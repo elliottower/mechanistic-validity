@@ -1,0 +1,1145 @@
+claim: docstring
+verdict: Causally Suggestive
+readings:
+- statement: Eight named heads compose to predict the next argument name in a Python docstring in this
+    4-layer model
+  verdict: Causally Suggestive
+  missing: Specificity on any non-docstring behaviour (I4), a leave-one-out over the eight heads (I3),
+    a matched random head set to show the 42\% belongs to these heads (M2), and dispersion on any reported
+    number (M1)
+  primary: true
+- statement: The circuit is the model's implementation of Docstring Induction, an algorithm
+  verdict: Underdetermined
+  missing: Apportionment between induction and the line-number algorithm, which the authors judge co-implemented
+    and suppress by prompt design rather than refute (I5, V3); the algorithm is inferred from attention
+    patterns rather than tested against its rivals (V2)
+  primary: false
+- statement: The circuit behaves like the model on the task it was found on
+  verdict: Disconfirmed
+  missing: Nothing --- tested and failed (E2), and on post-origin evidence alone; the post's own remark
+    that Google-style docstrings give similar performance points the other way and carries no number (M3)
+  primary: false
+- statement: These heads, or the head types they instantiate, serve other tasks or recur in other models
+  verdict: Insufficient
+  missing: Cross-task reuse is never asked (E3), cross-model transfer is named as future work with no
+    model, head set or number reported (E4), and the circuit is never compared with one for a neighbouring
+    task (C4)
+  primary: false
+hypotheses:
+- id: H1
+  view: Object
+  label: the eight named heads compose across three levels to produce the behaviour
+- id: H2
+  view: Role
+  label: the operation is docstring induction
+- id: H3
+  view: Role
+  label: the operation is line counting, running alongside or in place of induction
+- id: H4
+  view: Role
+  label: head 1.4's recency preference comes from the positional embeddings rather than the causal mask
+- id: H5
+  view: Object
+  label: no determinate eight-head set carries the behaviour
+- id: H6
+  view: Instrumental
+  label: the circuit is an artifact of resample ablation and of the search that selected it
+views_evidence:
+- criterion: C3
+  evidence: Residual-stream patching, head-output patching and the composition score are three granularities
+    of one operation, replacing an activation with the same activation from a corrupted run
+  cells:
+    H1: '-'
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: C
+  designed_for: []
+- criterion: M7
+  evidence: Heads are admitted by the same success-rate metric that then scores the circuit --- 42\% to
+    48\% for head 1.0, to 58\% with 0.1 and 2.3 --- with no correction and no candidate count stated
+  cells:
+    H1: I
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: C
+  designed_for: []
+- criterion: I1
+  family: Identity
+  evidence: Every head in the circuit is knocked out by resampling under three corruptions that each remove
+    a different piece of information, and the drop in logit difference is read off per head
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: I
+    H6: C
+  designed_for:
+  - H1
+  - H5
+- criterion: I2
+  family: Identity
+  evidence: Resample-ablating everything outside the eight heads leaves 42\% success against the full
+    model's 56\%
+  cells:
+    H1: C
+    H2: '-'
+    H3: C
+    H4: '-'
+    H5: C
+    H6: C
+  designed_for:
+  - H1
+- criterion: I3
+  evidence: Head 0.5's attention can be replaced by the identity for less than 0.1 logit difference, and
+    no leave-one-out over the eight is run
+  cells:
+    H1: I
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: C
+    H6: C
+  designed_for: []
+- criterion: I5
+  evidence: Extra argument names are added to the definition so that counting lines and inhibiting repeats
+    both give the wrong answer, at a cost in model accuracy from about 75\% to 56\%
+  cells:
+    H1: '-'
+    H2: C
+    H3: I
+    H4: '-'
+    H5: '-'
+    H6: '-'
+  designed_for:
+  - H2
+  - H3
+- criterion: I6
+  evidence: The four-case design dissociates two candidate causes of one attention pattern; no second
+    behaviour of this model is measured, so the converse arm is missing
+  cells:
+    H1: '-'
+    H2: '-'
+    H3: '-'
+    H4: I
+    H5: C
+    H6: C
+  designed_for:
+  - H4
+- criterion: I9
+  family: Mathematical
+  evidence: The composition score, a two-head quantity, establishes that head 1.2 reaches the argument
+    movers, and head 1.4's function is shown to depend on which subcircuit it sits in
+  cells:
+    H1: C
+    H2: C
+    H3: '-'
+    H4: '-'
+    H5: I
+    H6: C
+  designed_for:
+  - H1
+- criterion: E1
+  family: Analyst-choice
+  evidence: Four do-operators beyond resampling --- a positional-embedding swap, an attention-pattern
+    override, an identity replacement and a continuous BOS sweep --- agree with the resample results
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: I
+    H6: I
+  designed_for:
+  - H1
+  - H6
+- criterion: E2
+  evidence: The post never varies the prompt distribution and re-measures the circuit, and the disconfirming
+    result comes entirely from post-origin work
+  cells:
+    H1: I
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: C
+    H6: C
+  designed_for: []
+- criterion: E6
+  family: Identity
+  evidence: Overriding head 0.4's attention pattern between the two docstring positions inverts head 1.4's
+    attention while swapping the positional embeddings barely affects it
+  cells:
+    H1: C
+    H2: C
+    H3: '-'
+    H4: I
+    H5: I
+    H6: I
+  designed_for:
+  - H1
+  - H4
+- criterion: V3
+  evidence: The authors judge line counting to be co-implemented, and the surviving 42\% is never apportioned
+    between induction and residual line counting
+  cells:
+    H1: '-'
+    H2: I
+    H3: C
+    H4: '-'
+    H5: C
+    H6: '-'
+  designed_for: []
+tiers:
+- name: Proposed
+  requires: C1--C2; one admissible measurement
+  missing: '---'
+- name: Causally Suggestive
+  requires: Necessity (I1); baselines (M2)
+  missing: '---'
+- name: Mechanistically Supported
+  requires: Sufficiency (I2); reach (E1); specificity (I4)
+  missing: '\textbf{I4} unattempted: no non-docstring behaviour is measured, in a model that also handles
+    natural language; \textbf{I2} recovers 42\% against the full model''s 56\%'
+- name: Triangulated
+  requires: Convergence (C3); replication (E2/E4); dissociation (I6)
+  missing: '\textbf{E2} Disconfirmed; \textbf{E4} unattempted and declared unfinished; \textbf{I6} unattempted;
+    \textbf{C3}: patching and the composition score share one primitive'
+- name: Validated
+  requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
+  missing: \textbf{M1}, \textbf{M3}, \textbf{M5}, \textbf{M6}, \textbf{M7} unattempted --- fourteen of
+    the 35 criteria are Untested; \textbf{E2} Disconfirmed
+criteria:
+  C1:
+    name: Falsifiability
+    status: C
+    short: Each head assignment is a signed prediction that could have come out flat
+    verified: true
+    reasoning: 'Each head assignment is stated as a signed prediction about a measurable quantity and
+      could have come out flat. The metric is a logit difference against the strongest wrong answer, so
+      a component that mattered in the wrong direction would show; the circuit''s success rate is quoted
+      against a stated chance level; and the positional hypothesis is put as a pair of contrasting interventions
+      where one had to move the attention pattern and the other had not to. The paper also records a prediction
+      that failed. The obvious explanation for head 1.4''s recency preference was the positional embedding,
+      the swap was run, and it did nothing, which is what sent the authors to the causal mask. Risk taken,
+      and taken more than once. C.
+
+      '
+    notes:
+      verification: 'The cell''s quotation "inverts 1.4''s attention" is verbatim; the sentence reads
+        "Swapping head 0.4''s attention pattern inverts 1.4''s attention, while swapping the positional
+        embedding barely affects it" and sits in a figure caption under Positional Information Head 0.4,
+        not in the body. The cell says "eight heads are named with role assignments". Eight heads carry
+        role names in the circuit proper --- 0.2, 0.4, 0.5, 1.2, 1.4, 2.0, 3.0, 3.6 --- and that is exactly
+        the set the post then scores, so the count checks out for the claim. Three further heads are given
+        tentative role names in Open questions & leads (0.1 as a Duplicate Token Head, 1.0 as another
+        Fuzzy Previous Token Head, 2.2 as a negative head), each hedged with "seems to" and none tested,
+        so they do not add to the count of failable assignments.
+
+        '
+      legacy_evidence: Eight heads are named with role assignments, each making a patching prediction
+        that could have failed. Head 0.4's positional role is tested by swapping its attention pattern
+        between \texttt{A\_doc} and \texttt{B\_doc}, which ``inverts \textbf{1.4}'s attention,'' while
+        swapping positional embeddings does not
+  C2:
+    name: Structural plausibility
+    status: PC
+    short: 'Argued at the activation level: patterns locate, patching confirms'
+    verified: true
+    reasoning: 'The mechanism is argued at the level of activations. Attention patterns establish where
+      a head reads, patching establishes that what it reads matters, and the composition score is itself
+      a patching quantity: it asks how much one head''s output changes when fed another''s corrupted output.
+      The diagram''s Q, K and V labels are stated as inferences from behaviour, which is the author''s
+      own description of the evidence class. Nothing is computed from the weights, so the structural story
+      rests on a family of measurements that cannot separate a head that must compose from one that merely
+      covaries. Two structural puzzles are left standing and named. Plausible and behaviourally argued,
+      unverified at the parameter level, which is PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL. The legacy evidence says the authors "flag an unresolved
+        structural puzzle --- why three levels of composition when two would suffice". No such sentence
+        exists. Two separate remarks have been merged. The composition remark is "despite the circuit
+        seemingly requiring just 3 levels of composition, only the 4-layer model could do the task", which
+        is about layer count, not about two levels sufficing. The sufficiency remark is about the rival
+        algorithms: "This is surprising, since one of the two should be sufficient to perform the task",
+        where "the two" are the docstring-induction and line-number algorithms. Both are quoted above
+        so the cell can be repaired against them. The composition-score quotation in the cell is verbatim
+        from footnote 1. The absence claim holds: the words QK, OV and eigenvalue appear nowhere in the
+        post, and the only weight-level statement is the inference note on the summary diagram.
+
+        '
+      legacy_evidence: 'The information path is argued through attention patterns and patching-based composition
+        scores (``How much does \textbf{Top}''s output meaningfully change when we feed it the corrupted
+        rather than clean output of \textbf{Bottom}?''''). No weight-level analysis: no QK or OV decomposition,
+        no eigenvalue analysis. The plausibility argument is behavioural. The authors flag an unresolved
+        structural puzzle --- why three levels of composition when two would suffice'
+      legacy_warning: The legacy_evidence for this cell contains a paraphrase presented as a quotation,
+        or a claim fused from two separate remarks in the source. Verified 2026-08-07. Use the quotes
+        block, not the legacy text.
+  C3:
+    name: Convergent validity
+    status: PC
+    short: One instrument carries it; patching and composition share a primitive
+    verified: true
+    reasoning: 'One instrument carries the result. Residual-stream patching, head-output patching and
+      the composition score are three granularities of a single operation, replacing an activation with
+      the same activation from a corrupted run, so their agreement is close to arithmetic rather than
+      independent. Attention-pattern inspection is genuinely a second instrument and is used throughout
+      to confirm where a head reads, but it is observational and cannot on its own establish that the
+      read matters. Two evidence classes, one of them not causal, is PC.
+
+      '
+    notes:
+      verification: '"Our main method for investigating this circuit is activation patching" is verbatim
+        and is the post''s own framing, so the cell''s "one family at origin" is fair. The cell''s post-origin
+        claims --- SAE-based discovery (O''Neill & Bui 2024) and contextual decomposition (Hsu et al.
+        2024) scoring themselves on recovering this head set --- cannot be checked against this source
+        and are left unverified. The refs list is empty for that reason rather than because the claim
+        was rejected.
+
+        '
+      legacy_evidence: 'One family at origin: activation patching, with attention-pattern inspection as
+        support. Later agreement is circular rather than independent --- SAE-based discovery (O''Neill
+        \& Bui 2024) and contextual decomposition (Hsu et al.\ 2024) score \emph{themselves} on recovering
+        this head set, treating it as ground truth. No independent re-derivation of the mechanism has
+        been located'
+  C4:
+    name: Discriminant validity
+    status: U
+    short: The circuit is never compared with one for a neighbouring task
+    verified: true
+    reasoning: 'No neighbouring construct is put up against this one. The circuit is never compared with
+      a circuit for another task in the same model, and the authors state why: leaving the docstring distribution
+      is out of scope. What exists is one head tested off-distribution. Head 1.4 is run on six-token synthetic
+      prompts and shown to be inactive for ordinary words, which bounds that head''s range but says nothing
+      about whether the circuit as a construct separates from a neighbour. A boundary drawn around one
+      component is not a discriminant contrast. U.
+
+      '
+    notes:
+      verification: 'Read looking for a second task: the Introduction ("How we chose the candidate task"),
+        the Multi-Function Head 1.4 section, and Open questions & leads. The only off-docstring material
+        is the |BOS|S0|A|B|C|S1| sweep, which varies the destination token for one head, and the |BOS|,|A|B|=|,|
+        side note. Both are attention-pattern probes on one head, so the cell''s "the head set is never
+        compared against a neighbouring task''s head set" survives as written. The cell''s Conmy et al.
+        and uit de Bos & Garriga-Alonso claims are post-origin and cannot be checked here.
+
+        '
+      legacy_evidence: Unattempted. The head set is never compared against a neighbouring task's head
+        set on this model. Docstring appears as one of six tasks in \citet{conmy2023towards} and one of
+        three in uit de Bos \& Garriga-Alonso (2024), but always as a separate benchmark, never as a discriminant
+        contrast
+  C5:
+    name: Nomological validity
+    status: PC
+    short: Placed inside an existing theory of head types, which does work
+    verified: true
+    reasoning: 'The circuit is placed inside an existing theory of head types and the theory does work
+      rather than decoration. Induction-head theory says an induction head needs a previous-token head
+      feeding it, the post treats that as a prediction, runs a targeted patch on param_2 and finds head
+      0.2. That is a nomological link with a consequence. The link is loosened at the same time: the previous-token
+      type has to be widened to a "fuzzy" variant to fit heads 1.4 and 2.0, and the connection to the
+      IOI motifs is stated as resemblance. Embedded in theory, with the theory bent to fit, is PC.
+
+      '
+    notes:
+      verification: 'PARAPHRASE IN QUOTATION MARKS. The cell quotes head 1.4 as "attending to the token
+        following a previous occurrence of the current token". The post reads "a head that attends to
+        the token (B_doc) following a previous occurrence (param_2) of the current token (param_3)" ---
+        different verb form and the parenthetical anchors dropped. The full sentence is quoted above in
+        place of the paraphrase. The cell''s second quotation, "the previous but the last couple of tokens,
+        and sometimes the current token too", is verbatim. The cell attributes the induction-head definition
+        to this post; the post itself defers to an external explainer ("see this post for a great explanation"),
+        so the definition is borrowed rather than derived here.
+
+        '
+      legacy_evidence: 'Connects to induction-head theory: head 1.4 acts as a classic induction head,
+        ``attending to the token following a previous occurrence of the current token,'''' fed by previous-token
+        heads. The connection is by analogy to named head types rather than formal derivation, and the
+        authors'' ``Fuzzy Previous Token Head'''' is a loosened version of the standard type, attending
+        to ``the previous but the last couple of tokens, and sometimes the current token too'''''
+      legacy_warning: The legacy_evidence for this cell contains a paraphrase presented as a quotation,
+        or a claim fused from two separate remarks in the source. Verified 2026-08-07. Use the quotes
+        block, not the legacy text.
+  M1:
+    name: Reliability
+    status: U
+    short: Fifty prompts behind every plot; dispersion is never stated
+    verified: true
+    reasoning: 'Sample size is stated once and dispersion is never stated at all. Fifty prompts back every
+      patching plot and every attention figure, the figures are batch averages, and every number that
+      carries an argument --- 42%, 56%, 72%, 48%, 58%, the logit differences of 1.1, 0.5, -0.12 and -0.20
+      --- is a single value with no interval and no repetition. One released model is run once, so neither
+      sampling variability nor initialisation variability is bounded anywhere. U.
+
+      '
+    notes:
+      verification: 'Verified against a full read for the absence. The strings standard deviation, confidence,
+        error bar, variance, bootstrap and seed do not occur anywhere in the post, including the comment
+        thread; that count is corroboration after reading, not the basis for it. The cell''s "batch of
+        50 prompts for every experiment" is exact --- the post says "for all experiments and visualizations".
+
+        '
+      legacy_evidence: Unattempted. Batch of 50 prompts for every experiment; no confidence intervals,
+        standard deviations, repeated runs, or seed variation anywhere. Every reported figure is a point
+        estimate
+  M2:
+    name: Baseline separation
+    status: PC
+    short: 42\% against a 17\% chance level, with two further reference points
+    verified: true
+    reasoning: 'A chance level is computed and quoted beside the result, and the gap is large: 42% against
+      17%. Two further reference points are given, the unablated model at 56% and an augmented model at
+      72%, so the circuit is bracketed above and below. What is missing is the baseline that would show
+      the 42% belongs to these eight heads rather than to eight heads. No arbitrary or size-matched head
+      set is ever scored. Separation from chance shown, separation from a matched alternative not, which
+      is PC.
+
+      '
+    notes:
+      verification: 'All four numbers are verbatim: 42%, 17%, 56%, 72%, plus the ~75% original-task figure.
+        The cell''s "no random-circuit baseline" holds on a full read --- the only comparison sets in
+        the post are the full model, the full model minus heads 0.0 and 2.2, and the circuit plus named
+        extra heads, all of which are chosen rather than random.
+
+        '
+      legacy_evidence: 'A chance baseline is reported and separation is clear: circuit 42\% against chance
+        17\%. There is no random-circuit baseline --- no comparison against eight arbitrarily chosen heads,
+        which is the control that would show 42\% is about \emph{these} heads'
+  M3:
+    name: Stability
+    status: U
+    short: Head membership is varied upward only; nothing re-measures the claim
+    verified: true
+    reasoning: 'Nothing perturbs the circuit and re-measures the same claim. Head membership is varied,
+      but only upward and only as a search for more performance, so the 48% and 58% figures record what
+      adding heads buys rather than whether the eight-head result survives a jolt; no head is swapped
+      for a neighbour and no leave-one-out is run. A second docstring style is mentioned and a second
+      positional-swap variant is run, both reported as agreeing, but neither re-derives the circuit. Perturbations
+      exist at the edges of the argument and none of them touches the conclusion. U.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL. The legacy evidence asserts "no variation of the prompt
+        template family". The post does vary it: "We''ve also looked into Google-style docstrings and
+        found similar performance, but won''t discuss this further here." The qualification that keeps
+        the U intact is that this remark is about the model''s task performance on the original prompts,
+        carries no number, and precedes the isolating prompt design; the circuit is never re-derived on
+        Google-style docstrings. A second variation is also run inside the head 0.4 analysis (whole-line
+        positional swaps, layer 0 leakage), likewise reported as "similar results" with no numbers. "No
+        perturbation of the circuit boundary" is also loose --- the boundary is moved in Putting it all
+        together --- but only in the direction of adding heads.
+
+        '
+      legacy_evidence: Unattempted. No perturbation of the circuit boundary, no swap of a head for a neighbour,
+        no variation of the prompt template family
+      correction: 'The legacy cell says there is ''no variation of the prompt template family''. The post
+        varies it: ''We''ve also looked into Google-style docstrings and found similar performance, but
+        won''t discuss this further here.'' U survives only because that remark carries no number and
+        never re-derives the circuit.'
+  M4:
+    name: Calibration
+    status: PC
+    short: Logit difference against the highest wrong answer, recomputed throughout
+    verified: true
+    reasoning: 'The metric is well chosen for what is being claimed. Logit difference against the highest
+      wrong answer, recomputed each time, cannot be gamed by a model that raises all argument names together,
+      and the success rate is read directly off the task. The two scales are then compared without adjustment.
+      The 42% circuit is set beside a 56% full model that the isolating prompts have already depressed
+      from about 75%, and the authors say so themselves and call the resulting logit difference low. A
+      sound metric read against a moving reference is PC.
+
+      '
+    notes:
+      verification: 'DERIVED NUMBER. The cell says the isolating prompts "cost the model roughly 19 points
+        from its ~75% standard performance". The post states ~75% and 56% in separate sections and never
+        subtracts them; 19 is the auditor''s arithmetic, and it inherits the tilde on 75%. Both operands
+        are quoted above, so the derivation is checkable, but it should not be read as a reported figure.
+        Everything else in the cell is verbatim, including the authors'' own flag that "on this task the
+        model performs worse than on the original one".
+
+        '
+      legacy_evidence: 'Logit difference against the highest wrong answer is well chosen and interpretable,
+        and success rate is direct. The 42\% / 56\% comparison is uncalibrated in a way the authors themselves
+        surface: the 56\% full-model baseline is artificially depressed, since the algorithm-isolating
+        prompts cost the model roughly 19 points from its $\sim$75\% standard performance'
+  M5:
+    name: Sensitivity
+    status: U
+    short: Nothing with a known answer is fed in to see whether it comes back
+    verified: true
+    reasoning: 'Nothing with a known answer is fed to the method to see whether the method returns it.
+      No component is planted, no synthetic circuit is built and recovered, and no head with an independently
+      established role is used to calibrate the patching pipeline. The nearest thing is a theory-driven
+      search: induction theory says a previous-token head must sit below head 1.4, the authors go looking
+      and find 0.2, and they attach a confidence caveat to the identification. That is a prediction confirmed,
+      not a positive control, because the answer was not known in advance of the search. U.
+
+      '
+    notes:
+      verification: 'Read looking for a control: Methods (Patching experiments), the head 0.2 paragraph,
+        the Multi-Function Head 1.4 sweep, and Putting it all together. The synthetic |BOS|S0|A|B|C|S1|
+        prompts come with stated expectations for a pure induction head and a pure previous-token head,
+        which is the closest the post gets to a reference behaviour, but they test what head 1.4 does
+        rather than whether the method can detect a known head. The cell''s "no known-positive control"
+        holds; "no synthetic circuit is recovered" holds.
+
+        '
+      legacy_evidence: 'Unattempted. No known-positive control: no head with a known role is planted and
+        verified, no synthetic circuit is recovered'
+  M6:
+    name: Invariance
+    status: U
+    short: No conclusion is re-derived under a changed condition and shown to hold
+    verified: true
+    reasoning: 'The same conclusion is never re-derived under a changed condition and shown to hold. Each
+      of the three corruptions probes a different piece of information, so they are complementary rather
+      than redundant, and no result is reported twice under two settings for comparison. Both patching
+      directions were in fact run, but the post reports only the selected ones, which converts a possible
+      invariance check into a presentation choice. Two performance scales appear, logit difference and
+      success rate, and they are used at different points rather than against each other. U.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, twice over, though neither forces the status. "One prompt
+        family" is contradicted by the Google-style docstring remark. "One metric family" is loose: the
+        post uses logit difference throughout the patching sections and switches to success rate for the
+        circuit evaluation. The clean-to-corrupt direction is addressed only in the comment thread, where
+        the author writes that all plots were run both ways and the informative ones kept; that is quoted
+        here because it is the strongest evidence for or against the cell and it lives outside the post
+        body.
+
+        '
+      legacy_evidence: Unattempted. One prompt family, one metric family, one corruption regime per experiment;
+        no cross-condition consistency check
+  M7:
+    name: Selection correction
+    status: U
+    short: Components are chosen from the strongest cells of a patching grid
+    verified: true
+    reasoning: 'Components are chosen by looking at which cells of a patching grid are strongest, and
+      the phrase for it is the authors'' own. The same success-rate metric that then scores the circuit
+      is used to decide membership: head 1.0 is admitted because it lifts 42% to 48%, heads 0.1 and 2.3
+      because they lift it to 58%, heads 0.0 and 2.2 are dropped from the full model because doing so
+      lifts 56% to 72%. Selecting on a statistic and reporting the same statistic is exactly the situation
+      a correction addresses, and none is applied. No candidate count is stated, so the size of the search
+      is not even recoverable from the post. U.
+
+      '
+    notes:
+      verification: 'The cell reads "further heads (0.1, 1.0, 2.3) are added or dropped". All three are
+        added; the two heads dropped are 0.0 and 2.2, and they are dropped from the full model rather
+        than from the circuit. "Added or dropped" reads as covering both, so the phrasing is imprecise
+        rather than wrong. The cell''s "N is never stated as such" holds --- the post never gives the
+        model''s head count, and an earlier correction to this repo removed a "from 32" that came from
+        outside the source.
+
+        '
+      legacy_evidence: Unattempted. Eight heads are selected by inspection of patching results, and further
+        heads (0.1, 1.0, 2.3) are added or dropped by their effect on the same success-rate metric that
+        then scores the circuit. The candidate pool is small enough to state; $N$ is never stated as such
+        and no multiplicity control is applied
+  I1:
+    name: Necessity
+    status: PC
+    short: Every head is knocked out by resampling and the tests bite
+    verified: true
+    reasoning: 'Necessity is tested component by component and the tests bite. Every head in the circuit
+      is knocked out by resampling and the drop in logit difference is read off, under three corruptions
+      that each remove a different piece of information, which is what lets a head be shown necessary
+      for the B_doc value specifically rather than for the task in general. One ablation regime carries
+      all of it. The post names zero and mean ablation in the same breath as the method it chose and never
+      runs either, so no result is confirmed under a second removal operator. Necessity established within
+      one regime is PC.
+
+      '
+    notes:
+      verification: 'The "up to 1.1 logit diff change" figure is verbatim and belongs to head 0.5, as
+        the cell implies. The three corruption names are verbatim. The cell''s "no zero- or mean-ablation
+        cross-check" is confirmed by the post''s own sentence distinguishing resampling from both. The
+        Miller et al. (2024) quotation is post-origin and cannot be checked here.
+
+        '
+      legacy_evidence: Individual heads are shown to matter by resample ablation with three named corruption
+        types, with effects in logit difference (up to 1.1 logit diff change). One ablation regime only;
+        no zero- or mean-ablation cross-check. \citet{miller2024transformer} use this circuit as one of
+        four case studies establishing that faithfulness scores ``reflect both the methodological choices
+        of researchers as well as the actual components of the circuit''
+  I2:
+    name: Sufficiency
+    status: PC
+    short: Everything outside the eight heads is ablated and reported straight
+    verified: true
+    reasoning: 'The complement test is the one that can fail and it is run and reported straight. Everything
+      outside the eight heads is resample-ablated and the remainder scores 42% against the full model''s
+      56%, a shortfall the authors state in the epistemic header before any result is given. The test
+      is also the coarse version of itself: heads are kept whole, with all their positions and all their
+      compositions intact, so what is shown sufficient is a set of components rather than the circuit
+      as drawn. A severe test, run, and partly failed, which is PC.
+
+      '
+    notes:
+      verification: 'The cell''s two quotations are verbatim, with one wording difference worth recording:
+        the cell has "patch (i.e.\ resample-ablate) all other heads" and the post has exactly that, but
+        the cell renders "all other heads" in bold, which is the post''s own emphasis and not part of
+        the string. "our circuit only recovers up to half of the model performance" is verbatim from the
+        Epistemic Status header.
+
+        '
+      legacy_evidence: 'The complement test is run and reported honestly: ``Our final check to test whether
+        this circuit is sufficient for the task is to patch (i.e.\ resample-ablate) \textbf{all other
+        heads} and see if we recover the full performance.'''' Result: 42\% against the full model''s
+        56\%, which the authors state as ``our circuit only recovers up to half of the model performance.''''
+        A severe test, partly failed'
+  I3:
+    name: Minimality
+    status: PC
+    short: Heads are added rather than removed; one member is undercut anyway
+    verified: true
+    reasoning: 'Minimality is approached from the wrong end and one member is nonetheless undercut. Heads
+      are added rather than removed, and adding three of them carries the circuit to 58%, past the full
+      model, which shows the eight-head set is not maximal but says nothing about whether it is minimal.
+      The one member examined on its own comes off badly: head 0.5''s attention can be replaced by the
+      identity for less than 0.1 logit diff, so most of what it contributes is a token-embedding transform
+      that needs no attention at all. That is a minimality argument the authors make against their own
+      inclusion. No leave-one-out over the eight, and the composition-level check is listed as future
+      work. PC.
+
+      '
+    notes:
+      verification: '"loses less than 0.1 logit diff" is verbatim. The 48% and 58% figures are verbatim
+        and the cell reads them correctly as exceeding the full model''s 56%. The cell''s "no leave-one-out
+        over the eight-head set" holds on a full read: the only single-head removals reported are 0.0
+        and 2.2 from the full model.
+
+        '
+      legacy_evidence: 'Tested by accretion rather than pruning: adding head 1.0 raises the circuit to
+        48\%, adding 0.1 and 2.3 raises it to 58\%, above the full model''s 56\%. Head 0.5''s contribution
+        is bounded from above --- diagonalising its attention ``loses less than 0.1 logit diff'''' ---
+        which is a minimality argument against its own inclusion. No leave-one-out over the eight-head
+        set'
+  I4:
+    name: Specificity
+    status: U
+    short: Measured on one behaviour; head 1.4 alone is run off-distribution
+    verified: true
+    reasoning: 'The circuit''s effect is measured on one behaviour only. The model was trained on natural
+      language and Python generally, so there is an obvious off-target test available --- ablate the eight
+      heads and see what else falls over --- and it is not run; the authors state that leaving the docstring
+      distribution is outside the scope of the post. What exists is one head shown to be inactive on ordinary
+      words, which bounds head 1.4''s range without measuring any non-docstring performance. U.
+
+      '
+    notes:
+      verification: 'The cell''s "the circuit''s effect on any non-docstring behaviour is never measured"
+        is an absolute and it survives, narrowly. The Multi-Function Head 1.4 section does run non-docstring
+        inputs, but it reports attention patterns rather than any performance metric, and it covers one
+        head rather than the circuit. Read for this: Methods, Multi-Function Head 1.4, Putting it all
+        together, Open questions & leads.
+
+        '
+      legacy_evidence: Unattempted. The circuit's effect on any non-docstring behaviour is never measured,
+        although the model handles natural language and general Python
+  I5:
+    name: Rival mechanism exclusion
+    status: PC
+    short: Rivals are named first and the prompt set disables two of them
+    verified: true
+    reasoning: 'Rivals are named before any measurement and the prompt set is built to disable two of
+      them, which is the strongest move in the post. Extra argument names are added to the definition
+      so that counting lines and inhibiting repeats both give the wrong answer, and the cost is paid in
+      the open: model accuracy falls from about 75% to 56% on the harder prompts. Exclusion stops short
+      of elimination by the authors'' own verdict, since they judge at least two algorithms to be running
+      together and never apportion the surviving performance between them. Rivals identified, controlled,
+      and left partly in place is PC.
+
+      '
+    notes:
+      verification: 'All three algorithm names and the isolating design are verbatim. The cell''s quotation
+        "We are quite certain that at least the first two algorithms are implemented to some degree" is
+        verbatim. The cell''s "~75% -> 56%" is a pair of reported numbers rather than a reported change;
+        both are quoted above.
+
+        '
+      legacy_evidence: 'The paper''s strongest feature. Three rival algorithms are named --- Docstring
+        Induction, line-number based, inhibition based --- and the prompt set is constructed to suppress
+        two of them, at a measured cost ($\sim$75\% $\to$ 56\%). The exclusion is partial by the authors''
+        own verdict: ``We are quite certain that at least the first two algorithms are implemented to
+        some degree.'''' Rivals identified and controlled, not eliminated'
+  I6:
+    name: Double dissociation
+    status: U
+    short: No second capability is shown intact while the docstring one fails
+    verified: true
+    reasoning: 'The converse half is missing. A double dissociation needs a second capability shown intact
+      while the docstring behaviour is broken, and no second behaviour of this model is ever measured.
+      What the post does contain is a clean single dissociation of two candidate causes: swapping head
+      0.4''s attention pattern inverts head 1.4''s attention while swapping the positional embeddings
+      leaves it alone, with both arms run in the same four-case design. That separates two mechanisms
+      within one behaviour, which is a different and weaker thing. U.
+
+      '
+    notes:
+      verification: 'Read looking for a second behaviour: Results, Surprising discoveries, Putting it
+        all together, Open questions & leads. None reports a task other than docstring argument prediction.
+        The cell''s "no second circuit in this model is shown intact under docstring-circuit ablation"
+        holds. Recorded here because the 0.4-versus-positional-embedding contrast is close enough to be
+        mistaken for the missing test: it dissociates causes of one attention pattern, not circuits.
+
+        '
+      legacy_evidence: 'Unattempted. No converse test: no second circuit in this model is shown intact
+        under docstring-circuit ablation'
+  I7:
+    name: Confound control
+    status: PC
+    short: Line counting and repetition are designed out rather than argued away
+    verified: true
+    reasoning: 'The confound that would explain the behaviour away is designed out rather than argued
+      away. Line counting and repeat inhibition both predict the right answer on ordinary docstrings,
+      so extra arguments are inserted until they predict the wrong one, and the corrupted prompts change
+      only argument names while holding the docstring frame fixed, which keeps the patch from carrying
+      format information along with content. Randomly sampled names remove name identity in expectation.
+      Token-level confounds are handled by intention rather than by measurement, and the one instance
+      where a token turned out to be special was caught by accident and reported in the comments. The
+      central confound controlled, the peripheral ones not, is PC.
+
+      '
+    notes:
+      verification: 'PARTIAL CONTRADICTION WITH THE CELL. The legacy evidence says "token frequency, argument-name
+        length, and docstring length are uncontrolled". Random sampling of names and descriptions is a
+        control on name identity in expectation, and the comment thread records a deliberate attempt to
+        "select equivalent words". Neither is a measured control and neither addresses length or frequency,
+        so the cell''s substance stands; "uncontrolled" overstates it to the extent that a design choice
+        counts.
+
+        '
+      legacy_evidence: The main confound --- that success could come from counting line positions rather
+        than matching content --- is controlled by prompt design, and that control is the paper's central
+        methodological move. Token frequency, argument-name length, and docstring length are uncontrolled
+  I8:
+    name: Confounding sensitivity
+    status: U
+    short: Nothing asks how strong an unmeasured confounder would need to be
+    verified: false
+    reasoning: 'NOT SETTLED BY THE SOURCE. Nothing in the post asks how strong an unmeasured confounder
+      would have to be to overturn a result. No sensitivity analysis, no bound on residual confounding,
+      and no equivalent under another name.
+
+      '
+    notes:
+      verification: 'Read in full, including the footnote and the comment thread, looking for any robustness-to-confounding
+        argument under any vocabulary. The nearest material is the prompt design in Methods, which removes
+        two specific rival algorithms and is scored under I7, and the comment about equivalent token choice.
+        Neither quantifies what an unmeasured confounder could do. Left with no quotes rather than with
+        a quote that does not bear on the criterion.
+
+        '
+      legacy_evidence: Unattempted. No E-value or sensitivity analysis
+  I9:
+    name: Epistatic interaction
+    status: PC
+    short: The composition score is a two-head quantity, so interaction is the subject
+    verified: true
+    reasoning: 'Interaction is the subject rather than an afterthought. The composition score is defined
+      as a two-head quantity --- how much one head''s output moves when fed another''s corrupted output
+      --- and it is what establishes that head 1.2 reaches the argument movers. The strongest non-additivity
+      is head 1.4, whose function depends on where it sits: previous-token behaviour in the definition
+      subcircuit, induction behaviour in the docstring subcircuit, demonstrated rather than assumed. What
+      is absent is systematic coverage. Pairs are examined where the authors suspected something, there
+      is no ablation grid over head pairs, and the check that would test the composition structure as
+      a whole is listed as future work. PC.
+
+      '
+    notes:
+      verification: 'The composition-score definition in the cell is verbatim from footnote 1. The cell''s
+        description of head 1.4''s two roles matches the post''s own summary. The cell says "the three-level
+        composition question is left open"; what the post leaves open is why a 3-layer model cannot do
+        a task needing three levels of composition, which is the same remark misread in C2 --- see that
+        cell''s verification note.
+
+        '
+      legacy_evidence: 'Composition is the paper''s subject: composition scores are measured pairwise
+        by patching one head''s output into another''s input. Head 1.4''s role is shown to be context-dependent
+        --- previous-token head in the definition subcircuit, induction head in the docstring subcircuit
+        --- a non-additive interaction demonstrated rather than assumed. No systematic pairwise ablation
+        grid, and the three-level composition question is left open'
+      legacy_warning: The legacy_evidence for this cell contains a paraphrase presented as a quotation,
+        or a claim fused from two separate remarks in the source. Verified 2026-08-07. Use the quotes
+        block, not the legacy text.
+  I10:
+    name: Rescue reversibility
+    status: U
+    short: The restoring direction was run and not shown, by the author's own account
+    verified: true
+    reasoning: 'The restoring direction is available, was run, and is not shown. Every experiment in the
+      post patches corrupted activations into a clean run, which degrades; the reverse, inserting clean
+      activations into a corrupted run, is the rescue and the post flags it as the more common convention
+      before declining it. In the comments the author states that all plots were produced both ways and
+      the informative ones kept. So no restoration result is reported anywhere, and the criterion has
+      nothing to score. U.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL. The legacy evidence says the rescue "is not run". The
+        author''s comment reply says otherwise: "We basically ran all plots with both patching directions
+        and later picked the ones that contained all the information." The correct description is run,
+        unreported, which is a different failure from unattempted --- it means the missing evidence exists
+        and was withheld by selection. The cell''s other half, that resample ablation is reversible by
+        construction and therefore cheap here, is supported by the method definition quoted above.
+
+        '
+      legacy_evidence: Unattempted rather than untestable. Resample ablation is reversible by construction
+        and the clean activations are already in hand, so corrupt-then-restore is cheap on this model.
+        It is not run
+      correction: 'The legacy cell says the rescue ''is not run''. The author''s comment reply says otherwise:
+        ''We basically ran all plots with both patching directions and later picked the ones that contained
+        all the information.'' Run and unreported, which is a different defect from unattempted -- the
+        evidence exists and was dropped by selection. U still stands, since nothing is reported.'
+  I11:
+    name: Onset coupling
+    status: U
+    short: One pre-trained model off the shelf; no training trajectory in evidence
+    verified: true
+    reasoning: 'There is no training trajectory in evidence. The audited system is one pre-trained model
+      taken off the shelf from a public toy-model suite, observed at a single point, and the post says
+      nothing about whether earlier states of that model exist or can be obtained. Onset coupling needs
+      at least two points in training to ask whether the mechanism appears when the behaviour does, and
+      the source supplies one. The experiment is absent, and the source does not establish whether it
+      could have been run. U rather than N/A, because untestability is not shown either.
+
+      '
+    notes:
+      verification: 'PRIORITY CHECK, and the cell''s reason holds exactly as written. The string "checkpoint"
+        does not occur anywhere in the post, comments included. Every reference to training is one of
+        three: the TL;DR calling the model "pre-trained", the sourcing sentence "It was trained on natural
+        language and Python code", and an aside about a different model of Neel Nanda''s "trained without
+        positional embeddings". None says whether the suite ships intermediate states. Read for this:
+        TL;DR, How we chose the candidate task, Positional Information Head 0.4, Open questions & leads.
+        Note the contrast with greater-than, where the same criterion is N/A because the audited model
+        is GPT-2 small and the absence of published intermediate checkpoints is a settled fact about it.
+        Here the model is from a suite whose checkpoint policy the source never states, so the cell deliberately
+        declines to score untestability from outside knowledge. That distinction is the whole content
+        of the cell and it is faithful to the source.
+
+        '
+      legacy_evidence: Unattempted. The model is a released checkpoint from an open toy-model suite; whether
+        that suite ships intermediate training checkpoints is not stated in the post, so testability is
+        not established either way from the source
+  I12:
+    name: Offset coupling
+    status: U
+    short: Needs the training sequence that onset coupling also lacks
+    verified: true
+    reasoning: 'Offset coupling asks whether the mechanism''s disappearance tracks the behaviour''s, which
+      needs the same training trajectory I11 lacks. One pre-trained model is observed once and never varied
+      over training states, so there is no interval in which either could be seen to lapse. U for the
+      same reason as I11, including the same refusal to call it untestable.
+
+      '
+    notes:
+      verification: 'PRIORITY CHECK. Same evidence as I11 and the same conclusion. Nothing in the post
+        reports any component changing role over training; the only variation introduced anywhere is over
+        prompts, corruptions and head sets. The cell''s "testability is undetermined for the same reason"
+        is accurate.
+
+        '
+      legacy_evidence: Unattempted, and testability is undetermined for the same reason
+  E1:
+    name: Intervention reach
+    status: PC
+    short: Four do-operators beyond resampling, and they agree with it
+    verified: true
+    reasoning: 'Four do-operators beyond resampling are applied and they agree with it. Positional embeddings
+      are swapped between two positions, head 0.4''s attention pattern is overridden at those positions,
+      head 0.5''s pattern is replaced by the identity, and head 1.2''s attention to BOS is swept continuously;
+      each edits a different object --- an embedding, one head''s pattern, a whole attention matrix, a
+      scalar allocation --- and none is a relabelled resample. The reach stops short of the classes that
+      would test the result hardest. No weight is edited, no direction is steered, and zero and mean ablation
+      are named as the alternatives not taken. Several primitives, all activation-level, is PC.
+
+      '
+    notes:
+      verification: 'PRIORITY CHECK, and all four primitives exist. Positional-embedding swap: Positional
+        Information Head 0.4. Head 0.4 attention-pattern override: the four-case design in the same section.
+        Identity diagonalisation: Duplicate Token Head 0.5. Continuous BOS sweep: Duplicate Token Head
+        1.2, confirmed by the figure caption plotting "the relative change as a function of 1.2''s BOS-attention".
+        The earlier correction to this repo that raised the count from one to four is upheld. AMBIGUITY
+        IN THE CELL''S COUNT. It opens "Four intervention primitives" and then lists resample ablation
+        first and the four others under "Beyond it", which reads as five. The four are the four beyond
+        resampling; the sentence should say so. The Syed et al. (2023) quotation and the R^2 = 0.27 figure
+        are post-origin and cannot be checked against this source.
+
+        '
+      legacy_evidence: 'Four intervention primitives, and they agree. Resample ablation is applied with
+        three corruption sets --- random answer, random def, random doc --- at two granularities (residual
+        stream by position and layer; individual head outputs). Beyond it: the positional embeddings of
+        \texttt{A\_doc} and \texttt{B\_doc} are swapped, head 0.4''s attention pattern is overridden,
+        head 0.5''s pattern is set to the identity, and head 1.2''s BOS-attention is swept continuously.
+        No mean or zero ablation, no steering, no weight intervention. \citet{syed2023attribution} later
+        show method-dependence on this exact task: ``ACDC used with the KL Divergence metric outperforms
+        EAP,'''' reversing the ordering that holds on IOI and greater-than, with a poor approximation
+        check on docstring ($R^2 = 0.27$, best-fit gradient 0.531)'
+  E2:
+    name: Prompt generalization
+    status: D
+    short: The post never varies the prompt family; the status rests on later work
+    verified: false
+    reasoning: 'NOT SETTLED BY THE SOURCE. The status rests entirely on post-origin work. The post itself
+      never varies the prompt distribution and re-measures the circuit, so nothing in it can confirm or
+      disconfirm generalisation across prompts.
+
+      '
+    notes:
+      verification: 'The D comes from uit de Bos & Garriga-Alonso (2024), which is not this source and
+        cannot be checked here; the cell is honest about the attribution and the quotations are theirs,
+        not the post''s. Recorded because the origin post points the other way as far as it goes: "We''ve
+        also looked into Google-style docstrings and found similar performance, but won''t discuss this
+        further here" (The docstring task, figure caption). That is a bare remark with no number and no
+        circuit evaluation, so it does not rebut the later result, but it is the only in-source statement
+        on prompt generalisation and it is positive. Left with no quotes because a quote pointing the
+        opposite way to the status would misrepresent the status as source-supported.
+
+        '
+      legacy_evidence: Tested at scale and failed. uit de Bos \& Garriga-Alonso (2024) run over 1,000,000
+        clean/corrupted pairs and find model-vs-circuit KL with mean 3.91, median 3.66, max 12.07, worst
+        points ``more than 5 standard deviations away from the mean,'' concluding that ``the circuits
+        for the IOI and docstring tasks fail to behave similarly to the full model \emph{even on completely
+        benign inputs from the original task}.'' The failures are in-distribution, so this is generalisation
+        within the origin task, not beyond it
+  E3:
+    name: Cross-task generalization
+    status: U
+    short: Whether the components do anything for another task is never asked
+    verified: true
+    reasoning: 'Whether these components do anything for another task is never asked. The circuit is evaluated
+      only where it was found, and the authors say that leaving the docstring distribution is out of scope.
+      One head is followed off the task --- head 1.4 switches roles on default-argument-shaped prompts
+      and goes inactive on ordinary words --- which shows that a component generalises in behaviour without
+      showing that the circuit serves any other task. U.
+
+      '
+    notes:
+      verification: 'Read looking for a second task: Introduction, Multi-Function Head 1.4, Putting it
+        all together, Open questions & leads, Summary. The open-questions list names cross-model transfer
+        and further heads, never cross-task reuse. The cell''s "whether the argument-mover or fuzzy-previous-token
+        heads serve other tasks in this model is never asked" holds; the head 1.4 material is quoted here
+        so the near miss is on the record.
+
+        '
+      legacy_evidence: Unattempted. Whether the argument-mover or fuzzy-previous-token heads serve other
+        tasks in this model is never asked
+  E4:
+    name: Cross-model generalization
+    status: U
+    short: Transfer is named as future work and no result is reported
+    verified: true
+    reasoning: 'The transfer test is named as future work and no result from it is reported. The authors
+      say they had initial success in similar 3- and 4-layer models with MLPs, but the claim appears in
+      an open-questions list as an invitation to collaborate, with no model named, no head set given and
+      no number. The one cross-model fact the post does report is that a 4-layer attention-only model
+      does the task and a 3-layer one does not, which is about capability rather than about the same circuit
+      recurring elsewhere. U.
+
+      '
+    notes:
+      verification: 'Both quotations in the cell are verbatim, including the typo "we''d be interesting
+        in collaborating". The 3-versus-4-layer sentence quoted in the cell is verbatim from the Summary;
+        an earlier correction to this repo replaced a "3-layer gelu models can" phrasing that appears
+        nowhere in the source, and that correction is confirmed --- the word gelu does not occur in the
+        post.
+
+        '
+      legacy_evidence: 'Unattempted, and the attempt is declared unfinished: ``We had some initial success
+        finding similar circuits in similarly-sized 3- and 4-layer models with MLPs, we''d be interesting
+        in collaborating on this!'''' No result is reported. The related reported fact --- ``a 4-layer
+        attention-only toy model could do the task while a 3-layer one could not'''' --- concerns task
+        capability, not circuit recurrence'
+  E5:
+    name: Graded response
+    status: PC
+    short: Circuit size tracks performance monotonically across two axes
+    verified: true
+    reasoning: 'Two gradients exist and they cover different axes. Circuit size is varied and performance
+      tracks it monotonically, 42% at eight heads, 48% with head 1.0, 58% with 0.1 and 2.3 as well. Intervention
+      strength is varied for one head only: head 1.2''s attention to BOS is swept and the downstream change
+      in head 3.0''s attention is plotted against it, which is a genuine dose-response curve rather than
+      an on-off comparison. Everywhere else the intervention is binary, with no interpolation between
+      clean and corrupted activations, so seven of the eight heads have no dose axis at all. PC.
+
+      '
+    notes:
+      verification: 'The dose-response on head 1.2 is confirmed by the figure caption, which plots relative
+        change as a function of BOS-attention. All five performance figures are verbatim. Recorded from
+        the same caption: it calls head 3.0 "Induction Head 3.0", though 3.0 is an Argument Mover Head
+        everywhere else in the post and is never argued to be an induction head. That is a slip in the
+        source and it bears on V4 --- see that cell.
+
+        '
+      legacy_evidence: 'Graded in circuit \emph{size}: 42\% (8 heads), 48\% ($+$1.0), 58\% ($+$0.1, 2.3),
+        against 56\% full and 72\% augmented-full. Graded in intervention \emph{strength} for one head
+        only: head 1.2''s attention is varied continuously between BOS, \texttt{X\_def} and \texttt{X\_doc}
+        and the relative change plotted against it. Resample ablation elsewhere is binary per head, with
+        no interpolation between clean and corrupted activations'
+  E6:
+    name: Novel prediction
+    status: C
+    short: A mechanism proposed for one reason predicts something else, and it holds
+    verified: true
+    reasoning: 'A mechanism proposed for one reason yields a prediction about something else, and the
+      prediction is risky in both arms. If head 0.4 supplies recency through the causal mask rather than
+      through positional embeddings, then overriding 0.4''s pattern between the two docstring positions
+      must flip head 1.4''s attention, and swapping the positional embeddings must not. Both arms were
+      run in one four-case design and both came out as predicted, with the positional-embedding arm the
+      one that had every prior reason to succeed and did not. A prediction that could have failed on either
+      side and failed on neither is C.
+
+      '
+    notes:
+      verification: 'The cell''s two-part description matches the post''s four-case design exactly, and
+        the outcome sentence is verbatim in the figure caption. The prediction is stated before the test
+        in the source order: hypothesis in the body, then the four cases, then the result. Nothing in
+        the cell overstates it.
+
+        '
+      legacy_evidence: 'Head 0.4''s mechanism yields a two-part prediction that could have failed and
+        did not: if 0.4 supplies recency via the causal mask rather than positional embeddings, then swapping
+        its attention pattern between \texttt{A\_doc} and \texttt{B\_doc} should invert head 1.4''s attention,
+        while swapping positional embeddings should not. Both halves were tested and both held'
+  V1:
+    name: Level declaration
+    status: C
+    short: A circuit is defined as a subset of components before any result
+    verified: true
+    reasoning: 'The level is fixed before any result. The opening section defines a circuit as a subset
+      of components and weights that both accounts for behaviour and corresponds to a human-interpretable
+      algorithm, which names the two levels the claim will operate at and commits to both. Everything
+      after is stated in those terms: named heads, named token positions, named information moving between
+      them. No sentence drifts into a level the definition did not license. C.
+
+      '
+    notes:
+      verification: 'The cell''s quotation is verbatim apart from case, which the definition''s sentence-initial
+        "A circuit" explains. The cell describes the claim as "implementational-functional throughout",
+        which matches the definition''s own two clauses.
+
+        '
+      legacy_evidence: 'Declared, with the definition given up front: ``a circuit in a neural network,
+        is a small subset of model components and model weights that (a) accounts for a large fraction''''
+        of the behaviour. The claim is implementational-functional throughout, with named heads and named
+        information flows'
+  V2:
+    name: Level-evidence match
+    status: PC
+    short: Matches the lower declared level and thins at the upper one
+    verified: true
+    reasoning: 'The evidence matches the lower of the two declared levels and thins out at the upper one.
+      Which head reads what from where is established by patching and attention patterns, and that is
+      the implementational claim. The algorithmic claim, that the model runs docstring induction, is inferred
+      from those same attention patterns rather than tested against alternative algorithms, and the authors
+      concede a second algorithm runs alongside it. The 42% against 56% gap is the same shortfall stated
+      in performance terms and the post states it first. Evidence adequate at one level and inferential
+      at the other is PC.
+
+      '
+    notes:
+      verification: 'The cell''s "Docstring Induction" is the post''s own name for the algorithm, in the
+        post''s own quotation marks. The cell''s "the authors concede a second algorithm runs alongside
+        it" is supported verbatim. The cell''s "the 42% / 56% gap is a level-evidence gap the authors
+        state themselves" is supported by the Epistemic Status header, which states it before any number
+        appears.
+
+        '
+      legacy_evidence: Evidence supports the flow claims --- which head reads what from where --- via
+        patching and composition scores. It supports the algorithm-level claim (``Docstring Induction'')
+        more weakly, since the algorithm is inferred from attention patterns and the authors concede a
+        second algorithm runs alongside it. The 42\% / 56\% gap is a level-evidence gap the authors state
+        themselves
+  V3:
+    name: Alternative level
+    status: PC
+    short: Line counting is raised as the simpler description, then accepted
+    verified: true
+    reasoning: 'The simpler description of the same behaviour is raised and then accepted rather than
+      dismissed. Counting lines would produce the observed predictions on ordinary docstrings, the authors
+      judge it to be co-implemented, and they characterise it as the less robust of the two after a brief
+      look. Their response is to design it out of the prompts rather than to argue it away, which is the
+      right move and leaves the accounting undone: the surviving 42% is never apportioned between induction
+      and residual line counting. Alternative engaged, not resolved, is PC.
+
+      '
+    notes:
+      verification: 'All three of the cell''s substantive claims check out: the line-number algorithm
+        is stated as a rival, it is judged co-implemented, and it is suppressed by prompt design rather
+        than refuted. The verbatim typo "less generalizable that our model''s implementation" is preserved
+        in the quote. The cell''s "what is missing is apportionment" holds on a full read --- no result
+        in the post splits performance between the two algorithms.
+
+        '
+      legacy_evidence: 'The alternative is considered and partly \emph{accepted} rather than dismissed:
+        the line-number algorithm is a simpler description of the same behaviour, and the authors judge
+        it co-implemented. What is missing is apportionment --- how much of the 42\% is induction and
+        how much is residual line-number counting'
+  V4:
+    name: Unlicensed labeling
+    status: C
+    short: Each label is introduced where its operation has just been measured
+    verified: true
+    reasoning: 'Each label is introduced at the point where the operation it names has just been measured.
+      Argument Mover is defined in the same sentence as the movement it describes, from C_def to param_3.
+      Fuzzy Previous Token is introduced with the deviation from the standard type stated in the same
+      sentence, so the qualifier is doing hedging work rather than decorative work. Duplicate Token Head
+      1.2 is named immediately after its attention to the current token and its earlier occurrence is
+      described. No label imports intent, belief or understanding, which is the failure mode the criterion
+      is for. C, with two blemishes below that are inherited names rather than new constructs.
+
+      '
+    notes:
+      verification: 'PRIORITY CHECK, on all three labels the cell lists. Argument Mover: licensed, introduced
+        in a Takeaway that states the measured movement first and the name second. Note that "copy" is
+        asserted rather than measured --- there is no OV or copy-score analysis anywhere in the post ---
+        so the label rests on the patching and attention evidence for movement plus the effect on the
+        answer logit. Fuzzy Previous Token: licensed, and the cell is right that the qualifier is itself
+        a hedge; the sentence introducing it states exactly how the heads depart from the strict type.
+        Duplicate Token: licensed for head 1.2, which is named right after its duplicate-matching attention
+        pattern is described. QUALIFICATION THE CELL DOES NOT CARRY. For head 0.5 the same label is inherited
+        from prior work and the post''s own section heading argues against it --- "Duplicate Token Head
+        0.5 is mostly just transforming embeddings" --- so here the name over-describes and the post says
+        so. Separately, the figure caption for head 1.2 calls head 3.0 "Induction Head 3.0", a head the
+        post argues is an Argument Mover and never argues is an induction head. Both are local slips in
+        an otherwise mechanical naming scheme, and neither names a construct a nearby alternative would
+        satisfy equally, so the C stands.
+
+        '
+      legacy_evidence: 'Labels are mechanical throughout and name measured operations: ``Argument Mover
+        Head'''' names a copy from definition to output position; ``Fuzzy Previous Token Head'''' names
+        an attention pattern together with its deviation from the strict version; ``Duplicate Token Head''''
+        names a match. No intentional vocabulary. The ``fuzzy'''' qualifier is itself a hedge against
+        over-reading the standard label'
+  V5:
+    name: Scope declaration
+    status: C
+    short: The limit is declared before the argument, not conceded after it
+    verified: true
+    reasoning: 'The limit is declared before the argument rather than conceded after it. The epistemic
+      header states that the circuit recovers up to half of model performance and that leads remain unfollowed,
+      and it sits above the first result. The exclusions are then named individually: heads known to be
+      essential that the patching method cannot surface, a head whose ablation improves performance, and
+      a list of components the authors cannot account for. Scope stated up front and itemised throughout
+      is C.
+
+      '
+    notes:
+      verification: 'Both of the cell''s quotations are verbatim, including "patching it with corruptions
+        increases performance" (the post italicises "increases", which is emphasis and not part of the
+        string). The cell''s claim that the epistemic header comes before any result is confirmed by position:
+        it is the last line of the preamble, above the circuit diagram and every section.
+
+        '
+      legacy_evidence: 'The epistemic-status header declares the limit before any result: the circuit
+        ``only recovers up to half of the model performance, and there are a bunch of leads we didn''t
+        follow yet.'''' Unexplained heads (0.1, 1.0, 2.3), a negative head (2.2, where ``patching it with
+        corruptions \emph{increases} performance''''), and open composition questions are all named'

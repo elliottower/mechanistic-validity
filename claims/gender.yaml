@@ -1,0 +1,1241 @@
+claim: gender
+title: Gender Bias Circuits
+description: 'Causal mediation analysis treats a gender edit to the input as a treatment and each neuron,
+  layer, head or attention weight as a mediator, splitting the effect on a two-pronoun probability ratio
+  into a natural direct and a natural indirect effect. Three properties of the effect distribution are
+  reported --- sparsity, with ten of 144 heads reproducing the effect of intervening on all of them; synergy
+  among neurons; and decomposition into direct and indirect parts --- against a randomly initialised GPT2-small
+  carried through as a matched negative control. Systems: five GPT-2 sizes on 17 templates over 169 professions
+  plus WinoBias Type 1 and Winogender, with five further model families added in \S5.5. Description mode:
+  implementational-topographic.'
+source:
+  citation: vig2020gender
+  title: 'Causal Mediation Analysis for Interpreting Neural NLP: The Case of Gender Bias'
+  url: https://arxiv.org/abs/2004.12265
+  local: reference/vig_2020_gender_mediation.pdf
+  sha256: 1e35f3c72663d08be952910fd20caa7a6c4dc353544424a81a1a05808cd7a35e
+  extract_cmd: pdftotext -layout
+  read_in_full: true
+claims:
+  C1:
+    quotes:
+    - exact: Only 10 heads are required to match the effect of intervening on all 144 heads at the same
+        time (Figure 5b).
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: The first 6 selected ones are from layers 4 and 5, further demonstrating the concentration
+        of the effect in the middle layers.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: We did not find similar behavior in a randomly initialized model, indicating that these patterns
+        do not occur by chance.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: These two observations are further indications that the model has not learned a distinct
+        and sparse representation of gender-neutral references.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Neurons
+      page: null
+      line: null
+    - exact: Random model effects are much smaller, indicating that it is the training that causes gender
+        bias.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+  C2:
+    quotes:
+    - exact: The mediator, denoted as z, might be a particular neuron, a full layer, an attention head,
+        or a certain attention
+      prefix: ''
+      suffix: ''
+      section: §3.2.2
+      page: null
+      line: null
+    - exact: weight. Following Pearl’s definitions, we measure the direct and indirect effects of intervening
+        in the model relative to z (Pearl, 2001).
+      prefix: ''
+      suffix: ''
+      section: §3.2.2, continuing across the page break
+      page: null
+      line: null
+    - exact: For studying attention behavior, we focus on the attention weights, which define relationships
+        between words.
+      prefix: ''
+      suffix: ''
+      section: §3.4
+      page: null
+      line: null
+    - exact: Visualizing the indirect effect of each neuron in a heatmap (Figure 10 top) reveals vertical
+        stripes when a neuron at the same index, but different layers, has a similar effect.
+      prefix: ''
+      suffix: ''
+      section: §5.3, Residual Connections
+      page: null
+      line: null
+    - exact: As Figure 10 (bottom) shows, the stripes are less random in higher layers.
+      prefix: ''
+      suffix: ''
+      section: §5.3, Residual Connections
+      page: null
+      line: null
+  C3:
+    quotes:
+    - exact: We found this sparsity consistent in all model variants and datasets we examined.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: Similar to the attention result, a tiny fraction of neurons is sufficient for obtaining an
+        effect equal to that of
+      prefix: ''
+      suffix: ''
+      section: §5.2, Neurons
+      page: null
+      line: null
+    - exact: intervening on all neurons concurrently. Most of the top selected neurons are concentrated
+        in the embedding layer and first hidden layer.
+      prefix: ''
+      suffix: ''
+      section: §5.2, continuing across the page break
+      page: null
+      line: null
+    - exact: The same holds for concurrent interventions (Figure 8), where TE ≈ NDE-all + NIE-all.
+      prefix: ''
+      suffix: ''
+      section: §5.4
+      page: null
+      line: null
+    - exact: We find that our results are robust to the metric used to quantify the effects
+      prefix: ''
+      suffix: ''
+      section: §3.5
+      page: null
+      line: null
+    - exact: In the neuron intervention case, by definition TE = NIE-all and NDE-all = 0, so the decomposition
+        trivially holds.
+      prefix: ''
+      suffix: ''
+      section: footnote 8, §5.4
+      page: null
+      line: null
+  C4:
+    quotes:
+    - exact: 'For each of the templates, we used the following professions. Words in italics are definitional
+        and were thus excluded from the total effect calculation:'
+      prefix: ''
+      suffix: ''
+      section: Appendix A.1
+      page: null
+      line: null
+    - exact: Vig (2019) previously identified the same head (layer 5, head 10; noted as 5-10) as relating
+        to coreference resolution based on visual inspection.
+      prefix: ''
+      suffix: ''
+      section: §5.3, Attention
+      page: null
+      line: null
+    - exact: Clark et al. (2019) found an attention head in BERT (Devlin et al., 2019) that was highly
+        predictive of coreference, also in layer 5 out of 12.
+      prefix: ''
+      suffix: ''
+      section: §5.3, Attention
+      page: null
+      line: null
+    - exact: Here, we choose the domain A to be the set of predicted outcomes of interest, specifically
+        the stereotypical and anti-stereotypical candidates.
+      prefix: ''
+      suffix: ''
+      section: §3.5
+      page: null
+      line: null
+  C5:
+    quotes:
+    - exact: weight. Following Pearl’s definitions, we measure the direct and indirect effects of intervening
+        in the model relative to z (Pearl, 2001).
+      prefix: ''
+      suffix: ''
+      section: §3.2.2, continuing across the page break
+      page: null
+      line: null
+    - exact: However, the TE = NDE + NIE decomposition is not guaranteed without further assumptions (e.g.,
+        under linear models). In our case, an additional no-interaction condition was needed for the decomposition
+        to hold, as shown and discussed in Appendix E.
+      prefix: ''
+      suffix: ''
+      section: footnote 7, §5.4
+      page: null
+      line: null
+    - exact: This equation parallels a previously-described assumption in the causal mediation analysis
+        literature that ascertains that the NIE is the same regardless of the fixed value at which the
+        intervention (the analogue of set-gender/null) is held, known as a no-interaction assumption (Imai
+        et al., 2010b).
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+    - exact: Fitting the data to a linear model yields a coefficient of 1.04 and an intercept of 0.00
+        (R2 = 0.78).
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+    - exact: The causality literature often focuses on assumptions needed for identification of mediation
+        effects from observed data (Pearl, 2001; Avin, Shpitser, & Pearl, 2005; Imai, Keele, & Yamamoto,
+        2010b).
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+  M1:
+    quotes:
+    - exact: To simplify processing by GPT2 and focus on common professions, we only take examples that
+        are not split into sub-word units, resulting in 17 templates and 169 professions, or 2,873 examples
+        in total.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: For the professions dataset, the GPT2 variants from distil to large have respective total
+        effects of 8.3, 7.5, 9.6, and 12.5, all with standard deviations < 10.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: Given woman as the occupation word, the probability ratio p(she)/p(he) ranges from 2.5 to
+        45.1 across templates (µ = 17.2, σ = 13.1).
+      prefix: ''
+      suffix: ''
+      section: Appendix A.1
+      page: null
+      line: null
+    - exact: As can be seen from Figure 14, we also observe considerably higher variances with some of
+        the new models than in the case of GPT2.
+      prefix: ''
+      suffix: ''
+      section: §5.5, Neuron interventions
+      page: null
+      line: null
+    - exact: Only 10 heads are required to match the effect of intervening on all 144 heads at the same
+        time (Figure 5b).
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+  M2:
+    quotes:
+    - exact: Random model effects are much smaller, indicating that it is the training that causes gender
+        bias.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: GPT2-small rand. 117M 12 12 0.07 0.05 0.12
+      prefix: ''
+      suffix: ''
+      section: Table 1
+      page: null
+      line: null
+    - exact: We did not find similar behavior in a randomly initialized model, indicating that these patterns
+        do not occur by chance.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: However, we still observe a small increase in effect within the intermediate layers across
+        all models except for the randomized one.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Neurons
+      page: null
+      line: null
+    - exact: 'Figure 17: Indirect effect when using a randomly initialized GPT2-small model on Winobias.'
+      prefix: ''
+      suffix: ''
+      section: Figure 17 caption, Appendix C.1
+      page: null
+      line: null
+  M3:
+    quotes:
+    - exact: G REEDY approach, which iteratively selects the head with the maximal marginal contribution
+        to the indirect effect, or a T OP - K approach, which selects the k elements with the strongest
+        individual effects.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: Sparsity is consistent across all experiments where only a small proportion of heads are
+        sufficient to achieve the full model effect of intervening at all heads.
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+    - exact: On Winogender, only 4/4/5/4% of heads are needed to saturate, while on Winobias, only 6/7/8/6%
+        of heads are needed in GPT2-distil/small/medium/large.
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+    - exact: We find that our results are robust to the metric used to quantify the effects
+      prefix: ''
+      suffix: ''
+      section: §3.5
+      page: null
+      line: null
+    - exact: While we observed consistent results under multiple metrics, our definitions of causal effects
+        to quantify bias could be refined, and alternative definitions might be advantageous for NLP research.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+    - exact: 'Specifically, we perform the following do-operations: (a) set-gender: replace the ambiguous
+        profession with an anti-stereotypical gender-specific word (that is, replace nurse with man, doctor
+        with woman, etc.); (b) null: leave the sentence as is.'
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: As mentioned above, we pick person as target of the set-gender change for the gender-neutral
+        reference and we measure the probability of the continuation they.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: In this case, we define the swap-gender operation, which changes she to he.
+      prefix: ''
+      suffix: ''
+      section: §3.4
+      page: null
+      line: null
+  M4:
+    quotes:
+    - exact: 'The relative probabilities assigned to the two candidates can be thought of as a measure
+        of grammatical gender bias in the model:'
+      prefix: ''
+      suffix: ''
+      section: §3.2, immediately before Eq. 1
+      page: null
+      line: null
+    - exact: If y(u) < 1, the prediction is stereotypical; if y(u) > 1, it is anti-stereotypical. A perfectly
+        unbiased model would achieve y(u) = 1 and thus exhibit bias toward neither the stereotypical nor
+        the anti-stereotypical case.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: TE(set-gender, null; y, u) = 13.1/0.14 − 1 ≈ 92.6
+      prefix: ''
+      suffix: ''
+      section: Figure 4
+      page: null
+      line: null
+    - exact: It is difficult to compare effect magnitudes in the three datasets because of their different
+        nature.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: The professions dataset yields much stronger effects than the Winograd-style datasets.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+  M5:
+    quotes:
+    - exact: In the professions dataset, we found moderate positive correlations between the external
+        gender bias
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: and the log-total effect, ranging from 0.35 to 0.45 over the different models, indicating
+        that the model captures the expected biases.
+      prefix: ''
+      suffix: ''
+      section: §5.1, continuing past the footnote marker
+      page: null
+      line: null
+    - exact: In the Winograd-style datasets, we found relatively low correlations between the log-total
+        effect and the log-ratio of the two occupations’ stereotypicality, ranging from 0.17 to 0.26.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: Both datasets include statistics from the U.S. Bureau of Labor Statistics (BLS) to assess
+        the gender stereotypicality of the referenced occupations.
+      prefix: ''
+      suffix: ''
+      section: Appendix A.2
+      page: null
+      line: null
+  M6:
+    quotes:
+    - exact: 'We use several model sizes: small, medium, large, extra-large (xl), and a very small distilled
+        model (Sanh, Debut, Chaumond, & Wolf, 2019).'
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: To test the universality of our findings across Transformer-based architectures, we perform
+        a subset of experiments with two additional autoregressive models
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: 'Specifically, we investigate a total of four metrics, consisting of the primary metric and
+        the three alternate metrics, referred to and defined by the following:'
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: The agreement between all autoregressive models we have tested indicates that our framework
+        has revealed general patterns in gender bias effects manifesting across different architectures
+        rather than features of a particular model.
+      prefix: ''
+      suffix: ''
+      section: §5.5, Attention interventions
+      page: null
+      line: null
+    - exact: None of the non-GPT2 models seem to share the exact same pattern that we have observed with
+        GPT2 variants
+      prefix: ''
+      suffix: ''
+      section: §5.5, Neuron interventions
+      page: null
+      line: null
+    - exact: We do not have a compelling theory to explain these differences in results.
+      prefix: ''
+      suffix: ''
+      section: §5.5
+      page: null
+      line: null
+  M7:
+    quotes:
+    - exact: G REEDY approach, which iteratively selects the head with the maximal marginal contribution
+        to the indirect effect, or a T OP - K approach, which selects the k elements with the strongest
+        individual effects.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: Only 10 heads are required to match the effect of intervening on all 144 heads at the same
+        time (Figure 5b).
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: Figure 6a shows the indirect effects from the top 5% of neurons from each layer in different
+        models.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Neurons
+      page: null
+      line: null
+    - exact: For computational reasons, we select sets of 96 neurons.
+      prefix: ''
+      suffix: ''
+      section: footnote 6, §5.2
+      page: null
+      line: null
+    - exact: The problem of subset selection (selecting k elements from n) is an NP-hard combinatorial
+        optimization problem.
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+  I1:
+    quotes:
+    - exact: The natural direct effect (NDE) measures how much an intervention x changes an outcome variable
+        y directly, without passing through a hypothesized mediator z. It its computed by applying the
+        intervention x but holding z fixed to its original value.
+      prefix: ''
+      suffix: ''
+      section: §3.2.2
+      page: null
+      line: null
+    - exact: The natural indirect effect (NIE) measures how much the intervention x changes y indirectly,
+        through z. It is computed by setting z to its value under the intervention x, while keeping everything
+        else to its original value.
+      prefix: ''
+      suffix: ''
+      section: §3.2.2
+      page: null
+      line: null
+    - exact: This framework allows evaluating the causal contribution of different mediators z to gender
+        bias.
+      prefix: ''
+      suffix: ''
+      section: §3.2.2
+      page: null
+      line: null
+    - exact: By definition, concurrent intervention on all neurons entails TE = NIE-all, since then
+      prefix: ''
+      suffix: ''
+      section: §5.3, Neurons
+      page: null
+      line: null
+    - exact: In the neuron intervention case, by definition TE = NIE-all and NDE-all = 0, so the decomposition
+        trivially holds.
+      prefix: ''
+      suffix: ''
+      section: footnote 8, §5.4
+      page: null
+      line: null
+  I2:
+    quotes:
+    - exact: The natural indirect effect (NIE) measures how much the intervention x changes y indirectly,
+        through z. It is computed by setting z to its value under the intervention x, while keeping everything
+        else to its original value.
+      prefix: ''
+      suffix: ''
+      section: §3.2.2
+      page: null
+      line: null
+    - exact: Only 10 heads are required to match the effect of intervening on all 144 heads at the same
+        time (Figure 5b).
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: Similar to the case of attention, Figure 7 shows that after a few neurons (4%) match the
+        model-wise concurrent effect, most neurons do not contribute much, and many even diminish the
+        effect.
+      prefix: ''
+      suffix: ''
+      section: §5.3, Neurons
+      page: null
+      line: null
+    - exact: Very few neurons (4%) are required to saturate the model effect. Of those, 57% are from layers
+        0 and 1.
+      prefix: ''
+      suffix: ''
+      section: Figure 7 caption
+      page: null
+      line: null
+    - exact: Here, we choose the domain A to be the set of predicted outcomes of interest, specifically
+        the stereotypical and anti-stereotypical candidates.
+      prefix: ''
+      suffix: ''
+      section: §3.5
+      page: null
+      line: null
+  I3:
+    quotes:
+    - exact: G REEDY approach, which iteratively selects the head with the maximal marginal contribution
+        to the indirect effect
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: Only 10 heads are required to match the effect of intervening on all 144 heads at the same
+        time (Figure 5b).
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: As Figure 5b shows, most heads do not contribute much to the indirect effect, and many reduce
+        it.
+      prefix: ''
+      suffix: ''
+      section: §5.3, Attention
+      page: null
+      line: null
+    - exact: Similar to the case of attention, Figure 7 shows that after a few neurons (4%) match the
+        model-wise concurrent effect, most neurons do not contribute much, and many even diminish the
+        effect.
+      prefix: ''
+      suffix: ''
+      section: §5.3, Neurons
+      page: null
+      line: null
+  I4:
+    quotes:
+    - exact: Here, we choose the domain A to be the set of predicted outcomes of interest, specifically
+        the stereotypical and anti-stereotypical candidates.
+      prefix: ''
+      suffix: ''
+      section: §3.5
+      page: null
+      line: null
+    - exact: When working with neuron interventions, the outcomes of interest in response to a prompt
+        like The nurse said that will be the set of possible genders predicted by the model, specifically
+        A = {he, she} in our case.
+      prefix: ''
+      suffix: ''
+      section: §3.5
+      page: null
+      line: null
+    - exact: The probability distributions used in the metrics discussed above can reasonably be extended
+        to the full range of possible output words by the neural network. The inclusion of only pronouns
+        in our construction, though, is due to the focus on the specific case of gender bias.
+      prefix: ''
+      suffix: ''
+      section: §3.5
+      page: null
+      line: null
+    - exact: However, it may also yield interesting insights on more subtle consequences of the interventions,
+        such as how other non-pronoun words with associated stereotypes may be affected by these interventions.
+      prefix: ''
+      suffix: ''
+      section: §3.5
+      page: null
+      line: null
+  I5:
+    quotes:
+    - exact: Random model effects are much smaller, indicating that it is the training that causes gender
+        bias.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: We did not find similar behavior in a randomly initialized model, indicating that these patterns
+        do not occur by chance.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: To validate that each template would capture gender bias, we instantiate each with an occupation
+        of woman and man and verify that the conditional probabilities of she and he align with gender.
+      prefix: ''
+      suffix: ''
+      section: Appendix A.1
+      page: null
+      line: null
+    - exact: In the professions dataset, we found moderate positive correlations between the external
+        gender bias
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: and the log-total effect, ranging from 0.35 to 0.45 over the different models, indicating
+        that the model captures the expected biases.
+      prefix: ''
+      suffix: ''
+      section: §5.1, continuing past the footnote marker
+      page: null
+      line: null
+  I6:
+    quotes:
+    - exact: 'The figure demonstrates that they capture different coreference aspects: one head aligns
+        with the stereotypical coreference candidate, another head attends to the tokens following that
+        candidate, while a third attends to the anti-stereotypical candidate.'
+      prefix: ''
+      suffix: ''
+      section: §5.3, Attention
+      page: null
+      line: null
+    - exact: This framework allows evaluating the causal contribution of different mediators z to gender
+        bias.
+      prefix: ''
+      suffix: ''
+      section: §3.2.2
+      page: null
+      line: null
+    - exact: Through the distinction between direct and indirect effect, we can measure how much of the
+        total effect of gender edits on gender bias flows through a specific component (indirect effect)
+        or elsewhere in the model (direct effect).
+      prefix: ''
+      suffix: ''
+      section: §3.2.2
+      page: null
+      line: null
+  I7:
+    quotes:
+    - exact: 'For each of the templates, we used the following professions. Words in italics are definitional
+        and were thus excluded from the total effect calculation:'
+      prefix: ''
+      suffix: ''
+      section: Appendix A.1
+      page: null
+      line: null
+    - exact: The professions are accompanied by crowdsourced ratings between −1 and 1 for definitionality
+        and stereotypicality.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: Moreover, this case suffers from the additional confounder that the model could assign probability
+        to the plural they which we are not able to disambiguate from the singular case.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: Random model effects are much smaller, indicating that it is the training that causes gender
+        bias.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: To simplify processing by GPT2 and focus on common professions, we only take examples that
+        are not split into sub-word units
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+  I9:
+    quotes:
+    - exact: Figure 8 compares indirect effects of concurrent intervention on all heads (NIE-all) to summing
+        the effects of independent interventions (NIE-sum).
+      prefix: ''
+      suffix: ''
+      section: §5.3, Attention
+      page: null
+      line: null
+    - exact: The differences are fairly small (maximum relative distance from NIE-all between 0.7% and
+        11.3%), indicating that heads operate primarily in an independent and complementary manner, capturing
+        different aspects of gender bias.
+      prefix: ''
+      suffix: ''
+      section: §5.3, Attention
+      page: null
+      line: null
+    - exact: Notably, the sum of independent indirect effects (NIE-sum) is much smaller than the concurrent
+        intervention (NIE-all), as shown in the following table. Thus, neurons combine synergistically
+        to compound independent effects.
+      prefix: ''
+      suffix: ''
+      section: §5.3, Neurons
+      page: null
+      line: null
+    - exact: NIE-sum 6.8 4.0 3.5 2.1 2.9
+      prefix: ''
+      suffix: ''
+      section: table in §5.4
+      page: null
+      line: null
+    - exact: NIE-all 130.9 112.3 116.0 96.9 225.2
+      prefix: ''
+      suffix: ''
+      section: table in §5.4
+      page: null
+      line: null
+  I10:
+    quotes:
+    - exact: The natural direct effect (NDE) measures how much an intervention x changes an outcome variable
+        y directly, without passing through a hypothesized mediator z. It its computed by applying the
+        intervention x but holding z fixed to its original value.
+      prefix: ''
+      suffix: ''
+      section: §3.2.2
+      page: null
+      line: null
+    - exact: For the present use case, we define the NDE of x = x on y given mediator z = z to be the
+        change in the amount of bias when genderizing all units u, e.g., changing nurse to man, while
+        holding z for each unit to its original value.
+      prefix: ''
+      suffix: ''
+      section: §3.2.2
+      page: null
+      line: null
+    - exact: For the present use case, we define the NIE as the change in amount of bias when keeping
+        unit u as is, but setting z to the value it would attain under a genderized reading.
+      prefix: ''
+      suffix: ''
+      section: §3.2.2
+      page: null
+      line: null
+  I11:
+    quotes:
+    - exact: As an example large pre-trained LM, we use GPT2 (Radford et al., 2019), a Transformer-based
+        (English) LM trained on massive amounts of data.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Table 1 shows the total effects of gender bias in the different GPT2 models, on three datasets,
+        as well as the effects with a randomly initialized GPT2-small model.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+  I12:
+    quotes:
+    - exact: Random model effects are much smaller, indicating that it is the training that causes gender
+        bias.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: GPT2-small rand. 117M 12 12 0.07 0.05 0.12
+      prefix: ''
+      suffix: ''
+      section: Table 1
+      page: null
+      line: null
+    - exact: We did not find similar behavior in a randomly initialized model, indicating that these patterns
+        do not occur by chance.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: However, we still observe a small increase in effect within the intermediate layers across
+        all models except for the randomized one.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Neurons
+      page: null
+      line: null
+  E1:
+    quotes:
+    - exact: 'Specifically, we perform the following do-operations: (a) set-gender: replace the ambiguous
+        profession with an anti-stereotypical gender-specific word (that is, replace nurse with man, doctor
+        with woman, etc.); (b) null: leave the sentence as is.'
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: As mentioned above, we pick person as target of the set-gender change for the gender-neutral
+        reference and we measure the probability of the continuation they.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: In this case, we define the swap-gender operation, which changes she to he.
+      prefix: ''
+      suffix: ''
+      section: §3.4
+      page: null
+      line: null
+    - exact: We compute the NDE and NIE for each head individually by intervening on the attention weights
+      prefix: ''
+      suffix: ''
+      section: §3.4
+      page: null
+      line: null
+    - exact: We find that our results are robust to the metric used to quantify the effects
+      prefix: ''
+      suffix: ''
+      section: §3.5
+      page: null
+      line: null
+  E2:
+    quotes:
+    - exact: To simplify processing by GPT2 and focus on common professions, we only take examples that
+        are not split into sub-word units, resulting in 17 templates and 169 professions, or 2,873 examples
+        in total.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: For attention intervention experiments, we use examples from Winobias Dev/Test (Zhao et al.,
+        2018a) and Winogender (Rudinger et al., 2018), totaling 160/130 and 44 examples that fit our formulation,
+        respectively.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: For Winobias, we only consider Type 1 examples, which follow the format of a shared prompt
+        and two alternate continuations.
+      prefix: ''
+      suffix: ''
+      section: Appendix A.2
+      page: null
+      line: null
+    - exact: It is difficult to compare effect magnitudes in the three datasets because of their different
+        nature.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: This may be attributed to the more explicit source of bias, the word representations, as
+        compared to intricate coreference relations in the Winograd-style datasets.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: We found this sparsity consistent in all model variants and datasets we examined.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+  E3:
+    quotes:
+    - exact: While the framework may apply to any property expressed as a function of model predictions,
+        our experimental design focuses on gender bias in a binary setup.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+    - exact: Applying the methodology to more gender-inclusive setups and other kinds of biases is thus
+        especially important since it can uncover these shortcomings in models.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+    - exact: While we use gender bias as a case study, the approach can be applied to controlled effect
+        or bias.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: Here, we choose the domain A to be the set of predicted outcomes of interest, specifically
+        the stereotypical and anti-stereotypical candidates.
+      prefix: ''
+      suffix: ''
+      section: §3.5
+      page: null
+      line: null
+  E4:
+    quotes:
+    - exact: 'Table 1: Model sizes and total effects (TE) of gender bias in various GPT2 variants evaluated
+        on Winobias (WB), Winogender (WG), and the Professions dataset.'
+      prefix: ''
+      suffix: ''
+      section: Table 1 caption
+      page: null
+      line: null
+    - exact: In the Winograd-style datasets, the total effect mostly increases with model size, saturating
+        at the large and xl models. In the professions dataset, model size is not well correlated with
+        total effect, but GPT2-xl has a much larger effect.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: 'These results support our main findings with GPT2: the heat maps show the sparsity of indirect
+        effects in Transformer-XL and XLNet while the bar charts demonstrate decomposability.'
+      prefix: ''
+      suffix: ''
+      section: §5.5, Attention interventions
+      page: null
+      line: null
+    - exact: show mixed levels of agreement with GPT2 results.
+      prefix: ''
+      suffix: ''
+      section: §5.5, Attention interventions
+      page: null
+      line: null
+    - exact: None of the non-GPT2 models seem to share the exact same pattern that we have observed with
+        GPT2 variants
+      prefix: ''
+      suffix: ''
+      section: §5.5, Neuron interventions
+      page: null
+      line: null
+    - exact: We do not have a compelling theory to explain these differences in results.
+      prefix: ''
+      suffix: ''
+      section: §5.5
+      page: null
+      line: null
+  E5:
+    quotes:
+    - exact: To determine how many heads are required to achieve the full effect of intervening on all
+        heads, we also intervene on groups of heads.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: 'Figure 23: The indirect effect after sequentially selecting an increasing number of heads
+        through the T OP - K or G REEDY approach on different model types and data. A small proportion
+        of heads are required to saturate the effect of the model.'
+      prefix: ''
+      suffix: ''
+      section: Figure 23 caption, Appendix D
+      page: null
+      line: null
+    - exact: 'Figure 7: Indirect effects after sequentially selecting an increasing number of neurons
+        from either the full model or individual layers using the T OP - K approach in GPT2-small on the
+        professions dataset.'
+      prefix: ''
+      suffix: ''
+      section: Figure 7 caption
+      page: null
+      line: null
+    - exact: 'Specifically, we perform the following do-operations: (a) set-gender: replace the ambiguous
+        profession with an anti-stereotypical gender-specific word (that is, replace nurse with man, doctor
+        with woman, etc.); (b) null: leave the sentence as is.'
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: The natural indirect effect (NIE) measures how much the intervention x changes y indirectly,
+        through z. It is computed by setting z to its value under the intervention x, while keeping everything
+        else to its original value.
+      prefix: ''
+      suffix: ''
+      section: §3.2.2
+      page: null
+      line: null
+  E6:
+    quotes:
+    - exact: In the professions dataset, we found moderate positive correlations between the external
+        gender bias
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: and the log-total effect, ranging from 0.35 to 0.45 over the different models, indicating
+        that the model captures the expected biases.
+      prefix: ''
+      suffix: ''
+      section: §5.1, continuing past the footnote marker
+      page: null
+      line: null
+    - exact: In the Winograd-style datasets, we found relatively low correlations between the log-total
+        effect and the log-ratio of the two occupations’ stereotypicality, ranging from 0.17 to 0.26.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: These two observations are further indications that the model has not learned a distinct
+        and sparse representation of gender-neutral references.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Neurons
+      page: null
+      line: null
+    - exact: Preliminary experiments with gender-neutral references showed that models have not learned
+        the concept of these references, at least for our chosen templates.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+  V1:
+    quotes:
+    - exact: This article introduced a structural-behavioral framework for interpreting neural models
+        based on causal mediation analysis.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+    - exact: Our approach is a structural-behavioral analysis. It is structural in that our results highlight
+        internal model components that are responsible for gender bias. It is behavioral in that said
+        components are causally implicated in how gender bias manifests in the model outputs.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: The mediator, denoted as z, might be a particular neuron, a full layer, an attention head,
+        or a certain attention
+      prefix: ''
+      suffix: ''
+      section: §3.2.2
+      page: null
+      line: null
+    - exact: We first perform targeted interventions on the input text and measure their effect on the
+        gender bias measure defined above (Eq. 1), which serves as the response variable y.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+  V2:
+    quotes:
+    - exact: 'Gender bias is sparse: Much of the effect is concentrated in relatively few model components.'
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: 'Gender bias is synergistic: Some model components interact to produce mutual effects that
+        amplify their individual effects.'
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: 'Gender bias is decomposable: The total gender bias effect approximates the sum of the direct
+        and indirect effect, a surprising result given the non-linear nature of the model.'
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: Only 10 heads are required to match the effect of intervening on all 144 heads at the same
+        time (Figure 5b).
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: The differences are fairly small (maximum relative distance from NIE-all between 0.7% and
+        11.3%), indicating that heads operate primarily in an independent and complementary manner, capturing
+        different aspects of gender bias.
+      prefix: ''
+      suffix: ''
+      section: §5.3, Attention
+      page: null
+      line: null
+    - exact: The same holds for concurrent interventions (Figure 8), where TE ≈ NDE-all + NIE-all.
+      prefix: ''
+      suffix: ''
+      section: §5.4
+      page: null
+      line: null
+  V3:
+    quotes:
+    - exact: Random model effects are much smaller, indicating that it is the training that causes gender
+        bias.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: We did not find similar behavior in a randomly initialized model, indicating that these patterns
+        do not occur by chance.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Attention
+      page: null
+      line: null
+    - exact: 'The figure demonstrates that they capture different coreference aspects: one head aligns
+        with the stereotypical coreference candidate, another head attends to the tokens following that
+        candidate, while a third attends to the anti-stereotypical candidate.'
+      prefix: ''
+      suffix: ''
+      section: §5.3, Attention
+      page: null
+      line: null
+    - exact: Vig (2019) previously identified the same head (layer 5, head 10; noted as 5-10) as relating
+        to coreference resolution based on visual inspection.
+      prefix: ''
+      suffix: ''
+      section: §5.3, Attention
+      page: null
+      line: null
+  V4:
+    quotes:
+    - exact: 'The relative probabilities assigned to the two candidates can be thought of as a measure
+        of grammatical gender bias in the model:'
+      prefix: ''
+      suffix: ''
+      section: §3.2, immediately before Eq. 1
+      page: null
+      line: null
+    - exact: If y(u) < 1, the prediction is stereotypical; if y(u) > 1, it is anti-stereotypical. A perfectly
+        unbiased model would achieve y(u) = 1 and thus exhibit bias toward neither the stereotypical nor
+        the anti-stereotypical case.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: The mediator, denoted as z, might be a particular neuron, a full layer, an attention head,
+        or a certain attention
+      prefix: ''
+      suffix: ''
+      section: §3.2.2
+      page: null
+      line: null
+    - exact: Vig (2019) previously identified the same head (layer 5, head 10; noted as 5-10) as relating
+        to coreference resolution based on visual inspection.
+      prefix: ''
+      suffix: ''
+      section: §5.3, Attention
+      page: null
+      line: null
+    - exact: 'The figure demonstrates that they capture different coreference aspects: one head aligns
+        with the stereotypical coreference candidate, another head attends to the tokens following that
+        candidate, while a third attends to the anti-stereotypical candidate.'
+      prefix: ''
+      suffix: ''
+      section: §5.3, Attention
+      page: null
+      line: null
+  V5:
+    quotes:
+    - exact: This experimental setup is based on a binary notion of a stereotypical and an anti-stereotypical
+        candidate. Unfortunately, the datasets investigated in this work are designed for experiments
+        with a binary grammatical gender instead of a gender-inclusive spectrum.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: Moreover, this case suffers from the additional confounder that the model could assign probability
+        to the plural they which we are not able to disambiguate from the singular case.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: However, the TE = NDE + NIE decomposition is not guaranteed without further assumptions (e.g.,
+        under linear models). In our case, an additional no-interaction condition was needed for the decomposition
+        to hold, as shown and discussed in Appendix E.
+      prefix: ''
+      suffix: ''
+      section: footnote 7, §5.4
+      page: null
+      line: null
+    - exact: We do not have a compelling theory to explain these differences in results.
+      prefix: ''
+      suffix: ''
+      section: §5.5
+      page: null
+      line: null
+    - exact: While the framework may apply to any property expressed as a function of model predictions,
+        our experimental design focuses on gender bias in a binary setup.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null

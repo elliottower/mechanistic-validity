@@ -1,0 +1,1644 @@
+claim: successor_heads
+title: 'Successor Heads: Ordinal Incrementation'
+description: 'One attention head maps an ordinal token to its successor, and the mechanism is a product
+  of four weight matrices --- embedding, $\mathrm{MLP}_0$, the head''s OV circuit, unembedding --- evaluated
+  directly, with no activation from any prompt entering it. Mod-10 features recovered from $\mathrm{MLP}_0$
+  by sparse autoencoders, by a linear probe and by single-neuron ablation carry the index the head increments.
+  Systems: GPT-2, Pythia and Llama-2 from 31M to 12B for behavioural recurrence, with the feature-level
+  case study on Pythia-1.4B L12H0 and two appendix replications. Description mode: implementational-functional.'
+source:
+  citation: gould2023successor
+  title: 'Successor Heads: Recurring, Interpretable Attention Heads In The Wild'
+  url: https://arxiv.org/abs/2312.09230
+  local: reference/gould_2023_successor_heads.pdf
+  sha256: 8ba7f1cf8b29617acce30cd173ad262c20de187209403808ddb0b00e1e5dae82
+  extract_cmd: pdftotext -layout
+  read_in_full: true
+claims:
+  C1:
+    quotes:
+    - exact: The succession dataset is the set of tokens across eight different tasks that can be incremented
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: Successor Heads are then operationalized by considering an input token t from our succession
+        dataset (e.g. t =‘Monday’). If the effective OV circuit column for input t has a larger output
+        on the successor to t (‘Tuesday’) than on any other of the tokens in that task (‘Monday’ or ‘Wednesday’
+        or ‘Thursday’ or ...) then we consider the head to have performed succession in this case.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: Successor Heads are then defined as the attention heads that pass this test for more than
+        half of the tokens in the succession dataset. We call the proportion of succession dataset tokens
+        on which an attention head performs succession the succession score.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: 'Figure 2: Plots of successor scores (proportion of tokens where succession occurs) for each
+        model tested. A plot of the highest successor score observed across all attention heads for each
+        model tested (left) and successor scores of the best successor heads in models (Pythia-1.4B, GPT-2
+        XL, Llama-2 7B) across different tasks (right).'
+      prefix: ''
+      suffix: ''
+      section: Figure 2 caption
+      page: null
+      line: null
+    - exact: 'In Appendix I we find that for both Pythia-1.4B (the mainline model in the paper) and GPT-2
+        Large (a randomly selected model without a successor head from (Figure 2, left)), the heads with
+        highest successor score are sparse: in Pythia-1.4B L12H0 has eight times as great a successor
+        score to the next higher successor score.'
+      prefix: ''
+      suffix: ''
+      section: Appendix I
+      page: null
+      line: null
+  C2:
+    quotes:
+    - exact: 'Figure 1: A successor head with OV matrix WOV takes a numbered token such as ‘Monday’ in
+        embedding space and maps it to its successor value in unembedding space, e.g. ‘Tuesday’. The circuit
+        is the simple composition of the embedding matrix, the first MLP block, a single attention head,
+        and the unembedding matrix.'
+      prefix: ''
+      suffix: ''
+      section: Figure 1 caption
+      page: null
+      line: null
+    - exact: The (non-effective) OV circuit WU WOV WE (1) from Elhage et al. (2021) is the inspiration
+        for our effective OV circuit WU WOV MLP0 (WE ) (2).
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: Successor Heads are then operationalized by considering an input token t from our succession
+        dataset (e.g. t =‘Monday’). If the effective OV circuit column for input t has a larger output
+        on the successor to t (‘Tuesday’) than on any other of the tokens in that task (‘Monday’ or ‘Wednesday’
+        or ‘Thursday’ or ...) then we consider the head to have performed succession in this case.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: This is because Successor Heads are biased towards values greater than the successor, compared
+        to values less than the successor. This effect can be seen in Figure 8a on the tokens ‘first’,
+        ‘second’, ..., ‘tenth’.
+      prefix: ''
+      suffix: ''
+      section: §3.4, Greater-than bias
+      page: null
+      line: null
+    - exact: 'Figure 8: The Successor Head OV circuit displays a clear bias against decrementation (Figure
+        8a), i.e. the logits on or above the main diagonal are less than the logits below the main diagonal.
+        This bias isn’t captured in the mod 10 feature (Figure 8b).'
+      prefix: ''
+      suffix: ''
+      section: Figure 8 caption
+      page: null
+      line: null
+    - exact: 'Limitations: The absence of a strong greater-than bias in our mod 10 features suggests this
+        feature-level description is missing some details – specifically, that successor heads must use
+        other numeric information to produce the greater-than bias we observe. Additionally, while we
+        see a good generalization of the mod 10 features across various tasks in the table in Figure 7,
+        the mod 10 features are not able to steer the Days and Letters tasks from Section 2.'
+      prefix: ''
+      suffix: ''
+      section: §3.4, Limitations
+      page: null
+      line: null
+    - exact: Finding a ‘greater-than bias’, where a language model was much more likely to predict numeric
+        answers larger than the values in the prompt, compared to smaller values than tokens present in
+        the prompt, that was observable by a weights-level analysis.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+  C3:
+    quotes:
+    - exact: 'Are the mod-10 features we found in Section 3.2 simply an artifact of the SAE technique?
+        We provide evidence that these are natural, causally important features by using two independent
+        methods to recover them: (1) linear probing, and (2) identifying MLP0 neurons.'
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: We find that Pi , the ith row of our linear probe, has a high cosine similarity (on average
+        0.70764) to the corresponding mod-10 feature fi obtained from the SAE. Surprisingly, the probe
+        even generalizes to non-numeric tokens, correctly predicting the index value mod 10 for 94/102
+        examples from succession dataset tasks 2-8 (Section 2).
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: We perform ablative experiments on individual MLP0 neurons (activations immediately after
+        the final ReLU/GELU) to find the most important neurons for incrementing numeric tokens ti (measured
+        by decrease in probability of the successor token ti+1 , as per the definition of most important
+        feature). Observing the behavior of these neurons on tokens ti reveals periodic spiking patterns
+        in firing intensity (the neuron’s activation value), with the most common period across the top
+        16 most important neurons being 10.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: Given an ordinal sequence token t and a trained SAE, we define t’s most important feature
+        t⋆ as the SAE feature that, when ablated from the reconstruction of t’s MLP0 -representation,
+        causes the biggest decrease in the probability of the successor of t (by calculating probabilities
+        from the logits obtained by multiplying by WU WOV ).
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: However, our results do not contradict previous findings that understanding MLPs requires
+        understanding distributed behaviors, since, for example, feature f6 appears to be in superposition
+        across at least two neurons (see Figure 6).
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+  C4:
+    quotes:
+    - exact: 'In Appendix I we find that for both Pythia-1.4B (the mainline model in the paper) and GPT-2
+        Large (a randomly selected model without a successor head from (Figure 2, left)), the heads with
+        highest successor score are sparse: in Pythia-1.4B L12H0 has eight times as great a successor
+        score to the next higher successor score.'
+      prefix: ''
+      suffix: ''
+      section: Appendix I
+      page: null
+      line: null
+    - exact: 'Figure 2: Plots of successor scores (proportion of tokens where succession occurs) for each
+        model tested. A plot of the highest successor score observed across all attention heads for each
+        model tested (left) and successor scores of the best successor heads in models (Pythia-1.4B, GPT-2
+        XL, Llama-2 7B) across different tasks (right).'
+      prefix: ''
+      suffix: ''
+      section: Figure 2 caption
+      page: null
+      line: null
+    - exact: Successor Heads are then defined as the attention heads that pass this test for more than
+        half of the tokens in the succession dataset. We call the proportion of succession dataset tokens
+        on which an attention head performs succession the succession score.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: We observe that, while successorship is the predominant behavior across both winning and
+        loss-reducing cases, acronym and greater-than behaviors also form a non-negligible fraction of
+        successor head behavior.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: While polysemanticity has been observed in both vision models (Olah et al., 2020) and toy
+        models trained to perform simple tasks (Elhage et al., 2022), to the best of our knowledge the
+        presence of both successorship and acronym behavior in head L12H0 is the cleanest example of polysemantic
+        behavior identified so far in an LLM, where we show two clear distinct behaviors one model component
+        has.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  C5:
+    quotes:
+    - exact: Olah et al. (2020) introduces the universality hypothesis and we use Chughtai et al. (2023)’s
+        ‘weak universality’ notion in this work (Section 1).
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: One related case study to our work is Hanna et al. (2023) which studies a Greater-Than circuit
+        in GPT-2 Small, similar to how we indirectly found the Greater-Than operation in Section 3.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Mikolov et al. (2013)’s seminal work on word embedding arithmetic showed that latent language
+        model representations had compositionality, e.g. vec(‘King’) − vec(‘Man’) + vec(‘Woman’) = vec(‘Queen’)
+        approximated the embedding of ‘Queen’.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: In our work we provide an end-to-end explanation of generalizing language model components
+        (Figure 1), though induction heads are related to in-context learning and a consistent phase change
+        in training, which we didn’t observe for successor heads (Appendix G).
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Another line of evidence that Successor Heads are an important model component for low training
+        loss can be found by studying successor scores across training points. We study a Pythia model
+        (Biderman et al., 2023) as well as a Stanford GPT model (CRFM, 2021), as these models have training
+        checkpoints. The emergence of Successor Heads throughout training is displayed in Figure 18.
+      prefix: ''
+      suffix: ''
+      section: Appendix G
+      page: null
+      line: null
+  M1:
+    quotes:
+    - exact: As such, we define the mod-10 features f0 , ..., f9 as the modal most important features
+        from mod-10 classes {t0 , ..., t90 }, {t1 , ..., t91 }, ..., {t9 , ..., t99 }, averaged over 100
+        SAE training runs.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: We train a linear probe to predict the mod 10 value of tokens. Specifically, we train on
+        number tokens from ‘0’ to ‘500’, both with and without a space, assigning 90% of tokens to a train
+        set, and the remaining 10% to a validation set.
+      prefix: ''
+      suffix: ''
+      section: Appendix B.1
+      page: null
+      line: null
+    - exact: 'Out of the total 102 such examples, 94/102 are correct, and the 8 failures are: [‘January’,
+        ‘December’, ‘Friday’, ‘Saturday’, ‘Sunday’, ‘ V’, ‘ X’, ‘ XV’].'
+      prefix: ''
+      suffix: ''
+      section: Appendix B.1
+      page: null
+      line: null
+    - exact: Successor Heads are then defined as the attention heads that pass this test for more than
+        half of the tokens in the succession dataset. We call the proportion of succession dataset tokens
+        on which an attention head performs succession the succession score.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: To find these hyperparameters, we used the metric of mean max cosine similarity between two
+        trained SAEs, as described in Sharkey et al. (2022) and Cunningham et al. (2023).
+      prefix: ''
+      suffix: ''
+      section: Appendix A.2
+      page: null
+      line: null
+  M2:
+    quotes:
+    - exact: To show that there is no relevant information in the residual stream, i.e. the path WU MLP0
+        (WE ) is not sufficient to predict successors, we perform an experiment using the Tuned Lens (Belrose
+        et al., 2023), which approximates the optimal predictions after a given layer inside a transformer.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: The resulting successor score was <1% and commonly predicted bigrams, such as <token1>=“
+        first” giving “ time” as a completion and <token1>=‘ Sunday’ giving ‘ morning’ as a prediction.
+        This suggests that MLP0 information is insufficient for incrementation and the successor head
+        is critical for succession.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: 'In Appendix I we find that for both Pythia-1.4B (the mainline model in the paper) and GPT-2
+        Large (a randomly selected model without a successor head from (Figure 2, left)), the heads with
+        highest successor score are sparse: in Pythia-1.4B L12H0 has eight times as great a successor
+        score to the next higher successor score.'
+      prefix: ''
+      suffix: ''
+      section: Appendix I
+      page: null
+      line: null
+    - exact: Note, though, that, as our successor dataset contains 1041 tokens, a random classifier (even
+        when restricted to tokens in the successor dataset) would achieve an accuracy of 0.001.
+      prefix: ''
+      suffix: ''
+      section: footnote 9, Appendix M
+      page: null
+      line: null
+    - exact: Successor Heads are then defined as the attention heads that pass this test for more than
+        half of the tokens in the succession dataset. We call the proportion of succession dataset tokens
+        on which an attention head performs succession the succession score.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+  M3:
+    quotes:
+    - exact: '1. Mean ablation: replacing the output of a head with the average head output over a chosen
+        distribution. We choose this distribution to be the current batch we are using.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: '2. Resampling ablation: replacing the output of a head with the head’s activation on a randomly
+        sampled example from a dataset (e.g. the Pile). When using this method, we repeat this process
+        a number of times and average the results.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: '1. Direct effect resampling ablation: 33% for successorship, 11% for acronym, 10% for greater-than,
+        and 11% for copying behaviour.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: '4. Total effect mean ablation: 27% for successorship, 8.2% for acronym, 10% for greater-than,
+        and 8.4% for copying behaviour.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: '5. Total effect resampling ablation: 30% for successorship, 6.5% for acronym, 11% for greater-than,
+        and 6.2% for copying behaviour.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: Result 1 demonstrates that using resampling ablation instead of mean ablation for analyzing
+        the loss reducing effect has little effect on the results in Figure 11. Additionally, the indirect
+        effect results (2 and 3) provide some evidence that downstream effects of the successor head are
+        not highly significant to successorship.
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: By checking this criterion for a range λ ∈ {0.0, ..., 0.75, 1.0, 1.25, ..., 3.0}, we find
+        that λ = 1 achieves this criterion for all tasks other than months, where months instead have
+        λ = 2.
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+    - exact: While our experiments in Section 3 focus on the study of mod-10 features, one might hypothesise
+        that there exist similar natural mod-k features for other k. To explore this hypothesis, we repeat
+        the linear probing experiment detailed in Section 3.3 for a range of moduli m ∈ {2, ..., 25}.
+      prefix: ''
+      suffix: ''
+      section: Appendix P
+      page: null
+      line: null
+    - exact: Observe that, while for almost all moduli, validation and test performance are above random
+        chance, we cannot easily extract ‘mod-m data’ from token representations for all m.
+      prefix: ''
+      suffix: ''
+      section: Appendix P
+      page: null
+      line: null
+    - exact: To find these hyperparameters, we used the metric of mean max cosine similarity between two
+        trained SAEs, as described in Sharkey et al. (2022) and Cunningham et al. (2023).
+      prefix: ''
+      suffix: ''
+      section: Appendix A.2
+      page: null
+      line: null
+  M4:
+    quotes:
+    - exact: Successor Heads are then defined as the attention heads that pass this test for more than
+        half of the tokens in the succession dataset. We call the proportion of succession dataset tokens
+        on which an attention head performs succession the succession score.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: Winning cases. We identify prefixes where the head that most decreases the logit for the
+        correct next token under direct effect mean ablation is the successor head, denoting them as winning
+        cases.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: Loss-reducing cases. We identify prefixes p where direct effect mean ablation of the successor
+        head increases next-token prediction loss (by ∆L(p)), denoting them as loss-reducing cases.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: We collect 64 such prompts and check for whether the successor head in Pythia-1.4B is a winning
+        case (as in Section 4), and find that the successor head is indeed the winning head across all
+        64 prompts.
+      prefix: ''
+      suffix: ''
+      section: Appendix J
+      page: null
+      line: null
+    - exact: Note that in this section, while we identified that successor heads are often used in tasks
+        involving incrementation, we did not explicitly demonstrate that successor heads are necessary
+        for incrementation. In Appendix J we describe an experiment that reveals that successor heads
+        are necessary for a specific incrementation task (numbered listing).
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  M5:
+    quotes:
+    - exact: Successor Heads are then defined as the attention heads that pass this test for more than
+        half of the tokens in the succession dataset. We call the proportion of succession dataset tokens
+        on which an attention head performs succession the succession score.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: To show that there is no relevant information in the residual stream, i.e. the path WU MLP0
+        (WE ) is not sufficient to predict successors, we perform an experiment using the Tuned Lens (Belrose
+        et al., 2023), which approximates the optimal predictions after a given layer inside a transformer.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: 'In Appendix I we find that for both Pythia-1.4B (the mainline model in the paper) and GPT-2
+        Large (a randomly selected model without a successor head from (Figure 2, left)), the heads with
+        highest successor score are sparse: in Pythia-1.4B L12H0 has eight times as great a successor
+        score to the next higher successor score.'
+      prefix: ''
+      suffix: ''
+      section: Appendix I
+      page: null
+      line: null
+    - exact: Given an ordinal sequence token t and a trained SAE, we define t’s most important feature
+        t⋆ as the SAE feature that, when ablated from the reconstruction of t’s MLP0 -representation,
+        causes the biggest decrease in the probability of the successor of t (by calculating probabilities
+        from the logits obtained by multiplying by WU WOV ).
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+  M6:
+    quotes:
+    - exact: 'Figure 2: Plots of successor scores (proportion of tokens where succession occurs) for each
+        model tested. A plot of the highest successor score observed across all attention heads for each
+        model tested (left) and successor scores of the best successor heads in models (Pythia-1.4B, GPT-2
+        XL, Llama-2 7B) across different tasks (right).'
+      prefix: ''
+      suffix: ''
+      section: Figure 2 caption
+      page: null
+      line: null
+    - exact: The succession dataset is the set of tokens across eight different tasks that can be incremented
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: We also include different forms of these tokens, as language model tokenizers often have
+        several tokens corresponding to the same word (e.g. words with/without a space at the start being
+        different tokens).
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: '1. Direct effect resampling ablation: 33% for successorship, 11% for acronym, 10% for greater-than,
+        and 11% for copying behaviour.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: '4. Total effect mean ablation: 27% for successorship, 8.2% for acronym, 10% for greater-than,
+        and 8.4% for copying behaviour.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: 'Are the mod-10 features we found in Section 3.2 simply an artifact of the SAE technique?
+        We provide evidence that these are natural, causally important features by using two independent
+        methods to recover them: (1) linear probing, and (2) identifying MLP0 neurons.'
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: 'Limitations: The absence of a strong greater-than bias in our mod 10 features suggests this
+        feature-level description is missing some details – specifically, that successor heads must use
+        other numeric information to produce the greater-than bias we observe. Additionally, while we
+        see a good generalization of the mod 10 features across various tasks in the table in Figure 7,
+        the mod 10 features are not able to steer the Days and Letters tasks from Section 2.'
+      prefix: ''
+      suffix: ''
+      section: §3.4, Limitations
+      page: null
+      line: null
+    - exact: For the day and alphabet task, analogously to Figure 8, we look at the logits across the
+        task and the mod 10 features. These are displayed in Figure 17, and demonstrate that our mod 10
+        features are not very interpretable in the context of days and the alphabet in terms of logits,
+        with no clear diagonal of high logits.
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+  M7:
+    quotes:
+    - exact: Having found behavioral evidence that successor heads exist across a range of models, we
+        now perform a case study on the attention head (L12H0) with the maximal successor score in Pythia-1.4B.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: 'In Appendix I we find that for both Pythia-1.4B (the mainline model in the paper) and GPT-2
+        Large (a randomly selected model without a successor head from (Figure 2, left)), the heads with
+        highest successor score are sparse: in Pythia-1.4B L12H0 has eight times as great a successor
+        score to the next higher successor score.'
+      prefix: ''
+      suffix: ''
+      section: Appendix I
+      page: null
+      line: null
+    - exact: Given an ordinal sequence token t and a trained SAE, we define t’s most important feature
+        t⋆ as the SAE feature that, when ablated from the reconstruction of t’s MLP0 -representation,
+        causes the biggest decrease in the probability of the successor of t (by calculating probabilities
+        from the logits obtained by multiplying by WU WOV ).
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: As such, we define the mod-10 features f0 , ..., f9 as the modal most important features
+        from mod-10 classes {t0 , ..., t90 }, {t1 , ..., t91 }, ..., {t9 , ..., t99 }, averaged over 100
+        SAE training runs.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: The appropriate λ should be such that performing the arithmetic described by x has an effect
+        on the embedding’s numeric order (i.e. λ large enough) while not corrupting the task identity
+        of the original embedding (i.e. λ not too large)
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+    - exact: By checking this criterion for a range λ ∈ {0.0, ..., 0.75, 1.0, 1.25, ..., 3.0}, we find
+        that λ = 1 achieves this criterion for all tasks other than months, where months instead have
+        λ = 2.
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+  I1:
+    quotes:
+    - exact: Note that in this section, while we identified that successor heads are often used in tasks
+        involving incrementation, we did not explicitly demonstrate that successor heads are necessary
+        for incrementation. In Appendix J we describe an experiment that reveals that successor heads
+        are necessary for a specific incrementation task (numbered listing).
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: We collect 64 such prompts and check for whether the successor head in Pythia-1.4B is a winning
+        case (as in Section 4), and find that the successor head is indeed the winning head across all
+        64 prompts.
+      prefix: ''
+      suffix: ''
+      section: Appendix J
+      page: null
+      line: null
+    - exact: Winning cases. We identify prefixes where the head that most decreases the logit for the
+        correct next token under direct effect mean ablation is the successor head, denoting them as winning
+        cases.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+  I2:
+    quotes:
+    - exact: Successor Heads are then operationalized by considering an input token t from our succession
+        dataset (e.g. t =‘Monday’). If the effective OV circuit column for input t has a larger output
+        on the successor to t (‘Tuesday’) than on any other of the tokens in that task (‘Monday’ or ‘Wednesday’
+        or ‘Thursday’ or ...) then we consider the head to have performed succession in this case.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: Successor Heads are then defined as the attention heads that pass this test for more than
+        half of the tokens in the succession dataset. We call the proportion of succession dataset tokens
+        on which an attention head performs succession the succession score.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: 'Figure 2: Plots of successor scores (proportion of tokens where succession occurs) for each
+        model tested. A plot of the highest successor score observed across all attention heads for each
+        model tested (left) and successor scores of the best successor heads in models (Pythia-1.4B, GPT-2
+        XL, Llama-2 7B) across different tasks (right).'
+      prefix: ''
+      suffix: ''
+      section: Figure 2 caption
+      page: null
+      line: null
+    - exact: Given an ordinal sequence token t and a trained SAE, we define t’s most important feature
+        t⋆ as the SAE feature that, when ablated from the reconstruction of t’s MLP0 -representation,
+        causes the biggest decrease in the probability of the successor of t (by calculating probabilities
+        from the logits obtained by multiplying by WU WOV ).
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: As such, we define the mod-10 features f0 , ..., f9 as the modal most important features
+        from mod-10 classes {t0 , ..., t90 }, {t1 , ..., t91 }, ..., {t9 , ..., t99 }, averaged over 100
+        SAE training runs.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+  I3:
+    quotes:
+    - exact: 'Figure 1: A successor head with OV matrix WOV takes a numbered token such as ‘Monday’ in
+        embedding space and maps it to its successor value in unembedding space, e.g. ‘Tuesday’. The circuit
+        is the simple composition of the embedding matrix, the first MLP block, a single attention head,
+        and the unembedding matrix.'
+      prefix: ''
+      suffix: ''
+      section: Figure 1 caption
+      page: null
+      line: null
+    - exact: To show that there is no relevant information in the residual stream, i.e. the path WU MLP0
+        (WE ) is not sufficient to predict successors, we perform an experiment using the Tuned Lens (Belrose
+        et al., 2023), which approximates the optimal predictions after a given layer inside a transformer.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: The resulting successor score was <1% and commonly predicted bigrams, such as <token1>=“
+        first” giving “ time” as a completion and <token1>=‘ Sunday’ giving ‘ morning’ as a prediction.
+        This suggests that MLP0 information is insufficient for incrementation and the successor head
+        is critical for succession.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: Given an ordinal sequence token t and a trained SAE, we define t’s most important feature
+        t⋆ as the SAE feature that, when ablated from the reconstruction of t’s MLP0 -representation,
+        causes the biggest decrease in the probability of the successor of t (by calculating probabilities
+        from the logits obtained by multiplying by WU WOV ).
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: We perform ablative experiments on individual MLP0 neurons (activations immediately after
+        the final ReLU/GELU) to find the most important neurons for incrementing numeric tokens ti (measured
+        by decrease in probability of the successor token ti+1 , as per the definition of most important
+        feature). Observing the behavior of these neurons on tokens ti reveals periodic spiking patterns
+        in firing intensity (the neuron’s activation value), with the most common period across the top
+        16 most important neurons being 10.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: 'Limitations: The absence of a strong greater-than bias in our mod 10 features suggests this
+        feature-level description is missing some details – specifically, that successor heads must use
+        other numeric information to produce the greater-than bias we observe. Additionally, while we
+        see a good generalization of the mod 10 features across various tasks in the table in Figure 7,
+        the mod 10 features are not able to steer the Days and Letters tasks from Section 2.'
+      prefix: ''
+      suffix: ''
+      section: §3.4, Limitations
+      page: null
+      line: null
+  I4:
+    quotes:
+    - exact: In order to characterize the behavior of Pythia-1.4B’s successor head on natural-language
+        data, we randomly sample 128 length-512 contexts from The Pile, and for each prefix of each context,
+        we assess whether the successor head is important for the model’s ability to predict the correct
+        next token.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: We observe that, while successorship is the predominant behavior across both winning and
+        loss-reducing cases, acronym and greater-than behaviors also form a non-negligible fraction of
+        successor head behavior.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: While polysemanticity has been observed in both vision models (Olah et al., 2020) and toy
+        models trained to perform simple tasks (Elhage et al., 2022), to the best of our knowledge the
+        presence of both successorship and acronym behavior in head L12H0 is the cleanest example of polysemantic
+        behavior identified so far in an LLM, where we show two clear distinct behaviors one model component
+        has.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: A component of a network is said to be interpretably polysemantic if it performs multiple
+        distinct, interpretable functions.
+      prefix: ''
+      suffix: ''
+      section: footnote 6, §4.1
+      page: null
+      line: null
+    - exact: '1. Direct effect resampling ablation: 33% for successorship, 11% for acronym, 10% for greater-than,
+        and 11% for copying behaviour.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: '4. Total effect mean ablation: 27% for successorship, 8.2% for acronym, 10% for greater-than,
+        and 8.4% for copying behaviour.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+  I5:
+    quotes:
+    - exact: 'Are the mod-10 features we found in Section 3.2 simply an artifact of the SAE technique?
+        We provide evidence that these are natural, causally important features by using two independent
+        methods to recover them: (1) linear probing, and (2) identifying MLP0 neurons.'
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: We find that Pi , the ith row of our linear probe, has a high cosine similarity (on average
+        0.70764) to the corresponding mod-10 feature fi obtained from the SAE. Surprisingly, the probe
+        even generalizes to non-numeric tokens, correctly predicting the index value mod 10 for 94/102
+        examples from succession dataset tasks 2-8 (Section 2).
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: We perform ablative experiments on individual MLP0 neurons (activations immediately after
+        the final ReLU/GELU) to find the most important neurons for incrementing numeric tokens ti (measured
+        by decrease in probability of the successor token ti+1 , as per the definition of most important
+        feature). Observing the behavior of these neurons on tokens ti reveals periodic spiking patterns
+        in firing intensity (the neuron’s activation value), with the most common period across the top
+        16 most important neurons being 10.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: To show that there is no relevant information in the residual stream, i.e. the path WU MLP0
+        (WE ) is not sufficient to predict successors, we perform an experiment using the Tuned Lens (Belrose
+        et al., 2023), which approximates the optimal predictions after a given layer inside a transformer.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: The resulting successor score was <1% and commonly predicted bigrams, such as <token1>=“
+        first” giving “ time” as a completion and <token1>=‘ Sunday’ giving ‘ morning’ as a prediction.
+        This suggests that MLP0 information is insufficient for incrementation and the successor head
+        is critical for succession.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: This is because Successor Heads are biased towards values greater than the successor, compared
+        to values less than the successor. This effect can be seen in Figure 8a on the tokens ‘first’,
+        ‘second’, ..., ‘tenth’.
+      prefix: ''
+      suffix: ''
+      section: §3.4, Greater-than bias
+      page: null
+      line: null
+    - exact: 'Limitations: The absence of a strong greater-than bias in our mod 10 features suggests this
+        feature-level description is missing some details – specifically, that successor heads must use
+        other numeric information to produce the greater-than bias we observe. Additionally, while we
+        see a good generalization of the mod 10 features across various tasks in the table in Figure 7,
+        the mod 10 features are not able to steer the Days and Letters tasks from Section 2.'
+      prefix: ''
+      suffix: ''
+      section: §3.4, Limitations
+      page: null
+      line: null
+  I6:
+    quotes:
+    - exact: We observe that, while successorship is the predominant behavior across both winning and
+        loss-reducing cases, acronym and greater-than behaviors also form a non-negligible fraction of
+        successor head behavior.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: While polysemanticity has been observed in both vision models (Olah et al., 2020) and toy
+        models trained to perform simple tasks (Elhage et al., 2022), to the best of our knowledge the
+        presence of both successorship and acronym behavior in head L12H0 is the cleanest example of polysemantic
+        behavior identified so far in an LLM, where we show two clear distinct behaviors one model component
+        has.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: A component of a network is said to be interpretably polysemantic if it performs multiple
+        distinct, interpretable functions.
+      prefix: ''
+      suffix: ''
+      section: footnote 6, §4.1
+      page: null
+      line: null
+    - exact: Note that in this section, while we identified that successor heads are often used in tasks
+        involving incrementation, we did not explicitly demonstrate that successor heads are necessary
+        for incrementation. In Appendix J we describe an experiment that reveals that successor heads
+        are necessary for a specific incrementation task (numbered listing).
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  I7:
+    quotes:
+    - exact: We also include different forms of these tokens, as language model tokenizers often have
+        several tokens corresponding to the same word (e.g. words with/without a space at the start being
+        different tokens).
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: The (non-effective) OV circuit WU WOV WE (1) from Elhage et al. (2021) is the inspiration
+        for our effective OV circuit WU WOV MLP0 (WE ) (2).
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: We train a linear probe to predict the mod 10 value of tokens. Specifically, we train on
+        number tokens from ‘0’ to ‘500’, both with and without a space, assigning 90% of tokens to a train
+        set, and the remaining 10% to a validation set.
+      prefix: ''
+      suffix: ''
+      section: Appendix B.1
+      page: null
+      line: null
+    - exact: 'Out of the total 102 such examples, 94/102 are correct, and the 8 failures are: [‘January’,
+        ‘December’, ‘Friday’, ‘Saturday’, ‘Sunday’, ‘ V’, ‘ X’, ‘ XV’].'
+      prefix: ''
+      suffix: ''
+      section: Appendix B.1
+      page: null
+      line: null
+    - exact: To explore out-of-distribution performance, we also test whether πN can project out the numeric
+        component of Roman numerals (which weren’t in the successor dataset), by taking Roman numerals
+        iRom ∈ {‘I’, ..., ‘XII’} and tokens 1s from sequences s in the successor dataset, and testing
+        whether πD (1s ) + πN (iRom ) decodes to is .
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: 'We present the top-1 predicted tokens under output-space decoding in Table 2: observe that
+        we obtain perfect top-1 accuracy (apart from i ∈ {1, 5, 10},'
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: which we can attribute to the Roman numerals I, V and X being single-letter and impossible
+        to disambiguate from 9Letter , 22Letter and 24Letter ).
+      prefix: ''
+      suffix: ''
+      section: §3.1, continuing across the page break
+      page: null
+      line: null
+  I9:
+    quotes:
+    - exact: '2. Indirect effect mean ablation: 6.5% for successorship, 2.8% for acronym, 12% for greater-than,
+        and 9.0% for copying behaviour.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: '3. Indirect effect resampling ablation: 5.8% for successorship, 2.7% for acronym, 11% for
+        greater-than, and 8% for copying behaviour.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: '1. Direct effect resampling ablation: 33% for successorship, 11% for acronym, 10% for greater-than,
+        and 11% for copying behaviour.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: Result 1 demonstrates that using resampling ablation instead of mean ablation for analyzing
+        the loss reducing effect has little effect on the results in Figure 11. Additionally, the indirect
+        effect results (2 and 3) provide some evidence that downstream effects of the successor head are
+        not highly significant to successorship.
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: However, our results do not contradict previous findings that understanding MLPs requires
+        understanding distributed behaviors, since, for example, feature f6 appears to be in superposition
+        across at least two neurons (see Figure 6).
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+  I10:
+    quotes:
+    - exact: '1. Mean ablation: replacing the output of a head with the average head output over a chosen
+        distribution. We choose this distribution to be the current batch we are using.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: '2. Resampling ablation: replacing the output of a head with the head’s activation on a randomly
+        sampled example from a dataset (e.g. the Pile). When using this method, we repeat this process
+        a number of times and average the results.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: For a token t (row of arithmetic table) with order n := ord(t), and mod-10 feature fi (column
+        of arithmetic table), we consider how x := MLP0 (WE (t)) + k(−fn + fi ) attributes logits to tokens
+        within the same task as t, with k ∈ R+ a scaling.
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+    - exact: The appropriate λ should be such that performing the arithmetic described by x has an effect
+        on the embedding’s numeric order (i.e. λ large enough) while not corrupting the task identity
+        of the original embedding (i.e. λ not too large)
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+  I11:
+    quotes:
+    - exact: Another line of evidence that Successor Heads are an important model component for low training
+        loss can be found by studying successor scores across training points. We study a Pythia model
+        (Biderman et al., 2023) as well as a Stanford GPT model (CRFM, 2021), as these models have training
+        checkpoints. The emergence of Successor Heads throughout training is displayed in Figure 18.
+      prefix: ''
+      suffix: ''
+      section: Appendix G
+      page: null
+      line: null
+    - exact: 'Figure 18: Best successor scores across successor heads throughout training checkpoints
+        for Pythia and stanford-gpt2 models.'
+      prefix: ''
+      suffix: ''
+      section: Figure 18 caption, Appendix G
+      page: null
+      line: null
+    - exact: In our work we provide an end-to-end explanation of generalizing language model components
+        (Figure 1), though induction heads are related to in-context learning and a consistent phase change
+        in training, which we didn’t observe for successor heads (Appendix G).
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  I12:
+    quotes:
+    - exact: Another line of evidence that Successor Heads are an important model component for low training
+        loss can be found by studying successor scores across training points. We study a Pythia model
+        (Biderman et al., 2023) as well as a Stanford GPT model (CRFM, 2021), as these models have training
+        checkpoints. The emergence of Successor Heads throughout training is displayed in Figure 18.
+      prefix: ''
+      suffix: ''
+      section: Appendix G
+      page: null
+      line: null
+    - exact: 'Figure 18: Best successor scores across successor heads throughout training checkpoints
+        for Pythia and stanford-gpt2 models.'
+      prefix: ''
+      suffix: ''
+      section: Figure 18 caption, Appendix G
+      page: null
+      line: null
+  E1:
+    quotes:
+    - exact: Given an ordinal sequence token t and a trained SAE, we define t’s most important feature
+        t⋆ as the SAE feature that, when ablated from the reconstruction of t’s MLP0 -representation,
+        causes the biggest decrease in the probability of the successor of t (by calculating probabilities
+        from the logits obtained by multiplying by WU WOV ).
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: We perform ablative experiments on individual MLP0 neurons (activations immediately after
+        the final ReLU/GELU) to find the most important neurons for incrementing numeric tokens ti (measured
+        by decrease in probability of the successor token ti+1 , as per the definition of most important
+        feature). Observing the behavior of these neurons on tokens ti reveals periodic spiking patterns
+        in firing intensity (the neuron’s activation value), with the most common period across the top
+        16 most important neurons being 10.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: '1. Mean ablation: replacing the output of a head with the average head output over a chosen
+        distribution. We choose this distribution to be the current batch we are using.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: '2. Resampling ablation: replacing the output of a head with the head’s activation on a randomly
+        sampled example from a dataset (e.g. the Pile). When using this method, we repeat this process
+        a number of times and average the results.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: Result 1 demonstrates that using resampling ablation instead of mean ablation for analyzing
+        the loss reducing effect has little effect on the results in Figure 11. Additionally, the indirect
+        effect results (2 and 3) provide some evidence that downstream effects of the successor head are
+        not highly significant to successorship.
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: For a token t (row of arithmetic table) with order n := ord(t), and mod-10 feature fi (column
+        of arithmetic table), we consider how x := MLP0 (WE (t)) + k(−fn + fi ) attributes logits to tokens
+        within the same task as t, with k ∈ R+ a scaling.
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+    - exact: To explore out-of-distribution performance, we also test whether πN can project out the numeric
+        component of Roman numerals (which weren’t in the successor dataset), by taking Roman numerals
+        iRom ∈ {‘I’, ..., ‘XII’} and tokens 1s from sequences s in the successor dataset, and testing
+        whether πD (1s ) + πN (iRom ) decodes to is .
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+  E2:
+    quotes:
+    - exact: The succession dataset is the set of tokens across eight different tasks that can be incremented
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: We also include different forms of these tokens, as language model tokenizers often have
+        several tokens corresponding to the same word (e.g. words with/without a space at the start being
+        different tokens).
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: In order to characterize the behavior of Pythia-1.4B’s successor head on natural-language
+        data, we randomly sample 128 length-512 contexts from The Pile, and for each prefix of each context,
+        we assess whether the successor head is important for the model’s ability to predict the correct
+        next token.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: To show that there is no relevant information in the residual stream, i.e. the path WU MLP0
+        (WE ) is not sufficient to predict successors, we perform an experiment using the Tuned Lens (Belrose
+        et al., 2023), which approximates the optimal predictions after a given layer inside a transformer.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: We collect 64 such prompts and check for whether the successor head in Pythia-1.4B is a winning
+        case (as in Section 4), and find that the successor head is indeed the winning head across all
+        64 prompts.
+      prefix: ''
+      suffix: ''
+      section: Appendix J
+      page: null
+      line: null
+  E3:
+    quotes:
+    - exact: The succession dataset is the set of tokens across eight different tasks that can be incremented
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: 'Figure 2: Plots of successor scores (proportion of tokens where succession occurs) for each
+        model tested. A plot of the highest successor score observed across all attention heads for each
+        model tested (left) and successor scores of the best successor heads in models (Pythia-1.4B, GPT-2
+        XL, Llama-2 7B) across different tasks (right).'
+      prefix: ''
+      suffix: ''
+      section: Figure 2 caption
+      page: null
+      line: null
+    - exact: To explore out-of-distribution performance, we also test whether πN can project out the numeric
+        component of Roman numerals (which weren’t in the successor dataset), by taking Roman numerals
+        iRom ∈ {‘I’, ..., ‘XII’} and tokens 1s from sequences s in the successor dataset, and testing
+        whether πD (1s ) + πN (iRom ) decodes to is .
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: 'We present the top-1 predicted tokens under output-space decoding in Table 2: observe that
+        we obtain perfect top-1 accuracy (apart from i ∈ {1, 5, 10},'
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: which we can attribute to the Roman numerals I, V and X being single-letter and impossible
+        to disambiguate from 9Letter , 22Letter and 24Letter ).
+      prefix: ''
+      suffix: ''
+      section: §3.1, continuing across the page break
+      page: null
+      line: null
+    - exact: We find that Pi , the ith row of our linear probe, has a high cosine similarity (on average
+        0.70764) to the corresponding mod-10 feature fi obtained from the SAE. Surprisingly, the probe
+        even generalizes to non-numeric tokens, correctly predicting the index value mod 10 for 94/102
+        examples from succession dataset tasks 2-8 (Section 2).
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: Indeed, informal testing suggests that this numeric subspace may be interpretable even for
+        tokens not part of an ordinal sequence
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: 'Limitations: The absence of a strong greater-than bias in our mod 10 features suggests this
+        feature-level description is missing some details – specifically, that successor heads must use
+        other numeric information to produce the greater-than bias we observe. Additionally, while we
+        see a good generalization of the mod 10 features across various tasks in the table in Figure 7,
+        the mod 10 features are not able to steer the Days and Letters tasks from Section 2.'
+      prefix: ''
+      suffix: ''
+      section: §3.4, Limitations
+      page: null
+      line: null
+    - exact: For the day and alphabet task, analogously to Figure 8, we look at the logits across the
+        task and the mod 10 features. These are displayed in Figure 17, and demonstrate that our mod 10
+        features are not very interpretable in the context of days and the alphabet in terms of logits,
+        with no clear diagonal of high logits.
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+  E4:
+    quotes:
+    - exact: 'Figure 2: Plots of successor scores (proportion of tokens where succession occurs) for each
+        model tested. A plot of the highest successor score observed across all attention heads for each
+        model tested (left) and successor scores of the best successor heads in models (Pythia-1.4B, GPT-2
+        XL, Llama-2 7B) across different tasks (right).'
+      prefix: ''
+      suffix: ''
+      section: Figure 2 caption
+      page: null
+      line: null
+    - exact: We also observe the mod 10 structure via SAEs across models other than Pythia-1.4B, without
+        any finetuning of SAE parameters to these models.
+      prefix: ''
+      suffix: ''
+      section: Appendix A.3
+      page: null
+      line: null
+    - exact: Having found behavioral evidence that successor heads exist across a range of models, we
+        now perform a case study on the attention head (L12H0) with the maximal successor score in Pythia-1.4B.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: that underlie how successor heads increment in LLMs across different architectures and sizes.
+      prefix: ''
+      suffix: ''
+      section: Abstract, following the footnote marker on ‘mod 10’ features
+      page: null
+      line: null
+    - exact: Llama-7B does not generalize
+      prefix: ''
+      suffix: ''
+      section: Figure 16 caption, Appendix B.2
+      page: null
+      line: null
+    - exact: well to this task.
+      prefix: ''
+      suffix: ''
+      section: Figure 16 caption, Appendix B.2, continuing the sentence
+      page: null
+      line: null
+  E5:
+    quotes:
+    - exact: The appropriate λ should be such that performing the arithmetic described by x has an effect
+        on the embedding’s numeric order (i.e. λ large enough) while not corrupting the task identity
+        of the original embedding (i.e. λ not too large)
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+    - exact: By checking this criterion for a range λ ∈ {0.0, ..., 0.75, 1.0, 1.25, ..., 3.0}, we find
+        that λ = 1 achieves this criterion for all tasks other than months, where months instead have
+        λ = 2.
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+    - exact: For a token t (row of arithmetic table) with order n := ord(t), and mod-10 feature fi (column
+        of arithmetic table), we consider how x := MLP0 (WE (t)) + k(−fn + fi ) attributes logits to tokens
+        within the same task as t, with k ∈ R+ a scaling.
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+    - exact: '1. Mean ablation: replacing the output of a head with the average head output over a chosen
+        distribution. We choose this distribution to be the current batch we are using.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: '2. Resampling ablation: replacing the output of a head with the head’s activation on a randomly
+        sampled example from a dataset (e.g. the Pile). When using this method, we repeat this process
+        a number of times and average the results.'
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+  E6:
+    quotes:
+    - exact: To explore out-of-distribution performance, we also test whether πN can project out the numeric
+        component of Roman numerals (which weren’t in the successor dataset), by taking Roman numerals
+        iRom ∈ {‘I’, ..., ‘XII’} and tokens 1s from sequences s in the successor dataset, and testing
+        whether πD (1s ) + πN (iRom ) decodes to is .
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: 'We present the top-1 predicted tokens under output-space decoding in Table 2: observe that
+        we obtain perfect top-1 accuracy (apart from i ∈ {1, 5, 10},'
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: which we can attribute to the Roman numerals I, V and X being single-letter and impossible
+        to disambiguate from 9Letter , 22Letter and 24Letter ).
+      prefix: ''
+      suffix: ''
+      section: §3.1, continuing across the page break
+      page: null
+      line: null
+    - exact: In contrast to the high performance of output-space decoding, we found successor-space decoding
+        yielded a top-1 accuracy of 0.90 on the held-out dataset of token pairs, and a top-1 accuracy
+        of 0.125 on the out-of-distribution Roman numeral dataset (see Table 3)
+      prefix: ''
+      suffix: ''
+      section: Appendix M
+      page: null
+      line: null
+    - exact: This is because Successor Heads are biased towards values greater than the successor, compared
+        to values less than the successor. This effect can be seen in Figure 8a on the tokens ‘first’,
+        ‘second’, ..., ‘tenth’.
+      prefix: ''
+      suffix: ''
+      section: §3.4, Greater-than bias
+      page: null
+      line: null
+    - exact: We observe that, while successorship is the predominant behavior across both winning and
+        loss-reducing cases, acronym and greater-than behaviors also form a non-negligible fraction of
+        successor head behavior.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Finding a ‘greater-than bias’, where a language model was much more likely to predict numeric
+        answers larger than the values in the prompt, compared to smaller values than tokens present in
+        the prompt, that was observable by a weights-level analysis.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+  V1:
+    quotes:
+    - exact: 'Figure 1: A successor head with OV matrix WOV takes a numbered token such as ‘Monday’ in
+        embedding space and maps it to its successor value in unembedding space, e.g. ‘Tuesday’. The circuit
+        is the simple composition of the embedding matrix, the first MLP block, a single attention head,
+        and the unembedding matrix.'
+      prefix: ''
+      suffix: ''
+      section: Figure 1 caption
+      page: null
+      line: null
+    - exact: The (non-effective) OV circuit WU WOV WE (1) from Elhage et al. (2021) is the inspiration
+        for our effective OV circuit WU WOV MLP0 (WE ) (2).
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: Successor Heads are then operationalized by considering an input token t from our succession
+        dataset (e.g. t =‘Monday’). If the effective OV circuit column for input t has a larger output
+        on the successor to t (‘Tuesday’) than on any other of the tokens in that task (‘Monday’ or ‘Wednesday’
+        or ‘Thursday’ or ...) then we consider the head to have performed succession in this case.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: In this work, we use ‘feature’ to mean an interpretable (linear) direction in activation
+        space, inspired by the second ‘potential working definition’ from Elhage et al. (2022).
+      prefix: ''
+      suffix: ''
+      section: footnote 1, §1
+      page: null
+      line: null
+  V2:
+    quotes:
+    - exact: Successor Heads are then operationalized by considering an input token t from our succession
+        dataset (e.g. t =‘Monday’). If the effective OV circuit column for input t has a larger output
+        on the successor to t (‘Tuesday’) than on any other of the tokens in that task (‘Monday’ or ‘Wednesday’
+        or ‘Thursday’ or ...) then we consider the head to have performed succession in this case.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: 'Limitations: The absence of a strong greater-than bias in our mod 10 features suggests this
+        feature-level description is missing some details – specifically, that successor heads must use
+        other numeric information to produce the greater-than bias we observe. Additionally, while we
+        see a good generalization of the mod 10 features across various tasks in the table in Figure 7,
+        the mod 10 features are not able to steer the Days and Letters tasks from Section 2.'
+      prefix: ''
+      suffix: ''
+      section: §3.4, Limitations
+      page: null
+      line: null
+    - exact: 'Are the mod-10 features we found in Section 3.2 simply an artifact of the SAE technique?
+        We provide evidence that these are natural, causally important features by using two independent
+        methods to recover them: (1) linear probing, and (2) identifying MLP0 neurons.'
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: We also observe the mod 10 structure via SAEs across models other than Pythia-1.4B, without
+        any finetuning of SAE parameters to these models.
+      prefix: ''
+      suffix: ''
+      section: Appendix A.3
+      page: null
+      line: null
+    - exact: that underlie how successor heads increment in LLMs across different architectures and sizes.
+      prefix: ''
+      suffix: ''
+      section: Abstract, following the footnote marker on ‘mod 10’ features
+      page: null
+      line: null
+    - exact: Having found behavioral evidence that successor heads exist across a range of models, we
+        now perform a case study on the attention head (L12H0) with the maximal successor score in Pythia-1.4B.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+  V3:
+    quotes:
+    - exact: 'Are the mod-10 features we found in Section 3.2 simply an artifact of the SAE technique?
+        We provide evidence that these are natural, causally important features by using two independent
+        methods to recover them: (1) linear probing, and (2) identifying MLP0 neurons.'
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: To show that there is no relevant information in the residual stream, i.e. the path WU MLP0
+        (WE ) is not sufficient to predict successors, we perform an experiment using the Tuned Lens (Belrose
+        et al., 2023), which approximates the optimal predictions after a given layer inside a transformer.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: The resulting successor score was <1% and commonly predicted bigrams, such as <token1>=“
+        first” giving “ time” as a completion and <token1>=‘ Sunday’ giving ‘ morning’ as a prediction.
+        This suggests that MLP0 information is insufficient for incrementation and the successor head
+        is critical for succession.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: While polysemanticity has been observed in both vision models (Olah et al., 2020) and toy
+        models trained to perform simple tasks (Elhage et al., 2022), to the best of our knowledge the
+        presence of both successorship and acronym behavior in head L12H0 is the cleanest example of polysemantic
+        behavior identified so far in an LLM, where we show two clear distinct behaviors one model component
+        has.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: We observe that, while successorship is the predominant behavior across both winning and
+        loss-reducing cases, acronym and greater-than behaviors also form a non-negligible fraction of
+        successor head behavior.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  V4:
+    quotes:
+    - exact: Successor Heads are then defined as the attention heads that pass this test for more than
+        half of the tokens in the succession dataset. We call the proportion of succession dataset tokens
+        on which an attention head performs succession the succession score.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: Successor Heads are then operationalized by considering an input token t from our succession
+        dataset (e.g. t =‘Monday’). If the effective OV circuit column for input t has a larger output
+        on the successor to t (‘Tuesday’) than on any other of the tokens in that task (‘Monday’ or ‘Wednesday’
+        or ‘Thursday’ or ...) then we consider the head to have performed succession in this case.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: As such, we define the mod-10 features f0 , ..., f9 as the modal most important features
+        from mod-10 classes {t0 , ..., t90 }, {t1 , ..., t91 }, ..., {t9 , ..., t99 }, averaged over 100
+        SAE training runs.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: While our experiments in Section 3 focus on the study of mod-10 features, one might hypothesise
+        that there exist similar natural mod-k features for other k. To explore this hypothesis, we repeat
+        the linear probing experiment detailed in Section 3.3 for a range of moduli m ∈ {2, ..., 25}.
+      prefix: ''
+      suffix: ''
+      section: Appendix P
+      page: null
+      line: null
+    - exact: Observe that, while for almost all moduli, validation and test performance are above random
+        chance, we cannot easily extract ‘mod-m data’ from token representations for all m.
+      prefix: ''
+      suffix: ''
+      section: Appendix P
+      page: null
+      line: null
+    - exact: Moreover, of all the probes whose validation accuracy is above 0.5, P (10) has the smallest
+        drop in performance from in-distribution to out-of-distribution tasks.
+      prefix: ''
+      suffix: ''
+      section: Appendix P
+      page: null
+      line: null
+    - exact: In particular, for weeks (which we might expect to have ‘mod-7 features’) and months (which
+        we might expect to have ‘mod-12 features’), not only are the performances of P (7) and P (12)
+        substantially lower than that of P (10) , but P (7) fails to correctly identify the index mod
+        7 of any day of the week, while P (12) only correctly identifies the index mod 12 of 8/12 months
+        (failing on February, May, July and August).
+      prefix: ''
+      suffix: ''
+      section: Appendix P
+      page: null
+      line: null
+    - exact: This is because Successor Heads are biased towards values greater than the successor, compared
+        to values less than the successor. This effect can be seen in Figure 8a on the tokens ‘first’,
+        ‘second’, ..., ‘tenth’.
+      prefix: ''
+      suffix: ''
+      section: §3.4, Greater-than bias
+      page: null
+      line: null
+    - exact: 'Figure 8: The Successor Head OV circuit displays a clear bias against decrementation (Figure
+        8a), i.e. the logits on or above the main diagonal are less than the logits below the main diagonal.
+        This bias isn’t captured in the mod 10 feature (Figure 8b).'
+      prefix: ''
+      suffix: ''
+      section: Figure 8 caption
+      page: null
+      line: null
+    - exact: A component of a network is said to be interpretably polysemantic if it performs multiple
+        distinct, interpretable functions.
+      prefix: ''
+      suffix: ''
+      section: footnote 6, §4.1
+      page: null
+      line: null
+  V5:
+    quotes:
+    - exact: 'Limitations: The absence of a strong greater-than bias in our mod 10 features suggests this
+        feature-level description is missing some details – specifically, that successor heads must use
+        other numeric information to produce the greater-than bias we observe. Additionally, while we
+        see a good generalization of the mod 10 features across various tasks in the table in Figure 7,
+        the mod 10 features are not able to steer the Days and Letters tasks from Section 2.'
+      prefix: ''
+      suffix: ''
+      section: §3.4, Limitations
+      page: null
+      line: null
+    - exact: For the day and alphabet task, analogously to Figure 8, we look at the logits across the
+        task and the mod 10 features. These are displayed in Figure 17, and demonstrate that our mod 10
+        features are not very interpretable in the context of days and the alphabet in terms of logits,
+        with no clear diagonal of high logits.
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+    - exact: Note that in this section, while we identified that successor heads are often used in tasks
+        involving incrementation, we did not explicitly demonstrate that successor heads are necessary
+        for incrementation. In Appendix J we describe an experiment that reveals that successor heads
+        are necessary for a specific incrementation task (numbered listing).
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: In contrast to the high performance of output-space decoding, we found successor-space decoding
+        yielded a top-1 accuracy of 0.90 on the held-out dataset of token pairs, and a top-1 accuracy
+        of 0.125 on the out-of-distribution Roman numeral dataset (see Table 3)
+      prefix: ''
+      suffix: ''
+      section: Appendix M
+      page: null
+      line: null
+    - exact: Having found behavioral evidence that successor heads exist across a range of models, we
+        now perform a case study on the attention head (L12H0) with the maximal successor score in Pythia-1.4B.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: that underlie how successor heads increment in LLMs across different architectures and sizes.
+      prefix: ''
+      suffix: ''
+      section: Abstract, following the footnote marker on ‘mod 10’ features
+      page: null
+      line: null

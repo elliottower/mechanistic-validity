@@ -1,0 +1,999 @@
+claim: superposition
+verdict: Mechanistically Supported
+readings:
+- statement: A ReLU network on sparse features represents more features than it has dimensions, in geometries
+    set by sparsity and importance
+  verdict: Mechanistically Supported
+  missing: A converse arm, with some property shown intact while superposition is removed (I6); correction
+    for the lowest-loss selection the reported geometries are drawn from (M7); an input distribution outside
+    the synthetic family (E2)
+  primary: true
+- statement: The reported geometries are properties of the optimum rather than of the optimiser
+  verdict: Underdetermined
+  missing: The $m=2$ case is reported as much harder for gradient descent and its solutions are selected
+    by loss (I7, M7); an invited comment in the same article shows the global minimum can have a smaller
+    basin of attraction than nearby local minima, and the paper leaves it open (V3)
+  primary: false
+- statement: The phase diagram is fixed by sparsity and importance alone
+  verdict: Disconfirmed
+  missing: 'Nothing --- tested and failed: the paper holds the activation function fixed across every
+    one of its own experiments, and a replication carried in the same article finds the phase diagrams
+    look quite different under other activation functions (M3, M6)'
+  primary: false
+- statement: Language models represent features in superposition
+  verdict: Insufficient
+  missing: Every measurement is on a toy model, and the paper labels its real-model section validation
+    by consistency with existing reports rather than measurement taken here (E4); no natural-data distribution
+    appears anywhere, and Open Questions asks whether real importance and sparsity curves can be estimated
+    at all (E2)
+  primary: false
+hypotheses:
+- id: H1
+  view: Object
+  label: the network stores more features than dimensions on non-orthogonal directions
+- id: H2
+  view: Object
+  label: the network stores at most m features along principal components, as the linear model does
+- id: H3
+  view: Object
+  label: non-orthogonal directions arise incidentally, with no capacity tradeoff behind them
+- id: H4
+  view: Role
+  label: the compressed layer computes, carrying a nonlinear function through it
+- id: H5
+  view: Contrastive
+  label: the phase structure is fixed by sparsity and importance whatever the activation function
+- id: H6
+  view: Instrumental
+  label: the reported geometries belong to the optimiser and the lowest-loss selection rule
+views_evidence:
+- criterion: C1
+  family: Mathematical
+  evidence: An importance by sparsity grid scores every cell as not learned, learned in superposition,
+    or given a dedicated dimension, against closed-form losses for the candidate configurations
+  cells:
+    H1: C
+    H2: I
+    H3: I
+    H4: '-'
+    H5: C
+    H6: '-'
+  designed_for:
+  - H1
+- criterion: C2
+  family: Mathematical
+  evidence: Losses for each candidate way of storing two features in one dimension are determined analytically
+    and the crossover is confirmed to be a first-order transition
+  cells:
+    H1: C
+    H2: I
+    H3: I
+    H4: '-'
+    H5: C
+    H6: I
+  designed_for:
+  - H1
+  - H6
+- criterion: M6
+  evidence: The phenomenon holds across sizes and data structures, and the one report of varying the activation
+    function finds the phase diagrams look quite different
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: I
+    H6: '-'
+  designed_for:
+  - H5
+- criterion: M7
+  evidence: Neuron-level figures show the best of a thousand fits, the phase diagram discards the worst
+    of ten, and minimal-loss solutions are said to reveal more structure than typical ones
+  cells:
+    H1: '-'
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: C
+    H6: C
+  designed_for: []
+- criterion: I1
+  family: Mathematical
+  evidence: Removing the output nonlinearity removes superposition at every sparsity, dense features reproduce
+    linear-model behaviour, and L1 regularisation removes it at the cost of a higher loss
+  cells:
+    H1: C
+    H2: I
+    H3: I
+    H4: '-'
+    H5: C
+    H6: '-'
+  designed_for:
+  - H1
+  - H2
+- criterion: I2
+  family: Mathematical
+  evidence: A model built from sparse features, more features than neurons, varying importance and one
+    nonlinearity superposes, and the absolute-value model computes through the compressed layer
+  cells:
+    H1: C
+    H2: I
+    H3: '-'
+    H4: C
+    H5: C
+    H6: '-'
+  designed_for:
+  - H1
+  - H4
+- criterion: I3
+  evidence: The hidden-layer ReLU has no role except limiting how information is encoded, and the model
+    circumvents it if given any chance
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: I
+    H5: C
+    H6: '-'
+  designed_for:
+  - H4
+- criterion: I5
+  evidence: PCA is located as a limiting case of the same tradeoff, with correlated features collapsing
+    into their principal component as sparsity falls, and incidental polysemanticity is never considered
+  cells:
+    H1: C
+    H2: I
+    H3: C
+    H4: '-'
+    H5: C
+    H6: '-'
+  designed_for:
+  - H2
+- criterion: I7
+  evidence: Sparsity, importance, correlation and dimension are set by construction, while the two-dimensional
+    case is much harder for gradient descent and its solutions are chosen by loss
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: C
+    H6: C
+  designed_for: []
+- criterion: E3
+  evidence: Two tasks are run, and computing the absolute value forces the model to use the nonlinearity
+    the storage model circumvents
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: C
+    H5: C
+    H6: '-'
+  designed_for:
+  - H4
+- criterion: E5
+  family: Mathematical
+  evidence: Sparsity is swept continuously, represented features accumulate from the least important upward,
+    and the pentagon snaps to a pair of digons at a located critical point
+  cells:
+    H1: C
+    H2: I
+    H3: I
+    H4: '-'
+    H5: C
+    H6: '-'
+  designed_for:
+  - H1
+- criterion: E6
+  family: Mathematical
+  evidence: Feature dimensionalities cluster at the fractions belonging to uniform polytopes, and adversarial
+    vulnerability rises more than threefold as superposition forms
+  cells:
+    H1: C
+    H2: I
+    H3: '-'
+    H4: '-'
+    H5: C
+    H6: '-'
+  designed_for:
+  - H1
+tiers:
+- name: Proposed
+  requires: C1--C2; one admissible measurement
+  missing: '---'
+- name: Causally Suggestive
+  requires: Necessity (I1); baselines (M2)
+  missing: '---'
+- name: Mechanistically Supported
+  requires: Sufficiency (I2); reach (E1); specificity (I4)
+  missing: '\textbf{I4} not applicable: one objective, and superposition is induced by changing the task,
+    so losses at different amounts of it are measured on different tasks'
+- name: Triangulated
+  requires: Convergence (C3); replication (E2/E4); dissociation (I6)
+  missing: \textbf{I6} unattempted; no second property is shown intact while superposition is removed,
+    and no manipulation removes another property while leaving superposition in place
+- name: Validated
+  requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
+  missing: \textbf{M7} unattempted, and the neuron-level figures are the best of a thousand fits while
+    the phase diagram discards the worst of ten; \textbf{I8}, \textbf{I10}, \textbf{I12} unattempted
+criteria:
+  C1:
+    name: Falsifiability
+    status: C
+    short: Point prediction against a linear control, plus a two-parameter phase diagram
+    verified: true
+    reasoning: 'The paper names the observation that would sink the hypothesis before running anything:
+      if networks cannot noisily represent more features than they have neurons, superposition "may be
+      comfortably dismissed." The test is then built so it could fail. Two models differ in one activation
+      function, and the linear one is the well-understood case that cannot superpose, so the ReLU model
+      matching it at every sparsity level would have settled the question negatively. It does match in
+      the dense regime and departs as sparsity rises. The phase-change experiment adds a directional prediction
+      over an importance x sparsity grid, scoring each cell as not learned, superposed, or orthogonal,
+      against closed-form losses for the candidate weight configurations.
+
+      '
+    notes:
+      legacy_evidence: 'The linear model makes a point prediction that could have failed and did not:
+        with no output nonlinearity the optimum is the top-$m$ principal components at every sparsity
+        level, so no extra features. The ReLU model differs by one activation function and superposes.
+        The phase diagrams then make directional predictions over a two-parameter grid, with boundaries
+        derived in closed form before being measured'
+      verification: 'One qualification on the cell. It says the phase boundaries were "derived in closed
+        form before being measured." The paper presents the theoretical and empirical diagrams side by
+        side and states that the phase change is "observed in both"; it does not record which came first.
+        The rest of the cell checks out verbatim.
+
+        '
+      verdict_derivation: 'Verdict computed from the criteria on 2026-08-07 rather than asserted: Mechanistically
+        Supported, blocked above that by I6=U. The 35-criterion table scores the primary reading, so the
+        criteria, the primary reading''s verdict and the overall verdict are one number by construction.'
+  C2:
+    name: Structural plausibility
+    status: C
+    short: Mechanism derived in closed form, then matched against the trained weights
+    verified: true
+    reasoning: 'The mechanism is computed rather than inferred from the trained model. Losses for each
+      candidate way of storing two features in one dimension are determined analytically, the transition
+      between them is confirmed to be first order by locating the crossover in the derivative of the optimal
+      loss, and the same treatment is extended to three features in two dimensions. Where the paper reads
+      structure off the weights, as in the asymmetric superposition motif, it names the parts: one neuron
+      stores two features at reciprocal magnitudes, a second inhibits the case that would produce positive
+      interference, and the output ReLU makes the resulting negative interference cheap.
+
+      '
+    notes:
+      legacy_evidence: The mechanism is derived rather than inferred. Closed-form losses are computed
+        for each candidate weight configuration in the $n=2, m=1$ and $n=3, m=2$ cases; the transition
+        is ``analytically confirm[ed]'' to be first order, as a crossover between those loss curves; the
+        pentagon radius is predicted from the bias as $\|W_i\| = 1/(1-b_i)$ and observed; and the asymmetric-superposition-and-inhibition
+        motif in the computation model is read directly off the weight matrix, with the interference-cancelling
+        neuron identified
+      verification: 'The pentagon-radius quote stops at "setting their weights to" because pdftotext drops
+        the formula into a separate math run that cannot be quoted contiguously. The formula the cell
+        reports, ||W_i|| = 1/(1-b_i), is at that point in the source and is stated as the explanation
+        for an observed deviation from the unit circle. The cell reads it as a prediction that was then
+        observed; the text presents it in the other order.
+
+        '
+  C3:
+    name: Convergent validity
+    status: C
+    short: Theory and experiment agree, and three outside groups replicated before publication
+    verified: true
+    reasoning: 'Agreement comes from families of evidence that could have disagreed. The closed-form "toy
+      model of the toy model" and the trained models produce the same phase change. The geometric account,
+      in which uniform superposition solves a generalised Thomson problem and lands on uniform polytopes,
+      is a third description of the same solutions. Beyond the authors, the article carries three independent
+      replications from Redwood Research, DeepMind and OpenAI, covering the demonstration, the phase change,
+      feature dimensionality and the energy-level jumps.
+
+      '
+    notes:
+      legacy_evidence: 'Three independent families at origin: closed-form analysis, trained-weight inspection,
+        and a geometric characterisation (feature dimensionality, tegum factors, uniform polytopes) that
+        uses neither. Later convergence from methods the origin did not use: feature-capacity theory (Scherlis
+        et al.\ 2022, three weeks later, independently deriving the same tradeoff), sparse probing across
+        seven real models 70M--6.9B (Gurnee et al.\ 2023), dictionary learning \citep{cunningham2023sparse,
+        bricken2024monosemanticity}, and a scaling-law derivation confirmed in open-weight LLMs (Liu,
+        Liu \& Gore 2025)'
+      verification: 'The cell understates the origin-time evidence and overstates one part of it. The
+        three replications reported in Comments & Replications and named in the acknowledgments are the
+        strongest convergence available at publication and the cell does not mention them. Against that,
+        the cell calls the geometric characterisation a family that uses neither closed-form analysis
+        nor trained-weight inspection; feature dimensionality is computed from the trained W, so it is
+        a statistic over the same weights rather than an independent measurement. One replication also
+        disagrees with the paper on activation-function dependence, recorded under M3 and M6.
+
+        '
+  C4:
+    name: Discriminant validity
+    status: PC
+    short: Three-way discrimination against planted features; PCA separated as a limiting case
+    verified: true
+    reasoning: 'The measures are built to separate outcomes that the planted data distinguishes in advance:
+      a feature is unlearned, superposed, or given a dedicated dimension, and the norm of the embedding
+      vector together with the projection of other features onto it decides which. Within the toy setting
+      this is clean by construction. The correlated-feature experiments add a second separation, between
+      superposition and PCA, by driving the model from one to the other as sparsity falls. Discriminant
+      validity for the wider claim rests on polysemanticity implying capacity pressure, which the paper
+      assumes rather than tests.
+
+      '
+    notes:
+      legacy_evidence: 'Within the declared scope, separation is by construction and clean: the measures
+        $\|W_i\|$ and $\sum_{j \neq i}(\hat{W}_i \cdot W_j)^2$ distinguish ``not learned,'''' ``represented
+        in superposition'''' and ``dedicated dimension'''' against planted ground truth, and the correlated-features
+        experiments separate superposition from PCA as the capacity runs out. Outside it, the diagnostic
+        inference fails: Lecomte et al.\ (2023) show polysemanticity arises ``even when there are ample
+        neurons to represent all features,'''' so the observation the hypothesis was built to explain
+        does not discriminate'
+  C5:
+    name: Nomological validity
+    status: C
+    short: Formal links to compressed sensing, the Thomson problem and distributed codes
+    verified: true
+    reasoning: 'The hypothesis is placed in three literatures with content, not by analogy. Compressed
+      sensing supplies a lower bound that is turned into an upper bound on superposition in the toy model,
+      with the derivation carried out in the appendix. The 1-sparse loss term reduces to a generalised
+      Thomson problem, which is what makes the polytope geometry a prediction rather than a description.
+      The neuroscience section maps local and distributed codes onto the paper''s own decomposability
+      and superposition axes. All of this sits on a decomposition of the linear-representation hypothesis
+      into decomposability and linearity, with privileged basis stated as a separate question, before
+      any experiment.
+
+      '
+    notes:
+      legacy_evidence: 'Connected to three literatures with formal content rather than by analogy: compressed
+        sensing, with an appendix deriving the connection between compressed-sensing lower bounds and
+        the toy model; the Thomson problem and uniform polytopes for the geometry; and distributed / population
+        codes in neuroscience. The linear-representation hypothesis is decomposed into two separable sub-hypotheses
+        --- decomposability and linearity --- and the privileged-basis question is stated as a third,
+        all before any experiment'
+  M1:
+    name: Reliability
+    status: PC
+    short: Repetition run and reported; aggregation is selection by loss, with no dispersion
+    verified: true
+    reasoning: 'Repetition happens and the rule is stated each time, which is what separates this from
+      an unreported single fit. The rule is selection in two of the three cases: the phase diagram averages
+      ten models per point after discarding the worst, the m=2 geometries are the lowest-loss of several
+      fits, and the neuron-level figures are the best of a thousand. Reading the sections that report
+      these numbers, no standard deviation, interval or spread across the repeated fits accompanies any
+      of them.
+
+      '
+    notes:
+      legacy_evidence: 'Repetition is run and the aggregation rule is stated, but the rule is selection
+        rather than averaging in two of three cases. Phase diagrams: ``we train ten models for each point
+        and average over the results, discarding the model with the highest loss.'''' ReLU hidden layer:
+        ``we trained 1000 models and visualized the one with the lowest loss.'''' The $m=2$ geometry:
+        ``Getting clean results required fitting each model multiple times and taking the solution with
+        the lowest loss.'''' No dispersion --- standard deviation, interval, or spread across the repeated
+        fits --- is reported alongside any of the averaged or selected quantities'
+  M2:
+    name: Baseline separation
+    status: C
+    short: Linear control cannot superpose, runs at every sparsity, and separates completely
+    verified: true
+    reasoning: 'The baseline is chosen so that it cannot produce the effect: for a linear model it is
+      never worthwhile to represent more features than dimensions, so any superposition in the ReLU model
+      is attributable to the one component that differs. It is run in the same figures at every sparsity
+      level, and its solution is sparsity-independent, which makes the separation visible rather than
+      argued. A second baseline is analytic: closed-form losses for each candidate configuration give
+      the value the observed solution had to beat.
+
+      '
+    notes:
+      legacy_evidence: 'The linear model is a control that cannot exhibit the phenomenon by construction,
+        is run at every sparsity level in the same figures, and separates completely --- it learns the
+        top-$m$ most important features and nothing else, and its solution ``does not depend on sparsity
+        level.'''' The ``toy model of the toy model'''' supplies a second kind of baseline: the closed-form
+        loss of every candidate solution the observed one had to beat'
+  M3:
+    name: Stability
+    status: PC
+    short: Sparsity, importance, correlation and size all swept; activation function held fixed
+    verified: true
+    reasoning: 'Perturbation is the method here, and it reaches the data-generating process as well as
+      the model: sparsity from 1.0 to 0.01, importance from 0.1 to 10, single features perturbed against
+      a uniform background, correlation imposed in both directions, and the activation support widened
+      to [-1,1] for the computation model. What stays fixed is the activation function, which Open Questions
+      lists among the untried ways to control superposition. The paper also reports an instability of
+      its own: the ReLU hidden layer model avoids its nonlinearity unless forced, which the authors call
+      a significant mark against that variant.
+
+      '
+    notes:
+      legacy_evidence: 'Perturbation is the method rather than a check on it, and it reaches the data-generating
+        process as well as the model: sparsity swept over orders of magnitude, importance swept 0.1--10,
+        single features perturbed against a uniform background, independence broken in both directions
+        by correlated and anticorrelated feature sets, the activation support changed from $[0,1]$ to
+        $[-1,1]$ for the computation model, and sizes from $(2,1)$ to $(80,20)$. What is not perturbed
+        is the shape of the activation distribution, uniform in every experiment, and the activation function,
+        ReLU in every experiment --- the latter named in Open Questions as a promising untried control
+        (``changing the activation function all seem promising''''). The paper also reports its own instability:
+        for the ReLU hidden layer model ``the model will only use the ReLU activation function if absolutely
+        forced, which is a significant mark against studying this toy model'''''
+      verification: 'Two corrections to the cell. First, the size range is given as (2,1) to (80,20);
+        the uniform superposition experiments use n=400, m=30, and the computation model uses n=100, m=40,
+        so the sweep is wider than recorded. Second, the article does contain a report of varying the
+        activation function, in Kshitij Sachan''s replication comment, which found that the phase diagrams
+        "look quite different depending on the activation function." That is an invited external replication
+        rather than an author experiment, so the cell is right that the paper''s own experiments hold
+        it fixed, and the evidence the article carries on the point is destabilising.
+
+        '
+  M4:
+    name: Calibration
+    status: PC
+    short: Two purpose-built measures with stated readings and no external calibration
+    verified: true
+    reasoning: 'Both measures come with an interpretation attached rather than a threshold chosen after
+      the fact: the embedding norm says whether a feature is represented, and the summed projection of
+      other features onto its direction has a stated meaning at 1, where some group of other features
+      can activate the direction as strongly as the feature itself. Feature dimensionality is anchored
+      by summing to the number of hidden dimensions, which makes it a capacity accounting. Nothing is
+      tied to a quantity outside the toy model, and the authors list the definition of superposition itself
+      as an open question.
+
+      '
+    notes:
+      legacy_evidence: 'Two purpose-built measures with stated interpretations: $\|W_i\|$ for whether
+        a feature is represented, and $\sum_{j\neq i}(\hat{W}_i \cdot W_j)^2$ for shared dimension, where
+        ``values $\geq 1$ mean that there is some group of other features which can activate $W_i$ as
+        strongly as feature $i$ itself.'''' Feature dimensionality sums to $m$, which makes it a genuine
+        capacity accounting. Nothing is calibrated against an external quantity, and Open Questions asks
+        ``what is the most principled definition of superposition / polysemanticity?'''''
+      verification: 'The cell says feature dimensionality "sums to m." The paper reports this as an empirical
+        observation conditional on efficient packing, not as an identity.
+
+        '
+  M5:
+    name: Sensitivity
+    status: C
+    short: Planted ground-truth features give a known positive at every point
+    verified: true
+    reasoning: 'Sensitivity is structural here. The features are synthesised, with sparsity and importance
+      set per dimension, so every experiment has a known positive and any failure to recover it is visible.
+      The authors name this as the reason the toy models are worth studying at all, in contrast to real
+      models where no ground truth for features exists. The measures are then asked to recover planted
+      structure that the design guarantees is present.
+
+      '
+    notes:
+      legacy_evidence: 'The toy setting''s structural advantage, used as such: ground-truth features are
+        planted, so a known-positive is available at every point in every experiment. The authors name
+        it as the reason the model is worth studying --- ``This is also the reason why the toy models
+        described in this paper can be studied -- we do know what the features are!'''' The measures recover
+        the planted structure where theory says they should and fail where it says they should not'
+  M6:
+    name: Invariance
+    status: PC
+    short: Holds across sizes and data structures; one activation function and one loss
+    verified: true
+    reasoning: 'The phenomenon survives changes of scale and data structure: results are qualitatively
+      similar as features and hidden dimensions grow, and the paper reports that the number of input features
+      does not matter once it exceeds the hidden dimension, with the number of learned features scaling
+      with hidden dimensions. Held fixed are the activation function, the importance-weighted squared-error
+      loss and the optimiser. The one report in the article of varying the activation function comes from
+      an external replicator and finds the phase diagrams differ, which is why this is partial rather
+      than confirmed.
+
+      '
+    notes:
+      legacy_evidence: 'The phenomenon is reported across four model variants, two tasks, sparsity and
+        importance grids, and uniform / non-uniform / correlated / anticorrelated feature structure. Three
+        conditions are held fixed rather than varied: the activation function (ReLU throughout, and Open
+        Questions lists ``changing the activation function'''' among the untried ways to control superposition),
+        the loss (importance-weighted MSE throughout), and the optimiser. The geometry results are additionally
+        confined to $m \leq 3$ or small $n$ by the need to visualise them'
+  M7:
+    name: Selection correction
+    status: U
+    short: Best-of-1000 and worst-discarded selection documented, with no correction applied
+    verified: true
+    reasoning: 'Selection is on the outcome and is disclosed: a thousand fits per neuron-level figure
+      with the lowest-loss one shown, ten models per phase-diagram point with the worst discarded, and
+      lowest-loss selection for the m=2 geometries. The authors state what selection buys, that the minimal-loss
+      solutions reveal more structure than typical ones, which concedes the reported structure is a property
+      of the best-found optimum. No correction accompanies it.
+
+      '
+    notes:
+      legacy_evidence: Unattempted, and the selection is on the outcome. The headline geometry figures
+        show the best of 1000 fits; the phase diagram discards the worst of ten; the $m=2$ solutions are
+        the lowest-loss of several. $N$ is stated in every case, so the procedure is documented rather
+        than hidden, but the reported structures are properties of the best-found optimum rather than
+        of what training typically produces, and no correction is applied
+      verification: 'The cell says "the headline geometry figures show the best of 1000 fits." The thousand-fit
+        selection belongs to the ReLU hidden layer neuron figures in Superposition in a Privileged Basis.
+        The geometry figures use lowest-loss selection over several fits at m=2; the uniform superposition
+        figures carry no stated selection rule.
+
+        '
+  I1:
+    name: Necessity
+    status: C
+    short: Output nonlinearity, sparsity and negative bias each shown to be required
+    verified: true
+    reasoning: 'Necessary conditions are established by direct manipulation of one component at a time.
+      Removing the output nonlinearity removes superposition, which the paper states as the reason the
+      activation function is critical, and the linear model never benefits from representing more features
+      than dimensions. Sparsity is necessary for superposition to occur, with the dense case reproducing
+      linear-model behaviour. The negative bias is what lets the model discard small interference. Necessity
+      for performance is argued analytically, by comparing closed-form losses of the candidate configurations,
+      and empirically by L1 regularisation, which removes superposition at the cost of a higher loss.
+
+      '
+    notes:
+      legacy_evidence: 'Established in two directions. The necessary \emph{conditions} are shown by direct
+        manipulation: remove the output nonlinearity and superposition disappears at every sparsity; set
+        $1-S = 1.0$ and the ReLU model matches the linear model exactly; remove the negative bias and
+        the mechanism for discarding small interference goes with it. The necessity \emph{for performance}
+        is shown analytically rather than asserted: in ``Superposition as a Phase Change'''' the loss
+        of each candidate weight configuration is determined in closed form --- $W = [1,0]$, $W = [0,1]$
+        and the antipodal $W = [1,-1]$ for $n=2, m=1$, and four configurations for $n=3, m=2$ --- and
+        the superposed solution has the lowest loss over a located region of the sparsity--importance
+        plane, with the crossover confirmed as a first-order transition (``there''s crossover between
+        the functions, causing a discontinuity in the derivative of the optimal loss''''). L1 regularisation
+        supplies the empirical counterpart, removing superposition ``albeit at the cost of a higher loss,''''
+        without accompanying numbers'
+      verification: 'One overstatement in the cell. It says that at 1-S = 1.0 the ReLU model "matches
+        the linear model exactly." The paper says it "behaves the same on dense features." No numerical
+        identity is reported. The L1 result is reported without accompanying numbers, as the cell says.
+
+        '
+  I2:
+    name: Sufficiency
+    status: C
+    short: Built from the hypothesised ingredients alone, and superposition appears
+    verified: true
+    reasoning: 'Sufficiency is shown by construction, which is the strongest form available in a synthetic
+      setting. The data has exactly the properties the hypothesis names, sparse features, more features
+      than neurons, and varying importance, and the model adds one nonlinearity; nothing else is introduced
+      and superposition appears. The authors describe the result as a direct demonstration under a relatively
+      natural setup. The absolute-value model extends this from storage to computation: the same ingredients
+      suffice for the network to compute a nonlinear function through a layer holding more features than
+      neurons.
+
+      '
+    notes:
+      legacy_evidence: 'Sufficiency is established by construction in the strongest available form: the
+        model is built with exactly the four hypothesised ingredients (sparse features, more features
+        than dimensions, varying importance, one nonlinearity) and superposition appears without anything
+        else being added. For computation rather than storage, the absolute-value model shows the same
+        ingredients suffice to carry a nonlinear function through a compressed layer, with the mechanism
+        identified in the weights'
+      verification: 'The cell says "exactly the four hypothesised ingredients." The paper states three
+        assumptions about the data and treats the final activation function separately as the design choice
+        that turns out to be critical. The count is defensible; the paper does not present them as one
+        list of four.
+
+        '
+  I3:
+    name: Minimality
+    status: PC
+    short: Load-bearing parts named and the smallest case solved; data assumptions untested
+    verified: true
+    reasoning: 'The setup is already close to minimal and the paper says which parts carry weight. The
+      output nonlinearity and the negative bias are required. The hidden-layer ReLU is shown to be circumventable,
+      and the authors report this as a defect of that variant rather than dropping it, even choosing a
+      five-neuron model to work around the issue. The n=2, m=1 case is the minimal instance and is solved
+      in closed form. What is not stripped is the data-generating process: the uniform activation distribution
+      is called arbitrary in a footnote and never varied.
+
+      '
+    notes:
+      legacy_evidence: 'The setup is stripped and the load-bearing parts are named: the output ReLU is
+        required, the negative bias is required, and the hidden-layer ReLU is shown to be circumventable
+        --- which is reported as a defect of that variant rather than concealed. The $n=2, m=1$ case is
+        the minimal instance and is solved in closed form. No systematic ablation of the data-generating
+        assumptions: whether varying importance, or the uniform activation distribution, is needed is
+        not tested'
+  I4:
+    name: Specificity
+    status: N/A
+    short: One task and one loss, and the paper says cross-superposition loss comparison fails
+    verified: true
+    reasoning: 'Specificity asks whether an intervention hits the target behaviour and leaves others alone.
+      This setting has one objective, an importance-weighted squared error on a single task, so there
+      is no second behaviour to measure a side effect on. The paper also closes off the obvious workaround:
+      superposition is induced by changing the task to be sparser, so losses at different amounts of superposition
+      are measured on different tasks and are not comparable. That makes the criterion inapplicable by
+      the structure of the design rather than merely unrun.
+
+      '
+    notes:
+      legacy_evidence: Untestable in this setting. The model has one task, so there is no off-target behaviour
+        to measure. The nearest available check is whether the interventions that remove superposition
+        damage anything besides superposition; both L1 regularisation and adversarial training are reported
+        to raise loss, but the cost is not decomposed into on- and off-target components
+      verification: 'Contradiction with the cell, which says "both L1 regularisation and adversarial training
+        are reported to raise loss." Only L1 is, in the phrase "albeit at the cost of a higher loss."
+        The adversarial-training paragraph reports no loss cost; it reports that attacks had to be made
+        unreasonably large to eliminate superposition, and the "increased cost and complexity" the authors
+        cite for stopping is compute and engineering effort. Status left at N/A, which the footnote 17
+        argument supports independently of that error.
+
+        '
+  I5:
+    name: Rival mechanism exclusion
+    status: PC
+    short: PCA named and characterised as a limiting case; incidental polysemanticity untested
+    verified: true
+    reasoning: 'One rival account of the same weights is taken seriously and located rather than dismissed.
+      Linear models perform PCA, and the correlated-feature experiments show the model moving continuously
+      between the two strategies: as correlation rises and sparsity falls, correlated features collapse
+      into their principal component and the dense solution becomes equivalent to PCA. So PCA is a limiting
+      case of the same tradeoff. It is the only rival treated this way, which is what holds this short
+      of confirmed.
+
+      '
+    notes:
+      legacy_evidence: 'One rival is named and distinguished within the toy: PCA. The correlated-features
+        experiments show the two are complementary strategies that trade off, with the model collapsing
+        a correlated pair into its principal component when capacity runs short and becoming ``equivalent
+        to PCA'''' in dense regimes --- so the rival is characterised as a limiting case rather than dismissed.
+        The rival not considered is incidental polysemanticity, supplied later by Lecomte et al.\ (2023),
+        which produces the motivating observation with no capacity pressure at all'
+  I6:
+    name: Double dissociation
+    status: U
+    short: ''
+    verified: false
+    reasoning: 'NOT YET VERIFIED. No quote from the source supports this status.
+
+      '
+    notes:
+      legacy_evidence: 'Unattempted. No converse test: no second property of the toy model is shown intact
+        while superposition is removed by L1 regularisation, and no manipulation removes that second property
+        while leaving superposition in place'
+      verification: 'No converse test appears anywhere in the paper: no second property is shown intact
+        while superposition is removed, and no manipulation removes another property while leaving superposition
+        in place. An absence cannot be quoted, so this is left unverified rather than supported by a quote
+        that does not bear on it. Read for it in Relationship to Adversarial Robustness and in Approach
+        1, the two places an L1 or adversarial manipulation could have carried a converse arm.
+
+        '
+  I7:
+    name: Confound control
+    status: PC
+    short: Data confounds set by construction; optimisation left as an uncontrolled one
+    verified: true
+    reasoning: 'The generator is under complete control, so sparsity, importance, correlation and dimension
+      are set independently rather than adjusted for after the fact, and the phase-change experiment is
+      designed specifically to stop many features from moving at once. Correlation is imposed by construction,
+      by tying the zero pattern of a feature set. The confound that remains is optimisation: the authors
+      report that the m=2 case is much harder for gradient descent than three dimensions and that the
+      reported solutions are selected by loss, so which geometry appears depends partly on the optimiser.
+
+      '
+    notes:
+      legacy_evidence: 'The data generator is under complete control and the confounds are set rather
+        than adjusted for --- sparsity, importance, correlation structure and dimension are manipulated
+        independently. What is not controlled is optimisation: the $m=2$ case is ``a lot harder than even
+        just having three dimensions'''' for gradient descent and the reported solutions are selected
+        by loss, so which geometry appears is partly a property of the optimiser rather than of the loss
+        landscape'
+  I8:
+    name: Confounding sensitivity
+    status: U
+    short: ''
+    verified: false
+    reasoning: 'NOT YET VERIFIED. No quote from the source supports this status.
+
+      '
+    notes:
+      legacy_evidence: Unattempted. No sensitivity analysis for an unmeasured confounder. In a fully synthetic
+        setting the authors could argue none is needed, but the optimisation confound above is both unmeasured
+        and unbounded
+      verification: 'No sensitivity analysis for an unmeasured confounder appears in the paper, and no
+        quote can establish an absence. The nearest relevant material is the optimisation difficulty reported
+        in The Geometry of Superposition and in Tom McGrath''s comment on basins of attraction, quoted
+        under I7 and V3; neither is a sensitivity analysis. Left unverified.
+
+        '
+  I9:
+    name: Epistatic interaction
+    status: C
+    short: Feature interactions are the subject once uniformity is dropped, and each is measured
+    verified: true
+    reasoning: 'Interaction between features is manipulated directly and the resulting geometry is read
+      off. Correlated features are given an ordered set of preferences that the model is observed to follow:
+      orthogonality in separate tegum factors, then adjacency, then collapse into a principal component
+      when capacity runs out. Anti-correlated features go the other way, sharing a tegum factor with negative
+      interference. The asymmetric superposition motif is an explicit two-neuron interaction, where storing
+      two features at reciprocal magnitudes creates one-sided interference that a second neuron cancels
+      by inhibition.
+
+      '
+    notes:
+      legacy_evidence: Interaction between features is the paper's subject once the uniform case is done,
+        and each interaction is manipulated and measured. Correlated features prefer orthogonality in
+        separate tegum factors, then adjacency, then collapse to a principal component as capacity falls.
+        Anticorrelated features prefer the same tegum factor with negative interference. The asymmetric
+        superposition motif is an explicit two-neuron interaction, where one neuron's positive interference
+        is converted to negative interference by a second neuron's inhibition
+  I10:
+    name: Rescue reversibility
+    status: U
+    short: ''
+    verified: false
+    reasoning: 'NOT YET VERIFIED. No quote from the source supports this status.
+
+      '
+    notes:
+      legacy_evidence: Unattempted rather than untestable. L1 regularisation removes superposition and
+        can be withdrawn; no experiment removes it and then restores it to check that the same geometry
+        returns, which would bear directly on the optimisation confound in I7
+      verification: 'No removal-and-restoration experiment appears. L1 regularisation removes superposition
+        and could be withdrawn, and Approach 1 is where such a test would sit, but the paper stops at
+        removal. An absence cannot be quoted, so this is left unverified.
+
+        '
+  I11:
+    name: Onset coupling
+    status: PC
+    short: Onset tracked across training; feature dimensionality jumps as the loss drops
+    verified: true
+    reasoning: 'The onset direction is run. Per-feature dimensionality is tracked over training and moves
+      in discrete jumps between configurations, and the loss curve drops at the same moments, with the
+      larger jump accompanied by the larger drop. The coupling is qualitative and reported from single
+      runs, and the authors state that the section is limited to striking phenomena with detailed investigation
+      left to future work, which is why this stays partial.
+
+      '
+    notes:
+      legacy_evidence: 'The onset direction is run and is one of the paper''s more striking results: per-feature
+        dimensionality is tracked across training and moves in discrete ``energy level jumps,'''' with
+        the loss curve dropping at the same moments. The section is explicitly preliminary'
+  I12:
+    name: Offset coupling
+    status: U
+    short: Offset never run; the learning-dynamics section is limited by the authors' own account
+    verified: true
+    reasoning: 'Nothing in the paper removes superposition from a trained model and tracks the target
+      behaviour disappearing with it. The closest the source comes to acknowledging the gap is a general
+      statement that the learning-dynamics questions get less investigation than they deserve. That supports
+      the status without supporting the cell''s stronger reading.
+
+      '
+    notes:
+      legacy_evidence: 'Unattempted, and named as such: the offset direction is not run, although the
+        authors train every model in the paper'
+      verification: 'The cell says the offset direction is "named as such." It is not. The paper never
+        mentions an offset or removal-time analysis; it states only that the learning-dynamics section
+        is limited to a couple of striking phenomena. The status is unaffected.
+
+        '
+  E1:
+    name: Intervention reach
+    status: PC
+    short: Four intervention forms including two that remove superposition, cost reported
+    verified: true
+    reasoning: 'Interventions reach four different parts of the setup: the architecture, through the choice
+      of adding an activation function or L1 regularisation to the hidden layer; the data, through sparsity,
+      importance and correlation; L1 regularisation on the hidden activations; and adversarial training.
+      The last two are aimed at removing superposition and both do, with the cost reported rather than
+      buried, including the admission that attacks had to reach 80% of the input L2 norm to eliminate
+      it. Every intervention is on a toy model, which bounds the reach.
+
+      '
+    notes:
+      legacy_evidence: 'Four intervention forms: changing the architecture (linear vs ReLU-output vs ReLU-hidden),
+        changing the data (sparsity, importance, correlation), L1 regularisation on the hidden activations,
+        and adversarial training. The last two are designed to remove superposition and both do, with
+        the cost reported honestly --- adversarial attacks ``had to be made unreasonably large (80\% input
+        L2 norm) to fully eliminate it, which didn''t seem satisfying'''''
+  E2:
+    name: Prompt generalization
+    status: PC
+    short: Input distribution swept along every axis the theory names, all synthetic
+    verified: true
+    reasoning: 'The input distribution is varied along each axis the theory identifies, and the sweeps
+      are wide. What does not vary is the family: synthetic vectors that are zero with a set probability
+      and uniform otherwise, with the authors calling the uniform choice arbitrary and naming an exponential
+      or power law as equally natural. No natural-data distribution appears anywhere, and Open Questions
+      asks whether the importance and sparsity curves of real models can be estimated at all.
+
+      '
+    notes:
+      legacy_evidence: 'The input distribution is swept thoroughly along every axis the theory names ---
+        sparsity across orders of magnitude, importance, correlation structure --- but it is one synthetic
+        family throughout: features i.i.d.\ uniform on $[0,1]$ conditional on being active. No natural-data
+        input distribution appears anywhere in the paper, and Open Questions asks whether the feature
+        importance and sparsity curves of real models can even be estimated'
+      verification: 'The cell describes the family as "features i.i.d. uniform on [0,1] conditional on
+        being active" throughout. The computation model samples from [-1,1] instead, so the support does
+        change once.
+
+        '
+  E3:
+    name: Cross-task generalization
+    status: PC
+    short: Two tasks, with computation carrying the weight; representativeness left open
+    verified: true
+    reasoning: 'The second task is what makes this more than one experiment repeated. Reconstructing the
+      identity shows storage; computing the absolute value shows the model carrying a nonlinear function
+      through a compressed layer, and it forces use of the hidden-layer ReLU that the previous variant
+      circumvented. The paper declines to claim the task is representative and asks in Open Questions
+      whether it is idiosyncratic, which is the right reading of two tasks.
+
+      '
+    notes:
+      legacy_evidence: 'Two tasks: reconstruct the identity, and compute $\mathrm{abs}(x)$. The second
+        carries the weight, since it establishes computation rather than storage and requires the model
+        to use the nonlinearity it otherwise circumvents. The paper asks whether it is representative
+        rather than claiming it is: ``Is the absolute value problem representative of computation in superposition
+        generally, or idiosyncratic?'''''
+  E4:
+    name: Cross-model generalization
+    status: PC
+    short: Four architectures inside the toy family; real-model support is consistency only
+    verified: true
+    reasoning: 'Inside the toy family the phenomenon appears across four architectures and a wide size
+      range. Outside it, the Discussion offers four observations about real models, and the paper labels
+      them as validation by consistency with existing empirical reports rather than as measurements taken
+      here. The strongest statement made about generalisation is that the toy model reproduces qualitative
+      features of larger networks and that this is suggestive.
+
+      '
+    notes:
+      legacy_evidence: 'Within the toy family, four architectures across a wide size range. Beyond it,
+        nothing at origin --- the four real-model arguments in the Discussion are observations drawn from
+        other papers and are offered as consistency, not evidence. Real-model evidence arrived later:
+        sparse probing across seven models 70M--6.9B (Gurnee et al.\ 2023), dictionary learning at production
+        scale (Templeton et al.\ 2024), and Liu, Liu \& Gore (2025), who ``confirmed that open-sourced
+        LLMs operate in the strong superposition regime'''''
+  E5:
+    name: Graded response
+    status: C
+    short: 'Dose-response is the core object: sparsity swept, response monotone and located'
+    verified: true
+    reasoning: 'Graded response is the paper''s main empirical object. Sparsity is swept continuously
+      and the number of represented features rises with it, starting from the least important features
+      and working up. Neuron-level polysemanticity shifts the same way. The deformation experiment sweeps
+      one feature''s sparsity and locates the critical point where the pentagon snaps to a pair of digons,
+      so the response has both a monotone regime and a located discontinuity.
+
+      '
+    notes:
+      legacy_evidence: Dose-response is the paper's core empirical object rather than an add-on. Sparsity
+        is swept continuously and the number of represented features, the per-feature dimensionality,
+        and adversarial vulnerability all move monotonically with it; the phase diagrams are two-dimensional
+        dose-response surfaces with analytically predicted boundaries; the deformation experiments sweep
+        a single feature's sparsity and record the polytope snapping at a located critical point; the
+        adversarial-training sweep reports the attack norm required to eliminate superposition
+  E6:
+    name: Novel prediction
+    status: C
+    short: 'Two predictions that could have failed: polytope geometry and adversarial fragility'
+    verified: true
+    reasoning: 'Both predictions have content that the data could have refused. If uniform superposition
+      solves a generalised Thomson problem, feature dimensionalities should cluster at the fractions belonging
+      to uniform polytopes, and they do, at values corresponding to tetrahedra, triangles, antipodal pairs,
+      pentagons and square antiprisms. The adversarial prediction follows from the interference terms
+      that superposition creates, was tested with an explicit attack construction, and shows vulnerability
+      rising more than threefold as superposition forms and tracking features per dimension.
+
+      '
+    notes:
+      legacy_evidence: 'Two, both of which could have failed. Geometry: uniform superposition should solve
+        a Thomson-like problem and land on regular polytopes with quantised feature dimensionalities ($1/2$
+        digons, $2/3$ triangles, $3/4$ tetrahedra), and it does. Adversarial vulnerability: it ``sharply
+        increases as superposition forms,'''' tested with L2 attacks and with analytically derived optimal
+        attacks. Liu, Liu \& Gore (2025) later supply a third of a different kind --- a scaling exponent,
+        predicted from superposition and confirmed in open-weight LLMs'
+      verification: 'The cell glosses the 1/2 line as "digons." The geometry section labels it an antipodal
+        pair; digons appear as the name for the same structure in the deformation experiment. Same object,
+        different label.
+
+        '
+  V1:
+    name: Level declaration
+    status: C
+    short: Levels separated before any experiment; the chosen definition flagged as circular
+    verified: true
+    reasoning: 'The level of description is fixed before evidence is collected. Decomposability and linearity
+      are separated as distinct hypotheses, privileged basis and superposition are named as two countervailing
+      forces, and the whole is laid out as four progressively stricter properties. The unit of analysis
+      gets the same treatment: three candidate definitions of feature are stated, one is adopted, its
+      circularity is acknowledged in the same sentence, and the authors decline to commit to it.
+
+      '
+    notes:
+      legacy_evidence: Declared before any experiment and maintained. Decomposability and linearity are
+        separated as two distinct hypotheses; privileged basis and superposition are named as two countervailing
+        forces; three candidate definitions of ``feature'' are stated, one is chosen explicitly, its circularity
+        is acknowledged (``This definition is slightly circular, but avoids the issues with the earlier
+        ones''), and the authors decline to commit --- ``we actually think it's probably important to
+        not prematurely attach to a definition''
+      verification: 'The cell quotes "we actually think it''s probably important to not prematurely attach
+        to a definition." The source reads "But we aren''t overly attached to it, and actually think it''s
+        probably important to not prematurely attach to a definition." The inserted "we" is the only difference.
+
+        '
+  V2:
+    name: Level-evidence match
+    status: C
+    short: Claims stay at the toy-model level, and every step up from it is marked
+    verified: true
+    reasoning: 'The claim and the evidence sit at the same level throughout: the assertion is about toy
+      models and toy models are what is measured, stated as such in Open Questions. Where the level rises,
+      the move is marked in the text rather than smuggled. The Discussion validates by consistency with
+      existing observations of polysemanticity, and immediately separates the phenomena the authors expect
+      to transfer from the geometry and learning-dynamics results they regard as much more uncertain.
+
+      '
+    notes:
+      legacy_evidence: The claim is about toy models and the toy models are what is measured, so the evidence
+        sits at the level of the claim throughout. Where the level shifts --- from ``this happens in these
+        networks'' to ``this may happen in real networks'' --- the shift is marked and the supporting
+        material is labelled as consistency with prior observations rather than as evidence
+  V3:
+    name: Alternative level
+    status: PC
+    short: PCA examined as a limiting case; the optimisation alternative raised and left open
+    verified: true
+    reasoning: 'One alternative description is examined and placed: the model learns a linear PCA solution
+      before moving to a nonlinear one, and PCA is where it ends up in dense regimes, so it is a limit
+      of the same account rather than a competitor. A second alternative, that the observed geometries
+      are artifacts of gradient descent, is raised by the paper''s own reports of optimisation difficulty
+      and sharpened in Tom McGrath''s comment, which shows the global minimum can have a smaller basin
+      of attraction than local minima near a phase transition. It is left unresolved.
+
+      '
+    notes:
+      legacy_evidence: 'One alternative description is examined and characterised as a limiting case rather
+        than a rival: PCA, which the model converges to in dense regimes. A second is raised by the paper''s
+        own reports of optimisation difficulty --- that the observed geometries are artifacts of gradient
+        descent rather than properties of the loss landscape --- and is left unresolved. Later, Bhagat
+        et al.\ (2026) argue a downstream toy model''s advantage comes from residual-stream mixing rather
+        than superposed computation; a rebuttal follows three weeks later and the dispute stands'
+  V4:
+    name: Unlicensed labeling
+    status: C
+    short: Metaphors are physical and cashed out; agentive verbs appear but stay scare-quoted
+    verified: true
+    reasoning: 'Every label the paper attaches to a structure is cashed out in a measured quantity, and
+      no psychological state is imputed to the models. The one term that could over-read, feature, is
+      given three candidate definitions with the tradeoffs spelled out, and the definition that would
+      tie features to human understanding is rejected precisely because it would exclude features people
+      do not understand. The metaphors used for the geometry are physical rather than mental, and each
+      is attached to a measured quantity: stickiness at 1 and 1/2 is a statement about dimensions per
+      feature before it is a comparison to the fractional quantum Hall effect.
+
+      '
+    notes:
+      legacy_evidence: No intentional vocabulary anywhere. The one term that could over-read --- ``feature''
+        --- is given three candidate definitions with the tradeoffs of each spelled out, and the chosen
+        one is flagged as circular. Physical rather than psychological metaphors are used for the geometry
+        (tegum factors, energy levels, the fractional quantum Hall analogy), and each is tied to a measured
+        quantity
+      verification: 'Contradiction with the cell, which says there is "no intentional vocabulary anywhere."
+        There is, throughout: networks "want to represent more features than they have neurons", correlated
+        features "prefer" to be orthogonal, the model has an "order of preferences", and it "will only
+        use the ReLU activation function if absolutely forced." Each instance is scare-quoted or cashes
+        out as a claim about which weight configuration attains lower loss, so the substance of the criterion
+        survives and the absolute claim does not. Status left at C.
+
+        '
+  V5:
+    name: Scope declaration
+    status: C
+    short: Scope declared in the title, in Key Results, in the Discussion and in Open Questions
+    verified: true
+    reasoning: 'The scope limit is stated where a reader meets the claim rather than in a caveats paragraph
+      at the end. Key Results says outright that it is unclear what generalises to real networks. The
+      geometry section warns that its own structure may be idiosyncratic to the toy model before presenting
+      it. The Discussion separates what the authors expect to transfer from what they do not, and Open
+      Questions keeps how realistic these toy models are as an open problem.
+
+      '
+    notes:
+      legacy_evidence: Declared in the title, in Key Results (``it's very unclear what to generalize to
+        real networks''), and in a Discussion section written to answer the scope question, which separates
+        the phenomena the authors expect to generalise (superposition, mono- versus polysemantic neurons,
+        perhaps the adversarial link) from those they do not (``especially the geometry and learning dynamics
+        results''). Open Questions asks ``How realistic are these toy models?'' as an open problem

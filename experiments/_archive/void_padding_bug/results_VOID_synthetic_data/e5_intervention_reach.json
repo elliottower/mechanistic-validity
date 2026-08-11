@@ -1,0 +1,38 @@
+{
+  "n": 1000,
+  "seed": 0,
+  "full_model_logit_diff": 0.895223081111908,
+  "fixed_dimensions": {
+    "granularity": "(head, position) pairs as Wang et al. specify them",
+    "component_type": "attention heads only; no MLPs, no layer norms",
+    "token_positions": "the position assignment published for each head class",
+    "direction": "ablate the complement, measuring whether the circuit alone suffices",
+    "circuit_set": "the published 26 (head, position) pairs, unmodified",
+    "varied": "ablation value"
+  },
+  "by_ablation_value": {
+    "zero": {
+      "circuit_logit_diff": -0.17604538798332214,
+      "sem": 0.09304337203502655,
+      "percent_of_full": -19.664974212646484
+    },
+    "resample": {
+      "circuit_logit_diff": -0.7911460995674133,
+      "sem": 0.04919497296214104,
+      "percent_of_full": -88.37418365478516
+    },
+    "native": {
+      "circuit_logit_diff": 0.6831172108650208,
+      "sem": 0.06600669771432877,
+      "percent_of_full": 76.30693054199219
+    },
+    "gaussian": {
+      "circuit_logit_diff": -0.04267290607094765,
+      "sem": 0.07364343851804733,
+      "percent_of_full": -4.7667341232299805
+    }
+  },
+  "spread_percentage_points": 164.68111419677734,
+  "spread_exceeds_10pp": true,
+  "note": "spread is attributable to ablation value alone; the other five dimensions of Miller et al.'s six-tuple are held at the values above"
+}

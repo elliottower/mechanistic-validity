@@ -1,0 +1,1114 @@
+claim: gender
+verdict: Causally Suggestive
+readings:
+- statement: Ten of 144 attention heads carry the indirect effect of a gender edit on the pronoun probability
+    ratio, and neurons combine synergistically to produce it
+  verdict: Causally Suggestive
+  missing: Specificity, which has no second outcome to register on (I4); necessity, which the design's
+    substitution estimands cannot express (I1); correction for a greedy maximum over 144 candidates (M7);
+    and dispersion on the head-level and neuron-level effects that carry the sparsity claim (M1)
+  primary: true
+- statement: These components mediate gender bias rather than gender processing
+  verdict: Underdetermined
+  missing: A localised gender-competence mechanism to compute an overlap against; none is measured, and
+    the definitionally gendered professions that would carry the test are excluded from the total-effect
+    calculation (C4, V3, I5)
+  primary: false
+- statement: Training is what installs the sparse mediation structure
+  verdict: Underdetermined
+  missing: A trajectory. The coupling is a single endpoint contrast against one untrained model whose
+    total effects are small rather than absent --- 0.07 on WinoBias against GPT2-small's 0.25 (I12) ---
+    with no intermediate checkpoint anywhere (I11)
+  primary: false
+- statement: The effect grows with model size and the pattern holds across model families
+  verdict: Disconfirmed
+  missing: 'Nothing --- tested and failed: the neuron-level pattern does not transfer to the masked language
+    models and the authors state they have no theory for the difference (E4, M6), and the size trend holds
+    on the Winograd sets but not on Professions, where model size is not well correlated with total effect
+    (E4)'
+  primary: false
+hypotheses:
+- id: H1
+  view: Object
+  label: ten of 144 heads carry the indirect effect, and neurons combine synergistically to produce it
+- id: H2
+  view: Role
+  label: the mediators carry gender bias
+- id: H3
+  view: Role
+  label: the mediators carry gender processing generally, and the word bias comes from the stimulus set
+- id: H4
+  view: Object
+  label: the indirect effect is spread across the 144 heads with no sparse mediator set
+- id: H5
+  view: Instrumental
+  label: the sparse structure belongs to the interchange estimand and the templates rather than to the
+    model
+- id: H6
+  view: Contrastive
+  label: the pattern holds across model families rather than inside the autoregressive ones alone
+views_evidence:
+- criterion: C1
+  family: Identity
+  evidence: The search runs over all 144 heads and reports how many are needed to reach the all-head effect;
+    the answer could have been 100 and it was 10
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: I
+    H5: '-'
+    H6: '-'
+  designed_for:
+  - H1
+  - H4
+- criterion: M2
+  family: Analyst-choice
+  evidence: A randomly initialised GPT2-small matched on architecture, parameter count, datasets and estimator
+    gives 0.12 against 112.28 on Professions and shows no head-level structure
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: I
+    H5: I
+    H6: '-'
+  designed_for:
+  - H1
+  - H5
+- criterion: M7
+  evidence: The head set is a greedy maximum over 144 candidates quoted at its selected size, with no
+    null distribution for that maximum and no correction for the comparisons the search involved
+  cells:
+    H1: I
+    H2: '-'
+    H3: '-'
+    H4: C
+    H5: C
+    H6: '-'
+  designed_for: []
+- criterion: I2
+  family: Identity
+  evidence: Writing the treated value of ten heads out of 144, or four percent of neurons, into an otherwise
+    untreated run reproduces the all-mediator effect
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: I
+    H5: C
+    H6: '-'
+  designed_for:
+  - H1
+- criterion: I4
+  evidence: The primary measure and all three alternates are computed over a two-element outcome set,
+    so an intervention that wrecked syntax or factual recall would leave every reported number untouched
+  cells:
+    H1: '-'
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: C
+    H6: '-'
+  designed_for: []
+- criterion: I5
+  family: Analyst-choice
+  evidence: The untrained control excludes the architecture-and-stimuli rival and template validation
+    excludes the template rival, while the reading on which the mediators carry gender information generally
+    is left standing
+  cells:
+    H1: C
+    H2: '-'
+    H3: C
+    H4: I
+    H5: I
+    H6: '-'
+  designed_for:
+  - H1
+  - H5
+- criterion: I12
+  evidence: The untrained model's total effects are small rather than absent --- 0.07 on WinoBias against
+    GPT2-small's 0.25 --- and no intermediate degree of training is examined
+  cells:
+    H1: '-'
+    H2: '-'
+    H3: '-'
+    H4: C
+    H5: C
+    H6: '-'
+  designed_for: []
+- criterion: E1
+  evidence: Every result comes from writing a mediator's value from one forward pass into another, with
+    no ablation, zeroing, magnitude scaling or gradient attribution that could disagree with it
+  cells:
+    H1: '-'
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: C
+    H6: '-'
+  designed_for: []
+- criterion: E2
+  family: Analyst-choice
+  evidence: Sparsity of the indirect effect holds on a seventeen-template generator over 169 professions
+    and on two Winograd-schema sets built on a different principle
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: I
+    H5: I
+    H6: '-'
+  designed_for:
+  - H1
+  - H5
+- criterion: E4
+  evidence: The sparsity and decomposability patterns reappear in two further autoregressive families,
+    while the neuron-level pattern fails outright in the masked language models with no theory offered
+  cells:
+    H1: '-'
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: I
+  designed_for:
+  - H6
+- criterion: E6
+  evidence: Profession-level effects track published occupational gender statistics at 0.35 to 0.45, while
+    the gender-neutral arm fails to show the concentrated structure
+  cells:
+    H1: '-'
+    H2: C
+    H3: I
+    H4: '-'
+    H5: I
+    H6: '-'
+  designed_for:
+  - H2
+  - H3
+  - H5
+- criterion: V3
+  evidence: The top heads are described as capturing coreference aspects and the same head was previously
+    identified with coreference, without asking whether processing rather than bias is what they carry
+  cells:
+    H1: '-'
+    H2: I
+    H3: C
+    H4: '-'
+    H5: '-'
+    H6: '-'
+  designed_for: []
+tiers:
+- name: Proposed
+  requires: C1--C2; one admissible measurement
+  missing: '---'
+- name: Causally Suggestive
+  requires: Necessity (I1); baselines (M2)
+  missing: '\textbf{I1} not applicable: both estimands are substitutions, so no removal experiment exists
+    in the design'
+- name: Mechanistically Supported
+  requires: Sufficiency (I2); reach (E1); specificity (I4)
+  missing: '\textbf{I4} unattempted and structurally so: the outcome is a two-element set, so nothing
+    off-target can register; \textbf{E1} one intervention family throughout'
+- name: Triangulated
+  requires: Convergence (C3); replication (E2/E4); dissociation (I6)
+  missing: '\textbf{I6} unattempted; \textbf{E4} the neuron-level pattern fails outside the autoregressive
+    families; \textbf{C3}: every number is an NIE from the same interchange intervention'
+- name: Validated
+  requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
+  missing: '\textbf{M7} unattempted: the head set is a greedy maximum over 144 candidates reported at
+    its selected size; \textbf{M1} no dispersion on the effects carrying sparsity; \textbf{I8}, \textbf{I10},
+    \textbf{I11}, \textbf{E3} unattempted'
+criteria:
+  C1:
+    name: Falsifiability
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The sparsity claim is put as a quantity that could have come out any way. The search runs
+      over all 144 heads and reports how many are needed to reach the all-head effect; the answer could
+      have been 100, and it was 10. Two negative cases are named in advance and one of them fires. The
+      untrained model shows neither the effect nor the structure, and the gender-neutral arm — the same
+      instrument on the same templates with a different treatment target — fails to show the concentrated
+      structure, which the paper reports as a negative result rather than dropping. A directional prediction
+      with a stated failure mode and a reported miss is C.
+
+      '
+    notes:
+      verification: 'The legacy evidence''s "It could have taken all 144; it took 10" is the paper''s
+        own arithmetic, and both halves are verbatim in §5.2. The randomly-initialised sentence it quotes
+        is verbatim. One addition the cell does not make: the sharper falsification at origin is the gender-neutral
+        arm, where the predicted sparse structure did not appear and the authors say so in §5.2 and again
+        in §6.
+
+        '
+      legacy_evidence: 'The sparsity claim makes a directional prediction that could have failed: a small
+        head subset should match the all-head concurrent indirect effect. It could have taken all 144;
+        it took 10 (\S5.2). The randomly initialised GPT2-small is the stated failure mode --- ``We did
+        not find similar behavior in a randomly initialized model'''''
+  C2:
+    name: Structural plausibility
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The mediator inventory is taken from the architecture rather than from the phenomenon.
+      Neurons, layers, heads and single attention weights are enumerated before any measurement, and each
+      is a term the forward pass actually computes, so every effect the paper reports is attached to something
+      that exists in the model. The structural account stops there. The only claim about how an effect
+      travels is the residual-stripe analysis, which argues from the geometry of a heatmap and a stripe
+      count, not from the weights that would carry the information. No projection, no attention-circuit
+      computation and no parameter-level derivation of how a head produces its indirect effect appears
+      anywhere. Architecture-matched mediators with no weight-level mechanism is PC.
+
+      '
+    notes:
+      verification: 'The §3.2.2 mediator list straddles pages 8 and 9 with a running header between the
+        halves, so it is recorded as two adjacent fragments that reassemble the sentence. The "vertical
+        stripes" reading in the cell is the paper''s own, and the cell is right that it is offered as
+        one of two candidate explanations, decided by the stripe-count comparison in Figure 10 (bottom).
+        Confirmed by full read: the paper contains no analysis of any weight matrix.
+
+        '
+      legacy_evidence: The mediator set is chosen to match the architecture (neurons, layers, heads, individual
+        attention weights, \S3.2.2), and \S5.3 reads residual-stream ``vertical stripes'' in the neuron
+        heatmap as evidence of information carried across layers at a fixed index. No weight-level account
+        of how a head produces the effect; the mechanism is located, not derived
+  C3:
+    name: Convergent validity
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'Convergence at origin is broad and shallow. Two mediator families run on three datasets
+      give the same sparsity picture, and four outcome scales give it again, so the result is robust to
+      the unit of analysis and to the metric. What all of those share is the instrument: every number
+      is an NIE produced by the same interchange intervention, so their agreement tests the estimand''s
+      robustness rather than the method''s. The one check of a different kind is the TE ≈ NDE + NIE decomposition,
+      which holds the mediation numbers against a quantity they were not fitted to — and which, for neurons,
+      is true by definition and therefore carries no information.
+
+      '
+    notes:
+      verification: 'Every origin-side convergence the cell names is verbatim. Two qualifications the
+        cell does not carry. The two mediator families are not two methods; they are one estimand applied
+        to two kinds of unit. And the neuron arm cannot corroborate the decomposition, because footnote
+        8 states that TE = NIE-all and NDE-all = 0 hold by definition there. The genuinely method-independent
+        convergence the cell cites (Chintam et al., three discovery methods) is post-origin and cannot
+        be checked against this source.
+
+        '
+      legacy_evidence: 'Two mediator families at origin (neurons and attention heads) give a consistent
+        sparsity picture on three datasets, and \S5.4 adds the TE $=$ NDE $+$ NIE decomposition as a third
+        internal consistency check. Later independent convergence is explicit: \citet{chintam2023identifying}
+        run mediation analysis, automated circuit discovery and DiffMask+ on the same phenomenon and report
+        ``significant overlap in the identified components despite huge differences in computational requirements'''''
+  C4:
+    name: Discriminant validity
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Nothing in the source separates the bias mechanism from a mechanism for gender competence,
+      because no second construct is ever localised. The outcome is a ratio over two pronouns and nothing
+      else is measured, so there is no quantity on which a competence mechanism could show up and no overlap
+      statistic could be computed. Where the two constructs collide the paper handles it by deletion:
+      definitionally gendered professions are dropped from the total-effect calculation rather than analysed
+      as the contrasting case. U.
+
+      '
+    notes:
+      verification: 'The Appendix A.1 exclusion is verbatim and is the cell''s strongest point. CORRECTION
+        to the cell: the §5.3 coreference passage it calls "the nearest passage" reports other people''s
+        identifications — Vig (2019) on head 5-10 and Clark et al. on a BERT head — rather than a measurement
+        made in this paper. The cell''s description of it as "a qualitative aside" is right, but a reader
+        could take the attribution as the source''s own. Veloso & Schütze is post-origin.
+
+        '
+      legacy_evidence: \textbf{Unattempted, and it is the criterion the claim's name presupposes.} ``Gender
+        bias circuit'' presupposes separation from lexical gender competence. The paper never localises
+        a gender-competence mechanism, so no overlap statistic exists; it removes the relevant items instead,
+        excluding definitionally gendered professions from the total-effect calculation (Appendix A.1).
+        The nearest passage, \S5.3's remark that head 5-10 was ``previously identified \ldots as relating
+        to coreference resolution based on visual inspection,'' is a qualitative aside about a different
+        construct. Veloso \& Sch\"utze (2026) later run the test on Llama-3.1-8B and Olmo-7b and find
+        severe entanglement, but on lexical rather than grammatical gender and on no model this paper
+        used
+  C5:
+    name: Nomological validity
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The theory is imported rather than borrowed by analogy. TE, NDE and NIE are Pearl''s estimands,
+      used under his definitions and cited to him, and the paper does the work an import requires. It
+      identifies the condition under which the linear-model decomposition survives in a non-linear network,
+      matches that condition to the literature''s no-interaction assumption, proves the implication in
+      an appendix and then measures the residual instead of asserting it. The identification assumptions
+      mediation analysis needs are stated against the causal-inference literature rather than waved at.
+      C.
+
+      '
+    notes:
+      verification: 'Footnote 7, the Appendix E no-interaction passage and the §6 identification-assumption
+        sentence are verbatim, so the cell''s account of the import is accurate throughout. One addition
+        the cell omits: Appendix E does not only prove the implication, it fits the two sides of Eq. 11
+        against each other and reports a coefficient of 1.04, an intercept of 0.00 and R2 = 0.78, which
+        is what turns the approximate decomposition into a measured claim.
+
+        '
+      legacy_evidence: 'Imported wholesale from an existing formal theory rather than analogised: Pearl''s
+        mediation formalism, with TE, NDE and NIE defined as in \citet{pearl2001direct} and identification
+        assumptions discussed against Imai et al.\ and VanderWeele. Footnote 7 states which decomposition
+        results transfer to a non-linear model and which need an added no-interaction condition, proved
+        in Appendix E'
+  M1:
+    name: Reliability
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Estimates are averages over a stated population and dispersion is reported wherever the
+      paper has a story about dispersion: standard deviations for the gender-neutral effects, spread across
+      templates in the validation check, higher variance in the non-GPT-2 models. None of it reaches the
+      numbers the claim rests on. The per-head and per-neuron indirect effects that establish sparsity
+      are single point estimates, and the ten-head set is reported once, from one selection run, with
+      no resampling and no interval on the saturation point. Dispersion where it is incidental and none
+      where it is load-bearing is PC.
+
+      '
+    notes:
+      verification: 'The 2,873-example count, the four gender-neutral total effects with their standard
+        deviations and the cross-model variance remark are verbatim, so the cell reports them correctly.
+        Confirmed by full read: the strings "confidence interval", "bootstrap" and "seed" do not appear
+        anywhere in the paper, and no repeated-run protocol is described for any reported effect.
+
+        '
+      legacy_evidence: Effects are means over 2,873 Professions examples with standard deviations reported
+        for the gender-neutral arm (``total effects of 8.3, 7.5, 9.6, and 12.5, all with standard deviations
+        $<$ 10,'' \S5.1) and variance across models noted in \S5.5. No repeated runs, no seeds, no confidence
+        intervals on the head-level or neuron-level effects that carry the sparsity claim, and no bootstrap
+        on the top-10 head set
+  M2:
+    name: Baseline separation
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The negative control is matched on everything that could otherwise explain the result
+      — same architecture, same parameter count, same datasets, same estimator — and differs only in having
+      been trained. It is carried through both mediator families rather than reported once: it appears
+      in the total-effect table, in the head-level heatmap and in the neuron curves. Separation is large
+      where the claim is made, 0.12 against 112.28 on Professions, and the head-level structure is absent
+      rather than merely weaker. A matched control that separates at both levels is C.
+
+      '
+    notes:
+      verification: 'The Table 1 random-init row and both "did not find" statements are verbatim, and
+        the cell''s locators are right. One qualification the cell does not carry: separation is not uniform
+        across datasets. On Winobias the untrained model''s total effect is 0.07 against GPT2-small''s
+        0.25, a factor of about 3.5, while on Professions it is 0.12 against 112.28. The paper''s "much
+        smaller" is fair as an average and does not license reading the control as showing no effect.
+
+        '
+      legacy_evidence: 'A randomly initialised GPT2-small is carried through the main analyses as a matched
+        negative control. It separates at both levels: total effects ``much smaller, indicating that it
+        is the training that causes gender bias'''' (Table 1, \S5.1), and no head-sparsity structure ---
+        ``We did not find similar behavior in a randomly initialized model, indicating that these patterns
+        do not occur by chance'''' (\S5.2), with the neuron version in Figure 17'
+  M3:
+    name: Stability
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Two perturbations are run and both hold. The mediator-selection rule is varied between
+      a greedy marginal-gain search and a top-k rank, and the saturating fraction of heads is stable across
+      four model sizes and both Winograd datasets. The outcome scale is varied four ways and the sparsity
+      and size patterns survive. The treatment is varied across datasets but not within one: each dataset
+      has a single substitution scheme, so nothing tests whether a different anti-stereotypical target
+      word would move the same mediators. PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, two parts. First, the phrase it attributes to §5.5 —
+        "consistent results under multiple metrics" — is in §6, the Discussion; §5.5 reports the masked-LM
+        disagreement instead, which points the other way. Second, the cell says the treatment is "one
+        profession-substitution scheme, never varied". The paper runs three treatments: set-gender toward
+        man/woman on Professions (§3.2), the gender-neutral variant toward person with they as the measured
+        continuation (§3.3), and swap-gender on the Winograd sets (§3.4). The E1 cell states the last
+        two correctly, so the two cells disagree. What is genuinely unvaried is the substitution scheme
+        inside each treatment. A third, smaller point: the cell says Greedy and Top-k "agree that 10 heads
+        suffice"; the paper states the number 10 once without attributing it to either algorithm, and
+        the agreement is read off Figure 5b.
+
+        '
+      legacy_evidence: 'Mediator-selection perturbation is run: G\textsc{reedy} and T\textsc{op-k} head
+        selection are compared and agree that 10 heads suffice (\S5.2, Appendix D). Metric perturbation
+        is run: \S3.5 defines total-variation and normalised-difference alternatives and Appendices report
+        them, with \S5.5 reporting ``consistent results under multiple metrics.'''' The perturbation not
+        run is of the treatment itself --- one profession-substitution scheme, never varied'
+  M4:
+    name: Calibration
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The bias measure has what a calibrated scale needs: a fixed point at 1 that means indifference,
+      a sign convention on either side of it, and a worked example that carries real probabilities through
+      to a total effect of 92.6. The effect scale inherits the fixed point, so zero means the gender edit
+      changed nothing. Two things are uncalibrated. Comparison across datasets, which the paper rules
+      out itself, and behavioural meaning: nothing says what a total effect of 0.25 rather than 1.05 does
+      to any observable other than the ratio it is computed from. PC.
+
+      '
+    notes:
+      verification: 'FLAG — the legacy evidence puts a paraphrase inside quotation marks. It renders the
+        §5.1 sentence as TE magnitudes "are difficult to compare" across the three datasets "because of
+        their different nature". The second fragment is verbatim; the first is not. The paper reads "It
+        is difficult to compare effect magnitudes in the three datasets because of their different nature."
+        The substance of the cell is unaffected. The Figure 4 arithmetic and the y(u) = 1 fixed point
+        are verbatim.
+
+        '
+      legacy_evidence: 'The effect scale is meaningful and anchored: $y(u)=1$ is defined as unbiased,
+        and TE is a ratio-of-ratios minus one with a worked arithmetic example (Figure 4, $13.1/0.14-1
+        \approx 92.6$). Uncalibrated in one respect the authors name: TE magnitudes ``are difficult to
+        compare'''' across the three datasets ``because of their different nature'''' (\S5.1), and no
+        external scale fixes what a TE of 0.25 versus 1.05 means behaviourally'
+  M5:
+    name: Sensitivity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The instrument is checked against a quantity known to be present outside the model. Profession-level
+      total effects track published occupational gender statistics at 0.35 to 0.45, and the weaker Winograd
+      correlation is reported alongside, so the check has a direction and a case where it comes out worse.
+      It is not a sensitivity test in the strict sense: the ground truth is a correlate of the treatment,
+      not a mediator of known size planted inside the model, so the experiment cannot say what indirect
+      effect the method would fail to detect. Real known-positive at the wrong level is PC.
+
+      '
+    notes:
+      verification: 'Both correlation ranges are verbatim and the cell reports them correctly. The first
+        sentence carries a footnote marker between "external gender bias" and "and the log-total effect",
+        so it is recorded as two adjacent fragments. Confirmed by full read: no planted, synthetic or
+        otherwise known-magnitude mediator is inserted and recovered anywhere in the paper.
+
+        '
+      legacy_evidence: 'The known-positive is external rather than planted: profession-level effects correlate
+        with published occupational gender statistics, ``moderate positive correlations between the external
+        gender bias and the log-total effect, ranging from 0.35 to 0.45 over the different models''''
+        (\S5.1). That shows the instrument tracks a quantity known to be present. No mediator with a known
+        ground-truth effect is inserted and recovered'
+  M6:
+    name: Invariance
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'Invariance is tested along more axes than the criterion usually sees — five GPT-2 sizes,
+      three datasets, two mediator families, four metrics, six model families — and the answer differs
+      by axis. Inside the autoregressive family the sparsity and decomposability patterns hold and the
+      paper says which conclusion that licenses. Outside it the neuron-level pattern does not transfer,
+      and the paper reports the failure in its own words and declines to explain it. Reporting where the
+      invariance stops, rather than only where it holds, is what earns C.
+
+      '
+    notes:
+      verification: 'The §5.5 failure sentence is verbatim; the legacy evidence truncates it before "in
+        results", which the full sentence carries. Two locator corrections. The "four metrics" enumeration
+        is in Appendix F, not §3.5 — §3.5 defines the three alternates without counting them against the
+        primary. The six model families are named in §4.1; §5.5 reports their results.
+
+        '
+      legacy_evidence: 'Reported across five GPT-2 sizes, three datasets, two mediator types, four effect
+        metrics (\S3.5), and six model families (\S5.5). The paper reports where invariance \emph{fails}
+        rather than only where it holds: ``None of the non-GPT2 models seem to share the exact same pattern
+        that we have observed with GPT2 variants \ldots We do not have a compelling theory to explain
+        these differences'''' (\S5.5)'
+  M7:
+    name: Selection correction
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Selection is disclosed completely. The candidate pool, the search rule, the retained set
+      size and the computational shortcut are all stated, and Appendix D goes further and names the optimisation
+      problem being approximated together with the approximation guarantee. What never happens is any
+      accounting for the search. The headline effect is the value of a greedy maximum over 144 candidates,
+      quoted at its selected size, with no null distribution for that maximum and no correction for the
+      number of comparisons the selection involved. Full disclosure with zero correction is U.
+
+      '
+    notes:
+      verification: 'The Greedy and Top-k definitions, the 144-head pool, the top-5% neuron rule and footnote
+        6''s 96-neuron sets are verbatim, so the cell''s "N is fully stated at every stage" holds. CORRECTION
+        to the cell: it gives the layer range as "12--48"; Table 1 lists GPT2-distil at 6 layers, so the
+        range across the audited models is 6 to 48. Confirmed by full read: no multiplicity correction,
+        permutation null or false-discovery control appears anywhere.
+
+        '
+      legacy_evidence: Unattempted. $N$ is fully stated at every stage --- 144 heads, 12--48 layers, top-5\%
+        of neurons, sets of 96 neurons ``for computational reasons'' --- and $k$ is chosen by an explicit
+        search (G\textsc{reedy} ``iteratively selects the head with the maximal marginal contribution'').
+        Headline numbers are reported at the selected $k$ with no multiplicity control and no null distribution
+        for best-of-144 selection
+  I1:
+    name: Necessity
+    status: N/A
+    short: ''
+    verified: true
+    reasoning: 'Necessity asks what the behaviour does when a component is gone. Neither estimand in this
+      design can be put in that form. The NDE applies the treatment while pinning the mediator at the
+      value it already had; the NIE writes the treated value of the mediator into an otherwise untreated
+      run. Both are substitutions of one value for another, and under both the component remains in the
+      forward pass computing something. Nothing is removed, zeroed, mean-ablated or detached anywhere
+      in the paper, and the subset searches choose which mediators to set rather than which to drop. The
+      criterion is inapplicable to the design rather than skipped inside it, which is what N/A records.
+
+      '
+    notes:
+      verification: 'Both estimand definitions are verbatim, including the paper''s own typo "It its computed".
+        This confirms the cell''s reading that the N/A is structural: the design''s two operations are
+        substitutions by construction, so no removal experiment is available without changing the estimand.
+        Verified by full read rather than by a statement of omission — "ablation", "ablate", "necessary"
+        and removal applied to a mediator do not occur in the paper, and every intervention sets a mediator
+        to a value taken from another forward pass. One locator correction: the cell cites "NIE-all =
+        TE for neurons ... (§5.3 footnote)". The paper states it in the body of §5.3 and again in footnote
+        8, which is attached to §5.4, not to §5.3.
+
+        '
+      legacy_evidence: '\textbf{Untestable as the study is designed}, not merely unattempted. Necessity
+        requires removing the component and observing loss of the behaviour; both of the paper''s estimands
+        are substitutions, by definition. \S3.2.2: the NDE holds $z$ ``fixed to its original value''''
+        and the NIE sets $z$ ``to its value under the intervention $x$, while keeping everything else
+        to its original value.'''' \S3.3 and \S3.4 instantiate this for neurons and attention weights
+        respectively, and Appendix D''s subset search selects which mediators to \emph{set}, never which
+        to remove. NIE-all $=$ TE for neurons then holds by definition (\S5.3 footnote), not by test'
+  I2:
+    name: Sufficiency
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The NIE is an interchange intervention in the strict sense: the treated value of a mediator
+      is written into an otherwise untreated run, so a mediator set that reproduces the all-mediator effect
+      is a sufficiency result, and the paper reports one at both levels — ten heads out of 144, four percent
+      of neurons. What it is sufficient for is the whole question. The only outcome variable in the paper
+      is a two-pronoun probability ratio, so the demonstration reaches sufficiency for moving that ratio
+      and cannot reach sufficiency for any capability, because no capability is measured. PC.
+
+      '
+    notes:
+      verification: 'Both saturation results are verbatim and the cell reports them correctly. One locator
+        correction: the cell attributes the 4% neuron figure to §5.2; the sentence stating it is in §5.3,
+        though Figure 7''s caption in §5.2 carries the same number.
+
+        '
+      legacy_evidence: 'The NIE is exactly an interchange intervention: set the mediator to its post-edit
+        value, leave the text unedited, and the bias ratio moves. Ten heads reproduce the effect of all
+        144 (\S5.2, Figure 5b) and roughly 4\% of neurons match the model-wise concurrent effect (\S5.2,
+        Figure 7). This is sufficiency for shifting the bias \emph{ratio}, the only outcome defined; sufficiency
+        for any capability is undefined here because no capability is measured'
+  I3:
+    name: Minimality
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Minimality is approached from below. The greedy search admits heads one at a time by marginal
+      contribution and stops where the curve saturates, so each of the ten earned its place at the moment
+      it was added. The paper also gives the sign of everything it left out: most heads contribute little
+      and many reduce the effect, which is stronger than indifference and is a minimality argument in
+      its own right. The missing half is subtraction. No head is dropped from the selected ten to show
+      the effect falls, and the paper never claims all ten are required. PC.
+
+      '
+    notes:
+      verification: 'The marginal-contribution rule and the "most heads do not contribute much ... and
+        many reduce it" sentence are verbatim, and the cell reads the second correctly as a signed minimality
+        argument. Confirmed by full read: no leave-one-out over the retained set appears.
+
+        '
+      legacy_evidence: Approached by accretion with a marginal-contribution criterion --- G\textsc{reedy}
+        adds heads by maximal marginal gain and saturates at 10, and ``most heads do not contribute much
+        to the indirect effect, and many reduce it'' (\S5.3), which is a minimality argument with a sign.
+        No leave-one-out over the selected 10, and no claim that all 10 are required
+  I4:
+    name: Specificity
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Off-target effects have nowhere to register. The primary measure and all three alternates
+      are computed over a two-element outcome set, so an intervention that wrecked the model''s syntax
+      or its factual recall would leave every reported number untouched. The paper sees this and says
+      so: it notes the distributions could be extended to the full vocabulary, that doing so would reveal
+      consequences of the interventions it currently cannot see, and then declines. Structurally unmeasurable
+      in this design, and named as such by the authors. U.
+
+      '
+    notes:
+      verification: 'The A = {he, she} restriction and the paper''s own note about extending to the full
+        vocabulary are verbatim, and the second is a stronger version of the cell''s point than the cell
+        makes. Confirmed by full read: no perplexity, accuracy, downstream task or non-pronoun outcome
+        is reported anywhere. Veloso & Schütze''s two-outcome design is post-origin.
+
+        '
+      legacy_evidence: 'Unattempted, and structurally so: with a single outcome variable there is no second
+        quantity on which an off-target effect could register. \S3.5, the section that introduces alternative
+        measures, offers three --- a normalised difference, total-variation distance, and a relative $\ell_\infty$
+        metric --- and all three are computed over the same two-candidate set $A = \{he, she\}$, so none
+        is a capability measure. No perplexity, accuracy, or downstream task appears anywhere. Veloso
+        \& Sch\"utze (2026) supply the two-outcome design on other models and find the off-target cost
+        is real (GKnow Factual $P_{\mathrm{exp}}$ 91.49 $\to$ 79.86 under top-50 ablation; DiFair-Specific
+        $\Delta_{f,m}$ 45.57 $\to$ 15.30)'
+  I5:
+    name: Rival mechanism exclusion
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The rival that would sink the causal reading — that the structure belongs to the architecture
+      or to the stimuli rather than to what training put in the network — is excluded by a matched untrained
+      model that shows neither the effect nor the sparsity. A second rival, that the templates manufacture
+      the effect, is addressed twice: each template is validated against definitionally gendered occupations
+      before use, and profession-level effects correlate with external labour statistics, which no template
+      artifact would produce. The rival left standing is the one the claim''s name depends on, that these
+      mediators carry gender information generally and the word "bias" comes from the stimulus set. PC.
+
+      '
+    notes:
+      verification: 'The random-init control, the template validation and the external-statistics correlation
+        are all verbatim, and the cell attributes each to the right rival.
+
+        '
+      legacy_evidence: The design excludes the strongest rival to a causal reading --- that the effect
+        is a property of the input distribution rather than of the trained network --- via the randomly
+        initialised control, and \S5.1's external-statistics correlation excludes the rival that the effect
+        is an artifact of template construction. The rival not excluded is that the located components
+        mediate gender \emph{processing} generally rather than bias specifically, which is C4 restated
+        at the mechanism level
+  I6:
+    name: Double dissociation
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'A double dissociation needs two mechanisms and two behaviours, with each intervention
+      moving one and sparing the other. This design has one behaviour by construction: the paper states
+      that what it can measure is how much of the gender-edit effect flows through a component versus
+      elsewhere in the model, and it never localises a second mechanism to trade against. The nearest
+      result divides labour among three bias mediators, which dissociates mediators from each other rather
+      than bias from anything else. U.
+
+      '
+    notes:
+      verification: '"capture different coreference aspects" is verbatim and the cell reads it correctly
+        as a dissociation among bias mediators rather than between constructs.
+
+        '
+      legacy_evidence: 'Unattempted. No converse test: no non-bias mechanism is localised and shown intact
+        under bias-mediator patching. \S5.3''s observation that the top three heads ``capture different
+        coreference aspects'''' is a dissociation \emph{among} bias mediators, not between bias and anything
+        else'
+  I7:
+    name: Confound control
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Two confounds are removed by construction and both are the right ones. Definitional gender
+      is dropped from the total-effect calculation using crowdsourced definitionality ratings, so the
+      effect is measured on stereotype rather than on lexical entailment; architecture is separated from
+      training by the untrained control. One confound is named and left standing, in the paper''s own
+      words, for the gender-neutral arm. Below that, control is by restriction — single-token professions,
+      seventeen fixed frames — which bounds confounds without measuring them, and frequency is not addressed.
+      PC.
+
+      '
+    notes:
+      verification: 'The plural-they confounder sentence and the definitional exclusion are verbatim,
+        and the crowdsourced definitionality ratings that make the exclusion possible are in §4.2. PARTIAL
+        CORRECTION to the cell, which says "Token frequency and template length are uncontrolled". Frequency
+        is uncontrolled in the sense that matters — no stratification by corpus frequency — but §4.2''s
+        single-token restriction does bias the profession list toward common words, and the cell does
+        not mention it. Template length is genuinely uncontrolled; the seventeen templates in Figure 15
+        differ in length.
+
+        '
+      legacy_evidence: 'Two confounds controlled by construction: definitional gender, by excluding definitionally
+        gendered professions from the total-effect calculation (Appendix A.1), and training-versus-architecture,
+        by the random-init control. One confound is named and left standing --- ``this case suffers from
+        the additional confounder that the model could assign probability to the plural \emph{they} which
+        we are not able to disambiguate from the singular case'''' (\S3.3). Token frequency and template
+        length are uncontrolled'
+  I8:
+    name: Confounding sensitivity
+    status: U
+    short: ''
+    verified: false
+    reasoning: 'NOT SETTLED BY THE SOURCE. Nothing in the paper bounds how strong an unmeasured confounder
+      would have to be to overturn a reported effect, and no quantity in it can be read as such a bound.
+
+      '
+    notes:
+      verification: 'Read in full. The §6 identification-assumption discussion the cell points to is quoted
+        at C5; it names the assumptions the estimands require, which is a different thing from quantifying
+        what violating them would cost. "E-value" does not occur in the paper and "sensitivity analysis"
+        occurs only inside a reference title.
+
+        '
+      legacy_evidence: Unattempted. No E-value or sensitivity analysis for an unmeasured confounder. The
+        paper does discuss the identification assumptions mediation analysis requires (\S6, citing Pearl
+        2001; Avin, Shpitser \& Pearl 2005; Imai et al.\ 2010b), which is the closest it comes
+  I9:
+    name: Epistatic interaction
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'Non-additivity is measured rather than assumed, by a comparison designed for the purpose
+      and run at both levels: concurrent intervention on all mediators against the sum of the individual
+      interventions. The comparison is informative because it comes out differently for the two mediator
+      types — heads within 0.7 to 11.3% of additive, neurons an order of magnitude away from it — so the
+      test could tell the cases apart and did. The magnitudes are tabulated rather than asserted. C.
+
+      '
+    notes:
+      verification: 'Both halves are verbatim, including the 0.7%–11.3% range and the neuron conclusion,
+        and the cell quotes them correctly. One caveat the cell does not carry: for neurons NIE-all equals
+        TE by definition (footnote 8, quoted at C3), so the neuron gap measures how far summed single-neuron
+        effects fall short of the total effect rather than an independently estimated interaction term.
+
+        '
+      legacy_evidence: '\textbf{The paper''s strongest criterion, and a designed test.} \S5.3 compares
+        concurrent intervention on all mediators (NIE-all) against the sum of independent interventions
+        (NIE-sum), and reports opposite answers for the two mediator types: heads are near-additive (``maximum
+        relative distance from NIE-all between 0.7\% and 11.3\%,'''' so heads ``operate primarily in an
+        independent and complementary manner''''), while for neurons ``the sum of independent indirect
+        effects (NIE-sum) is much smaller than the concurrent intervention (NIE-all). Thus, neurons combine
+        synergistically to compound independent effects.'''' Non-additivity measured, not assumed'
+  I10:
+    name: Rescue reversibility
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'No experiment in the paper is presented or analysed as a recovery test. Both estimands
+      intervene on the input and on a mediator together, and the paper reads the result as the share of
+      the effect that bypasses the mediator, never as the fraction of behaviour that a preserved component
+      restores; no recovery fraction is reported anywhere. The materials for the test are already computed,
+      since both the original and the counterfactual activations exist for every example. Unattempted
+      rather than untestable. U.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, structural. It says "No corrupt-then-restore experiment
+        is run." The NDE as defined in §3.2.2 applies the gender edit to the input while holding the mediator
+        at its original, pre-edit value, which is arithmetically a restore at the granularity of one mediator,
+        with the NIE as its patch-direction complement. The paper never frames it that way and reports
+        no recovery quantity, which is why the recorded U survives, but the claim that the design contains
+        no restoration is too strong. The accurate statement is that the restoration direction is computed
+        and then read as a direct effect.
+
+        '
+      legacy_evidence: Unattempted rather than untestable. NDE freezes a mediator at its original value
+        and NIE writes in its counterfactual value; both are reversible by construction and both sets
+        of activations are already computed. No corrupt-then-restore experiment is run
+  I11:
+    name: Onset coupling
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Onset coupling requires the mediators and the behaviour to be timed against each other
+      while the model is being trained. The systems analysed are released checkpoints observed at one
+      point in their history, plus an untrained model, so the paper holds exactly two states: before all
+      training and after it. There is no sequence in which an onset could be located, and none is claimed.
+      U.
+
+      '
+    notes:
+      verification: 'Verified by full read rather than by a statement of omission: "checkpoint", "training
+        step" and "during training" occur nowhere in the paper, and §4.1 fixes the model set to released
+        variants. The legacy evidence''s remark that GPT-2 pretraining checkpoints did not exist publicly
+        in 2020 explains the gap but is not evidence in the source.
+
+        '
+      legacy_evidence: Unattempted. No intermediate checkpoints are used, so whether the mediators appear
+        as the bias appears is unmeasured. Testable in principle --- GPT-2 pretraining checkpoints did
+        not exist publicly in 2020
+  I12:
+    name: Offset coupling
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The coupling is shown at one end of the training axis and nowhere along it. In the untrained
+      model the behaviour is near zero and the sparse mediation structure is absent at both mediator levels,
+      and the paper reads the two together as training being the cause of the bias. That is a contrast
+      between two states rather than a trajectory: nothing is removed gradually, no intermediate degree
+      of training is examined, and the joint disappearance is observed once. PC.
+
+      '
+    notes:
+      verification: 'The quoted reading — "it is the training that causes gender bias" — is verbatim (§5.1),
+        and the cell is right that it is a single endpoint contrast: Table 1 carries exactly one untrained
+        row and no intermediate state exists anywhere in the paper. CORRECTION to the cell: "no bias behavior"
+        overstates the endpoint. The untrained model''s total effects are 0.07 on Winobias, 0.05 on Winogender
+        and 0.12 on Professions — small rather than absent, and on Winobias GPT2-small''s own total effect
+        is 0.25, a factor of about 3.5 rather than the three orders of magnitude the Professions column
+        shows.
+
+        '
+      legacy_evidence: 'Covered at the extreme rather than along a trajectory: the randomly initialised
+        model has both no bias behavior and no sparse mediation structure, and \S5.1 reads this as ``it
+        is the training that causes gender bias.'''' A single endpoint contrast, not a graded removal'
+  E1:
+    name: Intervention reach
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'One instrument, applied throughout. Every result in the paper comes from writing a mediator''s
+      value from one forward pass into another. The treatment that produces those values varies across
+      three operationalisations and the outcome scale varies four ways, but the intervention primitive
+      never does. There is no ablation, no zeroing, no magnitude scaling and no gradient attribution that
+      could disagree with it, so every agreement reported is the agreement of one method with itself.
+      U.
+
+      '
+    notes:
+      verification: 'The three treatments and both estimands are verbatim, and the cell''s description
+        of the family — freeze for the NDE, patch for the NIE, both on internal state — matches §3.2.2
+        exactly. Confirmed by full read: no second intervention primitive appears. Chintam et al.''s three-method
+        convergence is post-origin.
+
+        '
+      legacy_evidence: One intervention family --- interchange intervention on internal state, applied
+        as freeze (NDE) and patch (NIE) --- under two treatment operationalisations (\texttt{set-gender}
+        on Professions, \texttt{swap-gender} on the Winograd sets) and four outcome metrics that agree.
+        No removal-based or magnitude-based intervention exists to disagree with it. \citet{chintam2023identifying}
+        later supply genuine method-independence, with three discovery methods converging
+  E2:
+    name: Prompt generalization
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The claim is tested on three prompt sets that were not built the same way: a seventeen-template
+      generator over 169 professions, and two Winograd-schema coreference sets whose bias lives in which
+      of two entities a pronoun resolves to. The result that carries the paper, sparsity of the indirect
+      effect, holds on all of them. The paper also refuses to pool. It reports that effect magnitudes
+      differ across the sets and names the construction property it attributes the difference to. Generalisation
+      across constructions with the differences reported is C.
+
+      '
+    notes:
+      verification: 'The dataset counts, the Winobias Type 1 restriction and the cross-dataset comparison
+        are verbatim, and the cell''s "reports how effects differ between them and why, rather than pooling"
+        is supported directly by the "Effects in different datasets" paragraph.
+
+        '
+      legacy_evidence: 'Three datasets of different construction: 17 templates $\times$ 169 professions,
+        WinoBias Type 1, and Winogender, the last two being coreference schemas rather than templated
+        sentences. \S5.1 reports how effects differ between them and why, rather than pooling'
+  E3:
+    name: Cross-task generalization
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'The generality claim is about the framework and is made as a claim rather than shown as
+      a result. Every measurement in the paper runs on the same two-candidate gendered-continuation setup,
+      and the paper''s own forward-looking sentences place the second property in future work. No task
+      other than the gender-bias ratio is ever computed. U.
+
+      '
+    notes:
+      verification: 'The §6 scope sentence the cell quotes is verbatim, and §3.2 makes the same applicability
+        claim earlier. Both are statements of what the framework could cover, not demonstrations. Confirmed
+        by full read.
+
+        '
+      legacy_evidence: Unattempted at origin. Every result is on the same two-candidate gendered-continuation
+        setup; the framework's applicability to ``any property expressed as a function of model predictions''
+        (\S6) is asserted with no second property run
+  E4:
+    name: Cross-model generalization
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Cross-model testing is unusually broad and the result splits by architecture class. Inside
+      GPT-2 the effect is present at every size. In the two other autoregressive families the sparsity
+      and decomposability patterns reappear, which is the strongest transfer in the paper. In the masked
+      language models agreement is mixed, the neuron-level pattern fails outright, and the paper states
+      it has no theory for why. Transfer within one architecture class with a reported failure outside
+      it is PC.
+
+      '
+    notes:
+      verification: 'CORRECTION to the cell, which says "Five GPT-2 sizes agree and the effect grows with
+        size (Table 1)". The paper qualifies the size trend: it holds on the Winograd-style datasets and
+        explicitly does not on Professions, where "model size is not well correlated with total effect".
+        The §5.5 failure sentence is verbatim; the legacy evidence renders it as ending at "the exact
+        same pattern.", while the sentence continues. Leteno et al. is post-origin.
+
+        '
+      legacy_evidence: 'Unusually well tested and \emph{partly negative}. Five GPT-2 sizes agree and the
+        effect grows with size (Table 1). \S5.5 adds Transformer-XL, XLNet, BERT, DistilBERT and RoBERTa
+        and reports failure: ``None of the non-GPT2 models seem to share the exact same pattern.'''' \citet{leteno2023investigation}
+        later find that in BERT and DistilBERT ``every attention head uniformly encodes bias,'''' contradicting
+        the sparsity finding in the encoder family'
+  E5:
+    name: Graded response
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'There is a dose-response curve and its dose is the number of mediators rather than the
+      strength of the intervention. Both figures sweep the intervened set from one element upward and
+      show where it saturates, which is what makes the sparsity claim quantitative rather than anecdotal.
+      Strength cannot be swept in this design: the treatment is a discrete word substitution with no magnitude,
+      and the mediator is set to a value rather than moved toward it, so there is no continuous knob to
+      turn. Graded in extent, absent in strength, is PC.
+
+      '
+    notes:
+      verification: 'Both figure captions are verbatim and confirm the sweep. The cell says the sweep
+        runs "from 1 to 144 heads"; the captions say "an increasing number" and the 144 endpoint is read
+        off Figure 5b''s axis rather than stated in words.
+
+        '
+      legacy_evidence: 'Graded in \emph{number of mediators}, not intervention strength: Figures 5b and
+        7 sweep the size of the intervened set from 1 to 144 heads and across neuron-set sizes, producing
+        saturation curves. The treatment itself is a discrete text substitution with no magnitude, so
+        a strength sweep is not available in this design'
+  E6:
+    name: Novel prediction
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'One prediction points outside the model and is confirmed: profession-level effects should
+      track real occupational gender statistics, and they do at 0.35 to 0.45, with the weaker Winograd
+      correlation reported next to it. The sharper case is a prediction that failed. If the mediators
+      encode gender as such, the gender-neutral arm should show the same concentrated structure; it does
+      not, and the paper states the negative result twice, in §5.2 and again in the conclusion. A confirmed
+      external correlation plus a reported failure, with no prediction that risked the central sparsity
+      claim, is PC.
+
+      '
+    notes:
+      verification: 'Both correlation ranges and the gender-neutral negative result are verbatim, and
+        the cell reports them accurately, including the honest reporting of the weaker Winograd figure.
+
+        '
+      legacy_evidence: '\S5.1''s external-statistics correlation is a genuine out-of-model prediction,
+        confirmed at 0.35--0.45 on Professions and stated honestly where it is weak (0.17--0.26 on the
+        Winograd sets). The gender-neutral arm is the sharper case and it \emph{failed}: the prediction
+        that neutral references would show the same sparse structure did not hold, and the authors report
+        it as ``further indications that the model has not learned a distinct and sparse representation
+        of gender-neutral references'''' (\S5.2)'
+  V1:
+    name: Level declaration
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The level is declared twice and in the places where it binds. The introduction names the
+      analysis as structural-behavioral and says which half each claim comes from — components on the
+      structural side, model outputs on the behavioural side. The methodology fixes the admissible mediators
+      before any measurement and defines the response variable as a function of the model''s predictions
+      rather than of its internal state. No claim in the paper sits at a level the declaration fails to
+      cover. C.
+
+      '
+    notes:
+      verification: 'The §6 framing sentence and the §1 structural-behavioral declaration are verbatim,
+        and the cell''s characterisation of the declaration as the paper''s framing contribution is accurate.
+
+        '
+      legacy_evidence: 'Declared, and the declaration is the paper''s framing contribution: ``a structural-behavioral
+        framework for interpreting neural models based on causal mediation analysis'''' (\S6). What counts
+        as a mediator is enumerated in advance (\S3.2.2) and the outcome is defined as a function of model
+        predictions rather than of internal state'
+  V2:
+    name: Level-evidence match
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The three headline claims are properties of the distribution of measured effects, and
+      each is measured on that distribution directly: sparsity by how many mediators are needed to saturate,
+      synergism by the gap between concurrent and summed interventions, decomposability by the residual
+      between the total effect and the sum of its parts. There is no step where a measured effect is restated
+      as a computation a component performs, and no algorithm is narrated on top of the numbers. Claims
+      and evidence sit at one level throughout. C.
+
+      '
+    notes:
+      verification: 'All three claims and the three measurements answering them are verbatim, so the cell''s
+        account holds. The one place the paper reaches past its measurements is the qualitative coreference
+        reading of the top heads in §5.3, recorded at V3 and V4 rather than here.
+
+        '
+      legacy_evidence: The claims and the evidence sit at the same level. ``Sparse,'' ``synergistic''
+        and ``decomposable'' are each properties of the measured effect distribution, each measured directly
+        (\S5.2, \S5.3, \S5.4). The paper does not narrate a computational story on top of them
+  V3:
+    name: Alternative level
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'One alternative account is stated and defeated with an experiment: that the structure
+      belongs to the architecture rather than to what training put in it. The alternative the audit''s
+      own label depends on is never raised. The paper''s qualitative reading describes the top heads as
+      capturing coreference aspects and notes that the same head was previously identified with coreference
+      — a description at the level of gender processing rather than gender bias — without asking whether
+      processing, not bias, is what the mediators carry. Addressed on one axis and unaddressed on the
+      decisive one is PC.
+
+      '
+    notes:
+      verification: 'Both quotes supporting the addressed alternative are verbatim. The coreference sentences
+        are verbatim as well, and the second reports prior work (Vig 2019) rather than a measurement made
+        here, which is worth keeping in view when the cell treats it as the paper''s own reading.
+
+        '
+      legacy_evidence: 'One alternative is addressed and rejected --- that the structure is a property
+        of the architecture rather than of training (random-init control). The alternative not addressed
+        is the one the audit''s label depends on: that these components mediate gender processing generally,
+        with the ``bias'''' reading supplied by the stereotype-loaded stimulus set rather than by the
+        components'
+  V4:
+    name: Unlicensed labeling
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'Components get no names at all. A mediator is a neuron, a layer, a head or an attention
+      weight, identified by index — head 5-10 — and what is reported about it is an estimand, NDE or NIE,
+      on a scale fixed in Eq. 1. The one word carrying interpretive weight is "bias", and it is given
+      a formula before the results use it, with a fixed point at 1 and a sign convention on either side,
+      so a reader can check what any reported number means. The nearest thing to an unlicensed label is
+      the description of the top heads as capturing coreference aspects, read off attention pictures rather
+      than measured. C, with that qualification.
+
+      '
+    notes:
+      verification: 'All three parts of the cell check out: mediators are named by position ("5-10" is
+        the paper''s own notation), effects are named by estimand, and "bias" is defined operationally
+        at Eq. 1 before any result uses it. Two qualifications. First, "bias" in its ordinary societal
+        sense is used throughout the abstract and §1 before Eq. 1 defines the technical measure; the operational
+        definition governs the methodology and results, not the paper''s first use of the word. Second,
+        the cell''s absolute — "No intentional or epistemic vocabulary is used for components" — has a
+        counterexample in §5.3, where three heads are said to "capture different coreference aspects",
+        a construct attributed from attention plots rather than measured, reinforced by a citation identifying
+        head 5-10 with coreference. Neither is agentive vocabulary, so the recorded C stands, but the
+        absolute as written is contradicted by the source.
+
+        '
+      legacy_evidence: No intentional or epistemic vocabulary is used for components. Mediators are named
+        by position (``5-10''), effects by the estimand (NDE, NIE), and the outcome is stated as a probability
+        ratio. The one interpretive label in the paper --- ``bias'' --- is defined operationally in Eq.~1
+        before use
+  V5:
+    name: Scope declaration
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'Scope is declared at each place where it binds rather than collected into a limitations
+      paragraph at the end. The binary-gender restriction is stated where the outcome variable is defined,
+      before any result; the plural-they confound is stated where the gender-neutral treatment is introduced;
+      the decomposition''s extra assumption is stated in a footnote and proved in an appendix instead
+      of being left as an approximation; and the model-family failure is declared together with an admission
+      that the authors cannot explain it. The one thing left undeclared is the presupposition inside the
+      phrase "gender bias" itself. C.
+
+      '
+    notes:
+      verification: 'All five declarations are verbatim and the cell''s list of four places is accurate,
+        with the §5.5 admission quoted correctly in full.
+
+        '
+      legacy_evidence: 'Declared in four places: the binary-gender restriction and the gender-neutral
+        failure (\S6), the plural-\emph{they} confound (\S3.3), the decomposition assumption (footnote
+        7, proved in Appendix E), and the masked-LM disagreement together with the admission ``We do not
+        have a compelling theory to explain these differences in results'''' (\S5.5). What the paper does
+        not declare is that ``gender bias'''' presupposes separability from gender competence'

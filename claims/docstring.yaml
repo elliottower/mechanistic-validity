@@ -1,0 +1,1143 @@
+claim: docstring
+title: Docstring Circuit
+description: 'Eight attention heads in a 4-layer attention-only transformer compose across three levels
+  to predict the next argument name in a Python docstring: fuzzy previous-token heads and a positional
+  head set up an induction step, and argument movers carry the name from the definition line to the output
+  position. Resample ablation under three corruption types establishes which heads matter, and resample-ablating
+  everything outside the eight leaves 42\% success against the full model''s 56\%. Systems: one released
+  toy model, 50 prompts per experiment, on prompts built to disable the line-number and repeat-inhibition
+  algorithms at a measured cost ($\sim$75\% to 56\%). Description mode: implementational-functional.'
+source:
+  citation: heimersheim2023docstring
+  title: A circuit for Python docstrings in a 4-layer attention-only transformer
+  url: https://www.alignmentforum.org/posts/u6KXXmKFbXfWzoAXn/a-circuit-for-python-docstrings-in-a-4-layer-attention-only
+  local: reference/heimersheim_2023_docstring.txt
+  sha256: ff2852e43bc89b3725923e23514f1108b99e311a701e0aece2f6d230566c1f24
+  extract_cmd: cat
+  read_in_full: true
+claims:
+  C1:
+    quotes:
+    - exact: 'Choose the logit difference as our performance metric: We measure whether an intervention
+        changes the difference between the logit of the correct answer C and the highest wrong-answer
+        logit'
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 65
+    - exact: Testing the circuit performance with only this set of heads (0.2, 0.4, 0.5, 1.2, 1.4, 2.0,
+        3.0, 3.6) we get a success rate for predicting the right argument of 42% (chance is 17%).
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 193
+    - exact: However, when we swap the positional embeddings of A_doc and B_doc before we feed them to
+        1.4, it doesn't change the attention pattern significantly.
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4
+      page: null
+      line: 168
+    - exact: Swapping head 0.4's attention pattern inverts 1.4's attention, while swapping the positional
+        embedding barely affects it.
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4, figure caption
+      page: null
+      line: 174
+    - exact: Head 0.5 is important for the docstring task at positions B_def, C_def, and B_doc (up to
+        1.1 logit diff change). But its role can be almost entirely explained as transforming the embedding
+        of the current token.
+      prefix: ''
+      suffix: ''
+      section: Duplicate Token Head 0.5 is mostly just transforming embeddings
+      page: null
+      line: 176
+  C2:
+    quotes:
+    - exact: 'We use a new kind of composition score based on patching (point-to-point resampling ablation):
+        Composition between head Top and head Bottom is "How much does Top''s output meaningfully change
+        when we feed it the corrupted rather than clean output of Bottom?".'
+      prefix: ''
+      suffix: ''
+      section: Footnote 1
+      page: null
+      line: 215
+    - exact: adding notes about Q, K and V composition as inferred from the heads behavior
+      prefix: ''
+      suffix: ''
+      section: Summarizing information flow
+      page: null
+      line: 148
+    - exact: We can confirm they are indeed reading the information from the C_def position by checking
+        their (clean-run) attention pattern.
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the answer token
+      page: null
+      line: 91
+    - exact: In terms of mechanisms, these heads just seem to attend to their previous tokens. This is
+        a common mechanism in transformers and can easily be implemented based on the positional embeddings,
+        these heads are usually called Previous Token Heads.
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the other definition tokens
+      page: null
+      line: 118
+    - exact: This is surprising, since one of the two should be sufficient to perform the task; we do
+        not investigate further why this is the case.
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 49
+    - exact: Interestingly, despite the circuit seemingly requiring just 3 levels of composition, only
+        the 4-layer model could do the task.
+      prefix: ''
+      suffix: ''
+      section: How we chose the candidate task
+      page: null
+      line: 38
+  C3:
+    quotes:
+    - exact: Our main method for investigating this circuit is activation patching.
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 62
+    - exact: Most of our findings are based on patching experiments, and in each of the following 3 subsections
+        we will use one of the three corruptions.
+      prefix: ''
+      suffix: ''
+      section: 'Results: The Docstring Circuit'
+      page: null
+      line: 73
+    - exact: We can confirm they are indeed reading the information from the C_def position by checking
+        their (clean-run) attention pattern.
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the answer token
+      page: null
+      line: 91
+    - exact: For all experiments and visualizations (patching, attention patterns) we use a batch of 50
+        prompts. For each prompt we randomly generate arguments (A, B, C) and filler tokens (rand0, rand1,
+        ...).
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 71
+    - exact: 'We use a new kind of composition score based on patching (point-to-point resampling ablation):
+        Composition between head Top and head Bottom is "How much does Top''s output meaningfully change
+        when we feed it the corrupted rather than clean output of Bottom?".'
+      prefix: ''
+      suffix: ''
+      section: Footnote 1
+      page: null
+      line: 215
+  C4:
+    quotes:
+    - exact: To find these and any further heads we would need to expand to a non-docstring prompt distribution,
+        but that's not our focus here.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 191
+    - exact: For most other words (e.g. lemon, oil) it only attends to BOS, which we interpret as being
+        inactive.
+      prefix: ''
+      suffix: ''
+      section: Multi-Function Head 1.4
+      page: null
+      line: 164
+    - exact: Consider short prompts of the form |BOS|S0|A|B|C|S1|, where A, B and C are different words
+        and S0 and S1 are the same "special" token.
+      prefix: ''
+      suffix: ''
+      section: Multi-Function Head 1.4
+      page: null
+      line: 161
+  C5:
+    quotes:
+    - exact: You might recognize this attention pattern as that of an Induction Head -- a head that attends
+        to the token (B_doc) following a previous occurrence (param_2) of the current token (param_3)
+        -- see this post for a great explanation.
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the docstring tokens
+      page: null
+      line: 137
+    - exact: However since they do not only attend to the previous but the last couple of tokens, and
+        sometimes the current token too, we will call these heads Fuzzy Previous Token Heads here.
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the other definition tokens
+      page: null
+      line: 118
+    - exact: Induction heads rely on at least one additional head in the layer below, a Previous Token
+        Head at the position the induction had is attending to (B_doc).
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the docstring tokens
+      page: null
+      line: 139
+    - exact: Anthropic found the small and ubiquitous Induction Head circuit in various models, and a
+        team at Redwood found the Indirect Object Identification (IOI) circuit in GPT2-small.
+      prefix: ''
+      suffix: ''
+      section: Introduction, What are circuits
+      page: null
+      line: 36
+    - exact: We also found motifs seen in other works such as our Argument Mover heads that resemble the
+        Name Mover heads found in the IOI paper.
+      prefix: ''
+      suffix: ''
+      section: Summary
+      page: null
+      line: 211
+  M1:
+    quotes:
+    - exact: For all experiments and visualizations (patching, attention patterns) we use a batch of 50
+        prompts. For each prompt we randomly generate arguments (A, B, C) and filler tokens (rand0, rand1,
+        ...).
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 71
+    - exact: Full attention pattern of head 0.4 in the docstring prompt (averaged over batch).
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4, figure caption
+      page: null
+      line: 171
+    - exact: Testing the circuit performance with only this set of heads (0.2, 0.4, 0.5, 1.2, 1.4, 2.0,
+        3.0, 3.6) we get a success rate for predicting the right argument of 42% (chance is 17%).
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 193
+  M2:
+    quotes:
+    - exact: Testing the circuit performance with only this set of heads (0.2, 0.4, 0.5, 1.2, 1.4, 2.0,
+        3.0, 3.6) we get a success rate for predicting the right argument of 42% (chance is 17%).
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 193
+    - exact: The full model for comparison achieves 56%, and slightly augmenting the full model by removing
+        heads 0.0 and 2.2 gave 72%.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 194
+    - exact: The model will choose the "correct" answer files in 56% of the cases (significantly above
+        chance!), the average logit diff is 0.5.
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 54
+    - exact: Turns out that attn-only-4l is capable of this task, predicting the next token (files in
+        the example shown here) correctly in ~75% of cases.
+      prefix: ''
+      suffix: ''
+      section: The docstring task
+      page: null
+      line: 40
+  M3:
+    quotes:
+    - exact: We've also looked into Google-style docstrings and found similar performance, but won't discuss
+        this further here.
+      prefix: ''
+      suffix: ''
+      section: The docstring task, figure caption
+      page: null
+      line: 42
+    - exact: We found that there is one large improvement to our circuit, adding head 1.0 brings performance
+        to 48%, and also adding heads 0.1 and 2.3 brings performance to 58%. Beyond this point we found
+        only small performance gains per head.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 195
+    - exact: The full model for comparison achieves 56%, and slightly augmenting the full model by removing
+        heads 0.0 and 2.2 gave 72%.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 194
+    - exact: We also tested variations of this swap, such as swapping positional embeddings of the whole
+        line, or accounting for layer 0 head outputs leaking positional embeddings, with similar results.
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4
+      page: null
+      line: 168
+  M4:
+    quotes:
+    - exact: 'Choose the logit difference as our performance metric: We measure whether an intervention
+        changes the difference between the logit of the correct answer C and the highest wrong-answer
+        logit'
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 65
+    - exact: It's worth noting that on this task the model performs worse than on the original one.
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 54
+    - exact: Turns out that attn-only-4l is capable of this task, predicting the next token (files in
+        the example shown here) correctly in ~75% of cases.
+      prefix: ''
+      suffix: ''
+      section: The docstring task
+      page: null
+      line: 40
+    - exact: The model will choose the "correct" answer files in 56% of the cases (significantly above
+        chance!), the average logit diff is 0.5.
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 54
+    - exact: This is consistent with positive, but quite low average logit difference of 0.5 on this task.
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the answer token
+      page: null
+      line: 91
+  M5:
+    quotes:
+    - exact: We would expect a pure Induction Head to always attend from S1 to A and a pure Previous Token
+        Head to always attend from S1 to C.
+      prefix: ''
+      suffix: ''
+      section: Multi-Function Head 1.4
+      page: null
+      line: 161
+    - exact: We see that head 0.2 is important and has the right attention pattern, thus we believe it
+        is the (Fuzzy) Previous Token Head for the induction subcircuit, but we are less confident in
+        this.
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the docstring tokens
+      page: null
+      line: 139
+    - exact: For most other words (e.g. lemon, oil) it only attends to BOS, which we interpret as being
+        inactive.
+      prefix: ''
+      suffix: ''
+      section: Multi-Function Head 1.4
+      page: null
+      line: 164
+  M6:
+    quotes:
+    - exact: We've also looked into Google-style docstrings and found similar performance, but won't discuss
+        this further here.
+      prefix: ''
+      suffix: ''
+      section: The docstring task, figure caption
+      page: null
+      line: 42
+    - exact: We basically ran all plots with both patching directions and later picked the ones that contained
+        all the information.
+      prefix: ''
+      suffix: ''
+      section: Comments, StefanHex reply
+      page: null
+      line: 277
+    - exact: 'Choose the logit difference as our performance metric: We measure whether an intervention
+        changes the difference between the logit of the correct answer C and the highest wrong-answer
+        logit'
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 65
+    - exact: Testing the circuit performance with only this set of heads (0.2, 0.4, 0.5, 1.2, 1.4, 2.0,
+        3.0, 3.6) we get a success rate for predicting the right argument of 42% (chance is 17%).
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 193
+  M7:
+    quotes:
+    - exact: 'Focusing on the most significant effects again, we see exactly two heads match the criteria
+        mentioned in the previous paragraph: Head 1.4 writes information into ,_B and head 2.0 writes
+        into C_def.'
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the other definition tokens
+      page: null
+      line: 113
+    - exact: We found that there is one large improvement to our circuit, adding head 1.0 brings performance
+        to 48%, and also adding heads 0.1 and 2.3 brings performance to 58%. Beyond this point we found
+        only small performance gains per head.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 195
+    - exact: The full model for comparison achieves 56%, and slightly augmenting the full model by removing
+        heads 0.0 and 2.2 gave 72%.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 194
+    - exact: Testing the circuit performance with only this set of heads (0.2, 0.4, 0.5, 1.2, 1.4, 2.0,
+        3.0, 3.6) we get a success rate for predicting the right argument of 42% (chance is 17%).
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 193
+  I1:
+    quotes:
+    - exact: This is also referred to as resampling-ablation, differing from zero or mean-ablation in
+        that we replace the activations in one run with those from a different run, rather than setting
+        them to a constant.
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 62
+    - exact: 'random answer: Replace the correct answer C_def in the definition with a random word.'
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 67
+    - exact: 'random def: Replace all arguments in the definition other than C_def (i.e. A_def and B_def)
+        with random words.'
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 68
+    - exact: 'random doc: Replace all arguments in the docstring (i.e. A_doc and B_doc) with random words,
+        without changing the definition.'
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 69
+    - exact: Head 0.5 is important for the docstring task at positions B_def, C_def, and B_doc (up to
+        1.1 logit diff change). But its role can be almost entirely explained as transforming the embedding
+        of the current token.
+      prefix: ''
+      suffix: ''
+      section: Duplicate Token Head 0.5 is mostly just transforming embeddings
+      page: null
+      line: 176
+    - exact: We immediately see head 1.4 writing into param_3, and its output must importantly depend
+        on the value of B_doc since overwriting its activations with its corrupted version leads to a
+        large change in logit difference.
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the docstring tokens
+      page: null
+      line: 135
+  I2:
+    quotes:
+    - exact: Our final check to test whether this circuit is sufficient for the task is to patch (i.e.
+        resample-ablate) all other heads and see if we recover the full performance.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 192
+    - exact: Testing the circuit performance with only this set of heads (0.2, 0.4, 0.5, 1.2, 1.4, 2.0,
+        3.0, 3.6) we get a success rate for predicting the right argument of 42% (chance is 17%).
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 193
+    - exact: The full model for comparison achieves 56%, and slightly augmenting the full model by removing
+        heads 0.0 and 2.2 gave 72%.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 194
+    - exact: our circuit only recovers up to half of the model performance, and there are a bunch of leads
+        we didn't follow yet
+      prefix: ''
+      suffix: ''
+      section: Epistemic Status
+      page: null
+      line: 30
+    - exact: Note that we could expand this to take into account the heads position and composition (e.g.
+        with causal scrubbing) but stick to the more coarse-grained check for now.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 192
+  I3:
+    quotes:
+    - exact: We found that there is one large improvement to our circuit, adding head 1.0 brings performance
+        to 48%, and also adding heads 0.1 and 2.3 brings performance to 58%. Beyond this point we found
+        only small performance gains per head.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 195
+    - exact: In fact, setting its attention pattern to an identity matrix for the whole prompt loses less
+        than 0.1 logit diff.
+      prefix: ''
+      suffix: ''
+      section: Duplicate Token Head 0.5 is mostly just transforming embeddings
+      page: null
+      line: 176
+    - exact: The remaining 0.1 logit diff from diagonalizing head 0.5's attention comes mostly (~74%)
+        from the attention pattern at destination B_doc and K-composition with Head 1.4.
+      prefix: ''
+      suffix: ''
+      section: Duplicate Token Head 0.5 is mostly just transforming embeddings
+      page: null
+      line: 178
+    - exact: Testing the circuit more thoroughly, i.e. check also the composition and not just confirm
+        the list of heads involved.
+      prefix: ''
+      suffix: ''
+      section: Open questions & leads
+      page: null
+      line: 207
+  I4:
+    quotes:
+    - exact: To find these and any further heads we would need to expand to a non-docstring prompt distribution,
+        but that's not our focus here.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 191
+    - exact: For most other words (e.g. lemon, oil) it only attends to BOS, which we interpret as being
+        inactive.
+      prefix: ''
+      suffix: ''
+      section: Multi-Function Head 1.4
+      page: null
+      line: 164
+    - exact: We looked for interesting behaviors in a small, attention-only transformer with 4 layers,
+        from Neel Nanda's open source toy language models. It was trained on natural language and Python
+        code.
+      prefix: ''
+      suffix: ''
+      section: How we chose the candidate task
+      page: null
+      line: 38
+  I5:
+    quotes:
+    - exact: '"Docstring Induction": Always predict the argument that, in the definition, follows the
+        argument seen in the previous docstring line.'
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 46
+    - exact: 'Line number based: In the Nth line predict the Nth variable from the definition, irrespective
+        of the content of the other lines.'
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 47
+    - exact: 'Inhibition based: Predict variable names from the definition, but inhibit variable names
+        which occurred twice (similar to the inhibition in the IOI circuit)'
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 48
+    - exact: We are quite certain that at least the first two algorithms are implemented to some degree.
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 49
+    - exact: For this work we isolate and focus on the first algorithm. We do this by adding additional
+        variable names to the definition such that the line number and inhibition based methods will no
+        longer produce the right answer.
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 50
+    - exact: Turns out that attn-only-4l is capable of this task, predicting the next token (files in
+        the example shown here) correctly in ~75% of cases.
+      prefix: ''
+      suffix: ''
+      section: The docstring task
+      page: null
+      line: 40
+    - exact: The model will choose the "correct" answer files in 56% of the cases (significantly above
+        chance!), the average logit diff is 0.5.
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 54
+  I6:
+    quotes:
+    - exact: Swapping head 0.4's attention pattern inverts 1.4's attention, while swapping the positional
+        embedding barely affects it.
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4, figure caption
+      page: null
+      line: 174
+    - exact: However, when we swap the positional embeddings of A_doc and B_doc before we feed them to
+        1.4, it doesn't change the attention pattern significantly.
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4
+      page: null
+      line: 168
+    - exact: 'Testing this we plot 1.4''s attention pattern for four cases: (i) the baseline clean run,
+        and for runs where we swap (i) the positional embeddings of A_doc and B_doc, (ii) the attention
+        pattern of head 0.4 at A_doc and B_doc destination position, or (iii) both.'
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4
+      page: null
+      line: 172
+    - exact: Recall that the head 1.4 appears twice in our circuit. First, in the def subcircuit, acting
+        as a Fuzzy Previous Token Head. Second, in the doc subcircuit, acting as an Induction Head.
+      prefix: ''
+      suffix: ''
+      section: Multi-Function Head 1.4
+      page: null
+      line: 155
+  I7:
+    quotes:
+    - exact: For this work we isolate and focus on the first algorithm. We do this by adding additional
+        variable names to the definition such that the line number and inhibition based methods will no
+        longer produce the right answer.
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 50
+    - exact: Patch only from what we call the "docstring distribution", corrupted prompts where we exchange
+        argument names (highlighted in red) but leave the docstring frame (grey) intact.
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 66
+    - exact: All argument names and descriptions are randomly sampled words.
+      prefix: ''
+      suffix: ''
+      section: The docstring task, figure caption
+      page: null
+      line: 42
+    - exact: 'We tried to select equivalent words to not pick up on properties of the words, but in fact
+        there was an example where we got confused by this: We at some point wanted to patch param and
+        naively replaced it with arg, not realizing that param is treated specially!'
+      prefix: ''
+      suffix: ''
+      section: Comments, StefanHex reply
+      page: null
+      line: 279
+  I9:
+    quotes:
+    - exact: 'We use a new kind of composition score based on patching (point-to-point resampling ablation):
+        Composition between head Top and head Bottom is "How much does Top''s output meaningfully change
+        when we feed it the corrupted rather than clean output of Bottom?".'
+      prefix: ''
+      suffix: ''
+      section: Footnote 1
+      page: null
+      line: 215
+    - exact: based on our patching composition scores[1] we observed that head 1.2 composes with the Argument
+        Mover Heads 3.0 and 3.6 (both heads behave similarly). So 1.2 must influence 3.0 and 3.6's attention
+        patterns.
+      prefix: ''
+      suffix: ''
+      section: Duplicate Token Head 1.2 is helping Argument Movers
+      page: null
+      line: 182
+    - exact: Recall that the head 1.4 appears twice in our circuit. First, in the def subcircuit, acting
+        as a Fuzzy Previous Token Head. Second, in the doc subcircuit, acting as an Induction Head.
+      prefix: ''
+      suffix: ''
+      section: Multi-Function Head 1.4
+      page: null
+      line: 155
+    - exact: in a dedicated section further down we will show that head 1.4 indeed behaves differently
+        depending on the context!
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the docstring tokens
+      page: null
+      line: 143
+    - exact: Run the model with only the compositions allowed by the circuit, and all other connections
+        resample-ablated.
+      prefix: ''
+      suffix: ''
+      section: Open questions & leads
+      page: null
+      line: 208
+  I10:
+    quotes:
+    - exact: Note that this corrupted --> clean patching is the opposite direction from the commonly used
+        clean --> corrupted patching.
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 63
+    - exact: We basically ran all plots with both patching directions and later picked the ones that contained
+        all the information.
+      prefix: ''
+      suffix: ''
+      section: Comments, StefanHex reply
+      page: null
+      line: 277
+    - exact: This is also referred to as resampling-ablation, differing from zero or mean-ablation in
+        that we replace the activations in one run with those from a different run, rather than setting
+        them to a constant.
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 62
+    - exact: I historically had more success with corrupt->clean so I teach this as the default, however
+        Neel Nanda's tutorials usually start the other way around, and really you should check both.
+      prefix: ''
+      suffix: ''
+      section: Comments, StefanHex reply
+      page: null
+      line: 277
+  I11:
+    quotes:
+    - exact: We looked for interesting behaviors in a small, attention-only transformer with 4 layers,
+        from Neel Nanda's open source toy language models. It was trained on natural language and Python
+        code.
+      prefix: ''
+      suffix: ''
+      section: How we chose the candidate task
+      page: null
+      line: 38
+    - exact: We found a circuit in a pre-trained 4-layer attention-only transformer language model.
+      prefix: ''
+      suffix: ''
+      section: TL;DR
+      page: null
+      line: 26
+  I12:
+    quotes:
+    - exact: We looked for interesting behaviors in a small, attention-only transformer with 4 layers,
+        from Neel Nanda's open source toy language models. It was trained on natural language and Python
+        code.
+      prefix: ''
+      suffix: ''
+      section: How we chose the candidate task
+      page: null
+      line: 38
+    - exact: We found a circuit in a pre-trained 4-layer attention-only transformer language model.
+      prefix: ''
+      suffix: ''
+      section: TL;DR
+      page: null
+      line: 26
+  E1:
+    quotes:
+    - exact: This is also referred to as resampling-ablation, differing from zero or mean-ablation in
+        that we replace the activations in one run with those from a different run, rather than setting
+        them to a constant.
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 62
+    - exact: 'random answer: Replace the correct answer C_def in the definition with a random word.'
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 67
+    - exact: 'random def: Replace all arguments in the definition other than C_def (i.e. A_def and B_def)
+        with random words.'
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 68
+    - exact: 'random doc: Replace all arguments in the docstring (i.e. A_doc and B_doc) with random words,
+        without changing the definition.'
+      prefix: ''
+      suffix: ''
+      section: Methods, Patching experiments
+      page: null
+      line: 69
+    - exact: Now for this first experiment, we patch (i.e. overwrite) the clean activations of residual
+        stream before or after a certain layer and at a certain token position with the equivalent corrupted-run
+        activations.
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the answer token, Residual Stream patching
+      page: null
+      line: 78
+    - exact: Rather than overwriting the residual stream, we overwrite just the output of one particular
+        attention head.
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the answer token, Attention Head patching
+      page: null
+      line: 87
+    - exact: However, when we swap the positional embeddings of A_doc and B_doc before we feed them to
+        1.4, it doesn't change the attention pattern significantly.
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4
+      page: null
+      line: 168
+    - exact: 'Testing this we plot 1.4''s attention pattern for four cases: (i) the baseline clean run,
+        and for runs where we swap (i) the positional embeddings of A_doc and B_doc, (ii) the attention
+        pattern of head 0.4 at A_doc and B_doc destination position, or (iii) both.'
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4
+      page: null
+      line: 172
+    - exact: In fact, setting its attention pattern to an identity matrix for the whole prompt loses less
+        than 0.1 logit diff.
+      prefix: ''
+      suffix: ''
+      section: Duplicate Token Head 0.5 is mostly just transforming embeddings
+      page: null
+      line: 176
+    - exact: We varied head 1.2's attention pattern between BOS, X_def, and X_doc and notice that only
+        the amount of attention to BOS matters for performance.
+      prefix: ''
+      suffix: ''
+      section: Duplicate Token Head 1.2 is helping Argument Movers
+      page: null
+      line: 181
+  E3:
+    quotes:
+    - exact: To find these and any further heads we would need to expand to a non-docstring prompt distribution,
+        but that's not our focus here.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 191
+    - exact: For most other words (e.g. lemon, oil) it only attends to BOS, which we interpret as being
+        inactive.
+      prefix: ''
+      suffix: ''
+      section: Multi-Function Head 1.4
+      page: null
+      line: 164
+    - exact: It turns out that in the prompt of the form |BOS|,|A|B|=|,| it seems to behave as an Induction
+        Head, even though on |BOS|,|A|B|C|,| it's a Fuzzy Previous Token Head.
+      prefix: ''
+      suffix: ''
+      section: Multi-Function Head 1.4
+      page: null
+      line: 165
+  E4:
+    quotes:
+    - exact: Test universality of this circuit across similar models
+      prefix: ''
+      suffix: ''
+      section: Open questions & leads
+      page: null
+      line: 200
+    - exact: We had some initial success finding similar circuits in similarly-sized 3- and 4-layer models
+        with MLPs, we'd be interesting in collaborating on this!
+      prefix: ''
+      suffix: ''
+      section: Open questions & leads
+      page: null
+      line: 201
+    - exact: We selected this behaviour because a 4-layer attention-only toy model could do the task while
+        a 3-layer one could not.
+      prefix: ''
+      suffix: ''
+      section: Summary
+      page: null
+      line: 211
+  E5:
+    quotes:
+    - exact: Testing the circuit performance with only this set of heads (0.2, 0.4, 0.5, 1.2, 1.4, 2.0,
+        3.0, 3.6) we get a success rate for predicting the right argument of 42% (chance is 17%).
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 193
+    - exact: We found that there is one large improvement to our circuit, adding head 1.0 brings performance
+        to 48%, and also adding heads 0.1 and 2.3 brings performance to 58%. Beyond this point we found
+        only small performance gains per head.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 195
+    - exact: The full model for comparison achieves 56%, and slightly augmenting the full model by removing
+        heads 0.0 and 2.2 gave 72%.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 194
+    - exact: We varied head 1.2's attention pattern between BOS, X_def, and X_doc and notice that only
+        the amount of attention to BOS matters for performance.
+      prefix: ''
+      suffix: ''
+      section: Duplicate Token Head 1.2 is helping Argument Movers
+      page: null
+      line: 181
+    - exact: We observe that varying 1.2's attention to BOS changes the size of this bump!
+      prefix: ''
+      suffix: ''
+      section: Duplicate Token Head 1.2 is helping Argument Movers
+      page: null
+      line: 186
+    - exact: we show 3.0's baseline attention pattern in the top panel, the relative change as a function
+        of 1.2's BOS-attention in the bottom panel.
+      prefix: ''
+      suffix: ''
+      section: Duplicate Token Head 1.2, figure caption
+      page: null
+      line: 185
+  E6:
+    quotes:
+    - exact: We didn't know how the head 1.4 attends much more to B_doc than to A_doc. If it was following
+        a simple induction mechanism, then it should attend equally to both as they both follow a param
+        token.
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4
+      page: null
+      line: 167
+    - exact: The other source of positional information is the causal mask. We see that head 0.4 has an
+        approximately constant attention score, and thus the attention pattern decreases with destination
+        position
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4
+      page: null
+      line: 169
+    - exact: Our hypothesis is that head 0.4 provides the positional information for head 1.4 about which
+        argument (A_doc vs B_doc) is in the most recent line, and thus correct to attend to.
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4
+      page: null
+      line: 172
+    - exact: 'Testing this we plot 1.4''s attention pattern for four cases: (i) the baseline clean run,
+        and for runs where we swap (i) the positional embeddings of A_doc and B_doc, (ii) the attention
+        pattern of head 0.4 at A_doc and B_doc destination position, or (iii) both.'
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4
+      page: null
+      line: 172
+    - exact: However, when we swap the positional embeddings of A_doc and B_doc before we feed them to
+        1.4, it doesn't change the attention pattern significantly.
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4
+      page: null
+      line: 168
+    - exact: Swapping head 0.4's attention pattern inverts 1.4's attention, while swapping the positional
+        embedding barely affects it.
+      prefix: ''
+      suffix: ''
+      section: Positional Information Head 0.4, figure caption
+      page: null
+      line: 174
+  V1:
+    quotes:
+    - exact: A circuit in a neural network, is a small subset of model components and model weights that
+        (a) accounts for a large fraction of a certain behavior and (b) corresponds to a human-interpretable
+        algorithm.
+      prefix: ''
+      suffix: ''
+      section: Introduction, What are circuits
+      page: null
+      line: 36
+    - exact: We found a circuit in a pre-trained 4-layer attention-only transformer language model.
+      prefix: ''
+      suffix: ''
+      section: TL;DR
+      page: null
+      line: 26
+    - exact: Thus we can conclude that during layer 3 the model must have read the C_def information from
+        the C_def token position and copied that information to the param_3 position.
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the answer token
+      page: null
+      line: 84
+    - exact: Now we have a solid hypothesis which heads are involved in the circuit, mainly heads 1.4,
+        2.0, 3.0, and 3.6 for moving the information, head 0.5 for token transformation and some additional
+        support, as well as 1.2 for additional support.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 190
+  V2:
+    quotes:
+    - exact: '"Docstring Induction": Always predict the argument that, in the definition, follows the
+        argument seen in the previous docstring line.'
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 46
+    - exact: We are quite certain that at least the first two algorithms are implemented to some degree.
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 49
+    - exact: adding notes about Q, K and V composition as inferred from the heads behavior
+      prefix: ''
+      suffix: ''
+      section: Summarizing information flow
+      page: null
+      line: 148
+    - exact: Testing the circuit performance with only this set of heads (0.2, 0.4, 0.5, 1.2, 1.4, 2.0,
+        3.0, 3.6) we get a success rate for predicting the right argument of 42% (chance is 17%).
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 193
+    - exact: our circuit only recovers up to half of the model performance, and there are a bunch of leads
+        we didn't follow yet
+      prefix: ''
+      suffix: ''
+      section: Epistemic Status
+      page: null
+      line: 30
+  V3:
+    quotes:
+    - exact: 'Line number based: In the Nth line predict the Nth variable from the definition, irrespective
+        of the content of the other lines.'
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 47
+    - exact: We are quite certain that at least the first two algorithms are implemented to some degree.
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 49
+    - exact: A brief investigation showed that the implementation of the 2nd algorithm seems less robust
+        and less generalizable that our model's implementation of the first one.
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 49
+    - exact: For this work we isolate and focus on the first algorithm. We do this by adding additional
+        variable names to the definition such that the line number and inhibition based methods will no
+        longer produce the right answer.
+      prefix: ''
+      suffix: ''
+      section: Methods, Possible docstring algorithms
+      page: null
+      line: 50
+  V4:
+    quotes:
+    - exact: 'Takeaway: Heads 3.0 and 3.6 move information from C_def to the final position param_3, and
+        thus the final output logits. From now on we will call these the Argument Mover Heads, as they
+        copy the name of the argument.'
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the answer token
+      page: null
+      line: 94
+    - exact: However since they do not only attend to the previous but the last couple of tokens, and
+        sometimes the current token too, we will call these heads Fuzzy Previous Token Heads here.
+      prefix: ''
+      suffix: ''
+      section: Tracking the Flow of the other definition tokens
+      page: null
+      line: 118
+    - exact: We noticed another Duplicate Token Head, 1.2. This head attends to the current token X_doc,
+        previous occurrence X_def (where X is either A or B), and the BOS token if the destination is
+        a docstring argument.
+      prefix: ''
+      suffix: ''
+      section: Duplicate Token Head 1.2 is helping Argument Movers
+      page: null
+      line: 180
+    - exact: Head 0.5 is important for the docstring task at positions B_def, C_def, and B_doc (up to
+        1.1 logit diff change). But its role can be almost entirely explained as transforming the embedding
+        of the current token.
+      prefix: ''
+      suffix: ''
+      section: Duplicate Token Head 0.5 is mostly just transforming embeddings
+      page: null
+      line: 176
+    - exact: The attention pattern of Induction Head 3.0 as a function of head 1.2's attention pattern
+        at destination B_doc.
+      prefix: ''
+      suffix: ''
+      section: Duplicate Token Head 1.2, figure caption
+      page: null
+      line: 185
+  V5:
+    quotes:
+    - exact: our circuit only recovers up to half of the model performance, and there are a bunch of leads
+        we didn't follow yet
+      prefix: ''
+      suffix: ''
+      section: Epistemic Status
+      page: null
+      line: 30
+    - exact: We believe that we have identified most of the core mechanics and information flow of this
+        circuit.
+      prefix: ''
+      suffix: ''
+      section: Epistemic Status
+      page: null
+      line: 30
+    - exact: At least Previous Token Head 0.2 and Positional Information Head 0.4 (and potentially more)
+        are also essential parts of the circuit, but won't show differ in our patching experiments.
+      prefix: ''
+      suffix: ''
+      section: Putting it all together
+      page: null
+      line: 191
+    - exact: Head 2.2 seems to be some sort of negative head, patching it with corruptions increases performance.
+      prefix: ''
+      suffix: ''
+      section: Open questions & leads
+      page: null
+      line: 205
+    - exact: We believe we have understood most of the basic circuit components and what they do, but
+        there are still details we want to investigate in the future.
+      prefix: ''
+      suffix: ''
+      section: Open questions & leads
+      page: null
+      line: 197

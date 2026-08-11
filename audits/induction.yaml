@@ -1,0 +1,1128 @@
+claim: induction
+verdict: Triangulated
+readings:
+- statement: Induction heads implement in-context copying of a token that followed the same context earlier
+  verdict: Triangulated
+  missing: Reliability of the head evaluators (M1) and selection correction over the head pool (M7)
+  primary: true
+- statement: The mechanism is the source of in-context learning as measured by token-loss difference
+  verdict: Mech.\ Supported
+  missing: Necessity above 345M survives a decorrelating control, but the metric is uncalibrated (M4)
+  primary: false
+- statement: The mechanism is the source of in-context learning generally
+  verdict: Disconfirmed
+  missing: Nothing --- tested and failed; the bridge from the small-model result to the 13B claim is analogy
+    (V2)
+  primary: false
+- statement: The two heads compose in the stated order, each performing the role its name asserts
+  verdict: Underdetermined
+  missing: Weight-level derivation covers the two-layer case only; role semantics exceed it elsewhere
+    (C2)
+  primary: false
+hypotheses:
+- id: H1
+  view: Object
+  label: the scored previous-token to induction head composition performs the in-context copying
+- id: H2
+  view: Object
+  label: basic copying heads rather than the two-head composition produce the behaviour
+- id: H3
+  view: Object
+  label: the behaviour is spread across many heads with no determinate set
+- id: H4
+  view: Role
+  label: the two heads compose in the stated order, each performing the role its name asserts
+- id: H5
+  view: Role
+  label: the same heads perform general in-context retrieval, of which token copying is the literal case
+- id: H6
+  view: Instrumental
+  label: the structure is an artifact of the two head evaluators and the single-head pattern-preserving
+    ablation
+views_evidence:
+- criterion: C2
+  evidence: Copying is the OV circuit's positive eigenvalues and prefix matching a QK term from composition
+    with a previous-token head, with each evaluator validated against its weight quantity
+  cells:
+    H1: C
+    H2: I
+    H3: I
+    H4: C
+    H5: '-'
+    H6: I
+  designed_for:
+  - H1
+  - H4
+  - H6
+- criterion: I1
+  evidence: Almost all the in-context learning in small attention-only models comes from these induction
+    heads, from the start of the phase change through the end of training
+  cells:
+    H1: C
+    H2: '-'
+    H3: I
+    H4: '-'
+    H5: '-'
+    H6: '-'
+  designed_for:
+  - H1
+  - H3
+- criterion: M2
+  evidence: Every head in every ablated model is ablated at every snapshot, and footnote 17 reports that
+    ablating most other heads raises the in-context learning score
+  cells:
+    H1: C
+    H2: '-'
+    H3: I
+    H4: '-'
+    H5: '-'
+    H6: C
+  designed_for:
+  - H3
+  - H6
+- criterion: I5
+  evidence: Footnote 23 excludes basic copying heads by the argument that they also exist in one-layer
+    models, which do not show the effect
+  cells:
+    H1: C
+    H2: I
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: '-'
+  designed_for:
+  - H2
+- criterion: I11
+  evidence: Induction-head formation, the in-context learning jump, a loss bump and a pivot in per-token-loss
+    space all move in the same 2.5e9 to 5e9 token window
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: C
+    H6: I
+  designed_for:
+  - H1
+- criterion: E6
+  evidence: The smeared-key architecture was built to test the two-layer requirement and moved the phase
+    change, producing in-context learning in one-layer models that never had it
+  cells:
+    H1: C
+    H2: I
+    H3: I
+    H4: C
+    H5: C
+    H6: I
+  designed_for:
+  - H1
+  - H4
+- criterion: E4
+  evidence: Two external replications locate heads meeting the same criterion in GPT-2 and GPT-Neo, whose
+    pointer-arithmetic route the paper's own models cannot use
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: I
+  designed_for:
+  - H6
+- criterion: E2
+  evidence: The defining stimulus is repeated sequences of uniformly random tokens with the frequency
+    extremes removed
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: I
+  designed_for:
+  - H6
+- criterion: I6
+  evidence: 'Token and concept induction heads mean-ablated separately dissociate: concept heads carry
+    word-level translation and token heads carry nonsense copying'
+  cells:
+    H1: C
+    H2: '-'
+    H3: I
+    H4: '-'
+    H5: I
+    H6: '-'
+  designed_for:
+  - H5
+- criterion: I3
+  evidence: Every ablation removes one head at a time, and the authors note that layer norm masks the
+    importance of any head whose function is duplicated
+  cells:
+    H1: '-'
+    H2: '-'
+    H3: C
+    H4: '-'
+    H5: '-'
+    H6: '-'
+  designed_for: []
+- criterion: I9
+  evidence: Composition is the mechanism by construction and no joint or pairwise ablation is run
+  cells:
+    H1: C
+    H2: '-'
+    H3: C
+    H4: I
+    H5: '-'
+    H6: '-'
+  designed_for:
+  - H4
+- criterion: M7
+  evidence: High scorers on the two evaluators are ablated on the same models and data that ranked them,
+    with the full-scale sample biased toward high prefix-matching scores
+  cells:
+    H1: '-'
+    H2: '-'
+    H3: C
+    H4: '-'
+    H5: '-'
+    H6: C
+  designed_for: []
+tiers:
+- name: Proposed
+  requires: C1--C2; one admissible measurement
+  missing: '---'
+- name: Causally Suggestive
+  requires: Necessity (I1); baselines (M2)
+  missing: '---'
+- name: Mechanistically Supported
+  requires: Sufficiency (I2); reach (E1); specificity (I4)
+  missing: '---'
+- name: Triangulated
+  requires: Convergence (C3); replication (E2/E4); dissociation (I6)
+  missing: '---'
+- name: Validated
+  requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
+  missing: \textbf{M1} unattempted, one training run per model; \textbf{M7} unattempted; \textbf{I3},
+    \textbf{I8}, \textbf{I10} unattempted
+criteria:
+  C1:
+    name: Falsifiability
+    status: C
+    short: Two numerical evaluators with a stated failure mode; three predictions
+    verified: true
+    reasoning: 'The construct is fixed before any evidence is collected, in two numerical evaluators applied
+      to a stimulus with no natural statistics, and the paper states in advance what a negative result
+      would look like. Footnote 5 concedes the measurement is a continuum rather than a threshold, which
+      is the failure mode being declared rather than hidden. Two of the paper''s predictions were made
+      before their tests and could have come out the other way: the smeared-key architecture was built
+      to make induction expressible at one layer and predicted in advance that in-context learning would
+      appear there, and single-head ablation predicted that removing the scored heads would remove the
+      behaviour. Both held. C.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, on the count of predictions. The legacy evidence lists
+        three predictions "that could have failed and did not", the first being that one-layer models
+        should have no induction heads and no in-context learning. The paper does not treat that as a
+        prediction of this work: footnote 2 states it as inherited fact from Elhage et al., and Argument
+        2 opens by calling it "the observation (noted in the previous section)" and "pretty weak evidence
+        by itself". Two predictions were tested here, not three. Second, the smeared-key result is quoted
+        in the cell as covering "two-layer and larger models", and the paper does say that, but Model
+        Details states "We present these only at one-layer and two-layer sizes". No smeared-key model
+        larger than two layers exists in the paper, so the clause has nothing behind it.
+
+        '
+      legacy_evidence: 'The definition is two numerical evaluators with a stated failure mode, and three
+        separate predictions could have failed and did not: one-layer models should have no induction
+        heads and no in-context learning (they do not); the smeared-key architecture should produce both
+        in a one-layer model (it does); ablating induction heads should remove in-context learning in
+        attention-only models (it does). Footnote 5 concedes the measurement is a continuum rather than
+        a threshold'
+  C2:
+    name: Structural plausibility
+    status: C
+    short: 'Weight-level: copying is the OV circuit''s positive-eigenvalue property'
+    verified: true
+    reasoning: 'The structural account is at the weight level and it is the reason the two behavioural
+      evaluators were chosen. Copying is a property of the OV circuit, identified by its positive eigenvalues;
+      prefix matching is a QK-circuit term produced by K-composition with a previous-token head. The Appendix
+      then closes the loop in the direction that matters, validating each empirical evaluator against
+      the corresponding weight quantity rather than against another activation measure. GPT-2''s pointer-arithmetic
+      route is named as a second implementation of the same behaviour, which is what a structural account
+      should be able to say. The limit is stated plainly: no MLP model is reverse engineered. C for the
+      narrow copying claim.
+
+      '
+    notes:
+      verification: 'The cell''s quoted phrase "most easily characterized by its positive eigenvalues"
+        is verbatim, as is the QK term Id ⊗ hprev ⊗ W. Two mechanical notes. The QK-circuit formula straddles
+        a figure in the extraction, so the sentence containing it is quoted up to the break rather than
+        across it. The Appendix validation is scoped: "correlate well with mathematically-based measures
+        in small attention-only models" — the calibration the cell credits exists only for the twelve
+        small models'' attention-only half, not across the 34.
+
+        '
+      legacy_evidence: Weight-level and unusually direct. Copying is the OV circuit ``most easily characterized
+        by its positive eigenvalues''; prefix matching is a QK-circuit term $\mathrm{Id} \otimes h_{\mathrm{prev}}
+        \otimes W$ arising from K-composition with a previous-token head. The Appendix then validates
+        the empirical evaluators \emph{against} these weight quantities --- the copying evaluator against
+        the signed-eigenvalue fraction of OV, the prefix-matching evaluator against the trace of QK eigenvalues
+        for the previous-token term. GPT-2's alternative pointer-arithmetic mechanism is named as a second
+        implementation
+  C3:
+    name: Convergent validity
+    status: C
+    short: 'Five families: eigenvalues, evaluators, ablation, scaling, training'
+    verified: true
+    reasoning: 'Five instrument families appear at origin and they are not variants of one primitive:
+      a weight computation (the QK eigenvalue trace), two activation evaluators, single-head ablation,
+      per-token loss dynamics over training, and PCA of the per-token loss vectors. The weight measure
+      and the activation measures are genuinely independent, which is why validating one against the other
+      is informative rather than circular. Two external replications are published with the paper and
+      agree: Scherlis recovers most of the head''s loss contribution by substituting an idealised attention
+      pattern, and Lieberum finds heads meeting the same criterion in models neither group trained. C.
+
+      '
+    notes:
+      verification: 'The cell''s replication numbers are verbatim: 99% for the previous-token head and
+        "about 65% of the loss difference" for the induction head. The cell''s characterisation of Scherlis
+        as "Redwood" is supported ("Adam Scherlis is a researcher at Redwood Research"). The later convergence
+        the cell lists — mean ablation, zero ablation, attention knockout, training-time suppression —
+        is post-origin and cannot be checked against this source. One scope note the cell omits: all five
+        origin families are computed on the same 10,000 held-out examples, "held the same between all
+        snapshots and between all models", so they are independent as instruments and not as samples.
+
+        '
+      legacy_evidence: 'Five families at origin: weight-level eigenvalue analysis, empirical activation
+        evaluators, single-head ablation, per-token loss dynamics, and PCA of per-token loss vectors.
+        Two independent external replications are published \emph{with} the paper --- Scherlis (Redwood)
+        recovers 99\% of the previous-token head''s loss difference with idealised attention and $\sim$65\%
+        for the induction head, and Lieberum locates induction heads in GPT-2 and GPT-Neo. Later convergence
+        spans mean ablation, zero ablation, attention knockout and training-time suppression'
+  C4:
+    name: Discriminant validity
+    status: PC
+    short: Built to separate induction from repeated-token memorization
+    verified: true
+    reasoning: 'The defining stimulus is chosen to rule out the nearest neighbouring construct. Repeated
+      sequences of uniformly random tokens carry no natural statistics, so a head that attends to plausible
+      next tokens rather than to the induction target cannot score, and footnote 6 says this is why the
+      stimulus was chosen. Previous-token heads are scored on a separate evaluator rather than folded
+      into the same number, and the paper states that induction heads are a subset of copying heads rather
+      than coextensive with them. The separation is built into the measure and checked in one place —
+      the anti-copying prefix-search heads above 16 layers, which the definition correctly excludes. It
+      is not tested against any construct the field later confused it with, which is what keeps this at
+      PC.
+
+      '
+    notes:
+      verification: 'Footnote 6''s wording is "a simple copying head that heuristically attends to previous
+        tokens which could plausibly slot in well after the next token"; the cell quotes it truncated
+        at "previous tokens", which drops the clause doing the discriminating work. The cell''s claims
+        about function-vector heads and about Feucht et al.''s token/concept split are post-origin and
+        not checkable here.
+
+        '
+      legacy_evidence: 'The definition is explicitly built to separate induction from the neighbouring
+        construct: repeated \emph{random} sequences rule out ``a simple copying head that heuristically
+        attends to previous tokens'''' (footnote 6), and previous-token heads are scored separately. Not
+        separated from function-vector heads, which overlap substantially \citep{yin2025which}. Feucht
+        et al.\ (2025) later split the construct itself into causally dissociable token and concept routes
+        whose scores are uncorrelated'
+  C5:
+    name: Nomological validity
+    status: C
+    short: Derived from the mathematical framework rather than fitted to it
+    verified: true
+    reasoning: 'The layer-count prediction is derived, not fitted. Footnote 15 gives the derivation from
+      the framework''s own terms — an attention score is a function of the source and destination token
+      only, so where an induction head attends cannot depend on the token before the attended token without
+      a second head writing that information first. Two layers is therefore a consequence of the decomposition
+      rather than an observation generalised. Argument 2 then treats it as generating "predictions about
+      the minimum architectural requirements" and builds an architecture to test it. C.
+
+      '
+    notes:
+      verification: 'The cell says "Footnote 15 states the derivation explicitly" — correct. Note that
+        the framework being drawn on is the authors'' own prior paper, so this is nomological coherence
+        within one research programme rather than agreement with an independently developed theory.
+
+        '
+      legacy_evidence: Derived from a formal framework rather than fitted to one. \citet{elhage2021framework}
+        supplies the OV/QK decomposition and the composition algebra, from which the paper derives a falsifiable
+        architectural prediction --- induction requires attention-head composition, hence at least two
+        layers --- and then tests it. Footnote 15 states the derivation explicitly
+  M1:
+    name: Reliability
+    status: U
+    short: Unattempted; one training run per model, no interval on any score
+    verified: true
+    reasoning: 'One training run per model, stated in the Model Analysis Table preamble, and every head
+      evaluator score is an average over ten examples reported without any measure of spread. Nothing
+      in the paper estimates how much of the between-model or between-head variation is training noise.
+      The authors show they know the quantity matters — they discount an inconsistent result of O''Connor
+      and Andreas on the grounds that retraining introduces run-to-run loss variation — and then do not
+      estimate it for their own single runs. U.
+
+      '
+    notes:
+      verification: '"one run of training per model" is verbatim in the Model Analysis Table preamble,
+        exactly as the cell states. "averaged over 10 examples" is verbatim. Term counts corroborate rather
+        than establish: seed 0, "standard deviation" 0, confidence 0, "error bar" 0 occurrences under
+        this extraction. Reading the Appendix sections that would carry an interval if one existed — Data
+        Collection (3), where each evaluator is specified end to end, and Analyses, where each plotted
+        quantity is defined — confirms the cell: every head-evaluator score is a point estimate with no
+        dispersion reported anywhere. The one thing the cell does not record is that the authors name
+        run-to-run variation as a confound in someone else''s work in Related Work.
+
+        '
+      legacy_evidence: Unattempted. The Model Analysis Table preamble states ``one run of training per
+        model''; the strings \texttt{seed}, \texttt{standard deviation} and \texttt{confidence} occur
+        zero times in the paper. Each head evaluator score is ``averaged over 10 examples.'' Every number
+        is a single point estimate
+  M2:
+    name: Baseline separation
+    status: PC
+    short: Every head ablated at every snapshot, so the effect has a reference
+    verified: true
+    reasoning: 'Every head in every ablated model is ablated at every snapshot, so an induction head''s
+      effect is read against the empirical distribution of all head effects in the same model rather than
+      against nothing. That is an implicit matched comparison at more than fifty thousand ablations. The
+      one-layer model supplies a clean architectural negative control: no induction heads form and no
+      in-context learning develops. What is missing is an explicit random-head or random-init control,
+      and footnote 17 shows why one is needed — the non-induction distribution is not centred at zero
+      but displaced in the opposite direction. PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL AND WITH THE SUPPLEMENT''S SYSTEM LINE. The cell says
+        "every head in every small model is ablated"; the paper says ablations "were run only on the small
+        models", of which there are twelve. The supplement (supplement_audits_v1z.tex:753) describes causal
+        ablation as "confined to the twelve small attention-only models". The twelve are not attention-only.
+        The Model Analysis Table preamble defines two small series of six each, 1-layer to 6-layer, one
+        without MLPs and one with; Argument 3''s strength table scores Small with MLPs as causal evidence;
+        and Unexplained Curiosities discusses "The 4-layer MLP model ablations" and a 6-layer MLP induction
+        head "whose ablation has the opposite effect". Six small attention-only models were ablated, not
+        twelve. "more than 50,000 attention head ablations" is verbatim.
+
+        '
+      legacy_evidence: 'Every head in every small model is ablated at every snapshot, so the induction
+        heads'' effect is read against the full empirical distribution of head effects --- an implicit
+        matched comparison, and a strong one at $>$50,000 ablations. The one-layer model is a clean architectural
+        negative control. What is absent is an explicit random-head or randomly-initialised control, and
+        footnote 17 shows why one is needed: ``ablating most other attention heads appears to \emph{increase}
+        in-context learning.'''' Matched random controls arrive later --- layer-matched at 8B Crosbie
+        \& Shutova (2024), 10\%-matched at 70B \citep{yang2025unifying}'
+  M3:
+    name: Stability
+    status: PC
+    short: Token indices perturbed and the score shown robust to the choice
+    verified: true
+    reasoning: 'The one arbitrary constant in the outcome measure is perturbed and the conclusion survives:
+      the paper re-derives in-context learning score against the final context token instead of the 500th
+      and reports that the between-model picture is unchanged. The training dataset is perturbed too,
+      with the small models retrained on books only. Both are real robustness checks rather than restatements.
+      What is not perturbed is the intervention: the Model Analysis Table shows one ablation type, and
+      no threshold on the prefix-matching score is varied. PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL. The cell says the ablation type is "not perturbed" and
+        supports it with "the model analysis table shows only pattern-preserving ablations". That quote
+        is accurate but the Appendix continues: "full ablation results can be found in the appendix".
+        The full ablation was run; it is reported elsewhere in the article. The cell''s claim that the
+        type is unperturbed is contradicted by the source, though the figures are not in this PDF. Minor
+        wording: the cell writes the indices "were chosen somewhat arbitrarily"; the paper reads "We chose
+        the 500th and 50th token indices somewhat arbitrarily."
+
+        '
+      legacy_evidence: 'The in-context-learning score is perturbed and shown robust: the 500/50 token
+        indices ``were chosen somewhat arbitrarily'''' and the paper re-derives the result using the final
+        token (8192) against other indices, finding ``all definitions appear to show that the amount of
+        in-context learning varies only slightly between models.'''' Dataset is perturbed for the small
+        models (books-only). Not perturbed: the ablation type (full ablation is defined but ``the model
+        analysis table shows only pattern-preserving ablations'''') or any threshold on the prefix-matching
+        score'
+  M4:
+    name: Calibration
+    status: PC
+    short: Evaluators calibrated against weight-level quantities in the appendix
+    verified: true
+    reasoning: 'Two calibrations, pointing opposite ways. The head evaluators are validated against weight-level
+      quantities in the Appendix, which is more than most activation-level measures get, and the outcome
+      is in nats rather than an arbitrary unit. Against that, the outcome measure is not calibrated in
+      the direction it is used: footnote 17 reports that ablating unrelated heads raises in-context learning
+      score, so the metric moves the wrong way under a large class of interventions, and the authors give
+      the mechanism. The 0.4-nat constancy from a two-layer model to a 13B model is flagged as unexplained
+      rather than resolved. PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION INTERNAL TO THE SOURCE, in the definition of the paper''s central metric.
+        The in-context learning score is written down five times and four of them subtract in the order
+        that makes it negative for a model that predicts later tokens better: Key Concepts, Unexplained
+        Curiosities, the Analyses section, and the ablation-attribution section, whose prose ("how much
+        better the model is at predicting the 500th token than the 50th token") disagrees with its own
+        formula in the same sentence. The fifth, in Argument 1, reads "the 50th token loss minus the 500th
+        token loss as described in Key Concepts" — the only order consistent with the reported +0.4 nats,
+        and not what Key Concepts describes. Nothing downstream appears to depend on the sign, but a metric
+        written down inconsistently four times out of five is not calibrated. ARITHMETIC ERROR IN THE
+        CELL: it says the constancy holds "across two orders of magnitude of scale". The paper''s own
+        range is 13M to 13B non-embedding parameters, three orders, and the constancy sentence spans "a
+        tiny two layer model" to "a fairly large 13 billion parameter model".
+
+        '
+      legacy_evidence: 'The evaluators are calibrated against weight-level quantities in the Appendix,
+        which is more than most claims in this set have, and the outcome is in nats. But the metric is
+        not calibrated in the direction it is used, and the paper says so: footnote 17 records that damaging
+        unrelated heads raises the score, because ``if ablating a head makes the model bad at `normal
+        prediction'', in-context learning can predict more tokens that otherwise wouldn''t be predicted.''''
+        The 0.4-nat constancy across two orders of magnitude of scale is flagged as unexplained'
+  M5:
+    name: Sensitivity
+    status: PC
+    short: 'A known-positive exists: the two-layer model with a derived circuit'
+    verified: true
+    reasoning: 'A known-positive exists and is used. The two-layer attention-only induction circuit was
+      derived from weights in the previous paper, so the Appendix can ask whether the activation evaluators
+      recover a mechanism whose presence is already established independently, and they do. The smeared-key
+      architecture is a designed positive of a different kind: it makes induction cheap to express and
+      induction heads duly appear where they never had. Neither is a planted circuit of known strength,
+      so nothing here says how weak a real induction head could be and still be detected. PC.
+
+      '
+    notes:
+      verification: 'The known-positive is narrower than the cell implies. The paper says "we only reverse
+        engineered a single induction head in a small attention-only model", so the sensitivity anchor
+        is one head, not a circuit class. (The sentence contains a grammatical error in the source, "although
+        we can reverse engineered others", quoted here as printed.) The Appendix validation is a correlation
+        across heads, not a detection rate at a known effect size, so it bounds nothing.
+
+        '
+      legacy_evidence: 'A known-positive exists and is used: the two-layer attention-only model whose
+        induction circuit was independently derived from weights in \citet{elhage2021framework}, against
+        which the Appendix validates both evaluators. The smeared-key architecture is a designed positive
+        --- it makes induction cheap to express and induction heads duly appear. Neither is a planted
+        circuit of known strength, so the sensitivity floor is unquantified'
+  M6:
+    name: Invariance
+    status: C
+    short: 34 models, four series, 1--40 layers, 13M--13B, 200 snapshots each
+    verified: true
+    reasoning: 'The signature is checked across the widest sweep in this audit set: four model series,
+      two datasets, one to forty layers, and snapshots dense enough in the small models to see the transition
+      rather than infer it. What raises this above a list of models is that the exceptions are named rather
+      than smoothed — a non-induction head whose ablation mimics reversing the phase change, one model
+      whose ablations are not peaky, and a lone induction head whose ablation goes the wrong way. A sweep
+      that reports its own anomalies is evidence about invariance; one that does not is evidence about
+      presentation. C.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL''S `short`, which reads "34 models, four series, 1--40
+        layers, 13M--13B, 200 snapshots each". Two of the five numbers do not survive. (a) 200 snapshots
+        each is true of the twelve small models only. The six full-scale models have "a total of 15 saved
+        snapshots (except the 40L which has 14)", which footnote 26 flags as making the curve shapes harder
+        to judge. (b) 13M--13B is the full-scale series'' range, not the range of the 34. The small models
+        are 1- to 6-layer at d_model = 768 and the paper never states their parameter counts, so the low
+        end of the sweep is below 13M and unquantified. 34, four series and 1--40 layers all check out:
+        34 decoder-only models is verbatim, four series are enumerated, small models run 1 to 6 layers
+        and full-scale 4 to 40. The paper never itemises how the 34 decompose. Twelve small plus six full-scale
+        is stated; the remaining sixteen (books-only retrains, smeared key at one and two layers) are
+        never counted.
+
+        '
+      legacy_evidence: '34 models across four series, two datasets, 1--40 layers and 13M--13B parameters,
+        with 200 snapshots for each small model and 14--15 for each full-scale model, all reported in
+        the Model Analysis Table. Exceptions are named rather than smoothed: a non-induction head in the
+        6L attention-only model whose ablation mimics reversing the phase change, the 4L MLP model''s
+        ``nowhere near as peaky'''' ablations, and one induction head in the 6L MLP model ``whose ablation
+        has the opposite effect'''''
+  M7:
+    name: Selection correction
+    status: U
+    short: Unattempted; heads are scored, then the high scorers are ablated
+    verified: true
+    reasoning: 'Heads are scored on the two evaluators and the high scorers are then ablated on the same
+      models and the same data, with no correction for having chosen them. The candidate pool is large
+      and is stated — twelve heads per layer in the small models, and at full scale a deliberately biased
+      sample of a hundred heads — which makes the exposure visible without controlling it. The outcome
+      measure''s two constants are conceded to be arbitrary in the same breath. Nothing here is hidden;
+      nothing is corrected either. U.
+
+      '
+    notes:
+      verification: 'The cell''s quoted candidate pool is verbatim, including "only a randomized sample
+        of 100 heads (with selection biased towards those scoring highly on prefix matching)". The full-scale
+        head counts the cell gives as "40--48 heads/layer" come from the table of model properties, which
+        lists 8, 12, 20, 32, 48 and 40 heads per layer across the six full-scale models; 40--48 is the
+        top of that range rather than a general figure. In the small models the vocabulary size renders
+        as "216" in this extraction, which is 2^16 with the exponent dropped, not a paper error.
+
+        '
+      legacy_evidence: Unattempted. Heads are scored on the two evaluators and the high scorers are then
+        ablated on the same models; the candidate pool is stated (12 heads/layer in small models, up to
+        40--48 heads/layer at full scale, with ``only a randomized sample of 100 heads (with selection
+        biased towards those scoring highly on prefix matching)'' plotted) but no multiplicity control
+        is applied, and the 500/50 index choice is acknowledged as arbitrary
+  I1:
+    name: Necessity
+    status: C
+    short: Almost all in-context learning in small models comes from these heads
+    verified: true
+    reasoning: 'Necessity is established where it is established at all. Removing the scored heads removes
+      almost all of the measured behaviour in small attention-only models, at every snapshot from the
+      start of the phase change onward, and footnote 19 supplies the reason the decomposition is principled
+      there: in an attention-only model the logits are a near-linear sum of head terms, so a frozen-pattern
+      ablation measures a head''s contribution rather than perturbing an unrelated nonlinearity. The claim
+      scored here is the narrow copying claim in exactly the models where that argument holds. C.
+
+      '
+    notes:
+      verification: '"In fact, almost all the in-context learning in small attention-only models appears
+        to come from these induction heads!" is verbatim, including "these", which the cell drops. Scope:
+        "small attention-only models" is the six-model series running 1-layer to 6-layer at d_model =
+        768, one of which — the 1-layer — forms no induction heads at all; the sentence therefore rests
+        on five models. The same sentence does not extend to the small MLP models, which the paper handles
+        separately and calls "only suggestive". The Crosbie & Shutova and Yang et al. ablation figures
+        in the cell are post-origin and not checkable here.
+
+        '
+      legacy_evidence: '``In fact, almost all the in-context learning in small attention-only models appears
+        to come from these induction heads! This begins at the start of the phase change, and remains
+        true through the end of training'''' (Argument 3), from $>$50,000 single-head ablations. Extended
+        causally with matched controls since: 91.3\% $\to$ 59.7\% at 1\% ablation in Llama-3-8B against
+        85.9\% layer-matched random (Crosbie \& Shutova 2024); 80.57\% $\to$ 2.50\% at 10\% in Llama2-70B
+        against 79.13\% \citep{yang2025unifying}'
+  I2:
+    name: Sufficiency
+    status: PC
+    short: No experiment reconstructs copying from induction heads alone
+    verified: true
+    reasoning: 'No experiment in the paper reconstructs the copying behaviour from induction heads alone.
+      The two nearest things are both weaker than sufficiency. Argument 2 shows that the architectural
+      capacity for induction suffices to produce in-context learning in a one-layer model that previously
+      had none, which is sufficiency of the architecture rather than of the heads. Scherlis''s replication
+      comes closer, substituting an idealised induction pattern and recovering most of the head''s loss
+      contribution, but it is a comment on the paper rather than an experiment in it. PC.
+
+      '
+    notes:
+      verification: 'The cell''s Scherlis figures are verbatim: "about 65% of the loss difference", with
+        "an additional 10% of loss difference" when [A][B][C]...[A][B]→[C] matching is included. The cell
+        describes this as "rising 10 points", which is the same number. Note the direction of Scherlis''s
+        test: it substitutes an idealised attention pattern into the full model, so it measures how much
+        of the head''s effect the induction pattern explains, not whether induction heads alone suffice.
+
+        '
+      legacy_evidence: No experiment reconstructs copying from induction heads alone. The nearest is Argument
+        2's smeared-key manipulation, which shows the architectural \emph{capacity} for induction suffices
+        to produce in-context learning in a one-layer model that previously had none. Scherlis's replication
+        is closer still --- substituting an idealised induction attention pattern recovers ``about 65\%
+        of the loss difference,'' rising 10 points when $[A][B][C]\ldots[A][B]\to[C]$ matching is included
+        --- but it is a comment, not an experiment of the paper's
+  I3:
+    name: Minimality
+    status: U
+    short: Unattempted; the authors name the obstacle in marginal effects
+    verified: true
+    reasoning: 'Every ablation in the paper removes one head at a time, so no minimal sufficient set is
+      ever identified, and the authors name the reason the design cannot produce one: marginal effects
+      understate the importance of any head whose function is duplicated, because the layer norm rescales
+      what is left. Naming the obstacle is not addressing it. No pruning or joint-removal search is run.
+      U.
+
+      '
+    notes:
+      verification: 'The cell quotes the masking passage verbatim and attributes it to Argument 3, correctly.
+        The design fact behind it is confirmed in the Appendix: "individual attention head ablations where
+        only one attention head is modified at a time", explicitly contrasted with the prior paper''s
+        nth-order term ablations.
+
+        '
+      legacy_evidence: 'Unattempted, and the authors name the obstacle: ``Our ablations measure the marginal
+        effects of removing attention heads from the model. To the extent two heads do something similar
+        and the layer norm before the logits rescales things, the importance of individual heads may be
+        masked'''' (Argument 3). No minimal head set is identified or pruned'
+  I4:
+    name: Specificity
+    status: PC
+    short: Every head is ablated, so off-target effects are measured throughout
+    verified: true
+    reasoning: 'Off-target effects are measured in one direction and not the other. Because every head
+      is ablated, the effect of ablating non-induction heads on the induction metric is known, and footnote
+      17 reports it, which is more than most ablation studies can say. The converse — what ablating an
+      induction head does to behaviour that is not copying — is never computed, even though the per-token
+      losses are saved at all 512 positions and the ablation data has exactly two views, both of which
+      are about the phase change. The data to run the missing analysis exists and is not used that way.
+      PC.
+
+      '
+    notes:
+      verification: 'The cell''s claim that per-token losses are saved for all 512 positions is supported:
+        the run saves "individual token losses for every token" on 512-token examples, and the context-index
+        average gives "a length-512 vector". The two ablation views are exhaustive as listed in the Appendix,
+        which is what makes the absence of a non-copying outcome checkable rather than assumed.
+
+        '
+      legacy_evidence: 'Off-target effects are measured, in an unusual way: because \emph{every} head
+        is ablated, the effect of ablating non-induction heads on the induction metric is known, and footnote
+        17 reports it. What is not measured is the converse --- the effect of ablating induction heads
+        on non-copying behaviour. Per-token losses are saved for all 512 positions, so the data to do
+        it exists and is not analysed that way'
+  I5:
+    name: Rival mechanism exclusion
+    status: PC
+    short: Basic copying heads named and argued away rather than tested
+    verified: true
+    reasoning: 'For the narrow claim the rival is named and argued away rather than tested. Footnote 23
+      identifies basic copying heads as the only other candidate in two-layer attention-only models and
+      excludes them by an argument from the one-layer case rather than by an experiment: copying heads
+      exist in one-layer models, which do not show the effect. Footnote 19 supplies the linearity argument
+      that makes head ablation a principled decomposition in attention-only models, which is what licenses
+      treating the ablation result as exclusive. Both are arguments. PC.
+
+      '
+    notes:
+      verification: 'Footnote 23 is quoted verbatim in the cell, and continues past where the cell stops
+        with a third clause, "Further, induction heads just seem conceptually more powerful", which is
+        an appeal rather than evidence and belongs in the same assessment. The shared-latent-variable
+        alternative in Argument 1 is aimed at the broad claim, not this one.
+
+        '
+      legacy_evidence: 'The rival is named and argued away rather than tested. Footnote 23: ``The only
+        other potential contender for driving in-context learning in two-layer attention only models would
+        be basic copying heads. However, basic copying heads also exist in one-layer models, which don''t
+        have the greatly increased in-context learning we see in two-layer models.'''' Footnote 19 supplies
+        the linearity argument that makes head ablation a principled decomposition in attention-only models.
+        Both are arguments, not experiments'
+  I6:
+    name: Double dissociation
+    status: C
+    short: Unattempted at origin; run later by Feucht et al.\ and it succeeds
+    verified: true
+    reasoning: 'At origin the intervention has exactly two outcome views, the before-and-after vector
+      and the in-context learning score, and both are about the same phase change. No second construct
+      is measured under induction-head ablation and no second head class is ablated against the copying
+      outcome, so neither arm of a double dissociation exists in this source. The C rests on Feucht et
+      al. (2025), which mean-ablates token and concept induction heads separately: ablating concept heads
+      collapses word-level translation while leaving nonsense copying intact, and the converse holds,
+      with the two head rankings showing little overlap. Both arms cross, three years after the claim.
+      That evidence is post-origin and cannot be checked against Olsson et al., so the quote gate verifies
+      the origin half alone.'
+    notes:
+      verification: 'The PC in this cell rests on Feucht et al. (2025), which is post-origin and cannot
+        be checked against Olsson et al. What is checkable is the origin half of the cell''s claim, "unattempted
+        at origin", and the Appendix confirms it by enumerating the ablation analyses exhaustively.
+
+        '
+      legacy_evidence: 'Unattempted at origin. Run later, and it succeeds: Feucht et al.\ (2025) mean-ablate
+        token and concept induction heads separately and find ablating concept heads collapses word-level
+        translation while leaving nonsense copying intact, and vice versa, with the two head rankings
+        showing ``little overlap.'''' A genuine double dissociation, obtained three years after the claim'
+      status_change: 'PC to C. Both arms are run. Feucht et al. mean-ablate token and concept induction
+        heads separately: ablating concept heads collapses word-level translation while leaving nonsense
+        copying intact, and the converse holds, with the two head rankings showing little overlap.'
+  I7:
+    name: Confound control
+    status: PC
+    short: Three exogenous confounds checked, including scheduled hyperparameters
+    verified: true
+    reasoning: 'Three exogenous explanations are checked before the causal reading is offered. The scheduled
+      hyperparameter changes are located in training time and shown to fall outside the phase-change window,
+      or in the warm-up''s case named as the one that overlaps it. The dataset is varied and the phase
+      change recurs. The one-layer model rules out the possibility that the timing is a property of training
+      rather than of architecture. What is left uncontrolled is the endogenous confound the authors themselves
+      raise, and footnote 11 records that all models saw the same tokens in the same order, so the co-occurrence
+      window is not independently sampled across models. PC.
+
+      '
+    notes:
+      verification: 'All three controls are verbatim as the cell describes them, including the 4750-step
+        weight decay change "notably beyond the range in which the phase change occurs" and the 1.5e9-token
+        warm-up. One qualification the cell does not carry: Model Details puts the small models'' phase
+        change at "approximately 1-3 billion tokens", which overlaps the learning-rate warm-up ramp of
+        1.5e9 tokens. The paper names that overlap and does not test it.
+
+        '
+      legacy_evidence: 'Three exogenous confounds are checked: scheduled hyperparameter changes (weight
+        decay drops at step 4750, ``notably beyond the range in which the phase change occurs''''; LR
+        warm-up ramps over the first 1.5e9 tokens), dataset (small models retrained on books-only), and
+        architecture (the one-layer control). Uncontrolled and acknowledged: ``all these models were trained
+        on the same tokens in the same order'''' (footnote 11), one run per model, and the shared-latent-variable
+        possibility named in Argument 1'
+  I8:
+    name: Confounding sensitivity
+    status: U
+    short: Unattempted; no sensitivity analysis for an unmeasured confounder
+    verified: true
+    reasoning: 'The paper enumerates its confounds carefully and quantifies none of them. Every item in
+      the caution list is verbal: the resolution is called low without a bound, the shared latent variable
+      is described without a magnitude, the baseline-drift worry is stated as a possibility. Nothing states
+      how strong an unmeasured common cause would have to be to account for the observed association,
+      which is what a sensitivity analysis would supply. U.
+
+      '
+    notes:
+      verification: 'Read in full. No E-value, no bias-factor calculation and no bound of any kind on
+        an unmeasured confounder appears anywhere in the paper, including the Appendix. The confounds
+        are listed in prose in Argument 1 and referenced again in Argument 6, always qualitatively.
+
+        '
+      legacy_evidence: Unattempted. No E-value or sensitivity analysis for an unmeasured confounder
+  I9:
+    name: Epistatic interaction
+    status: PC
+    short: Composition is the mechanism; the two-head circuit is non-additive
+    verified: true
+    reasoning: 'The mechanism is an interaction by construction: an induction head is one half of a two-head
+      circuit and footnote 15 derives why neither half does the job alone. That is a strong prior that
+      effects are non-additive. The measurement does not follow the mechanism, though — every ablation
+      removes one head, so the interaction the theory asserts is never measured, and the authors flag
+      that marginal ablation masks importance under exactly the redundancy the mechanism predicts. Mechanism
+      yes, measurement no. PC.
+
+      '
+    notes:
+      verification: 'The cell''s reading is right about the origin. The Doan et al. (2025) non-additivity
+        figures are post-origin and not checkable here.
+
+        '
+      legacy_evidence: 'Composition \emph{is} the mechanism --- the two-head previous-token $\to$ induction
+        circuit is an interaction by construction, and Argument 5 derives why neither head is useful alone.
+        But no joint ablation is run at origin; all ablations are single-head and marginal, and the authors
+        flag the resulting masking. Later work quantifies the non-additivity: Doan et al.\ (2025) report
+        ``ablating only one induction head has a minimal impact'''' while three or more collapse pattern
+        recall 75.4--76.7\%'
+  I10:
+    name: Rescue reversibility
+    status: U
+    short: Unattempted; pattern-preserving ablation already caches the clean run
+    verified: true
+    reasoning: 'The pattern-preserving ablation already runs the model twice and caches every attention
+      pattern from the clean pass, so restoring the ablated head and rechecking the outcome costs one
+      forward pass on machinery the paper has already built. It is not run. The distinction that matters
+      for this criterion is between untested and untestable, and this is the former. U.
+
+      '
+    notes:
+      verification: 'The two-pass procedure is quoted verbatim from the Appendix, which is what makes
+        the cell''s cost claim checkable rather than asserted.
+
+        '
+      legacy_evidence: Unattempted rather than untestable. Pattern-preserving ablation already runs the
+        model twice and caches the clean activations, so restore-and-recheck is nearly free. It is not
+        run
+  I11:
+    name: Onset coupling
+    status: C
+    short: Across 34 models, heads and the loss bump appear at the same point
+    verified: true
+    reasoning: 'Onset coupling is the paper''s organising result and it is coupled four ways, not two:
+      the in-context learning score, induction-head formation, a visible bump in the loss curve and a
+      pivot in per-token-loss PCA space all move in the same 2.5e9--5e9 token window, across the whole
+      sweep, with the one-layer model showing none of them. Argument 2 then does what a correlation cannot
+      and moves the onset by intervention: an architectural change that makes induction cheap brings the
+      whole cluster forward together. C.
+
+      '
+    notes:
+      verification: 'The window and the co-occurrence list are verbatim. One inconsistency in the source:
+        Argument 1 places the window at "roughly 2.5 to 5 billion tokens" while Model Details reports
+        it "at approximately 1-3 billion tokens in the small models". The two ranges overlap in one billion
+        tokens and are not the same, and the paper does not reconcile them. Both are quoted above. The
+        smeared-key clause the cell quotes, "forms earlier for two-layer and larger models", is verbatim
+        but has no models behind the words "and larger": Model Details states the smeared-key models exist
+        only at one and two layers.
+
+        '
+      legacy_evidence: 'The paper''s organizing result. Across 34 models, induction heads and in-context
+        learning appear in the same narrow window (2.5e9--5e9 tokens), co-timed with a loss-curve bump
+        and a pivot in per-token-loss PCA space. Argument 2 then \emph{moves} the onset by architecture:
+        the smeared-key modification makes induction cheap and in-context learning ``forms earlier for
+        two-layer and larger models'''''
+  I12:
+    name: Offset coupling
+    status: U
+    short: One Pythia-160m head loses the behavior while the algorithm persists
+    verified: true
+    reasoning: 'The only designed manipulation in the paper adds the mechanism or advances its arrival.
+      Nothing removes an induction head once formed and asks whether the copying behaviour disappears
+      with it on the same training trajectory, so the offset direction has no test at origin. U.
+
+      '
+    notes:
+      verification: 'The Pythia-160m observation in the cell''s `short` does not come from this source
+        and cannot be checked against it. The origin half — that the manipulation shifts onset rather
+        than removing the capability — is confirmed by Argument 2 and Model Details.
+
+        '
+      legacy_evidence: Unattempted at origin. The designed manipulation shifts onset timing rather than
+        removing the capability, so the converse direction is untested
+  E1:
+    name: Intervention reach
+    status: PC
+    short: 'One primitive at origin: pattern-preserving zero ablation of a head'
+    verified: true
+    reasoning: 'Two levers at origin, which is more reach than most claims in this set have, but they
+      act at different times and only one acts on a trained model. Ablation is a single primitive applied
+      one head at a time, in the pattern-preserving variant for the main results; the smeared-key architecture
+      is an intervention on training rather than on inference, so it cannot corroborate a test-time result
+      about a particular head. Footnote 18 costs the missing extension and explains why it was not run.
+      PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL. The cell says "Full ablation is defined and explicitly
+        not shown." The paper says the Model Analysis Table shows only pattern-preserving ablations, and
+        then, in Analyses: "full ablation results can be found in the appendix". Full ablation was run
+        and reported, outside the table. The stronger true statement is that the main results rest on
+        one ablation variant. Footnote 18''s cost figure is verbatim, O(N^1.33), with the base cost "evaluating
+        each ablation on 10,000 examples, for each training checkpoint".
+
+        '
+      legacy_evidence: 'One intervention primitive at origin --- pattern-preserving zero ablation of a
+        single head. Full ablation is defined and explicitly not shown. The architectural manipulation
+        of Argument 2 is a second, very different lever, but it acts on training rather than on the trained
+        model. Genuine method independence arrived later: mean ablation, zero ablation, attention knockout,
+        and training-time loss masking all agree for copying'
+  E2:
+    name: Prompt generalization
+    status: C
+    short: The defining stimulus is out of distribution by construction
+    verified: true
+    reasoning: 'The defining stimulus is off-distribution by construction. Uniformly random token sequences
+      with the extremes of the frequency distribution removed cannot be solved by anything the model learned
+      about natural text, so a head that scores has to be doing the operation rather than exploiting a
+      correlate. Evaluation then adds three further distributions: ten thousand held-out natural examples
+      per snapshot, a natural-text passage, and a synthetic four-template task with no natural analogue.
+      Generalisation across prompts is designed in rather than checked afterwards. C.
+
+      '
+    notes:
+      verification: 'The construction is verbatim, including "excluding the most common and the least
+        common tokens" and the four repeats with a prepended start-of-sequence token. One inconsistency
+        in the source: the Appendix says the held-out set is "held the same between all snapshots and
+        between all models in all three families", while the Model Analysis Table preamble enumerates
+        four model series. The paper counts its own families two ways.
+
+        '
+      legacy_evidence: The definitional stimulus is out-of-distribution by construction --- repeated sequences
+        of uniformly random tokens, excluding the most and least common. Evaluation adds 10,000 held-out
+        512-token dataset examples per snapshot, a natural-text passage, and a synthetic four-template
+        pattern-matching task. The claim is deliberately distribution-free
+  E3:
+    name: Cross-task generalization
+    status: PC
+    short: The same heads perform literal translation, verified against definition
+    verified: true
+    reasoning: 'The cross-task test is done the right way round: heads are first verified against the
+      strict copying definition, then shown performing translation and category-based pattern matching,
+      so the generalisation is a property of identified heads rather than of a new head set selected per
+      task. That is what makes it evidence at all. It is also three heads in one model, reported as anecdote
+      by the authors, with the translation head''s logit attributions conceded to be imperfect. PC.
+
+      '
+    notes:
+      verification: 'The 65% attention figure is verbatim. Two internal inconsistencies in Argument 4.
+        The text places the pattern-matching head "at layer 26 of our 40-layer model" while the section''s
+        own table lists it at 8 / 40. And the section says "we study up to 12B parameter models" while
+        the same paragraph calls the model "our 40-layer model with 13 billion parameters" and the model
+        table gives 13B. Neither affects the argument; both bear on how carefully the anecdotal section
+        was checked.
+
+        '
+      legacy_evidence: 'Argument 4 shows the same heads --- verified against the strict definition ---
+        performing literal copying, English/French/German translation, and category-based pattern matching
+        (``about 65\% of its attention from the colons to the correct positions''''). Three heads, one
+        model, explicitly anecdotal. Later work makes it systematic and also splits it: Crosbie \& Shutova
+        across four abstract pattern tasks; Feucht et al.\ separating the semantic route from the token
+        route'
+  E4:
+    name: Cross-model generalization
+    status: C
+    short: 34 models across four series, plus two external replications
+    verified: true
+    reasoning: 'Cross-model reach at origin is unusually good for the narrow claim: four architecture
+      series spanning one to forty layers and two data distributions, plus two external replications on
+      models the authors did not train and did not release-tune. Lieberum finds heads meeting the paper''s
+      own criterion in GPT-2 and GPT-Neo, which are different architectures with different positional
+      schemes — the paper notes its own models cannot use the GPT-2 pointer-arithmetic route, so the behavioural
+      claim survives a change of implementation. C.
+
+      '
+    notes:
+      verification: 'The replication head identifications in the cell are verbatim: GPT2-XL head 20 in
+        layer 21, GPT-Neo-2.7B head 0 in layer 12. The cell writes these as "head 21.20" and "head 12.0",
+        layer-first, which is the opposite order from Lieberum''s sentence but the same heads. The later
+        cross-model list (Llama, Qwen, Gemma, Pythia, OLMo, Mixtral, Yi, InternLM) is post-origin.
+
+        '
+      legacy_evidence: '34 models at origin across four architecture series and 13M--13B parameters, plus
+        two external replications on released models (GPT-2, GPT-2-XL head 21.20, GPT-Neo-2.7B head 12.0)
+        published alongside. Since then: Llama-2, Llama-3, Qwen, Gemma, Pythia, OLMo, Mixtral, Yi and
+        InternLM, with matched-control causal ablation up to 70B \citep{yang2025unifying}'
+  E5:
+    name: Graded response
+    status: PC
+    short: Both evaluators are continuous; the ablation is not interpolated
+    verified: true
+    reasoning: 'Measurement is graded and intervention is not. Both evaluators return continuous scores
+      on stated ranges, footnote 5 says the construct itself is a continuum rather than a threshold, and
+      the in-context learning score is tracked at every snapshot rather than before and after. The intervention
+      is a zero vector substituted for one head: binary, one head at a time, with no interpolation between
+      ablated and intact. A dose-response curve is available on the measurement side and absent on the
+      causal side. PC.
+
+      '
+    notes:
+      verification: 'Footnote 5''s "our measurements give us a continuum" is verbatim. The copying score''s
+        stated range, 0 to 0.5 rescaled to -1 to 1, confirms the measurement is graded on a defined scale
+        rather than thresholded.
+
+        '
+      legacy_evidence: 'The measurement is graded --- both evaluators are continuous and footnote 5 states
+        ``our measurements give us a continuum'''' --- and the in-context learning score is tracked continuously
+        across training. The \emph{intervention} is binary per head at origin. Graded intervention arrived
+        later: 1\% vs 3\% Crosbie \& Shutova (2024), 10\% \citep{yang2025unifying}, and 1\% increments
+        in Yang, Cho \& Inoue (2025)'
+  E6:
+    name: Novel prediction
+    status: C
+    short: Argument 2 predicts an architectural change will move the bump
+    verified: true
+    reasoning: 'This is a novel prediction in the strict sense and the order of operations is what makes
+      it one. The mechanism implies a constraint on architecture; the constraint implies that relaxing
+      it should move the phase change; an architecture was then built for no other purpose and trained.
+      The prediction was specific enough to fail in two distinguishable ways — no in-context learning
+      in one-layer smeared-key models, or an unchanged onset in deeper ones — and neither happened. The
+      authors immediately bound what it licenses about large models. C.
+
+      '
+    notes:
+      verification: 'The prediction and the result are both verbatim and the prediction is stated before
+        the result in the text. The bound the paper puts on it is also explicit: "we probably shouldn''t
+        make too strong an inference about large models on this evidence." The result sentence''s reach
+        to "two-layer and larger models" is not supported by any model in the paper beyond two layers.
+
+        '
+      legacy_evidence: Argument 2 is a novel prediction in the strict sense. The hypothesis predicts that
+        an architectural change making induction expressible at one layer should move the in-context-learning
+        phase change, and it does --- in-context learning appears in one-layer smeared-key models where
+        it never had, and appears earlier in deeper ones. The prediction was made from the mechanism,
+        the architecture was built to test it, and it could have failed
+  V1:
+    name: Level declaration
+    status: C
+    short: Declared early and explicitly, by behavior on the defining stimulus
+    verified: true
+    reasoning: 'The level is declared before any evidence, and declared as a choice with a stated reason:
+      weight-level analysis does not survive contact with MLPs, so the construct is pinned to behaviour
+      on a defined stimulus and the mechanistic story is advertised as something to be shown afterwards
+      rather than assumed. The paper even says what the previous treatment got wrong — a cluster of co-occurring
+      behaviours called by one name. Behavioural definition and mechanistic account are kept apart and
+      their intended relationship is stated. C.
+
+      '
+    notes:
+      verification: 'The declaration is verbatim as the cell quotes it, with the elided passage being
+        the bracket notation "(the [A][B]...[A]→[B] )". Nothing in the source contradicts this cell.
+
+        '
+      legacy_evidence: 'Declared explicitly and early: ``for this paper we choose to define induction
+        heads by their narrow empirical sequence copying behavior … and then attempt to show that they
+        (1) also serve a more expansive function that can be tied to in-context learning, and (2) coincide
+        with the mechanistic picture for small models.'''' The behavioural definition and the mechanistic
+        account are kept separate and their relationship is stated'
+  V2:
+    name: Level-evidence match
+    status: C
+    short: Close for the narrow claim; the abstract's narrow sentence is backed
+    verified: true
+    reasoning: 'For the narrow claim the level of the evidence matches the level of the assertion. The
+      abstract''s first sentence describes an algorithm over token sequences; the two evaluators measure
+      exactly that behaviour on exactly that stimulus; the ablations perturb it; and the weight-level
+      analysis explains it in the two-layer case, with the Appendix checking that the behavioural measure
+      tracks the weight-level one. The abstract also states in its own voice where the causal evidence
+      stops. C.
+
+      '
+    notes:
+      verification: 'The abstract''s narrow sentence is verbatim. The abstract''s own scope split — strong
+        causal for small attention-only, correlational for larger models with MLPs — is what keeps the
+        narrow reading matched and hands the mismatch to the broad audit rather than this one.
+
+        '
+      legacy_evidence: For the narrow claim the match is close. The abstract's narrow sentence --- induction
+        heads ``implement a simple algorithm to complete token sequences like $[A][B]\ldots[A]\to[B]$''
+        --- is exactly what the two evaluators measure, what the ablations perturb, and what the OV/QK
+        analysis explains at the weight level in the two-layer case
+  V3:
+    name: Alternative level
+    status: PC
+    short: One alternative addressed; the authors offer their own caveat
+    verified: true
+    reasoning: 'One alternative at a competing level is addressed, basic copying heads, and it is handled
+      by argument rather than test. The paper''s own higher-level redescription — in-context nearest neighbour
+      — is offered as compatible with the copying account rather than as a rival to it, and two candidate
+      relations between the levels are proposed, one where copying is the special case and one where the
+      difference is which residual-stream path the head reads. Neither is tested and the paper does not
+      claim otherwise. PC.
+
+      '
+    notes:
+      verification: 'Both candidate relations are verbatim and both are stated as possibilities ("perhaps",
+        "Another possibility"). Nothing in the source contradicts this cell.
+
+        '
+      legacy_evidence: One alternative is addressed --- basic copying heads, footnote 23. The authors
+        offer their own higher-level redescription (``in-context nearest neighbor'') as compatible rather
+        than competing, and speculate about two ways the two levels could relate, without testing either
+  V4:
+    name: Unlicensed labeling
+    status: PC
+    short: The label imports an epistemic category, and the import is declared
+    verified: true
+    reasoning: 'The label imports an epistemic category and the paper declares the import in one sentence.
+      What licenses the import is thin but stated: the operational content is mechanical, prefix matching
+      plus copying, and the paper argues the rule generalises rather than tabulating bigrams. Footnote
+      3 pre-empts a stronger reading of the surrounding term by rejecting metalearning as overclaiming.
+      Declared and hedged, never contrastively tested against a deflationary label. PC.
+
+      '
+    notes:
+      verification: 'Both quotes in the cell are verbatim; the cell''s footnote 3 excerpt elides "although
+        this term" between "metalearning" and "implicitly makes". Footnote 3''s full clause also rejects
+        the term as "not entirely precise in its meaning", which strengthens rather than weakens the cell.
+
+        '
+      legacy_evidence: 'The label imports an epistemic category and the paper declares the import: ``Induction
+        heads are named by analogy to inductive reasoning.'''' The operational content is mechanical (prefix
+        matching plus copying), and footnote 3 pre-empts a stronger reading of the surrounding term ---
+        ``metalearning … implicitly makes the stronger claim that the model is learning how to do a new
+        ability.'''' Declared, hedged, never contrastively tested'
+  V5:
+    name: Scope declaration
+    status: C
+    short: The most thoroughly scoped claim in this audit set
+    verified: true
+    reasoning: 'Scope is declared more thoroughly here than anywhere else in this audit set, and in a
+      form that can be checked rather than merely felt: a strength table for the paper as a whole and
+      another for each of the six arguments, crossing claim reach against model class. The missing experiment
+      is named, costed, and the reason for publishing without it is stated as a norm rather than an excuse.
+      Argument 6 goes further than scope declaration and states the condition under which the broad claim
+      would be wrong. C.
+
+      '
+    notes:
+      verification: 'All of it checks out, including the per-argument tables and footnote 18''s cost.
+        One wording error in the source worth recording since this cell credits the strength tables: the
+        preamble to them reads "we believe we have strong evidence that attention heads are the mechanism
+        for the majority of in-context learning" where every other statement of the same claim says induction
+        heads.
+
+        '
+      legacy_evidence: The most thoroughly scoped claim in this audit set. A strength table appears for
+        the paper as a whole and again for each of the six arguments, crossing claim reach against model
+        class with entries down to ``Plausibility'' and ``Analogy.'' The missing experiment is named in
+        the text and costed in footnote 18 ($O(N^{1.33})$ per checkpoint), and Argument 6 names the alternative
+        that later refuted the broader claim

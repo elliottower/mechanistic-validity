@@ -1,0 +1,854 @@
+claim: superposition
+title: Superposition of Features in Toy Models
+description: 'A ReLU network trained to reconstruct sparse features stores more of them than it has dimensions,
+  giving each a non-orthogonal direction and absorbing the interference that creates, which the linear
+  model differing only in that activation function never does at any sparsity. Where the tradeoff falls
+  is mapped over an importance $\times$ sparsity grid against closed-form losses for each candidate weight
+  configuration, and the geometries the trained models settle into are uniform polytopes solving a generalised
+  Thomson problem. Systems: toy autoencoders on synthetic features whose sparsity, importance and correlation
+  are set by hand, across four architectures and sizes from $(2,1)$ to 400 features in 30 dimensions,
+  plus an absolute-value model that computes through a compressed layer rather than storing. Description
+  mode: representational.'
+source:
+  citation: elhage2022superposition
+  title: Toy Models of Superposition
+  url: https://transformer-circuits.pub/2022/toy_model/index.html
+  local: reference/elhage_2022_superposition.pdf
+  sha256: 0acd3e05e40c1b703be3aed15c8cdbd5713a1840df9738b495d2bde2e8eb1e3a
+  extract_cmd: pdftotext -layout
+  read_in_full: true
+claims:
+  C1:
+    quotes:
+    - exact: If one takes the superposition hypothesis seriously, a natural first question is whether
+        neural networks can actually noisily represent more features than they have neurons. If they can't,
+        the superposition hypothesis may be comfortably dismissed.
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition
+      page: null
+      line: null
+    - exact: We will actually consider two models, which we motivate below. The first "linear model" is
+        a well understood baseline which does not exhibit superposition. The second "ReLU output model"
+        is a very simple model which does exhibit superposition. The two models vary only in the final
+        activation function.
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Experiment Setup
+      page: null
+      line: null
+    - exact: As our standard intuitions would expect, the linear model always learns the top-m most important
+        features, analogous to learning the top principal components. The ReLU output model behaves the
+        same on dense features (1 − S = 1.0), but as sparsity increases, we see superposition emerge.
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Basic Results
+      page: null
+      line: null
+    - exact: We then plot whether the 2nd "extra" feature is not learned, learned in superposition, or
+        learned and represented orthogonally.
+      prefix: ''
+      suffix: ''
+      section: Superposition as a Phase Change
+      page: null
+      line: null
+  C2:
+    quotes:
+    - exact: It turns out we can analytically determine the loss for these solutions (details can be found
+        in this notebook).
+      prefix: ''
+      suffix: ''
+      section: Superposition as a Phase Change
+      page: null
+      line: null
+    - exact: 'But most interestingly, there appears to be a real phase change, observed in both the empirical
+        and theoretical diagrams! The optimal weight configuration discontinuously changes in magnitude
+        and superposition. (In the theoretical model, we can analytically confirm that there''s a first-order
+        phase change: there''s crossover between the functions, causing a discontinuity in the derivative
+        of the optimal loss.)'
+      prefix: ''
+      suffix: ''
+      section: Superposition as a Phase Change
+      page: null
+      line: null
+    - exact: The reason pentagonal solutions are not on the unit circle is because models reduce the effect
+        of positive interference, setting a slight negative bias to cut off noise and setting their weights
+        to
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Perturbing a Single Feature
+      page: null
+      line: null
+    - exact: 'These other neurons implement two instances of asymmetric superposition and inhibition.
+        Each instance consists of two neurons:'
+      prefix: ''
+      suffix: ''
+      section: Computation in Superposition — The Asymmetric Superposition Motif
+      page: null
+      line: null
+    - exact: To avoid the consequences of that interference, the model has another neuron heavily inhibit
+        the feature in the case where there would have been positive interference. This essentially converts
+        positive interference (which could greatly increase the loss) into negative interference (which
+        has limited consequences due to the output ReLU).
+      prefix: ''
+      suffix: ''
+      section: Computation in Superposition — The Asymmetric Superposition Motif
+      page: null
+      line: null
+  C3:
+    quotes:
+    - exact: we replicated many of the experiments in this paper. Specifically, we replicated all plots
+        in the Demonstrating Superposition and Superposition as a Phase Change sections (visualizations
+        of the relu models with different sparsities and the phase diagrams) as well as the plot in The
+        Geometry of Superposition – Uniform Superposition.
+      prefix: ''
+      suffix: ''
+      section: Comments & Replications — Kshitij Sachan
+      page: null
+      line: null
+    - exact: We’ve reproduced the experiments in the Demonstrating Superposition and Superposition as
+        a Phase Change sections and have a minor additional result to contribute.
+      prefix: ''
+      suffix: ''
+      section: Comments & Replications — Tom McGrath
+      page: null
+      line: null
+    - exact: The results have been surprisingly easy to replicate -- we have reproduced (with very little
+        fuss) plots similar to those in the Demonstrating Superposition – Basic Results, Geometry – Feature
+        Dimensionality, and Learning Dynamics – Discrete "Energy Level" Jumps sections.
+      prefix: ''
+      suffix: ''
+      section: Comments & Replications — Jeffrey Wu and Dan Mossing
+      page: null
+      line: null
+    - exact: Jeff Wu, Daniel Mossing, Tom McGrath, and Kshitij Sachan did independent replications of
+        many of our experiments, greatly increasing our confidence in our results.
+      prefix: ''
+      suffix: ''
+      section: Acknowledgments
+      page: null
+      line: null
+  C4:
+    quotes:
+    - exact: 'The results in the previous section seem to suggest that there are three outcomes for a
+        feature when we train a model: (1) the feature may simply not be learned; (2) the feature may
+        be learned, and represented in superposition; or (3) the model may represent a feature with a
+        dedicated dimension.'
+      prefix: ''
+      suffix: ''
+      section: Superposition as a Phase Change
+      page: null
+      line: null
+    - exact: As we vary the sparsity of the features, we find that in the very sparse regime, we observe
+        superposition as expected, with features arranged in a hexagon and correlated features side-by-
+        side. As we decrease sparsity, the features progressively "collapse" into their principal components.
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Collapsing of Correlated Features
+      page: null
+      line: null
+    - exact: We'd also like to understand whether a given feature shares its dimension with other features.
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Basic Results
+      page: null
+      line: null
+  C5:
+    quotes:
+    - exact: 'One might think of this as two separate properties, which we''ll explore in more detail
+        shortly: Decomposability: Network representations can be described in terms of independently understandable
+        features. Linearity: Features are represented by direction.'
+      prefix: ''
+      suffix: ''
+      section: 'Definitions and Motivation: Features, Directions, and Superposition'
+      page: null
+      line: null
+    - exact: 'We hypothesize that there are really two countervailing forces driving this: Privileged
+        Basis: Only some representations have a privileged basis which encourages features to align with
+        basis directions (i.e. to correspond to neurons). Superposition: Linear representations can represent
+        more features than dimensions, using a strategy we call superposition. This can be seen as neural
+        networks simulating larger networks. This pushes features away from corresponding to neurons.'
+      prefix: ''
+      suffix: ''
+      section: 'Definitions and Motivation: Features, Directions, and Superposition'
+      page: null
+      line: null
+    - exact: As a result, compressed sensing lower bounds—which give lower bounds on the dimension of
+        the embedding such that recovery is still possible—can be interpreted as giving an upper bound
+        on the amount of superposition in our toy model. In particular, in various compressed sensing
+        settings, one can recover an n-dimensional k-sparse vector from an m dimensional projection if
+        and only if m = Ω(k log(n/k)) [47, 48, 49] . While the connection is not entirely straightforward,
+        we apply one such result to the toy model in the appendix.
+      prefix: ''
+      suffix: ''
+      section: Related Work — Compressed Sensing
+      page: null
+      line: null
+    - exact: In our framework, these senses correspond to decomposability (representing stimuli as compositions
+        of independent features) and superposition (representing more features than neurons, at cost of
+        interference if features co-occur).
+      prefix: ''
+      suffix: ''
+      section: Related Work — Theories of Neural Coding and Representation
+      page: null
+      line: null
+    - exact: We'll also discover a connection to the famous Thomson Problem in chemistry.
+      prefix: ''
+      suffix: ''
+      section: Mathematical Understanding
+      page: null
+      line: null
+  M1:
+    quotes:
+    - exact: To reduce noise, we train ten models for each point and average over the results, discarding
+        the model with the highest loss.
+      prefix: ''
+      suffix: ''
+      section: Superposition as a Phase Change
+      page: null
+      line: null
+    - exact: Getting clean results required fitting each model multiple times and taking the solution
+        with the lowest loss.
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Perturbing a Single Feature
+      page: null
+      line: null
+  M2:
+    quotes:
+    - exact: if optimized well enough, the linear model solution does not depend on sparsity level.)
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Basic Results
+      page: null
+      line: null
+    - exact: In fact, this makes it never worthwhile for the linear model to represent more features than
+        it has dimensions.
+      prefix: ''
+      suffix: ''
+      section: Mathematical Understanding
+      page: null
+      line: null
+    - exact: We can compare this to a theoretical "toy model of the toy model" where we can get closed
+        form solutions for the loss of different weight configurations as a function of importance and
+        sparsity.
+      prefix: ''
+      suffix: ''
+      section: Superposition as a Phase Change
+      page: null
+      line: null
+    - exact: 'There are three natural ways to store 2 features in 1 dimension: W = [1, 0] (ignore [0,
+        1], throwing away the extra feature), W = [0, 1] (ignore [1, 0], throwing away the first feature
+        to give the extra feature a dedicated dimension), and W = [1, −1] (store the features in superposition,
+        losing the ability to represent [1, 1], the combination of both features at the same time).'
+      prefix: ''
+      suffix: ''
+      section: Superposition as a Phase Change
+      page: null
+      line: null
+  M3:
+    quotes:
+    - exact: On one axis, we vary the importance of the 2nd "extra" feature from 0.1 to 10. On the other
+        axis, we vary the sparsity of all features from 1.0 to 0.01.
+      prefix: ''
+      suffix: ''
+      section: Superposition as a Phase Change
+      page: null
+      line: null
+    - exact: The model will only use the ReLU activation function if absolutely forced, which is a significant
+        mark against studying this toy model.
+      prefix: ''
+      suffix: ''
+      section: Superposition in a Privileged Basis — Limitations of the ReLU Hidden Layer Toy Model
+      page: null
+      line: null
+    - exact: L1 regularization of activations, adversarial training, and changing the activation function
+        all seem promising.
+      prefix: ''
+      suffix: ''
+      section: Open Questions
+      page: null
+      line: null
+  M4:
+    quotes:
+    - exact: ≥ 1 mean that there is some group of other features which can activate Wi as strongly as
+        feature i
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Basic Results
+      page: null
+      line: null
+    - exact: Empirically, it seems that the dimensionality of all features add up to the number of embedding
+        dimensions when the features are "packed efficiently" in some sense.
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Feature Dimensionality
+      page: null
+      line: null
+    - exact: Are we measuring the maximally principled things? For example, what is the most principled
+        definition of superposition / polysemanticity?
+      prefix: ''
+      suffix: ''
+      section: Open Questions
+      page: null
+      line: null
+  M5:
+    quotes:
+    - exact: At present, it's challenging to study superposition in models because we have no ground truth
+        for what the features are. (This is also the reason why the toy models described in this paper
+        can be studied – we do know what the features are!)
+      prefix: ''
+      suffix: ''
+      section: The Strategic Picture of Superposition — Additional Considerations
+      page: null
+      line: null
+    - exact: Since we don't have any ground truth for features, we need to create synthetic data for x
+        which simulates any important properties we believe features have from the perspective of modeling
+        them.
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Experiment Setup
+      page: null
+      line: null
+    - exact: We consider each dimension xi to be a "feature". Each one has an associated sparsity Si and
+        importance Ii .
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Experiment Setup
+      page: null
+      line: null
+  M6:
+    quotes:
+    - exact: The results are qualitatively similar for models with more features and hidden dimensions.
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Basic Results
+      page: null
+      line: null
+    - exact: the number of input features n doesn't matter as long as it's much larger than the number
+        of hidden dimensions, n ≫ m. And it also turns out that the number of hidden dimensions doesn't
+        really matter as long as we're interested in the ratio of features learned to hidden features.
+        Doubling the number of hidden dimensions just doubles the number of features the model learns.
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Uniform Superposition
+      page: null
+      line: null
+    - exact: We found the phase diagrams look quite different depending on the activation function, suggesting
+        that in this toy model some activation functions induce more polysemanticity than others.
+      prefix: ''
+      suffix: ''
+      section: Comments & Replications — Kshitij Sachan
+      page: null
+      line: null
+  M7:
+    quotes:
+    - exact: For each model shown, we trained 1000 models and visualized the one with the lowest loss.
+      prefix: ''
+      suffix: ''
+      section: Superposition in a Privileged Basis
+      page: null
+      line: null
+    - exact: Although the typical solutions are often similar to the minimal loss solutions shown, selecting
+        the minimal loss solutions reveals even more structure in how features align with neurons.
+      prefix: ''
+      suffix: ''
+      section: Superposition in a Privileged Basis
+      page: null
+      line: null
+  I1:
+    quotes:
+    - exact: The final step is whether to add an activation function. This turns out to be critical to
+        whether superposition occurs.
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Experiment Setup
+      page: null
+      line: null
+    - exact: 'In the previous section, we observed a surprising empirical result: adding a ReLU to the
+        output of our model allowed a radically different solution – superposition – which doesn''t occur
+        in linear models.'
+      prefix: ''
+      suffix: ''
+      section: Mathematical Understanding
+      page: null
+      line: null
+    - exact: As expected, sparsity is necessary for superposition to occur, but we can see that it interacts
+        in an interesting way with relative feature importance.
+      prefix: ''
+      suffix: ''
+      section: Superposition as a Phase Change
+      page: null
+      line: null
+    - exact: But we'll see later that the ability to set a negative bias is important for superposition
+        for a second set of reasons – roughly, it allows models to discard small amounts of noise.
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Experiment Setup
+      page: null
+      line: null
+    - exact: It's actually quite easy to get rid of superposition in the toy models described in this
+        paper, albeit at the cost of a higher loss.
+      prefix: ''
+      suffix: ''
+      section: 'The Strategic Picture of Superposition — Approach 1: Creating Models Without Superposition'
+      page: null
+      line: null
+  I2:
+    quotes:
+    - exact: 'Feature Sparsity: In the natural world, many features seem to be sparse in the sense that
+        they only rarely occur.'
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Experiment Setup
+      page: null
+      line: null
+    - exact: 'More Features Than Neurons: There are an enormous number of potentially useful features
+        a model might represent.'
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Experiment Setup
+      page: null
+      line: null
+    - exact: 'Features Vary in Importance: Not all features are equally useful to a given task.'
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Experiment Setup
+      page: null
+      line: null
+    - exact: For interpretability researchers, our main contribution is providing a direct demonstration
+        that superposition occurs in artificial neural networks given a relatively natural setup, suggesting
+        this may also occur in practice.
+      prefix: ''
+      suffix: ''
+      section: Introduction
+      page: null
+      line: null
+    - exact: However, once the features become sufficiently sparse, this model, too, uses superposition
+        to represent more features than it has neurons. This result is notable because it demonstrates
+        the ability of neural networks to perform computation even on data that is represented in superposition.
+      prefix: ''
+      suffix: ''
+      section: Computation in Superposition — Superposition vs Sparsity
+      page: null
+      line: null
+  I3:
+    quotes:
+    - exact: The issue is that the model doesn't benefit from the ReLU hidden layer – it has no role except
+        limiting how the model can encode information. If given any chance, the model will circumvent
+        it.
+      prefix: ''
+      suffix: ''
+      section: Superposition in a Privileged Basis — Limitations of the ReLU Hidden Layer Toy Model
+      page: null
+      line: null
+    - exact: We chose a very small model (only 5 neurons) both for ease of visualization, and to circumvent
+        some issues with this toy model we'll discuss below.
+      prefix: ''
+      suffix: ''
+      section: Superposition in a Privileged Basis
+      page: null
+      line: null
+    - exact: We made some progress towards this for the n = 2; m = 1 ReLU output model (and Tom McGrath
+        makes further progress in his comment), but it would be nice to solve this more generally.
+      prefix: ''
+      suffix: ''
+      section: Open Questions
+      page: null
+      line: null
+  I4:
+    quotes:
+    - exact: One question you might ask is whether we can quantify the ability of superposition to enable
+        extra computation by examining the loss. Unfortunately, we can't easily do this. Superposition
+        occurs when we change the task, making it sparser. As a result, the losses of models with different
+        amounts of superposition are not comparable – they're measuring the loss on different tasks!
+      prefix: ''
+      suffix: ''
+      section: Footnote 17
+      page: null
+      line: null
+    - exact: 'Our loss is weighted mean squared error weighted by the feature importances, Ii , described
+        above:'
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Experiment Setup
+      page: null
+      line: null
+    - exact: We found that this did reduce superposition, but attacks had to be made unreasonably large
+        (80% input L2 norm) to fully eliminate it, which didn't seem satisfying.
+      prefix: ''
+      suffix: ''
+      section: Relationship to Adversarial Robustness
+      page: null
+      line: null
+  I5:
+    quotes:
+    - exact: If one wants to understand why linear models don't exhibit superposition, the easy answer
+        is to observe that linear models essentially perform PCA.
+      prefix: ''
+      suffix: ''
+      section: Mathematical Understanding
+      page: null
+      line: null
+    - exact: These results seem to hint that PCA and superposition are in some sense complementary strategies
+        which trade off with one another. As features become more correlated, PCA becomes a better strategy.
+        As features become sparser, superposition becomes a better strategy.
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Collapsing of Correlated Features
+      page: null
+      line: null
+    - exact: In very dense regimes, the solution becomes equivalent to PCA.
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Collapsing of Correlated Features
+      page: null
+      line: null
+  I7:
+    quotes:
+    - exact: Although we can see hints of this in our previous experiment, it's hard to really isolate
+        what's going on because many features are changing at once and there may be interaction effects.
+        As a result, we set up the following experiment to better isolate the effects.
+      prefix: ''
+      suffix: ''
+      section: Superposition as a Phase Change
+      page: null
+      line: null
+    - exact: 'A note for reimplementations: optimizing with a two-dimensional hidden space makes this
+        easier to study, but the actual optimization process to be really challenging from gradient descent
+        – a lot harder than even just having three dimensions.'
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Perturbing a Single Feature
+      page: null
+      line: null
+    - exact: Mathematically, we represent this by linking the choice of whether all the features in a
+        correlated feature set are zero or not together.
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Setup for Exploring Correlated and Anticorrelated Features
+      page: null
+      line: null
+  I9:
+    quotes:
+    - exact: Correlated features prefer to be orthogonal, often forming in different tegum factors. As
+        a result, correlated features may form an orthogonal local basis. When they can't be orthogonal,
+        they prefer to be side-by-side.
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Non-Uniform Superposition
+      page: null
+      line: null
+    - exact: Anti-correlated features prefer to be in the same tegum factor when superposition is necessary.
+        They prefer to have negative interference, ideally being antipodal.
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Non-Uniform Superposition
+      page: null
+      line: null
+    - exact: The model ideally represents correlated features orthogonally, in separate tegum factors
+        with no interactions between them. When that fails, it prefers to arrange them so that they're
+        as close together as possible – it prefers positive interference between correlated features over
+        negative interference. Finally, when there isn't enough space to represent all the correlated
+        features, it will collapse them and represent their principal component instead!
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Correlated and Anticorrelated Features
+      page: null
+      line: null
+    - exact: One neuron does asymmetric superposition. In normal superposition, one might store features
+        with equal weights (eg. W = [1, −1]) and then have equal output weights
+      prefix: ''
+      suffix: ''
+      section: Computation in Superposition — The Asymmetric Superposition Motif
+      page: null
+      line: null
+  I11:
+    quotes:
+    - exact: Perhaps the most striking phenomenon we've noticed is that the learning dynamics of toy models
+        with large numbers of features appear to be dominated by "energy level jumps" where features jump
+        between different feature dimensionalities.
+      prefix: ''
+      suffix: ''
+      section: 'Superposition and Learning Dynamics — Phenomenon 1: Discrete Energy Level Jumps'
+      page: null
+      line: null
+    - exact: Note how the dimensionality of some features "jump" between different values and swap places.
+        As this happens, the loss curve also undergoes a sudden drop (a very small one at the first jump,
+        and a larger one at the second jump).
+      prefix: ''
+      suffix: ''
+      section: 'Superposition and Learning Dynamics — Phenomenon 1: Discrete Energy Level Jumps'
+      page: null
+      line: null
+  I12:
+    quotes:
+    - exact: Unfortunately, we aren't able to give these questions the detailed investigation they deserve
+        within the scope of this paper. Instead, we'll limit ourselves to a couple particularly striking
+        phenomena we've noticed, leaving more detailed investigation for future work.
+      prefix: ''
+      suffix: ''
+      section: Superposition and Learning Dynamics
+      page: null
+      line: null
+  E1:
+    quotes:
+    - exact: Simply apply at L1 regularization term to the hidden layer activations
+      prefix: ''
+      suffix: ''
+      section: 'The Strategic Picture of Superposition — Approach 1: Creating Models Without Superposition'
+      page: null
+      line: null
+    - exact: In addition to observing that superposition can cause models to be vulnerable to adversarial
+        examples, we briefly experimented with adversarial training to see if the relationship could be
+        used in the other direction to reduce superposition.
+      prefix: ''
+      suffix: ''
+      section: Relationship to Adversarial Robustness
+      page: null
+      line: null
+    - exact: 'There are at least two ways we could do this: we could add an activation function or apply
+        L1 regularization to the hidden layer.'
+      prefix: ''
+      suffix: ''
+      section: Superposition in a Privileged Basis
+      page: null
+      line: null
+  E2:
+    quotes:
+    - exact: The choice to have features distributed uniformly is arbitrary. An exponential or power law
+        distribution would also be very natural.
+      prefix: ''
+      suffix: ''
+      section: Footnote 8
+      page: null
+      line: null
+    - exact: 'Concretely, our synthetic data is defined as follows: The input vectors x are synthetic
+        data intended to simulate the properties we believe the true underlying features of our task have.'
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Experiment Setup
+      page: null
+      line: null
+    - exact: Can we estimate the feature importance curve or feature sparsity curve of real models?
+      prefix: ''
+      suffix: ''
+      section: Open Questions
+      page: null
+      line: null
+  E3:
+    quotes:
+    - exact: 'Specifically, we''ll have the model compute y = abs(x). Absolute value is an appealing function
+        to study because there''s a very simple way to compute it with ReLU neurons:'
+      prefix: ''
+      suffix: ''
+      section: Computation in Superposition
+      page: null
+      line: null
+    - exact: Is the absolute value problem representative of computation in superposition generally, or
+        idiosyncratic?
+      prefix: ''
+      suffix: ''
+      section: Open Questions
+      page: null
+      line: null
+  E4:
+    quotes:
+    - exact: Our best validation is whether their predictions are consistent with empirical observations
+        regarding polysemanticity. To the best of our knowledge they are.
+      prefix: ''
+      suffix: ''
+      section: Discussion — To What Extent Does Superposition Exist in Real Models?
+      page: null
+      line: null
+    - exact: Early Transformer MLP neurons are extremely polysemantic. Our experience is that neurons
+        in the first MLP layer in Transformer language models are often extremely polysemantic.
+      prefix: ''
+      suffix: ''
+      section: Discussion — To What Extent Does Superposition Exist in Real Models?
+      page: null
+      line: null
+    - exact: While only suggestive, the ability of our toy model to reproduce these qualitative features
+        of larger neural networks offers an exciting hint that these models are illuminating general phenomena.
+      prefix: ''
+      suffix: ''
+      section: Computation in Superposition — Superposition vs Sparsity
+      page: null
+      line: null
+  E5:
+    quotes:
+    - exact: The model represents more features by having them not be orthogonal to each other. It starts
+        with less important features, and gradually affects the most important ones.
+      prefix: ''
+      suffix: ''
+      section: Demonstrating Superposition — Basic Results
+      page: null
+      line: null
+    - exact: If we make it sufficiently sparse, there's a phase change, and it collapses from a pentagon
+        to a pair of digons with the sparser point at zero.
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Perturbing a Single Feature
+      page: null
+      line: null
+    - exact: The most important thing to pay attention to is how there's a shift from monosemantic to
+        polysemantic neurons as sparsity increases.
+      prefix: ''
+      suffix: ''
+      section: Superposition in a Privileged Basis
+      page: null
+      line: null
+  E6:
+    quotes:
+    - exact: 'In the previous diagram, we found that there are distinct lines corresponding to dimensionality
+        of: ¾ (tetrahedron), ⅔ (triangle), ½ (antipodal pair), ⅖ (pentagon), ⅜ (square antiprism), and
+        0 (feature not learned).'
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Why These Geometric Structures?
+      page: null
+      line: null
+    - exact: Several of these configurations may jump out as solutions to the famous Thomson problem.
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Why These Geometric Structures?
+      page: null
+      line: null
+    - exact: To test this, we generated L2 adversarial examples (allowing a max L2 attack norm of 0.1
+        of the average input norm).
+      prefix: ''
+      suffix: ''
+      section: Relationship to Adversarial Robustness
+      page: null
+      line: null
+    - exact: We find that vulnerability to adversarial examples sharply increases as superposition forms
+        (increasing by >3x), and that the level of vulnerability closely tracks the number of features
+        per dimension (the reciprocal of feature dimensionality).
+      prefix: ''
+      suffix: ''
+      section: Relationship to Adversarial Robustness
+      page: null
+      line: null
+  V1:
+    quotes:
+    - exact: 'Rather than offer a single definition we''re confident about, we consider three potential
+        working definitions:'
+      prefix: ''
+      suffix: ''
+      section: Definitions and Motivation — What are Features?
+      page: null
+      line: null
+    - exact: This definition is slightly circular, but avoids the issues with the earlier ones.
+      prefix: ''
+      suffix: ''
+      section: Definitions and Motivation — What are Features?
+      page: null
+      line: null
+    - exact: But we aren't overly attached to it, and actually think it's probably important to not prematurely
+        attach to a definition.
+      prefix: ''
+      suffix: ''
+      section: Definitions and Motivation — What are Features?
+      page: null
+      line: null
+    - exact: The ideas in this section might be thought of in terms of four progressively more strict
+        properties that neural network representations might have.
+      prefix: ''
+      suffix: ''
+      section: 'Definitions and Motivation — Summary: A Hierarchy of Feature Properties'
+      page: null
+      line: null
+  V2:
+    quotes:
+    - exact: Why are we interested in toy models? We believe they are useful proxies for studying the
+        superposition we suspect might exist in real neural networks.
+      prefix: ''
+      suffix: ''
+      section: Discussion — To What Extent Does Superposition Exist in Real Models?
+      page: null
+      line: null
+    - exact: This doesn't mean that everything about our toy model reflects real neural networks. Our
+        intuition is that some of the phenomena we observe (superposition, monosemantic vs polysemantic
+        neurons, perhaps the relationship to adversarial examples) are likely to generalize, while other
+        phenomena (especially the geometry and learning dynamics results) are much more uncertain.
+      prefix: ''
+      suffix: ''
+      section: Discussion — To What Extent Does Superposition Exist in Real Models?
+      page: null
+      line: null
+    - exact: This paper has shown that the superposition hypothesis is true in certain toy models.
+      prefix: ''
+      suffix: ''
+      section: Open Questions
+      page: null
+      line: null
+  V3:
+    quotes:
+    - exact: In some cases (e.g. when parameters approach those needed for a phase transition) the global
+        minimum can have a considerably smaller basin of attraction than local minima.
+      prefix: ''
+      suffix: ''
+      section: Comments & Replications — Tom McGrath
+      page: null
+      line: null
+    - exact: we see the toy network learns a linear PCA solution before moving to a better nonlinear solution.
+      prefix: ''
+      suffix: ''
+      section: 'Superposition and Learning Dynamics — Phenomenon 2: Learning as Geometric Transformations'
+      page: null
+      line: null
+  V4:
+    quotes:
+    - exact: Roughly, the idea of superposition is that neural networks "want to represent more features
+        than they have neurons", so they exploit a property of high-dimensional spaces to simulate a model
+        with many more neurons.
+      prefix: ''
+      suffix: ''
+      section: Definitions and Motivation — The Superposition Hypothesis
+      page: null
+      line: null
+    - exact: The behavior seems to be quite nuanced, with a kind of "order of preferences" for how correlated
+        features behave in superposition.
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Correlated and Anticorrelated Features
+      page: null
+      line: null
+    - exact: Surprisingly, we find that this graph is "sticky" at 1 and 1/2. (This very vaguely resembles
+        the fractional quantum Hall effect
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition — Uniform Superposition
+      page: null
+      line: null
+    - exact: But it seems important to allow for features we might not understand. If AlphaFold discovers
+        some important chemical structure for predicting protein folding, it very well might not be something
+        we initially understand!
+      prefix: ''
+      suffix: ''
+      section: Definitions and Motivation — What are Features?
+      page: null
+      line: null
+  V5:
+    quotes:
+    - exact: Our toy models are simple ReLU networks, so it seems fair to say that neural networks exhibit
+        these properties in at least some regimes, but it's very unclear what to generalize to real networks.
+      prefix: ''
+      suffix: ''
+      section: Key Results From Our Toy Models
+      page: null
+      line: null
+    - exact: In some ways, the structure described in this section seems "too elegant to be true" and
+        we think there's a good chance it's at least partly idiosyncratic to the toy model we're investigating.
+      prefix: ''
+      suffix: ''
+      section: The Geometry of Superposition
+      page: null
+      line: null
+    - exact: How realistic are these toy models? To what extent do they capture the important properties
+        of real models with respect to superposition? How can we tell?
+      prefix: ''
+      suffix: ''
+      section: Open Questions
+      page: null
+      line: null

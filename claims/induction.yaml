@@ -1,0 +1,1817 @@
+claim: induction
+title: 'Induction Heads: In-Context Token Copying'
+description: 'A two-head composition: a previous-token head writes the identity of the token before a
+  repeat into the residual stream, and an induction head reads it to predict what followed last time.
+  Heads are identified by two behavioral scores on sequences of repeated uniform-random tokens, prefix
+  matching and copying, and the mechanism is derived at the weight level for the two-layer attention-only
+  case. Systems: 34 decoder-only models from one to forty layers, with causal ablation confined to the
+  twelve small models, six attention-only and six with MLPs. Description mode: implementational-functional.'
+source:
+  citation: olsson2022context
+  title: In-context Learning and Induction Heads
+  url: https://arxiv.org/abs/2209.11895
+  local: reference/olsson_2022_induction_heads.pdf
+  sha256: 9fa4a667e559431efac5bf1d9463f3b0005633e0b78f3ebbacfb901e4ed36e50
+  extract_cmd: pdftotext -layout
+  read_in_full: false
+claims:
+  C1:
+    quotes:
+    - exact: Formally, we define an induction head as one which exhibits the following two properties
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+    - exact: 'Prefix matching: The head attends back to previous tokens that were followed by the current
+        and/or recent tokens.'
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+    - exact: 'Copying: The head’s output increases the logit corresponding to the attended-to token.'
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+    - exact: In other words, induction heads are any heads that empirically increase the likelihood of
+        [B] given [A][B]...[A] when shown a repeated sequence of completely random tokens.
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+    - exact: In practice, induction heads don't exhibit these properties perfectly, and our measurements
+        give us a continuum, but there is a clear subset of heads which exhibit these properties with
+        much greater than random chance.
+      prefix: ''
+      suffix: ''
+      section: Footnote 5
+      page: null
+      line: null
+    - exact: Note that induction heads don’t occur in 1 layer models, because they require a composition
+        of attention heads in different layers.
+      prefix: ''
+      suffix: ''
+      section: Footnote 2
+      page: null
+      line: null
+    - exact: The hypothesis that induction heads are the primary mechanism of in-context learning predicts
+        that the phase change will happen in one-layer models with this change, and perhaps might happen
+        earlier in models with more layers.
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: 'The results (figure below) are in line with the predictions: when we use the smeared-key
+        architecture, in-context learning does indeed form for one-layer models (when it didn’t before),
+        and it forms earlier for two-layer and larger models.'
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: In fact, almost all the in-context learning in small attention-only models appears to come
+        from these induction heads! This begins at the start of the phase change, and remains true through
+        the end of training.
+      prefix: ''
+      suffix: ''
+      section: Argument 3
+      page: null
+      line: null
+  C2:
+    quotes:
+    - exact: 'This is done by having a
+
+        "copying matrix" OV circuit, most easily characterized by its positive eigenvalues.'
+      prefix: ''
+      suffix: ''
+      section: Argument 5, Summary of Reverse Engineering Induction Heads
+      page: null
+      line: null
+    - exact: 'Transformers seem to have
+
+        quite a number of copying heads, of which induction heads are a subset.'
+      prefix: ''
+      suffix: ''
+      section: Argument 5, Summary of Reverse Engineering Induction Heads
+      page: null
+      line: null
+    - exact: 'In order to do prefix matching, the key vector at the attended token
+
+        needs to contain information about the preceding tokens'
+      prefix: ''
+      suffix: ''
+      section: Argument 5, Summary of Reverse Engineering Induction Heads
+      page: null
+      line: null
+    - exact: 'The most basic
+
+        form of an induction head uses pure K-composition with an earlier “previous token head” to create
+        a'
+      prefix: ''
+      suffix: ''
+      section: Argument 5, Summary of Reverse Engineering Induction Heads
+      page: null
+      line: null
+    - exact: 'In the small models we
+
+        studied in our previous paper, all induction heads have the described QK term driving their attention
+
+        pattern and a positive eigenvalue circuit performing copying.'
+      prefix: ''
+      suffix: ''
+      section: Argument 5, Summary of Reverse Engineering Induction Heads
+      page: null
+      line: null
+    - exact: We show here that our head activation evaluators (that we use to measure the properties in
+        our definition of induction heads) correlate well with mathematically-based measures in small
+        attention-only models.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Validating head activation evaluators
+      page: null
+      line: null
+    - exact: Our copying evaluator correlates well with the OV matrix of each head.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Validating head activation evaluators
+      page: null
+      line: null
+    - exact: Our prefix matching evaluator correlates well with the trace of QK eigenvalues for the previous-token
+        QK-circuit term.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Validating head activation evaluators
+      page: null
+      line: null
+    - exact: 'we''ve
+
+        seen evidence of a second "pointer-arithmetic" mechanism for induction heads. This mechanism
+
+        makes use of the positional embedding and “Q-composition”.'
+      prefix: ''
+      suffix: ''
+      section: Argument 5, Summary of Reverse Engineering Induction Heads
+      page: null
+      line: null
+    - exact: 'A bigger
+
+        issue is that right now we''re unable to reverse engineer induction heads in models with MLP layers.'
+      prefix: ''
+      suffix: ''
+      section: Argument 5
+      page: null
+      line: null
+  C3:
+    quotes:
+    - exact: 'We combine these
+
+        log-likelihoods into a "per-token loss vector" and apply Principal Component Analysis (PCA)'
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Per-Token Loss Analysis
+      page: null
+      line: null
+    - exact: For the small models, all attention heads are shown. For the full-scale models, a subset
+        of 100 heads is shown; see the Appendix for an explanation of how the 100 heads were chosen.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Analyses, Attention head measurements
+      page: null
+      line: null
+    - exact: Our prefix matching evaluator correlates well with the trace of QK eigenvalues for the previous-token
+        QK-circuit term.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Validating head activation evaluators
+      page: null
+      line: null
+    - exact: With the exception of the attention head ablations (which are the most computationally-intensive,
+        and so were run only on the small models), we measure these properties on all snapshots of all
+        models across training (that is, 200 snapshots each for the twelve small models, and 14 or 15
+        snapshots each for the six full-scale models).
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection
+      page: null
+      line: null
+    - exact: 'Replacing the previous-token head’s
+
+        scores with exact previous-token attention recovered 99% of the loss difference.'
+      prefix: ''
+      suffix: ''
+      section: Comments & Replications, Adam Scherlis
+      page: null
+      line: null
+    - exact: "Replacing the\ninduction head’s scores with a simple approximation (attending to the first\
+        \ token and to exact\n [A][B]...[A] matches) recovered about 65% of the loss difference."
+      prefix: ''
+      suffix: ''
+      section: Comments & Replications, Adam Scherlis
+      page: null
+      line: null
+    - exact: 'Under this definition, I found potential induction heads in GPT2 and GPT-Neo mostly starting
+        in
+
+        the mid-depth region.'
+      prefix: ''
+      suffix: ''
+      section: Comments & Replications, Tom Lieberum
+      page: null
+      line: null
+    - exact: 'For example, for GPT2-XL, head 20 in layer 21 seems to be
+
+        an induction head, as well as head 0 in layer 12 of GPT-Neo-2.7B.'
+      prefix: ''
+      suffix: ''
+      section: Comments & Replications, Tom Lieberum
+      page: null
+      line: null
+  C4:
+    quotes:
+    - exact: By defining induction heads in terms of their behavior on repeated copies of random sequences,
+        we can be confident that it's actually relying on induction rather than, say, a simple copying
+        head that heuristically attends to previous tokens which could plausibly slot in well after the
+        next token, even if that hasn’t occurred yet in the current context.
+      prefix: ''
+      suffix: ''
+      section: Footnote 6
+      page: null
+      line: null
+    - exact: Previous token attention. Does the head attend to the token that immediately precedes the
+        present token?
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (3)
+      page: null
+      line: null
+    - exact: 'Transformers seem to have
+
+        quite a number of copying heads, of which induction heads are a subset.'
+      prefix: ''
+      suffix: ''
+      section: Argument 5, Summary of Reverse Engineering Induction Heads
+      page: null
+      line: null
+    - exact: 'Full-scale models above 16 layers start to show a small number of heads that score well
+        on
+
+        “prefix search”, but get a negative score on copying, which means they are not induction heads.'
+      prefix: ''
+      suffix: ''
+      section: Unexplained Curiosities, Additional Curiosities
+      page: null
+      line: null
+    - exact: In other words, induction heads are any heads that empirically increase the likelihood of
+        [B] given [A][B]...[A] when shown a repeated sequence of completely random tokens.
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+  C5:
+    quotes:
+    - exact: Why do induction heads require composition? In an induction head, where the head attends
+        must be a function of the token before the token it attends to. But an individual attention head
+        computes attention scores only from the source and destination token.
+      prefix: ''
+      suffix: ''
+      section: Footnote 15
+      page: null
+      line: null
+    - exact: Note that induction heads don’t occur in 1 layer models, because they require a composition
+        of attention heads in different layers.
+      prefix: ''
+      suffix: ''
+      section: Footnote 2
+      page: null
+      line: null
+    - exact: 'This is what we''d predict if induction heads were the mechanism for the majority of in-context
+        learning: induction heads require a composition of attention heads, which is only possible with
+        two or more layers.'
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: If induction heads are the mechanism behind the large improvement in in-context learning,
+        that makes predictions about the minimum architectural requirements in order to achieve the observed
+        improvement.
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: 'In the small models we
+
+        studied in our previous paper, all induction heads have the described QK term driving their attention
+
+        pattern and a positive eigenvalue circuit performing copying.'
+      prefix: ''
+      suffix: ''
+      section: Argument 5, Summary of Reverse Engineering Induction Heads
+      page: null
+      line: null
+  M1:
+    quotes:
+    - exact: The arguments above are based on analysis of 34 decoder-only Transformer language models,
+        with different snapshots saved over the course of training, for one run of training per model.
+      prefix: ''
+      suffix: ''
+      section: Model Analysis Table, preamble
+      page: null
+      line: null
+    - exact: In more detail, each head evaluator is implemented as follows, and each score is averaged
+        over 10 examples.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (3)
+      page: null
+      line: null
+    - exact: That said, it’s also the case that aside from the experiments varying the dataset, all these
+        models were trained on the same tokens in the same order
+      prefix: ''
+      suffix: ''
+      section: Footnote 11
+      page: null
+      line: null
+    - exact: because retraining models introduces the possibility of run-to-run loss variation, and the
+        measured loss differences are small
+      prefix: ''
+      suffix: ''
+      section: Related Work, In-context learning
+      page: null
+      line: null
+  M2:
+    quotes:
+    - exact: including more than 50,000 attention head ablations (the data of which is shown in the Model
+        Analysis Table)
+      prefix: ''
+      suffix: ''
+      section: Introduction
+      page: null
+      line: null
+    - exact: With the exception of the attention head ablations (which are the most computationally-intensive,
+        and so were run only on the small models), we measure these properties on all snapshots of all
+        models across training (that is, 200 snapshots each for the twelve small models, and 14 or 15
+        snapshots each for the six full-scale models).
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection
+      page: null
+      line: null
+    - exact: For the small models, all attention heads are shown. For the full-scale models, a subset
+        of 100 heads is shown; see the Appendix for an explanation of how the 100 heads were chosen.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Analyses, Attention head measurements
+      page: null
+      line: null
+    - exact: In fact, ablating most other attention heads appears to increase in-context learning.
+      prefix: ''
+      suffix: ''
+      section: Footnote 17
+      page: null
+      line: null
+    - exact: The exception is the one-layer model, where induction heads never form – just as in-context
+        learning never substantially develops for the one-layer model.
+      prefix: ''
+      suffix: ''
+      section: Argument 1
+      page: null
+      line: null
+    - exact: This shift also appears to be the first point where, at least for small models, the loss
+        curve diverges from a one-layer model – which does not display the bump, just as it does not display
+        the other abrupt changes.
+      prefix: ''
+      suffix: ''
+      section: Argument 1
+      page: null
+      line: null
+  M3:
+    quotes:
+    - exact: We chose the 500th and 50th token indices somewhat arbitrarily.
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, In-context Learning
+      page: null
+      line: null
+    - exact: In the following plot, we show how the large models' "in-context learning score" varies if
+        we define it instead as the difference between the loss at the final token in the context (8192)
+        and other indices.
+      prefix: ''
+      suffix: ''
+      section: Unexplained Curiosities, Seemingly Constant In-Context Learning Score
+      page: null
+      line: null
+    - exact: all definitions appear to show that the amount of in-context learning varies only slightly
+        between models.
+      prefix: ''
+      suffix: ''
+      section: Unexplained Curiosities, Seemingly Constant In-Context Learning Score
+      page: null
+      line: null
+    - exact: Additionally, another set of the small models was trained on a different dataset, consisting
+        of just internet books, to explore the impact of varying the dataset.
+      prefix: ''
+      suffix: ''
+      section: Model Analysis Table, preamble
+      page: null
+      line: null
+    - exact: Second, we tried out training some of the small models on a different dataset, and we observed
+        the phase change develop in the same way
+      prefix: ''
+      suffix: ''
+      section: Argument 1, Looking at the Phase Change More Closely
+      page: null
+      line: null
+    - exact: 'We could do these ablations in two different ways: a “full” ablation, and a “pattern-preserving”
+        ablation. (The model analysis table shows only pattern-preserving ablations; we explain the other
+        method for comparison)'
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (2)
+      page: null
+      line: null
+  M4:
+    quotes:
+    - exact: We show here that our head activation evaluators (that we use to measure the properties in
+        our definition of induction heads) correlate well with mathematically-based measures in small
+        attention-only models.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Validating head activation evaluators
+      page: null
+      line: null
+    - exact: Our copying evaluator correlates well with the OV matrix of each head.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Validating head activation evaluators
+      page: null
+      line: null
+    - exact: Our prefix matching evaluator correlates well with the trace of QK eigenvalues for the previous-token
+        QK-circuit term.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Validating head activation evaluators
+      page: null
+      line: null
+    - exact: In fact, ablating most other attention heads appears to increase in-context learning.
+      prefix: ''
+      suffix: ''
+      section: Footnote 17
+      page: null
+      line: null
+    - exact: 'At first, that seems kind of crazy: how could damaging the model make it better at in-context
+        learning?'
+      prefix: ''
+      suffix: ''
+      section: Footnote 17
+      page: null
+      line: null
+    - exact: It appears that some tokens can be predicted with both "normal prediction" and in-context
+        learning.
+      prefix: ''
+      suffix: ''
+      section: Footnote 17
+      page: null
+      line: null
+    - exact: and in-context learning score as we've defined it increases.
+      prefix: ''
+      suffix: ''
+      section: Footnote 17
+      page: null
+      line: null
+    - exact: 'Before this window there is less than
+
+        0.15 nats of in-context learning, after it there is roughly 0.4 nats, an amount that remains constant
+
+        for the rest of training and is also constant across many different model sizes'
+      prefix: ''
+      suffix: ''
+      section: Argument 1
+      page: null
+      line: null
+    - exact: 'It appears to not matter whether the model is a
+
+        tiny two layer model or a fairly large 13 billion parameter model, nor whether the model has just
+
+        gone through the phase change or trained much longer.'
+      prefix: ''
+      suffix: ''
+      section: Unexplained Curiosities, Seemingly Constant In-Context Learning Score
+      page: null
+      line: null
+    - exact: 'While it still seems mysterious to us why models should have the same in-context learning
+
+        score, this perspective makes it "strange" rather than "shocking".'
+      prefix: ''
+      suffix: ''
+      section: Unexplained Curiosities, Seemingly Constant In-Context Learning Score
+      page: null
+      line: null
+    - exact: 'In-context learning score: the loss of the 500th token in the context minus the average
+        loss of the 50th token in the context, averaged over dataset examples.'
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, In-context Learning
+      page: null
+      line: null
+    - exact: defined as the 50th token loss minus the 500th token loss as described in Key Concepts
+      prefix: ''
+      suffix: ''
+      section: Argument 1
+      page: null
+      line: null
+    - exact: 'One of the stranger observations in this paper is that in-context learning score (as we''ve
+        defined it:
+
+        the loss of the 500th token in the context minus the loss of the 50th token in the context) is
+        more or
+
+        less the same for all models after the phase change.'
+      prefix: ''
+      suffix: ''
+      section: Unexplained Curiosities, Seemingly Constant In-Context Learning Score
+      page: null
+      line: null
+    - exact: 'In-context learning score: We compute what we call the “in-context learning score” as the
+
+        average loss of the 500th token minus the average loss of the 50th token'
+      prefix: ''
+      suffix: ''
+      section: Appendix, Analyses, Per-token losses
+      page: null
+      line: null
+    - exact: We operationalize the model’s in-context learning abilities as how much better the model
+        is at predicting the 500th token than the 50th token
+      prefix: ''
+      suffix: ''
+      section: Appendix, Analyses, Ablation attribution to phase change
+      page: null
+      line: null
+  M5:
+    quotes:
+    - exact: 'In the previous paper, we only reverse engineered a single induction head in a small
+
+        attention-only model, although we can reverse engineered others (and have done so).'
+      prefix: ''
+      suffix: ''
+      section: Argument 5
+      page: null
+      line: null
+    - exact: We show here that our head activation evaluators (that we use to measure the properties in
+        our definition of induction heads) correlate well with mathematically-based measures in small
+        attention-only models.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Validating head activation evaluators
+      page: null
+      line: null
+    - exact: We define a “smeared key" architecture with a very simple modification that should make it
+        easy for transformers of any depth to express induction heads.
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: 'The results (figure below) are in line with the predictions: when we use the smeared-key
+        architecture, in-context learning does indeed form for one-layer models (when it didn’t before),
+        and it forms earlier for two-layer and larger models.'
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: 'In the small models we
+
+        studied in our previous paper, all induction heads have the described QK term driving their attention
+
+        pattern and a positive eigenvalue circuit performing copying.'
+      prefix: ''
+      suffix: ''
+      section: Argument 5, Summary of Reverse Engineering Induction Heads
+      page: null
+      line: null
+  M6:
+    quotes:
+    - exact: The arguments above are based on analysis of 34 decoder-only Transformer language models,
+        with different snapshots saved over the course of training, for one run of training per model.
+      prefix: ''
+      suffix: ''
+      section: Model Analysis Table, preamble
+      page: null
+      line: null
+    - exact: 'The models are drawn from four different model series as follows:'
+      prefix: ''
+      suffix: ''
+      section: Model Analysis Table, preamble
+      page: null
+      line: null
+    - exact: “Full-scale models”, a series of successively-larger models with MLPs (ranging from 4 layers
+        and 13M parameters, up to 40 layers and 13B parameters), that are used as the basis for multiple
+        projects at Anthropic.
+      prefix: ''
+      suffix: ''
+      section: Model Analysis Table, preamble
+      page: null
+      line: null
+    - exact: They were trained for 10,000 steps (~10 billion tokens), saving 200 snapshots at intervals
+        of every 50 steps.
+      prefix: ''
+      suffix: ''
+      section: Model Details, Small Models
+      page: null
+      line: null
+    - exact: For our analyses we use snapshots at steps from 2^5 through 2^17, plus one or two final saves
+        thereafter, for a total of 15 saved snapshots (except the 40L which has 14 saved snapshots).
+      prefix: ''
+      suffix: ''
+      section: Model Details, Full-Scale Models
+      page: null
+      line: null
+    - exact: With the exception of the attention head ablations (which are the most computationally-intensive,
+        and so were run only on the small models), we measure these properties on all snapshots of all
+        models across training (that is, 200 snapshots each for the twelve small models, and 14 or 15
+        snapshots each for the six full-scale models).
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection
+      page: null
+      line: null
+    - exact: Additionally, another set of the small models was trained on a different dataset, consisting
+        of just internet books, to explore the impact of varying the dataset.
+      prefix: ''
+      suffix: ''
+      section: Model Analysis Table, preamble
+      page: null
+      line: null
+    - exact: 'This head is not an induction head, and yet ablating it has an effect similar to
+
+        reversing the phase change (in the “before-and-after vector” attribution plot).'
+      prefix: ''
+      suffix: ''
+      section: Unexplained Curiosities, Additional Curiosities
+      page: null
+      line: null
+    - exact: The 4-layer MLP model ablations are nowhere near as “peaky” as those of any other model.
+      prefix: ''
+      suffix: ''
+      section: Unexplained Curiosities, Additional Curiosities
+      page: null
+      line: null
+    - exact: 'The 6-layer MLP model has one lone induction head whose ablation has the opposite effect
+
+        on the in-context learning score.'
+      prefix: ''
+      suffix: ''
+      section: Unexplained Curiosities, Additional Curiosities
+      page: null
+      line: null
+  M7:
+    quotes:
+    - exact: We chose the 500th and 50th token indices somewhat arbitrarily.
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, In-context Learning
+      page: null
+      line: null
+    - exact: For the small models, all attention heads are shown. For the full-scale models, a subset
+        of 100 heads is shown; see the Appendix for an explanation of how the 100 heads were chosen.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Analyses, Attention head measurements
+      page: null
+      line: null
+    - exact: Note that in these plots, only a randomized sample of 100 heads (with selection biased towards
+        those scoring highly on prefix matching) are shown as opaque dots
+      prefix: ''
+      suffix: ''
+      section: Appendix, Where induction heads form
+      page: null
+      line: null
+    - exact: 'They have a context window of 8192 tokens, a
+
+        216 token vocabulary, an activation dimension dmodel = 768, and 12 attention heads per layer
+
+        regardless of total model size.'
+      prefix: ''
+      suffix: ''
+      section: Model Details, Small Models
+      page: null
+      line: null
+    - exact: 'Our goal is to find heads that meet this definition but
+
+        also perform more interesting and sophisticated behaviors, essentially showing that induction
+        heads
+
+        in large models can be “generalizable”.'
+      prefix: ''
+      suffix: ''
+      section: Argument 4
+      page: null
+      line: null
+  I1:
+    quotes:
+    - exact: In fact, almost all the in-context learning in small attention-only models appears to come
+        from these induction heads! This begins at the start of the phase change, and remains true through
+        the end of training.
+      prefix: ''
+      suffix: ''
+      section: Argument 3
+      page: null
+      line: null
+    - exact: For the cases they cover, ablations are by far our strongest evidence.
+      prefix: ''
+      suffix: ''
+      section: Argument 3
+      page: null
+      line: null
+    - exact: All things considered, we feel comfortable concluding from this that induction heads are
+        the primary mechanism for in-context learning in small attention-only models, but see this evidence
+        as only suggestive for the MLP case.
+      prefix: ''
+      suffix: ''
+      section: Argument 3
+      page: null
+      line: null
+    - exact: Unfortunately, we do not have ablations for our full-scale models.
+      prefix: ''
+      suffix: ''
+      section: Argument 3
+      page: null
+      line: null
+    - exact: With the exception of the attention head ablations (which are the most computationally-intensive,
+        and so were run only on the small models), we measure these properties on all snapshots of all
+        models across training (that is, 200 snapshots each for the twelve small models, and 14 or 15
+        snapshots each for the six full-scale models).
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection
+      page: null
+      line: null
+    - exact: That means that all in-context learning must ultimately originate with attention heads, and
+        since the relationship is almost linear, ablations (with frozen attention patterns) are a principled
+        way to measure their contribution.
+      prefix: ''
+      suffix: ''
+      section: Footnote 19
+      page: null
+      line: null
+  I2:
+    quotes:
+    - exact: 'Not only do we understand the induction
+
+        heads and know that they should contribute to in-context learning, but there doesn''t seem to
+        really
+
+        be an alternative mechanism that could be driving it.'
+      prefix: ''
+      suffix: ''
+      section: Argument 5
+      page: null
+      line: null
+    - exact: We define a “smeared key" architecture with a very simple modification that should make it
+        easy for transformers of any depth to express induction heads.
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: 'The results (figure below) are in line with the predictions: when we use the smeared-key
+        architecture, in-context learning does indeed form for one-layer models (when it didn’t before),
+        and it forms earlier for two-layer and larger models.'
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: "Replacing the\ninduction head’s scores with a simple approximation (attending to the first\
+        \ token and to exact\n [A][B]...[A] matches) recovered about 65% of the loss difference."
+      prefix: ''
+      suffix: ''
+      section: Comments & Replications, Adam Scherlis
+      page: null
+      line: null
+    - exact: 'Our induction heads
+
+        also match patterns of the form [A][B][C]...[A][B]→[C] ; including this in the substituted
+
+        attention scores recovered an additional 10% of loss difference.'
+      prefix: ''
+      suffix: ''
+      section: Comments & Replications, Adam Scherlis
+      page: null
+      line: null
+  I3:
+    quotes:
+    - exact: Our ablations measure the marginal effects of removing attention heads from the model. To
+        the extent two heads do something similar and the layer norm before the logits rescales things,
+        the importance of individual heads may be masked.
+      prefix: ''
+      suffix: ''
+      section: Argument 3
+      page: null
+      line: null
+    - exact: the specific ablations we describe here are individual attention head ablations where only
+        one attention head is modified at a time, whereas the ablations described in our prior work are
+        nth-order term ablations in which all attention heads are manipulated at once and the process
+        is repeated iteratively n times
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (2)
+      page: null
+      line: null
+    - exact: 'Method: Run the model, replacing the ablated attention head’s result vector with a zero
+        vector.'
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (2), Full ablation
+      page: null
+      line: null
+  I4:
+    quotes:
+    - exact: In fact, ablating most other attention heads appears to increase in-context learning.
+      prefix: ''
+      suffix: ''
+      section: Footnote 17
+      page: null
+      line: null
+    - exact: For the small models, all attention heads are shown. For the full-scale models, a subset
+        of 100 heads is shown; see the Appendix for an explanation of how the 100 heads were chosen.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Analyses, Attention head measurements
+      page: null
+      line: null
+    - exact: We run the model snapshot on a set of 10,000 randomly-selected examples from the dataset,
+        each of which is 512 tokens in length, and save individual token losses for every token.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (1)
+      page: null
+      line: null
+    - exact: Context index average. We average the per-token losses by context index (i.e. by position),
+        giving a length-512 vector for each model snapshot.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (1)
+      page: null
+      line: null
+    - exact: The first “view” on the ablation data is the attribution to the “before-and-after” vector,
+        which relates the result of each head ablation to the change in model behavior over the course
+        of the phase change
+      prefix: ''
+      suffix: ''
+      section: Appendix, Analyses, Ablation attribution to phase change
+      page: null
+      line: null
+    - exact: The second “view” on the ablation data is the attribution to the in-context learning score.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Analyses, Ablation attribution to phase change
+      page: null
+      line: null
+  I5:
+    quotes:
+    - exact: The only other potential contender for driving in-context learning in two-layer attention
+        only models would be basic copying heads.
+      prefix: ''
+      suffix: ''
+      section: Footnote 23
+      page: null
+      line: null
+    - exact: However, basic copying heads also exist in one-layer models, which don't have the greatly
+        increased
+      prefix: ''
+      suffix: ''
+      section: Footnote 23
+      page: null
+      line: null
+    - exact: Further, induction heads just seem conceptually more powerful.
+      prefix: ''
+      suffix: ''
+      section: Footnote 23
+      page: null
+      line: null
+    - exact: That means that all in-context learning must ultimately originate with attention heads, and
+        since the relationship is almost linear, ablations (with frozen attention patterns) are a principled
+        way to measure their contribution.
+      prefix: ''
+      suffix: ''
+      section: Footnote 19
+      page: null
+      line: null
+    - exact: 'Our work suggests that the primary mechanism of in-context
+
+        learning, at least in small models, is induction heads. We did not observe any evidence of mesa-
+
+        optimizers.'
+      prefix: ''
+      suffix: ''
+      section: Discussion, Safety Implications
+      page: null
+      line: null
+    - exact: Put another way, perhaps the co-occurrence is primarily caused by a shared latent variable,
+        rather than direct causality from induction heads to the full observed change in in-context learning.
+      prefix: ''
+      suffix: ''
+      section: Argument 1, Assessing the Evidence
+      page: null
+      line: null
+    - exact: For example, perhaps the phase change is really the point at which the model learns how to
+        compose layers through the residual stream, enabling both induction heads and potentially many
+        other mechanisms that also require composition of multiple heads
+      prefix: ''
+      suffix: ''
+      section: Argument 1, Assessing the Evidence
+      page: null
+      line: null
+  I6:
+    quotes:
+    - exact: The first “view” on the ablation data is the attribution to the “before-and-after” vector,
+        which relates the result of each head ablation to the change in model behavior over the course
+        of the phase change
+      prefix: ''
+      suffix: ''
+      section: Appendix, Analyses, Ablation attribution to phase change
+      page: null
+      line: null
+    - exact: The second “view” on the ablation data is the attribution to the in-context learning score.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Analyses, Ablation attribution to phase change
+      page: null
+      line: null
+    - exact: In fact, almost all the in-context learning in small attention-only models appears to come
+        from these induction heads! This begins at the start of the phase change, and remains true through
+        the end of training.
+      prefix: ''
+      suffix: ''
+      section: Argument 3
+      page: null
+      line: null
+    refs:
+    - citation: feucht2025dual
+      text: Ablating token copier heads damages copying for nonsense tokens, without affecting tasks that
+        can be performed semantically. Ablating concept copier heads damages performance for translation,
+        synonyms, and antonyms, without affecting surface-level copying.
+      section: Figure 5
+      page: null
+      direction: raises
+      local: reference/feucht_2025_dual_route.pdf
+      sha256: 3b2d679275120a3ed2dd4d1df5ffb9ddf1570f9cd4ceab60b9888d7b187990e8
+      extract_cmd: pdftotext -layout
+    - citation: feucht2025dual
+      text: We find that there is little overlap between the top-k heads of each ranking (Figure 32) and
+        that token & concept scores are not correlated (Appendix C.2), implying that these are two separate
+        roles.
+      section: §3
+      page: null
+      direction: raises
+      local: reference/feucht_2025_dual_route.pdf
+      sha256: 3b2d679275120a3ed2dd4d1df5ffb9ddf1570f9cd4ceab60b9888d7b187990e8
+      extract_cmd: pdftotext -layout
+    - citation: feucht2025dual
+      text: Llama-3-8b and OLMo-2-7b behave similarly to Llama-2-7b, but token ablation results for Pythia-6.9b
+        are less clear-cut.
+      section: §5
+      page: null
+      direction: neutral
+      local: reference/feucht_2025_dual_route.pdf
+      sha256: 3b2d679275120a3ed2dd4d1df5ffb9ddf1570f9cd4ceab60b9888d7b187990e8
+      extract_cmd: pdftotext -layout
+  I7:
+    quotes:
+    - exact: Weight decay was reduced at 4750 steps (approximately 5 billion tokens), the effects of which
+        can be seen as a slight deviation about halfway through the displayed loss curves, occurring at
+        the exact same point for all models; this is not related to the phase change, as this step number
+        is notably beyond the range in which the phase change occurs.
+      prefix: ''
+      suffix: ''
+      section: Model Details, Small Models
+      page: null
+      line: null
+    - exact: The only other hyperparameter change that occurs within the range of the phase change is
+        the learning rate warm-up, which ramps up over the first 1.5e9 tokens.
+      prefix: ''
+      suffix: ''
+      section: Model Details, Small Models
+      page: null
+      line: null
+    - exact: 'We observe a “phase change” phenomenon that appears at approximately 1-3 billion tokens
+        in the
+
+        small models.'
+      prefix: ''
+      suffix: ''
+      section: Model Details, Small Models
+      page: null
+      line: null
+    - exact: Second, we tried out training some of the small models on a different dataset, and we observed
+        the phase change develop in the same way
+      prefix: ''
+      suffix: ''
+      section: Argument 1, Looking at the Phase Change More Closely
+      page: null
+      line: null
+    - exact: Additionally, another set of the small models was trained on a different dataset, consisting
+        of just internet books, to explore the impact of varying the dataset.
+      prefix: ''
+      suffix: ''
+      section: Model Analysis Table, preamble
+      page: null
+      line: null
+    - exact: The exception is the one-layer model, where induction heads never form – just as in-context
+        learning never substantially develops for the one-layer model.
+      prefix: ''
+      suffix: ''
+      section: Argument 1
+      page: null
+      line: null
+    - exact: That said, it’s also the case that aside from the experiments varying the dataset, all these
+        models were trained on the same tokens in the same order
+      prefix: ''
+      suffix: ''
+      section: Footnote 11
+      page: null
+      line: null
+    - exact: Put another way, perhaps the co-occurrence is primarily caused by a shared latent variable,
+        rather than direct causality from induction heads to the full observed change in in-context learning.
+      prefix: ''
+      suffix: ''
+      section: Argument 1, Assessing the Evidence
+      page: null
+      line: null
+  I8:
+    quotes:
+    - exact: 'However, the following issues and confounds suggest caution:'
+      prefix: ''
+      suffix: ''
+      section: Argument 1, Assessing the Evidence
+      page: null
+      line: null
+    - exact: In large models, we have low time resolution on our analysis over training.
+      prefix: ''
+      suffix: ''
+      section: Argument 1, Assessing the Evidence
+      page: null
+      line: null
+    - exact: For example, perhaps the phase change is really the point at which the model learns how to
+        compose layers through the residual stream, enabling both induction heads and potentially many
+        other mechanisms that also require composition of multiple heads
+      prefix: ''
+      suffix: ''
+      section: Argument 1, Assessing the Evidence
+      page: null
+      line: null
+    - exact: Put another way, perhaps the co-occurrence is primarily caused by a shared latent variable,
+        rather than direct causality from induction heads to the full observed change in in-context learning.
+      prefix: ''
+      suffix: ''
+      section: Argument 1, Assessing the Evidence
+      page: null
+      line: null
+    - exact: 'Reducing the loss a fixed amount from a lower baseline is likely
+
+        harder, and so may be driven by additional mechanisms as training time goes on.'
+      prefix: ''
+      suffix: ''
+      section: Argument 1, Assessing the Evidence
+      page: null
+      line: null
+  I9:
+    quotes:
+    - exact: 'Mechanically, induction heads in our models are implemented by a circuit of two attention
+        heads: the first head is a “previous token head” which copies information from the previous token
+        into the next token, while the second head (the actual “induction head”) uses that information
+        to find tokens preceded by the present token.'
+      prefix: ''
+      suffix: ''
+      section: Introduction
+      page: null
+      line: null
+    - exact: 'The most basic
+
+        form of an induction head uses pure K-composition with an earlier “previous token head” to create
+        a'
+      prefix: ''
+      suffix: ''
+      section: Argument 5, Summary of Reverse Engineering Induction Heads
+      page: null
+      line: null
+    - exact: Our ablations measure the marginal effects of removing attention heads from the model. To
+        the extent two heads do something similar and the layer norm before the logits rescales things,
+        the importance of individual heads may be masked.
+      prefix: ''
+      suffix: ''
+      section: Argument 3
+      page: null
+      line: null
+    - exact: the specific ablations we describe here are individual attention head ablations where only
+        one attention head is modified at a time, whereas the ablations described in our prior work are
+        nth-order term ablations in which all attention heads are manipulated at once and the process
+        is repeated iteratively n times
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (2)
+      page: null
+      line: null
+    - exact: Why do induction heads require composition? In an induction head, where the head attends
+        must be a function of the token before the token it attends to. But an individual attention head
+        computes attention scores only from the source and destination token.
+      prefix: ''
+      suffix: ''
+      section: Footnote 15
+      page: null
+      line: null
+  I10:
+    quotes:
+    - exact: 'Step 1: Run the model for the first time, saving all attention patterns and discarding the
+        output logits.'
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (2), Pattern-preserving ablation
+      page: null
+      line: null
+    - exact: 'Step 2: Run model a second time. Replace the ablated attention head’s result vector with
+        a zero vector, and force all attention patterns to be the version recorded in the first run.'
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (2), Pattern-preserving ablation
+      page: null
+      line: null
+    - exact: 'We could do these ablations in two different ways: a “full” ablation, and a “pattern-preserving”
+        ablation. (The model analysis table shows only pattern-preserving ablations; we explain the other
+        method for comparison)'
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (2)
+      page: null
+      line: null
+  I11:
+    quotes:
+    - exact: 'it
+
+        develops abruptly in a narrow window early in training (roughly 2.5 to 5 billion tokens) and then
+        is
+
+        constant for the rest of training'
+      prefix: ''
+      suffix: ''
+      section: Argument 1
+      page: null
+      line: null
+    - exact: 'We observe a “phase change” phenomenon that appears at approximately 1-3 billion tokens
+        in the
+
+        small models.'
+      prefix: ''
+      suffix: ''
+      section: Model Details, Small Models
+      page: null
+      line: null
+    - exact: 'we find that induction heads form abruptly during
+
+        exactly the same window where in-context learning develops'
+      prefix: ''
+      suffix: ''
+      section: Argument 1
+      page: null
+      line: null
+    - exact: 'In summary, the following things all co-occur during the same abrupt window:'
+      prefix: ''
+      suffix: ''
+      section: Argument 1
+      page: null
+      line: null
+    - exact: 'We
+
+        see that the training trajectories pivot during exactly the same window where the other changes
+
+        happen.'
+      prefix: ''
+      suffix: ''
+      section: Argument 1
+      page: null
+      line: null
+    - exact: 'Collectively these results suggest that some important transition is happening during the
+        2.5e9 to
+
+        5e9 token window early in training'
+      prefix: ''
+      suffix: ''
+      section: Argument 1
+      page: null
+      line: null
+    - exact: The exception is the one-layer model, where induction heads never form – just as in-context
+        learning never substantially develops for the one-layer model.
+      prefix: ''
+      suffix: ''
+      section: Argument 1
+      page: null
+      line: null
+    - exact: 'The results (figure below) are in line with the predictions: when we use the smeared-key
+        architecture, in-context learning does indeed form for one-layer models (when it didn’t before),
+        and it forms earlier for two-layer and larger models.'
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+  I12:
+    quotes:
+    - exact: The hypothesis that induction heads are the primary mechanism of in-context learning predicts
+        that the phase change will happen in one-layer models with this change, and perhaps might happen
+        earlier in models with more layers.
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: 'The results (figure below) are in line with the predictions: when we use the smeared-key
+        architecture, in-context learning does indeed form for one-layer models (when it didn’t before),
+        and it forms earlier for two-layer and larger models.'
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: These models were otherwise proportioned and trained exactly the same as the small models.
+        We present these only at one-layer and two-layer sizes.
+      prefix: ''
+      suffix: ''
+      section: Model Details, Smeared Key Models
+      page: null
+      line: null
+  E1:
+    quotes:
+    - exact: 'Method: Run the model, replacing the ablated attention head’s result vector with a zero
+        vector.'
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (2), Full ablation
+      page: null
+      line: null
+    - exact: 'Step 1: Run the model for the first time, saving all attention patterns and discarding the
+        output logits.'
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (2), Pattern-preserving ablation
+      page: null
+      line: null
+    - exact: 'Step 2: Run model a second time. Replace the ablated attention head’s result vector with
+        a zero vector, and force all attention patterns to be the version recorded in the first run.'
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (2), Pattern-preserving ablation
+      page: null
+      line: null
+    - exact: 'We could do these ablations in two different ways: a “full” ablation, and a “pattern-preserving”
+        ablation. (The model analysis table shows only pattern-preserving ablations; we explain the other
+        method for comparison)'
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (2)
+      page: null
+      line: null
+    - exact: We show only the pattern-preserving ablation results here; full ablation results can be found
+        in the appendix. Note also that ablation experiments were not conducted for the full-scale models.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Analyses, Ablation attribution to phase change
+      page: null
+      line: null
+    - exact: We define a “smeared key" architecture with a very simple modification that should make it
+        easy for transformers of any depth to express induction heads.
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: The base cost of an ablation is also non-trivial, since we're evaluating each ablation on
+        10,000 examples, for each training checkpoint.
+      prefix: ''
+      suffix: ''
+      section: Footnote 18
+      page: null
+      line: null
+  E2:
+    quotes:
+    - exact: 'Copying: Generate a sequence of 25 random tokens, excluding the most common and the least
+        common tokens.'
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (3)
+      page: null
+      line: null
+    - exact: 'Prefix matching: Generate a sequence of 25 random tokens, excluding the most common and
+        the least common tokens. Repeat this sequence 4 times and prepend a “start of sequence” token.'
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (3)
+      page: null
+      line: null
+    - exact: We run the model snapshot on a set of 10,000 randomly-selected examples from the dataset,
+        each of which is 512 tokens in length, and save individual token losses for every token.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (1)
+      page: null
+      line: null
+    - exact: The set is held the same between all snapshots and between all models in all three families.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (1)
+      page: null
+      line: null
+    - exact: 'Each
+
+        line follows one of four templates, followed by a label for which template it is drawn from.'
+      prefix: ''
+      suffix: ''
+      section: 'Argument 4, Behavior 3: Pattern matching'
+      page: null
+      line: null
+    - exact: In other words, induction heads are any heads that empirically increase the likelihood of
+        [B] given [A][B]...[A] when shown a repeated sequence of completely random tokens.
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+  E3:
+    quotes:
+    - exact: 'In this argument, we show some anecdotal examples of induction heads from larger transformers
+
+        (our 40-layer model with 13 billion parameters) that exhibit exactly such behaviors – namely literal
+
+        copying, translation, and a specific type of abstract pattern matching.'
+      prefix: ''
+      suffix: ''
+      section: Argument 4
+      page: null
+      line: null
+    - exact: 'We verify that these heads score
+
+        highly on our “copying” and “prefix matching” evaluations'
+      prefix: ''
+      suffix: ''
+      section: Argument 4
+      page: null
+      line: null
+    - exact: 'The comparison is not a metaphor or a
+
+        blurring of the definition: induction heads which are defined by their ability to copy literal
+        sequences
+
+        turn out to also sometimes match more abstract patterns.'
+      prefix: ''
+      suffix: ''
+      section: Argument 4, What’s going on with more abstract heads that are also induction heads?
+      page: null
+      line: null
+    - exact: 'This head isn’t perfect at this,
+
+        but empirically it allocates about 65% of its attention from the colons to the correct positions,
+        when
+
+        tested on a range of similar problems.'
+      prefix: ''
+      suffix: ''
+      section: 'Argument 4, Behavior 3: Pattern matching'
+      page: null
+      line: null
+    - exact: 'This evidence applies even to the very largest models (and we study up to 12B parameter
+
+        models), but since it shows only a small number of tasks, it’s only suggestive regarding in-context
+
+        learning in general.'
+      prefix: ''
+      suffix: ''
+      section: Argument 4
+      page: null
+      line: null
+    - exact: 'The logit attribution patterns for this head are not perfectly sharp; that is, even in cases
+        where the
+
+        attention head is attending to the matching word in an earlier language, it does not always
+
+        directly increase the logit of the corresponding prediction.'
+      prefix: ''
+      suffix: ''
+      section: 'Argument 4, Behavior 2: Translation'
+      page: null
+      line: null
+  E4:
+    quotes:
+    - exact: The arguments above are based on analysis of 34 decoder-only Transformer language models,
+        with different snapshots saved over the course of training, for one run of training per model.
+      prefix: ''
+      suffix: ''
+      section: Model Analysis Table, preamble
+      page: null
+      line: null
+    - exact: 'The models are drawn from four different model series as follows:'
+      prefix: ''
+      suffix: ''
+      section: Model Analysis Table, preamble
+      page: null
+      line: null
+    - exact: “Full-scale models”, a series of successively-larger models with MLPs (ranging from 4 layers
+        and 13M parameters, up to 40 layers and 13B parameters), that are used as the basis for multiple
+        projects at Anthropic.
+      prefix: ''
+      suffix: ''
+      section: Model Analysis Table, preamble
+      page: null
+      line: null
+    - exact: The full-scale models were trained on an improved version of roughly the same data distribution.
+      prefix: ''
+      suffix: ''
+      section: Model Analysis Table, preamble
+      page: null
+      line: null
+    - exact: 'Under this definition, I found potential induction heads in GPT2 and GPT-Neo mostly starting
+        in
+
+        the mid-depth region.'
+      prefix: ''
+      suffix: ''
+      section: Comments & Replications, Tom Lieberum
+      page: null
+      line: null
+    - exact: 'For example, for GPT2-XL, head 20 in layer 21 seems to be
+
+        an induction head, as well as head 0 in layer 12 of GPT-Neo-2.7B.'
+      prefix: ''
+      suffix: ''
+      section: Comments & Replications, Tom Lieberum
+      page: null
+      line: null
+    - exact: 'Replacing the previous-token head’s
+
+        scores with exact previous-token attention recovered 99% of the loss difference.'
+      prefix: ''
+      suffix: ''
+      section: Comments & Replications, Adam Scherlis
+      page: null
+      line: null
+  E5:
+    quotes:
+    - exact: In practice, induction heads don't exhibit these properties perfectly, and our measurements
+        give us a continuum, but there is a clear subset of heads which exhibit these properties with
+        much greater than random chance.
+      prefix: ''
+      suffix: ''
+      section: Footnote 5
+      page: null
+      line: null
+    - exact: This value ranges from 0 (only raises other tokens) to 0.5 (only raises the present token),
+        so we scale it into the range of -1 to 1.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (3)
+      page: null
+      line: null
+    - exact: The prefix matching score is the average of all attention pattern entries attending from
+        a given token back to the tokens that preceded the same token in earlier repeats.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (3)
+      page: null
+      line: null
+    - exact: 'Method: Run the model, replacing the ablated attention head’s result vector with a zero
+        vector.'
+      prefix: ''
+      suffix: ''
+      section: Appendix, Data Collection (2), Full ablation
+      page: null
+      line: null
+    - exact: For the small models, all attention heads are shown. For the full-scale models, a subset
+        of 100 heads is shown; see the Appendix for an explanation of how the 100 heads were chosen.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Analyses, Attention head measurements
+      page: null
+      line: null
+  E6:
+    quotes:
+    - exact: If induction heads are the mechanism behind the large improvement in in-context learning,
+        that makes predictions about the minimum architectural requirements in order to achieve the observed
+        improvement.
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: We define a “smeared key" architecture with a very simple modification that should make it
+        easy for transformers of any depth to express induction heads.
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: In our modified models, for each head h, we introduce a trainable real parameter αh which
+        we use as σ(αh ) ∈ [0, 1] to interpolate between the key for the current token and previous token
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: The hypothesis that induction heads are the primary mechanism of in-context learning predicts
+        that the phase change will happen in one-layer models with this change, and perhaps might happen
+        earlier in models with more layers.
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: 'The results (figure below) are in line with the predictions: when we use the smeared-key
+        architecture, in-context learning does indeed form for one-layer models (when it didn’t before),
+        and it forms earlier for two-layer and larger models.'
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+    - exact: However, we probably shouldn't make too strong an inference about large models on this evidence.
+      prefix: ''
+      suffix: ''
+      section: Argument 2
+      page: null
+      line: null
+  V1:
+    quotes:
+    - exact: "so for this paper we\nchoose to define induction heads by their narrow empirical sequence\
+        \ copying behavior (the\n [A][B]...[A]→[B] ), and then attempt to show that they (1) also serve\
+        \ a more expansive\nfunction that can be tied to in-context learning, and (2) coincide with the\
+        \ mechanistic picture for\nsmall models."
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+    - exact: 'However, we were a bit vague on the exact definition of induction heads: it was more like
+        we found a cluster of behaviors and mechanisms that tended to occur together, and called heads
+        in that cluster “induction heads”.'
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+    - exact: Formally, we define an induction head as one which exhibits the following two properties
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+    - exact: In other words, induction heads are any heads that empirically increase the likelihood of
+        [B] given [A][B]...[A] when shown a repeated sequence of completely random tokens.
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+    - exact: One of things we’ll be trying to establish is that when induction heads occur in sufficiently
+        large models and operate on sufficiently abstract representations, the very same heads that do
+        this sequence copying also take on a more expanded role of analogical sequence copying or in-context
+        nearest neighbors.
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+  V2:
+    quotes:
+    - exact: '“Induction heads” are attention heads that implement a simple algorithm to complete
+
+        token sequences like [A][B] … [A] → [B] .'
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: 'For small attention-only models, we present strong,
+
+        causal evidence; for larger models with MLPs, we present correlational evidence.'
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: 'we were able to show precisely that induction heads implement
+
+        this pattern copying behavior and appear to be the primary source of in-context learning.'
+      prefix: ''
+      suffix: ''
+      section: Introduction
+      page: null
+      line: null
+    - exact: In other words, induction heads are any heads that empirically increase the likelihood of
+        [B] given [A][B]...[A] when shown a repeated sequence of completely random tokens.
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+    - exact: In fact, almost all the in-context learning in small attention-only models appears to come
+        from these induction heads! This begins at the start of the phase change, and remains true through
+        the end of training.
+      prefix: ''
+      suffix: ''
+      section: Argument 3
+      page: null
+      line: null
+    - exact: We show here that our head activation evaluators (that we use to measure the properties in
+        our definition of induction heads) correlate well with mathematically-based measures in small
+        attention-only models.
+      prefix: ''
+      suffix: ''
+      section: Appendix, Validating head activation evaluators
+      page: null
+      line: null
+  V3:
+    quotes:
+    - exact: The only other potential contender for driving in-context learning in two-layer attention
+        only models would be basic copying heads.
+      prefix: ''
+      suffix: ''
+      section: Footnote 23
+      page: null
+      line: null
+    - exact: However, basic copying heads also exist in one-layer models, which don't have the greatly
+        increased
+      prefix: ''
+      suffix: ''
+      section: Footnote 23
+      page: null
+      line: null
+    - exact: One of things we’ll be trying to establish is that when induction heads occur in sufficiently
+        large models and operate on sufficiently abstract representations, the very same heads that do
+        this sequence copying also take on a more expanded role of analogical sequence copying or in-context
+        nearest neighbors.
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+    - exact: 'For example,
+
+        note that the first behavior is a special case of the second, so perhaps induction heads are
+
+        implementing a more general algorithm that reverts to the special case of copying when given a
+
+        repeated sequence'
+      prefix: ''
+      suffix: ''
+      section: Argument 4, What’s going on with more abstract heads that are also induction heads?
+      page: null
+      line: null
+    - exact: 'Another possibility is that induction heads implement literal copying when
+
+        they take a path through the residual stream that includes only them, but implement more abstract
+
+        behaviors when they process the outputs of earlier layers that create more abstract representations'
+      prefix: ''
+      suffix: ''
+      section: Argument 4, What’s going on with more abstract heads that are also induction heads?
+      page: null
+      line: null
+    - exact: 'From this perspective, it seems natural that applying the same
+
+        mechanism to more abstract features can produce more complex behavior.'
+      prefix: ''
+      suffix: ''
+      section: Argument 5, What About More Complex Induction Heads?
+      page: null
+      line: null
+  V4:
+    quotes:
+    - exact: Induction heads are named by analogy to inductive reasoning.
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+    - exact: Or sometimes metalearning, although this term implicitly makes the stronger claim that the
+        model is learning how to do a new ability (as opposed to “locating” an ability, i.e. learning
+        what it is supposed to do), an implication which is both controversial and not entirely precise
+        in its meaning.
+      prefix: ''
+      suffix: ''
+      section: Footnote 3
+      page: null
+      line: null
+    - exact: Notice that induction heads are implementing a simple algorithm, and are not memorizing a
+        fixed table of n-gram statistics.
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+    - exact: In other words, induction heads are any heads that empirically increase the likelihood of
+        [B] given [A][B]...[A] when shown a repeated sequence of completely random tokens.
+      prefix: ''
+      suffix: ''
+      section: Key Concepts, Induction Heads
+      page: null
+      line: null
+  V5:
+    quotes:
+    - exact: 'We present six complementary lines of
+
+        evidence, arguing that induction heads may be the mechanistic source of general in-context
+
+        learning in transformer models of any size.'
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: 'For small attention-only models, we present strong,
+
+        causal evidence; for larger models with MLPs, we present correlational evidence.'
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: 'Before we go through the arguments, it’s useful to delineate where the evidence is more
+        conclusive
+
+        vs. less conclusive. This is shown in the table below.'
+      prefix: ''
+      suffix: ''
+      section: Summary of evidence for sub-claims
+      page: null
+      line: null
+    - exact: 'For small, attention-only models, we believe we
+
+        have strong evidence that attention heads are the mechanism for the majority of in-context
+
+        learning, as we have evidence supported by ablations and mechanistic reverse engineering.'
+      prefix: ''
+      suffix: ''
+      section: Summary of evidence for sub-claims
+      page: null
+      line: null
+    - exact: 'For each argument, we’ll have a similar table to the one in this section, showing the strength
+        of the
+
+        evidence provided by that claim as it applies to large/small models and some/most of context
+
+        learning.'
+      prefix: ''
+      suffix: ''
+      section: Summary of evidence for sub-claims
+      page: null
+      line: null
+    - exact: 'But we considered these results worth reporting, both
+
+        because future work could build on our results to establish the claim more firmly, and because
+        this
+
+        kind of indirect evidence is likely to be common in interpretability as it advances, so we’d like
+        to
+
+        establish a norm of reporting it even when it is not fully conclusive.'
+      prefix: ''
+      suffix: ''
+      section: Introduction
+      page: null
+      line: null
+    - exact: The base cost of an ablation is also non-trivial, since we're evaluating each ablation on
+        10,000 examples, for each training checkpoint.
+      prefix: ''
+      suffix: ''
+      section: Footnote 18
+      page: null
+      line: null
+    - exact: 'The most compelling alternative possibility we see is that other composition mechanisms
+        may also
+
+        form during the phase change. Larger models have more heads, which gives them more capacity
+
+        for other interesting Q-composition and K-composition mechanisms that small models can’t afford
+
+        to express.'
+      prefix: ''
+      suffix: ''
+      section: Argument 6
+      page: null
+      line: null
+    - exact: 'If all “composition heads” form simultaneously during the phase change, then it’s
+
+        possible that above some size, non-induction composition heads could together account for more
+
+        of the phase change and in-context learning improvement than induction heads do.'
+      prefix: ''
+      suffix: ''
+      section: Argument 6
+      page: null
+      line: null

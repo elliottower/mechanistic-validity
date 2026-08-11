@@ -1,0 +1,1467 @@
+claim: copy_suppression
+title: Copy Suppression in Negative Attention Heads
+description: 'Negative Head L10H7 in GPT-2 Small suppresses tokens that earlier components have already
+  predicted, in three steps: an early component predicts a token that already appears in context, the
+  head attends back to that token, and its OV circuit writes a negative logit for it. The QK and OV halves
+  are read off the weights before any ablation, with 84.70\% of tokens carrying their OV diagonal among
+  the ten most negative entries of its column and 95.72\% of QK rows carrying the diagonal as the largest
+  entry. A structured ablation that deletes every function of the head except those two preserves 76.9\%
+  of its effect on OpenWebText, and copy-suppression scores correlate head by head with anti-induction
+  scores across GPT, Pythia and SoLU models. Description mode: implementational-functional.'
+source:
+  citation: mcdougall2023copy
+  title: ''
+  url: https://arxiv.org/abs/2310.04625
+  local: reference/mcdougall_2023_copy_suppression.pdf
+  sha256: a0dc617f897adeb92bb476ab80c0c2722fb5ad58453cbc578c99e7dbd4dc62e3
+  extract_cmd: pdftotext -layout
+  read_in_full: true
+claims:
+  C1:
+    quotes:
+    - exact: 'We show that the main role of Negative Heads in GPT-2 Small is copy suppression (Figure
+        1), which is defined by three steps:'
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: 1. Prior copying. Language model components in early layers directly predict that the next
+        token is one that already appears in context, e.g that the prefix “All’s fair in love and” is
+        completed with “ love”. 2. Attention. Copy suppression heads detect the prediction of a copied
+        token and attend back to the previous instance of this token (“ love”). 3. Suppression. Copy suppression
+        heads write directly to the model’s output to decrease the logits on the copied token.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: 'Specifically, we sampled from the top 5% of completions where L10H7 had greatest effect
+        as these accounted for half of the attention head’s loss reducing effect across the dataset. 80%
+        of the sampled completions were examples of copy suppression when we operationalized the three
+        qualitative copy suppression steps from Section 1 by three corresponding conditions:'
+      prefix: ''
+      suffix: ''
+      section: §2.1
+      page: null
+      line: null
+    - exact: 1. The model’s predictions at the input to L10H7 included a token which appeared in context
+        as one of the top 10 most confident completions (as measured by the logit lens); 2. The source
+        token was one of the top 2 tokens in context that L10H7 attended to most; 3. The 10 tokens that
+        L10H7 decreased logits for the most included the source token.
+      prefix: ''
+      suffix: ''
+      section: §2.1
+      page: null
+      line: null
+    - exact: 'If L10H7 is suppressing the tokens that it attends to, then the diagonal elements of (1))
+        will consistently be the most negative elements in their columns. This is what we find: 84.70%
+        of the tokens in GPT-2 Small’s vocabulary have their diagonal elements as one of the top 10 most
+        negative values in their columns, and 98.86% of tokens had diagonal elements in the bottom 5%.'
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: Therefore we expect the largest elements of each row of Eqn. (2) to be the diagonal elements
+        of this matrix. Indeed, in Figure 3 (orange bars) we find that 95.72% of diagonal values in this
+        matrix were the largest in their respective rows.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+  C2:
+    quotes:
+    - exact: 'If L10H7 is suppressing the tokens that it attends to, then the diagonal elements of (1))
+        will consistently be the most negative elements in their columns. This is what we find: 84.70%
+        of the tokens in GPT-2 Small’s vocabulary have their diagonal elements as one of the top 10 most
+        negative values in their columns, and 98.86% of tokens had diagonal elements in the bottom 5%.'
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: Therefore we expect the largest elements of each row of Eqn. (2) to be the diagonal elements
+        of this matrix. Indeed, in Figure 3 (orange bars) we find that 95.72% of diagonal values in this
+        matrix were the largest in their respective rows.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: 'We found that the results approximately matched our dynamic analysis (with slightly more
+        noise): the proportion of (source, destination) token pairs where the source token was in the
+        top 10 most suppressed tokens was 78.24% (which is close to the static analysis result of 84.70%).'
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: However, one limitation of our analysis of the QK circuit is that this idealised setup does
+        not completely faithfully represent L10H7’s real functioning (Appendices M.2, M.3 and N).
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: We find that the median attention change is −0.09, with lower quartile −0.19.
+      prefix: ''
+      suffix: ''
+      section: Appendix M.2
+      page: null
+      line: null
+    - exact: this suggests that the effective embedding does not faithfully capture the model’s attention.
+      prefix: ''
+      suffix: ''
+      section: Appendix M.2
+      page: null
+      line: null
+  C3:
+    quotes:
+    - exact: We use the logit lens (nostalgebraist, 2020) technique to measure what intermediate model
+        components predict, and use mean ablation to delete internal model activations.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: 1. In Section 3.1, we analyse the OV circuit, and show that the head suppresses the prediction
+        of 84.70% of tokens which it attends to. 2. In Section 3.2, we analyse the QK circuit, and show
+        that the head attends to the token which the model is currently predicting across 95.72% of the
+        model’s vocabulary.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: 'Specifically, we sampled from the top 5% of completions where L10H7 had greatest effect
+        as these accounted for half of the attention head’s loss reducing effect across the dataset. 80%
+        of the sampled completions were examples of copy suppression when we operationalized the three
+        qualitative copy suppression steps from Section 1 by three corresponding conditions:'
+      prefix: ''
+      suffix: ''
+      section: §2.1
+      page: null
+      line: null
+    - exact: In this section, we perform an ablation which deletes all functionality of L10H7’s OV and
+        QK circuits, except for the mechanisms described in Section 3.1 and 3.2 respectively, with the
+        goal of seeing how much functionality we can remove without damaging performance. We refer to
+        this as Copy Suppression-Preserving Ablation (CSPA).
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: 'We found that the results approximately matched our dynamic analysis (with slightly more
+        noise): the proportion of (source, destination) token pairs where the source token was in the
+        top 10 most suppressed tokens was 78.24% (which is close to the static analysis result of 84.70%).'
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: For example, head L10H7 in GPT-2 Small ranked higher than all other attention heads in both
+        copy-suppression and negative induction score.
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+  C4:
+    quotes:
+    - exact: This is because GPT-2 Small uses the same matrix for embeddings and unembeddings, so L10H7
+        could simply be matching similar vectors at query and keyside (for example, in a ‘same matching’
+        QK matrix (Elhage et al., 2021)) Therefore in Figure 3 (blue bars) we also compare to a baseline
+        where both query and keys are effective embeddings,5 and find that the ranks of the diagonal elements
+        in their rows are much smaller
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: 'Additionally, the median ranks for other attention heads do not show the same patterns as
+        Figure 3: for example, Duplicate Token Heads (Wang et al., 2023) have a ‘matching’ QK circuit
+        that has much higher median ranks when the'
+      prefix: ''
+      suffix: ''
+      section: Appendix M.1 (page 21)
+      page: null
+      line: null
+    - exact: queryside lookup table is the effective embedding (Figure 19b).
+      prefix: ''
+      suffix: ''
+      section: Appendix M.1 (page 22)
+      page: null
+      line: null
+    - exact: Additionally, most other attention heads are different to copy suppression heads and duplicate
+        token heads, as e.g for Name Mover Heads across all key and queryside lookup tables the best median
+        rank is 561.
+      prefix: ''
+      suffix: ''
+      section: Appendix M.1
+      page: null
+      line: null
+    - exact: While we find that CSPA recovers more KL divergence L10H7 than all other heads, we also find
+        that the QK and OV ablations (Section 3.3.1) lead to large (> 50%) KL divergence recovered for
+      prefix: ''
+      suffix: ''
+      section: Appendix J.3 (page 19)
+      page: null
+      line: null
+    - exact: many other heads, too. In Appendix N we describe a more destructive intervention which recovers
+        25% of L10H7’s KL divergence naively and 61% when adjusted.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.3 (page 20)
+      page: null
+      line: null
+  C5:
+    quotes:
+    - exact: In this work we explain how “Negative Heads” (which include ‘negative name mover heads’ from
+        Wang et al. (2023) and ‘anti-induction heads’ from Olsson et al. (2022)) function on the natural
+        language training distribution in GPT-2 Small.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: Several works have found that transformer language model predictions are iteratively refined
+        (Dar et al., 2022; nostalgebraist, 2020; Belrose et al., 2023; Halawi et al., 2023) in the sense
+        that the state after intermediate layers forms a partial approximation to the final output, though
+        no connections have yet been made to Negative Heads.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: This paper aimed to mechanistically explain what heads like L10H7 do, rather than to provide
+        an explanation for why they form. We hope to address this in subsequent research. Here, we present
+        three possible theories, present some evidence for/against them, and discuss how we might test
+        them.
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+    - exact: 'Tests: Examine the sequences for which this head decreases the loss by the most (particularly
+        for checkpointed models, just as the negative head is forming).'
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+  M1:
+    quotes:
+    - exact: We average these values over OpenWebText for both ablations we use, defining DCSPA for CSPA
+        and
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, Ablation metric
+      page: null
+      line: null
+    - exact: DMA for the mean ablation baseline. Finally, we define the effect explained as 1 − DCSPA
+        /DMA (Eqn. (3)).
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, Ablation metric
+      page: null
+      line: null
+    - exact: CSPA explains 76.9% of L10H7’s behavior.
+      prefix: ''
+      suffix: ''
+      section: §3.3.2
+      page: null
+      line: null
+    - exact: We get 82% effect recovered for the net loss effect and 45% effect recovered for the absolute
+        change in loss.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.2
+      page: null
+      line: null
+    - exact: For instance, one head in Stanford GPT-2 Small E wrote ’less against’ the correct token upon
+        the ablation of earlier Name Mover Heads; however, it is distinct from the copy suppression heads
+        in GPT-2 Small in that it attended to both the IO and S2 tokens equally on a clean run.
+      prefix: ''
+      suffix: ''
+      section: Appendix Q
+      page: null
+      line: null
+    - exact: 'We have performed the experiment in Section 3.2 on all heads in GPT-2 Medium: Figure 10.
+        We found that the two heads most prominently recovered were 2/3 of the most negative heads on
+        the IOI task in GPT-2 Medium (Figure 11).'
+      prefix: ''
+      suffix: ''
+      section: Appendix B
+      page: null
+      line: null
+  M2:
+    quotes:
+    - exact: We average these values over OpenWebText for both ablations we use, defining DCSPA for CSPA
+        and
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, Ablation metric
+      page: null
+      line: null
+    - exact: DMA for the mean ablation baseline. Finally, we define the effect explained as 1 − DCSPA
+        /DMA (Eqn. (3)).
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, Ablation metric
+      page: null
+      line: null
+    - exact: This is because GPT-2 Small uses the same matrix for embeddings and unembeddings, so L10H7
+        could simply be matching similar vectors at query and keyside (for example, in a ‘same matching’
+        QK matrix (Elhage et al., 2021)) Therefore in Figure 3 (blue bars) we also compare to a baseline
+        where both query and keys are effective embeddings,5 and find that the ranks of the diagonal elements
+        in their rows are much smaller
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: If Eqn. (3) is a good measure of the copy suppression mechanism, it should be smaller for
+        heads in GPT-2 Small that aren’t negative heads. We computed the CSPA value for all heads in Layers
+        9-11 in Figure 17.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.3
+      page: null
+      line: null
+    - exact: While we find that CSPA recovers more KL divergence L10H7 than all other heads, we also find
+        that the QK and OV ablations (Section 3.3.1) lead to large (> 50%) KL divergence recovered for
+      prefix: ''
+      suffix: ''
+      section: Appendix J.3 (page 19)
+      page: null
+      line: null
+    - exact: many other heads, too. In Appendix N we describe a more destructive intervention which recovers
+        25% of L10H7’s KL divergence naively and 61% when adjusted.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.3 (page 20)
+      page: null
+      line: null
+  M3:
+    quotes:
+    - exact: Actually, key and query biases don’t affect results much so we remove them for simplicity
+        of Eqn. (2). Results when we uses these biases can be found in Figure 19a, which seem identical
+        to the main text figure except a tiny difference in the Rank 1-2 bar heights.
+      prefix: ''
+      suffix: ''
+      section: Appendix M.1
+      page: null
+      line: null
+    - exact: 'We found that the results approximately matched our dynamic analysis (with slightly more
+        noise): the proportion of (source, destination) token pairs where the source token was in the
+        top 10 most suppressed tokens was 78.24% (which is close to the static analysis result of 84.70%).'
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: We get 82% effect recovered for the net loss effect and 45% effect recovered for the absolute
+        change in loss.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.2
+      page: null
+      line: null
+    - exact: We find that the median attention change is −0.09, with lower quartile −0.19.
+      prefix: ''
+      suffix: ''
+      section: Appendix M.2
+      page: null
+      line: null
+    - exact: effective embedding, we find a more faithful approximation of L10H7’s keyside input as Figure
+        21 shows that the median change in L10H7’s attention weights is −0.06 which is closer to 0.
+      prefix: ''
+      suffix: ''
+      section: Appendix M.2
+      page: null
+      line: null
+    - exact: However, one limitation of our analysis of the QK circuit is that this idealised setup does
+        not completely faithfully represent L10H7’s real functioning (Appendices M.2, M.3 and N).
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+  M4:
+    quotes:
+    - exact: We choose KL divergence for several reasons, including how 0 has a natural interpretation
+        as the ablated and clean distributions being identical – in other words, 100% of the head’s effect
+        being explained by the part we preserve.
+      prefix: ''
+      suffix: ''
+      section: §3.3.1
+      page: null
+      line: null
+    - exact: There are flaws with the KL divergence metric. For example, if the correct token probability
+        is very small, and a head has the effect of changing the logits for this token (but not enough
+        to meaningfully change the probability), this will affect loss but not KL divergence.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.1
+      page: null
+      line: null
+    - exact: Fortunately, we find that most of L10H7’s effect on loss was via the direct path to the final
+        logits.
+      prefix: ''
+      suffix: ''
+      section: §2.2
+      page: null
+      line: null
+    - exact: We get 82% effect recovered for the net loss effect and 45% effect recovered for the absolute
+        change in loss.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.2
+      page: null
+      line: null
+    - exact: We observed that this pattern holds on a random sample of OpenWebText for almost all Layer
+        9-11 heads, as most of these heads have harmful direct effect on more than 25% of completions
+      prefix: ''
+      suffix: ''
+      section: Appendix J.2
+      page: null
+      line: null
+  M5:
+    quotes:
+    - exact: In this section, we perform an ablation which deletes all functionality of L10H7’s OV and
+        QK circuits, except for the mechanisms described in Section 3.1 and 3.2 respectively, with the
+        goal of seeing how much functionality we can remove without damaging performance. We refer to
+        this as Copy Suppression-Preserving Ablation (CSPA).
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: If Eqn. (3) is a good measure of the copy suppression mechanism, it should be smaller for
+        heads in GPT-2 Small that aren’t negative heads. We computed the CSPA value for all heads in Layers
+        9-11 in Figure 17.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.3
+      page: null
+      line: null
+    - exact: This is because GPT-2 Small uses the same matrix for embeddings and unembeddings, so L10H7
+        could simply be matching similar vectors at query and keyside (for example, in a ‘same matching’
+        QK matrix (Elhage et al., 2021)) Therefore in Figure 3 (blue bars) we also compare to a baseline
+        where both query and keys are effective embeddings,5 and find that the ranks of the diagonal elements
+        in their rows are much smaller
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+  M6:
+    quotes:
+    - exact: We average these values over OpenWebText for both ablations we use, defining DCSPA for CSPA
+        and
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, Ablation metric
+      page: null
+      line: null
+    - exact: DMA for the mean ablation baseline. Finally, we define the effect explained as 1 − DCSPA
+        /DMA (Eqn. (3)).
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, Ablation metric
+      page: null
+      line: null
+    - exact: We get 82% effect recovered for the net loss effect and 45% effect recovered for the absolute
+        change in loss.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.2
+      page: null
+      line: null
+    - exact: 'We found that the results approximately matched our dynamic analysis (with slightly more
+        noise): the proportion of (source, destination) token pairs where the source token was in the
+        top 10 most suppressed tokens was 78.24% (which is close to the static analysis result of 84.70%).'
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: 42.00% of (source, destination) pairs had the source token in the top 10 most suppressed
+        tokens, but not the most suppressed.
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: We codify these rules, and find that in 90% of the aforementioned cases, the most suppressed
+        token is semantically related to the source token.
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: 'We have performed the experiment in Section 3.2 on all heads in GPT-2 Medium: Figure 10.
+        We found that the two heads most prominently recovered were 2/3 of the most negative heads on
+        the IOI task in GPT-2 Medium (Figure 11).'
+      prefix: ''
+      suffix: ''
+      section: Appendix B
+      page: null
+      line: null
+  M7:
+    quotes:
+    - exact: 'Specifically, we sampled from the top 5% of completions where L10H7 had greatest effect
+        as these accounted for half of the attention head’s loss reducing effect across the dataset. 80%
+        of the sampled completions were examples of copy suppression when we operationalized the three
+        qualitative copy suppression steps from Section 1 by three corresponding conditions:'
+      prefix: ''
+      suffix: ''
+      section: §2.1
+      page: null
+      line: null
+    - exact: We mean ablate the result vectors from each source token S, except for the top 5% of source
+        tokens which are predicted with highest probability at the destination token D (as measured with
+        the logit lens).
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, QK ablation
+      page: null
+      line: null
+    - exact: We look at the top 5% of token completions where L10H7 was most useful (as in Section 2)
+        and select the top two non-BOS tokens in context that have maximal attention paid to them.
+      prefix: ''
+      suffix: ''
+      section: Appendix M.2
+      page: null
+      line: null
+    - exact: We study the top 5% of token completions where L10H7 has most important effect.
+      prefix: ''
+      suffix: ''
+      section: Appendix M.3
+      page: null
+      line: null
+    - exact: If Eqn. (3) is a good measure of the copy suppression mechanism, it should be smaller for
+        heads in GPT-2 Small that aren’t negative heads. We computed the CSPA value for all heads in Layers
+        9-11 in Figure 17.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.3
+      page: null
+      line: null
+  I1:
+    quotes:
+    - exact: To investigate the relative importance of the direct and indirect effect of L10H7 on the
+        model’s loss, we decompose its effect into a set of different paths
+      prefix: ''
+      suffix: ''
+      section: §2.2
+      page: null
+      line: null
+    - exact: We measure the effect on model’s loss as well as the KL divergence to the model’s clean predictions.
+      prefix: ''
+      suffix: ''
+      section: §2.2
+      page: null
+      line: null
+    - exact: Fortunately, we find that most of L10H7’s effect on loss was via the direct path to the final
+        logits.
+      prefix: ''
+      suffix: ''
+      section: §2.2
+      page: null
+      line: null
+    - exact: We observed that this pattern holds on a random sample of OpenWebText for almost all Layer
+        9-11 heads, as most of these heads have harmful direct effect on more than 25% of completions
+      prefix: ''
+      suffix: ''
+      section: Appendix J.2
+      page: null
+      line: null
+    - exact: We get 82% effect recovered for the net loss effect and 45% effect recovered for the absolute
+        change in loss.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.2
+      page: null
+      line: null
+  I2:
+    quotes:
+    - exact: In this section, we perform an ablation which deletes all functionality of L10H7’s OV and
+        QK circuits, except for the mechanisms described in Section 3.1 and 3.2 respectively, with the
+        goal of seeing how much functionality we can remove without damaging performance. We refer to
+        this as Copy Suppression-Preserving Ablation (CSPA).
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: We can project each of these vectors onto the unembedding vector for the corresponding source
+        token S. We only keep the negative components.6
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, OV ablation
+      page: null
+      line: null
+    - exact: We mean ablate the result vectors from each source token S, except for the top 5% of source
+        tokens which are predicted with highest probability at the destination token D (as measured with
+        the logit lens).
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, QK ablation
+      page: null
+      line: null
+    - exact: CSPA explains 76.9% of L10H7’s behavior.
+      prefix: ''
+      suffix: ''
+      section: §3.3.2
+      page: null
+      line: null
+    - exact: 81.1% effect explained, and only using QK
+      prefix: ''
+      suffix: ''
+      section: §3.3.2, left column
+      page: null
+      line: null
+    - exact: leads to 95.2% effect explained.
+      prefix: ''
+      suffix: ''
+      section: §3.3.2, left column
+      page: null
+      line: null
+    - exact: CSPA explained 88.1% of L10H7’s
+      prefix: ''
+      suffix: ''
+      section: §3.3.2, left column
+      page: null
+      line: null
+    - exact: We get 82% effect recovered for the net loss effect and 45% effect recovered for the absolute
+        change in loss.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.2
+      page: null
+      line: null
+    - exact: Sadly, this intervention results in only 25% of KL divergence recovered.
+      prefix: ''
+      suffix: ''
+      section: Appendix N
+      page: null
+      line: null
+    - exact: With this setup, we recover 61% of KL divergence.
+      prefix: ''
+      suffix: ''
+      section: Appendix N
+      page: null
+      line: null
+  I3:
+    quotes:
+    - exact: CSPA explains 76.9% of L10H7’s behavior.
+      prefix: ''
+      suffix: ''
+      section: §3.3.2
+      page: null
+      line: null
+    - exact: 81.1% effect explained, and only using QK
+      prefix: ''
+      suffix: ''
+      section: §3.3.2, left column
+      page: null
+      line: null
+    - exact: leads to 95.2% effect explained.
+      prefix: ''
+      suffix: ''
+      section: §3.3.2, left column
+      page: null
+      line: null
+    - exact: If Eqn. (3) is a good measure of the copy suppression mechanism, it should be smaller for
+        heads in GPT-2 Small that aren’t negative heads. We computed the CSPA value for all heads in Layers
+        9-11 in Figure 17.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.3
+      page: null
+      line: null
+    - exact: Sadly, this intervention results in only 25% of KL divergence recovered.
+      prefix: ''
+      suffix: ''
+      section: Appendix N
+      page: null
+      line: null
+    - exact: With this setup, we recover 61% of KL divergence.
+      prefix: ''
+      suffix: ''
+      section: Appendix N
+      page: null
+      line: null
+  I4:
+    quotes:
+    - exact: If Eqn. (3) is a good measure of the copy suppression mechanism, it should be smaller for
+        heads in GPT-2 Small that aren’t negative heads. We computed the CSPA value for all heads in Layers
+        9-11 in Figure 17.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.3
+      page: null
+      line: null
+    - exact: While we find that CSPA recovers more KL divergence L10H7 than all other heads, we also find
+        that the QK and OV ablations (Section 3.3.1) lead to large (> 50%) KL divergence recovered for
+      prefix: ''
+      suffix: ''
+      section: Appendix J.3 (page 19)
+      page: null
+      line: null
+    - exact: many other heads, too. In Appendix N we describe a more destructive intervention which recovers
+        25% of L10H7’s KL divergence naively and 61% when adjusted.
+      prefix: ''
+      suffix: ''
+      section: Appendix J.3 (page 20)
+      page: null
+      line: null
+    - exact: Unfortunately the direction perpendicular to IO is slightly more important than the parallel
+        direction, for both name movers.
+      prefix: ''
+      suffix: ''
+      section: Appendix L
+      page: null
+      line: null
+    - exact: However, we present two pieces of evidence to highlight how the unembedding only explains
+        part of the self-repair in GPT-2 Small, including showing that our understanding of Negative Heads
+        on the IOI task also requires understanding more than simply the unembedding directions.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+  I5:
+    quotes:
+    - exact: This is because GPT-2 Small uses the same matrix for embeddings and unembeddings, so L10H7
+        could simply be matching similar vectors at query and keyside (for example, in a ‘same matching’
+        QK matrix (Elhage et al., 2021)) Therefore in Figure 3 (blue bars) we also compare to a baseline
+        where both query and keys are effective embeddings,5 and find that the ranks of the diagonal elements
+        in their rows are much smaller
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: Fortunately, we find that most of L10H7’s effect on loss was via the direct path to the final
+        logits.
+      prefix: ''
+      suffix: ''
+      section: §2.2
+      page: null
+      line: null
+    - exact: However, we present two pieces of evidence to highlight how the unembedding only explains
+        part of the self-repair in GPT-2 Small, including showing that our understanding of Negative Heads
+        on the IOI task also requires understanding more than simply the unembedding directions.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: We’re not sure what this perpendicular component represents.
+      prefix: ''
+      suffix: ''
+      section: Appendix M.3
+      page: null
+      line: null
+  I6:
+    quotes:
+    - exact: We found that these backup heads on the right hand side use a qualitatively different mechanism
+        for self-repair than (copy suppressing) negative heads, which we summarise behaviorally in Table
+        2.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: However, we present two pieces of evidence to highlight how the unembedding only explains
+        part of the self-repair in GPT-2 Small, including showing that our understanding of Negative Heads
+        on the IOI task also requires understanding more than simply the unembedding directions.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: In this section we use the narrow Indirect Object Identification (IOI; Wang et al. (2023))
+        task to study self-repair, as this was studied in the GPT-2 Small model, and was the first known
+        example of self-repair.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  I7:
+    quotes:
+    - exact: To account for this, we define the effective embedding. The effective embedding is purely
+        a function of the input token, with no leakage from other tokens in the prompt, as the attention
+        is ablated.
+      prefix: ''
+      suffix: ''
+      section: Appendix I
+      page: null
+      line: null
+    - exact: This is because GPT-2 Small uses the same matrix for embeddings and unembeddings, so L10H7
+        could simply be matching similar vectors at query and keyside (for example, in a ‘same matching’
+        QK matrix (Elhage et al., 2021)) Therefore in Figure 3 (blue bars) we also compare to a baseline
+        where both query and keys are effective embeddings,5 and find that the ranks of the diagonal elements
+        in their rows are much smaller
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: For example, our Layer Norm functions only apply normalization, with no centering or rescaling
+        (this particular detail significantly simplifies our Logit Lens experiments).
+      prefix: ''
+      suffix: ''
+      section: Appendix H
+      page: null
+      line: null
+    - exact: We normalize the query and key inputs to norm dmodel to simulate the effect of Layer Norm.
+      prefix: ''
+      suffix: ''
+      section: Appendix M.1
+      page: null
+      line: null
+    - exact: However, observing the cases where this intervention has at least 0.1 KL divergence to the
+        original model (57/6000 cases), we find that in 39/57 of the cases the model had greatest attention
+        to a capitalized word, which is far above the base rate in natural language.
+      prefix: ''
+      suffix: ''
+      section: Appendix N
+      page: null
+      line: null
+  I9:
+    quotes:
+    - exact: and therefore does not activate future copy suppression components.
+      prefix: ''
+      suffix: ''
+      section: Appendix C
+      page: null
+      line: null
+    - exact: Indeed the loss increase is roughly twice as large in the normal indirect effect case compared
+        to when we control for the effect through L11H10 (Figure 12). However, surprisingly there is little
+        effect on KL Divergence.
+      prefix: ''
+      suffix: ''
+      section: Appendix C
+      page: null
+      line: null
+    - exact: We found that these backup heads on the right hand side use a qualitatively different mechanism
+        for self-repair than (copy suppressing) negative heads, which we summarise behaviorally in Table
+        2.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: The sum of the proportions of self-repair explained by Negative Heads L10H7 and L11H10 is
+        39%.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: However, we present two pieces of evidence to highlight how the unembedding only explains
+        part of the self-repair in GPT-2 Small, including showing that our understanding of Negative Heads
+        on the IOI task also requires understanding more than simply the unembedding directions.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+  I10:
+    quotes:
+    - exact: In this section, we perform an ablation which deletes all functionality of L10H7’s OV and
+        QK circuits, except for the mechanisms described in Section 3.1 and 3.2 respectively, with the
+        goal of seeing how much functionality we can remove without damaging performance. We refer to
+        this as Copy Suppression-Preserving Ablation (CSPA).
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: We can project each of these vectors onto the unembedding vector for the corresponding source
+        token S. We only keep the negative components.6
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, OV ablation
+      page: null
+      line: null
+    - exact: We mean ablate the result vectors from each source token S, except for the top 5% of source
+        tokens which are predicted with highest probability at the destination token D (as measured with
+        the logit lens).
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, QK ablation
+      page: null
+      line: null
+    - exact: Making a copy of the residual stream before the self-repair head, and adding a scaled vector
+        s⃗v (where ⃗v is a vector and s is some scaling) to this copy (before the LayerNorm)
+      prefix: ''
+      suffix: ''
+      section: Appendix R
+      page: null
+      line: null
+    - exact: We observe that the Negative Heads have a positive slope across all of the IO subgraphs.
+      prefix: ''
+      suffix: ''
+      section: Appendix R
+      page: null
+      line: null
+  I11:
+    quotes:
+    - exact: This paper aimed to mechanistically explain what heads like L10H7 do, rather than to provide
+        an explanation for why they form. We hope to address this in subsequent research. Here, we present
+        three possible theories, present some evidence for/against them, and discuss how we might test
+        them.
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+    - exact: 'Tests: Examine the sequences for which this head decreases the loss by the most (particularly
+        for checkpointed models, just as the negative head is forming).'
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+    - exact: 'Tests: Look at checkpointed models, and see if negative heads form concurrently with the
+        emergence of copying behaviour by other heads.'
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+    - exact: 'Tests: Look at attention patterns of the negative head early in training'
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+    - exact: While discussing these theories, it is also important to draw a distinction between the reason
+        a head forms during training, and the primary way this head decreases loss on the fully trained
+        model - these two may not be the same.
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+  I12:
+    quotes:
+    - exact: We also find instances of copy suppression (though weaker) in the Pythia models that were
+        trained without dropout and without tied embeddings (Figure 9).
+      prefix: ''
+      suffix: ''
+      section: Appendix B
+      page: null
+      line: null
+    - exact: While discussing these theories, it is also important to draw a distinction between the reason
+        a head forms during training, and the primary way this head decreases loss on the fully trained
+        model - these two may not be the same.
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+    - exact: 'Tests: Look at checkpointed models, and see if negative heads form concurrently with the
+        emergence of copying behaviour by other heads.'
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+  E1:
+    quotes:
+    - exact: We use the logit lens (nostalgebraist, 2020) technique to measure what intermediate model
+        components predict, and use mean ablation to delete internal model activations.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: To investigate the relative importance of the direct and indirect effect of L10H7 on the
+        model’s loss, we decompose its effect into a set of different paths
+      prefix: ''
+      suffix: ''
+      section: §2.2
+      page: null
+      line: null
+    - exact: We can project each of these vectors onto the unembedding vector for the corresponding source
+        token S. We only keep the negative components.6
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, OV ablation
+      page: null
+      line: null
+    - exact: We mean ablate the result vectors from each source token S, except for the top 5% of source
+        tokens which are predicted with highest probability at the destination token D (as measured with
+        the logit lens).
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, QK ablation
+      page: null
+      line: null
+    - exact: However, we present two pieces of evidence to highlight how the unembedding only explains
+        part of the self-repair in GPT-2 Small, including showing that our understanding of Negative Heads
+        on the IOI task also requires understanding more than simply the unembedding directions.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: Making a copy of the residual stream before the self-repair head, and adding a scaled vector
+        s⃗v (where ⃗v is a vector and s is some scaling) to this copy (before the LayerNorm)
+      prefix: ''
+      suffix: ''
+      section: Appendix R
+      page: null
+      line: null
+  E2:
+    quotes:
+    - exact: We average these values over OpenWebText for both ablations we use, defining DCSPA for CSPA
+        and
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, Ablation metric
+      page: null
+      line: null
+    - exact: DMA for the mean ablation baseline. Finally, we define the effect explained as 1 − DCSPA
+        /DMA (Eqn. (3)).
+      prefix: ''
+      suffix: ''
+      section: §3.3.1, Ablation metric
+      page: null
+      line: null
+    - exact: CSPA explains 76.9% of L10H7’s behavior.
+      prefix: ''
+      suffix: ''
+      section: §3.3.2
+      page: null
+      line: null
+    - exact: CSPA explained 88.1% of L10H7’s
+      prefix: ''
+      suffix: ''
+      section: §3.3.2, left column
+      page: null
+      line: null
+    - exact: In this section we use the narrow Indirect Object Identification (IOI; Wang et al. (2023))
+        task to study self-repair, as this was studied in the GPT-2 Small model, and was the first known
+        example of self-repair.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Attention heads have been discovered in large models which identify repeating prefixes and
+        suppressing the prediction of the token which followed the first instance of the prefix, in other
+        words the opposite of the induction pattern (Olsson et al., 2022).
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+  E3:
+    quotes:
+    - exact: Attention heads have been discovered in large models which identify repeating prefixes and
+        suppressing the prediction of the token which followed the first instance of the prefix, in other
+        words the opposite of the induction pattern (Olsson et al., 2022).
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+    - exact: For example, head L10H7 in GPT-2 Small ranked higher than all other attention heads in both
+        copy-suppression and negative induction score.
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+    - exact: Importantly, since the induction task involves a repeated sequence of random tokens, this
+        graph strongly suggests that the negative behavior displayed by certain heads on the IOI task
+        is not task-dependent.
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+    - exact: We believe this holds a generalisable lesson for mechanistic interpretability - certain components
+        can appear to be using task-specific algorithms, but are actually implementing a more general
+        pattern of behaviour.
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+    - exact: In this section we use the narrow Indirect Object Identification (IOI; Wang et al. (2023))
+        task to study self-repair, as this was studied in the GPT-2 Small model, and was the first known
+        example of self-repair.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  E4:
+    quotes:
+    - exact: 'We have performed the experiment in Section 3.2 on all heads in GPT-2 Medium: Figure 10.
+        We found that the two heads most prominently recovered were 2/3 of the most negative heads on
+        the IOI task in GPT-2 Medium (Figure 11).'
+      prefix: ''
+      suffix: ''
+      section: Appendix B
+      page: null
+      line: null
+    - exact: We also find instances of copy suppression (though weaker) in the Pythia models that were
+        trained without dropout and without tied embeddings (Figure 9).
+      prefix: ''
+      suffix: ''
+      section: Appendix B
+      page: null
+      line: null
+    - exact: For instance, one head in Stanford GPT-2 Small E wrote ’less against’ the correct token upon
+        the ablation of earlier Name Mover Heads; however, it is distinct from the copy suppression heads
+        in GPT-2 Small in that it attended to both the IO and S2 tokens equally on a clean run.
+      prefix: ''
+      suffix: ''
+      section: Appendix Q
+      page: null
+      line: null
+    - exact: Two limitations of our work include our understanding of the query inputs to self-repair
+        heads, and the transferability of our results to different models.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+    - exact: Further, while we show that some of our insights generalize to large models (Appendix A and
+        B), we don’t have a mechanistic understanding of copy suppression in these cases.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+    refs:
+    - citation: tigges2024llm
+      text: tend to replicate across model scale
+      section: body
+      page: null
+      direction: neutral
+      local: reference/tigges_2024_circuits_consistent.pdf
+      sha256: de26edd28d3792be78213005cc5d2e1f7999ee40a3a5a28743161f9a5ee9eba9
+      extract_cmd: pdftotext -layout
+    - citation: tigges2024llm
+      text: suddenly stops exhibiting this behavior
+      section: body
+      page: null
+      direction: neutral
+      local: reference/tigges_2024_circuits_consistent.pdf
+      sha256: de26edd28d3792be78213005cc5d2e1f7999ee40a3a5a28743161f9a5ee9eba9
+      extract_cmd: pdftotext -layout
+  E5:
+    quotes:
+    - exact: Making a copy of the residual stream before the self-repair head, and adding a scaled vector
+        s⃗v (where ⃗v is a vector and s is some scaling) to this copy (before the LayerNorm)
+      prefix: ''
+      suffix: ''
+      section: Appendix R
+      page: null
+      line: null
+    - exact: We observe that the Negative Heads have a positive slope across all of the IO subgraphs.
+      prefix: ''
+      suffix: ''
+      section: Appendix R
+      page: null
+      line: null
+    - exact: this implies that the greater the presence of the IO unembedding in the query of the negative
+        name mover head, the greater the neagtive head attends to the IO token.
+      prefix: ''
+      suffix: ''
+      section: Appendix R
+      page: null
+      line: null
+    - exact: Unfortunately, this same trend does not hold for backup heads.
+      prefix: ''
+      suffix: ''
+      section: Appendix R
+      page: null
+      line: null
+    - exact: CSPA explained 88.1% of L10H7’s
+      prefix: ''
+      suffix: ''
+      section: §3.3.2, left column
+      page: null
+      line: null
+  E6:
+    quotes:
+    - exact: Attention heads have been discovered in large models which identify repeating prefixes and
+        suppressing the prediction of the token which followed the first instance of the prefix, in other
+        words the opposite of the induction pattern (Olsson et al., 2022).
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+    - exact: For example, head L10H7 in GPT-2 Small ranked higher than all other attention heads in both
+        copy-suppression and negative induction score.
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+    - exact: Importantly, since the induction task involves a repeated sequence of random tokens, this
+        graph strongly suggests that the negative behavior displayed by certain heads on the IOI task
+        is not task-dependent.
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+    - exact: 'We show that the main role of Negative Heads in GPT-2 Small is copy suppression (Figure
+        1), which is defined by three steps:'
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+  V1:
+    quotes:
+    - exact: Our central claim is that at least 76.9% of the role of attention head L10H7 on GPT-2 Small’s
+        training distribution is copy suppression.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: 'We show that the main role of Negative Heads in GPT-2 Small is copy suppression (Figure
+        1), which is defined by three steps:'
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: 1. Prior copying. Language model components in early layers directly predict that the next
+        token is one that already appears in context, e.g that the prefix “All’s fair in love and” is
+        completed with “ love”. 2. Attention. Copy suppression heads detect the prediction of a copied
+        token and attend back to the previous instance of this token (“ love”). 3. Suppression. Copy suppression
+        heads write directly to the model’s output to decrease the logits on the copied token.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: 1. In Section 3.1, we analyse the OV circuit, and show that the head suppresses the prediction
+        of 84.70% of tokens which it attends to. 2. In Section 3.2, we analyse the QK circuit, and show
+        that the head attends to the token which the model is currently predicting across 95.72% of the
+        model’s vocabulary.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: However, we do not explain precisely when or how much copy suppression is activated in different
+        contexts.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+  V2:
+    quotes:
+    - exact: However, we do not explain precisely when or how much copy suppression is activated in different
+        contexts.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: However, one limitation of our analysis of the QK circuit is that this idealised setup does
+        not completely faithfully represent L10H7’s real functioning (Appendices M.2, M.3 and N).
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: We find that the median attention change is −0.09, with lower quartile −0.19.
+      prefix: ''
+      suffix: ''
+      section: Appendix M.2
+      page: null
+      line: null
+    - exact: effective embedding, we find a more faithful approximation of L10H7’s keyside input as Figure
+        21 shows that the median change in L10H7’s attention weights is −0.06 which is closer to 0.
+      prefix: ''
+      suffix: ''
+      section: Appendix M.2
+      page: null
+      line: null
+    - exact: Unfortunately the direction perpendicular to IO is slightly more important than the parallel
+        direction, for both name movers.
+      prefix: ''
+      suffix: ''
+      section: Appendix L
+      page: null
+      line: null
+  V3:
+    quotes:
+    - exact: We speculate that the copy suppression algorithm is better thought of as semantic copy suppression,
+        i.e. all tokens semantically related to the source token are suppressed, rather than pure copy
+        suppression (where only the source token is suppressed).
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: 42.00% of (source, destination) pairs had the source token in the top 10 most suppressed
+        tokens, but not the most suppressed.
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: We codify these rules, and find that in 90% of the aforementioned cases, the most suppressed
+        token is semantically related to the source token.
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: This is because GPT-2 Small uses the same matrix for embeddings and unembeddings, so L10H7
+        could simply be matching similar vectors at query and keyside (for example, in a ‘same matching’
+        QK matrix (Elhage et al., 2021)) Therefore in Figure 3 (blue bars) we also compare to a baseline
+        where both query and keys are effective embeddings,5 and find that the ranks of the diagonal elements
+        in their rows are much smaller
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: We’re not sure what this perpendicular component represents.
+      prefix: ''
+      suffix: ''
+      section: Appendix M.3
+      page: null
+      line: null
+  V4:
+    quotes:
+    - exact: 'We show that the main role of Negative Heads in GPT-2 Small is copy suppression (Figure
+        1), which is defined by three steps:'
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: 1. Prior copying. Language model components in early layers directly predict that the next
+        token is one that already appears in context, e.g that the prefix “All’s fair in love and” is
+        completed with “ love”. 2. Attention. Copy suppression heads detect the prediction of a copied
+        token and attend back to the previous instance of this token (“ love”). 3. Suppression. Copy suppression
+        heads write directly to the model’s output to decrease the logits on the copied token.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: We define Negative Heads as attention heads which primarily reduce the model’s confidence
+        in particular token completions.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: Negative Head are attention heads in transformer language models which which primarily reduce
+        the model’s confidence in particular token completions. This is a qualitative definition.
+      prefix: ''
+      suffix: ''
+      section: Glossary
+      page: null
+      line: null
+    - exact: We define backup heads (see Section 4) as attention heads that respond to the ablation of
+        a head by imitating that original behavior.
+      prefix: ''
+      suffix: ''
+      section: §1, footnote 2
+      page: null
+      line: null
+    - exact: Attention Head 10.7 (L10H7) suppresses naive copying behavior which improves overall model
+        calibration.
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: From this curve, we can define an overconfidence metric, calculated by subtracting the perfect
+        calibration curve from the model’s actual calibration curve, and taking the normalized L2 inner
+        product between this curve and the curve we get from a perfectly overconfident model (which only
+        ever makes predictions of absolute certainty).
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+    - exact: One possible role for negative heads is that they are reducing the model’s overconfidence,
+        causing it to make fewer errors of this form. However, it is also possible that this result is
+        merely incidental, and not directly related to the reason these heads form.
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+    - exact: This paper aimed to mechanistically explain what heads like L10H7 do, rather than to provide
+        an explanation for why they form. We hope to address this in subsequent research. Here, we present
+        three possible theories, present some evidence for/against them, and discuss how we might test
+        them.
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+  V5:
+    quotes:
+    - exact: Our central claim is that at least 76.9% of the role of attention head L10H7 on GPT-2 Small’s
+        training distribution is copy suppression.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: However, we do not explain precisely when or how much copy suppression is activated in different
+        contexts.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: However, one limitation of our analysis of the QK circuit is that this idealised setup does
+        not completely faithfully represent L10H7’s real functioning (Appendices M.2, M.3 and N).
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: Two limitations of our work include our understanding of the query inputs to self-repair
+        heads, and the transferability of our results to different models.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+    - exact: Further, while we show that some of our insights generalize to large models (Appendix A and
+        B), we don’t have a mechanistic understanding of copy suppression in these cases.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+    - exact: This paper aimed to mechanistically explain what heads like L10H7 do, rather than to provide
+        an explanation for why they form. We hope to address this in subsequent research. Here, we present
+        three possible theories, present some evidence for/against them, and discuss how we might test
+        them.
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null

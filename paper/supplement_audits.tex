@@ -1,0 +1,140 @@
+% Supplementary file: full criterion audits.
+% Per claim: one page of Source + Description + verdict table + readings table,
+% then a new page carrying the full 35-criterion scorecard.
+\pdfoutput=1
+\documentclass{article}
+\usepackage[preprint]{tmlr}
+\newcommand{\openreview}{\url{https://openreview.net/forum?id=XXXX}}
+\def\month{06}
+\def\year{2026}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{caption}
+\captionsetup[table]{skip=8pt}
+\setlength{\intextsep}{16pt plus 2pt minus 2pt}
+
+\title{Supplementary Material:\\Criterion Audits of Mechanistic Claims}
+\author{}
+
+\begin{document}
+\maketitle
+
+\section*{How to read these audits}
+
+Each claim occupies two pages: a summary page carrying the verdict and how it was reached,
+and a facing page carrying the full 35-criterion scorecard. Three conventions govern the
+scoring.
+
+\textbf{Scope is part of the claim.} A mechanistic claim is not true or false on its own;
+it is true or false at a scope. We report the broadest scope at which the claim reaches
+each verdict. A claim that holds narrowly and fails broadly is recorded as both, because
+reporting only the failure misrepresents the origin paper and reporting only the success
+misrepresents how the claim is used. The scorecard scores the primary reading; the readings table records the others.
+
+\textbf{The verdict comes from gates, not from counts.} The status tally at the foot of
+each scorecard is descriptive. Promotion between tiers is decided by named criteria, and
+the verdict table reports which one blocks it.
+
+\textbf{Untested splits two ways.} \emph{Unattempted} means the experiment was not run.
+\emph{Untestable in the setting as run} means it could not have been. Only the first is a
+gap the authors could have closed.
+
+
+% ---- Induction Heads: In-Context Token Copying (Triangulated)
+\input{generated/induction_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/induction_views_table}
+
+% ---- Copy Suppression in Negative Attention Heads (Mechanistically Supported)
+\input{generated/copy_suppression_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/copy_suppression_views_table}
+
+% ---- Greater-Than Circuit in Year-Span Prediction (Mechanistically Supported)
+\input{generated/greater_than_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/greater_than_views_table}
+
+% ---- Fourier Multiplication in Modular Addition (Mechanistically Supported)
+\input{generated/grokking_section}
+
+% ---- Refusal Mediated by a Single Direction (Mechanistically Supported)
+\input{generated/refusal_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/refusal_views_table}
+
+% ---- Successor Heads: Ordinal Incrementation (Mechanistically Supported)
+\input{generated/successor_heads_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/successor_heads_views_table}
+
+% ---- Superposition of Features in Toy Models (Mechanistically Supported)
+\input{generated/superposition_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/superposition_views_table}
+
+% ---- Global Workspace / J-space (Mechanistically Supported)
+\input{generated/workspace_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/workspace_views_table}
+
+% ---- Docstring Circuit (Causally Suggestive)
+\input{generated/docstring_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/docstring_views_table}
+
+% ---- Gender Bias Circuits (Causally Suggestive)
+\input{generated/gender_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/gender_views_table}
+
+% ---- IOI Circuit (Causally Suggestive)
+\input{generated/ioi_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/ioi_views_table}
+
+% ---- Othello World Model (Causally Suggestive)
+\input{generated/othello_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/othello_views_table}
+
+% ---- SAE Features as Units of Analysis (Causally Suggestive)
+\input{generated/sae_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/sae_views_table}
+
+% ---- Probing Classifiers as Mechanistic Evidence (Proposed)
+\input{generated/probing_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/probing_views_table}
+
+% ---- Induction Heads: General In-Context Learning (Disconfirmed)
+\input{generated/induction_broad_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/induction_broad_views_table}
+
+% ---- Knowledge Neurons (Disconfirmed)
+\input{generated/knowledge_neurons_section}
+
+\subsection*{Mechanistic Views Audit}
+\input{generated/knowledge_neurons_views_table}
+
+\end{document}

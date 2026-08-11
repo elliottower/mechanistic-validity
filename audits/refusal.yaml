@@ -1,0 +1,1111 @@
+claim: refusal
+verdict: Mechanistically Supported
+readings:
+- statement: Ablating one difference-in-means direction stops refusal on harmful instructions and adding
+    it induces refusal on harmless ones, across 13 chat models
+  verdict: Mechanistically Supported
+  missing: A second estimator for the direction, since the three implementations are consumers of one
+    difference in means (C3); a dissociation from any other behaviour's direction (I6); sensitivity of
+    the extraction to its own three thresholds (M3)
+  primary: true
+- statement: The direction carries refusal rather than harmfulness
+  verdict: Underdetermined
+  missing: The estimator is the axis along which mean harmful and harmless activations differ, which a
+    harmfulness direction satisfies exactly (V4); the two constructs are separated by citation rather
+    than by experiment (C4); base models that never refuse express the same direction (I11)
+  primary: false
+- statement: Refusal is organised along one dimension of the residual stream
+  verdict: Underdetermined
+  missing: The interventions license a lever rather than a representational organisation, which the authors
+    concede by calling the work an existence proof (V2); no rank above one is ever ablated and the search
+    enumerates single vectors only (I3); refusal is scored as a twelve-substring match, an output property
+    a single direction would control either way (V3)
+  primary: false
+- statement: Orthogonalising the direction removes refusal whatever the prompting condition
+  verdict: Disconfirmed
+  missing: 'Nothing --- tested and failed: with its default system prompt the orthogonalised LLAMA-2 70B
+    yields 4.4\% attack success against 62.9\% without it, so refusal produced on instruction survives
+    an edit that removes the learned propensity (I1, M6)'
+  primary: false
+hypotheses:
+- id: H1
+  view: Object
+  label: one difference-in-means direction mediates refusal in these chat models
+- id: H2
+  view: Object
+  label: refusal spans more than one dimension and this vector is one cut of it
+- id: H3
+  view: Object
+  label: no determinate direction mediates refusal and refusal-shaped behaviour has several sources
+- id: H4
+  view: Role
+  label: the direction carries the harmfulness of the instruction, with refusal downstream
+- id: H5
+  view: Instrumental
+  label: the direction is the survivor of a search that optimised the reported quantity
+- id: H6
+  view: Instrumental
+  label: the direction controls a twelve-substring output score rather than an internal organisation
+views_evidence:
+- criterion: I1
+  family: Pragmatic
+  evidence: Ablating the direction at all layers and positions collapses refusal on 13 models, and with
+    its default system prompt the orthogonalised LLAMA-2 70B reaches 4.4 percent attack success against
+    62.9 percent without it
+  cells:
+    H1: C
+    H2: '-'
+    H3: I
+    H4: C
+    H5: C
+    H6: C
+  designed_for:
+  - H1
+- criterion: I2
+  family: Pragmatic
+  evidence: Adding the vector at its extraction layer makes models refuse harmless instructions, down
+    to a request for the benefits of yoga
+  cells:
+    H1: C
+    H2: '-'
+    H3: I
+    H4: C
+    H5: C
+    H6: C
+  designed_for:
+  - H1
+- criterion: C3
+  family: Mathematical
+  evidence: Directional ablation and activation addition agree on the behavioural outcome, weight orthogonalisation
+    is proved equivalent to ablation, and the direction itself comes from one estimator
+  cells:
+    H1: C
+    H2: C
+    H3: '-'
+    H4: C
+    H5: C
+    H6: '-'
+  designed_for: []
+- criterion: C4
+  family: Mathematical
+  evidence: The direction is the axis along which mean harmful and harmless instruction activations differ,
+    and the prior claim that harmfulness is distinct from refusal is answered by citation
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: C
+    H5: '-'
+    H6: '-'
+  designed_for: []
+- criterion: M2
+  family: Pragmatic
+  evidence: Seven jailbreak comparators and a matched random-suffix control are run, and no random or
+    orthogonal direction is ever ablated for comparison
+  cells:
+    H1: C
+    H2: '-'
+    H3: C
+    H4: '-'
+    H5: C
+    H6: C
+  designed_for: []
+- criterion: M7
+  family: Pragmatic
+  evidence: Every post-instruction position crossed with every layer forms the candidate pool, the minimiser
+    of bypass score wins subject to three thresholds, and its own selection scores are reported as its
+    properties
+  cells:
+    H1: '-'
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: C
+    H6: '-'
+  designed_for: []
+- criterion: I3
+  family: Mathematical
+  evidence: The search enumerates single difference-in-means vectors, so no rank above one could have
+    been selected, and no two-dimensional ablation is run
+  cells:
+    H1: C
+    H2: C
+    H3: C
+    H4: '-'
+    H5: C
+    H6: '-'
+  designed_for: []
+- criterion: I5
+  family: Pragmatic
+  evidence: The orthogonalised model still generates the same refusal strings when asked for them, on
+    one model and one prompt pair
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: C
+    H5: '-'
+    H6: I
+  designed_for:
+  - H6
+- criterion: I11
+  family: Mathematical
+  evidence: Base models that never refuse express the direction as the chat models do, high on harmful
+    prompts and low on harmless ones
+  cells:
+    H1: '-'
+    H2: '-'
+    H3: '-'
+    H4: C
+    H5: I
+    H6: '-'
+  designed_for: []
+- criterion: V3
+  family: Pragmatic
+  evidence: Refusal is scored as the presence of one of twelve substrings in the completion, an output
+    property a single direction would control either way
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: C
+    H5: '-'
+    H6: C
+  designed_for: []
+- criterion: E6
+  family: Mathematical
+  evidence: Expression of the direction under an adversarial suffix closely resembles that of harmless
+    instructions while a length-matched random suffix leaves it high, on one model and one suffix
+  cells:
+    H1: C
+    H2: '-'
+    H3: I
+    H4: C
+    H5: I
+    H6: '-'
+  designed_for:
+  - H1
+  - H5
+tiers:
+- name: Proposed
+  requires: C1--C2; one admissible measurement
+  missing: '---'
+- name: Causally Suggestive
+  requires: Necessity (I1); baselines (M2)
+  missing: '---'
+- name: Mechanistically Supported
+  requires: Sufficiency (I2); reach (E1); specificity (I4)
+  missing: '---'
+- name: Triangulated
+  requires: Convergence (C3); replication (E2/E4); dissociation (I6)
+  missing: '\textbf{C3}: three implementations of two operations, all consuming one unreplicated difference-in-means
+    estimate; \textbf{I6} unattempted, with no second direction ablated to show refusal intact'
+- name: Validated
+  requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
+  missing: \textbf{M3}, \textbf{M7} unattempted, and the selected direction's own selection scores are
+    reported as properties of it; \textbf{I11} Inconclusive, the direction being fully expressed in base
+    models that never refuse; \textbf{I9}, \textbf{I10}, \textbf{E5} unattempted
+criteria:
+  C1:
+    name: Falsifiability
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The claim states two predictions in opposite directions and fixes an outcome measure before
+      either is tested: ablation must stop refusal on harmful instructions, addition must start it on
+      harmless ones, and refusal is a substring match scored 0 or 1. Both predictions are also selection
+      conditions, so a candidate direction can fail them, and the surviving direction''s margin is reported
+      per model. LLAMA-3 70B survives on an induce_score of 0.126 against a threshold of 0, which is how
+      close the procedure came to returning nothing for that model. A claim that could have come out the
+      other way, with the failure condition written down in advance, is C.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, numerical. The legacy evidence reads "induce_score 0.126
+        against 5--7 for the other large models (Table 5)". Table 5''s other large models are QWEN 72B
+        at 1.885, YI 34B at 1.865 and LLAMA-2 70B at 5.191; the 5--7 band belongs to GEMMA 2B (6.709),
+        GEMMA 7B (6.851), LLAMA-2 7B (5.941) and LLAMA-3 8B (7.681), which are the small models. Across
+        all twelve other models the range is 1.107 to 7.681. The 0.126 figure and its isolation at the
+        bottom of the table are correct; the comparison band is not.
+
+        '
+      legacy_evidence: 'Bidirectional and quantitative: ablation should drop refusal, addition should
+        raise it on harmless prompts, and both were preconditions the selection procedure could fail to
+        meet. Llama-3 70B nearly does fail --- \texttt{induce\_score} 0.126 against 5--7 for the other
+        large models (Table 5)'
+      numeric_correction: The cell reads 'induce_score 0.126 against 5-7 for the other large models (Table
+        5)'. Table 5's other large models are Qwen 72B at 1.885, Yi 34B at 1.865 and Llama-2 70B at 5.191;
+        the 5-7 band belongs to the small models. The 0.126 and its isolation hold; the comparison band
+        does not.
+      verdict_derivation: 'Verdict computed from the criteria on 2026-08-07 rather than asserted: Mechanistically
+        Supported, blocked above that by I6=U. The 35-criterion table scores the primary reading, so the
+        criteria, the primary reading''s verdict and the overall verdict are one number by construction.'
+  C2:
+    name: Structural plausibility
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The mechanism is stated in the weights. §4.1 enumerates the five kinds of matrix that
+      write to the residual stream and defines the edit that removes the direction from all of them, and
+      §E derives that this weight edit and the inference-time ablation compute the same thing, so the
+      structural story and the behavioural intervention are one object rather than two claims that happen
+      to agree. §5.2 then localises the writers: components are ranked by the projection of their output
+      onto the direction, and the top eight attention heads are identified. Structure that is implemented
+      and localised rather than argued is C.
+
+      '
+    notes:
+      verification: 'The cell''s enumeration of the five matrix families matches §4.1 exactly, and the
+        top-eight head attribution matches §5.2 and Figure 6. Direct feature attribution is a projection
+        of component outputs, so it ranks writers without establishing that any of them is necessary;
+        §5.2 names MLP components as part of the analysis and reports none, which the I9 cell records.
+
+        '
+      legacy_evidence: The mechanism is realised in the weights, not argued for. \S4.1 enumerates every
+        matrix that writes to the residual stream (embedding, positional embedding, attention-out, MLP-out,
+        and output biases) and orthogonalises each against $\hat r$; \S E proves the weight edit is algebraically
+        identical to the inference-time ablation. Direct feature attribution locates the top eight heads
+        that write the direction (Figure 6)
+  C3:
+    name: Convergent validity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Convergence is real on the intervention side and absent on the extraction side. Directional
+      ablation and activation addition are separate operations that agree on the behavioural outcome,
+      and a LoRA fine-tuning comparator agrees again. Weight orthogonalisation adds no independent evidence,
+      because §4.1 states that it computes the same function as the ablation and therefore inherits its
+      results exactly; three implementations of two operations is the honest count. The direction itself
+      is produced by one estimator, a difference in means, with no second attribution family applied to
+      the same question, and §7 concedes the extraction is heuristic. Agreement among consumers of one
+      estimate, with the estimate itself unreplicated, is PC.
+
+      '
+    notes:
+      verification: 'The cell''s claim that orthogonalisation is proved equivalent to ablation is supported
+        verbatim by §4.1, which goes further than the cell and says the ablation results "exactly characterize"
+        the weight edit. The four independent extraction methods the cell cites (Wollschl\"ager, Prakash,
+        Piras) are post-origin and are not checked here.
+
+        '
+      legacy_evidence: 'Three intervention forms agree (ablation, activation addition, weight orthogonalisation)
+        plus a LoRA fine-tuning comparator, but orthogonalisation is \emph{proved equivalent} to ablation
+        (\S E), so the count is two. Extraction is single-method throughout: difference-in-means, one
+        vector, no second attribution family. Independent methods arrived later and disagree on dimensionality
+        --- gradient-based extraction (Wollschl\"ager et al.\ 2025), sparse autoencoders (Prakash et al.\
+        2025), self-organising maps (Piras et al.\ 2025) each find multiple directions'
+  C4:
+    name: Discriminant validity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The neighbouring construct is harmfulness, and the paper''s own description of the estimator
+      is a description of a harmfulness contrast: the vector is defined as the axis along which mean harmful
+      and harmless activations differ. §6 records that two prior groups extract a harmfulness representation
+      from the same kind of contrastive pair and assert it is distinct from refusal, and the paper answers
+      with a single point of disagreement about adversarial suffixes rather than a test that separates
+      the two. §J then finds the same direction expressed in base models, which do not refuse, which is
+      what a harmfulness feature would predict. Discrimination attempted at the level of citation rather
+      than experiment is PC.
+
+      '
+    notes:
+      verification: 'PARTIAL CONTRADICTION WITH THE CELL. The cell says §6 "records that Zheng et al.
+        and Zou et al. assert the two are distinct and does not adjudicate". §6 does record that, and
+        it also registers one empirical disagreement --- Zou reports the harmfulness representation is
+        unaffected by adversarial suffixes, while §5.1 reports the refusal direction is suppressed by
+        one. That is a contrast with a published result, not an experiment run here, so the cell''s conclusion
+        holds and its description of §6 is incomplete.
+
+        '
+      legacy_evidence: The neighbouring construct is harmfulness, and the origin's own extraction contrast
+        is a harmfulness contrast (harmful vs.\ harmless \emph{instructions}, \S2.3) whose product is
+        labelled a refusal direction. \S6 records that Zheng et al.\ and Zou et al.\ assert the two are
+        distinct and does not adjudicate. Zhao et al.\ (2025) run the separation and find a harmfulness
+        direction ``distinct from the refusal direction,'' with different steering consequences --- which
+        vindicates the \emph{name} while showing the origin's instrument could not have made the distinction
+  C5:
+    name: Nomological validity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The claim is placed in a theory that predates it. The linear representation hypothesis
+      supplies the form of the answer, difference-in-means supplies the estimator with a prior track record
+      on other features, and §J adds a developmental account in which the direction predates the behaviour
+      and is recruited by fine-tuning. What the surrounding theory does not supply is the number: nothing
+      in the linear representation hypothesis predicts that one dimension should suffice, so the paper''s
+      headline quantity is an empirical finding with no nomological reason behind it. A claim embedded
+      in a theory that does not entail its central parameter is PC.
+
+      '
+    notes:
+      verification: 'The cell''s §J quotation, "exists already in the base model, and is repurposed for
+        refusal during safety fine-tuning", is verbatim. The three difference-in-means citations named
+        in the cell (Belrose; Marks and Tegmark; Panickssery) all appear in §2.3 as the cell states.
+
+        '
+      legacy_evidence: 'Sits inside an established line: difference-in-means as a feature-isolation estimator
+        (Belrose 2023; Marks \& Tegmark 2023; Panickssery et al.\ 2023) and the linear representation
+        hypothesis. \S J adds a developmental account --- the direction ``exists already in the base model,
+        and is repurposed for refusal during safety fine-tuning.'''' No theory predicts \emph{one} dimension;
+        one-dimensionality is an empirical finding without a nomological reason'
+  M1:
+    name: Reliability
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Every uncertainty the paper reports is sampling error over prompts. §D.4 gives a binomial
+      standard error at n = 100 for the two headline figures, §H.2 a standard deviation over 128 prompts
+      for the suffix analysis, and §4.3 a 99% confidence interval for the capability evaluations. None
+      of these bears on the estimator: generation is deterministic by construction, so repeated runs would
+      agree trivially, and the direction is computed once from one 128-prompt training split with no resampling
+      reported anywhere in §2.3 or §C. Uncertainty quantified for the measurement and left unquantified
+      for the instrument is PC.
+
+      '
+    notes:
+      verification: 'All three uncertainty statements in the cell check out, including the n values. The
+        cell says estimator reliability is unaddressed; the stronger statement supported by the source
+        is that the training split is used once and no procedure in §2.3 or §C repeats or resamples it,
+        which is consistent with the cell.
+
+        '
+      legacy_evidence: 'The two sections that report uncertainty, \S D.4 and \S H.2, both report \emph{sampling}
+        error across prompts and nothing else: \S D.4 gives a binomial standard error $\sqrt{p(1-p)/n}$
+        at $n = 100$ for Figures 1 and 3, \S H.2 a standard deviation over 128 prompts for Figure 5, and
+        \S4.3 a 99\% confidence-interval statement for the capability evaluations. Estimator reliability
+        is unaddressed: generation is deterministic by construction (greedy decoding), and the direction
+        is extracted once from a single 128-prompt training split with no resampling or repetition anywhere
+        in \S2.3 or \S C'
+  M2:
+    name: Baseline separation
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The external baselines are unusually rich: five optimised jailbreak attacks, human-written
+      templates, a direct-response floor, and a fine-tuning comparator with an independent literature
+      behind it. One arm of the paper also carries a matched control, the length-matched random suffix
+      that isolates the effect of appending any suffix at all. The comparison a directional claim most
+      needs is the one that is missing: enumerating every condition in §3.1, §4.2, §4.3, §G.1, §G.3, §I.1
+      and §I.2 yields the unmodified model, rival jailbreaks, fine-tuning and harmless-prompt references,
+      and no random or orthogonal direction is ever ablated to show the effect is specific to this direction.
+      Strong baselines for the application and none for the estimate is PC.
+
+      '
+    notes:
+      verification: 'The cell''s count of seven comparison methods in Table 2 is right: GCG, GCG-M, GCG-T,
+        AutoPrompt, PAIR, HUMAN templates and DR, against ORTHO. The random-suffix control is in §5.1
+        as the cell says. The sentence carrying that control is broken line-by-line by the Figure 5 legend
+        in the -layout extraction, so it is quoted here as three adjacent pieces that reassemble it.
+
+        '
+      legacy_evidence: 'Rich external baselines --- seven jailbreak methods in Table 2 (GCG, GCG-M, GCG-T,
+        AutoPrompt, PAIR, human templates, direct response), a LoRA fine-tuning comparator (Table 8),
+        and a matched random-\emph{suffix} control for the adversarial analysis. The one baseline that
+        matters most for a directional claim is absent: enumerating every comparison condition in the
+        paper (\S3.1, \S4.2, \S4.3, \S G.1, \S G.3, \S I.1, \S I.2) yields the unmodified model, rival
+        jailbreak methods, fine-tuning, and harmless-prompt references --- no random or orthogonal direction
+        is ever ablated for comparison'
+  M3:
+    name: Stability
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'The selection rule is a fixed point in a search with three hard thresholds and a single
+      objective, and none of the four is ever moved. No result is reported under a different kl_score
+      cutoff, a different layer restriction, or a resampled training set, so nothing in the paper says
+      whether the same direction would be returned by a slightly different procedure. The authors state
+      the position themselves in §7: the extraction relies on several heuristics and the paper is an existence
+      proof rather than a study of the estimator. Unattempted, and flagged as unattempted by the authors,
+      is U.
+
+      '
+    notes:
+      verification: 'The cell''s three thresholds are verbatim in §C.1 and its "relies on several heuristics"
+        quotation is verbatim in §7. No sensitivity analysis appears in §C, §2.3 or any appendix from
+        A to N.
+
+        '
+      legacy_evidence: 'Unattempted, and the authors flag it: the extraction ``relies on several heuristics''''
+        (\S7). The three selection thresholds ($\texttt{kl\_score} < 0.1$, $\texttt{induce\_score} > 0$,
+        $l < 0.8L$) are never perturbed, and no sensitivity of the selected direction to the 128-prompt
+        training set is reported'
+  M4:
+    name: Calibration
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The two outcome measures have documented failure modes rather than assumed validity. §2.5
+      states what the string match cannot see, §D.3 exhibits both directions of disagreement between the
+      two scores with worked examples, and §7 declares every coherence metric flawed. What is missing
+      is the quantity that would turn documentation into calibration: no agreement rate between the substring
+      match and Llama Guard 2 is reported, and neither is validated against human judgement on any sample.
+      A metric whose errors are shown by example and never counted is PC.
+
+      '
+    notes:
+      verification: 'The substring list in §D.1 has exactly the twelve entries the cell claims. Both directions
+        of disagreement are in §D.3 as the cell says, at Figures 13 and 14 (0/1) and Figure 15 (1/0).
+        The "difficult to measure the coherence of a chat model" quotation is verbatim.
+
+        '
+      legacy_evidence: 'Two outcome metrics whose failure modes are documented rather than assumed. \S
+        D.3 exhibits both directions of disagreement: cases with $\texttt{refusal\_score}=0$ and $\texttt{safety\_score}=1$,
+        and a case with $\texttt{refusal\_score}=1$ and $\texttt{safety\_score}=0$. The authors state
+        the position plainly --- ``it is difficult to measure the coherence of a chat model, and we consider
+        each metric used flawed in various ways'''' (\S7). Refusal score remains a 12-string match, which
+        cannot distinguish a refusal from a completion that merely apologises'
+  M5:
+    name: Sensitivity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'A known-positive exists and the instrument detects it. LoRA fine-tuning on 243 harmful
+      instruction-completion pairs is an intervention independently established to disable refusal, and
+      the refusal and safety scores move from 0.95 and 0.97 to 0.00 and 0.08 under it, so a real effect
+      of the expected size registers on the measure. Two limits keep this short of full sensitivity: the
+      positive control is run on one model, and it tests the outcome measure rather than the extraction
+      --- no synthetic direction is planted in a model and recovered by the selection procedure. A detected
+      known-positive on one model is PC.
+
+      '
+    notes:
+      verification: 'The 243 pairs, the 0.95 to 0.00 refusal drop and the 0.97 to 0.08 safety drop are
+        all verbatim in §I.2 and Table 8, and §I.2 is LLAMA-3 8B INSTRUCT only, as the cell says.
+
+        '
+      legacy_evidence: 'A known-positive comparator exists on one model: LoRA fine-tuning on 243 harmful
+        instruction--completion pairs, an intervention independently known to disable refusal, which the
+        instrument detects (refusal 0.95 $\to$ 0.00, safety 0.97 $\to$ 0.08; Table 8). No planted direction
+        is inserted and recovered, and the known-positive is run on Llama-3 8B only'
+  M6:
+    name: Invariance
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The result is reported across every axis the design varies: 13 models in 5 families over
+      a 40x parameter range, both alignment paradigms, four harmful instruction sources plus Alpaca, six
+      capability benchmarks and cross-entropy loss on three corpora. The system-prompt condition is the
+      strongest case, because it is the axis along which the result is weakest: §4.2 reports attack success
+      both with and without the default system prompt and states the discrepancy for the LLAMA-2 family
+      rather than pooling it away. Invariance demonstrated across the axes that matter, including one
+      where the effect degrades, is C.
+
+      '
+    notes:
+      verification: 'OVERSTATEMENT IN THE CELL. It says "every headline evaluation reported both with
+        and without the default system prompt". Only the HARMBENCH attack success rate in §4.2 and Table
+        2 is reported both ways; Figures 1 and 3, the refusal and safety scores that carry §3, state no
+        system-prompt condition at all. The parenthetical "(§4.2)" in the cell points at the one place
+        the claim holds.
+
+        '
+      legacy_evidence: 13 models, 5 families, 1.8B--72B, both alignment paradigms; four instruction datasets;
+        six capability benchmarks plus cross-entropy loss on three corpora; and every headline evaluation
+        reported both with and without the default system prompt, with the discrepancy stated rather than
+        pooled away (\S4.2)
+  M7:
+    name: Selection correction
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'The search is large and its size is never written as a number. Every post-instruction
+      position crossed with every layer gives |I| x L candidates, the winner is the minimiser of bypass_score
+      subject to three thresholds, and no multiplicity control is applied at any point. The selected direction''s
+      own selection statistics are then reported in Table 5 as properties of that direction, which is
+      the winner''s curse in its plainest form: the quantity optimised over is the quantity reported.
+      Unattempted, with the exposure clearly visible in the procedure, is U.
+
+      '
+    notes:
+      verification: 'The cell''s description of the search is exact: |I| x L candidates, minimum-bypass_score
+        winner, three thresholds, and Table 5 reporting the selected direction''s scores. N is given only
+        as the formula, never evaluated for any model.
+
+        '
+      legacy_evidence: Unattempted, and the search is large. $|I| \times L$ candidate vectors are scored
+        and the minimum-\texttt{bypass\_score} survivor is taken subject to three thresholds (\S C.1).
+        $N$ is given as a formula and never as a number; no multiplicity control is applied; the selected
+        direction's scores are then reported as its properties (Table 5)
+  I1:
+    name: Necessity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Removing the direction removes refusal, and the demonstration runs on all 13 models rather
+      than on a chosen one. The single case with numbers attached drops refusal from 0.95 to 0.01 and
+      safety from 0.97 to 0.15. Necessity then fails visibly in one condition the paper reports rather
+      than hides: with its default system prompt, orthogonalised LLAMA-2 70B yields 4.4% attack success
+      against 62.9% without it, because the instruction to avoid harmful content survives an edit that
+      only removes the learned propensity. The direction is necessary for refusal the model produces on
+      its own and unnecessary for refusal produced on instruction, which is PC.
+
+      '
+    notes:
+      verification: 'All four numbers in the cell are verbatim: 0.95 to 0.01 refusal and 0.97 to 0.15
+        safety in Table 8, and 4.4 against 62.9 in Table 2. §4.2''s explanation supports the cell''s learned-versus-instructed
+        reading in the authors'' own words, though they mark it as speculation.
+
+        '
+      legacy_evidence: 'Ablating $\hat r$ at all layers and all token positions collapses refusal across
+        13 models (Figure 1), with the one available numeric case dropping refusal 0.95 $\to$ 0.01 and
+        safety 0.97 $\to$ 0.15 (Llama-3 8B, Table 8). Necessity fails visibly in one family: with the
+        default system prompt, orthogonalised Llama-2 70B reaches only 4.4\% attack success, against 62.9\%
+        without it (Table 2). The direction is necessary for the model''s \emph{learned} refusal, not
+        for refusal-shaped behaviour under explicit instruction'
+  I2:
+    name: Sufficiency
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Adding the vector at its extraction layer makes models refuse instructions that carry
+      no harm at all, down to a request for the benefits of yoga, and the result holds across the 13 models.
+      The qualification is procedural: the ability to induce refusal was a selection criterion applied
+      on the validation split before any test evaluation, so sufficiency is partly built into which direction
+      was chosen rather than discovered about it afterwards. The margin shows how much that matters, since
+      LLAMA-3 70B passes the induce_score > 0 filter at 0.126. Sufficiency demonstrated on a direction
+      selected for being sufficient is PC.
+
+      '
+    notes:
+      verification: 'SAME NUMERICAL CONTRADICTION AS C1. The cell reads "LLAMA-3 70B clears that bar at
+        0.126 where other models score 5--7". Table 5''s other twelve induce_scores run from 1.107 to
+        7.681, and the two other 70B-plus models score 1.885 and 5.191. The yoga example is verbatim from
+        Figure 4.
+
+        '
+      legacy_evidence: 'Adding $r$ at the extraction layer induces refusal on harmless Alpaca instructions,
+        with worked examples including refusal of ``List three benefits that yoga has on physical health''''
+        (Figure 4). Two qualifications: the ability to induce refusal was itself a \emph{selection criterion}
+        ($\texttt{induce\_score} > 0$) applied on a validation split before the test evaluation, and Llama-3
+        70B clears that bar at 0.126 where other models score 5--7'
+      numeric_correction: The cell reads 'induce_score 0.126 against 5-7 for the other large models (Table
+        5)'. Table 5's other large models are Qwen 72B at 1.885, Yi 34B at 1.865 and Llama-2 70B at 5.191;
+        the 5-7 band belongs to the small models. The 0.126 and its isolation hold; the comparison band
+        does not.
+  I3:
+    name: Minimality
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The object under test is one dimension, so minimality holds trivially in the downward
+      direction: there is nothing inside a rank-one projection to prune. The test that would make it a
+      finding runs the other way and is absent. No two-dimensional or k-dimensional ablation appears anywhere
+      in the paper, so the claim that one dimension suffices is never compared against the alternative
+      that two or four do better, and the selection procedure searches only over single candidate vectors.
+      Minimal by construction and uncompared against higher rank is PC.
+
+      '
+    notes:
+      verification: 'The cell''s characterisation is right and understates the design point: §C.1''s search
+        space is a set of individual difference-in-means vectors, so no k > 1 candidate could have been
+        selected even in principle. David \& Gervais''s rank-4 result is post-origin and is not checked
+        here.
+
+        '
+      legacy_evidence: 'Minimal by construction --- the object is one dimension, so nothing can be pruned
+        --- and never compared against $k > 1$. No two-dimensional or $k$-dimensional ablation is run.
+        Later work supplies the comparison and prefers higher rank: David \& Gervais (2026) report rank-4
+        projection achieving a better utility--safety balance than the rank-1 direction'
+  I4:
+    name: Specificity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Off-target cost is measured on six benchmarks across all 13 models, on cross-entropy loss
+      over three corpora, and qualitatively on harmless generations, and the adverse findings are reported
+      rather than averaged away: TruthfulQA falls consistently, QWEN 7B and YI 34B take statistically
+      significant hits, and §L.3 finds the edited model''s account of its own refusal behaviour incoherent.
+      The measurement is genuine and the interpretation is where it stops short --- TruthfulQA is explained
+      away as adjacent to refusal rather than tested for it, and the incoherence result sits in an appendix
+      without bearing on the headline specificity claim. Real specificity evidence with real off-target
+      findings left unresolved is PC.
+
+      '
+    notes:
+      verification: 'Checked against Table 6 directly: TruthfulQA falls for all thirteen models, from
+        -1.0 (LLAMA-2 70B) to -5.9 (YI 6B), as the cell states, and the six benchmarks are MMLU, TinyHellaSwag,
+        ARC, WinoGrande, GSM8K and TruthfulQA. The "seem not to be coherent" quotation is verbatim from
+        §L.3.
+
+        '
+      legacy_evidence: Genuinely measured, with real off-target findings reported. Six benchmarks across
+        all 13 models (MMLU, ARC, GSM8K, TruthfulQA, WinoGrande, TinyHellaSwag; Table 6), cross-entropy
+        loss on The Pile, Alpaca and on-distribution completions (Table 7), and a qualitative harmless-generation
+        comparison (\S L.2). Average degradation is under 1\%, but TruthfulQA falls for \emph{all thirteen}
+        models ($-1.0$ to $-5.9$), Qwen 7B and Yi 34B show significant drops, and \S L.3 finds the orthogonalised
+        model's explanations of its own refusal behaviour ``seem not to be coherent''
+  I5:
+    name: Rival mechanism exclusion
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The deflationary rival is named and tested. If the edit worked by blocking refusal strings,
+      the edited model could not produce them; §L.1 asks it to and it does, which is a real elimination
+      of the token-suppression account. Two things keep it partial: the test is one model and one prompt
+      pair, and the other unembedding-level rival is excluded by the l < 0.8L selection constraint rather
+      than by any experiment, so it is ruled out by construction. One rival eliminated on a single case
+      and one pre-empted by design is PC.
+
+      '
+    notes:
+      verification: 'The cell''s quotation, "the modification works at a higher conceptual level, rather
+        than at the level of suppressing output tokens", is verbatim, and §L is LLAMA-3 8B INSTRUCT throughout
+        as the cell says. Figure 25 shows two prompts, which is the "one prompt pair" the cell describes.
+
+        '
+      legacy_evidence: 'The deflationary rival is named and tested: that the edit merely blocks refusal
+        tokens. \S L.1 shows the orthogonalised model can still generate the same refusal strings, concluding
+        ``the modification works at a higher conceptual level, rather than at the level of suppressing
+        output tokens'''' --- on one model, one prompt pair. The $l < 0.8L$ constraint pre-empts the unembedding
+        rival by construction rather than by test. The rival left standing is multiplicity, which later
+        work confirms'
+  I6:
+    name: Double dissociation
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'A double dissociation needs two directions and two behaviours, with each intervention
+      moving one and sparing the other. The paper localises one direction for one behaviour and tests
+      it in both directions of effect, which is necessity and sufficiency rather than dissociation. No
+      second behaviour''s direction is shown intact under refusal-direction ablation, and no third direction
+      is ablated to show refusal survives. The nearest structure in the paper is §J''s base-versus-chat
+      comparison, which contrasts two models rather than two mechanisms. U.
+
+      '
+    notes:
+      verification: 'Read in full. The specificity evidence in §4.3, §G.1 and §L.2 shows other behaviours
+        surviving the ablation, which is one half of the design; the missing half is an intervention on
+        some other direction that leaves refusal intact, and no such intervention appears anywhere in
+        the paper.
+
+        '
+      legacy_evidence: Unattempted. No second behaviour's direction is shown intact under refusal-direction
+        ablation, and no third direction is ablated to show refusal survives. Zhao et al.\ (2025) later
+        supply one arm of exactly this design across the harmfulness/refusal pair
+  I7:
+    name: Confound control
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Three confounds are controlled, each by construction rather than by adjustment: train,
+      validation and both evaluation sets are pairwise disjoint, so the reported effects are not the selection
+      set replayed; the random suffix arm controls for appending any suffix at all; and the layer constraint
+      controls for the unembedding shortcut. The confound left standing is the one the estimator is built
+      on. The direction is the axis along which harmful and harmless prompt sets differ in the mean, so
+      whatever those prompts share besides harmfulness --- topic, register, imperative form --- is inside
+      the vector, and no analysis separates content from construct. Controls where they were cheap and
+      none on the extraction axis is PC.
+
+      '
+    notes:
+      verification: '"Pairwise disjoint" is verbatim in §A.1 and again in §A.2, and §2.2 states the same
+        filtering for the training splits. The cell''s three controls are all present as described.
+
+        '
+      legacy_evidence: 'Three controls by construction: train, validation and both evaluation sets are
+        ``pairwise disjoint'''' (\S A.1); the random-suffix arm controls for the effect of appending any
+        suffix (\S5.1); the $l < 0.8L$ constraint controls for the unembedding shortcut. Uncontrolled:
+        the topical and lexical content of the harmful prompt set, which is the same axis the difference-in-means
+        is taken along, so what the direction encodes is confounded with what those prompts are about'
+  I8:
+    name: Confounding sensitivity
+    status: U
+    short: ''
+    verified: false
+    reasoning: 'NOT SETTLED BY THE SOURCE. Nothing in the paper quantifies how strong an unmeasured confounder
+      would have to be to overturn a reported effect, and no quantity in it can be read as such a bound.
+
+      '
+    notes:
+      verification: 'Read in full. The paper''s causal claims rest on intervention rather than adjustment,
+        so an E-value has no natural home in the design; that explains the absence without supplying evidence
+        against the U.
+
+        '
+      legacy_evidence: Unattempted. No E-value or sensitivity analysis for an unmeasured confounder
+  I9:
+    name: Epistatic interaction
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'The eight largest contributors to the direction are measured one at a time, by projecting
+      each head''s output onto the direction, and their suppression under the adversarial suffix is read
+      off head by head. Nothing tests whether their contributions compose. No pair is ablated jointly,
+      no head is ablated with another already removed, and the additivity that direct feature attribution
+      assumes is never checked against a joint intervention. §5.2 also names MLP components as part of
+      the analysis and reports none, so even the additive decomposition is incomplete. U.
+
+      '
+    notes:
+      verification: 'The cell is right that MLPs are named and never reported: §5.2 says the contributions
+        of "individual attention head and MLP components" are examined, and Figure 6 shows attention heads
+        only. The sentence introducing the top-eight selection runs across the page 8 break in the -layout
+        extraction and is quoted here as two adjacent pieces.
+
+        '
+      legacy_evidence: Unattempted. The eight heads with the largest direct feature attribution are measured
+        individually (Figure 6a); no joint or pairwise intervention tests whether their contributions
+        compose additively, and no MLP attribution is reported at all despite \S5.2 naming MLPs as part
+        of the analysis
+  I10:
+    name: Rescue reversibility
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Every intervention in the paper runs one way: the direction is removed or added and the
+      damage to refusal is measured. The complementary test --- break the behaviour by other means, then
+      restore the direction and recover it --- appears nowhere. The design makes it cheap, which is what
+      keeps this from being untestable: ablation is an inference-time projection that can simply be switched
+      off, and orthogonalisation is a rank-one weight edit whose inverse is known in closed form. Unattempted
+      where it was runnable is U.
+
+      '
+    notes:
+      verification: 'The cell''s claim that the interventions are reversible in closed form is supported
+        by §2.4 and §4.1, which define both as projections against a unit vector. §I.2''s fine-tuned model
+        is a second way to remove refusal, and no attempt is made to rescue refusal in it by re-inserting
+        the direction.
+
+        '
+      legacy_evidence: 'Unattempted rather than untestable, and cheap here: directional ablation is an
+        inference-time projection that can be switched off, and weight orthogonalisation is a rank-one
+        edit whose inverse is known in closed form. No corrupt-then-restore experiment is run'
+  I11:
+    name: Onset coupling
+    status: I
+    short: ''
+    verified: true
+    reasoning: 'The coupling test was run and it came back the wrong way. §J compares base and chat models
+      on the same direction and finds the base models express it just as the chat models do, high on harmful
+      prompts and low on harmless ones, in models that do not refuse anything. The mechanism is present
+      where the behaviour is absent, so onset of the behaviour is not accompanied by onset of the mechanism.
+      Either the coupling fails or cosine similarity is not measuring the thing the causal claims are
+      about, and the paper cannot say which, because the measurement in base models is correlational ---
+      no ablation, addition or orthogonalisation is applied to any base model. Evidence that cuts against
+      coupling with the discriminating experiment missing is I.
+
+      '
+    notes:
+      verification: 'CONFIRMS THE CELL, including its final clause. §J''s method is stated exactly: cache
+        activations at the last token position and compute cosine similarity with the chat model''s direction.
+        No intervention is applied to a base model anywhere in the paper --- §J opens by saying only chat
+        models are considered throughout, and every intervention in §3, §4, §5 and §I is applied to a
+        chat model.
+
+        '
+      legacy_evidence: Tested, with a result that cuts against coupling. \S J finds base models already
+        express the direction --- high cosine similarity on harmful prompts, low on harmless --- so ``this
+        representation exists already in the base model.'' The mechanism is present where the capability
+        is absent. Either coupling fails or cosine similarity is not measuring the mechanism, and the
+        paper does not test the direction's causal role in base models
+  I12:
+    name: Offset coupling
+    status: U
+    short: ''
+    verified: true
+    reasoning: '§I.2 fine-tunes LLAMA-3 8B INSTRUCT until it stops refusing, driving the refusal score
+      from 0.95 to 0.00, which is exactly the behavioural offset an offset-coupling test needs. The measurement
+      that would make it one is never taken: the fine-tuned model''s activations are never checked for
+      the direction, no direction is re-extracted from it, and no ablation is applied to it. The paper
+      reports cross-entropy loss for that model and stops. The intervention exists and the coupling measurement
+      does not, so U.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL. It reads "No fine-tuning run removes refusal behavior
+        to test whether the direction goes with it". §I.2 does run exactly such a fine-tune, with the
+        resulting refusal score at 0.00 in Table 8. What is absent is any measurement of the direction
+        in the fine-tuned model, which is the coupling half of the test. The U stands; the reason for
+        it changes.
+
+        '
+      legacy_evidence: Unattempted. No fine-tuning run removes refusal behavior to test whether the direction
+        goes with it
+  E1:
+    name: Intervention reach
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Two genuinely different operations reach the claim: a projection that removes a component
+      at every layer and position, and an additive shift at one layer. They agree on the behavioural outcome
+      and disagree on collateral cost, and the paper reports the disagreement --- activation addition
+      raises cross-entropy loss much further because it pushes harmless activations off distribution.
+      That disagreement is informative, since it distinguishes the direction''s role from the artifact
+      of moving activations far from the data manifold. Weight orthogonalisation is a third implementation
+      of the first operation rather than a third method, so the reach is two, which is PC.
+
+      '
+    notes:
+      verification: 'The cell''s quotation, "shifts the harmless activations off distribution", is verbatim
+        in §I.1, and the Table 7 pattern it describes holds for every model. §4.1''s equivalence proof
+        supports counting orthogonalisation with ablation.
+
+        '
+      legacy_evidence: 'Two genuinely distinct interventions --- projection-based ablation and additive
+        steering --- agree on the behavioural outcome and \emph{disagree} on collateral cost, which the
+        paper reports: activation addition raises cross-entropy loss substantially more than ablation
+        (Table 7), because it ``shifts the harmless activations off distribution'''' (\S I.1). Weight
+        orthogonalisation is a third implementation of the first (\S E), not a third method'
+  E2:
+    name: Prompt generalization
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The evaluation prompts are disjoint from the extraction prompts by construction and cover
+      more ground than the 128 instructions the direction was fitted on: 100 JailbreakBench instructions
+      over 10 harm categories, 159 HarmBench standard behaviours over 6, and 100 Alpaca instructions for
+      the harmless side. The categories are enumerated rather than asserted, and the harmful sets are
+      drawn from different benchmark families than the training pool. Generalisation demonstrated across
+      held-out prompts spanning declared category coverage is C.
+
+      '
+    notes:
+      verification: 'OVERSTATEMENT IN THE CELL, same one as M6. It ends "Both system-prompt conditions
+        reported", which is true of the HARMBENCH evaluation in §4.2 and not of the JailbreakBench evaluation
+        in §3, where no system-prompt condition is stated. The 10 and 6 category counts and the disjointness
+        are exact.
+
+        '
+      legacy_evidence: Evaluated on 100 JailbreakBench instructions spanning 10 harm categories and 159
+        HarmBench standard behaviours spanning 6, with harmless behaviour checked on Alpaca, all disjoint
+        from the 128 extraction prompts. Both system-prompt conditions reported
+  E3:
+    name: Cross-task generalization
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Every behaviour the direction is tested against is refusal or its absence. The two places
+      the paper looks outside refusal ask whether other behaviour survives the edit, which is specificity,
+      and answer that it does. Whether the same direction mediates any second behaviour --- compliance,
+      harm judgement, sycophancy, hedging --- is never asked, and no second task is set up in which the
+      direction could be intervened on. A criterion the design gives no purchase on is U.
+
+      '
+    notes:
+      verification: 'Read in full. §4.3, §G.1, §G.3, §L.2 and §6 together are the paper''s entire off-refusal
+        evidence and all of it is null-effect specificity evidence. Maskey et al.''s task-dependence result
+        is post-origin and is not checked here.
+
+        '
+      legacy_evidence: 'Unattempted. Whether the same direction mediates any behaviour other than refusal
+        is never asked. Later work marks the boundary: Maskey et al.\ (2026) find harmful-refusal directions
+        task-agnostic but over-refusal directions ``task-dependent and span higher dimensions'''''
+  E4:
+    name: Cross-model generalization
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'Cross-model scope is the design rather than a robustness check appended to it: 13 models,
+      5 architecture families, a 40x parameter range, and both alignment paradigms, with the intervention
+      working in every one. The families are trained by different labs on different data with different
+      tokenizers, so agreement among them is not agreement among near-copies. Generalisation across systems
+      at this spread is C.
+
+      '
+    notes:
+      verification: 'Table 1''s five families and the 1.8B-to-72B range confirm the cell''s numbers. The
+        cell''s own caveat is right and worth keeping: all 13 refits are run by one group with one pipeline,
+        so this is replication across models rather than independent re-derivation. Wang et al.''s cross-lingual
+        transfer is post-origin.
+
+        '
+      legacy_evidence: 'The criterion the paper is built around: 13 models, 5 architecture families, a
+        40$\times$ parameter range, and two distinct alignment procedures, with the intervention working
+        in all. Later strengthened rather than weakened --- Wang et al.\ (2025) transfer English-derived
+        refusal vectors across 14 languages without fine-tuning. What replicates within the origin is
+        one lab''s pipeline, not an independent re-derivation'
+  E5:
+    name: Graded response
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'No intervention in the paper has a strength parameter. §2.4 promises to "modulate the
+      strength" of the feature and then defines activation addition as adding r with an implicit coefficient
+      of 1, and directional ablation as a projection with no free magnitude at all. §I.1 adds one more
+      point, the sign-flipped vector at the same magnitude, so the paper has three settings and no curve.
+      Nothing anywhere carries intervention strength on an axis. Unattempted, and trivially runnable in
+      this design, is U.
+
+      '
+    notes:
+      verification: 'CONFIRMS THE CELL AND SHARPENS IT. The cell says §2.4 is where a strength parameter
+        would be defined; §2.4 uses the words "modulate the strength" and then defines interventions that
+        have no coefficient, which is a gap between the stated capability and the implementation. No figure
+        in the paper carries magnitude on an axis, checked across appendices A through N.
+
+        '
+      legacy_evidence: \textbf{Unattempted, and the audit's rationale asserts otherwise.} \S2.4, where
+        an intervention-strength parameter would be defined, defines activation addition as $x^{(l)} \leftarrow
+        x^{(l)} + r^{(l)}$ with implicit coefficient 1 and directional ablation as a projection with no
+        free magnitude; \S I.1 adds only the sign-flipped variant at the same magnitude. No appendix from
+        A to N sweeps strength, and no figure carries intervention magnitude on an axis. Trivially runnable
+        in this design, and not run
+  E6:
+    name: Novel prediction
+    status: PC
+    short: ''
+    verified: true
+    reasoning: '§5 is a prediction the direction was not built for: if refusal is carried by this direction,
+      then an attack that bypasses refusal by an unrelated route should show up as suppression of it.
+      It held, with a matched random-suffix control separating suppression from the effect of appending
+      anything, and it contradicted a published finding, which is what makes it a test rather than a demonstration.
+      Scope is what caps it: one model, and one suffix picked as the best of 100 generated. A confirmed
+      novel prediction on a single case is PC.
+
+      '
+    notes:
+      verification: 'The cell''s quotation, "closely resembles that of harmless instructions", is verbatim,
+        as is the best-of-100 provenance in §H.1. The contradicted rival is Zou et al. (2023a), named
+        in §6 as the cell says.
+
+        '
+      legacy_evidence: '\S5 is a genuine novel prediction on a phenomenon the direction was not built
+        for: if refusal is carried by this direction, an adversarial suffix should work by suppressing
+        it. It held --- expression under the adversarial suffix ``closely resembles that of harmless instructions''''
+        while a length-matched random suffix leaves it high --- and it contradicted a published rival
+        finding (\S6, on Zou et al.\ 2023a). Scope is one model and one suffix, selected as the best of
+        100 generated'
+  V1:
+    name: Level declaration
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The description mode is never declared and three of them appear in the first paragraph.
+      "Mediated by" is a causal-behavioural claim about what makes the output happen, "mechanisms remain
+      poorly understood" is an implementational claim about parts, and "a one-dimensional subspace" is
+      a representational claim about geometry. The evidence is consistent with the first, and the reader
+      is left to sort out which of the three the paper means. The scare quotes around "refusal direction",
+      kept up from §2.3 to the appendices, do the work an explicit declaration would do, without saying
+      what the hedge is about. PC.
+
+      '
+    notes:
+      verification: 'All three registers in the cell are verbatim from the title and abstract. The scare-quoting
+        is consistent throughout the paper, including §2.3, §3.1, §4.1, §J and the figure captions; the
+        quotes are dropped in §5 and §6, where the object is called the refusal-mediating direction and
+        the refusal direction without them.
+
+        '
+      legacy_evidence: Never declared. ``Mediated by'' is causal-behavioural, ``mechanism'' appears throughout,
+        and the object is called a ``one-dimensional subspace'' --- three different levels in one abstract.
+        The consistent scare-quoting of ``refusal direction'' functions as an undeclared hedge
+  V2:
+    name: Level-evidence match
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The evidence establishes a lever: remove this direction and refusal stops, add it and
+      refusal starts, on 13 models. The title makes a claim about the model''s representational organisation,
+      that refusal is mediated by a single direction, which is a stronger reading than a sufficient intervention
+      supports. The authors supply the correction themselves in §7, calling the work an existence proof
+      that such a direction exists, and §J''s base-model result shows the same direction carrying something
+      in models where refusal does not exist at all. The gap between what the interventions license and
+      what the title asserts is PC.
+
+      '
+    notes:
+      verification: 'The "more of an existence proof" quotation is verbatim in §7. Zhao et al.''s separation
+        of harmfulness from refusal is post-origin and is not checked here; the source-internal version
+        of the same point is §J plus §6.
+
+        '
+      legacy_evidence: 'The evidence establishes a lever: remove this direction and refusal stops, add
+        it and refusal starts. The title states a claim about the model''s representational organisation.
+        The authors themselves supply the correction --- ``more of an existence proof that such a direction
+        exists'''' (\S7) --- but the title does not carry it. The sharpest evidence for the mismatch is
+        external: Zhao et al.\ (2025) show the refusal direction sits downstream of a separate harmfulness
+        representation'
+  V3:
+    name: Alternative level
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'One alternative description is addressed and refuted. If the edit worked at the level
+      of output tokens, the model could not be made to emit refusal strings on request, and §L.1 shows
+      it can, which retires the token-suppression reading. The alternative left unaddressed is about why
+      one dimension was enough: refusal is measured as the presence of one of twelve strings in the completion,
+      a low-rank output property, and a single direction that controls it would be findable whether or
+      not the model organises refusal along one axis internally. One alternative level excluded and the
+      level-of-the-measure alternative untouched is PC.
+
+      '
+    notes:
+      verification: '§L.1 is the only place in the paper that names an alternative reading and tests it.
+        The alternative the cell says is unaddressed does not appear anywhere in the paper, checked across
+        §7 and appendices A through N.
+
+        '
+      legacy_evidence: One alternative description is addressed and refuted --- token-level suppression
+        (\S L.1). The alternative not addressed is that one dimension suffices because refusal is a low-rank
+        \emph{output} behaviour, so a single direction would be findable whether or not the model organises
+        refusal that way
+  V4:
+    name: Unlicensed labeling
+    status: PC
+    short: The outcome measure is operationalised; the direction's identity is not
+    verified: true
+    reasoning: 'The outcome is operationalised before it is used --- twelve substrings and a Llama Guard
+      2 classification --- so "refusal" as a behaviour redescribes something measured, and no intentional
+      vocabulary is applied to the direction itself. The direction''s identity is a separate question
+      and it is not operationalised. Extraction is a difference in means over harmful versus harmless
+      instructions, which a harmfulness direction satisfies exactly as well, and an ablated harmfulness
+      representation would produce the same refusal-classified outputs. §6 records that two prior groups
+      assert harmfulness and refusal are distinct, and the paper answers with a citation-level contrast
+      rather than an experiment. §J then finds the direction fully expressed in base models that never
+      refuse, which is the harmfulness reading''s prediction. A name whose nearby alternative is left
+      standing by every experiment in the paper is PC.
+
+      '
+    notes:
+      verification: 'Resolved 2026-08-07: the status is now PC; see notes.status_change. Originally recorded
+        as C, and its legacy_evidence is the pre-change text. The C-to-PC change recorded this session
+        lives in docs/audits/refusal_direction.yaml, which reads PC with the operationalised-outcome-versus-identity
+        argument in its evidence field; docs/data/audits/refusal.yaml was migrated from the .bak instead.
+        Status is left untouched here per instruction. On the merits PC is right, and both halves check
+        out against the source: the operationalisation is §2.5 plus §D.1 and Figure 11 (exactly twelve
+        substrings) plus §D.2, and the extraction is §2.3''s difference-in-means over harmful and harmless
+        instructions. No experiment in the paper separates a refusal direction from a harmfulness direction.
+        The three places the question is touched all leave it open: §6 reports the assertion of distinctness
+        by Zheng et al. and Zou et al. without adjudicating, offering only the contrast that Zou''s harmfulness
+        representation is unaffected by adversarial suffixes while §5.1''s direction is suppressed by
+        one --- a disagreement with another paper''s reported result, not a comparison run here; §J finds
+        the direction expressed in base models that do not refuse, which favours the harmfulness reading;
+        and §C.1''s selection criteria are the one thing pulling the other way, since the surviving direction
+        is chosen for bypassing and inducing refusal, which licenses the name for the selected vector
+        without distinguishing the construct it carries.
+
+        '
+      legacy_evidence: '``Refusal'''' is operationalised before it is used --- a 12-substring match plus
+        a Llama Guard 2 classification (\S2.5) --- and no intentional vocabulary is applied to the direction
+        itself. The one place the paper probes model self-description, it reports the negative result:
+        the orthogonalised model''s account of its own behaviour is incoherent (\S L.3)'
+      status_change: 'C to PC, 2026-08-07. Made earlier in docs/audits/refusal_direction.yaml and lost
+        when data/audits/ was migrated from the .bak. Verified against the source: §2.5 operationalises
+        the refusal_score as a twelve-substring match plus Llama Guard 2, but §2.3 defines the direction
+        only as the difference in means between harmful and harmless instruction activations -- which
+        a harmfulness direction satisfies exactly. No experiment separates them; §J finds the direction
+        fully expressed in base models that never refuse, which is the harmfulness reading''s prediction.
+        §C.1 selects the vector for bypassing and inducing refusal, which licenses the name for that vector
+        without settling the construct. Licensed in part, unlicensed in part.'
+  V5:
+    name: Scope declaration
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'Four limitations are declared by name and each names something the evidence does not reach:
+      untested models and scales, an extraction procedure the authors call heuristic, an adversarial analysis
+      restricted to one model and one suffix, and coherence metrics they call flawed. §H.1 explains the
+      third rather than merely asserting it, giving the reason the scope could not be widened. An ethical
+      section states the dual-use position outright. Scope declared, explained and positioned is C.
+
+      '
+    notes:
+      verification: 'All four limitations are in §7 in the order the cell gives them, and §H.1 carries
+        the explanation for the third. V5 asks only whether scope is declared, so this C says nothing
+        about whether the declared scope matches the evidence; the E and I cells carry that.
+
+        '
+      legacy_evidence: \S7 declares four limitations by name --- untested models and scales, heuristic
+        extraction, single-model single-suffix adversarial analysis, flawed coherence metrics --- and
+        \S H.1 explains the third. An ethical-considerations section states the dual-use position explicitly

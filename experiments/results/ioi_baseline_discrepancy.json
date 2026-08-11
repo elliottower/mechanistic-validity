@@ -1,0 +1,17 @@
+{
+  "seed": 42,
+  "variants": {
+    "Wang: prompt ends 'to'": {
+      "n": 300,
+      "io_over_s_pct": 100.0,
+      "mean_logit_diff": 2.8735663890838623,
+      "top1_pct": 95.99999785423279
+    },
+    "Xu: prompt ends 'to ' (space)": {
+      "n": 300,
+      "io_over_s_pct": 51.99999809265137,
+      "mean_logit_diff": -0.012704210355877876,
+      "top1_pct": 0.0
+    }
+  }
+}

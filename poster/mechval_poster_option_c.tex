@@ -1,0 +1,387 @@
+% Mechanistic Validity — NEMI 2026 poster, Option C
+% Practical/tool framing: "Here's how to audit your own claims."
+% Text and tables only, no figures.
+%
+%   cd poster && lualatex mechval_poster_option_c.tex
+
+\documentclass[28pt, a0paper, portrait]{tikzposter}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+\tikzposterlatexaffectionproofoff
+
+% ── Color palette ───────────────────────────────────────
+\definecolor{darktext}{HTML}{2C3E50}
+\definecolor{blockbg}{HTML}{FFFFFF}
+\definecolor{tierTriangulated}{HTML}{27AE60}
+\definecolor{tierSupported}{HTML}{2980B9}
+\definecolor{tierCausal}{HTML}{F39C12}
+\definecolor{tierProposed}{HTML}{95A5A6}
+\definecolor{tierDisconfirmed}{HTML}{E74C3C}
+\definecolor{construct}{HTML}{C0392B}
+\definecolor{newlabel}{HTML}{8E44AD}
+\definecolor{practicalgreen}{HTML}{27AE60}
+
+% ── Theme ───────────────────────────────────────────────
+\usetheme{Default}
+
+\definecolorstyle{MechValColors}{
+  \definecolor{colorOne}{HTML}{2C3E50}
+  \definecolor{colorTwo}{HTML}{3498DB}
+  \definecolor{colorThree}{HTML}{ECF0F1}
+}{
+  \colorlet{backgroundcolor}{colorThree}
+  \colorlet{framecolor}{colorOne}
+  \colorlet{titlefgcolor}{white}
+  \colorlet{titlebgcolor}{colorOne}
+  \colorlet{blocktitlebgcolor}{colorTwo}
+  \colorlet{blocktitlefgcolor}{white}
+  \colorlet{blockbodybgcolor}{blockbg}
+  \colorlet{blockbodyfgcolor}{darktext}
+  \colorlet{notefgcolor}{darktext}
+  \colorlet{notebgcolor}{tierCausal!15}
+  \colorlet{notefrcolor}{tierCausal}
+}
+\usecolorstyle{MechValColors}
+
+\defineblockstyle{MechValBlock}{
+  titlewidthscale=1.0, bodywidthscale=1.0, titleleft,
+  titleoffsetx=0pt, titleoffsety=0pt,
+  bodyoffsetx=0pt, bodyoffsety=0pt, bodyverticalshift=0pt,
+  roundedcorners=12, linewidth=2pt, titleinnersep=10pt, bodyinnersep=12pt
+}{
+  \draw[rounded corners=\blockroundedcorners, color=blocktitlebgcolor,
+        fill=blockbodybgcolor, line width=\blocklinewidth]
+    (blockbody.south west) rectangle (blocktitle.north east);
+  \ifBlockHasTitle
+    \draw[rounded corners=\blockroundedcorners,
+          fill=blocktitlebgcolor, color=blocktitlebgcolor,
+          line width=\blocklinewidth]
+      (blocktitle.south west) rectangle (blocktitle.north east);
+  \fi
+}
+\useblockstyle{MechValBlock}
+
+\definetitlestyle{MechValTitle}{
+  width=\paperwidth, roundedcorners=0, linewidth=0pt, innersep=20pt,
+  titletotopverticalspace=12mm, titletoblockverticalspace=20mm
+}{
+  \draw[fill=titlebgcolor, color=titlebgcolor]
+    (\titleposleft, \titleposbottom)
+    rectangle (\titleposright, \titlepostop);
+}
+\usetitlestyle{MechValTitle}
+
+\title{%
+  \parbox{0.92\linewidth}{\centering\bfseries
+    Mechanistic Validity\\[6pt]
+    A Validity Audit for Mechanistic Interpretability}}
+\author{Elliot Tower\quad\texttt{elliot@elliottower.ai}}
+\institute{}
+
+\begin{document}
+
+\maketitle[width=\paperwidth]
+
+% ════════════════════════════════════════════════════════
+% ROW 1 — GAP + FIVE TYPES + EVIDENCE CARD
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.33}
+
+\block{The Gap}{
+  Every field that makes mechanistic claims has validity
+  standards.
+
+  \vspace{4mm}
+  \begin{itemize}[leftmargin=*, itemsep=3mm]
+    \item \textbf{Neuroscience}: Craver's constitutive
+      relevance --- mutual manipulability at a declared level
+    \item \textbf{Genetics}: complementation tests, rescue
+      experiments, sensitivity analysis
+    \item \textbf{Pharmacology}: dose-response curves,
+      the ORBITA trial
+    \item \textbf{Measurement theory}: Cronbach and Meehl's
+      construct validity (1955)
+  \end{itemize}
+
+  \vspace{4mm}
+  Mechanistic interpretability borrows the interventional
+  vocabulary --- ablation, patching, knockout --- but not the
+  statistical discipline that comes with it.
+
+  \vspace{4mm}
+  We adapt \textbf{five validity types} for neural network
+  mechanisms. \textbf{36 criteria}. Applied to
+  \textbf{16 published claims}.
+}
+
+\column{0.34}
+
+{
+\colorlet{blocktitlebgcolor}{construct}
+\block{Five Types, One Dependency Chain}{
+  Each type answers one question. The chain means
+  \textbf{construct is a ceiling on all the rest}.
+
+  \vspace{5mm}
+  \renewcommand{\arraystretch}{1.5}
+  {\large
+  \begin{tabular}{@{}r>{\raggedright\arraybackslash}p{0.75\linewidth}@{}}
+    \textbf{Construct} & Is the circuit a natural kind?
+      {\small (C4: discriminant validity)} \\
+    $\downarrow$ & \\[-6mm]
+    \textbf{Measurement} & Does the metric measure what
+      it claims? {\small (M2: baseline separation)} \\
+    $\downarrow$ & \\[-6mm]
+    \textbf{Internal} & Is the causal claim warranted?
+      {\small (I4: specificity)} \\
+    $\downarrow$ & \\[-6mm]
+    \textbf{External} & Does the result generalize?
+      {\small (E1: intervention reach)} \\
+    $\downarrow$ & \\[-6mm]
+    \textcolor{newlabel}{\textbf{Interpretive}} &
+      \textcolor{newlabel}{Is the label justified?}
+      {\small \textcolor{newlabel}{(V2: level-evidence match)
+      \textbf{[NEW]}}} \\
+  \end{tabular}}
+
+  \vspace{5mm}
+  {\Large The verdict is the \textbf{minimum}, not the average.}
+
+  \vspace{3mm}
+  No amount of causal evidence rescues a claim whose target
+  concept is incoherent. No measurement reliability
+  compensates for measuring the wrong thing.
+}
+}
+
+\column{0.33}
+
+\block{How to Read a Verdict}{
+  Every claim gets an \textbf{evidence card}: the atomic
+  reporting unit linking measurement to verdict.
+
+  \vspace{4mm}
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabular}{@{}p{0.25\linewidth}p{0.68\linewidth}@{}}
+    \toprule
+    \textbf{Claim} & A 26-head circuit implements IOI
+      in GPT-2 Small \\[2pt]
+    \textbf{Claimed} & Triangulated \\[2pt]
+    \textbf{Supported} & \textcolor{tierCausal}{\textbf{Causally
+      Suggestive}} \\[2pt]
+    \textbf{Capped by} & Method-conditional faithfulness:
+      87\% under mean ablation, below 0\% under others \\[2pt]
+    \textbf{To close} & Specificity test, double
+      dissociation, cross-model replication \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{5mm}
+  Three questions for any mechanistic claim:
+  \begin{enumerate}[leftmargin=*, itemsep=2mm]
+    \item What \textbf{description mode} is declared?
+    \item What \textbf{tier} does the evidence support?
+    \item What \textbf{caps} it?
+  \end{enumerate}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 2 — 16-CLAIM TABLE + DIAGNOSTIC PATTERNS
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.67}
+
+{
+\colorlet{blocktitlebgcolor}{colorOne}
+\block{Sixteen Claims from Fifteen Papers}{
+  {\small
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.6cm}
+                    >{\raggedright\arraybackslash}p{7.0cm}
+                    >{\raggedright\arraybackslash}p{5.5cm}@{}}
+    \toprule
+    \textbf{Verdict} & \textbf{Claim} & \textbf{Scope} \\
+    \midrule
+    \textcolor{tierTriangulated}{\textbf{Triangulated}}
+      & Induction heads: token copying
+      & 1L--70B, copying only \\
+    \midrule
+    \textcolor{tierSupported}{\textbf{Mech.\ Supported}}
+      & Fourier mechanism (modular addition)
+      & 1L ReLU transformer \\
+      & Greater-Than circuit
+      & GPT-2 Small \\
+      & Copy Suppression (L10H7)
+      & GPT-2 Small \\
+      & Superposition (toy networks)
+      & 4 ReLU nets \\
+      & Steering vector (refusal)
+      & 13 models, 5 families \\
+      & Global Workspace / J-space
+      & 4 Claude models \\
+      & Successor Heads
+      & Pythia-1.4B \\
+    \midrule
+    \textcolor{tierCausal}{\textbf{Causally Suggestive}}
+      & Othello World Model
+      & Othello-GPT \\
+      & Docstring Circuit
+      & 4L attn-only \\
+      & Gender Bias Circuits
+      & GPT-2 + 5 families \\
+      & IOI Circuit
+      & GPT-2 Small \\
+    \midrule
+    \textcolor{tierProposed}{\textbf{Proposed}}
+      & Probing Classifiers
+      & Review (no single task) \\
+    \midrule
+    \textcolor{tierDisconfirmed}{\textbf{Disconfirmed}}
+      & Knowledge Neurons
+      & BERT-base \\
+      & SAE features as canonical units
+      & Pythia \\
+      & Induction heads: general ICL
+      & $>$1B models \\
+    \bottomrule
+  \end{tabular}}
+
+  \vspace{4mm}
+  No claim reaches \textbf{Validated}. The highest tier is
+  Triangulated --- by the field's oldest mechanism, and only
+  the narrow reading.
+}
+}
+
+\column{0.33}
+
+{
+\colorlet{blocktitlebgcolor}{tierDisconfirmed}
+\block{Three Diagnostic Patterns}{
+  These recur across claims:
+
+  \vspace{4mm}
+  \textbf{1. Construct ceiling.}
+  The Othello ``world model'' label asserts more than
+  ``linearly decodable board state.'' The intervention
+  supports the weaker reading; the label claims the stronger
+  one. V2 caps the verdict.
+
+  \vspace{4mm}
+  \textbf{2. Method conditioning.}
+  IOI faithfulness swings from below 0\% to over 100\%
+  across six methodological choices. The causal claim is
+  method-conditional in both directions. E1 caps the verdict.
+
+  \vspace{4mm}
+  \textbf{3. Same paper, two verdicts.}
+  Induction heads for token copying: \textbf{Triangulated}.
+  Induction heads for general in-context learning:
+  \textbf{Disconfirmed}. The authors anticipated this ---
+  their Argument~6 concedes the case ``is stronger for small
+  models.'' One paper, two claims, two tiers.
+}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 3 — PRACTICAL + LIMITATIONS + TAKEAWAY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.33}
+
+{
+\colorlet{blocktitlebgcolor}{practicalgreen}
+\block{For Your Next Paper}{
+  \begin{enumerate}[leftmargin=*, itemsep=4mm]
+    \item \textbf{Declare the description mode.}
+      Implementational? Functional? Topographic? The mode
+      determines what evidence the claim owes.
+
+    \item \textbf{Test specificity, not just necessity.}
+      What does your circuit \emph{not} do? Ablation shows
+      the component matters; specificity shows it matters
+      \emph{for this}.
+
+    \item \textbf{Run a baseline.} Does a random subspace
+      of matched rank achieve comparable scores? A metric
+      without a baseline is a metric without meaning.
+
+    \item \textbf{Report what caps your tier.} Name the
+      criterion, not just the faithfulness number. The gap
+      between ``claimed'' and ``supported'' is the distance
+      to close.
+  \end{enumerate}
+}
+}
+
+\column{0.34}
+
+\block{Limitations}{
+  \begin{itemize}[leftmargin=*, itemsep=3mm]
+    \item The framework has \textbf{not been validated
+      against itself}. Three planned checks are specified
+      and pre-registered but not run: ground-truth
+      calibration, prospective audit, inter-rater agreement.
+
+    \item \textbf{Expect poor agreement.} Annotators
+      rating evidence--claim gaps across 186 claims agree
+      at $\alpha = 0.11$, near chance. Autointerpretability
+      scores show intraclass correlations as low as $-0.049$.
+
+    \item \textbf{Scoring is retrospective}, by the
+      framework's author. This is the arrangement the
+      prospective audit exists to fix.
+
+    \item \textbf{Verdicts are claim-level, not
+      paper-level.} Several papers scored below Triangulated
+      state their own scope correctly. The cap reflects what
+      evidence licenses, not care taken.
+  \end{itemize}
+}
+
+\column{0.33}
+
+{
+\colorlet{blocktitlebgcolor}{colorOne}
+\block{Takeaway}{
+  {\Large\bfseries Report the tier your evidence supports,
+  and name the criterion that caps it.}
+
+  \vspace{5mm}
+  \begin{itemize}[leftmargin=*, itemsep=3mm]
+    \item \textbf{36} criteria across \textbf{5} validity
+      types in dependency order
+    \item \textbf{16} claims audited from \textbf{15} papers
+    \item \textbf{0} claims reach Validated
+    \item \textbf{1} reaches Triangulated --- the narrow
+      reading of induction heads
+    \item \textbf{3} Disconfirmed, on evidence the original
+      authors anticipated
+  \end{itemize}
+
+  \vspace{6mm}
+  \begin{center}
+  \texttt{elliot@elliottower.ai}
+
+  \vspace{3mm}
+  {\small Framework, criteria, and all sixteen evidence cards:}
+
+  \texttt{mechanisticresearch.org}
+  \end{center}
+}
+}
+
+\end{columns}
+
+\end{document}

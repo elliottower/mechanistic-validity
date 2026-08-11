@@ -1,0 +1,73 @@
+{
+  "n": 1000,
+  "seed": 0,
+  "conditions": {
+    "zero": {
+      "deficits": {
+        "ioi": {
+          "mean": 0.10100000351667404,
+          "sem": 0.011442461982369423,
+          "accuracy_drop": 0.10100000351667404,
+          "baseline_accuracy": 0.5849999785423279,
+          "independent": false
+        },
+        "greater_than": {
+          "mean": 0.08900000154972076,
+          "sem": 0.009008892811834812,
+          "accuracy_drop": 0.08900000154972076,
+          "baseline_accuracy": 0.9909999966621399,
+          "independent": true
+        },
+        "gender_bias": {
+          "mean": 0.0233265720307827,
+          "sem": 0.005018831230700016,
+          "accuracy_drop": 0.0233265720307827,
+          "baseline_accuracy": 0.5567951202392578,
+          "independent": true
+        },
+        "sva": {
+          "mean": 0.008999999612569809,
+          "sem": 0.0029879638459533453,
+          "accuracy_drop": 0.008999999612569809,
+          "baseline_accuracy": 0.5509999990463257,
+          "independent": true
+        }
+      },
+      "ioi_exceeds_independent_controls": true
+    },
+    "resample": {
+      "deficits": {
+        "ioi": {
+          "mean": 0.09600000083446503,
+          "sem": 0.012998190708458424,
+          "accuracy_drop": 0.09600000083446503,
+          "baseline_accuracy": 0.5849999785423279,
+          "independent": false
+        },
+        "greater_than": {
+          "mean": 0.42399999499320984,
+          "sem": 0.01563548669219017,
+          "accuracy_drop": 0.42399999499320984,
+          "baseline_accuracy": 0.9909999966621399,
+          "independent": true
+        },
+        "gender_bias": {
+          "mean": 0.017241379246115685,
+          "sem": 0.005043738055974245,
+          "accuracy_drop": 0.017241379246115685,
+          "baseline_accuracy": 0.5567951202392578,
+          "independent": true
+        },
+        "sva": {
+          "mean": 0.004000000189989805,
+          "sem": 0.0019969947170466185,
+          "accuracy_drop": 0.004000000189989805,
+          "baseline_accuracy": 0.5509999990463257,
+          "independent": true
+        }
+      },
+      "ioi_exceeds_independent_controls": false
+    }
+  },
+  "criterion_met": false
+}

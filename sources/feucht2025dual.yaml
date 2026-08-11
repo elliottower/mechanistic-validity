@@ -1,0 +1,28 @@
+citation: feucht2025dual
+depth: quoted
+title: The Dual-Route Model of Induction
+authors:
+- Feucht, Sheridan
+- Todd, Eric
+- Wallace, Byron
+- Bau, David
+year: '2025'
+venue: COLM
+url: https://arxiv.org/abs/2504.03022
+arxiv: '2504.03022'
+local: reference/feucht_2025_dual_route.pdf
+sha256: 3b2d679275120a3ed2dd4d1df5ffb9ddf1570f9cd4ceab60b9888d7b187990e8
+quotes:
+- text: Ablating token copier heads damages copying for nonsense tokens, without affecting tasks that
+    can be performed semantically. Ablating concept copier heads damages performance for translation,
+    synonyms, and antonyms, without affecting surface-level copying.
+  section: Figure 5
+  direction: raises
+- text: We find that there is little overlap between the top-k heads of each ranking (Figure 32) and that
+    token & concept scores are not correlated (Appendix C.2), implying that these are two separate roles.
+  section: §3
+  direction: raises
+- text: Llama-3-8b and OLMo-2-7b behave similarly to Llama-2-7b, but token ablation results for Pythia-6.9b
+    are less clear-cut.
+  section: §5
+  direction: neutral

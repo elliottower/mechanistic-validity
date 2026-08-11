@@ -1,0 +1,28 @@
+citation: chen2026circuits
+depth: quoted
+title: 'All Circuits Lead to Rome: Rethinking Functional Anisotropy in Circuit and Sheaf Discovery for
+  LLMs'
+authors:
+- Chen
+- Jin
+- Niu
+- Yin
+- Zhao
+- Guo
+- Metaxas
+- Wang
+- Yue
+- Penn
+year: '2026'
+venue: arXiv preprint
+url: https://arxiv.org/abs/2605.12671
+arxiv: '2605.12671'
+local: reference/chen_2026_circuits.pdf
+sha256: aaec573dde3325cb351e85030b172b70dbe4ad219da5cfdf9f1d75b1e3b1198b
+quotes:
+- text: IoU(A, B) = 4.1%
+  section: body
+  direction: neutral
+- text: Both sheaves achieve perfect IOI accuracy and satisfy
+  section: body
+  direction: neutral

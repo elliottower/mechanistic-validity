@@ -1,0 +1,114 @@
+{
+ "copy_suppression": {
+  "citation": "mcdougall2023copy",
+  "local": "reference/mcdougall_2023_copy_suppression.pdf",
+  "sha256": "a0dc617f897adeb92bb476ab80c0c2722fb5ad58453cbc578c99e7dbd4dc62e3",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 1809
+ },
+ "docstring": {
+  "citation": "heimersheim2023docstring",
+  "local": "reference/heimersheim_2023_docstring.txt",
+  "sha256": "ff2852e43bc89b3725923e23514f1108b99e311a701e0aece2f6d230566c1f24",
+  "extract_cmd": "cat",
+  "extract_lines": 314
+ },
+ "gender": {
+  "citation": "vig2020gender",
+  "local": "reference/vig_2020_gender_mediation.pdf",
+  "sha256": "1e35f3c72663d08be952910fd20caa7a6c4dc353544424a81a1a05808cd7a35e",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 3161
+ },
+ "greater_than": {
+  "citation": "hanna2023greater",
+  "local": "reference/hanna_2023_greater_than.pdf",
+  "sha256": "c23636a032c05443bd82984c6e8949d1b24f8b84ae4afa3a9ca634abbc7d15d1",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 2142
+ },
+ "grokking": {
+  "citation": "nanda2023progress",
+  "local": "reference/nanda_2023_grokking.pdf",
+  "sha256": "93dcdafc2ecf75d31ab2e32e74cdc11e2e488fec42edfef58ad3d4b6515bcd5f",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 2527
+ },
+ "induction": {
+  "citation": "olsson2022context",
+  "local": "reference/olsson_2022_induction_heads.pdf",
+  "sha256": "9fa4a667e559431efac5bf1d9463f3b0005633e0b78f3ebbacfb901e4ed36e50",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 1887
+ },
+ "induction_broad": {
+  "citation": "olsson2022context",
+  "local": "reference/olsson_2022_induction_heads.pdf",
+  "sha256": "9fa4a667e559431efac5bf1d9463f3b0005633e0b78f3ebbacfb901e4ed36e50",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 1887
+ },
+ "ioi": {
+  "citation": "wang2023interpretability",
+  "local": "reference/wang_2023_ioi.pdf",
+  "sha256": "af0ea3ca3912f819d2cd06b0f36f5c20bfcab72fbc83816d830c286af6872c91",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 1769
+ },
+ "knowledge_neurons": {
+  "citation": "dai2022knowledge",
+  "local": "reference/dai_2022_knowledge_neurons.pdf",
+  "sha256": "7b297c75bae91e9b61d20f195522a3997f6eb640ff87bf66d3fbeb76d52d43af",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 676
+ },
+ "othello": {
+  "citation": "li2023othello",
+  "local": "reference/li_2023_othello.pdf",
+  "sha256": "3a64ec2e9610837e577578397e7fd8b6bb49adbe60bed026a496a94356866391",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 1051
+ },
+ "probing": {
+  "citation": "belinkov2022probing",
+  "local": "reference/belinkov_2022_probing_classifiers.pdf",
+  "sha256": "5d42161c48d0a4f885064c4f352c2b2e647f3ef179b98e170dea2638fc33f9d1",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 771
+ },
+ "refusal": {
+  "citation": "arditi2024refusal",
+  "local": "reference/arditi_2024_refusal_direction.pdf",
+  "sha256": "9e0ca3b77c0678b289df869493ecb72f7b6b3a4dc6891769c1f5e8511b46d6db",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 2122
+ },
+ "sae": {
+  "citation": "cunningham2023sparse",
+  "local": "reference/cunningham_2023_sparse_autoencoders.pdf",
+  "sha256": "0475237e835c07738a74b2f372f0b7aa33ac047dce6affd49bb750dc4009e661",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 859
+ },
+ "successor_heads": {
+  "citation": "gould2023successor",
+  "local": "reference/gould_2023_successor_heads.pdf",
+  "sha256": "8ba7f1cf8b29617acce30cd173ad262c20de187209403808ddb0b00e1e5dae82",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 1981
+ },
+ "superposition": {
+  "citation": "elhage2022superposition",
+  "local": "reference/elhage_2022_superposition.pdf",
+  "sha256": "0acd3e05e40c1b703be3aed15c8cdbd5713a1840df9738b495d2bde2e8eb1e3a",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 2476
+ },
+ "workspace": {
+  "citation": "gurnee2026verbalizable",
+  "local": "reference/gurnee_2026_workspace.pdf",
+  "sha256": "c906bd5972ed69e583354377968a50d93006bcf818c199f52c181a40c75ecde8",
+  "extract_cmd": "pdftotext -layout",
+  "extract_lines": 5289
+ }
+}

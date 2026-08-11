@@ -1,0 +1,1324 @@
+claim: probing
+title: Probing Classifiers as Mechanistic Evidence
+description: 'A classifier $g$ is trained on a model''s intermediate output $f_l(x)$ to predict a property
+  $z$, and its accuracy is reported as evidence that the model has learned information relevant to $z$.
+  The audited object is the method rather than one experiment: the anchor is a review that runs none of
+  its own, so the evidence sits in the studies it formalises, and its Figure 1 separates the nine components
+  a probing result depends on from the ten controls the literature has added to them. Systems: every architecture
+  family the method has been pointed at, from static word embeddings through recurrent and recursive networks
+  to transformers, and outward to speech recognition and computer vision. Description mode: representational.'
+source:
+  citation: belinkov2022probing
+  title: ''
+  url: https://doi.org/10.1162/coli_a_00422
+  local: reference/belinkov_2022_probing_classifiers.pdf
+  sha256: 5d42161c48d0a4f885064c4f352c2b2e647f3ef179b98e170dea2638fc33f9d1
+  extract_cmd: pdftotext -layout
+  read_in_full: true
+claims:
+  C1:
+    quotes:
+    - exact: Giulianelli et al. (2018) use gradients from g to modify the representations in f and evaluate
+        how this change affects both the probing performance and the original model performance.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: They find that their intervention increases probing performance, as may be expected.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: They conclude that probing classifiers can identify features that are actually used by the
+        model.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: They find that high probing performance P ERF (g, f, DO , DP ) does not necessarily entail
+        a large drop in original task performance after their removal, that is, P ERF ( f˜, DO ).
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Thus, contrary to Giulianelli et al. (2018), they conclude that probing classifiers do not
+        always identify features that are actually used by the model.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: They show that probes may have high accuracy, but low selectivity, and that linear probes
+        tend to have high selectivity, while nonlinear probes tend to have low selectivity.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  C2:
+    quotes:
+    - exact: 'Let us denote by f : x 7→ ŷ a model that maps input x to output ŷ.'
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: 'A probing classifier g : fl (x) 7→ ẑ maps intermediate representations to some property
+        ẑ, which is typically some linguistic feature of interest.'
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: From an information theoretic perspective, training the probing classifier g can be seen
+        as estimating the mutual information between the intermediate representations fl (x) and the property
+        z
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: The above careful definition of the probing classifiers framework reveals that it is composed
+        of multiple concepts and components, depicted in Figure 1.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: A main limitation of the probing classifier paradigm is the disconnect between the probing
+        classifier g and the original model f .
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: the information discovered by probe g? In other words, the probing framework may indicate
+        correlations between representations fl (x) and linguistic property z, but it does not tell us
+        whether this property is involved in predictions of f .
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+  C3:
+    quotes:
+    - exact: Somewhat anecdotally, a few studies observed better performance with more complex probes,
+        but reported similar relative trends (Conneau et al. 2018; Belinkov
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: However, this pattern may be flipped under alternative measures, such as selectivity (Hewitt
+        and Liang 2019).
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: Another line of work proposes methods to extract linguistic information from a trained model
+        without learning additional parameters.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: Additionally, from the perspective of an accuracy–complexity trade-off, such work should
+        perhaps be placed on the low end of the complexity axis, although the complexity of the parsing
+        algorithm could also be taken into account.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: While Pimentel et al. (2020b) posit that their control function is a better criterion than
+        the control tasks of Hewitt and Liang (2019), subsequent work showed that the two criteria are
+        almost equivalent, both theoretically and empirically (Zhu and Rudzicz 2020).
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  C4:
+    quotes:
+    - exact: Hewitt and Liang (2019) observe that the probing performance P ERF (g, f, DO , DP ) may tell
+        us more about the probe g than about the model f .
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: The probe g may memorize information from DP , rather than evaluate information found in
+        representations f (x).
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: They show that probes may have high accuracy, but low selectivity, and that linear probes
+        tend to have high selectivity, while nonlinear probes tend to have low selectivity.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: This indicates that high accuracy of nonlinear probes may come from memorization of surface
+        patterns by the probe g, rather than from information captured in the representations fl (x).
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: These studies show that even random features capture significant information that can be
+        decoded by the probing classifier, so performance on learned features should be viewed in such
+        a perspective.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  C5:
+    quotes:
+    - exact: we write I(z; h), where z is a random variable ranging over properties z and h is a random
+        variable ranging over representations fl (x).
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: Pimentel et al. (2020b) argue that, in order to give the best estimate about the information
+        that model f has about property z, the most complex probe should be used.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: 'In a more practical view, Voita and Titov (2020) propose to measure both the performance
+        of the probe g and its complexity, by estimating the minimum description length of the code required
+        to transmit property z knowing the representations fl (x): MDL(g, f, DO , DP ).'
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: 'they compare the information gain, which is the difference in mutual information between
+        the property z and the representation before and after applying the control function: G(z, h,
+        c) = I(z; h) − I(z; c(h)).'
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: While Pimentel et al. (2020b) posit that their control function is a better criterion than
+        the control tasks of Hewitt and Liang (2019), subsequent work showed that the two criteria are
+        almost equivalent, both theoretically and empirically (Zhu and Rudzicz 2020).
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Pimentel et al. (2020a) argue that probing work should report the possible trade-offs between
+        accuracy and complexity, along a range of probes g, and call for using probes that are both simple
+        and accurate.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+  M1:
+    quotes:
+    - exact: We discuss comparisons and controls, how to choose the probing classifier, which causal claims
+        can be made, the difference between datasets and tasks, and the need to define the probed properties.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: When designing a probing classifier experiment, we advise researchers to take the various
+        controls and alternative measures into account.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Depending on goals, one may want to measure the probe’s complexity (if ease of extractability
+        is in question), report the accuracy–complexity trade-off (when designing new probes), or perform
+        an intervention (to measure usage of information by the original model).
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  M2:
+    quotes:
+    - exact: Suppose we run such an experiment and obtain a performance of P ERF (g, f, DO , DP ) = 87.8.
+        Is that a high/low number? What should we compare it to? We will denote a baseline model with
+        f and an upper bound or skyline model with f¯.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Some studies compare with majority baselines (Belinkov et al. 2017a; Conneau et al. 2018)
+        or with classifiers trained on representations that are thought to be simpler than what the original
+        model f produces, such as static word embeddings (Belinkov et al. 2017a; Tenney et al. 2019).
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Others advocate for random baselines, training the classifier g on a randomized version of
+        f
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: These studies show that even random features capture significant information that can be
+        decoded by the probing classifier, so performance on learned features should be viewed in such
+        a perspective.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: They design control tasks, which a probe may only solve by memorizing.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Another kind of control is proposed by Ravichander, Belinkov, and Hovy (2021), who design
+        control datasets, where the linguistic property z is not discriminative with respect to the original
+        task of mapping x to y.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Components constituting the probing classifiers framework.
+      prefix: ''
+      suffix: ''
+      section: Figure 1
+      page: null
+      line: null
+  M3:
+    quotes:
+    - exact: Somewhat anecdotally, a few studies observed better performance with more complex probes,
+        but reported similar relative trends (Conneau et al. 2018; Belinkov
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: However, this pattern may be flipped under alternative measures, such as selectivity (Hewitt
+        and Liang 2019).
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: They show that probes may have high accuracy, but low selectivity, and that linear probes
+        tend to have high selectivity, while nonlinear probes tend to have low selectivity.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: The control tasks introduced by Hewitt and Liang are particularly suited for word-level properties
+        z as they evaluate memorization of word types; it is less clear how to apply this idea more broadly,
+        such as in sentence-level properties.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  M4:
+    quotes:
+    - exact: Suppose we run such an experiment and obtain a performance of P ERF (g, f, DO , DP ) = 87.8.
+        Is that a high/low number? What should we compare it to?
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: These studies show that even random features capture significant information that can be
+        decoded by the probing classifier, so performance on learned features should be viewed in such
+        a perspective.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Then, they define selectivity as the difference between the probing performance on the probing
+        task and the control task
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Absolute claims about representation quality seem difficult to make.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Yet recent improvements to the framework, such as better controls and metrics, allow us to
+        make relative claims and answer questions like how extractable a property is from a representation.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: When designing a probing classifier experiment, we advise researchers to take the various
+        controls and alternative measures into account.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  M5:
+    quotes:
+    - exact: On the other hand, some studies compare P ERF (g, f, DO , DP ) to skylines or upper bounds
+        f¯, in an attempt to provide a point of comparison for how far probing performance is from the
+        possible performance on the task of mapping x 7→ z.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Examples include estimating human performance (Conneau et al. 2018), reporting the state
+        of the art from the literature (Liu et al. 2019), or training a dedicated model to predict z from
+        x, without restricting to (frozen) representations from f (Belinkov et al. 2017b).
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: At the same time, another probing classifier gC is trained positively, aiming to control
+        for properties zC that should not be removed from f .
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Intuitively, a model f trained on DO,z should not pick up information about z, since it is
+        not useful for the task of f .
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  M6:
+    quotes:
+    - exact: Note that the performance measure depends on the probing classifier g and the probing dataset
+        DP , as well as on the original model f and the original dataset DO .
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: However, this pattern may be flipped under alternative measures, such as selectivity (Hewitt
+        and Liang 2019).
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: Unfortunately, models f tend to be trained on different datasets DO , making statements about
+        models confounded with issues of datasets.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: Some prior work acknowledged that conclusions can only be made about the existing trained
+        models, not about general architectures (Liu et al. 2019).
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: The control tasks introduced by Hewitt and Liang are particularly suited for word-level properties
+        z as they evaluate memorization of word types; it is less clear how to apply this idea more broadly,
+        such as in sentence-level properties.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  M7:
+    quotes:
+    - exact: We discuss comparisons and controls, how to choose the probing classifier, which causal claims
+        can be made, the difference between datasets and tasks, and the need to define the probed properties.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: When designing a probing classifier experiment, we advise researchers to take the various
+        controls and alternative measures into account.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Depending on goals, one may want to measure the probe’s complexity (if ease of extractability
+        is in question), report the accuracy–complexity trade-off (when designing new probes), or perform
+        an intervention (to measure usage of information by the original model).
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Pimentel et al. (2020a) argue that probing work should report the possible trade-offs between
+        accuracy and complexity, along a range of probes g, and call for using probes that are both simple
+        and accurate.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+  I1:
+    quotes:
+    - exact: However, in the process, we have forgotten about the original task assigned to f , which
+        was to predict y.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Similarly, Elazar et al. (2021) remove certain properties z (such as parts of speech or syntactic
+        dependencies) from representations in f by repeatedly training (linear) probing classifiers g
+        and projecting them out of the representation.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: They find that high probing performance P ERF (g, f, DO , DP ) does not necessarily entail
+        a large drop in original task performance after their removal, that is, P ERF ( f˜, DO ).
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Thus, contrary to Giulianelli et al. (2018), they conclude that probing classifiers do not
+        always identify features that are actually used by the model.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: They conclude that probing classifiers can identify features that are actually used by the
+        model.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: In contrast, Lovering et al. (2021) find that extractability of a property according to MDL(
+        g, f, DO , DP ) is correlated with f , making predictions consistent with that property.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+  I2:
+    quotes:
+    - exact: 'A probing classifier g : fl (x) 7→ ẑ maps intermediate representations to some property
+        ẑ, which is typically some linguistic feature of interest.'
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: They are trained in two different steps, where f is trained once and only used to generate
+        feature representations fl (x), which are fed into g.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Giulianelli et al. (2018) use gradients from g to modify the representations in f and evaluate
+        how this change affects both the probing performance and the original model performance.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Interestingly, while in the general language modeling case the intervention has a small effect
+        on the original model performance, P ERF ( f, DO ), they find an increase in this performance
+        on examples designed to assess number agreement.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Tucker, Qian, and Levy (2021) also use probe gradients to update the representations fl (x)
+        with respect to z, resulting in what they call counterfactual representations, and measure the
+        effect on other properties.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+  I3:
+    quotes:
+    - exact: for example, fl (x) may denote the representation of x at layer l of f .
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: We use fl (x) to refer more generally to any intermediate output of f when applied to x,
+        so the framework includes analyses of other model components, such as attention weights (Clark
+        et al. 2019).
+      prefix: ''
+      suffix: ''
+      section: footnote 2
+      page: null
+      line: null
+    - exact: Pimentel et al. (2020a) argue that probing work should report the possible trade-offs between
+        accuracy and complexity, along a range of probes g, and call for using probes that are both simple
+        and accurate.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: Indeed, Cao, Sanh, and Rush (2021) design a pruning-based probe, which learns a mask on weights
+        of f and obtains a better accuracy–complexity trade-off than a nonlinear probe.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+  I4:
+    quotes:
+    - exact: Another kind of control is proposed by Ravichander, Belinkov, and Hovy (2021), who design
+        control datasets, where the linguistic property z is not discriminative with respect to the original
+        task of mapping x to y.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: That is, they modify DO and create a new dataset, DO,z , where all examples have the same
+        value for property z.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Intuitively, a model f trained on DO,z should not pick up information about z, since it is
+        not useful for the task of f .
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: They show that a probe g may learn to predict property z incidentally, even when it is not
+        discriminative with respect to the original task of mapping x 7→ y, casting doubts on causal claims
+        concerning the effect that a property encoded in the representation may have on the original task.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  I5:
+    quotes:
+    - exact: Hewitt and Liang (2019) observe that the probing performance P ERF (g, f, DO , DP ) may tell
+        us more about the probe g than about the model f .
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: They design control tasks, which a probe may only solve by memorizing.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: They show that probes may have high accuracy, but low selectivity, and that linear probes
+        tend to have high selectivity, while nonlinear probes tend to have low selectivity.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: The control tasks introduced by Hewitt and Liang are particularly suited for word-level properties
+        z as they evaluate memorization of word types; it is less clear how to apply this idea more broadly,
+        such as in sentence-level properties.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: And causal approaches (Section 4.3) may reveal which properties are used by the original
+        model.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  I6:
+    quotes:
+    - exact: We discuss comparisons and controls, how to choose the probing classifier, which causal claims
+        can be made, the difference between datasets and tasks, and the need to define the probed properties.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: Depending on goals, one may want to measure the probe’s complexity (if ease of extractability
+        is in question), report the accuracy–complexity trade-off (when designing new probes), or perform
+        an intervention (to measure usage of information by the original model).
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Other studies that perform interventions to interpret NLP models without involving probing
+        classifiers (e.g., Bau et al. 2019; Lakretz et al. 2019; Vig et al. 2020) are left out of the
+        present scope.
+      prefix: ''
+      suffix: ''
+      section: footnote 11
+      page: null
+      line: null
+  I7:
+    quotes:
+    - exact: Others have proposed to design controls for possible confounders.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: They design control tasks, which a probe may only solve by memorizing.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Another kind of control is proposed by Ravichander, Belinkov, and Hovy (2021), who design
+        control datasets, where the linguistic property z is not discriminative with respect to the original
+        task of mapping x to y.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Furthermore, we ideally want to disentangle the role of each dataset from the role of the
+        original model f and probing classifier g.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: Unfortunately, models f tend to be trained on different datasets DO , making statements about
+        models confounded with issues of datasets.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: More such experiments are currently lacking.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: The effect of the probing dataset DP —its size, composition, and so forth—is similarly not
+        well studied.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+  I8:
+    quotes:
+    - exact: We discuss comparisons and controls, how to choose the probing classifier, which causal claims
+        can be made, the difference between datasets and tasks, and the need to define the probed properties.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: Depending on goals, one may want to measure the probe’s complexity (if ease of extractability
+        is in question), report the accuracy–complexity trade-off (when designing new probes), or perform
+        an intervention (to measure usage of information by the original model).
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: When designing a probing classifier experiment, we advise researchers to take the various
+        controls and alternative measures into account.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  I9:
+    quotes:
+    - exact: for example, fl (x) may denote the representation of x at layer l of f .
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: We use fl (x) to refer more generally to any intermediate output of f when applied to x,
+        so the framework includes analyses of other model components, such as attention weights (Clark
+        et al. 2019).
+      prefix: ''
+      suffix: ''
+      section: footnote 2
+      page: null
+      line: null
+    - exact: Other studies that perform interventions to interpret NLP models without involving probing
+        classifiers (e.g., Bau et al. 2019; Lakretz et al. 2019; Vig et al. 2020) are left out of the
+        present scope.
+      prefix: ''
+      suffix: ''
+      section: footnote 11
+      page: null
+      line: null
+    - exact: We discuss comparisons and controls, how to choose the probing classifier, which causal claims
+        can be made, the difference between datasets and tasks, and the need to define the probed properties.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+  I10:
+    quotes:
+    - exact: Similarly, Elazar et al. (2021) remove certain properties z (such as parts of speech or syntactic
+        dependencies) from representations in f by repeatedly training (linear) probing classifiers g
+        and projecting them out of the representation.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: They compare the probing performance to the performance on the original task (in their case,
+        language modeling) after the removal of said features.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: In a similar vein, Feder et al. (2021) remove properties z from representations in f by training
+        g adversarially.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Representations of x from f , after an intervention
+      prefix: ''
+      suffix: ''
+      section: Figure 1(b)
+      page: null
+      line: null
+  I11:
+    quotes:
+    - exact: They are trained in two different steps, where f is trained once and only used to generate
+        feature representations fl (x), which are fed into g.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: A major difference from standard probing classifiers work is the continued updating of f
+        .
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Concerning the latter, Zhang et al. (2021) found that models require less data to encode
+        syntactic and semantic properties compared to commonsense knowledge.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: We discuss comparisons and controls, how to choose the probing classifier, which causal claims
+        can be made, the difference between datasets and tasks, and the need to define the probed properties.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+  I12:
+    quotes:
+    - exact: They are trained in two different steps, where f is trained once and only used to generate
+        feature representations fl (x), which are fed into g.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: We discuss comparisons and controls, how to choose the probing classifier, which causal claims
+        can be made, the difference between datasets and tasks, and the need to define the probed properties.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: Depending on goals, one may want to measure the probe’s complexity (if ease of extractability
+        is in question), report the accuracy–complexity trade-off (when designing new probes), or perform
+        an intervention (to measure usage of information by the original model).
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  E1:
+    quotes:
+    - exact: Indeed, a number of studies have proposed improvements to the probing classifier paradigm,
+        which aim to discover causal effects by intervening in representations of the model f .
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: They conclude that probing classifiers can identify features that are actually used by the
+        model.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Thus, contrary to Giulianelli et al. (2018), they conclude that probing classifiers do not
+        always identify features that are actually used by the model.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: In contrast, Lovering et al. (2021) find that extractability of a property according to MDL(
+        g, f, DO , DP ) is correlated with f , making predictions consistent with that property.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Relatedly, Tamkin et al. (2020) find a discrepancy between features fl (x) obtaining high
+        probing performance, P ERF ( g, f, DO , DP ), and features identified as important when fine-tuning
+        f
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: They find that they can accurately estimate the effect of properties z on downstream tasks
+        performed by f when it is fine-tuned.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+  E2:
+    quotes:
+    - exact: However, in practice these tasks are operationalized via finite datasets. Ravichander, Belinkov,
+        and Hovy (2021) point out
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: that datasets are imperfect proxies for tasks.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: Indeed, the effect of the choice of datasets—both the original dataset DO and the probing
+        dataset DP —has not been widely studied.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: The effect of the probing dataset DP —its size, composition, and so forth—is similarly not
+        well studied.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: While some work reported results on multiple datasets when predicting the same property z
+        (e.g., Belinkov et al. 2017a), more careful investigations are needed.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+  E3:
+    quotes:
+    - exact: 'The probing paradigm aims to study models performing some task ( f : x 7→ ŷ) via a classifier
+        performing another task (g : fl (x) 7→ ẑ).'
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: They show that a probe g may learn to predict property z incidentally, even when it is not
+        discriminative with respect to the original task of mapping x 7→ y, casting doubts on causal claims
+        concerning the effect that a property encoded in the representation may have on the original task.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: It constrains the work to existing annotated datasets, which are often limited to English
+        and certain properties.
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: It also requires focusing on properties z that are thought to be relevant to the task of
+        mapping x 7→ y a priori, potentially leading to biased conclusions.
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+  E4:
+    quotes:
+    - exact: Perhaps the first studies that can be cast in the framework of probing classifiers are by
+        Köhn (2015) and Gupta et al. (2015), who trained classifiers on static word embeddings to predict
+        various morphological, syntactic, and semantic properties.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: stable form by several groups who studied sentence embeddings (Ettinger, Elgohary, and Resnik
+        2016; Adi et al. 2017; Conneau et al. 2018) and recurrent/recursive neural networks (Belinkov
+        et al. 2017a; Hupkes, Veldhoen, and Zuidema 2018).
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: The same idea had been concurrently proposed for investigating computer vision models (Alain
+        and Bengio 2016).
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: For recent analyses focusing on the BERT model (Devlin et al. 2019), see Rogers, Kovaleva,
+        and Rumshisky (2020).
+      prefix: ''
+      suffix: ''
+      section: footnote 6
+      page: null
+      line: null
+    - exact: phonetic information in layers of a speech recognition system (Belinkov and Glass 2017) partly
+        motivated Krishna, Toshniwal, and Livescu (2019) to propose multitask learning with phonetic supervision
+        on intermediate layers.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  E5:
+    quotes:
+    - exact: 'A probing classifier g : fl (x) 7→ ẑ maps intermediate representations to some property
+        ẑ, which is typically some linguistic feature of interest.'
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: Pimentel et al. (2020a) argue that probing work should report the possible trade-offs between
+        accuracy and complexity, along a range of probes g, and call for using probes that are both simple
+        and accurate.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: Giulianelli et al. (2018) use gradients from g to modify the representations in f and evaluate
+        how this change affects both the probing performance and the original model performance.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Depending on goals, one may want to measure the probe’s complexity (if ease of extractability
+        is in question), report the accuracy–complexity trade-off (when designing new probes), or perform
+        an intervention (to measure usage of information by the original model).
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  E6:
+    quotes:
+    - exact: One might hope that probing classifier experiments would suggest ways to improve the quality
+        of the probed model or to direct it to be better tuned to some use or task.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Presently, there are few such successful examples.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: An analysis of redundancy in language models (again using probing classifiers and other methods)
+        motivated an efficient transfer-learning procedure (Dalvi et al. 2020).
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: phonetic information in layers of a speech recognition system (Belinkov and Glass 2017) partly
+        motivated Krishna, Toshniwal, and Livescu (2019) to propose multitask learning with phonetic supervision
+        on intermediate layers.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Belinkov et al. (2020) discuss how their probing experiments can guide the selection of which
+        machine translation models to use when translating specific languages.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  V1:
+    quotes:
+    - exact: If the classifier performs well, we say that the model has learned information relevant for
+        the property. However, upon closer inspection, it turns out that much more is involved here.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: The above careful definition of the probing classifiers framework reveals that it is composed
+        of multiple concepts and components, depicted in Figure 1.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: Components constituting the probing classifiers framework.
+      prefix: ''
+      suffix: ''
+      section: Figure 1
+      page: null
+      line: null
+    - exact: 'Good probing performance is often taken to indicate several potential situations:'
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: Often, different terms (quality, readability, usability, etc.) appear abstractedly without
+        precise definitions.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+  V2:
+    quotes:
+    - exact: Sometimes, good performance is taken to indicate how the original model achieves its behavior
+        on the original task (Hupkes, Veldhoen, and Zuidema 2018).
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: 'This raises an important question, which early work has largely taken for granted (Section
+        3): Does model f use'
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: the information discovered by probe g? In other words, the probing framework may indicate
+        correlations between representations fl (x) and linguistic property z, but it does not tell us
+        whether this property is involved in predictions of f .
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Absolute claims about representation quality seem difficult to make.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Yet recent improvements to the framework, such as better controls and metrics, allow us to
+        make relative claims and answer questions like how extractable a property is from a representation.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  V3:
+    quotes:
+    - exact: Hewitt and Liang (2019) observe that the probing performance P ERF (g, f, DO , DP ) may tell
+        us more about the probe g than about the model f .
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: They design control tasks, which a probe may only solve by memorizing.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Then, they define selectivity as the difference between the probing performance on the probing
+        task and the control task
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Another kind of control is proposed by Ravichander, Belinkov, and Hovy (2021), who design
+        control datasets, where the linguistic property z is not discriminative with respect to the original
+        task of mapping x to y.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: 'they compare the information gain, which is the difference in mutual information between
+        the property z and the representation before and after applying the control function: G(z, h,
+        c) = I(z; h) − I(z; c(h)).'
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Indeed, a number of studies have proposed improvements to the probing classifier paradigm,
+        which aim to discover causal effects by intervening in representations of the model f .
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Yet recent improvements to the framework, such as better controls and metrics, allow us to
+        make relative claims and answer questions like how extractable a property is from a representation.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  V4:
+    quotes:
+    - exact: If the classifier performs well, we say that the model has learned information relevant for
+        the property.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: “If the classifier succeeds, it means that the pre-trained encoder is storing readable tense
+        information into the embeddings it creates” (Conneau et al. 2018)
+      prefix: ''
+      suffix: ''
+      section: footnote 8
+      page: null
+      line: null
+    - exact: Often, different terms (quality, readability, usability, etc.) appear abstractedly without
+        precise definitions.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: It constrains the work to existing annotated datasets, which are often limited to English
+        and certain properties.
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: It also requires focusing on properties z that are thought to be relevant to the task of
+        mapping x 7→ y a priori, potentially leading to biased conclusions.
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: In an isolated effort to alleviate this limitation, Michael, Botha, and Tenney (2020) propose
+        to learn latent clusters useful for predicting a property z.
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: Still, probing classifiers are so far mainly useful when one has prior expectations about
+        which properties z might be relevant with respect to a given task.
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+  V5:
+    quotes:
+    - exact: However, recent studies have demonstrated various methodological limitations of this approach.
+        This squib critically reviews the probing classifiers framework, highlighting their promises,
+        shortcomings, and advances.
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: Critiques have been made about comparative baselines, metrics, the choice of classifier,
+        and the correlational nature of the method.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: We discuss comparisons and controls, how to choose the probing classifier, which causal claims
+        can be made, the difference between datasets and tasks, and the need to define the probed properties.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: Components constituting the probing classifiers framework.
+      prefix: ''
+      suffix: ''
+      section: Figure 1
+      page: null
+      line: null
+    - exact: To conclude, our critical review of the probing classifiers framework reveals that it is
+        more complicated than may seem.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: We do not argue that every study must perform all the various controls and report all the
+        alternative measures summarized here. However, future work seeking to use probing classifiers
+        would do well to take into account the complexity of the framework, its apparent shortcomings,
+        and available advances.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null

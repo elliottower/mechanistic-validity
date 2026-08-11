@@ -1,0 +1,12 @@
+citation: cao2020deformer
+depth: uncited
+title: 'DeFormer: Decomposing Pre-trained Transformers for Faster Question Answering'
+authors:
+- Cao, Qingqing
+- Trivedi, Harsh
+- Balasubramanian, Aruna
+- Balasubramanian, Niranjan
+year: '2020'
+venue: Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics (ACL)
+url: https://aclanthology.org/2020.acl-main.411/
+arxiv: '2005.00697'

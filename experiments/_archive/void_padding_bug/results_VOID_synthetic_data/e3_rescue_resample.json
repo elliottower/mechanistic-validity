@@ -1,0 +1,105 @@
+{
+  "n": 1000,
+  "mode": "resample",
+  "seed": 0,
+  "baseline": 0.895223081111908,
+  "ablated": -0.11707957088947296,
+  "full_restoration": 0.895223081111908,
+  "restoration_gap_abs": 0.0,
+  "recovers_within_1pct": true,
+  "curve_monotone": false,
+  "curve": [
+    {
+      "k": 0,
+      "restored": [],
+      "n_heads": 0,
+      "mean": -0.12168490886688232,
+      "sem": 0.04901188239455223
+    },
+    {
+      "k": 1,
+      "restored": [
+        "name_mover"
+      ],
+      "n_heads": 3,
+      "mean": 1.1700842380523682,
+      "sem": 0.0812094658613205
+    },
+    {
+      "k": 2,
+      "restored": [
+        "name_mover",
+        "negative_name_mover"
+      ],
+      "n_heads": 5,
+      "mean": 0.33140116930007935,
+      "sem": 0.04958256706595421
+    },
+    {
+      "k": 3,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover"
+      ],
+      "n_heads": 13,
+      "mean": 0.586976170539856,
+      "sem": 0.05984197556972504
+    },
+    {
+      "k": 4,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover",
+        "s_inhibition"
+      ],
+      "n_heads": 17,
+      "mean": 0.9236690402030945,
+      "sem": 0.07215657085180283
+    },
+    {
+      "k": 5,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover",
+        "s_inhibition",
+        "induction"
+      ],
+      "n_heads": 21,
+      "mean": 0.8483989238739014,
+      "sem": 0.07039321959018707
+    },
+    {
+      "k": 6,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover",
+        "s_inhibition",
+        "induction",
+        "duplicate_token"
+      ],
+      "n_heads": 24,
+      "mean": 0.8741363286972046,
+      "sem": 0.07299622148275375
+    },
+    {
+      "k": 7,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover",
+        "s_inhibition",
+        "induction",
+        "duplicate_token",
+        "previous_token"
+      ],
+      "n_heads": 26,
+      "mean": 0.895223081111908,
+      "sem": 0.0737127959728241
+    }
+  ],
+  "note": "classes are restored in the fixed order given by IOI_CLASSES, so the curve is one ordering of many; it tests monotonicity, not importance"
+}

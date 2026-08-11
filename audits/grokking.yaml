@@ -1,0 +1,865 @@
+claim: grokking
+verdict: Mechanistically Supported
+readings:
+- statement: The network computes $a+b \bmod 113$ by multiplying Fourier components at five key frequencies
+  verdict: Mechanistically Supported
+  missing: Selection correction over the frequency pool (M7) and a positive control (M5)
+  primary: true
+- statement: The five frequencies are the mechanism at neuron granularity
+  verdict: Underdetermined
+  missing: The leave-one-out runs at frequency level; 79 of 512 neurons fail the polynomial fit the account
+    predicts (I3)
+  primary: false
+- statement: The account fixes which algorithm the network runs
+  verdict: Underdetermined
+  missing: \citet{zhong2023clock} give two algorithms on the same frequencies; the metrics separating
+    them are unrun here (I5)
+  primary: false
+- statement: The progress measures explain grokking generally
+  verdict: Insufficient
+  missing: Three further tasks are run but only for whether grokking occurs, never for the mechanism (E3)
+  primary: false
+tiers:
+- name: Proposed
+  requires: C1--C2; one admissible measurement
+  missing: '---'
+- name: Causally Suggestive
+  requires: Necessity (I1); baselines (M2)
+  missing: '---'
+- name: Mechanistically Supported
+  requires: Sufficiency (I2); reach (E1); specificity (I4)
+  missing: '\textbf{I4} not applicable: one task, no off-target behavior to spare'
+- name: Triangulated
+  requires: Convergence (C3); replication (E2/E4); dissociation (I6)
+  missing: \textbf{I6} unattempted; no second mechanism shown intact under key-frequency ablation
+- name: Validated
+  requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
+  missing: \textbf{M5}, \textbf{M7} unattempted, and the frequency selection is circular; \textbf{I8},
+    \textbf{I10}, \textbf{E5} unattempted
+criteria:
+  C1:
+    name: Falsifiability
+    status: C
+    short: Each key frequency makes a directional ablation prediction that could fail
+    verified: true
+    reasoning: 'Every claim in the mechanism is attached to an ablation whose direction is fixed before
+      the result is read. Each of the five key frequencies must be load-bearing and each of the other
+      51 must not, and Figure 6 runs both halves on the same axis, so a key frequency that did nothing
+      or a non-key frequency that mattered would have shown up in the same plot. The nullspace test is
+      sharper still: it predicts that a model deprived of ten directions out of 512 should be destroyed,
+      and the reported 5.27 is worse than a uniform predictor. The excluded-loss construction states in
+      advance what a memorising solution would look like in the Fourier domain, which is the direction
+      the measure would have moved had memorisation persisted. C.
+
+      '
+    notes:
+      verification: 'Figure 6 plots all 56 unique frequencies, so the falsifying observation is on the
+        same axis as the confirming one. The paper never writes the number 51; it follows from the 56
+        unique frequencies of Figure 6 and footnote 3 minus the five key ones.
+
+        '
+      legacy_evidence: 'Each of the five key frequencies makes a directional ablation prediction that
+        could have failed, and the 51 non-key frequencies make the complementary one (their \S4.4, Fig.~6).
+        The sharpest is the nullspace test: projecting MLP activations off the ten $u_k, v_k$ directions
+        should destroy the model, and gives loss 5.27 --- worse than uniform'
+      verdict_derivation: 'Verdict computed from the criteria on 2026-08-07 rather than asserted: Mechanistically
+        Supported, blocked above that by I6=U. The 35-criterion table scores the primary reading, so the
+        criteria, the primary reading''s verdict and the overall verdict are one number by construction.'
+  C2:
+    name: Structural plausibility
+    status: C
+    short: Weight-level throughout; $W_E$ sparse in the Fourier basis at 6 frequencies
+    verified: true
+    reasoning: 'The account is stated over weights rather than over activations wherever it can be. Sparsity
+      of WE in the Fourier basis, the rank-10 approximation of WL with residual Frobenius norm under 0.55%,
+      and the single-frequency fit to the attention-score lookup vector at 92.42–99.10% of variance are
+      all properties of the parameters, which is what makes the mechanism a structural claim rather than
+      a description of one forward pass. Two gaps keep it from being complete: Win never receives a weight-level
+      account, the neurons being characterised by fitting their activations instead, and the role given
+      to heads 1 and 3 is introduced as speculation. C for what is covered.
+
+      '
+    notes:
+      verification: 'The four per-head fits are 99.02%, 95.21%, 99.10% and 92.42%, so the legacy cell''s
+        92.4–99.1% range is right. The 0.55% figure is the residual Frobenius norm as a fraction of the
+        norm of WL, not an absolute quantity.
+
+        '
+      legacy_evidence: Weight-level throughout. $W_E$ is sparse in the Fourier basis at 6 frequencies
+        (\S4.1); $W_L$ is approximately rank 10 with residual Frobenius norm ``under 0.55\%'' (\S4.2);
+        the attention-score lookup vector $C_j = W_E^T W_K^{jT} W_Q^j x_2^{(0)}$ is a single-frequency
+        wave at 92.4--99.1\% FVE, and the OV circuits are Fourier-sparse (Appendix C.1.3). No weight-level
+        account exists for $W_{\mathrm{in}}$, and heads 1 and 3 are assigned an amplification role the
+        authors flag as speculation
+  C3:
+    name: Convergent validity
+    status: PC
+    short: Three families at origin, but all descend from Fourier-space ablation
+    verified: true
+    reasoning: 'Three of the four advertised lines of evidence are genuinely different instruments: periodicity
+      in activations, composition of weights, and ablation in Fourier space. The fourth, the training-dynamics
+      evidence, is derived from the third by the authors'' own description of it, so it cannot count as
+      an independent measurement of the same object. Convergence across three families with one dependency
+      is PC.
+
+      '
+    notes:
+      verification: 'The dependency is stated by the source itself in §5.1, which is stronger than an
+        auditor''s inference about it.
+
+        '
+      legacy_evidence: 'Three genuinely distinct families at origin: activations (periodicity in attention
+        scores, neuron activations and logits, \S4.1), weights (\S4.2--4.3, Appendix C.1), and ablation
+        (\S4.4). The fourth --- training dynamics --- is derived from the third by the authors'' own statement,
+        ``We translate the ablations in Section 4.4 into two progress measures'''' (\S5.1), so it is not
+        independent. No external group has re-derived the mechanism on these checkpoints'
+  C4:
+    name: Discriminant validity
+    status: PC
+    short: Excluded loss rises during circuit formation while train loss stays flat
+    verified: true
+    reasoning: 'The construct is separated from memorisation by an instrument built for that purpose.
+      Excluded loss rises while train loss stays flat, which is the signature the authors predicted for
+      a model moving off a memorising solution onto a frequency-supported one, and a diffuse memorising
+      solution would have left it unmoved. Separation from a rival generalising algorithm is another matter:
+      nothing in the paper distinguishes this composition of the key frequencies from a different one
+      over the same frequencies, since every discriminating measurement reported is a Fourier-sparsity
+      measurement that any such rival would also pass. PC.
+
+      '
+    notes:
+      verification: 'The rival-generalising-algorithm instruments (gradient symmetricity, distance irrelevance)
+        are post-origin and are not in this source, so the cell rests on what the source does not separate
+        rather than on a reported failure.
+
+        '
+      legacy_evidence: 'Separated from memorisation: excluded loss rises during circuit formation while
+        train loss stays flat (\S5.2), and the memorising solution is by construction diffuse in the Fourier
+        domain. Not separated from the nearest generalizing rival. \citet{zhong2023clock} later build
+        the discriminating instruments (gradient symmetricity, distance irrelevance) and find Clock, Pizza,
+        hybrid and non-circular solutions in the same architecture family --- but nobody has run those
+        instruments on this model'
+  C5:
+    name: Nomological validity
+    status: PC
+    short: Placed inside progress measures and phase changes; links are analogical
+    verified: true
+    reasoning: 'The mechanism is placed inside two named frames, progress measures and the circuits programme,
+      and Appendix B supplies a reason internal to the task for a feature of the mechanism that could
+      otherwise look arbitrary: why several frequencies are needed rather than one. What is missing is
+      a theory that predicts the Fourier basis from the task and the architecture in advance. The frames
+      organise the result after the fact rather than generating it. PC.
+
+      '
+    notes:
+      verification: 'Appendix B is an argument from the shape of the cosine waves, not a measurement,
+        and the paper presents it that way.
+
+        '
+      legacy_evidence: Positioned inside a named theoretical frame --- progress measures (Barak et al.\
+        2022), phase changes, and the circuits programme \citep{elhage2021framework} --- and the constructive-interference
+        argument of Appendix B explains \emph{why} several frequencies rather than one. No theory predicts
+        the Fourier basis from task and architecture; Morwani et al.\ (2023) supply one afterwards, for
+        a one-hidden-layer quadratic network under the $L_{2,3}$ norm, which does not cover this model
+  M1:
+    name: Reliability
+    status: PC
+    short: Five seeds at the mainline configuration, reported in full (Table 3)
+    verified: true
+    reasoning: 'Repetition is real at the level of training: five seeds at the mainline configuration,
+      all five carried through the mechanism analysis, and Table 6 reports a standard deviation of loss
+      over runs. Repetition is absent at the level of the measurements that carry the mechanism claim.
+      The fraction of variance explained is quoted as one number per direction in Tables 1 and 3 with
+      no interval, so the reader cannot tell how much of a 93.2% would survive resampling. PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE LEGACY EVIDENCE, which says every FVE in Tables 1, 3 and 5
+        is a single point estimate. Table 5''s MLP FVE column carries a dispersion: its caption says "Numbers
+        in square brackets represent the standard deviation", and the bracketed values run from 0.3% to
+        28.2%. That dispersion is across the uk, vk directions within a model, not across runs. The logit
+        FVE column is a point estimate, and Tables 1 and 3 are point estimates throughout.
+
+        '
+      legacy_evidence: Five random seeds at the mainline configuration, reported in full (Fig.~2, Appendix
+        C.2.1, Table 3), and Table 6 reports standard deviations of loss over runs. No confidence intervals,
+        bootstrap, or repeated estimates on any of the fraction-of-variance-explained figures that carry
+        the mechanism claim; every FVE in Tables 1, 3 and 5 is a single point estimate
+  M2:
+    name: Baseline separation
+    status: C
+    short: All 56 frequencies ablated individually; the five separate by orders
+    verified: true
+    reasoning: 'The comparison class is the whole of it. All 56 unique frequencies are ablated one at
+      a time on a single log axis, so the five key frequencies are not compared against a chosen foil
+      but against every alternative the model has, and the separation is orders of magnitude on that axis.
+      The complementary ablation is the same comparison run the other way: removing everything outside
+      the key frequencies improves loss by 70%. A baseline that both survives removal of the complement
+      and collapses on removal of the set is separated as sharply as this design allows. C.
+
+      '
+    notes:
+      verification: 'The 70% improvement is not the complement of Figure 6. Figure 6 ablates single frequencies
+        out of 56; the 70% figure comes from ablating all 113 · 113 − 40 two-dimensional Fourier components
+        outside the key frequencies at once, relative to the unablated test loss of 2.41 · 10−7. The paper
+        never writes "51" and never reports the loss of ablating the 51 non-key frequencies jointly. Note
+        also that §4.4 keeps 40 components while the restricted loss of §5.1 keeps the constant term plus
+        20; the two ablations are not the same operation.
+
+        '
+      legacy_evidence: 'Figure 6 ablates each of the 56 unique frequencies individually: the five key
+        frequencies raise loss by orders of magnitude, the other 51 do not harm the model at all. Ablating
+        all 113$\cdot$113$-$40 non-key components \emph{improves} loss 70\% to $7.24\times10^{-8}$. Replicated
+        across four further seeds (Table 4: key-frequency removal gives 6.5--11, worse than uniform; all-other
+        removal gives $\sim$6$\times10^{-8}$)'
+  M3:
+    name: Stability
+    status: PC
+    short: Seed, data fraction, depth and modulus swept; analysis choices are not
+    verified: true
+    reasoning: 'Training-side stability is swept harder than in any other audit in this set, because the
+      authors train the models: seed, data fraction, depth, prime modulus, weight-decay strength and regulariser
+      type. Analysis-side stability is not swept at all. The threshold that decides which Fourier coefficients
+      count as nontrivial is never given a value, the rank-10 truncation is fixed, and the 85% cutoff
+      that selects 433 neurons is used once and never varied, so the reader cannot tell whether the mechanism
+      statistics move when those choices move. PC.
+
+      '
+    notes:
+      verification: 'The λ set stated in the source is {0.3, 0.5, 1, 3, 5, 8} for the P = 401 sweep; λ
+        = 0 appears separately in Appendix D.1 and λ = 5 for P = 53. The legacy cell''s set {0, 0.3, 1,
+        3, 5, 8} drops 0.5 and folds those runs together.
+
+        '
+      legacy_evidence: 'Training-side stability is swept hard --- seed, data fraction 10--90\%, depth,
+        $P \in \{53, 109, 401\}$, weight decay $\lambda \in \{0, 0.3, 1, 3, 5, 8\}$, dropout and $\ell_1$.
+        Analysis-side stability is not: the threshold defining a ``nontrivial'''' Fourier coefficient,
+        the rank-10 truncation, and the 85\% FVE cutoff that selects 433 neurons are all fixed and never
+        perturbed'
+  M4:
+    name: Calibration
+    status: PC
+    short: Loss in natural units; the uniform reference is invoked but never computed
+    verified: true
+    reasoning: 'Loss is reported in nats on a task whose chance level is fixed and known, so a number
+      like 5.27 or 11 can be read directly as worse than a model that predicts uniformly. That is more
+      calibration than most interpretability results carry. The reference itself is never computed: "worse
+      than uniform" and "worse than chance" are asserted, and log 113 ≈ 4.73 appears nowhere, so the margin
+      above chance has to be reconstructed by the reader. The fraction-of-variance-explained instrument
+      has no false-positive reference at all. PC.
+
+      '
+    notes:
+      verification: 'The uniform-prediction reference is invoked twice and stated never. The `short` has
+        been narrowed to say so. Within the source, the weakest evidence that the logit FVE is uncalibrated
+        is internal: Table 5 classifies the 80% training-data run as implementing the algorithm at a logit
+        FVE of 63.9%, well below the 95% of the mainline model.
+
+        '
+      legacy_evidence: 'Loss is in natural units against an interpretable uniform-prediction reference,
+        and FVE is directly meaningful. The logit-FVE instrument is uncalibrated against its nearest false
+        positive: it is the Clock functional form, a Pizza model scores 75.4--75.6\% on it \citep[Table~2]{zhong2023clock},
+        and Nanda et al.''s own 80\%-data run scores 63.9\% and three grokked dropout runs score 71--74\%,
+        all classified as Fourier'
+  M5:
+    name: Sensitivity
+    status: U
+    short: Unattempted; a known-negative control with no known-positive
+    verified: true
+    reasoning: 'One half of a sensitivity design is present. Ablating the 51 non-key frequencies is a
+      known-negative control, and it behaves as a control should: the procedure reports no effect where
+      none should exist. The other half is missing. No model with a planted circuit of known frequencies
+      is analysed and recovered, so nothing measures what this analysis would fail to find. The setting
+      makes such a control unusually cheap, since the authors specify and train the models. U.
+
+      '
+    notes:
+      verification: 'Verified against a full read rather than against a statement of omission. §4.4, Appendix
+        C.2 and Appendix D contain every ablation performed, and none of them plants a mechanism to be
+        recovered.
+
+        '
+      legacy_evidence: Unattempted. Ablating non-key frequencies is a known-negative control; there is
+        no known-positive. No synthetic model with a planted Fourier circuit of known frequencies is analysed
+        and recovered, although the setting makes one cheap to construct
+  M6:
+    name: Invariance
+    status: C
+    short: Table 5 repeats the mechanism statistics for 27 models, five conditions
+    verified: true
+    reasoning: 'The same statistics are recomputed on every generalising model the paper trains, across
+      data fraction, depth, prime modulus and regulariser, and reported in one table with the spread visible
+      rather than summarised. The one condition where the pattern breaks is named in the text rather than
+      buried in the table. Invariance stated over the conditions actually varied, with the exception disclosed,
+      is C.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL''S `short`, which said 24 models. Table 5 has 27 rows:
+        6 data fractions, 5 two-layer, 5 at P = 53, 5 at P = 109, 3 dropout p = 0.2 and 3 dropout p =
+        0.5. The count reaches 24 only if the three dropout p = 0.2 rows are dropped, and the source keeps
+        them, listing them as generalising at around 99.6% test accuracy. `short` corrected to 27.
+
+        '
+      legacy_evidence: Table 5 reports the mechanism statistics for 24 generalizing models across five
+        conditions --- data fraction 40--90\%, 2-layer, $P = 53$, $P = 109$, dropout $p \in \{0.2, 0.5\}$
+        --- with the spread visible and the one anomaly named in text (dropout embeddings ``are not sparse
+        in the Fourier basis''). Figures 16--19 add per-seed embedding spectra, neuron-logit spectra,
+        restricted losses and Gini curves
+  M7:
+    name: Selection correction
+    status: U
+    short: 'Unattempted, and circular: frequencies chosen from the spectrum tested'
+    verified: true
+    reasoning: 'The selection step and the test step read the same quantity. The five key frequencies
+      are chosen by inspecting the Fourier spectrum of WE and WL, and the claim that they matter is then
+      tested by ablating those five. The 433 neurons are chosen by an 85% variance threshold and then
+      replaced by the polynomials that defined the threshold. Both search spaces are stated in the paper,
+      56 unique frequencies and 512 neurons, so the size of the selection is known and no correction for
+      it is applied anywhere. U.
+
+      '
+    notes:
+      verification: 'Figure 6 partly mitigates the circularity for the frequencies, since it reports the
+        whole swept space rather than the selected members alone; that is disclosure of the search, not
+        a correction for it. Nothing comparable exists for the 512 neurons, which are never swept individually.
+
+        '
+      legacy_evidence: Unattempted, and the selection is circular. The five key frequencies are chosen
+        by inspecting the Fourier spectrum of $W_E$ and $W_L$, then the same five are ablated to show
+        they matter. The 433 neurons are chosen by an 85\% FVE threshold, then replaced by the polynomials
+        that defined the threshold. $N = 56$ frequencies and $N = 512$ neurons are both stated; no multiplicity
+        control is applied
+  I1:
+    name: Necessity
+    status: C
+    short: Key-frequency removal gives 6.5--11 in four seeds; nullspace gives 5.27
+    verified: true
+    reasoning: 'Two removals, at different loci, both catastrophic. Removing the key frequencies from
+      the logits drives loss to between 6.5 and 11 across four seeds, past the point where the model is
+      worse than predicting uniformly, and Figure 6 shows that each key frequency contributes to that
+      individually. Projecting the MLP activations onto the nullspace of the ten uk, vk directions gives
+      5.27 from a base of 2.41 · 10−7, which removes the mechanism at the activation level rather than
+      at the output. Necessity established at both loci is C.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL''S `short` AND LEGACY EVIDENCE. The 6.5–11 range is Table
+        4, which has four rows, one per non-mainline seed, not five models; the mainline model is absent
+        from it and its test loss of 2.41 · 10−7 does not appear there. Those four seeds do not have five
+        key frequencies each: Appendix C.2.1 says the neuron-logit spectra identify "3 or 4 key frequencies
+        for each of the seeds", and Table 3 shows 4, 3, 4 and 4. So the 6.5–11 numbers are what happens
+        when each model''s own 3 or 4 key frequencies are removed. The mainline model''s five-frequency
+        ablation is reported only as the excluded-loss curve of Figure 7, with no endpoint number in text.
+        The uniform reference is asserted ("worse than chance", "worse than uniform") and never computed.
+        `short` corrected.
+
+        '
+      legacy_evidence: Two independent removals, both catastrophic. Ablating all five key frequencies
+        from the logits gives loss 6.5--11 against a uniform-prediction reference (Table 4, five models).
+        Projecting MLP activations onto the nullspace of the ten $u_k, v_k$ directions gives 5.27, which
+        the authors note is ``worse than uniform'' (\S4.4)
+  I2:
+    name: Sufficiency
+    status: C
+    short: Non-key Fourier ablation improves loss 70%; polynomial substitution costs 3%
+    verified: true
+    reasoning: 'The complement test is run at three loci and passes at all three with room to spare. Keeping
+      only the key-frequency components of the logits improves loss by 70%, keeping only the ten uk, vk
+      directions of the MLP activations improves it by 50%, and substituting 433 neuron activations with
+      their fitted degree-2 polynomials costs 3% of a loss already at 10−7 while leaving accuracy untouched.
+      A circuit whose retained part does the job better than the whole model is sufficient by any reading
+      of the term. C.
+
+      '
+    notes:
+      verification: 'The two Fourier-space operations keep different sets. §4.4 ablates all 113 · 113
+        − 40 components besides the key frequencies, keeping 40; the restricted loss of §5.1 keeps the
+        constant term plus 20 components. The cell''s `short` described the §5.1 set while quoting the
+        §4.4 result, so it has been rewritten to name the operation that produced the 70%.
+
+        '
+      legacy_evidence: 'The complement test is run and passed with room to spare: keeping only the constant
+        term and the 20 Fourier components of the five key frequencies \emph{improves} loss 70\%, and
+        projecting MLP activations onto the ten directions improves it 50\%. Replacing 433 neuron activations
+        with their degree-2 polynomials costs 3\% relative and leaves accuracy unchanged (\S4.4)'
+  I3:
+    name: Minimality
+    status: PC
+    short: Every key frequency is load-bearing singly; 79 of 512 neurons miss the cutoff
+    verified: true
+    reasoning: 'At frequency granularity the leave-one-out is genuine and complete: every one of the five
+      is removed on its own, every one degrades the model, so the set has no redundant member. At neuron
+      granularity nothing comparable is run. The 79 neurons outside the 433 are left untouched by the
+      substitution and are never shown to be inert, so the claim that the mechanism is the 433 is not
+      tested against the smaller claim that some subset would do. PC.
+
+      '
+    notes:
+      verification: 'The number 79 does not appear in the source; it is 512 − 433 from §4.3. "Fail the
+        polynomial fit" is also imprecise: the 79 are the neurons whose activations are not over 85% explained
+        by a degree-2 polynomial of a single key frequency, which does not establish that no polynomial
+        fits them. `short` corrected on both points.
+
+        '
+      legacy_evidence: 'A genuine leave-one-out exists at frequency granularity: Figure 6 and Figure 15
+        ablate each key frequency singly and every one is load-bearing, so the five-element set has no
+        redundant member. No leave-one-out at neuron or direction granularity, and the 79 of 512 neurons
+        that fail the polynomial fit are never accounted for or shown to be inert'
+  I4:
+    name: Specificity
+    status: N/A
+    short: One task; the model has no off-target behavior to spare
+    verified: true
+    reasoning: 'Specificity asks whether an intervention that removes the target behaviour spares behaviours
+      it should not touch. This model has no other behaviour. It is trained from scratch on one task,
+      its input is a fixed three-token form, and loss is read from one position, so after a key-frequency
+      ablation there is no second capability whose survival could be measured. The inapplicability is
+      structural rather than a matter of an experiment left unrun. The nearest available check, that ablating
+      the other frequencies leaves performance intact, is a property of the complement rather than evidence
+      about off-target effects of the circuit. N/A.
+
+      '
+    notes:
+      verification: 'Checked for an off-target surface before recording N/A. The three additional tasks
+        of Appendix D.3 are separate models trained separately, not other behaviours of this one, so they
+        cannot serve as an off-target measure for an ablation of this model.
+
+        '
+      legacy_evidence: Untestable in this setting. The model is trained on one task and has no non-target
+        behaviour on which off-target effects of a key-frequency ablation could be measured. The nearest
+        available check --- that ablating the other 51 frequencies does not harm performance --- is a
+        property of the complement, not of the circuit
+  I5:
+    name: Rival mechanism exclusion
+    status: PC
+    short: Memorization excluded; Clock and Pizza are not
+    verified: true
+    reasoning: 'One rival is excluded and it is excluded well. Memorisation predicts a solution diffuse
+      in the Fourier domain, the excluded loss is built to detect exactly that, and its rise during circuit
+      formation is the observed signature of the model leaving that solution. The paper then treats the
+      field of rivals as exhausted, writing that the model has two possible solutions. No alternative
+      generalising algorithm over the same key frequencies is considered, and none of the reported measurements
+      would separate one from the Fourier multiplication account. PC.
+
+      '
+    notes:
+      verification: 'The two-solutions framing is in Appendix E.1, which the source labels speculation.
+        That weakens it as evidence that the rival space was searched and strengthens the reading that
+        it was assumed.
+
+        '
+      legacy_evidence: Memorisation is excluded by the excluded-loss construction (\S5.1--5.2) and by
+        the observation that a memorising solution is diffuse in the Fourier domain. No rival \emph{generalizing}
+        algorithm is considered. \citet{zhong2023clock} exhibit Pizza, hybrid and non-circular solutions
+        in the same architecture class, including at attention rate 1 and width 1024; none has been tested
+        against this model
+  I6:
+    name: Double dissociation
+    status: U
+    short: Unattempted; no second mechanism shown intact under ablation
+    verified: true
+    reasoning: 'A double dissociation needs two mechanisms and two outcomes, with each intervention moving
+      one and sparing the other. Only the first half exists here. Ablating non-key frequencies spares
+      the target behaviour, which is a single dissociation, and the component ablations of Appendix A.1
+      report necessity rather than the survival of a second mechanism under key-frequency ablation. Nothing
+      in the paper identifies a second mechanism in this network that could be shown intact. U.
+
+      '
+    notes:
+      verification: 'Verified against a full read. The constant term and the positional pathway are the
+        only candidates for a second mechanism in this model, and neither is measured under key-frequency
+        ablation.
+
+        '
+      legacy_evidence: 'Unattempted. No converse test: no second mechanism in this network is shown intact
+        under key-frequency ablation. The single-task setting makes a converse hard to construct but not
+        impossible --- the constant term and the positional pathway are candidates'
+  I7:
+    name: Confound control
+    status: PC
+    short: Data fraction, modulus, depth, seed and weight decay all varied
+    verified: true
+    reasoning: 'Training the models is what buys the controls. Data fraction, modulus, depth, seed, regulariser
+      type and weight-decay strength are all varied rather than found, and the λ = 0 run is the sharpest
+      of them: with the regulariser removed the excluded loss stays flat, so the circuit does not form
+      and grokking does not occur. What remains uncontrolled is on the analysis side, where thresholds
+      are fixed, and in the architecture, since every mainline conclusion rests on one width and one depth.
+      PC.
+
+      '
+    notes:
+      verification: 'The ℓ1 result is a further control in the same direction: a regulariser that pushes
+        toward neuron-basis sparsity produces no grokking, which separates weight decay from regularisation
+        in general.
+
+        '
+      legacy_evidence: 'The strongest controls in the audit set, because the authors train the model:
+        data fraction, modulus, depth, seed, regulariser type and weight-decay strength are all varied,
+        and Appendix D.1 shows $\lambda = 0$ produces neither grokking nor circuit formation. Uncontrolled:
+        analysis-side choices (M3), and the fact that all mainline conclusions rest on one architecture
+        at one $d_{\mathrm{model}}$'
+  I8:
+    name: Confounding sensitivity
+    status: U
+    short: Unattempted; no sensitivity analysis for an unmeasured confounder
+    verified: false
+    reasoning: 'NOT SETTLED BY THE SOURCE. Nothing in the paper quantifies how strong an unmeasured confounder
+      would have to be to overturn a reported effect, and no quantity in it can be read as such a bound.
+
+      '
+    notes:
+      verification: 'Read in full. Every causal claim in the source rests on intervention on a model the
+        authors trained, so the E-value framing has no natural home in it. That explains the absence rather
+        than supplying evidence for the cell.
+
+        '
+      legacy_evidence: Unattempted. No E-value or sensitivity analysis for an unmeasured confounder
+  I9:
+    name: Epistatic interaction
+    status: PC
+    short: 'Non-additivity demonstrated: single frequencies have sparse effects'
+    verified: true
+    reasoning: 'Non-additivity is demonstrated rather than assumed. Appendix B shows that a single key
+      frequency has near-maxima away from the answer, that a second cancels them, and that the five frequencies
+      together produce a peak only at the correct output, which is a mechanism for why the components
+      cannot be read off one at a time. The empirical side matches: single-frequency exclusion and joint
+      exclusion are both reported and the joint effect far exceeds the sum. No pairwise grid is run and
+      the interaction is never quantified as an interaction term. PC.
+
+      '
+    notes:
+      verification: 'The Appendix B numbers are verbatim: f14(8) = 0.998 and f35(8) = −0.990.
+
+        '
+      legacy_evidence: 'Non-additivity is argued and demonstrated rather than assumed: Appendix B shows
+        that a single frequency has spurious near-maxima ($f_{14}(8) = 0.998$) which other frequencies
+        cancel ($f_{35}(8) = -0.990$), so the five must be summed, and Figure 8 plots the resulting constructive
+        interference. Single-frequency exclusion (Fig.~15) and all-five exclusion (excluded loss) are
+        both reported and are strongly superadditive. No pairwise ablation grid, and the interaction is
+        never quantified as such'
+  I10:
+    name: Rescue reversibility
+    status: U
+    short: Unattempted; every intervention substitutes rather than restores
+    verified: true
+    reasoning: 'Every intervention in the paper is a substitution performed on a clean model: replace
+      a component with its approximation, or project activations onto or off a subspace. None of them
+      corrupts the model and then restores the mechanism to see the behaviour return. The clean values
+      are in hand at every one of these loci, so the corrupt-then-restore direction costs one extra forward
+      pass and is not run. Unattempted rather than untestable. U.
+
+      '
+    notes:
+      verification: 'Verified against a full read of §4.4, Appendix A.1 and Appendix C, which contain
+        every intervention in the paper.
+
+        '
+      legacy_evidence: Unattempted rather than untestable. Every intervention is a Fourier-space or activation-space
+        substitution with the clean values in hand, so corrupt-then-restore costs one extra forward pass.
+        It is not run
+  I11:
+    name: Onset coupling
+    status: C
+    short: Restricted and excluded loss move before test accuracy does
+    verified: true
+    reasoning: 'This is the criterion the paper was written to satisfy. Both progress measures are computed
+      at every checkpoint, they move during circuit formation while train and test loss stay flat, and
+      the behaviour appears only later during cleanup. The ordering is the claim, it is measured rather
+      than inferred, and it is reproduced on four further seeds. Mechanism measurable before behaviour,
+      on repeated runs, is C.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE LEGACY EVIDENCE, which says the measures are tracked across
+        all 40,000 epochs. Training runs 40,000 epochs (§3), but no progress measure is plotted that far:
+        the axes of Figure 7, Figure 13, Figure 14 and Figure 15 stop at 30k, and Figure 18 and Figure
+        19 stop at 25k for three of the four seeds. The phase boundaries 0–1.4k, 1.4k–9.4k and 9.4k–14k
+        are verbatim from §5.2.
+
+        '
+      legacy_evidence: The paper's strongest criterion and its central contribution. Restricted and excluded
+        loss are tracked across all 40,000 epochs (Fig.~7), splitting training into memorization (0--1.4k),
+        circuit formation (1.4k--9.4k) and cleanup (9.4k--14k), with the mechanism measurable before the
+        behavior appears. Replicated on four further seeds (Figs.~18, 19)
+  I12:
+    name: Offset coupling
+    status: U
+    short: Unattempted; no test that behavior disappears as the circuit does
+    verified: true
+    reasoning: 'No run removes the capability from a trained model and asks whether the Fourier structure
+      goes with it. The λ = 0 experiment is the nearest thing in the paper and it is a different design:
+      a training condition in which neither the circuit nor the generalisation ever appears, which is
+      a co-absence across conditions rather than a coupled disappearance within a model. The authors train
+      these models and could construct the within-model version. U on the criterion as defined.
+
+      '
+    notes:
+      verification: 'The λ = 0 run is stronger evidence than the cell''s U suggests. Excluded loss stays
+        flat and grokking never occurs in the same run, so the circuit and the behaviour are jointly absent
+        under an intervention on the training objective. Whether that counts as offset coupling depends
+        on whether the criterion admits between-run co-absence; if it does, this cell is PC rather than
+        U. Flagged rather than changed, since statuses are out of scope here.
+
+        '
+      legacy_evidence: Unattempted. No training run removes the capability to test whether the Fourier
+        structure goes with it, although the authors train the models and could construct one
+  E1:
+    name: Intervention reach
+    status: C
+    short: Five intervention primitives at four loci, all agreeing
+    verified: true
+    reasoning: 'Five distinct intervention primitives are applied at four loci: zeroing Fourier components
+      of the logits, projecting MLP activations onto and off a subspace, substituting neuron activations
+      with fitted polynomials, replacing the sigmoid with its best linear fit, and zero or mean ablation
+      of the skip connections and attention heads. Removal and replacement agree wherever both are available,
+      which is what stops any single primitive from carrying the result. The reach is in the interventions
+      rather than in the readout: test loss is the only outcome measure, with accuracy reported as a secondary
+      check. C.
+
+      '
+    notes:
+      verification: 'The linear-fit substitution improves loss, so it is a replacement test rather than
+        a knockout, and it targets the softmax over two elements that Appendix A.1 reduces to a sigmoid.
+
+        '
+      legacy_evidence: 'Five distinct intervention primitives at four loci, all agreeing: zeroing Fourier
+        components of the logits, projecting MLP activations onto and off a subspace, substituting neuron
+        activations with fitted polynomials, replacing the softmax with its best linear fit (which \emph{improves}
+        loss to $2.12\times10^{-7}$), and zero/mean ablation of the skip connections and attention heads
+        (Appendix A.1). Removal and replacement agree. One outcome metric only (test loss)'
+  E2:
+    name: Prompt generalization
+    status: C
+    short: 'The input space is enumerable and enumerated: all $113^2$ pairs'
+    verified: true
+    reasoning: 'The input space is finite, enumerable and enumerated. Thirty per cent of the 113 · 113
+      pairs are used for training and every remaining pair is used for evaluation, and the Fourier analyses
+      and ablations are computed over the full grid rather than over a sample of it. There is no further
+      prompt distribution the mechanism could fail to cover, so the criterion is met by construction rather
+      than by a generalisation experiment. C.
+
+      '
+    notes:
+      verification: 'The mainline dataset sentence straddles a line break inside the number 113 · 113,
+        so it is quoted as the fragment that ends at the break rather than reflowed.
+
+        '
+      legacy_evidence: 'The input space is enumerable and is enumerated: all $113^2$ pairs, 30\% train
+        and the remaining 70\% as test, with the mechanism analysis and every ablation evaluated over
+        the full grid. Figures 3--6 are functions of $(a,b)$ across the whole domain. There is no further
+        prompt distribution to generalize to'
+  E3:
+    name: Cross-task generalization
+    status: PC
+    short: Three further tasks run, but only for whether grokking occurs
+    verified: true
+    reasoning: 'Three further tasks are run and none of them is analysed mechanistically. What transfers
+      is the grokking phenomenon and its dependence on limited data, measured as loss curves; the Fourier
+      multiplication account is never recomputed on 5-digit addition, repeated subsequences or the skip
+      trigram, and the architectures differ from the mainline model. Behaviour generalised, mechanism
+      not tested. PC.
+
+      '
+    notes:
+      verification: 'The skip-trigram figure caption says 512 data points while its title says 50; the
+        text says 512. That is a caption error in the source and bears on nothing in this cell.
+
+        '
+      legacy_evidence: 'Appendix D.3 runs three further algorithmic tasks --- 5-digit addition, repeated
+        subsequences, skip trigram --- but measures only whether grokking occurs, never the mechanism.
+        Later work extends the feature basis: Chughtai, Chan \& Nanda (2023) find representation-theoretic
+        circuits for general groups while disclaiming strong universality, and Stander et al.\ (2023)
+        find \emph{coset} rather than representation-theoretic circuits for $S_5$ and $S_6$'
+  E4:
+    name: Cross-model generalization
+    status: PC
+    short: One- and two-layer transformers only at origin
+    verified: true
+    reasoning: 'The model family at origin is one- and two-layer transformers of a single width, trained
+      by the authors on one task. Within that family the mechanism recurs, including at two depths and
+      three moduli. Outside it nothing is tested, and the paper does not claim otherwise. Recurrence across
+      depth and modulus but not across architecture class is PC.
+
+      '
+    notes:
+      verification: 'd_model is 128 throughout; the source varies depth and modulus but never width, so
+        "we vary the depth and dimension of the model" is realised in the appendices as depth and prime,
+        with no second d_model reported.
+
+        '
+      legacy_evidence: Origin covers 1- and 2-layer transformers only. The Fourier feature basis has since
+        been found in two-layer MLPs with analytic solutions (Gromov 2023), one-hidden-layer quadratic
+        networks where it is provably max-margin-forced (Morwani et al.\ 2023), and bidirectional transformers
+        at $p = 59$ \citep{zhong2023clock}. What recurs is the feature basis; the \emph{algorithm} composed
+        from it does not
+  E5:
+    name: Graded response
+    status: U
+    short: Unattempted; ablation is binary per component, with no interpolation
+    verified: true
+    reasoning: 'Every intervention is all-or-nothing per component. Frequencies are set to zero, subspaces
+      are projected out entirely, neuron activations are replaced wholesale by their polynomial fits.
+      There is no interpolation between clean and ablated values and no sweep of edit magnitude against
+      loss, so the dose-response curve that would show the effect scaling with the size of the edit is
+      never traced. Figure 6 sweeps which frequency, never how much. U.
+
+      '
+    notes:
+      verification: 'Verified against a full read. The closest thing to a graded axis in the source is
+        the number of key frequencies excluded, one versus five (Figure 15 against Figure 7), which is
+        a two-point comparison rather than a magnitude sweep.
+
+        '
+      legacy_evidence: Unattempted. Frequency ablation is binary per component; there is no interpolation
+        between clean and ablated activations and no sweep of edit magnitude against loss. Figure 6 sweeps
+        \emph{which} frequency, never \emph{how much}
+  E6:
+    name: Novel prediction
+    status: C
+    short: The progress measures are derived, then shown to predict the curve
+    verified: true
+    reasoning: 'The progress measures are predictions in the strict sense: they are derived from a mechanism
+      read off the endpoint weights, they say what a quantity computed at every earlier checkpoint must
+      do, and the data that would refute them was already collected. Restricted loss falls and excluded
+      loss rises before test loss moves, as derived. A second prediction runs the other way and is quantitative:
+      removing almost every Fourier component was predicted not to harm the model, and it improves loss
+      by 70%. C.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE LEGACY EVIDENCE, which says 99% of the Fourier components.
+        The source says "the other 95% of frequencies" in §1. Neither figure is exact for the operation
+        that produced the 70%: that ablation removes 113 · 113 − 40 of 113 · 113 two-dimensional components,
+        which is 99.7% of them, while 51 of 56 unique frequencies is 91%.
+
+        '
+      legacy_evidence: 'The progress measures are novel predictions in the strict sense: derived from
+        the endpoint mechanism, they predict that restricted loss should fall and excluded loss should
+        rise \emph{before} test loss moves, and both do (Fig.~7). A second holds in the other direction
+        --- ablating 99\% of the Fourier components was predicted not to harm the model, and it improves
+        it by 70\%'
+  V1:
+    name: Level declaration
+    status: PC
+    short: Level implied by usage rather than declared
+    verified: true
+    reasoning: 'The level is legible from usage and never declared. The abstract puts an algorithm-level
+      claim and an implementation-level method in consecutive sentences, and §3.1 states the algorithm
+      as a four-step procedure without saying whether the claim is about the function computed, the algorithm
+      used, or the weights that realise it. A reader can reconstruct the answer; the paper does not supply
+      it. PC.
+
+      '
+    notes:
+      verification: '"Fully reverse engineer" is the strongest level commitment in the source and it appears
+        in the abstract, before any of the evidence that qualifies it.
+
+        '
+      legacy_evidence: Level is implied by usage rather than declared. The abstract mixes algorithmic
+        vocabulary (``fully reverse engineer the algorithm learned by these networks'') with implementational
+        vocabulary (``analyzing the activations and weights''), and \S3.1 states the algorithm as a four-step
+        procedure without saying at which level the claim is pitched
+  V2:
+    name: Level-evidence match
+    status: PC
+    short: Algorithm-level claim backed at the weight level for most of the model
+    verified: true
+    reasoning: 'The evidence sits mostly at the weight level for an algorithm-level claim, which is a
+      close match and unusual in this audit set. The overreach is in the word fully. By the paper''s own
+      numbers 79 of 512 neurons fall outside the single-frequency polynomial account, two of four attention
+      heads receive a role introduced with "We speculate", and the headline logit reconstruction explains
+      95% of variance rather than all of it. Claim and evidence match in kind and differ in extent. PC.
+
+      '
+    notes:
+      verification: 'The 95% is the logit-level fit of §4.2. The MLP-level fits of Table 1 range from
+        93.2% to 98.2%, so no reported reconstruction is exact.
+
+        '
+      legacy_evidence: 'The algorithm-level claim is backed at the weight level for most of the model,
+        which is a close match. ``\emph{Fully} reverse engineer'''' overstates by the paper''s own numbers:
+        79 of 512 neurons fail the polynomial fit, two of four attention heads receive a role the authors
+        introduce with ``We speculate,'''' and the headline logit reconstruction is 95\% rather than exact'
+  V3:
+    name: Alternative level
+    status: PC
+    short: Memorization addressed and refuted; the basis alternative is not
+    verified: true
+    reasoning: 'One alternative account is stated and refuted. Memorisation is a competing description
+      of the same behaviour, the excluded loss is built to detect it, and it is ruled out. The weaker
+      alternative is not addressed: that the model computes some periodic function of a + b over the key
+      frequencies without the particular trigonometric decomposition claimed. The >90% MLP-level fits
+      are the closest the paper comes to excluding it, and they are fits to the claimed form rather than
+      comparisons against a stated rival form. PC.
+
+      '
+    notes:
+      verification: 'No competing functional form is fitted anywhere in the source, so the variance-explained
+        numbers have no alternative to be compared against.
+
+        '
+      legacy_evidence: One alternative is addressed and refuted --- memorisation, via excluded loss. The
+        weaker alternative that the model computes \emph{some} periodic function of $a+b$ without the
+        specific trigonometric-identity decomposition is not addressed, and it is exactly the alternative
+        \citet{zhong2023clock} later instantiate as Pizza
+  V4:
+    name: Unlicensed labeling
+    status: C
+    short: Four labels restate measurements; the algorithm name outruns what separates it
+    verified: true
+    reasoning: 'Four of the five labels are licensed by construction, because each arrives in the same
+      sentence as the measurement it abbreviates. "Key frequencies" names the frequencies with non-negligible
+      norm in the Fourier spectrum of WE that also appear downstream, and §4.4 then supplies the experiment
+      that would have unnamed them: all 56 are ablated singly and only those five matter. "Neuron-logit
+      map" is defined by an equation, WL = WU Wout. "Restricted loss" and "excluded loss" name two zeroing
+      operations spelled out in the sentences that introduce them. The fifth is weaker. "Fourier multiplication"
+      names a four-step procedure, and the nearest alternative, a different composition over the same
+      key frequencies, would satisfy every reported measurement of frequency sparsity; what distinguishes
+      it is the MLP-level fit to cos(wk(a + b)), which is measured, and the multiplication step in the
+      attention layer, which is measured for two of four heads and speculated for the other two. Licensed
+      for the quantities, thin for the algorithm name. C, with the algorithm label flagged.
+
+      '
+    notes:
+      verification: 'Rescored under the renamed criterion. The old rationale, that vocabulary is mathematical
+        throughout and no intentional terms appear, is true and is not evidence that the labels are licensed;
+        it has been replaced. Under the new rule the cell turns on one label. "Fourier multiplication"
+        names a construct that a nearby alternative would also satisfy, and no experiment in this source
+        distinguishes them, which is an argument for PC. C is retained here on the ground that four of
+        five labels are definitional and the fifth is a name for a stated four-step procedure rather than
+        for an unmeasured capacity; the phase labels memorization, circuit formation and cleanup are likewise
+        tied to the measured behaviour of two named losses. The one place the source names something it
+        did not measure is the amplification role of heads 1 and 3, which it marks "We speculate". Status
+        left unchanged per instruction; if the criterion is read strictly, this cell is PC. NOTE: the
+        `name` field is renamed here only. The other fifteen audits and the label maps in build/make_grand_matrix.py
+        and build/make_grokking_grand.py still read "Anthropomorphism check".
+
+        '
+      legacy_evidence: 'Vocabulary is mathematical throughout: ``Fourier multiplication algorithm,''''
+        ``key frequencies,'''' ``neuron-logit map,'''' ``restricted loss.'''' No intentional or epistemic
+        terms are applied to the network, and the one mentalistic-sounding word in the field''s name for
+        this phenomenon --- ``grokking'''' --- is inherited from Power et al.\ (2022) and used only for
+        the loss-curve shape'
+  V5:
+    name: Scope declaration
+    status: C
+    short: \S6 states the limits before any generalization is implied
+    verified: true
+    reasoning: 'The limits are declared before any generalisation is implied, and they are the right limits:
+      one task, one circuit, small models, manual analysis, and progress measures that do not transfer
+      off this task. A second limit gets its own paragraph, that the measures do not predict when the
+      transition occurs. Scope stated in the authors'' own words, covering the claims the paper makes,
+      is C.
+
+      '
+    notes:
+      verification: 'Appendix F extends the scope discussion with three scenarios for scaling the approach,
+        each explicitly conditional. Nothing in the source asserts coverage beyond the mainline family.
+
+        '
+      legacy_evidence: '\S6 declares the limits before any generalization is implied: ``we studied the
+        behavior of small transformers on a simple algorithmic task, solved with a single circuit,''''
+        the analysis ``required significant amounts of manual effort,'''' and ``our progress metrics are
+        specific to small networks on one particular algorithmic task.'''' A second limit --- no ex-ante
+        prediction of when the transition occurs --- gets its own paragraph'

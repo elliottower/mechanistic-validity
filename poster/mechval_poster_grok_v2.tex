@@ -1,0 +1,372 @@
+% Mechanistic Validity — NEMI 2026 poster, v2
+% tikzposter 4-row format with IOI audit decomposition and source disciplines.
+%
+%   lualatex mechval_poster_grok_v2.tex
+
+\documentclass[25pt, a0paper, portrait]{tikzposter}
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+% ── Color palette ───────────────────────────────────────
+\definecolor{confirmed}{HTML}{27AE60}
+\definecolor{partial}{HTML}{2980B9}
+\definecolor{inconclusive}{HTML}{F39C12}
+\definecolor{untested}{HTML}{95A5A6}
+\definecolor{disconfirmed}{HTML}{E74C3C}
+\definecolor{darktext}{HTML}{2C3E50}
+\definecolor{blockbg}{HTML}{FFFFFF}
+
+% ── Theme ───────────────────────────────────────────────
+\usetheme{Default}
+
+\definecolorstyle{MechValColors}{
+  \definecolor{colorOne}{HTML}{2C3E50}
+  \definecolor{colorTwo}{HTML}{3498DB}
+  \definecolor{colorThree}{HTML}{ECF0F1}
+}{
+  \colorlet{backgroundcolor}{colorThree}
+  \colorlet{framecolor}{colorOne}
+  \colorlet{titlefgcolor}{white}
+  \colorlet{titlebgcolor}{colorOne}
+  \colorlet{blocktitlebgcolor}{colorTwo}
+  \colorlet{blocktitlefgcolor}{white}
+  \colorlet{blockbodybgcolor}{blockbg}
+  \colorlet{blockbodyfgcolor}{darktext}
+  \colorlet{notefgcolor}{darktext}
+  \colorlet{notebgcolor}{inconclusive!15}
+  \colorlet{notefrcolor}{inconclusive}
+}
+\usecolorstyle{MechValColors}
+
+\defineblockstyle{MechValBlock}{
+  titlewidthscale=1.0, bodywidthscale=1.0, titleleft,
+  titleoffsetx=0pt, titleoffsety=0pt,
+  bodyoffsetx=0pt, bodyoffsety=0pt, bodyverticalshift=0pt,
+  roundedcorners=12, linewidth=2pt, titleinnersep=10pt, bodyinnersep=15pt
+}{
+  \draw[rounded corners=\blockroundedcorners, color=blocktitlebgcolor,
+        fill=blockbodybgcolor, line width=\blocklinewidth]
+    (blockbody.south west) rectangle (blocktitle.north east);
+  \ifBlockHasTitle
+    \draw[rounded corners=\blockroundedcorners,
+          fill=blocktitlebgcolor, color=blocktitlebgcolor,
+          line width=\blocklinewidth]
+      (blocktitle.south west) rectangle (blocktitle.north east);
+  \fi
+}
+\useblockstyle{MechValBlock}
+
+\definetitlestyle{MechValTitle}{
+  width=\paperwidth, roundedcorners=0, linewidth=0pt, innersep=20pt,
+  titletotopverticalspace=15mm, titletoblockverticalspace=25mm
+}{
+  \draw[fill=titlebgcolor, color=titlebgcolor]
+    (\titleposleft, \titleposbottom)
+    rectangle (\titleposright, \titlepostop);
+}
+\usetitlestyle{MechValTitle}
+
+% verdict bar helper: \vbar{color}{width mm}
+\newcommand{\vbar}[2]{\textcolor{#1}{\rule[0.6mm]{#2mm}{5mm}}}
+
+\title{%
+  \parbox{0.92\linewidth}{\centering\bfseries
+    Mechanistic Validity\\[6pt]
+    A Validity Theory, Research Methodology, and Evidence Standard\\[3pt]
+    for Mechanistic Interpretability}}
+\author{Elliot Tower\quad\texttt{elliot@elliottower.ai}}
+\institute{}
+
+\begin{document}
+
+\maketitle[width=\paperwidth]
+
+% ════════════════════════════════════════════════════════
+% ROW 1
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.33}
+
+\block{The Problem}{
+  Mechanistic claims require five kinds of evidence---construct,
+  measurement, internal, external, and interpretive validity---but
+  researchers typically establish one or two and treat the claim as
+  validated.
+
+  \vspace{6mm}
+  A strong causal result can conceal an unresolved construct definition.
+  A reliable measurement can be measuring the wrong thing.
+
+  \vspace{6mm}
+  \textbf{Evidence along one dimension cannot substitute for another.}
+  The field's dominant failure mode: establishing \emph{that} a
+  component matters while leaving open \emph{what} it is.
+}
+
+\column{0.34}
+
+\block{The Framework}{
+  \textbf{36 criteria across 5 validity types.} Each claim receives a
+  structured validity profile. The tier is bounded by the weakest
+  dimension, not the strongest.
+
+  \vspace{5mm}
+  \begin{center}
+  \begin{tabular}{lcp{0.52\linewidth}}
+    \toprule
+    \textbf{Type} & \textbf{Criteria} & \textbf{Example question} \\
+    \midrule
+    Construct    & C1--C6  & Is the circuit a natural kind? \\
+    Measurement  & M1--M7  & Does the metric measure what it claims? \\
+    Internal     & I1--I12 & Is the causal claim warranted? \\
+    External     & E1--E6  & Does the result generalize? \\
+    Interpretive & V1--V5  & Is the interpretation justified? \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \vspace{4mm}
+  The criteria form a dependency chain: the target mechanism must be
+  coherent before it can be measured; the measurement must be
+  trustworthy before it can support causal inference.
+}
+
+\column{0.33}
+
+\block{The Tier System}{
+  Four tiers form a dependency chain. Each requires the evidence of all
+  tiers below it.
+
+  \vspace{5mm}
+  \begin{enumerate}[leftmargin=*, itemsep=4mm]
+    \item \textbf{Descriptive:} an observed pattern, no causal test
+    \item \textbf{Causally Suggestive:} single-method intervention
+    \item \textbf{Triangulated:} convergent evidence from methods with
+      genuinely independent failure modes
+    \item \textbf{Mechanistically Adequate:} full validity profile,
+      no disconfirmed criteria
+  \end{enumerate}
+
+  \vspace{5mm}
+  Most published claims reach \textbf{Causally Suggestive}. The gap:
+  single-method causal evidence versus convergent evidence from
+  independent methods.
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 2 — IOI AUDIT
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.50}
+
+\block{Case Study: The IOI Circuit (Wang et al., 2023)}{
+  Applied all 36 criteria to the indirect object identification circuit.
+  \textbf{Verdict: Causally Suggestive}---scored at the claim's most
+  lenient reading, where rival head sets leave it standing. What caps it
+  is method disagreement: the headline faithfulness number spans below
+  0\% to over 100\% depending on the ablation protocol.
+
+  \vspace{4mm}
+  {\small
+  \begin{tabular}{@{}clcl@{}}
+    \toprule
+    & \textbf{Construct} & & \textbf{Internal} \\
+    \midrule
+    \textcolor{confirmed}{\textbf{C}} & C1 Falsifiability
+      & \textcolor{partial}{\textbf{PC}} & I1 Necessity \\
+    \textcolor{partial}{\textbf{PC}} & C2 Structural plausibility
+      & \textcolor{partial}{\textbf{PC}} & I2 Sufficiency \\
+    \textcolor{partial}{\textbf{PC}} & C3 Convergent validity
+      & \textcolor{inconclusive}{\textbf{I}} & I3 Minimality \\
+    \textcolor{inconclusive}{\textbf{I}} & C4 Discriminant validity
+      & \textcolor{inconclusive}{\textbf{I}} & I4 Specificity \\
+    \textcolor{partial}{\textbf{PC}} & C5 Nomological validity
+      & \textcolor{inconclusive}{\textbf{I}} & I5 Rival exclusion \\
+    \textcolor{untested}{\textbf{U}} & C6 Complementation
+      & \textcolor{untested}{\textbf{U}} & I6 Double dissociation \\
+    \midrule
+    & \textbf{Measurement} & \textcolor{partial}{\textbf{PC}} & I7 Confound control \\
+    \cmidrule{1-2}
+    \textcolor{inconclusive}{\textbf{I}} & M1 Reliability
+      & \textcolor{untested}{\textbf{U}} & I8 Confound sensitivity \\
+    \textcolor{partial}{\textbf{PC}} & M2 Baseline separation
+      & \textcolor{partial}{\textbf{PC}} & I9 Epistatic interaction \\
+    \textcolor{disconfirmed}{\textbf{D}} & M3 Stability
+      & \textcolor{partial}{\textbf{PC}} & I10 Rescue reversibility \\
+    \textcolor{partial}{\textbf{PC}} & M4 Calibration
+      & \textcolor{partial}{\textbf{PC}} & I11 Onset coupling \\
+    \textcolor{untested}{\textbf{U}} & M5 Sensitivity
+      & \textcolor{partial}{\textbf{PC}} & I12 Offset coupling \\
+    \textcolor{disconfirmed}{\textbf{D}} & M6 Invariance & & \\
+    \textcolor{untested}{\textbf{U}} & M7 Selection correction & & \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{4mm}
+  \begin{tabular}{@{}clcl@{}}
+    \toprule
+    & \textbf{External} & & \textbf{Interpretive} \\
+    \midrule
+    \textcolor{inconclusive}{\textbf{I}} & E1 Intervention reach
+      & \textcolor{partial}{\textbf{PC}} & V1 Level declaration \\
+    \textcolor{disconfirmed}{\textbf{D}} & E2 Prompt generalization
+      & \textcolor{partial}{\textbf{PC}} & V2 Level-evidence match \\
+    \textcolor{partial}{\textbf{PC}} & E3 Cross-task
+      & \textcolor{inconclusive}{\textbf{I}} & V3 Alternative level \\
+    \textcolor{partial}{\textbf{PC}} & E4 Cross-model
+      & \textcolor{partial}{\textbf{PC}} & V4 Unlicensed labeling \\
+    \textcolor{partial}{\textbf{PC}} & E5 Graded response
+      & \textcolor{confirmed}{\textbf{C}} & V5 Scope declaration \\
+    \textcolor{confirmed}{\textbf{C}} & E6 Novel prediction & & \\
+    \bottomrule
+  \end{tabular}
+  }
+}
+
+\column{0.50}
+
+\block{What the Audit Reveals}{
+  \vspace{2mm}
+  \begin{center}
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Verdict} & \textbf{Count} & \\
+    \midrule
+    \textcolor{confirmed}{\textbf{Confirmed}} & 3 &
+      \vbar{confirmed}{18} \\
+    \textcolor{partial}{\textbf{Partially confirmed}} & 18 &
+      \vbar{partial}{108} \\
+    \textcolor{inconclusive}{\textbf{Inconclusive}} & 7 &
+      \vbar{inconclusive}{42} \\
+    \textcolor{untested}{\textbf{Untested}} & 5 &
+      \vbar{untested}{30} \\
+    \textcolor{disconfirmed}{\textbf{Disconfirmed}} & 3 &
+      \vbar{disconfirmed}{18} \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \vspace{6mm}
+  \textbf{Three Disconfirmed criteria sit in measurement and external
+  validity:} stability (M3), invariance (M6), and prompt generalization
+  (E2). The same faithfulness quantity ranges from below 0\% to over
+  100\% across six methodological choices. Measurement is a ceiling on
+  the causal claims above it.
+
+  \vspace{6mm}
+  \textbf{Five Untested criteria are unattempted, not untestable.}
+  The complementation test (C6) requires two ablation runs and a
+  composition rule. Double dissociation (I6) requires one cross-task
+  ablation. Selection correction (M7) requires no new experiment---only
+  a multiplicity adjustment on numbers already reported.
+
+  \vspace{6mm}
+  \textbf{Rival circuits are the binding constraint.} Two IOI subgraphs
+  at 100\% accuracy share 4.1\% of their edges. The ``IOI circuit'' is
+  one of several sufficient subnetworks, not the mechanism.
+
+  \vspace{6mm}
+  \textbf{The IOI circuit is the field's most studied mechanism.}
+  Even read as leniently as the evidence allows, it caps at Causally
+  Suggestive. What tier would less scrutinized claims reach?
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 3 — SOURCE DISCIPLINES
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.33}
+
+\block{From Philosophy of Science}{
+  Popper's falsifiability, Mayo's severe testing, Glennan's new
+  mechanical philosophy. A circuit discovered by activation patching and
+  evaluated by activation patching has only been shown to pass the test
+  it was built to pass. \textbf{Corroboration requires a genuinely risky
+  test the circuit was not optimized for.}
+}
+
+\column{0.34}
+
+\block{From Measurement Theory}{
+  Cronbach and Meehl's construct validity (1955): a measurement must
+  converge with measures of the same construct and diverge from measures
+  of different constructs. \textbf{Convergent without discriminant is
+  not enough}---the same heads appear in most circuits, and no published
+  claim tests what its components do \emph{not} do.
+}
+
+\column{0.33}
+
+\block{From Causal Inference}{
+  Rubin's potential outcomes, Rosenbaum's sensitivity analysis,
+  E-values for unmeasured confounders. \textbf{Ablation is an
+  intervention, and every intervention needs a sensitivity analysis.}
+  The framework borrows the field's interventional vocabulary; it should
+  borrow the statistical discipline too.
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 4 — SOURCE DISCIPLINES + TAKEAWAY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.33}
+
+\block{From Neuroscience}{
+  Craver's mutual manipulability, constitutive relevance criteria.
+  A mechanism must be located at a level and testable by intervention
+  at that level. \textbf{The level at which a claim is made determines
+  what evidence it needs}---weight-level claims need weight-level tests,
+  and activation-level claims need activation-level tests.
+}
+
+\column{0.34}
+
+\block{From Pharmacology}{
+  Dose-response curves, receptor theory, the ORBITA trial.
+  \textbf{Graded interventions distinguish specific from nonspecific
+  effects.} A circuit ablation is a maximal dose; the dose-response
+  curve between zero and complete ablation carries more information than
+  the endpoint alone.
+}
+
+\column{0.33}
+
+\block{From Genetics}{
+  Epistasis mapping, rescue experiments, sensitivity analysis,
+  complementation tests (Benzer's cis-trans procedure). These fill gaps
+  no existing MI technique covers: \textbf{interaction structure,
+  functional rescue, construct boundaries.} The toolkit adapts directly
+  to transformer circuits.
+
+  \vspace{8mm}
+  \begin{center}
+  {\large\textbf{Takeaway}}
+
+  \vspace{4mm}
+  A mechanistic claim is warranted only to the\\
+  extent that every required link between concept,\\
+  measurement, causal evidence, scope, and\\
+  interpretation is supported.
+
+  \vspace{6mm}
+  \texttt{elliot@elliottower.ai}
+
+  \vspace{2mm}
+  {\small Paper and code:}
+  \texttt{github.com/mechanistic-validity/}
+  \end{center}
+}
+
+\end{columns}
+
+\end{document}

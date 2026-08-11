@@ -1,0 +1,25 @@
+{
+  "n_positions": 50800,
+  "seed": 0,
+  "conditions": [
+    "predictions at the input to L10H7 include a context token in the top 10 by logit lens",
+    "the source token is among the top 2 context tokens L10H7 attends to",
+    "the source token is among the 10 tokens L10H7 decreases logits for most"
+  ],
+  "top_5pct_by_own_effect": {
+    "n": 2540,
+    "proportion": 0.49645668268203735,
+    "sem": 0.009922651574015617
+  },
+  "random_sample": {
+    "n": 2540,
+    "proportion": 0.12795275449752808,
+    "sem": 0.006629236042499542
+  },
+  "decile_stratified": {
+    "n": 2540,
+    "proportion": 0.14803150296211243,
+    "sem": 0.007047863677144051
+  },
+  "winners_curse_gap": 0.3685039281845093
+}

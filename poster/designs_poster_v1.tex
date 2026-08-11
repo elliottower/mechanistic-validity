@@ -1,0 +1,357 @@
+% Experiment Designs poster — NEMI 2026, v1
+% Six experiment designs from other fields that MI hasn't adopted.
+% Combined framing: designs menu + complementation as centerpiece.
+%
+%   cd poster && lualatex designs_poster_v1.tex
+
+\documentclass[25pt, a0paper, portrait]{tikzposter}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+\tikzposterlatexaffectionproofoff
+
+% ── Color palette ───────────────────────────────────────
+\definecolor{darktext}{HTML}{2C3E50}
+\definecolor{blockbg}{HTML}{FFFFFF}
+\definecolor{hookred}{HTML}{C0392B}
+\definecolor{designblue}{HTML}{2980B9}
+\definecolor{centerpiecegreen}{HTML}{27AE60}
+
+% ── Theme ───────────────────────────────────────────────
+\usetheme{Default}
+
+\definecolorstyle{DesignColors}{
+  \definecolor{colorOne}{HTML}{2C3E50}
+  \definecolor{colorTwo}{HTML}{3498DB}
+  \definecolor{colorThree}{HTML}{ECF0F1}
+}{
+  \colorlet{backgroundcolor}{colorThree}
+  \colorlet{framecolor}{colorOne}
+  \colorlet{titlefgcolor}{white}
+  \colorlet{titlebgcolor}{colorOne}
+  \colorlet{blocktitlebgcolor}{designblue}
+  \colorlet{blocktitlefgcolor}{white}
+  \colorlet{blockbodybgcolor}{blockbg}
+  \colorlet{blockbodyfgcolor}{darktext}
+  \colorlet{notefgcolor}{darktext}
+  \colorlet{notebgcolor}{designblue!12}
+  \colorlet{notefrcolor}{designblue}
+}
+\usecolorstyle{DesignColors}
+
+\defineblockstyle{DesignBlock}{
+  titlewidthscale=1.0, bodywidthscale=1.0, titleleft,
+  titleoffsetx=0pt, titleoffsety=0pt,
+  bodyoffsetx=0pt, bodyoffsety=0pt, bodyverticalshift=0pt,
+  roundedcorners=12, linewidth=2pt, titleinnersep=10pt, bodyinnersep=14pt
+}{
+  \draw[rounded corners=\blockroundedcorners, color=blocktitlebgcolor,
+        fill=blockbodybgcolor, line width=\blocklinewidth]
+    (blockbody.south west) rectangle (blocktitle.north east);
+  \ifBlockHasTitle
+    \draw[rounded corners=\blockroundedcorners,
+          fill=blocktitlebgcolor, color=blocktitlebgcolor,
+          line width=\blocklinewidth]
+      (blocktitle.south west) rectangle (blocktitle.north east);
+  \fi
+}
+\useblockstyle{DesignBlock}
+
+\definetitlestyle{DesignTitle}{
+  width=\paperwidth, roundedcorners=0, linewidth=0pt, innersep=20pt,
+  titletotopverticalspace=15mm, titletoblockverticalspace=25mm
+}{
+  \draw[fill=titlebgcolor, color=titlebgcolor]
+    (\titleposleft, \titleposbottom)
+    rectangle (\titleposright, \titlepostop);
+}
+\usetitlestyle{DesignTitle}
+
+\title{%
+  \parbox{0.92\linewidth}{\centering\bfseries
+    Experiment Designs We Haven't Run Yet}}
+\author{Elliot Tower\quad\texttt{elliot@elliottower.ai}}
+\institute{}
+
+\begin{document}
+
+\maketitle[width=\paperwidth]
+
+% ════════════════════════════════════════════════════════
+% ROW 1 — THE PITCH + COMPLEMENTATION (centerpiece)
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.45}
+
+{
+\colorlet{blocktitlebgcolor}{hookred}
+\block{What's the Sham Control for an Ablation?}{
+  Cardiac stenting for stable angina was standard practice for three
+  decades---500,000 procedures a year in the US. The first
+  sham-controlled trial (ORBITA, 2017) found no significant improvement
+  in exercise tolerance versus sham surgery. The intervention was real.
+  The causal attribution to the specific intervention had never been
+  tested against a matched control.
+
+  \vspace{5mm}
+  Ablating a circuit and measuring degradation shows the circuit
+  matters. But what's the sham? A size-matched random subnetwork,
+  ablated the same way. Without that control, faithfulness scores carry
+  the same ambiguity that exercise-tolerance scores carried before
+  ORBITA.
+
+  \vspace{5mm}
+  Six experiment designs from fields that learned these lessons decades
+  ago. Each tests something current methods leave open.
+
+  \vspace{5mm}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.3}
+  {\small
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    \textbf{Design} & \textbf{Tests} & \textbf{Cost} \\
+    \midrule
+    Complementation     & Same or different?   & 1 condition \\
+    Double dissociation & Specificity          & 1 condition \\
+    Dose--response      & Graded vs.\ threshold & Free \\
+    Sham control        & Specific vs.\ generic & 1 run \\
+    Rescue              & Necessity vs.\ damage & 1 pass \\
+    Offset coupling     & Bidirectional link   & Expensive \\
+    \bottomrule
+  \end{tabular}}
+  \end{center}
+}
+}
+
+\column{0.55}
+
+{
+\colorlet{blocktitlebgcolor}{centerpiecegreen}
+\block{Complementation: Are These Two Mechanisms or One?}{
+  Two head sets both suppress the repeated name in IOI: S-inhibition
+  heads and negative name movers. Each degrades performance when
+  ablated alone. Are they two independent failure modes, or two names
+  for the same functional unit?
+
+  \vspace{5mm}
+  \textbf{The test.} Ablate both simultaneously. If the combined
+  lesion produces the same deficit as either single lesion, they
+  operate through the same pathway---they \emph{complement}. If the
+  combined deficit is additive, they are independent mechanisms.
+
+  \vspace{5mm}
+  \textbf{Why it matters.} Circuit papers routinely identify multiple
+  component classes (``name movers,'' ``S-inhibition heads,'' ``backup
+  name movers'') without testing whether these classes are functionally
+  distinct. The complementation test answers that question with one
+  extra ablation condition.
+
+  \vspace{5mm}
+  \textbf{What it looks like.}
+
+  \vspace{3mm}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.3}
+  {\large
+  \begin{tabular}{@{}lcl@{}}
+    \toprule
+    \textbf{Ablation} & \textbf{Deficit} & \textbf{Interpretation} \\
+    \midrule
+    S-inhibition only     & $\Delta_1$ & \\
+    Neg.\ name movers only & $\Delta_2$ & \\
+    \midrule
+    Both (if $\approx \max$)  & $\approx \Delta_1$ & Same pathway \\
+    Both (if $\approx$ sum)   & $\Delta_1 + \Delta_2$ & Independent \\
+    \bottomrule
+  \end{tabular}}
+  \end{center}
+
+  \vspace{5mm}
+  Across sixteen published mechanistic claims, this test has been
+  applied \textbf{zero times}.
+
+  \vspace{4mm}
+  \textbf{Cost:} one extra ablation condition.
+
+  \vspace{3mm}
+  {\footnotesize Genetics. Benzer's cis-trans test (1955), standard in
+  functional genomics.}
+}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 2 — THREE DESIGNS
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.33}
+
+\block{Double Dissociation}{
+  Two interventions that cross: A breaks function X and spares
+  function Y; B breaks Y and spares X. One arm alone shows
+  involvement. The crossing shows specificity.
+
+  \vspace{4mm}
+  \textbf{In MI:} patching a belief-tracking subspace in Llama-3-70B
+  yields IIA~$= 1.0$ on belief-framed questions and $0.0$ on
+  reality-framed questions---about identical underlying facts. The
+  subspace responds to the epistemic framing, not the information.
+
+  \vspace{4mm}
+  Across sixteen published claims, exactly \textbf{one} meets this
+  standard---by different authors, three years after the original
+  paper.
+
+  \vspace{4mm}
+  \textbf{Cost:} one extra condition.
+
+  \vspace{3mm}
+  {\footnotesize Neuropsychology. Standard since Teuber (1955).}
+}
+
+\column{0.34}
+
+\block{Dose--Response}{
+  Partial intervention should produce partial effect. A step function
+  means you measured a threshold, not a mechanism.
+
+  \vspace{4mm}
+  \textbf{In MI:} sweep ablation strength from 0\% to 100\% instead
+  of reporting one on/off number. The shape of the curve distinguishes
+  specific mechanisms (graded, monotonic) from nonspecific disruption
+  (all-or-nothing collapse at some threshold).
+
+  \vspace{4mm}
+  Most published evaluations report a single ablation point. The curve
+  between zero and complete ablation carries more information than
+  either endpoint.
+
+  \vspace{4mm}
+  \textbf{Cost:} free---you already have the interpolation.
+
+  \vspace{3mm}
+  {\footnotesize Pharmacology. Dose-response curves, receptor theory.}
+}
+
+\column{0.33}
+
+\block{Sham Control}{
+  Not ``no intervention'' but ``the same procedure with the active
+  ingredient removed.''
+
+  \vspace{4mm}
+  \textbf{In MI:} ablate a size-matched random subnetwork---same count,
+  same layer distribution---and compare. If the identified circuit and
+  the random circuit degrade performance equally, the specificity claim
+  is unfounded.
+
+  \vspace{4mm}
+  ORBITA showed that three decades of clinical confidence rested on
+  comparison against no intervention rather than against a matched
+  control. The same gap exists in most circuit evaluations.
+
+  \vspace{4mm}
+  \textbf{Cost:} one extra run.
+
+  \vspace{3mm}
+  {\footnotesize Clinical trials. Sham surgery, placebo controls.}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 3 — TWO MORE DESIGNS + TAKEAWAY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.33}
+
+\block{Rescue / Reversibility}{
+  Remove a component, observe the deficit, then restore it. If
+  function does not recover, the ablation caused collateral damage
+  beyond what the mechanism hypothesis predicts.
+
+  \vspace{4mm}
+  \textbf{In MI:} re-inject the clean activation after ablation and
+  measure recovery. Rescue separates ``this component is necessary''
+  from ``removing this component broke something downstream.''
+
+  \vspace{4mm}
+  Activation patching already contains the rescue logic. Almost no
+  published evaluation reports the recovery rate alongside the
+  degradation rate.
+
+  \vspace{4mm}
+  \textbf{Cost:} one forward pass.
+
+  \vspace{3mm}
+  {\footnotesize Genetics. Rescue and complementation experiments.}
+}
+
+\column{0.34}
+
+\block{Offset Coupling}{
+  A mechanism should disappear when its capability disappears.
+  Onset coupling---the circuit forms when the capability appears
+  during training---is reported for induction heads. The partner
+  test is not.
+
+  \vspace{4mm}
+  \textbf{In MI:} unlearn or fine-tune away a capability, then check
+  whether the circuit degrades in tandem. If the circuit persists after
+  the capability is gone, the causal link runs in one direction only.
+
+  \vspace{4mm}
+  Onset coupling is suggestive. Offset coupling is confirmatory.
+  Together they establish a bidirectional association between mechanism
+  and capability.
+
+  \vspace{4mm}
+  \textbf{Cost:} expensive (fine-tuning or unlearning required).
+
+  \vspace{3mm}
+  {\footnotesize Developmental neuroscience. Lesion-recovery studies.}
+}
+
+\column{0.33}
+
+{
+\colorlet{blocktitlebgcolor}{colorOne}
+\block{Takeaway}{
+  {\Large\bfseries Each of these designs tests something that current
+  methods leave open. Most cost one extra condition.}
+
+  \vspace{5mm}
+  \begin{itemize}[leftmargin=*, itemsep=3mm]
+    \item \textbf{3 of 6} designs cost one extra condition
+    \item \textbf{1 of 6} is free
+    \item \textbf{1 of 16} published claims meets double dissociation
+    \item \textbf{0 of 16} meets complementation
+    \item Combined methodological heritage: 250+ years
+  \end{itemize}
+
+  \vspace{5mm}
+  {\small A claim is as strong as its weakest validity dimension. These
+  designs close the dimensions that current methods leave untested.}
+
+  \vspace{5mm}
+  \begin{center}
+  \texttt{elliot@elliottower.ai}
+
+  \vspace{2mm}
+  {\small Framework:} \textit{Mechanistic Validity}
+
+  {\small 36 criteria, 16 claims audited}
+  \end{center}
+}
+}
+
+\end{columns}
+
+\end{document}

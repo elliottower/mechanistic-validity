@@ -1,0 +1,1052 @@
+claim: workspace
+verdict: Mechanistically Supported
+readings:
+- statement: A low-dimensional Jacobian subspace mediates which contents the model reports and reasons
+    over
+  verdict: Mechanistically Supported
+  missing: A converse dissociation (I6), an unmeasured-confounder bound (I8), and correction for how the
+    token sets were chosen (M7)
+  primary: true
+- statement: Any direction encoding the concept would serve equally
+  verdict: Disconfirmed
+  missing: Nothing --- named twice and tested twice, and concept vectors do not reproduce the effect
+  primary: false
+- statement: The subspace is a global workspace in the sense the theory intends
+  verdict: Underdetermined
+  missing: The architectural disanalogies are enumerated by the authors; no experiment separates a workspace
+    from a bottleneck that behaves like one
+  primary: false
+- statement: The result holds beyond one model family
+  verdict: Insufficient
+  missing: Four models, one laboratory, all closed-weight, effects scale-graded from 54\% to 70\% (E4)
+  primary: false
+hypotheses:
+- id: H1
+  view: Object
+  label: the low-dimensional Jacobian subspace carries it
+- id: H2
+  view: Object
+  label: any direction encoding the concept would serve
+- id: H3
+  view: Object
+  label: the effect is distributed across no low-dimensional subspace
+- id: H4
+  view: Role
+  label: 'it is a workspace: contents compete for entry and become reportable'
+- id: H5
+  view: Role
+  label: it is a capacity-limited bottleneck with no workspace-specific properties
+- id: H6
+  view: Instrumental
+  label: the structure is an artifact of the Jacobian lens
+views_evidence:
+- criterion: M2
+  family: Analyst-choice
+  evidence: J-lens beats logit lens and tuned lens on six prompt distributions
+  cells:
+    H1: C
+    H2: I
+    H3: I
+    H4: C
+    H5: C
+    H6: I
+  designed_for:
+  - H1
+- criterion: I5
+  family: Mathematical
+  evidence: Concept vectors are named twice and tested twice and do not reproduce the effect
+  cells:
+    H1: C
+    H2: I
+    H3: I
+    H4: C
+    H5: C
+    H6: C
+  designed_for:
+  - H1
+- criterion: I1
+  family: Mathematical
+  evidence: J-space ablation drives multihop accuracy to near zero with the rest intact
+  cells:
+    H1: C
+    H2: C
+    H3: I
+    H4: C
+    H5: C
+    H6: I
+  designed_for:
+  - H1
+- criterion: I2
+  family: Mathematical
+  evidence: Two-coordinate swaps install counterfactual content and the output follows at 54 to 70 percent
+  cells:
+    H1: C
+    H2: C
+    H3: I
+    H4: C
+    H5: C
+    H6: I
+  designed_for:
+  - H1
+- criterion: I3
+  family: Mathematical
+  evidence: Occupancy is estimated from where marginal improvement flattens rather than assumed
+  cells:
+    H1: C
+    H2: C
+    H3: I
+    H4: C
+    H5: C
+    H6: C
+  designed_for:
+  - H1
+- criterion: I9
+  evidence: Token-level exclusion at 0.09 against 0.29 while two held concepts co-occupy at chance
+  cells:
+    H1: C
+    H2: C
+    H3: I
+    H4: C
+    H5: C
+    H6: C
+  designed_for:
+  - H4
+- criterion: I3
+  family: Mathematical
+  evidence: Occupancy is about 25 concepts and one or two unrelated list items at a single layer
+  cells:
+    H1: C
+    H2: C
+    H3: I
+    H4: C
+    H5: C
+    H6: C
+  designed_for:
+  - H4
+  - H5
+- criterion: E3
+  evidence: The flexible-generalization experiment predicted by the theory succeeds
+  cells:
+    H1: C
+    H2: C
+    H3: I
+    H4: C
+    H5: I
+    H6: C
+  designed_for:
+  - H4
+- criterion: I6
+  evidence: One manipulation moves one behaviour and leaves the other, with the representation tracked
+  cells:
+    H1: C
+    H2: '-'
+    H3: I
+    H4: C
+    H5: C
+    H6: I
+  designed_for:
+  - H4
+- criterion: I4
+  family: Pragmatic
+  evidence: A fourteen-task battery separates where the mechanism is required from where it is not
+  cells:
+    H1: C
+    H2: C
+    H3: I
+    H4: C
+    H5: C
+    H6: I
+  designed_for:
+  - H1
+- criterion: I11
+  evidence: The subspace is present and load-bearing in a base model before any RLHF
+  cells:
+    H1: C
+    H2: C
+    H3: I
+    H4: C
+    H5: C
+    H6: I
+  designed_for:
+  - H6
+tiers:
+- name: Proposed
+  requires: C1--C2; one admissible measurement
+  missing: '---'
+- name: Causally Suggestive
+  requires: Necessity (I1); baselines (M2)
+  missing: '---'
+- name: Mechanistically Supported
+  requires: Sufficiency (I2); reach (E1); specificity (I4)
+  missing: '---'
+- name: Triangulated
+  requires: Convergence (C3); replication (E2/E4); dissociation (I6)
+  missing: '\textbf{C3}: nearly every intervention edits along the same directions; \textbf{I6} single
+    rather than double; \textbf{E4} one model family'
+- name: Validated
+  requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
+  missing: \textbf{M7} unattempted, and one token set is chosen self-referentially; \textbf{I8} unattempted
+criteria:
+  C1:
+    name: Falsifiability
+    status: C
+    short: Five properties operationalised before any result is reported
+    verified: true
+    reasoning: 'The five properties are stated as a definition in §1.2, before any measurement, and each
+      carries a directional prediction. Selectivity is the one that could have failed outright: it predicts
+      a class of tasks that must survive ablation, so uniform degradation would have refuted it. The paper
+      reports the discovery order explicitly — one property was used to find the object and the rest were
+      then tested — which is what makes the remaining four risky rather than definitional.
+
+      '
+    notes:
+      legacy_evidence: 'Five properties are operationalised \emph{before} any result --- verbal report,
+        directed modulation, internal reasoning, flexible generalisation, selectivity --- each with a
+        directional prediction that could fail. Selectivity is the sharpest: if every task had degraded
+        under ablation, the workspace reading would have failed and a bottleneck reading would have replaced
+        it'
+      verification: 'Verified against the pdftotext -layout extraction. The five properties appear as
+        a bulleted definition on p.3, ahead of every result. No pre-registration exists; the ordering
+        claim rests on the authors'' own account of how they proceeded.
+
+        '
+      verdict_derivation: 'Verdict computed from the criteria on 2026-08-07 rather than asserted: Triangulated,
+        blocked above that by M7=U. The 35-criterion table scores the primary reading, so the criteria,
+        the primary reading''s verdict and the overall verdict are one number by construction.'
+  C2:
+    name: Structural plausibility
+    status: C
+    short: $J_\ell$ derived from the architecture, not posited
+    verified: true
+    reasoning: 'J_ell is derived, not posited: it is the corpus-averaged Jacobian of the final-layer residual
+      stream with respect to layer-ell activations, composed with the unembedding, so the object is fixed
+      by the architecture and the corpus rather than chosen. Two structural corroborations follow from
+      weights alone at differing removes from the lens.
+
+      '
+    notes:
+      legacy_evidence: 'The object is derived from the architecture rather than posited: $J_\ell$ is the
+        expected Jacobian of the final-layer residual stream with respect to layer-$\ell$ activations,
+        composed with the unembedding. Three structural corroborations use no lens at all --- a CKA layer-block
+        bump ``computed from the network''s weights alone, without reference to any lens or dictionary'''';
+        MLP gain along J-lens directions rising to roughly $10\times$ against a neuron-direction baseline
+        near 1; and broadcast-head identification from weight geometry'
+      verification: 'CONTRADICTION with notes.legacy_evidence. The legacy cell says three structural corroborations
+        "use no lens at all" and attributes the phrase "computed from the network''s weights alone, without
+        reference to any lens or dictionary" to a CKA layer-block bump. Both halves are wrong on the source.
+        (1) The CKA analysis of §4.1 is computed on J-lens vectors — it "compares, for each pair of layers,
+        the matrices of pairwise similarities among J-lens vectors" — so it is lens-derived. (2) The quoted
+        phrase belongs to §A.19.2, where it describes the attention-composition bump for MLP *neuron*
+        directions (Figure 79), a different analysis. The MLP-gain and broadcast-head results also take
+        J-lens vectors as their input population and so are lens-dependent. The only two genuinely lens-free
+        measurements in the paper are that §A.19.2 neuron-direction bump and the projection-share readout
+        of §4.1.1 ("a measurement that does not involve the J-lens"). The status C survives on the derivation
+        argument; the "three corroborations use no lens at all" gloss does not.
+
+        '
+  C3:
+    name: Convergent validity
+    status: PC
+    short: Three cross-checks, but almost every intervention edits along J-lens
+    verified: true
+    reasoning: 'Three cross-checks do not route through the lens: mean-difference activation patching
+      of arithmetic intermediates recovers the depths the lens identifies; the ignition sweep is read
+      out by projection share along the pure-A/pure-B line; and an SAE decomposition independently agrees
+      that only a small fraction of features align with the J-space. Against that, nearly every causal
+      manipulation in the paper edits along J-lens directions, so the bulk of the evidence is one method''s.
+      No independent group has re-derived the J-space, which is what holds this at PC.
+
+      '
+    notes:
+      legacy_evidence: 'Almost every intervention edits along J-lens directions, so the evidence family
+        is one. Three genuine cross-checks exist and are labelled as such: mean-difference activation
+        patching of arithmetic intermediates recovering the same causal depths the lens identifies; the
+        ``ignition'''' input-mixture result, read out ``with a measurement that does not involve the J-lens'''';
+        and an SAE-based decomposition agreeing that only a small fraction of features align with the
+        J-space. No independent group and no independent method has re-derived the J-space'
+      verification: 'Verified. The SAE cross-check is partly circular in the same direction — SAE features
+        are scored by J-lens kurtosis, i.e. by projection through the lens — so it corroborates the capacity
+        claim using an independent dictionary but a lens-defined statistic.
+
+        '
+  C4:
+    name: Discriminant validity
+    status: PC
+    short: Separated from ``any direction encoding this concept'' by design
+    verified: true
+    reasoning: 'The neighbouring construct — any direction encoding this concept — is separated by construction
+      and by number. Concept vectors built without the lens are split into a J-space component holding
+      6-7% of variance and a remainder holding ~93%; the small component drives 59% of report swaps against
+      5% for the large one, and independently derived intermediate probes give 61% against 28%. What is
+      not separated is workspace from output preparation, which the authors concede, and which is why
+      this is PC rather than C.
+
+      '
+    notes:
+      legacy_evidence: 'The neighbouring construct --- ``any direction encoding this concept'''' --- is
+        separated by design and by number. Concept vectors derived without the lens split into a J-space
+        component carrying only 6--7\% of variance yet driving 59\% of report swaps, against 5\% for the
+        93\% of variance outside it; independently trained probes give 61\% against 28\%, the residual
+        falling to 6\% when J-space coordinates are clamped. What is \emph{not} separated is workspace
+        from output preparation, and the authors say so: ``we did not provide a principled definition
+        of what distinguishes a `workspace'' representation from a `motor'' one'''''
+      verification: 'Verified. One wording correction to the legacy cell: the §3.3 intermediates are recovered
+        by a mean-difference probe ("the mean residual-stream activation over a set of prompts that imply
+        the same intermediate ... minus the mean over all intermediates"), not by a trained probe. Its
+        J-space component explains roughly 10-15% of the probe''s variance, not the 6-7% quoted for the
+        §3.1 concept vectors; the two figures come from different experiments.
+
+        '
+  C5:
+    name: Nomological validity
+    status: C
+    short: Stated inside a named theory with disanalogies enumerated
+    verified: true
+    reasoning: 'The claim is embedded in a named external theory whose functional predictions are enumerated
+      in advance and drawn from that literature rather than invented. The theory''s contested status is
+      flagged, and the three architectural disanalogies — no separable input processors, no recurrent
+      broadcast, unclear competitive ignition — are stated in the introduction rather than conceded in
+      a limitations section.
+
+      '
+    notes:
+      legacy_evidence: 'The claim is stated inside a named external theory whose predictions are enumerated
+        in advance and whose disanalogies are stated: no separable input processors, no recurrent broadcast,
+        unclear competitive ignition. The theory''s status is flagged (``the global workspace model is
+        not universally accepted''''), and the properties it is being tested against are drawn from that
+        literature rather than invented'
+      verification: 'Verified.
+
+        '
+  M1:
+    name: Reliability
+    status: PC
+    short: Wilson intervals and per-prompt dots throughout; no seed variance
+    verified: true
+    reasoning: 'Uncertainty is reported throughout: Wilson 95% intervals, standard-error bars, per-prompt
+      dots, 30 rollouts per prompt, five seeds for the random-head control, ten seeds for the auditing
+      agent. What is missing is inferential machinery. Reading every passage that discusses statistical
+      reliability, no p-value and no named hypothesis test appears; the strongest inferential statement
+      is that realism edits lower the eval-awareness score with statistical significance at a 95% confidence
+      interval on eight of eleven suites. The J-lens matrix and the reflection fine-tune are each produced
+      once, with method-variant sweeps standing in for replication.
+
+      '
+    notes:
+      legacy_evidence: Uncertainty is reported throughout the figure captions --- 95\% Wilson intervals,
+        standard-error bars, per-prompt dots, 30 rollouts per prompt, five seeds for the random-head control,
+        ten investigator seeds for the auditing agent. Reading every passage in the paper that discusses
+        statistical reliability, no $p$-value or named hypothesis test appears; the strongest inferential
+        statement is that realism edits lower the eval-awareness score ``with statistical significance
+        at a 95\% confidence interval on eight of them.'' The J-lens matrix itself and the reflection
+        fine-tuning are each produced once, with no replication. Method-variant sweeps stand in --- ``our
+        qualitative results are robust to these choices''
+      verification: 'The "no p-value, no named test" claim was checked rather than assumed: a fixed-string
+        search over the extraction returns only two occurrences of "statistical" (the A.17 co-occupancy
+        aside and the A.21 realism-edit sentence) and zero hits for p-value, t-test, chi-square, Bonferroni,
+        multiple comparison or false discovery. §A.7 was read in full; the method-variant results are
+        reported qualitatively ("fairly consistent among these design choices") with no test statistic.
+
+        '
+  M2:
+    name: Baseline separation
+    status: C
+    short: 'The densest negative controls in the set: logit lens and tuned lens'
+    verified: true
+    reasoning: 'The negative controls are the densest in the batch and they are quantitative rather than
+      rhetorical. The lens is benchmarked against logit lens and tuned lens on six prompt distributions
+      and on two causal measures, where J-lens ablation induces roughly twice the output KL divergence
+      of either. The structural claims are guarded by matched nulls chosen to kill the specific alternative:
+      a fixed random orthogonal rotation that preserves the J-lens spectrum and pairwise geometry but
+      destroys its token identities, isotropic-random normalisation for MLP gain, layer-matched random
+      head sets over five seeds, same-size random control sets for occupancy and variance.
+
+      '
+    notes:
+      legacy_evidence: The densest set of negative controls in this batch. Quantitative comparison against
+        logit lens and tuned lens on six prompt distributions; matched-norm random-direction perturbations;
+        a fixed random orthogonal rotation of the J-lens vectors that ``preserves their spectrum and pairwise
+        geometry''; isotropic-random normalisation for MLP gain; shuffled-position nulls; same-size random
+        control sets for variance and occupancy; layer-matched random heads over five seeds. J-lens ablation
+        induces ``roughly twice the output KL divergence'' of logit- or tuned-lens ablation
+      verification: 'Verified. The rotation control is the strongest of these because it holds the geometry
+        fixed and varies only the assignment of directions to vocabulary items, so a positive result cannot
+        be a spectral artifact.
+
+        '
+  M3:
+    name: Stability
+    status: PC
+    short: Method variants swept and robust; corpus size from 1 to 1000
+    verified: true
+    reasoning: 'The construction is swept along every axis the authors identify: which gradient is taken,
+      how per-prompt Jacobians are aggregated, and how much data the expectation runs over, with the corpus
+      swept from 1 to 1,000 prompts. Ablation is reported at three strengths and k is varied throughout.
+      The parameter that defines the object is conceded to be unprincipled, which caps this at PC: robustness
+      is demonstrated by sweeping k rather than by deriving it.
+
+      '
+    notes:
+      legacy_evidence: 'Method variants swept and reported robust (present-only versus future-token effects,
+        frozen attention patterns, corpus size from 1 to 1{,}000 prompts); the sparsity level $k$ is varied
+        throughout; ablation is reported at three strengths. The parameter that defines the object is
+        conceded to be unprincipled: ``this parameter is somewhat arbitrary, and we vary our choice of
+        $k$ throughout the paper'''''
+      verification: 'Verified. The variant sweeps of §A.7 are reported as qualitative agreement, with
+        no stability statistic and no seed-to-seed variance on the J-lens matrix itself, which is computed
+        once.
+
+        '
+  M4:
+    name: Calibration
+    status: PC
+    short: Ablations normalised to unablated Sonnet with a smaller-model floor
+    verified: true
+    reasoning: 'The ablation battery is anchored twice — normalised to unablated Sonnet 4.5 with unablated
+      Haiku 4.5 drawn as a smaller-model floor — so "below Haiku" is a degradation unit a reader can interpret
+      without knowing the task scales. Report rates, reciprocal ranks and swap success rates are natively
+      interpretable. The deception screen is not calibrated: it reports raw counts of top-10 token appearances
+      with no threshold, no operating point and no false-positive rate, which is what holds this at PC.
+
+      '
+    notes:
+      legacy_evidence: 'The ablation battery is anchored twice --- normalised to unablated Sonnet 4.5,
+        with unablated Haiku 4.5 plotted as a smaller-model floor, so ``below Haiku'''' is a meaningful
+        degradation unit. Report rates, reciprocal ranks and swap success rates are directly interpretable.
+        Uncalibrated: per-task battery scores appear only in a figure, and the deception screen reports
+        raw top-10 token counts with no threshold or operating point'
+      verification: 'Verified. Per-task battery scores appear only inside Figure 24; no table in the text
+        gives a number for any of the fourteen tasks.
+
+        '
+  M5:
+    name: Sensitivity
+    status: C
+    short: A known-positive control is run and named as one
+    verified: true
+    reasoning: 'A known-positive control is run and named as one: before using J-space ablation to map
+      capabilities, the authors verify on the multi-hop eval that the ablation removes content the earlier
+      sections showed the J-space to carry, and it drops accuracy from near-ceiling to near zero under
+      heavy ablation. Concept injection with a strength sweep over n=100 concepts is a second planted-signal
+      recovery test, since the concept is known by construction and the measurement is whether the method
+      finds it.
+
+      '
+    notes:
+      legacy_evidence: 'An explicit known-positive control is run and named as one: ``We first verify,
+        as a positive control, that the ablation removes the kind of content the preceding sections showed
+        the J-space to carry,'''' with multihop accuracy falling to near zero under heavy ablation. Concept
+        injection at $n=100$ with a strength sweep is a second planted-signal recovery test'
+      verification: 'Verified, with a limit worth recording: the positive control is stated qualitatively.
+        "Near-ceiling" and "near zero" carry no numbers anywhere in the running text — the multihop accuracy
+        values exist only inside Figure 22. The same is true of the fourteen-task battery in Figure 24.
+
+        '
+  M6:
+    name: Invariance
+    status: PC
+    short: Four models, base and organism checkpoints, two further lenses
+    verified: true
+    reasoning: 'Invariance is tested across four models, base and post-trained checkpoints, two misaligned
+      model organisms, many task families, and two further lens constructions (template and oracle) that
+      relax the single-token restriction. The authors report where invariance fails rather than only where
+      it holds — on Haiku 4.5 the ablation breaks coherence before it changes content. All four models
+      come from one family at one laboratory, which is the ceiling on this cell.
+
+      '
+    notes:
+      legacy_evidence: Four models plus base and organism checkpoints; many task families; two additional
+        lens constructions (template, oracle); results reported where they \emph{fail} to hold (``on Haiku
+        4.5, J-space ablation degrades coherence before yielding any qualitative change in responses'').
+        All within one model family from one laboratory
+      verification: 'Verified. See E4: the four models are Claude Haiku 4.5, Sonnet 4.5, Opus 4.5 and
+        Opus 4.6. No experiment in the paper is run on a non-Anthropic or open-weight model.
+
+        '
+  M7:
+    name: Selection correction
+    status: U
+    short: Unattempted, and one token set is chosen self-referentially
+    verified: true
+    reasoning: 'No multiplicity control appears anywhere, and one selection is openly self-referential:
+      the eval-awareness token set is chosen as the tokens that appear in the J-lens top-20 across the
+      six blackmail prompts, then ablated and evaluated on those same six prompts. Broadcast heads are
+      likewise the top 1% of workspace-layer heads by the same two metrics later used to characterise
+      them; that selection at least carries a comparison-population control, the token selection carries
+      none.
+
+      '
+    notes:
+      legacy_evidence: 'Unattempted, and one instance is self-referential: the eval-awareness token set
+        is chosen as the tokens ``that unambiguously encode recognition of the scenario''s artificiality,
+        among those that appear in the J-lens top-20 at some (layer $\times$ token position) instances
+        across the six blackmail evaluation prompts'''' --- then ablated and evaluated on those same six
+        prompts. Broadcast heads are the top 1\%. No multiplicity control anywhere'
+      verification: 'Verified. The two quotes are adjacent fragments of one sentence, split at a line-break
+        hyphenation in "J-lens" that the extraction renders as "J-" / "lens".
+
+        '
+  I1:
+    name: Necessity
+    status: C
+    short: Four necessity demonstrations, three with controls
+    verified: true
+    reasoning: 'Four independent necessity demonstrations, three of them controlled. J-space ablation
+      (top-10 lens directions zeroed per position across a layer band, excluding tokens in the clean top-10)
+      drives multihop accuracy from near-ceiling to near zero while MMLU, odd-one-out, SQuAD, sentiment
+      and CoLA sit at or near the unablated Sonnet baseline. Broadcast-head ablation drops injected-concept
+      reporting 0.54 to 0.09 while a layer-matched random-head control over five seeds leaves it intact.
+      Ethics-token ablation returns the reflection-trained model''s fabrication score from 0.07 to 0.22
+      while leaving the base model at 0.25. Eval-awareness ablation drops verbalised eval-awareness from
+      71% to 3% with no control ablation reported.
+
+      '
+    notes:
+      legacy_evidence: Four independent necessity demonstrations, three of them with controls. J-space
+        ablation drives multihop accuracy to near zero while leaving MMLU, SQuAD, CoLA and sentiment near
+        baseline. Broadcast-head ablation drops injected-concept reporting from 0.54 to 0.09 while a layer-matched
+        random-head control leaves it intact. Eval-awareness ablation drops verbalised eval-awareness
+        from 71\% to 3\%, with no control ablation reported. Ethics-token ablation returns the reflection-trained
+        model's fabrication score from 0.07 to 0.22, ``back to base-model level,'' while leaving the base
+        model unchanged
+      verification: 'Two corrections to the legacy cell. (1) The battery''s unaffected set is five tasks,
+        not four: the legacy text omits odd-one-out. (2) The multihop claim has no number in the source.
+        "Near-ceiling performance" and "dropping it to near zero" are the paper''s own words and the accuracies
+        exist only inside Figure 22, so "near zero" is quotable but no percentage is. The multihop set
+        is the 50-prompt set of §3.3 (footnote 3). The eval-awareness arm''s lack of a control is confirmed:
+        §5.1 compares ablated against unablated over six prompts x 30 rollouts and reports no matched
+        random-direction or random-token condition.
+
+        '
+  I2:
+    name: Sufficiency
+    status: PC
+    short: Swaps install counterfactual content at 54--70\% across three models
+    verified: true
+    reasoning: 'Sufficiency is shown by installation rather than by correlation: exchanging two lens coordinates
+      while leaving the orthogonal complement of their span untouched installs the counterfactual intermediate
+      and the output follows, at 54% on Haiku 4.5 and 70% on each of Sonnet 4.5 and Opus 4.5 over 50 two-hop
+      prompts. The flagship broadcast test is weaker — 76 of 192 at unit strength, 101 of 192 at double
+      — and the failure mode is diagnosed rather than hidden, which is what earns PC rather than C.
+
+      '
+    notes:
+      legacy_evidence: 'Swaps install the counterfactual content and the output follows, at 54\% (Haiku
+        4.5), 70\% (Sonnet 4.5) and 70\% (Opus 4.5) on 50 two-hop prompts. The flagship generalisation
+        test is weaker: 76 of 192 trials at unit strength, 101 of 192 at double strength, with the failure
+        mode diagnosed rather than hidden --- ``swap failures are concentrated in cases where the source
+        concept was only weakly present in the lens before any intervention'''''
+      verification: 'All three model rates and the n verify exactly, as do 76/192 and 101/192 and the
+        weak-loading diagnosis. One number nearby is easy to conflate and is not the same experiment:
+        §3.3 also reports 60% for raw J-lens swaps and 61% for probe J-space components over n=90 two-hop
+        prompts (Figure 16). That is a different prompt set from the n=50 set behind the 54/70/70 figures,
+        so the two Sonnet numbers (70% and 60%) are not in conflict.
+
+        '
+  I3:
+    name: Minimality
+    status: PC
+    short: Occupancy estimated from where marginal improvement flattens
+    verified: true
+    reasoning: 'Occupancy is estimated rather than assumed: K is set where marginal reconstruction improvement
+      falls below a same-size random control, giving a plateau of about 25 across the workspace band.
+      That establishes how many directions are active, not that each ablated direction is load-bearing.
+      No pruning experiment shows the top-10 ablated directions are individually necessary, and the sparsity
+      level that defines the object is conceded to be arbitrary.
+
+      '
+    notes:
+      legacy_evidence: 'Occupancy is estimated rather than assumed: the number of active directions is
+        set at ``the value of $K$ at which the marginal improvement in reconstruction falls below that
+        of a control set of random directions of the same size,'''' giving on the order of tens. No pruning
+        experiment establishes that the top-10 ablated directions are each load-bearing, and $k$ is conceded
+        to be arbitrary'
+      verification: 'Verified.
+
+        '
+  I4:
+    name: Specificity
+    status: C
+    short: Tested three ways; a fourteen-task battery maps where it is not needed
+    verified: true
+    reasoning: 'Specificity is tested three ways, and the prediction was stated before the tests: presence
+      in the J-space should be required for report and flexible computation and not for automatic processing.
+      The two within-stimulus designs are the strongest, because the stimulus, the manipulation and the
+      representation are all held fixed and only the task varies. One Spanish-to-French lens swap flips
+      explicit report and three flexible-inference questions while leaving continuation and anomaly detection
+      unmoved, with the language name present in the lens at comparable rates in all four conditions —
+      so the null arms are not null for want of the representation. One count swap moves a reported count
+      from 46 to 65 while leaving the line-wrap point unchanged. The fourteen-task battery then maps the
+      same boundary at scale, and a story-writing control rules out generic capability loss.
+
+      '
+    notes:
+      legacy_evidence: '\textbf{Tested three ways, and the audit''s rationale asserts the opposite.} The
+        fourteen-task battery dissociates shallow classification and factual recall (unaffected) from
+        inference-grounded generation (collapsed). Two within-stimulus designs are stronger still: the
+        same language swap flips explicit report and flexible inference while leaving continuation and
+        anomaly detection unmoved, with the language name present in the lens in all four conditions;
+        the same count swap moves a reported count from 46 to 65 while leaving the line-wrap point unchanged.
+        A story-writing control rules out generic capability loss. The residual gap is that the battery''s
+        random-subspace control is figure-only'
+      verification: 'RESOLVES THE RECORDED CONTRADICTION (SCHEMA.md, "J-space I4"). The cell''s long evidence
+        opens "Tested three ways, and the audit''s rationale asserts the opposite," so the cell and its
+        rationale disagree about whether specificity was tested. The source decides it for the long evidence,
+        and the status C stands. Three distinct specificity tests exist and are quoted above: (1) the
+        language swap across four task conditions over n=8 passages, with presence in the lens confirmed
+        in all four; (2) the count swap over n=11 passages, 46->65 under report versus an unchanged wrap
+        point under linewrap; (3) the fourteen-task ablation battery, where MMLU, odd-one-out, SQuAD,
+        sentiment and CoLA sit at or near the unablated Sonnet baseline while inference-grounded generation
+        falls below unablated Haiku. A story-writing control (§A.23) shows the collapse is not generic
+        writing degradation. Any rationale asserting specificity is untested is contradicted by §3.5.1
+        and §3.5.2 and should be discarded.
+
+        The residual gap the legacy cell names also verifies: the battery''s random-direction control
+        appears only in the Figure 22 caption, and no number for it is given in the running text.
+
+        '
+  I5:
+    name: Rival mechanism exclusion
+    status: PC
+    short: The concept-vector rival is named twice and tested twice
+    verified: true
+    reasoning: 'The primary rival — that any direction encoding the concept would serve equally well —
+      is named twice, once for report and once for reasoning, and tested twice against a lens-independent
+      construction of the same concept. The non-J-space component drives 5% of report swaps and 28% of
+      reasoning swaps, the latter falling to 6% once the J-space coordinates are clamped. The rival left
+      open is that the J-space is an early read of the output-preparation pathway, which the authors list
+      among their limitations without resolving.
+
+      '
+    notes:
+      legacy_evidence: The primary rival --- that any direction encoding the concept would do --- is named
+        twice and tested twice (\S report, \S reasoning), with the non-J-space component failing at 5\%
+        and 28\%$\rightarrow$6\%. The rival left open is that the J-space is an early read of the output-preparation
+        pathway, which the authors list among their limitations
+      verification: 'Verified.
+
+        '
+  I6:
+    name: Double dissociation
+    status: U
+    short: Single dissociation run cleanly and repeatedly; no converse
+    verified: true
+    reasoning: 'The main-text design is a single dissociation run repeatedly and cleanly: one manipulation,
+      two behaviours, one moves and one does not, with the representation demonstrably present in both
+      arms. The converse arm in the strict sense is absent — no non-J-space substrate is ablated to break
+      continuation or anomaly detection while sparing report — so the manipulation side of the design
+      never varies.
+
+      '
+    notes:
+      legacy_evidence: 'Single dissociation, run repeatedly and cleanly: one manipulation, two behaviours,
+        one moves and one does not, with the representation demonstrably present in both. The converse
+        arm is missing --- no second substrate is ablated to break continuation or anomaly detection while
+        sparing report'
+      verification: 'The legacy cell says "no converse", and that is true as stated: every manipulation
+        in the paper is a J-lens edit. But §A.14 supplies a crossed dissociation the cell does not mention,
+        over layer bands rather than substrates. Ablating the concept''s J-lens vector at early workspace
+        layers (L38-54) leaves naming intact while raising the avoidance failure rate roughly fivefold;
+        ablating at late layers (L75-92) suppresses production under both instructions. Two manipulations,
+        two behaviours, crossing effects, over n=63 items with a matched-magnitude same-category control.
+        This raises I6 above "single dissociation only" without reaching a substrate-level double dissociation,
+        so PC still holds.
+
+        '
+      status_change: PC to U. One arm only. The main-text design moves one behaviour and spares another
+        under a single manipulation; no non-J-space substrate is ablated to break continuation while sparing
+        report.
+  I7:
+    name: Confound control
+    status: C
+    short: Five designed controls, each aimed at its experiment's alternative
+    verified: true
+    reasoning: 'Five controls, each built against the specific alternative its experiment invites rather
+      than a generic null. The swap-depth comparison answers the concern that the intermediate''s vector
+      smuggles in the answer: if it did, both swaps would bite at the same depth, and instead the intermediate
+      swap takes effect a median of about 17 percent earlier. A no-instruction baseline near zero rules
+      out prompt context alone raising the target concept. Matched-norm perturbations, a matched-magnitude
+      same-category ablation and a story-writing control cover the degradation confounds.
+
+      '
+    notes:
+      legacy_evidence: 'Five designed controls, each aimed at the specific alternative for its experiment.
+        The intermediate-versus-answer swap-depth comparison rules out the concern that the intermediate''s
+        vector smuggles in the answer: the intermediate swap takes effect ``a median of approximately
+        17 percent earlier.'''' A no-instruction baseline confirms prompt context alone does not raise
+        the target concept. Matched-norm perturbations, a matched-magnitude same-category ablation, and
+        a story-writing control cover the degradation confounds'
+      verification: 'Verified.
+
+        '
+  I8:
+    name: Confounding sensitivity
+    status: U
+    short: Unattempted; specific alternatives answered, no unmeasured-confounder bound
+    verified: true
+    reasoning: 'Confounding is raised twice and each time answered with a designed control aimed at one
+      named alternative — the swap-depth comparison, and the prediction that whole-J-space suppression
+      should impair flexible reasoning. Neither is a sensitivity analysis. Nothing in the paper quantifies
+      how strong an unmeasured confounder would have to be to overturn a result, and the uncertainty the
+      authors do quantify is sampling uncertainty, not robustness to omitted causes.
+
+      '
+    notes:
+      legacy_evidence: 'Unattempted. The paper raises confounding twice, each time naming a \emph{specific}
+        alternative and answering it with a designed control --- the intermediate-versus-answer swap-depth
+        comparison, and the prediction that whole-J-space suppression should impair flexible reasoning.
+        Neither is a sensitivity analysis: no section quantifies how strong an unmeasured confounder would
+        need to be to overturn a result'
+      verification: 'The negative claim was checked by reading rather than by term count. §9.1 was read
+        in full: its eight subsections name vocabulary restriction, bag-of-concepts structure, uninterpretable
+        readouts, the workspace/motor boundary, the absence of a predictive criterion for J-space engagement,
+        the early layers, scaling, and the mechanism of workspace entry. The closest thing to a robustness
+        statement is the admission that the flexible/automatic criterion may not generalise, which concerns
+        external validity rather than confounding. §A.7 and §A.23 were also read; both contain method-variant
+        and matched-norm controls, neither contains a bound on an unmeasured confounder.
+
+        '
+  I9:
+    name: Epistatic interaction
+    status: PC
+    short: Token-level exclusion at 0.09 vs 0.29; two held concepts co-occupy at chance
+    verified: true
+    reasoning: 'Interaction between two occupants of the workspace is measured directly against a shuffled
+      control, and the two conditions come apart. Two held concepts co-occupy tokens at the control rate,
+      so they do not interact at all; a concept and an ongoing computation co-occupy at 0.09 against a
+      control of 0.29, so the computation excludes concurrent content at the tokens it occupies. The exclusion
+      is local rather than global — each task still reaches the top of the lens somewhere in the response,
+      the largest cost being 95% to 72% for the computed answer — so what is demonstrated is token-level
+      scheduling, not competitive entry. Untested: whether jointly ablating the top-k directions exceeds
+      the sum of the individual ablations.
+
+      '
+    notes:
+      legacy_evidence: 'Competition for workspace entry is measured directly: two held concepts share
+        token slots at the control rate (0.46 against 0.53) while a concept and a computed answer almost
+        never do (0.09 against 0.29), against a shuffled control. The ignition analysis sweeps an input
+        mixture from 0 to 1 and measures transition width. Not tested: whether jointly ablating the top-$k$
+        directions exceeds the sum of individual ablations'
+      verification: 'The numbers verify exactly (0.46 vs. 0.53; 0.09 vs. 0.29), but the `short` line did
+        not and has been corrected. It read "Workspace competition measured: two concepts share slots
+        at 0.46", which presents the null arm as the competition result. 0.46 against a control of 0.53
+        is the paper''s evidence of NO competition between two held concepts — its own gloss is "statistically,
+        they ignore each other" and "Holding two concepts at once is essentially free." The competition-shaped
+        result is the other pair, 0.09 against 0.29.
+
+        On the question of what this shows: neither capacity competition nor a capacity limit. It is a
+        token-local scheduling constraint. A capacity limit would show as content failing to enter the
+        workspace; here both tasks enter and both still reach the top of the lens somewhere in the response,
+        and only the tokens are partitioned. The paper''s actual capacity-limit evidence is elsewhere
+        — occupancy plateauing near 25 (§4.2), around six unrelated list items present at a time, one
+        to two at a single layer (§A.16) — and the authors themselves decline to call the A.17 effect
+        competitive ignition.
+
+        '
+  I10:
+    name: Rescue reversibility
+    status: PC
+    short: Clamp-to-clean restoration run twice as a mediation control
+    verified: true
+    reasoning: 'A clamp-to-clean manipulation is run twice as a mediation control, and it does real work:
+      restoring the J-lens coordinates to their clean-pass values collapses the non-J-space component''s
+      residual effect to zero in the report swap and from 28% to 6% in the reasoning swap, which is what
+      distinguishes a direct effect from one routed through the J-space. What is missing is the other
+      direction — no experiment degrades a capability by ablation and then restores it to test recovery.
+
+      '
+    notes:
+      legacy_evidence: A clamp-to-clean manipulation is run twice as a mediation control --- restoring
+        the intermediate's J-space coordinates to their clean-pass values collapses the residual non-J-space
+        effect from 28\% to 6\%. No experiment degrades a capability by ablation and then restores it
+        to test recovery
+      verification: 'Verified.
+
+        '
+  I11:
+    name: Onset coupling
+    status: PC
+    short: Present and load-bearing in a base model before any RLHF
+    verified: true
+    reasoning: 'Onset is pinned at one boundary and left open at the other. The base-versus-post-trained
+      comparison shows the J-space present and load-bearing before any RLHF, so the structure is not installed
+      by post-training; the model organism is tracked across four training stages and the deception signal
+      is already substantially present at the SDF checkpoint, before any RL. Neither observation is a
+      time course: pretraining emergence and scaling are named as unknown by the authors.
+
+      '
+    notes:
+      legacy_evidence: The base-versus-post-trained comparison shows the J-space ``present and load-bearing
+        in a base model before any RLHF.'' The model organism is tracked across four training stages,
+        with the deception signal ``already substantially present at the SDF checkpoint.'' Pretraining
+        emergence and scaling are named as unknown by the authors
+      verification: 'Verified.
+
+        '
+  I12:
+    name: Offset coupling
+    status: PC
+    short: Deception signal amplified by coding RL, then attenuated by safety training
+    verified: true
+    reasoning: 'The same four-checkpoint tracking supplies the offset direction at one point: the deception
+      signal is amplified by coding RL and then partially attenuated by RLHF safety training, so mechanism
+      strength moves down as the trained-in behavior is mitigated. It is one organism, one attenuation,
+      observed rather than induced — no manipulation removes the mechanism to see the behavior follow.
+
+      '
+    notes:
+      legacy_evidence: 'The same tracking supplies the offset direction at one point: the deception signal
+        is amplified by coding RL and then ``partially attenuated by RLHF safety training,'''' with mechanism
+        strength moving against a trained-in behavior. One model organism, one attenuation, no controlled
+        removal'
+      verification: 'Verified.
+
+        '
+  E1:
+    name: Intervention reach
+    status: PC
+    short: Many intervention forms, nearly all editing along the same directions
+    verified: true
+    reasoning: 'Six intervention forms appear — additive steering, directional projection, top-k ablation,
+      two-coordinate swap, attention-head ablation, input-embedding mixture — but the first four all edit
+      along J-lens directions, so they share a pathway and cannot cross-validate each other. Two do not:
+      head ablation acts on weights, and the input-embedding mixture acts before the lens exists. The
+      one method-independent causal check, mean-difference activation patching of arithmetic intermediates,
+      agrees with the lens on the depths at which each intermediate becomes causal.
+
+      '
+    notes:
+      legacy_evidence: Many intervention forms --- additive steering, directional projection, top-$k$
+        ablation, two-coordinate swap, attention-head ablation, input-embedding mixture --- but nearly
+        all edit along J-lens directions, so they share a pathway. The one method-independent causal check,
+        mean-difference activation patching of arithmetic intermediates, agrees on the layer depths at
+        which each intermediate becomes causal
+      verification: 'Verified.
+
+        '
+  E2:
+    name: Prompt generalization
+    status: C
+    short: Five public benchmarks plus six prompt distributions
+    verified: true
+    reasoning: 'Prompt coverage runs well past the purpose-built sets. Five public benchmarks (MMLU, SQuAD,
+      CoLA, GSM8K, TriviaQA) anchor the ablation battery, six prompt distributions anchor the lens comparison,
+      roughly 94,000 Assistant-turn positions from auditing transcripts anchor the eval-awareness probe,
+      and the probe is then compared against deployment traffic from Claude Code sessions and Claude.ai
+      conversations rather than against evaluation prompts only.
+
+      '
+    notes:
+      legacy_evidence: Purpose-built sets plus five public benchmarks (MMLU, SQuAD, CoLA, GSM8K, TriviaQA),
+        six prompt distributions for the lens comparison, roughly 94{,}000 Assistant-turn positions from
+        auditing transcripts, and comparison against deployment traffic distributions from Claude Code
+        sessions and Claude.ai conversations
+      verification: 'Verified.
+
+        '
+  E3:
+    name: Cross-task generalization
+    status: C
+    short: A fourteen-task battery maps where the mechanism is required
+    verified: true
+    reasoning: 'Cross-task generalisation is the question the flexible-generalisation experiment is built
+      to ask: whether a representation lifted from one context is correctly operated on by an arbitrary
+      downstream function. Sixteen functions over four argument categories give 192 trials, reported with
+      per-category resolution rather than pooled — 42 of 48 for country facts down to 0 of 48 for number
+      relations — so the failure region is visible. The fourteen-task ablation battery maps the same boundary
+      from the other side, separating where the mechanism is required from where it is not.
+
+      '
+    notes:
+      legacy_evidence: The fourteen-task battery maps where the mechanism is required and where it is
+        not, and the flexible-generalisation experiment is built precisely to ask whether a representation
+        lifted from one context is correctly operated on by an arbitrary downstream function --- 16 functions,
+        4 argument categories, 192 trials, with per-category resolution (42/48 for country facts, 0/48
+        for number relations)
+      verification: 'Verified.
+
+        '
+  E4:
+    name: Cross-model generalization
+    status: PC
+    short: Four closed-weight models, one lab, sizes undisclosed; partly replicated externally
+    verified: true
+    reasoning: 'Four models, one family, one laboratory, all closed-weight, with no parameter counts disclosed.
+      The effects are scale-graded rather than uniform, which is informative in itself: swap success runs
+      54% / 70% / 70% up the size ladder, and on the smallest model ablation breaks coherence before it
+      changes content. Graded transfer within a family is weaker evidence than transfer across families,
+      and none is available here.
+
+      '
+    notes:
+      legacy_evidence: Four models, one family, one laboratory, all closed-weight, with no sizes disclosed.
+        Effects are scale-graded rather than uniform (54\% / 70\% / 70\% on two-hop swaps; ablation degrades
+        Haiku's coherence before changing its content). \textbf{No open-weight or third-party model appears
+        anywhere in the paper}, contrary to the audit's current text
+      verification: 'One qualification to the legacy cell''s "No open-weight or third-party model appears
+        anywhere in the paper". No *experiment* in the paper is run on an open-weight or third-party model,
+        which is the load-bearing claim and it holds. But open-source models do appear twice as artifacts
+        rather than as evidence: §2.2 notes "J-lens readouts on open-source models can be found on Neuronpedia",
+        and §A.2 says an interactive J-lens on open-source models is hosted there. Neither supports a
+        result. The four models are Claude Haiku 4.5, Sonnet 4.5, Opus 4.5 and Opus 4.6, plus a base checkpoint
+        and two Anthropic model organisms.
+
+        '
+  E5:
+    name: Graded response
+    status: C
+    short: Six dose-response designs, including injection strength against rank
+    verified: true
+    reasoning: 'Six distinct dose-response designs, and the doses are on different axes rather than repeats
+      of one. Injection strength is swept against median reciprocal rank over n=100 concepts; swap strength
+      is doubled and success rises 76/192 to 101/192; ablation is graded by layer band; the input mixture
+      is swept 0 to 1 with a measured transition width; contrastive steering at -0.1, 0 and +0.1 produces
+      a monotone response on every suite; lens corpus size is swept from 1 to 1,000 prompts. Monotonicity
+      across independent manipulations is what a graded-response cell asks for.
+
+      '
+    notes:
+      legacy_evidence: Six distinct dose-response designs. Injection strength swept against median reciprocal
+        rank over $n=100$ concepts with an interquartile band; swap strength at $\alpha = 1$ against $\alpha
+        = 2$ (76/192 to 101/192); three ablation strengths defined by layer band; input-mixture $\alpha$
+        swept 0 to 1 with a measured transition width; contrastive steering at $-0.1$, 0 and $+0.1$ producing
+        a monotone response ``on every suite''; lens corpus size swept from 1 to 1{,}000 prompts
+      verification: 'Verified.
+
+        '
+  E6:
+    name: Novel prediction
+    status: C
+    short: Five properties enumerated from theory, one used to find the object
+    verified: true
+    reasoning: 'This is the strongest form available short of pre-registration. Five properties are enumerated
+      from an external theory, one is used to find the object, and the remaining four are then tested
+      — the authors say so in those terms, which makes the four risky rather than definitional. Counterfactual
+      reflection training supplies a second, sharper prediction with two arms that could each have failed:
+      implanting workspace content should change behaviour in contexts where the training text never appears
+      (0.25 to 0.07), and ablating the implanted vectors should reverse it (0.07 to 0.22, with the base
+      model unmoved at 0.25).
+
+      '
+    notes:
+      legacy_evidence: 'The strongest form available short of pre-registration. Five properties are enumerated
+        from an external theory, one is used to \emph{find} the object, and the other four are then tested:
+        ``We identified them by searching for representations satisfying the first property, namely those
+        that are verbalizable. We then discovered that, rather surprisingly, they satisfy the others.''''
+        Counterfactual reflection training adds a second: implanting workspace content should change behaviour
+        and ablating the implanted vectors should reverse it --- fabrication score 0.25 $\to$ 0.07 under
+        training, $\to$ 0.22 under ablation'
+      verification: 'Verified.
+
+        '
+  V1:
+    name: Level declaration
+    status: C
+    short: Declared before evidence, and the level is named explicitly
+    verified: true
+    reasoning: 'The level is declared before any evidence and named explicitly: access consciousness,
+      a functional notion, with phenomenal consciousness set aside rather than assumed or denied. The
+      five properties then supply an operational definition given in advance, so the reader knows what
+      claim is being made about which level before the first measurement.
+
+      '
+    notes:
+      legacy_evidence: 'Declared before evidence, and the level is named explicitly: ``access consciousness
+        is a purely functional notion; the relationship that it has with subjective experience \ldots
+        is widely debated. In this paper, we take no position on this issue, and instead focus on the
+        functional role played by consciously accessible information.'''' The five properties constitute
+        an operational definition given in advance'
+      verification: 'Verified. The quote is split into two adjacent fragments because the extraction hyphenates
+        "is-sue" across a line break.
+
+        '
+  V2:
+    name: Level-evidence match
+    status: PC
+    short: Three levels in play and two matched; the third is asserted
+    verified: true
+    reasoning: 'Three levels are in play and two are matched to their evidence. The subspace is recovered
+      by a weight-derived linear map, which is implementational; it is shown to carry reportable content,
+      which is representational; and intervention shows it is required for one class of computation and
+      not another, which is functional. The unmatched level is architectural — broadcast by recurrence,
+      encapsulated modules, competitive ignition — and those are the properties that make "global workspace"
+      more than a functional label. The paper states it has not demonstrated them, which is why the mismatch
+      costs PC rather than more.
+
+      '
+    notes:
+      legacy_evidence: 'Three levels are in play and two are matched. The subspace is recovered by a weight-derived
+        linear map (implementational); it is shown to carry reportable content (representational); and
+        it is shown by intervention to be required for one class of computation and not another (functional).
+        The unmatched content is architectural: broadcast by recurrence, encapsulated modules, competitive
+        ignition --- the properties that make ``global workspace'''' more than a functional label, and
+        the ones the paper states it has not demonstrated'
+      verification: 'Verified.
+
+        '
+  V3:
+    name: Alternative level
+    status: PC
+    short: Two alternatives addressed and refuted; the workspace framing is not
+    verified: true
+    reasoning: 'Two alternative readings are raised and refuted with designed tests: that any direction
+      encoding the concept would do, and that the intermediate''s vector already contains the answer.
+      A third is raised and left open — that the J-space is the output-preparation pathway observed early
+      — and the authors record it as an unresolved boundary problem rather than dismissing it. An unresolved
+      alternative at the level of what the object *is* is what holds this at PC.
+
+      '
+    notes:
+      legacy_evidence: 'Two alternatives are addressed and refuted --- ``any direction encoding the concept''''
+        and ``the intermediate vector already contains the answer.'''' One is raised and left open: that
+        the J-space is the output-preparation pathway observed early, which the authors list as an unresolved
+        boundary problem'
+      verification: 'Verified.
+
+        '
+  V4:
+    name: Unlicensed labeling
+    status: PC
+    short: Disanalogies enumerated and consciousness not adjudicated; hedged
+    verified: true
+    reasoning: 'The paper is hedged more than the audit''s summary allows. Architectural disanalogies
+      are enumerated in the introduction rather than buried; phenomenal consciousness is explicitly not
+      adjudicated; the properties not demonstrated are listed; and "automatic" is offered as an operational
+      definition that only partially aligns with the human sense. What is asserted without a contrastive
+      test is the closing generalisation that the workspace is a solution learning systems converge on,
+      drawn from four models of one family with no negative case.
+
+      '
+    notes:
+      legacy_evidence: Hedged more than the audit allows. The architectural disanalogies are enumerated;
+        phenomenal consciousness is explicitly not adjudicated; the properties not demonstrated are listed;
+        and ``automatic'' is offered as an operational definition rather than a psychological one. What
+        is asserted without a contrastive test is the closing generalisation that the workspace is ``a
+        solution that learning systems converge on,'' from four models of one family
+      verification: 'Verified.
+
+        '
+  V5:
+    name: Scope declaration
+    status: C
+    short: Eight limitations named in a dedicated section
+    verified: true
+    reasoning: 'Scope is declared in a dedicated section rather than implied. §9.1 names eight limitations
+      under their own headings — single-token vocabulary, bag-of-concepts structure, uninterpretable readouts,
+      no principled workspace/motor boundary, no predictive criterion for J-space engagement, unresolved
+      early layers, unknown scaling and pretraining onset, and no mechanism for workspace entry. §9.2
+      adds an explicit refusal of the monitoring-sufficiency claim, which is the claim the paper''s practical
+      framing most invites a reader to over-read.
+
+      '
+    notes:
+      legacy_evidence: Eight limitations named in a dedicated section --- single-token vocabulary, bag-of-concepts
+        structure, uninterpretable readouts, no principled workspace/motor boundary, no predictive criterion
+        for J-space engagement, unresolved early layers, no mechanism for workspace entry --- plus an
+        explicit refusal of the monitoring-sufficiency claim and an explicit statement that pretraining
+        emergence and scaling are unknown
+      verification: 'The count of eight was checked against the subsection headings of §9.1 rather than
+        inferred. The legacy cell lists seven and folds the scaling limitation into a separate clause;
+        the eighth heading is "Relationship to model size, architecture, and training dynamics".
+
+        '

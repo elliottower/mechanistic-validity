@@ -1,0 +1,951 @@
+claim: sae
+verdict: Causally Suggestive
+readings:
+- statement: Sparse dictionary learning recovers directions more interpretable than PCA, ICA and the neuron
+    basis, and causally usable
+  verdict: Causally Suggestive
+  missing: Specificity (I4), tested and inconclusive; then independent convergence (C3), separation from
+    other decompositions (I6), and calibration of the scoring instrument (M1, M3, M5, M7)
+  primary: true
+- statement: SAE features are atomic, canonical units of the model
+  verdict: Disconfirmed
+  missing: 'Nothing --- tested and failed: meta-SAEs decompose latents further (C4), and the instrument
+    cannot distinguish a trained transformer from a random one \citep{heap2025sparse}'
+  primary: false
+- statement: SAE features localize causation better than neurons
+  verdict: Disconfirmed
+  missing: 'Nothing --- tested and failed: \citet{mueller2025mib} report no causal-localization advantage
+    over the neuron basis'
+  primary: false
+hypotheses:
+- id: H1
+  view: Object
+  label: the features are atomic canonical units of the model
+- id: H2
+  view: Object
+  label: the features are a useful decomposition but not atomic
+- id: H3
+  view: Object
+  label: the neuron basis is an equally good decomposition
+- id: H4
+  view: Instrumental
+  label: the recovered structure is a property of the model
+- id: H5
+  view: Instrumental
+  label: the structure is an artifact of the sparsity objective
+views_evidence:
+- criterion: M2
+  evidence: Interpretability scoring beats six baselines including the default basis and random directions
+  cells:
+    H1: C
+    H2: C
+    H3: I
+    H4: C
+    H5: I
+  designed_for:
+  - H1
+  - H4
+- criterion: I2
+  evidence: Activation patching on 50 IOI data points shows the features are causally usable
+  cells:
+    H1: C
+    H2: C
+    H3: C
+    H4: C
+    H5: C
+  designed_for:
+  - H1
+- criterion: C4
+  evidence: Meta-SAEs decompose the learned latents further
+  cells:
+    H1: I
+    H2: C
+    H3: C
+    H4: C
+    H5: C
+  designed_for:
+  - H2
+- criterion: I4
+  evidence: A single-feature ablation moves twelve thousand logits and is left unanalyzed
+  cells:
+    H1: I
+    H2: C
+    H3: C
+    H4: C
+    H5: C
+  designed_for: []
+- criterion: V4
+  evidence: The showcased apostrophe feature does not activate on all apostrophes
+  cells:
+    H1: I
+    H2: C
+    H3: C
+    H4: C
+    H5: C
+  designed_for: []
+- criterion: M3
+  evidence: The sparsity sweep gives a smooth tradeoff rather than a stable optimum
+  cells:
+    H1: I
+    H2: C
+    H3: C
+    H4: C
+    H5: C
+  designed_for: []
+- criterion: I6
+  evidence: No causal-localization advantage over the neuron basis is found
+  cells:
+    H1: I
+    H2: C
+    H3: C
+    H4: C
+    H5: C
+  designed_for:
+  - H3
+- criterion: M5
+  evidence: The scoring instrument cannot distinguish a trained transformer from a random one
+  cells:
+    H1: I
+    H2: I
+    H3: C
+    H4: I
+    H5: C
+  designed_for:
+  - H5
+- criterion: I7
+  evidence: An alpha equals zero dictionary isolates sparsity from dictionary learning
+  cells:
+    H1: C
+    H2: C
+    H3: C
+    H4: C
+    H5: I
+  designed_for:
+  - H4
+  - H5
+- criterion: E4
+  evidence: Features transfer across Pythia GPT-2 small and Gemma 2 2B
+  cells:
+    H1: C
+    H2: C
+    H3: C
+    H4: C
+    H5: I
+  designed_for:
+  - H4
+tiers:
+- name: Proposed
+  requires: C1--C2; one admissible measurement
+  missing: '---'
+- name: Causally Suggestive
+  requires: Necessity (I1); baselines (M2)
+  missing: '---'
+- name: Mechanistically Supported
+  requires: Sufficiency (I2); reach (E1); specificity (I4)
+  missing: \textbf{E1}, \textbf{I4} inconclusive
+- name: Triangulated
+  requires: Convergence (C3); replication (E2/E4); dissociation (I6)
+  missing: '\textbf{C3}: later work reaches opposite conclusions on utility; \textbf{I6} unattempted'
+- name: Validated
+  requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
+  missing: \textbf{M1}, \textbf{M3} Inconclusive; \textbf{M5}, \textbf{M7} unattempted
+criteria:
+  C1:
+    name: Falsifiability
+    status: C
+    short: Directional prediction against four named baselines; partly fails in layer 4
+    verified: true
+    reasoning: 'The comparison is directional and stated in advance of the result: scores from the learned
+      dictionary against scores from named alternative decompositions, on the same metric. It could have
+      come out the other way, and in two layers it substantially does — the paper reports the advantage
+      collapsing to parity with ICA at layer 4 and to near-nothing at the final layer, rather than reporting
+      only the layers where the effect holds.
+
+      '
+    notes:
+      legacy_evidence: 'The comparative prediction is directional and could fail against six named baselines
+        (default basis, random directions, PCA, ICA, top-$K$ PCA, top-$K$ ICA). It partly does: the advantage
+        is ``comparable to ICA in layer 4'''' and shows ``minimal improvement in the final layer.''''
+        Leask et al.''s stitching prediction is equally falsifiable --- adding novel latents should improve
+        reconstruction and swapping reconstruction latents should not'
+      verification: 'Contradiction with the cell as written. The origin names four baselines, not six.
+        §3.2 lists the default basis, random directions, PCA and ICA, and Figure 2 — the headline comparison
+        — is against those four. Top-K PCA and top-K ICA appear only in Appendix G (Figure 18) as a control
+        against a specific objection, that a sparse-coding feature activates on less than a full direction
+        while a PCA direction activates on a half-space. Calling them baselines is defensible; calling
+        the headline comparison a six-baseline comparison is not. The two layer-4 and final-layer phrases
+        are verbatim.
+
+        '
+  C2:
+    name: Structural plausibility
+    status: PC
+    short: Predicted by superposition; MLP training fails, attention not attempted
+    verified: true
+    reasoning: 'The object is the one superposition predicts rather than one chosen for convenience: if
+      a layer holds more features than dimensions, the features form an overcomplete non-orthogonal basis,
+      and recovering them is sparse dictionary learning. The derivation is stated in §1 before any method
+      appears. It is partial because the structural story is only carried through at one site. The residual
+      stream works; the MLP requires untying encoder from decoder and still fails to give overcomplete
+      bases in intermediate layers; and attention is named as future work.
+
+      '
+    notes:
+      legacy_evidence: 'Grounded in the superposition account: an overcomplete dictionary over the residual
+        stream is the object that account predicts. The structural story covers one site only. The authors
+        report where it breaks: the pipeline ``is not able to robustly learn overcomplete bases in the
+        intermediate layers of the MLP,'''' MLPs require untying the encoder and decoder, and attention
+        is not attempted --- ``it''s unclear how to apply this to the Attention sublayer since we''d need
+        to see which position dimension the feature is in'''''
+      verification: 'Contradiction with the cell''s supporting quote. The sentence "Additionally, it''s
+        unclear how to apply this to the Attention sublayer since we''d need to see which position dimension
+        the feature is in" is in Appendix D.4, "Failed Interpretability Methods," and its referent is
+        a weight-based cross-layer method — multiplying a layer-4 dictionary feature by the MLP and taking
+        cosine similarity with layer-5 features, which "There were no meaningful connections." It is not
+        a statement about training sparse autoencoders on attention activations. The claim that attention
+        is not attempted is still correct and is better sourced to §6.2, quoted above. A second wrinkle:
+        Figure 1''s caption says the method samples "either the residual stream, MLP sublayer, or attention
+        head sublayer," so the paper''s own overview advertises an attention site for which it reports
+        no results.
+
+        '
+  C3:
+    name: Convergent validity
+    status: PC
+    short: Two evidence types; the concurrent-origin pairing comes from the follow-up, not here
+    verified: true
+    reasoning: 'Two evidence families are present and they are genuinely different instruments: an automated
+      language-model scoring of activation patterns, and an interventional patching experiment scored
+      by KL divergence. Neither depends on the other''s assumptions. What keeps this at partial is that
+      both are run by the same authors on the same dictionaries, and the later literature that could have
+      converged has instead split on whether the units are the model''s.
+
+      '
+    notes:
+      legacy_evidence: 'Two evidence types at origin --- automated interpretability scoring and activation
+        patching --- plus a concurrent independent origin (Bricken et al.\ 2023). Later convergence is
+        broad on the method and divergent on the claim: SAEBench, MIB, AxBench and its 2026 rebuttal reach
+        opposite conclusions about utility, and \citet{mueller2025mib} finds no causal-localisation advantage
+        over neurons'
+      verification: 'The two origin evidence types are confirmed. The concurrent-origin claim is not attested
+        in Cunningham et al., which never cites Bricken et al. (2023) anywhere in its reference list;
+        the pairing comes from Leask et al., who cite the two together as the joint origin of the method.
+        SAEBench, MIB, AxBench and the 2026 rebuttal appear in neither audited paper, so nothing here
+        is quotable for them.
+
+        '
+  C4:
+    name: Discriminant validity
+    status: PC
+    short: Scored against the origin's operational construct, not the field's
+    verified: true
+    reasoning: 'The origin defines its construct as a dictionary feature that approximates an unknown
+      ground truth network feature, and its case studies score against a weaker operational stand-in:
+      whether a direction admits one human-readable explanation. The neighbouring constructs the construct
+      must be separated from — an atomic unit, a complete unit, and a direction that is an artifact of
+      the dictionary rather than a property of the model — are exactly the ones the follow-up tests. Atomicity
+      fails: meta-SAE decomposition of a 49,152-latent GPT-2 dictionary recovers components that match
+      latents of a comparably sized ordinary SAE, and the decompositions are themselves interpretable
+      at 73% five-way identification. Completeness fails: 657 latents in a 1,536-latent SAE have no counterpart
+      in the 768-latent SAE, and adding them reduces reconstruction error by almost 10%. Both tests were
+      capable of returning nothing and did not.
+
+      '
+    notes:
+      legacy_evidence: 'The construct is ``a feature of the model,'''' and both neighbouring constructs
+        have been tested and not separated. Not atomic: meta-SAE decomposition recovers general components
+        matching smaller-SAE latents, with 73\% five-way identification against a 20\% floor, and the
+        cause named as the sparsity penalty. Not complete: 657 of 1{,}536 latents in the larger of a stitched
+        GPT-2 pair are novel relative to the smaller, and adding them ``reduces the MSE by almost 10\%.''''
+        Not distinguishable from a dictionary artifact: the origin''s headline metric returns similar
+        values on randomly initialised transformers (Heap et al.\ 2025). Tests capable of exposing the
+        failure were run and the criterion failed'
+      verification: 'Every number in the cell checks out with one qualification. The 20% chance floor
+        is not stated anywhere in Leask et al.; it is an inference from "ask it to choose which of 5 SAE
+        latent explanations most relate to the explanations of the meta-SAE latents," where four of the
+        five are random distractors. The floor is right, but it is the auditor''s arithmetic rather than
+        the paper''s number, and the cell should say so. "657 of 1,536" is a fair restatement of "all
+        657 latents in GPT-1536," since GPT2-1536 has 1,536 latents (Table 2). Heap et al. (2025) appears
+        in neither audited paper, so the third leg of this cell is unquotable from these sources. The
+        Leask PDF read for this audit is /Users/elliottower/Downloads/ICLR-2025-sparse-autoencoders-do-not-find-canonical-units-of-analysis-Paper-Conference.pdf,
+        bib key leask2025canonical.
+
+        '
+  C5:
+    name: Nomological validity
+    status: PC
+    short: Fits superposition; the theory does not underwrite the method
+    verified: true
+    reasoning: 'The theoretical chain is stated precisely and in the right order: superposition implies
+      an overcomplete non-orthogonal basis, superposition requires sparsity, sparsity plus overcomplete
+      recovery is sparse dictionary learning, and an ℓ1 penalty is cited as recovering ground truth. What
+      the theory does not deliver is uniqueness. Nothing in the superposition account says the recovered
+      dictionary is the only one, and the follow-up shows the sparsity penalty pushing in the opposite
+      direction — rewarding composed latents precisely because they are sparser.
+
+      '
+    notes:
+      legacy_evidence: 'Fits superposition and the linear representation hypothesis, and the origin states
+        the connection precisely. The theory does not underwrite the strong claim: nothing in superposition
+        predicts a \emph{unique} dictionary, and Leask et al.\ show the training objective actively pushes
+        against one --- ``The sparsity penalty incentivizes larger SAEs to learn compositions of latents
+        rather than atomic latents'''''
+      verification: 'The Leask quote in the cell is verbatim from the Figure 2 caption, where it is the
+        caption''s closing sentence rather than a body claim. The cell''s stronger assertion, that nothing
+        in superposition predicts a unique dictionary, is an argument rather than a quotable finding:
+        neither paper states it, and the closest attested support is Leask''s demonstration that the penalty
+        rewards composed latents. One quote in this cell was swapped during verification: the origin sentence
+        about sparsity being required for superposition is interrupted in the PDF by a footnote block,
+        a page break and the Figure 1 caption, so the contiguous sparse-dictionary-learning sentence from
+        the same passage is quoted instead.'
+  M1:
+    name: Reliability
+    status: I
+    short: One training run per configuration; no repetition reported
+    verified: true
+    reasoning: 'The training appendix specifies the optimiser, the data volume and the epoch count and
+      says nothing about seeds or repeated runs, and no figure caption in the paper reports variation
+      across training runs. Figure 2''s error bars are confidence intervals over the 150 scored features
+      from a single dictionary, which measures scoring spread rather than training reliability. Every
+      reported quantity is therefore a single point estimate from one fit. The follow-up supplies the
+      missing test at one width and finds high agreement, which is why the picture depends on scale rather
+      than settling.
+
+      '
+    notes:
+      legacy_evidence: 'Nothing at origin: the training appendix (\S B) specifies one run per configuration
+        and reports no repetition, and the appendix inventory (A autointerpretation protocol, B training,
+        C further autointerpretation, D qualitative analysis, E active features, F other layers, G top-$K$
+        comparisons) contains no replication or seed-variation study, so every reported number is a single
+        point estimate. Tested later, with results that depend on width: 94\% cross-seed agreement at
+        3{,}072 latents on GPT-2 (Leask et al., Appendix A.6) against 30\% shared features at 131K latents
+        on Llama 3 8B (Paulo \& Belrose 2025). Gerasimov et al.\ (2026) reconcile them by relocating the
+        stable object --- unstable individual features concentrate in reproducible low-rank subspaces'
+      verification: "The appendix inventory in the cell is exact and the absence of a seed study is confirmed\
+        \ by reading all seven appendices. Two locator corrections. The 94% cross-seed figure is in Leask\
+        \ et al. Appendix A.7 (Stitching experiments), with the seed axes labelled in Figure 18a; Appendix\
+        \ A.6 is \"Open source SAE weights.\" And the 94% is a proportion of reconstruction latents at\
+        \ a 0.7 cosine threshold, which is agreement in the sense the paper defines rather than a feature-identity\
+        \ match. Paulo & Belrose (2025) and Gerasimov et al. (2026) appear in neither audited paper.\n\
+        \ The seed axes are labelled in Leask et al. Figure 18a, \"Proportion of reconstruction latents\
+        \ in GPT-2 SAEs with 3072 latents. X and Y labels are random training seeds\"; that caption is\
+        \ set in two columns and does not extract contiguously, so the contiguous sentence from Appendix\
+        \ A.7 is quoted instead."
+  M2:
+    name: Baseline separation
+    status: PC
+    short: SAE beats four baselines; the two negative controls do not separate from each other
+    verified: true
+    reasoning: 'The negative controls are constructed to be comparable rather than to lose: random directions
+      and the default basis are rectified so their activations are nonnegative like the dictionary''s,
+      which removes the obvious way a control could fail for a reason unrelated to the hypothesis. Both
+      separate from the learned dictionary, and the separation survives the harder random-only scoring
+      regime. The paper also reports the sharper negative that the two controls do not separate from each
+      other, which is what a null-of-the-null looks like when it is honestly handled. What holds this
+      at partial is that no random-network control exists — every baseline is a different decomposition
+      of the same trained model''s activations, so nothing here distinguishes structure in the model from
+      structure the dictionary imposes.
+
+      '
+    notes:
+      legacy_evidence: 'Two baselines with opposite verdicts. The origin''s random-\emph{direction} and
+        default-basis controls separate cleanly, and the paper reports the sharper negative alongside:
+        ``We do not find residual stream basis directions to be any more interpretable than random directions.''''
+        The random-\emph{network} baseline was not run at origin and fails when run: auto-interpretability
+        scores on randomly initialised transformers are ``similar to those from trained models'''' (Heap
+        et al.\ 2025)'
+      verification: 'The default-basis quote is verbatim and sits in Appendix C.2, in the paragraph about
+        transformers storing information in the residual stream basis. One thing the cell''s phrasing
+        obscures: the quoted sentence says the two negative controls do not separate from each other,
+        so "separate cleanly" must mean each separates from the learned dictionary, not that they separate
+        from one another. The separation itself is reported as a figure with 95% confidence intervals
+        over 150 features and no significance test. Heap et al. (2025) is not in either audited paper.
+
+        '
+  M3:
+    name: Stability
+    status: I
+    short: Sparsity sweep gives a smooth tradeoff, not a stable optimum
+    verified: true
+    reasoning: 'The perturbation test was run and returned a negative, and the authors read it correctly.
+      A stable decomposition would show a knee: a sparsity setting past which accuracy falls away, so
+      that the chosen dictionary is picked out by the data rather than by the practitioner. The sweep
+      shows a smooth exchange rate instead, at every setting tried, which is exactly the signature of
+      a free parameter. The follow-up makes the same point on the other axis — the thresholds separating
+      novel from reconstruction latents are set by inspection and differ by model family, and the conclusion
+      is that no width is privileged.
+
+      '
+    notes:
+      legacy_evidence: 'Perturbation was run at origin and returned a negative that the authors read correctly:
+        sweeping the sparsity coefficient gives ``a smooth tradeoff between the sparsity and accuracy,''''
+        and ``the lack of a `bump'' or `knee'' in these plots provides some evidence that there is not
+        a single correct way to decompose activation spaces into a sparse basis.'''' Dictionary width
+        changes which latents exist. Against this, subspaces are reproducible where features are not (Gerasimov
+        et al.\ 2026), and Leask et al.''s own thresholds are hand-set per model family (0.7 for GPT-2,
+        0.4 for Gemma Scope) ``based on our exploratory analysis'''''
+      verification: 'Both origin quotes are verbatim; the cell truncates the second before the authors''
+        own hedge, "though to confirm this would require many additional experiments," which is restored
+        in the quote above. The Leask threshold quote is verbatim, and the paper spells "Gemmascope" that
+        way in this sentence. Gerasimov et al. (2026) is in neither audited paper. One detail the cell
+        asserts without a source in either paper: that dictionary width changes which latents exist is
+        established by Leask''s novel-latent result, not by the Cunningham sweep, which varies the sparsity
+        coefficient rather than the width.
+
+        '
+  M4:
+    name: Calibration
+    status: PC
+    short: Interpretability score is a correlation with a meaningful zero
+    verified: true
+    reasoning: 'The metric is a correlation, so zero has a meaning that does not depend on the experiment:
+      a description that predicts activations no better than chance. That is a real anchor, and the paper
+      does not hide what the scale delivers — the unselected first-five sample in Table 1 includes a negative
+      score of -0.11 and a top score of 0.57, and the sample is explicitly unselected. Calibration is
+      partial in the direction that matters for the claim: nothing converts a score of 0.33 into a statement
+      about how much of a feature''s behaviour is explained, and no upper reference point is established
+      for what a genuinely monosemantic direction should score.
+
+      '
+    notes:
+      legacy_evidence: 'The interpretability score is a correlation with a meaningful zero, and the origin
+        prints an unselected sample including a negative value ($-0.11$ among the first five features).
+        Leask et al.''s 73\% against a 20\% chance floor is properly anchored. Uncalibrated in the respect
+        that matters: no absolute scale says what a score of 0.33 licenses, and the scale is known not
+        to separate trained from random networks'
+      verification: Table 1 confirms the -0.11 (feature 1-0001) and the 0.33 (feature 1-0000), and §3.1
+        confirms the sample is the first five under an arbitrary ordering rather than a chosen five. The
+        20% chance floor is the auditor's arithmetic from Leask's five-option protocol, not a number Leask
+        reports. The claim that the scale does not separate trained from random networks rests on Heap
+        et al. (2025), which is in neither audited paper.
+  M5:
+    name: Sensitivity
+    status: U
+    short: Unattempted; no planted ground-truth features
+    verified: true
+    reasoning: 'The premise that an ℓ1 penalty recovers the features that generated the data is imported
+      by citation and never tested on a system whose features are known. Every control the paper runs
+      is a known-negative: rectified random directions, the default basis, PCA, ICA, and a non-sparse
+      dictionary, each of which should score low and does. A known-positive would require a model with
+      planted features and a check that the dictionary returns them, and no such construction appears
+      in §§1-6 or Appendices A-G. Without one, a low score is uninformative about whether the method missed
+      a feature or the feature was not there.'
+    notes:
+      legacy_evidence: 'Unattempted at origin. No known-positive control: no synthetic model with planted
+        ground-truth features is used to check that the method recovers them. The only controls are known-negatives
+        (random directions, non-sparse dictionary, random SAE latents)'
+      verification: 'The cell is right that the origin runs only known-negatives. One qualification worth
+        recording: the follow-up does run a known-positive-style evaluation, sparse probing for benchmark
+        concepts described as "known ground-truth features," which is not a synthetic model with planted
+        features but is closer to a sensitivity test than anything at origin. It is also the evaluation
+        whose result is reported as complex and dataset dependent, so it does not rescue the criterion.'
+  M6:
+    name: Invariance
+    status: PC
+    short: All layers of Pythia-70M, five expansion ratios, two scoring regimes
+    verified: true
+    reasoning: 'The result is not reported at one setting. It is reported across every residual stream
+      layer of Pythia-70M, five dictionary-width ratios spanning undercomplete to eight times overcomplete,
+      six layers of a second and larger model, and two scoring regimes of which the harder one is run
+      precisely because the easier one could be flattering. That is a wide invariance envelope for a 2023
+      result. It stops short of complete because the envelope is one architecture family, one tokeniser
+      and one training corpus, and because the paper reports where invariance breaks rather than explaining
+      it: the advantage is gone by layer 4.'
+    notes:
+      legacy_evidence: 'Reported across all layers of Pythia-70M, six layers of Pythia-410M, five expansion
+        ratios, and two scoring regimes (top-and-random, random-only). Reported where invariance \emph{fails}:
+        the advantage over ICA vanishes by layer 4. Leask et al.\ add a second model family. Not checked
+        across tokenisers, training corpora, or architectures beyond decoder-only transformers'
+      verification: 'Every count in the cell checks out: five expansion ratios (R ∈ {0.5, 1, 2, 4, 8},
+        Table 2 caption), six Pythia-410M layers (3, 7, 11, 15, 19, 23, Figure 17), two scoring regimes
+        (top-and-random, random-only). This creates a conflict with E2, which describes the causal evidence
+        as covering "one layer." Figure 3 is one layer; Appendix F repeats the procedure on six. The two
+        cells cannot both stand as written.'
+  M7:
+    name: Selection correction
+    status: U
+    short: A feature scoring fewer than 20 varying fragments is skipped; the count is unreported
+    verified: true
+    reasoning: 'The counts that exist are disclosed and the search that produced the showcase is disclosed
+      in unusual detail, down to the probe sentence and the fact that the apostrophe feature was the third
+      hit rather than the first. None of that is a correction. No adjustment for multiplicity is applied
+      anywhere, and the scored 150 are a survivor population: step 5 of the protocol discards any feature
+      with fewer than 20 varying fragments among 50,000 before scoring begins, and the number discarded
+      is never reported. Sparser dictionaries lose more features to that filter, which cuts in the direction
+      of the paper''s own comparison.'
+    notes:
+      legacy_evidence: Unattempted. 150 features per method are scored for the headline comparison; the
+        showcased apostrophe feature is disclosed as the third hit of a hand-run search (``The top activating
+        feature in our dictionary was an outlier dimension feature \ldots then the apostrophe-preceding-s
+        feature''); the circuit-detection case study uses 20 contexts and one target feature. $N$ is partly
+        stated; no multiplicity control is applied anywhere
+      verification: 'The 150 figure is verbatim from the Figure 2 caption and applies to that figure only;
+        Figures 8, 9, 10 and 18 report no N. The third-hit reading of Appendix D.3 is correct: an outlier-dimension
+        feature, then the apostrophes-after-O feature, then the apostrophe-preceding-s feature that the
+        paper showcases. Two of the sentences quoted above are entered as two quotes each because they
+        run across page furniture in the PDF and do not resolve whole against the pinned extraction —
+        the Appendix D.3 sentence across a footnote, a page break and two figure captions, the §5.3 sentence
+        across footnote 5 and a page break. Each pair reassembles to the whole sentence with nothing omitted.
+        The cell does not mention the step-5 skip rule, which is the sharper selection problem, since
+        it is a filter applied before scoring whose magnitude is never reported.'
+  I1:
+    name: Necessity
+    status: PC
+    short: One feature ablated for behaviour; a full previous-layer sweep reads out to features
+    verified: true
+    reasoning: 'Removal is performed and the direction of the effect matches the feature''s reading: take
+      away the apostrophe feature and the model stops predicting the possessive s. The report is qualitative.
+      There is no effect size, no comparison against ablating a random direction of the same norm, and
+      no necessity test over a set of features with a stated criterion. The ablation is also deliberately
+      minimal by construction, lowering activation only to the threshold, which bounds how much necessity
+      it could demonstrate.'
+    notes:
+      legacy_evidence: 'One removal experiment, on one feature, qualitatively reported: ``less-than-rank-one
+        ablation'''' of the apostrophe feature lowers the logit for the following \texttt{''s}. The off-target
+        scale is disclosed in the same caption --- ``there are 12k logits negatively effected, but we
+        set a threshold of 0.1 for visual clarity.'''' No systematic necessity test over a feature set'
+      verification: 'Contradiction with the cell''s summary. "One feature, one removal" holds for necessity
+        with respect to behaviour, which is tested once, on the apostrophe feature, against logits. It
+        does not hold for ablation as such: §5.3 ablates every dictionary feature in the previous layer,
+        one at a time, and ranks them by effect on a target feature, then applies the procedure recursively.
+        That is a systematic ablation sweep whose outcome variable is another feature''s activation rather
+        than model behaviour.'
+  I2:
+    name: Sufficiency
+    status: PC
+    short: Interchange intervention on IOI; counterfactual features written in
+    verified: true
+    reasoning: 'This is an interchange intervention in the strict sense: feature values from a counterfactual
+      run are written into the base run, and the outcome is distance to the counterfactual target rather
+      than change from baseline. Sufficiency is established comparatively, as fewer feature directions
+      than PCA components to reach a given KL, and never absolutely. No KL threshold is nominated below
+      which the patched set counts as sufficient, so the claim is that the curve is better rather than
+      that a particular set suffices. The floor of the curve is set by lossy reconstruction, which the
+      paper quantifies elsewhere as a Pile perplexity rise from 25 to 40.'
+    notes:
+      legacy_evidence: 'The IOI experiment is an interchange intervention: features from a counterfactual
+        run are written into the base run and KL to the counterfactual target is measured. It shows that
+        patching \emph{fewer} feature directions reaches a given KL than patching PCA components. No threshold
+        is defined at which the feature set is called sufficient, and reconstruction is lossy --- substituting
+        one layer''s reconstruction raises Pile perplexity from 25 to 40'
+      verification: 'All five quotes are verbatim. The perplexity number is measured on layer 2 of Pythia-70M,
+        whereas the patching experiment is layer 11 of Pythia-410M, so the cell''s pairing of the two
+        is an argument rather than a measurement on the same system. The cell''s "one layer" also conflicts
+        with M6: Appendix F reports the same procedure on layers 3, 7, 11, 15, 19 and 23.'
+  I3:
+    name: Minimality
+    status: PC
+    short: ACDC orders features; the next feature usually adds little
+    verified: true
+    reasoning: 'The result has the shape of a minimality claim: a greedy ordering over features and the
+      demonstration that a short prefix of it does the work. It is not a minimality test. Nothing is removed
+      from a selected prefix to show the remainder fails, and a greedy ordering cannot certify that no
+      smaller set reaches the same KL. The comparison that is made is across decompositions rather than
+      within one, which supports the weaker claim the paper actually states: fewer feature directions
+      than PCA components, not the fewest possible.'
+    notes:
+      legacy_evidence: 'The origin''s headline causal result is minimality-shaped: ACDC orders features
+        so that ``patching the next feature usually results in a smaller $D_{KL}$ loss,'''' and the claim
+        is that fewer patches suffice. No leave-one-out over a selected set, and Leask et al.\ show minimality
+        is not a property of the model but of the chosen width --- a latent minimal at one dictionary
+        size decomposes at another'
+      verification: The cell's quote is verbatim but stops before "than each previous feature," which
+        is what makes the sentence a statement about a monotone ordering rather than about diminishing
+        returns. Restored in the quote above.
+  I4:
+    name: Specificity
+    status: I
+    short: Single-feature ablation moves 12,000 logits; left unanalyzed
+    verified: true
+    reasoning: 'The off-target extent of the intervention was measured, disclosed in one clause of a figure
+      caption, and then removed from view. Ablating a single dictionary feature moves twelve thousand
+      logits down; the paper names the one that moves most and reads the intervention as confirming the
+      feature''s interpretation. Nothing establishes that the other movements are noise: there is no comparison
+      to ablating a random direction of the same norm, no report of which tokens they are, and the display
+      threshold of 0.1 is chosen for clarity rather than derived from a null. Specificity was computable
+      from data the authors already had and is the one quantity the section does not analyse.'
+    notes:
+      legacy_evidence: 'Measured incidentally at origin and left unanalysed: the single-feature ablation
+        moves 12{,}000 logits, disclosed and then hidden behind a display threshold. Later evidence splits.
+        Against: 17 of 22 matched features clearing a cosine $\geq 0.90$ recovery bar are causally inert
+        in a \emph{degraded} SAE (77\%) against 2 of 22 in a well-trained one (9\%), with inert matches
+        at cosine up to 0.9998; the paper separates structural inertness, which better training does not
+        remove, from competitive inertness, a TopK pathology of degraded dictionaries \citep{bal2026causal},
+        and Leask et al.''s targeted-probe-perturbation score is ``not monotonically decreasing with SAE
+        size.'''' For: the origin''s circuit-detection procedure finds coherent causal trees across layers'
+      verification: 'PRIORITY CHECK, confirmed. The ablated object is dictionary feature 556, the apostrophe
+        feature of Figure 4, ablated by less-than-rank-one ablation per footnote 5. What moves is the
+        next-token logit distribution, measured as the difference between ablated and unablated models.
+        The paper''s only comment on the 12k is the display-threshold clause quoted above; §5.2 discusses
+        the "s" token and nothing else, so the quantity is disclosed and left unanalysed exactly as the
+        cell says. One attribution correction for the follow-up: Leask et al. say the targeted probe perturbation
+        *accuracy* is not monotonically decreasing, not the score.'
+  I5:
+    name: Rival mechanism exclusion
+    status: PC
+    short: 'Rival methods excluded: PCA, ICA, top-$K$, non-sparse dictionary'
+    verified: true
+    reasoning: 'Rival methods are excluded carefully. Each alternative decomposition is run on the same
+      activations and scored by the same instrument, and two of the controls isolate a specific ingredient
+      rather than just adding another competitor: α = 0 removes sparsity while keeping dictionary learning,
+      and top-K matches the number of active directions so the comparison is not won by a half-space artifact.
+      The paper even offers a mechanism for why the strongest rival is strongest. What is not excluded
+      is the rival account of what the surviving directions are. Every comparison here is between decompositions
+      of the same trained model, so none of them can separate structure in the model from structure the
+      sparsity penalty imposes.'
+    notes:
+      legacy_evidence: 'Rival \emph{methods} are excluded carefully --- PCA, ICA, top-$K$ variants controlling
+        for active-direction count, and a non-sparse dictionary isolating the contribution of sparsity
+        itself. The rival \emph{account} is not excluded and is what later work establishes: that the
+        recovered directions are properties of the dictionary and its sparsity penalty rather than of
+        the model'
+      verification: The four rival methods and both isolating controls are confirmed verbatim. The cell's
+        claim that the rival account is what later work establishes is supported by the two Leask quotes,
+        which name the sparsity penalty as the cause of composed latents.
+  I6:
+    name: Double dissociation
+    status: U
+    short: Unattempted; no second decomposition shown intact
+    verified: true
+    reasoning: The inventory of interventions is stated explicitly and is one-directional throughout.
+      Every manipulation acts on dictionary features and reads out either model logits or another dictionary
+      feature. A double dissociation needs the converse arm as well, an intervention that disrupts the
+      sparse dictionary decomposition while leaving a rival decomposition intact, or the reverse. Neither
+      paper contains one; the PCA and ICA comparisons are parallel measurements on undisturbed activations,
+      not crossed interventions.
+    notes:
+      legacy_evidence: 'Unattempted. No converse test: no second decomposition is shown intact under an
+        intervention that disrupts SAE features, or vice versa'
+      verification: 'The quotes bound the design rather than asserting an absence: §5 lists the three
+        analyses performed, and §4.1 gives the only other intervention. The absence of a converse arm
+        follows from a full read of both papers.'
+  I7:
+    name: Confound control
+    status: PC
+    short: Three designed controls, including an $\alpha=0$ dictionary
+    verified: true
+    reasoning: Three controls, each designed against a named alternative explanation rather than added
+      for completeness. The non-sparse dictionary asks whether dictionary learning alone produces the
+      causal advantage and answers no. Top-K PCA and ICA ask whether the interpretability advantage is
+      an artifact of sparse features activating on less than a half-space and answer mostly no, with the
+      residual quantified rather than waved away. Random-only scoring asks whether the metric is inflated
+      by feeding the scorer top-activating fragments and answers that scores fall but the ordering holds.
+      The confounds left standing are the two that later broke the claim.
+    notes:
+      legacy_evidence: 'Three designed controls at origin. The $\alpha = 0$ dictionary isolates sparsity
+        from dictionary learning in the causal experiment; top-$K$ PCA and ICA isolate sparsity from expansion
+        in the interpretability experiment, and ``this change does not explain more than a small fraction
+        of the improvement in scores''''; random-only scoring isolates the effect of selecting top-activating
+        fragments. Uncontrolled: model trainedness and dictionary width, the two that later broke'
+      verification: 'All three controls are confirmed and the top-K quote is verbatim. One correction
+        to the cell''s list of uncontrolled confounds: dictionary width is not entirely uncontrolled,
+        since Appendix C.1 varies R from 0.5 to 8 and reports interpretability scores stable across widths.
+        What is uncontrolled is width as a determinant of *which* latents exist, which is the sense in
+        which it later broke.'
+  I8:
+    name: Confounding sensitivity
+    status: U
+    short: Unattempted; no E-value or sensitivity analysis
+    verified: false
+    reasoning: NOT SETTLED BY THE SOURCES. Neither paper reports a sensitivity analysis for unmeasured
+      confounding, and no sentence in either paper bears on the question, so there is nothing to quote
+      in either direction.
+    notes:
+      legacy_evidence: Unattempted. No E-value or sensitivity analysis
+      verification: Read both papers in full. No E-value, no bias-adjusted bound, no sensitivity parameter
+        appears in Cunningham §§1-6 or Appendices A-G, or in Leask §§1-7 or Appendix A. The status rests
+        on an absence that cannot be evidenced by quotation, so quotes stay empty and verified stays false.
+  I9:
+    name: Epistatic interaction
+    status: PC
+    short: Assumed away explicitly; ACDC treats features as a flat graph
+    verified: true
+    reasoning: 'The independence assumption is stated in the method rather than left implicit, which is
+      the right way to assume something away: the reader can see that interactions between features are
+      excluded by construction, not overlooked. That is why this is partial rather than incomplete. The
+      assumption has since been tested on the object it concerns and fails, since a large latent can be
+      a sparse combination of meta-latents, in which case its contribution is not independent of theirs.'
+    notes:
+      legacy_evidence: 'Assumed away at origin, explicitly: ACDC is applied ``treating them as a flat
+        computational graph in which every feature contributes an independent change to the $D_{KL}$ output
+        metric.'''' The assumption has since been tested and fails in two ways --- feature absorption,
+        where ``parent features fail to activate and are absorbed into child features'''' (Chanin et al.\
+        2024), and composition, where a single large latent is a sparse combination of meta-latents'
+      verification: The flat-graph quote is verbatim. Chanin et al. (2024) and the feature-absorption
+        result the cell cites appear in neither audited paper, so only the composition half of the cell's
+        argument is quotable from these sources.
+  I10:
+    name: Rescue reversibility
+    status: U
+    short: Unattempted, though patching is reversible by construction
+    verified: true
+    reasoning: 'The intervention is reversible by construction and the material for a rescue experiment
+      is already computed: base-run features and counterfactual-run features are both in hand, and the
+      patch is an additive edit that could simply be run in the other direction. No corrupt-then-restore
+      condition is reported in either paper. The criterion is unattempted rather than failed, and unattempted
+      at unusually low cost.'
+    notes:
+      legacy_evidence: Unattempted. Activation patching is reversible by construction and the clean activations
+        are already computed; no corrupt-then-restore experiment appears in either paper
+      verification: The quotes establish that both activation sets exist at intervention time, which is
+        what makes the missing experiment cheap. The absence of a restore condition follows from a full
+        read.
+  I11:
+    name: Onset coupling
+    status: U
+    short: 'Unattempted, and cheap: Pythia ships pretraining checkpoints'
+    verified: true
+    reasoning: The audited models are the Pythia suite, which exists to support analysis across training.
+      Nothing in either paper measures when a dictionary feature first appears during pretraining, or
+      whether its appearance coincides with the behaviour it is said to support. The single dictionary
+      per configuration is trained on a final checkpoint, so onset is not merely unreported but outside
+      the design.
+    notes:
+      legacy_evidence: 'Unattempted, and cheap here: Pythia ships intermediate pretraining checkpoints
+        by design, so whether a feature appears when the corresponding capability appears is directly
+        runnable on the audited models'
+      verification: 'The model identification is verbatim. The further claim in the cell, that Pythia
+        ships intermediate pretraining checkpoints by design, is true of the Pythia release but is not
+        stated in either audited paper; the only trace here is the cited title, "Pythia: A suite for analyzing
+        large language models across training and scaling."'
+  I12:
+    name: Offset coupling
+    status: U
+    short: Unattempted; the nearest result is at the extreme rather than along a trajectory
+    verified: false
+    reasoning: NOT SETTLED BY THE SOURCES. Neither paper measures whether a feature weakens or disappears
+      when the capability it is credited with disappears. The comparison the cell points to is external
+      to both papers.
+    notes:
+      legacy_evidence: Unattempted. The nearest existing result is at the extreme rather than along the
+        trajectory --- SAEs on randomly initialised transformers score comparably \citep{heap2025sparse}
+        --- and that bears on the scoring instrument rather than on the feature's coupling to a capability
+      verification: Heap et al. (2025), the random-network comparison the cell treats as the nearest result,
+        is cited in neither audited paper. Nothing in Cunningham or Leask varies a capability and tracks
+        a feature, so there is no sentence to quote and the cell stays unverified.
+  E1:
+    name: Intervention reach
+    status: PC
+    short: 'Two forms: activation patching and less-than-rank-one ablation'
+    verified: true
+    reasoning: 'Two intervention forms are used and they differ in kind: writing counterfactual feature
+      values into the residual stream, and lowering a feature''s activation until it switches off. Both
+      act on feature directions, which is the right target for the claim. Neither drives a feature above
+      its natural range, so no steering condition exists, and §5''s own inventory confirms it: input,
+      output and upstream analyses. The abstract''s appeal to steerability is scoped as a hope for future
+      work in the same sentence.'
+    notes:
+      legacy_evidence: 'Two intervention forms at origin --- activation patching in the IOI experiment
+        (\S4) and less-than-rank-one ablation in the case studies (\S5.2, \S5.3) --- both acting on feature
+        directions. \S5 is organised as input, output and intermediate analyses and contains no steering
+        condition; the abstract''s appeal to ``steerability'''' is an aspiration for future work rather
+        than a reported experiment. Later reach is broad and contested: AxBench reports SAEs uncompetitive
+        at steering, and J\o{}rgensen et al.\ (2026) rebut with the reply title ``Actually, Sparse Autoencoders
+        can outperform simple baselines'''''
+      verification: The steerability sentence is verbatim from the abstract and is explicitly about what
+        the method may enable later, which supports the cell's reading of it as an aspiration. AxBench
+        and Jørgensen et al. (2026) appear in neither audited paper.
+  E2:
+    name: Prompt generalization
+    status: PC
+    short: 'Cross-corpus by construction: trained on the Pile, scored on OpenWebText'
+    verified: true
+    reasoning: 'The interpretability evidence is cross-corpus without anyone having to arrange it: dictionaries
+      are fit on the Pile and scored on OpenWebText, and the screen is 50,000 fragments per feature, so
+      a direction that only cohered on its training distribution would score badly. The causal evidence
+      does not generalize the same way. It is one task, one template family with a swapped indirect object,
+      and 50 items, which is enough to establish the comparison against PCA and not enough to establish
+      that the features localise behaviour in general.'
+    notes:
+      legacy_evidence: 'Cross-corpus by construction --- dictionaries trained on the Pile, interpretability
+        scored on OpenWebText, with 50{,}000 fragments screened per feature. The causal evidence is narrow
+        by comparison: one template family, 50 IOI data points, six layers of Pythia-410M'
+      verification: 'The corpora and the 50,000 figure are confirmed. The cell''s "one layer" conflicts
+        with the same paper''s Appendix F and with M6 in this audit: Figure 3 is layer 11 of Pythia-410M,
+        and Figure 17 repeats the procedure on layers 3, 7, 11, 15, 19 and 23. The Figure 3 caption points
+        at Appendix F in the same breath, so the narrower reading is not sustainable.'
+      reconciled: 'E2 previously described the reach as one layer, which conflicted with M6 in this same
+        audit. M6 is correct: Figure 17 repeats the procedure on layers 3, 7, 11, 15, 19 and 23 of Pythia-410M,
+        and the Figure 3 caption points at Appendix F in the same sentence.'
+  E3:
+    name: Cross-task generalization
+    status: U
+    short: Unattempted; generalization stated as an expectation
+    verified: true
+    reasoning: The generalization is asserted as an expectation and flagged as unconfirmed inside the
+      same sentence, which is the honest way to state it and is not evidence. One task is run. The follow-up
+      supplies a multi-dataset test of a related quantity and gets a result that does not resolve cleanly
+      in either direction.
+    notes:
+      legacy_evidence: 'Unattempted at origin, and asserted past: ``Because our dictionary is trained
+        in a task-agnostic way, we expect this result to generalize to similar tasks and behaviours, but
+        more work is needed to confirm this suspicion.'''' Later work supplies the test and the answer
+        is mixed --- Leask et al.\ report the sparse-probing relationship ``complex and dataset dependent,''''
+        and \citet{mueller2025mib} finds no advantage over neurons across four tasks'
+      verification: Both origin quotes are verbatim, as is the Leask sparse-probing sentence. Mueller
+        et al. (2025) is cited in neither audited paper.
+  E4:
+    name: Cross-model generalization
+    status: C
+    short: 'Transfers everywhere tried: Pythia, GPT-2 small, Gemma 2 2B'
+    verified: true
+    reasoning: 'The method transfers everywhere it has been tried within these two papers: two Pythia
+      sizes at origin, and in the follow-up eight dictionaries on GPT-2 Small plus two released dictionaries
+      on Gemma 2 2B, where the second family is run explicitly to check that the result is not an artifact
+      of the first. What transfers is the recovery procedure. Which units it returns is exactly what the
+      follow-up shows varies with model and width, so cross-model generalization of the method is not
+      cross-model generalization of the features.'
+    notes:
+      legacy_evidence: 'The method transfers everywhere it has been tried: Pythia-70M and 410M at origin,
+        GPT-2 small and Gemma 2 2B in Leask et al., Claude 3 Sonnet (Templeton et al.\ 2024), GPT-4 (Gao
+        et al.\ 2024), Llama 3 8B (Paulo \& Belrose 2025), and the full Gemma Scope release. What transfers
+        is the recovery procedure; what varies with model and width is which units it returns'
+      verification: 'Pythia-70M, Pythia-410M, GPT-2 Small and Gemma 2 2B are all attested. The other transfers
+        the cell lists are not: Claude 3 Sonnet, GPT-4 and Llama 3 8B appear in neither audited paper,
+        and Templeton (2024) is cited by Leask only as an example of very large SAEs they did not study.'
+  E5:
+    name: Graded response
+    status: PC
+    short: 'Two graded curves: KL against features patched, edit size against KL'
+    verified: true
+    reasoning: 'Two dose-response curves exist and they vary different quantities: number of patched features
+      against KL, and edit magnitude against KL. Both are monotone in the direction the account predicts,
+      and the second is the more informative one because it separates how much you change from how much
+      you achieve. The gap is at the level of the individual feature. The ablation is binary by construction,
+      switching a feature off rather than scaling it, so no per-feature strength sweep exists to show
+      that half the feature does half the work.'
+    notes:
+      legacy_evidence: 'Two graded curves at origin: KL divergence against number of patched features,
+        and mean edit magnitude against KL, described as improving ``the Pareto frontier of edit magnitude
+        vs thoroughness of editing.'''' Leask et al.\ add latent-by-latent stitching curves. The single-feature
+        ablation is binary by construction --- lowering activation only ``up to the point where the feature
+        is no longer active'''' --- so no per-feature strength sweep exists'
+      verification: Both curves and the Pareto phrase are verbatim. The binary-ablation reading is supported
+        by footnote 5's "only up to the point where the feature is no longer active."
+  E6:
+    name: Novel prediction
+    status: PC
+    short: The IOI experiment is a prediction in the weak sense
+    verified: true
+    reasoning: 'The prediction is real in the weak sense and the paper identifies why it counts: the dictionaries
+      were fit without reference to the task, then asked to localise a behaviour they never saw, against
+      a decomposition fit the same way. It stays weak because the prediction is comparative and directional
+      with no stated threshold, is not registered anywhere, and the task was selected after the dictionaries
+      existed for the stated reason that it is simple and previously studied.'
+    notes:
+      legacy_evidence: 'The IOI experiment is a genuine prediction in the weak sense and the paper says
+        why: ``Recall that the training of our feature dictionaries does not emphasize any particular
+        task.'''' Task-agnostic dictionaries were predicted to localise a task they never saw, and they
+        did, against PCA. Not pre-registered, and the outcome is reported as a curve rather than against
+        a stated threshold'
+      verification: The task-agnostic sentence is verbatim and sits immediately after the task description,
+        which is where it does the work the cell credits it with.
+  V1:
+    name: Level declaration
+    status: PC
+    short: Formal object declared precisely; ``feature'' carries more than it
+    verified: true
+    reasoning: 'The formal object and the metric are declared exactly: rows of a learned matrix, and a
+      correlation between simulated and actual activations. The word carrying the claim is less disciplined.
+      Across four sentences "feature" denotes a unit of the network to be reverse engineered, a row of
+      the dictionary, and a real-world property that text corresponds to, and the last sentence uses two
+      of those senses at once. No description mode is declared, so which level a result speaks to has
+      to be inferred from context.'
+    notes:
+      legacy_evidence: 'The formal object is declared precisely --- an overcomplete dictionary with a
+        sparsity penalty, and a named metric. The word ``feature'''' is not: it slides between a direction
+        in activation space and a human-recognisable concept, and no description mode is stated'
+      verification: 'One qualification to the cell. The origin is more careful than "it slides between
+        a direction in activation space and a human-recognisable concept" allows: §2 names ground truth
+        network features and dictionary features as separate objects and writes the approximation between
+        them. The slide is in the title, abstract and case-study prose, where the qualifier is dropped.'
+  V2:
+    name: Level-evidence match
+    status: PC
+    short: Evidence supports the decomposition claim the origin makes
+    verified: true
+    reasoning: 'The origin scopes its claims to the instrument, and does it inside the sentences that
+      carry them: more interpretable than named alternatives, with the measurement caveat attached in
+      the abstract itself, and features that appear to correspond to an explanation. The evidence matches
+      that. The mismatch appears at the level the field adopted, where the same result is read as identifying
+      the model''s features and the units of analysis, which is a representational and computational claim
+      that comparative scores on a proxy do not reach.'
+    notes:
+      legacy_evidence: 'Scored against the field''s claim. The evidence establishes that sparse dictionary
+        learning yields directions scoring higher on an automated proxy than six baselines, and that patching
+        fewer of them than PCA components reaches a given KL on one task. The adopted claim is that these
+        are the model''s features and the units of analysis --- representational and computational. Three
+        results sever the link: the proxy does not distinguish trained from random networks, the units
+        change with width, and causal localisation is no better than neurons. Against the \emph{origin''s
+        own} hedged wording (``indicates that it is possible,'''' ``appear to correspond,'''' ``more monosemantic
+        than comparable methods'''') this row would be PC'
+      verification: 'All three hedges the cell quotes are verbatim and appear in the places it says. The
+        cell''s closing observation, that against the origin''s own wording this row would be PC, is supported:
+        nothing in the four quotes above claims the recovered directions are the model''s units. The three
+        severing results the cell cites are only partly quotable here, since the trained-versus-random
+        comparison and the neuron comparison are external to both papers; the width result is in Leask.'
+  V3:
+    name: Alternative level
+    status: PC
+    short: 'Raised at origin and not pursued: no single correct decomposition'
+    verified: true
+    reasoning: 'The alternative level is raised by the origin itself, in the appendix, from its own negative
+      result, and then not pursued: the sentence names the possibility that no decomposition is privileged
+      and immediately says confirming it would take work not done here. Raising an alternative and declining
+      to test it is the partial case. The follow-up pursues it, formalises it as the question of canonical
+      units, and recommends accepting the alternative rather than resolving it.'
+    notes:
+      legacy_evidence: 'The alternative is raised at origin and not pursued: ``there is not a single correct
+        way to decompose activation spaces into a sparse basis, though to confirm this would require many
+        additional experiments.'''' Leask et al.\ pursue it and formalise it, and their recommendation
+        is to accept it --- ``the choice of SAE size should be guided by the specific interpretability
+        task at hand, accepting that no single SAE configuration provides a universal solution'''''
+      verification: Both quotes are verbatim. The origin sentence is quoted here in full including the
+        trailing hedge, which the cell truncates.
+  V4:
+    name: Unlicensed labeling
+    status: PC
+    short: '``Monosemantic'''' projects semantics; the origin hedges consistently'
+    verified: true
+    reasoning: '“Monosemantic” and “interpretable” project a semantic category onto a direction in activation
+      space, and the origin hedges the projection every time it makes it: an idealised feature is defined
+      rather than claimed, features appear to correspond, and the conclusion says more monosemantic than
+      comparable methods rather than monosemantic. The showcase discloses its own counterexample in running
+      text, with figure pointers, which is what a calibrated version of this vocabulary looks like. It
+      falls short of complete because the label is never tested contrastively: nothing in the paper establishes
+      what a direction that was not a concept would score.'
+    notes:
+      legacy_evidence: '``Monosemantic'''' and ``interpretable'''' project semantic categories onto directions,
+        and the origin hedges consistently (``an \emph{idealised} monosemantic dictionary feature,''''
+        features that ``\emph{appear to} correspond'''') while disclosing the counterexample within its
+        own showcase: the apostrophe feature ``does not activate on all apostrophes,'''' with two further
+        apostrophe features for other contexts. Never contrastively tested; Heap et al.''s random-network
+        comparison is the contrast and the label survives it, which is the problem'
+      verification: 'PRIORITY CHECK, confirmed as the authors'' own disclosure. The sentence opens the
+        paragraph immediately after the monosemanticity showcase in §5.1, concedes the limitation in the
+        authors'' voice, points at Figures 14 and 15 for the two other apostrophe features, and points
+        at Appendix D.3 for the search protocol. It is not a reading imposed on the paper. A tension the
+        paper does not name: “activates only for apostrophes” and “does not activate on all apostrophes”
+        together describe a direction with high precision and unquantified recall, and neither quantity
+        is reported. Heap et al. (2025), the contrastive test the cell invokes, is in neither audited
+        paper.'
+  V5:
+    name: Scope declaration
+    status: C
+    short: Both papers declare limits and quantify them
+    verified: true
+    reasoning: Both papers declare their limits and attach numbers to them rather than gesturing. The
+      origin quantifies incomplete reconstruction as a perplexity rise from 25 to 40, names the sublayer
+      where its pipeline fails, names the sublayer it did not attempt, marks its generalization claim
+      as unconfirmed in the sentence that makes it, and devotes an appendix to a method that did not work.
+      The follow-up states its model and scale coverage and its own uncertainty about whether the object
+      it looked for exists.
+    notes:
+      legacy_evidence: Both papers declare limits and quantify them. Cunningham \S6.2 gives incomplete
+        reconstruction with a number (Pile perplexity 25 $\to$ 40), the MLP training failure, the untried
+        attention sublayer, and the unconfirmed IOI generalisation, plus an appendix of failed methods.
+        Leask et al.\ state ``our work only studies two LLMs and does not include very large SAEs'' and
+        ``We are uncertain whether canonical units of analysis exist''
+      verification: 'All quotes verbatim. One locator correction to the cell: “We are uncertain whether
+        canonical units of analysis exist” is the last sentence of Leask §1, not part of the §7 limitations
+        paragraph, so the two Leask quotes come from opposite ends of the paper.'

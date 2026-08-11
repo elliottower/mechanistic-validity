@@ -1,0 +1,22 @@
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.pdf
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.toc
+.DS_Store
+
+# pinned source PDFs — not redistributed (copyright).
+# each claims/*.yaml carries the citation, url and sha256 to refetch and verify.
+reference
+paper/generated/
+__pycache__/
+*.pyc
+
+# editor and build leftovers
+*.bak
+*_backup_*.tex

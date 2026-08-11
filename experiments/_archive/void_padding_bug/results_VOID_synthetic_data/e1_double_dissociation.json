@@ -1,0 +1,86 @@
+{
+  "n": 1000,
+  "n_perm": 1000,
+  "seed": 0,
+  "baseline": {
+    "ioi": 0.895223081111908,
+    "greater_than": 0.8602335453033447
+  },
+  "conditions": {
+    "zero": {
+      "deficits": {
+        "ioi": {
+          "ioi": {
+            "mean": 1.0382051467895508,
+            "sem": 0.06470072269439697
+          },
+          "greater_than": {
+            "mean": 0.39435961842536926,
+            "sem": 0.0075955200009047985
+          }
+        },
+        "greater_than": {
+          "ioi": {
+            "mean": 0.7761502861976624,
+            "sem": 0.053733427077531815
+          },
+          "greater_than": {
+            "mean": 0.8824491500854492,
+            "sem": 0.00866995844990015
+          }
+        }
+      },
+      "decisive": true,
+      "crosses": true,
+      "p_permutation": 0.000999000999000999
+    },
+    "resample": {
+      "deficits": {
+        "ioi": {
+          "ioi": {
+            "mean": 1.0549918413162231,
+            "sem": 0.07697127014398575
+          },
+          "greater_than": {
+            "mean": 0.7053166627883911,
+            "sem": 0.01332970429211855
+          }
+        },
+        "greater_than": {
+          "ioi": {
+            "mean": 1.0466620922088623,
+            "sem": 0.07207624614238739
+          },
+          "greater_than": {
+            "mean": 0.8665262460708618,
+            "sem": 0.007127583492547274
+          }
+        }
+      },
+      "decisive": true,
+      "crosses": false,
+      "p_permutation": 0.060939060939060936
+    },
+    "native": {
+      "deficits": {
+        "ioi": {
+          "ioi": {
+            "mean": 0.8168402910232544,
+            "sem": 0.05141405761241913
+          }
+        },
+        "greater_than": {
+          "greater_than": {
+            "mean": 1.3331177234649658,
+            "sem": 0.01637222245335579
+          }
+        }
+      },
+      "decisive": false,
+      "crosses": null,
+      "p_permutation": null,
+      "note": "native corruptions are task-specific; the off-diagonal is undefined, so this condition cannot test a crossing"
+    }
+  },
+  "criterion_met": false
+}

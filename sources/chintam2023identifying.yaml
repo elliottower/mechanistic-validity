@@ -1,0 +1,14 @@
+citation: chintam2023identifying
+depth: uncited
+title: Identifying and Adapting Transformer-Components Responsible for Gender Bias in an English Language
+  Model
+authors:
+- Chintam, Abhijith
+- Beloch, Rahel
+- Zuidema, Willem
+- Hanna, Michael
+- van der Wal, Oskar
+year: '2023'
+venue: BlackboxNLP
+url: https://doi.org/10.18653/v1/2023.blackboxnlp-1.29
+doi: 10.18653/v1/2023.blackboxnlp-1.29

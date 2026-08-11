@@ -1,0 +1,22 @@
+citation: bal2026causal
+depth: quoted
+title: 'From Geometric Recovery to Causal Validation: A Reproducible Audit of Sparse Autoencoder Features,
+  from Superposition Geometry to Causal Inertness'
+authors:
+- Bal, Mohamed Abdessalem
+year: '2026'
+venue: arXiv preprint
+url: https://arxiv.org/abs/2607.12166
+arxiv: '2607.12166'
+local: reference/bal_2026_causal_inertness.pdf
+sha256: 0c5c3a9888ae0ce3ea3558e7ef6daa7ec32dd68e7f7c0ca8b11c069d9a498d68
+quotes:
+- text: 'we find that up to 77% of features passing a standard recovery bar (cosine ≥ 0.90) in a degraded
+    SAE—and 9% in a well-trained one—are causally inert: the matched atom never fires when the feature
+    is present'
+  section: Abstract
+  direction: lowers
+- text: 'This is 17 of 22 pairs (77%), not a dredged-up edge case. The good SAE exhibits the same mode
+    at a lower rate: 2 of 22 matches (9%), both at cosine > 0.9999.'
+  section: '6.3'
+  direction: lowers

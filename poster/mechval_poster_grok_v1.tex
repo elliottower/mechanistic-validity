@@ -1,0 +1,311 @@
+% Mechanistic Validity — NEMI 2026 poster, v1
+% tikzposter 3x3 block format, matching grokking_poster_v2.tex style.
+%
+%   lualatex mechval_poster_grok_v1.tex
+
+\documentclass[25pt, a0paper, portrait]{tikzposter}
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+% ── Color palette ───────────────────────────────────────
+\definecolor{confirmed}{HTML}{2980B9}
+\definecolor{partial}{HTML}{E67E22}
+\definecolor{inconclusive}{HTML}{95A5A6}
+\definecolor{untested}{HTML}{BDC3C7}
+\definecolor{disconfirmed}{HTML}{E74C3C}
+\definecolor{darktext}{HTML}{2C3E50}
+\definecolor{blockbg}{HTML}{FFFFFF}
+
+% ── Theme ───────────────────────────────────────────────
+\usetheme{Default}
+
+\definecolorstyle{MechValColors}{
+  \definecolor{colorOne}{HTML}{2C3E50}
+  \definecolor{colorTwo}{HTML}{3498DB}
+  \definecolor{colorThree}{HTML}{ECF0F1}
+}{
+  \colorlet{backgroundcolor}{colorThree}
+  \colorlet{framecolor}{colorOne}
+  \colorlet{titlefgcolor}{white}
+  \colorlet{titlebgcolor}{colorOne}
+  \colorlet{blocktitlebgcolor}{colorTwo}
+  \colorlet{blocktitlefgcolor}{white}
+  \colorlet{blockbodybgcolor}{blockbg}
+  \colorlet{blockbodyfgcolor}{darktext}
+  \colorlet{notefgcolor}{darktext}
+  \colorlet{notebgcolor}{partial!15}
+  \colorlet{notefrcolor}{partial}
+}
+\usecolorstyle{MechValColors}
+
+\defineblockstyle{MechValBlock}{
+  titlewidthscale=1.0, bodywidthscale=1.0, titleleft,
+  titleoffsetx=0pt, titleoffsety=0pt,
+  bodyoffsetx=0pt, bodyoffsety=0pt, bodyverticalshift=0pt,
+  roundedcorners=12, linewidth=2pt, titleinnersep=10pt, bodyinnersep=15pt
+}{
+  \draw[rounded corners=\blockroundedcorners, color=blocktitlebgcolor,
+        fill=blockbodybgcolor, line width=\blocklinewidth]
+    (blockbody.south west) rectangle (blocktitle.north east);
+  \ifBlockHasTitle
+    \draw[rounded corners=\blockroundedcorners,
+          fill=blocktitlebgcolor, color=blocktitlebgcolor,
+          line width=\blocklinewidth]
+      (blocktitle.south west) rectangle (blocktitle.north east);
+  \fi
+}
+\useblockstyle{MechValBlock}
+
+\definetitlestyle{MechValTitle}{
+  width=\paperwidth, roundedcorners=0, linewidth=0pt, innersep=20pt,
+  titletotopverticalspace=15mm, titletoblockverticalspace=25mm
+}{
+  \draw[fill=titlebgcolor, color=titlebgcolor]
+    (\titleposleft, \titleposbottom)
+    rectangle (\titleposright, \titlepostop);
+}
+\usetitlestyle{MechValTitle}
+
+\title{%
+  \parbox{0.92\linewidth}{\centering\bfseries
+    Mechanistic Validity\\[6pt]
+    A Validity Theory, Research Methodology, and Evidence Standard\\[3pt]
+    for Mechanistic Interpretability}}
+\author{Elliot Tower\quad\texttt{elliot@elliottower.ai}}
+\institute{}
+
+\begin{document}
+
+\maketitle[width=\paperwidth]
+
+% ════════════════════════════════════════════════════════
+% ROW 1
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.33}
+
+\block{The Problem}{
+  Mechanistic claims require five kinds of evidence---construct,
+  measurement, internal, external, and interpretive validity---but
+  researchers typically establish one or two and treat the claim as
+  validated.
+
+  \vspace{6mm}
+  A strong causal result can conceal an unresolved construct definition.
+  A reliable measurement can be measuring the wrong thing. A result
+  established in one setting cannot automatically support broader
+  generalization.
+
+  \vspace{6mm}
+  \textbf{Evidence along one dimension cannot substitute for another.}
+  The field's dominant failure mode: establishing \emph{that} a
+  component matters while leaving open \emph{what} it is.
+}
+
+\column{0.34}
+
+\block{The Framework}{
+  \textbf{36 criteria across 5 validity types.} Each claim receives a
+  structured validity profile---pass, partial, or fail on each
+  criterion. The tier is bounded by the weakest dimension, not the
+  strongest.
+
+  \vspace{5mm}
+  \begin{center}
+  \begin{tabular}{lcp{0.52\linewidth}}
+    \toprule
+    \textbf{Type} & \textbf{Criteria} & \textbf{Example question} \\
+    \midrule
+    Construct    & C1--C6  & Is the circuit a natural kind? \\
+    Measurement  & M1--M7  & Does the metric measure what it claims? \\
+    Internal     & I1--I12 & Is the causal claim warranted? \\
+    External     & E1--E6  & Does the result generalize? \\
+    Interpretive & V1--V5  & Is the interpretation justified? \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \vspace{4mm}
+  The criteria form a dependency structure: the target mechanism must be
+  coherent before it can be measured; the measurement must be
+  trustworthy before it can support causal inference.
+}
+
+\column{0.33}
+
+\block{Evidence Cards}{
+  Each conclusion is tied to the specific measurement and criterion that
+  support it. An evidence card records five fields:
+
+  \vspace{5mm}
+  \begin{enumerate}[leftmargin=*, itemsep=4mm]
+    \item The \textbf{claim} under evaluation
+    \item The \textbf{criterion} it addresses
+    \item The \textbf{measurement} used to test it
+    \item The \textbf{verdict} (confirmed, partial, inconclusive, disconfirmed)
+    \item The resulting \textbf{tier}
+  \end{enumerate}
+
+  \vspace{5mm}
+  Strength along one dimension stops standing in for weakness along
+  another. A claim with strong causal evidence but no construct
+  definition is recorded as such---the causal result is not discarded,
+  but neither does it fill the construct gap.
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 2
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.33}
+
+\block{Case Study: The IOI Circuit}{
+  Applied all 36 criteria to the indirect object identification circuit
+  (Wang et al., 2023).
+
+  \vspace{5mm}
+  \begin{center}
+  \begin{tabular}{lc}
+    \toprule
+    \textbf{Verdict} & \textbf{Count} \\
+    \midrule
+    \textcolor{confirmed}{\textbf{Confirmed}}            & 3  \\
+    \textcolor{partial}{\textbf{Partially confirmed}}     & 18 \\
+    \textcolor{inconclusive}{\textbf{Inconclusive}}       & 7  \\
+    \textcolor{untested}{\textbf{Untested}}               & 5  \\
+    \textcolor{disconfirmed}{\textbf{Disconfirmed}}       & 3  \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \vspace{4mm}
+  The IOI circuit achieves descriptive adequacy and causal sufficiency
+  but skips construct validity entirely. The analysis establishes
+  \emph{that} specific heads matter without establishing \emph{what}
+  functional role they fill as a natural kind.
+}
+
+\column{0.34}
+
+\block{The Tier System}{
+  Four tiers form a dependency chain. Each requires the evidence of all
+  tiers below it.
+
+  \vspace{5mm}
+  \begin{enumerate}[leftmargin=*, itemsep=4mm]
+    \item \textbf{Descriptive:} an observed pattern with no causal test
+    \item \textbf{Causally Suggestive:} a single-method intervention
+      supports the claim
+    \item \textbf{Triangulated:} convergent evidence from independent
+      methods with genuinely different failure modes
+    \item \textbf{Mechanistically Adequate:} full validity profile with
+      no disconfirmed criteria
+  \end{enumerate}
+
+  \vspace{5mm}
+  Most published claims reach \textbf{Causally Suggestive}. The gap is
+  between single-method causal evidence and convergent evidence from
+  independent methods.
+}
+
+\column{0.33}
+
+\block{Genetics Analogy}{
+  The framework adapts four techniques from genetics that fill gaps
+  interpretability's existing toolkit cannot cover:
+
+  \vspace{5mm}
+  \begin{enumerate}[leftmargin=*, itemsep=4mm]
+    \item \textbf{Epistasis mapping:} do circuit components interact
+      non-additively? Sub-additive interaction indicates a shared
+      pathway; super-additive indicates mutual compensation.
+    \item \textbf{Rescue experiments:} does restoring a single component
+      recover function?
+    \item \textbf{Sensitivity analysis:} does the choice of ablation
+      method change the conclusion?
+    \item \textbf{Complementation tests:} are the construct's labeled
+      subdivisions functionally distinct? Adapts Benzer's cis-trans
+      procedure.
+  \end{enumerate}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 3
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.33}
+
+\block{What This Shows}{
+  Across the case study and surveyed literature, published claims
+  establish \emph{that} a component matters and stop short of
+  establishing \emph{what} it is.
+
+  \vspace{6mm}
+  \textbf{Construct validity is the systematic gap.} The field's
+  interventions are sophisticated enough to support causal claims but
+  the construct definitions those claims rest on are rarely tested.
+
+  \vspace{6mm}
+  Evidence cards make the gap visible: a claim with strong internal
+  validity but untested construct validity is recorded at the tier its
+  weakest dimension supports, and the missing evidence is named.
+}
+
+\column{0.34}
+
+\block{What This Does Not Show}{
+  \textbf{The framework evaluates claims, not methods.} A method is not
+  invalid because a claim produced with it scores low---the claim may
+  need additional evidence from complementary methods.
+
+  \vspace{5mm}
+  \textbf{The tier system is ordinal, not cardinal.} It orders the
+  strength of evidence but does not quantify the distance between tiers.
+
+  \vspace{5mm}
+  \textbf{Single-paper validation is possible but incomplete.} A single
+  paper can score high on many criteria; complete validation requires
+  independent replication by a separate research group.
+
+  \vspace{5mm}
+  \textbf{The genetics analogies are tested on one circuit family.}
+  Broader applicability awaits additional case studies.
+}
+
+\column{0.33}
+
+\block{Takeaway}{
+  \textbf{A mechanistic claim is warranted only to the extent that every
+  required link between its concept, measurement, causal evidence,
+  scope, and interpretation is supported.}
+
+  \vspace{6mm}
+  \begin{itemize}[leftmargin=*, itemsep=4mm]
+    \item 36 criteria across 5 validity types
+    \item Tier bounded by the weakest dimension
+    \item Construct validity is the field's systematic gap
+    \item Genetics provides four techniques with no current MI analogue
+  \end{itemize}
+
+  \vspace{8mm}
+  \begin{center}
+  \texttt{elliot@elliottower.ai}
+
+  \vspace{3mm}
+  {\small Paper and code:}
+
+  \texttt{github.com/mechanistic-validity/}
+  \end{center}
+}
+
+\end{columns}
+
+\end{document}

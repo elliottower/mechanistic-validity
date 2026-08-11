@@ -1,0 +1,420 @@
+% Experiment Designs poster — NEMI 2026, v3
+% Six criteria grounded in the mechanistic validity paper.
+% All designs properly attributed, claims calibrated.
+% Wording reviewed against hostile-review feedback.
+%
+%   cd poster && lualatex designs_poster_v3.tex
+
+\documentclass[25pt, a0paper, portrait]{tikzposter}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+\tikzposterlatexaffectionproofoff
+
+% ── Color palette ───────────────────────────────────────
+\definecolor{darktext}{HTML}{2C3E50}
+\definecolor{blockbg}{HTML}{FFFFFF}
+\definecolor{hookred}{HTML}{C0392B}
+\definecolor{designblue}{HTML}{2980B9}
+\definecolor{constructgreen}{HTML}{27AE60}
+\definecolor{externalpurple}{HTML}{8E44AD}
+
+% ── Theme ───────────────────────────────────────────────
+\usetheme{Default}
+
+\definecolorstyle{DesignColors}{
+  \definecolor{colorOne}{HTML}{2C3E50}
+  \definecolor{colorTwo}{HTML}{3498DB}
+  \definecolor{colorThree}{HTML}{ECF0F1}
+}{
+  \colorlet{backgroundcolor}{colorThree}
+  \colorlet{framecolor}{colorOne}
+  \colorlet{titlefgcolor}{white}
+  \colorlet{titlebgcolor}{colorOne}
+  \colorlet{blocktitlebgcolor}{designblue}
+  \colorlet{blocktitlefgcolor}{white}
+  \colorlet{blockbodybgcolor}{blockbg}
+  \colorlet{blockbodyfgcolor}{darktext}
+  \colorlet{notefgcolor}{darktext}
+  \colorlet{notebgcolor}{designblue!12}
+  \colorlet{notefrcolor}{designblue}
+}
+\usecolorstyle{DesignColors}
+
+\defineblockstyle{DesignBlock}{
+  titlewidthscale=1.0, bodywidthscale=1.0, titleleft,
+  titleoffsetx=0pt, titleoffsety=0pt,
+  bodyoffsetx=0pt, bodyoffsety=0pt, bodyverticalshift=0pt,
+  roundedcorners=12, linewidth=2pt, titleinnersep=10pt, bodyinnersep=14pt
+}{
+  \draw[rounded corners=\blockroundedcorners, color=blocktitlebgcolor,
+        fill=blockbodybgcolor, line width=\blocklinewidth]
+    (blockbody.south west) rectangle (blocktitle.north east);
+  \ifBlockHasTitle
+    \draw[rounded corners=\blockroundedcorners,
+          fill=blocktitlebgcolor, color=blocktitlebgcolor,
+          line width=\blocklinewidth]
+      (blocktitle.south west) rectangle (blocktitle.north east);
+  \fi
+}
+\useblockstyle{DesignBlock}
+
+\definetitlestyle{DesignTitle}{
+  width=\paperwidth, roundedcorners=0, linewidth=0pt, innersep=20pt,
+  titletotopverticalspace=15mm, titletoblockverticalspace=25mm
+}{
+  \draw[fill=titlebgcolor, color=titlebgcolor]
+    (\titleposleft, \titleposbottom)
+    rectangle (\titleposright, \titlepostop);
+}
+\usetitlestyle{DesignTitle}
+
+\title{%
+  \parbox{0.92\linewidth}{\centering\bfseries
+    What Does Your Ablation Rule Out?}}
+\author{Elliot Tower\quad\texttt{elliot@elliottower.ai}}
+\institute{}
+
+\begin{document}
+
+\maketitle[width=\paperwidth]
+
+% ════════════════════════════════════════════════════════
+% ROW 1 — THE PITCH + COMPLEMENTATION (C6)
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.45}
+
+{
+\colorlet{blocktitlebgcolor}{hookred}
+\block{Different Designs Answer Different Causal Questions}{
+  Ablating a circuit and measuring degradation establishes causal
+  involvement. Stronger conclusions---specificity, independence,
+  reversibility, training-time coupling---require additional designs,
+  each of which rules out a different rival explanation.
+
+  \vspace{5mm}
+  The ORBITA trial (2017) illustrates the general principle: compare
+  an intervention against a control that preserves its incidental
+  features while removing the hypothesized active ingredient. In MI,
+  this motivates matched perturbation controls rather than comparison
+  with an intact model alone.
+
+  \vspace{5mm}
+  These designs are not unknown in MI. The claim is that they are not
+  yet routine, not consistently interpreted as distinct inferential
+  tests, and not standardized in reporting.
+
+  \vspace{5mm}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.3}
+  {\small
+  \begin{tabular}{@{}llll@{}}
+    \toprule
+    \textbf{ID} & \textbf{Design} & \textbf{Rules out} & \textbf{Cost} \\
+    \midrule
+    C6  & Complementation     & Mislabeled units   & 2 passes \\
+    I6  & Double dissociation & Generic disruption  & 1 cond. \\
+    I9  & Factorial ablation  & Hidden interaction  & 1 cond. \\
+    I10 & Rescue              & Collateral damage   & 1 pass \\
+    I11/12 & Onset/offset     & Spurious coexistence & Varies \\
+    E5  & Dose--response      & Threshold artifacts & Low \\
+    \bottomrule
+  \end{tabular}}
+  \end{center}
+}
+}
+
+\column{0.55}
+
+{
+\colorlet{blocktitlebgcolor}{constructgreen}
+\block{C6: Complementation --- Same Unit or Different?}{
+  In genetics, two mutations that both break a function might be in
+  the same gene or in different genes. Benzer's cis-trans test (1955)
+  distinguishes them: place one mutation on each chromosome (the
+  \emph{trans} configuration). If function recovers, the mutations
+  are in different genes---they \emph{complement}.
+
+  \vspace{5mm}
+  \textbf{MI translation.} S-inhibition heads and negative name
+  movers both suppress the repeated name in IOI. Run two forward
+  passes, one with each group intact. Construct a hybrid activation
+  by taking the S-inhibition contribution from pass~1 and the
+  negative name-mover contribution from pass~2 (trans configuration).
+  If the model recovers, they serve independent functional roles. If
+  the hybrid fails, they are part of the same functional unit.
+
+  \vspace{5mm}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.3}
+  {\large
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    \textbf{Configuration} & \textbf{Result} & \textbf{Interpretation} \\
+    \midrule
+    Trans (hybrid pass) & Recovers & Different units \\
+    Trans (hybrid pass) & Fails    & Same unit \\
+    Cis (single pass)   & Works    & Control \\
+    \bottomrule
+  \end{tabular}}
+  \end{center}
+
+  \vspace{5mm}
+  \textbf{Rules out:} treating two labels as two mechanisms without
+  testing whether they name the same functional unit.
+
+  \vspace{4mm}
+  Across 16 audited claims, this test has been applied
+  \textbf{zero times}. Circuit papers identify component classes
+  without testing whether those classes are functionally distinct.
+
+  \vspace{4mm}
+  \textbf{Cost:} two forward passes + hybrid assembly.
+
+  \vspace{3mm}
+  {\footnotesize Genetics. Benzer's cis-trans test (1955).}
+}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 2 — THREE INTERNAL/EXTERNAL CRITERIA
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.33}
+
+\block{I6: Double Dissociation}{
+  A selective effect---one intervention disrupts one behavior---shows
+  involvement. A \textbf{double dissociation} shows specificity: two
+  interventions with crossed effects.
+
+  \vspace{4mm}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    & \textbf{Behav.\ X} & \textbf{Behav.\ Y} \\
+    \midrule
+    Ablate mech.\ A & Large & Small \\
+    Ablate mech.\ B & Small & Large \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \vspace{4mm}
+  A selective effect in one row is a \textbf{single dissociation}.
+  Many MI papers achieve this---showing that an intervention
+  selectively affects one condition. The crossed pattern across
+  \emph{both} rows is a double dissociation. Neither effect alone
+  can be explained by generalized disruption.
+
+  \vspace{4mm}
+  \textbf{Rules out:} involvement mistaken for specificity.
+
+  \vspace{4mm}
+  Across 16 audited claims, exactly \textbf{one} meets this
+  criterion (Feucht et~al.\ 2025, three years after the original
+  paper).
+
+  \vspace{4mm}
+  \textbf{Cost:} one extra condition.
+
+  \vspace{3mm}
+  {\footnotesize Neuroscience. Shallice (1988).}
+}
+
+\column{0.34}
+
+\block{I9: Factorial Ablation / Epistasis}{
+  Do circuit components contribute independently? Ablate A alone,
+  B alone, both together. Compare the joint deficit with the sum of
+  single deficits.
+
+  \vspace{4mm}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Pattern} & \textbf{Interpretation} \\
+    \midrule
+    Joint $=$ sum   & Independent \\
+    Joint $<$ sum   & Redundancy or shared bottleneck \\
+    Joint $>$ sum   & Synergy or mutual dependence \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \vspace{4mm}
+  Subadditivity can indicate redundancy \emph{or} a shared
+  downstream bottleneck; superadditivity can indicate synergy
+  \emph{or} a ceiling effect. Neither pattern alone establishes
+  mechanistic identity---the additive null must be assessed on an
+  appropriate scale for bounded metrics.
+
+  \vspace{4mm}
+  \textbf{Rules out:} treating two component classes as independent
+  contributors without measuring their interaction.
+
+  \vspace{4mm}
+  \textbf{Cost:} one extra ablation condition.
+
+  \vspace{3mm}
+  {\footnotesize Genetics. Fisher's epistasis; interaction structure
+  in gene networks.}
+}
+
+\column{0.33}
+
+{
+\colorlet{blocktitlebgcolor}{externalpurple}
+\block{E5: Dose--Response}{
+  An intervention-strength sweep reveals thresholds, saturation,
+  compensation, and non-monotonicity that a single ablation endpoint
+  cannot show.
+
+  \vspace{4mm}
+  \textbf{MI translation.} Sweep ablation strength from 0\% to
+  100\%. The shape of the resulting curve carries more information
+  than either endpoint.
+
+  \vspace{4mm}
+  \textbf{Caveat.} Interpretation depends on whether intervention
+  strength is a meaningful dose. Linear interpolation in activation
+  space need not represent proportional mechanistic inhibition.
+  Genuine mechanisms can have thresholds; nonspecific disruption
+  can produce smooth monotonic decline.
+
+  \vspace{4mm}
+  \textbf{Rules out:} threshold artifacts and saturation effects
+  invisible at a single intervention strength.
+
+  \vspace{4mm}
+  \textbf{Cost:} low marginal cost, but interpretation requires
+  validating the intervention scale.
+
+  \vspace{3mm}
+  {\footnotesize Pharmacology. Dose-response curves, Hill (1910).}
+}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 3 — RESCUE, ONSET/OFFSET, TAKEAWAY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.33}
+
+\block{I10: Rescue / Reversibility}{
+  After producing a deficit by ablation, restore the hypothesized
+  mediator using an independently specified intervention.
+
+  \vspace{4mm}
+  \textbf{MI translation.} Re-inject the clean activation after
+  ablation and measure recovery. Activation patching already
+  contains this logic: patching in a clean activation \emph{is} a
+  rescue experiment. Almost no published evaluation reports the
+  recovery rate alongside the degradation rate.
+
+  \vspace{4mm}
+  Successful recovery strengthens causal attribution. Failed
+  recovery is \textbf{ambiguous}---the restoration may be at the
+  wrong site, the intervention may create off-manifold states, or
+  the component may require coordinated restoration with its inputs.
+
+  \vspace{4mm}
+  \textbf{Rules out} (when recovery succeeds): collateral damage
+  from the original ablation.
+
+  \vspace{4mm}
+  \textbf{Cost:} one forward pass.
+
+  \vspace{3mm}
+  {\footnotesize Genetics. Rescue experiments in functional
+  genomics.}
+}
+
+\column{0.34}
+
+\block{I11/I12: Onset and Offset Coupling}{
+  Does causal contribution emerge with the capability (onset, I11)
+  and diminish when the capability is selectively removed (offset,
+  I12)?
+
+  \vspace{4mm}
+  \textbf{MI translation.} Onset: track the circuit across training
+  checkpoints; the mechanism should become causally active when the
+  capability appears. Offset: fine-tune or unlearn the capability,
+  then check whether the circuit's causal contribution diminishes.
+
+  \vspace{4mm}
+  Onset alone is reported for induction heads---the circuit forms at
+  a training phase transition when in-context copying emerges. The
+  partner test, offset coupling, has not been reported.
+
+  \vspace{4mm}
+  Concordant onset and offset are stronger than either alone, but
+  require controls for global representation drift and mechanistic
+  rerouting---a mechanism can persist dormant after its capability
+  is suppressed.
+
+  \vspace{4mm}
+  \textbf{Rules out:} spurious coexistence at a single checkpoint.
+
+  \vspace{4mm}
+  \textbf{Cost:} onset = checkpoint tracking (low). Offset =
+  fine-tuning or unlearning (high).
+
+  \vspace{3mm}
+  {\footnotesize Medical microbiology. Fredricks \& Relman (1996).}
+}
+
+\column{0.33}
+
+{
+\colorlet{blocktitlebgcolor}{colorOne}
+\block{Takeaway}{
+  {\Large\bfseries Different intervention designs answer different
+  causal questions. Ablation alone does not answer all of them.}
+
+  \vspace{5mm}
+  \begin{itemize}[leftmargin=*, itemsep=3mm]
+    \item \textbf{1/16} audited claims meets double
+      dissociation (I6)
+    \item \textbf{0/16} meets complementation (C6)
+    \item \textbf{0/16} reports epistatic interaction
+      structure (I9)
+    \item \textbf{0/16} reports offset coupling (I12)
+    \item Each design rules out a rival explanation that
+      ablation leaves open
+  \end{itemize}
+
+  \vspace{4mm}
+  {\small These six criteria are part of a 36-criterion validity
+  framework spanning construct, measurement, internal, external, and
+  interpretive validity. The framework also introduces interpretive
+  validity (V1--V5)---the requirement that the description mode match
+  the evidence---for which no existing validity framework has a
+  counterpart.}
+
+  \vspace{5mm}
+  \begin{center}
+  \texttt{elliot@elliottower.ai}
+
+  \vspace{2mm}
+  {\small Paper:}
+  \texttt{doi.org/10.5281/zenodo.20478480}
+  \end{center}
+}
+}
+
+\end{columns}
+
+\end{document}

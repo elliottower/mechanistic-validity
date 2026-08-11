@@ -1,0 +1,1093 @@
+claim: knowledge_neurons
+verdict: Disconfirmed
+readings:
+- statement: These roughly four feed-forward neurons store the relational fact
+  verdict: Disconfirmed
+  missing: 'Nothing --- tested and failed: all three of the paper''s own summaries report a correlation
+    between activation and expression while the title and abstract claim storage (V2), and the same editing
+    machinery moves non-factual linguistic patterns, so the construct never separates from its neighbour
+    (C4)'
+  primary: true
+- statement: Manipulating these neurons changes how strongly the model expresses the fact
+  verdict: Causally Suggestive
+  missing: Specificity, tested and inconclusive (I4); sufficiency reaches a 34.4\% edit success rate on
+    a fact the rest of the model still expresses (I2)
+  primary: false
+- statement: Editing these neurons edits that fact and leaves unrelated knowledge alone
+  verdict: Disconfirmed
+  missing: 'Nothing --- tested and failed: Table 6 gives an inter-relation perplexity rise of 7.2 for
+    the identified neurons against 4.3 for random ones, and \S5.1 reads the same table as little negative
+    influence on other knowledge (I4)'
+  primary: false
+- statement: The account holds beyond BERT-base-cased
+  verdict: Insufficient
+  missing: One model, and the generalization is asserted with no experiment behind it (E4, V5); what has
+    since transferred is the attribution procedure rather than the storage reading
+  primary: false
+hypotheses:
+- id: H1
+  view: Object
+  label: the roughly four identified feed-forward neurons store the relational fact
+- id: H2
+  view: Object
+  label: the fact is spread across the network with no determinate small neuron set
+- id: H3
+  view: Role
+  label: the neurons route or amplify a fact assembled elsewhere rather than holding it
+- id: H4
+  view: Role
+  label: the neurons are general expression machinery carrying no fact-specific content
+- id: H5
+  view: Instrumental
+  label: the neurons carry a signal covarying with the correct-answer probability, which no measurement
+    here separates from storage
+- id: H6
+  view: Instrumental
+  label: the identified set is an artifact of the attribution procedure and its tuned thresholds
+views_evidence:
+- criterion: C1
+  evidence: Suppression lowers and amplification raises the correct-answer probability across 34 relations,
+    and the count-matched control attributor reproduces neither direction
+  cells:
+    H1: C
+    H2: I
+    H3: C
+    H4: C
+    H5: C
+    H6: I
+  designed_for:
+  - H1
+  - H2
+  - H6
+- criterion: M2
+  evidence: Value-slot rewriting installs the substituted entity as top prediction 34.4 percent of the
+    time against the count-matched control's 0.0 percent
+  cells:
+    H1: C
+    H2: I
+    H3: C
+    H4: I
+    H5: C
+    H6: I
+  designed_for:
+  - H1
+  - H2
+- criterion: E6
+  evidence: Neurons identified from templates activate at 0.485 on unseen web text expressing the relation
+    and at 0.019 on text carrying only the head entity
+  cells:
+    H1: C
+    H2: I
+    H3: C
+    H4: I
+    H5: C
+    H6: I
+  designed_for:
+  - H1
+  - H6
+- criterion: I5
+  evidence: Fact pairs from different relations share 0.09 identified neurons against the control's 1.92
+  cells:
+    H1: C
+    H2: I
+    H3: C
+    H4: I
+    H5: C
+    H6: I
+  designed_for:
+  - H4
+  - H6
+- criterion: I7
+  evidence: Refining keeps only neurons recurring across the 8.63 templates a relation has; entity frequency,
+    tail-token frequency and relation cardinality are never measured
+  cells:
+    H1: C
+    H2: '-'
+    H3: C
+    H4: C
+    H5: C
+    H6: I
+  designed_for:
+  - H6
+- criterion: I1
+  evidence: Zeroing the identified activations lowers correct-answer probability by 29.03 percent on average,
+    a decrement that leaves the fact still expressed
+  cells:
+    H1: I
+    H2: C
+    H3: C
+    H4: C
+    H5: C
+    H6: C
+  designed_for:
+  - H1
+- criterion: I2
+  evidence: Every result changes a fact the rest of the model already expresses, and nothing produces
+    the fact from these neurons alone
+  cells:
+    H1: I
+    H2: C
+    H3: C
+    H4: C
+    H5: C
+    H6: C
+  designed_for: []
+- criterion: I4
+  evidence: Table 6 gives an inter-relation perplexity rise of 7.2 for the identified neurons against
+    4.3 for random ones
+  cells:
+    H1: I
+    H2: C
+    H3: C
+    H4: C
+    H5: C
+    H6: C
+  designed_for:
+  - H1
+  - H2
+  - H4
+- criterion: C4
+  evidence: The same editing machinery moves non-factual linguistic patterns, so the construct never separates
+    from its neighbour
+  cells:
+    H1: I
+    H2: C
+    H3: C
+    H4: C
+    H5: C
+    H6: C
+  designed_for:
+  - H4
+- criterion: V4
+  evidence: The control is run through the same pipeline and Table 2 reports knowledge neurons 4.13 and
+    3.96 side by side
+  cells:
+    H1: I
+    H2: C
+    H3: C
+    H4: C
+    H5: C
+    H6: C
+  designed_for: []
+- criterion: V2
+  evidence: The title and abstract claim storage while all three of the paper's own summaries report a
+    positive correlation between activation and expression
+  cells:
+    H1: I
+    H2: '-'
+    H3: C
+    H4: C
+    H5: C
+    H6: '-'
+  designed_for: []
+- criterion: I3
+  evidence: The refining threshold is swept by 0.05 until the average count enters two to five, so set
+    size is fixed before any effect is measured
+  cells:
+    H1: I
+    H2: C
+    H3: C
+    H4: C
+    H5: C
+    H6: C
+  designed_for: []
+tiers:
+- name: Proposed
+  requires: C1--C2; one admissible measurement
+  missing: '---'
+- name: Causally Suggestive
+  requires: Necessity (I1); baselines (M2)
+  missing: '---'
+- name: Mechanistically Supported
+  requires: Sufficiency (I2); reach (E1); specificity (I4)
+  missing: '\textbf{I4} inconclusive: erasure spares other relations, while updating damages them more
+    than editing random neurons does'
+- name: Triangulated
+  requires: Convergence (C3); replication (E2/E4); dissociation (I6)
+  missing: '\textbf{I6} unattempted: no second mechanism is shown intact under knowledge-neuron ablation;
+    \textbf{C3}: one attribution family against one contrast baseline'
+- name: Validated
+  requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
+  missing: \textbf{V2} Disconfirmed; \textbf{V3} inconclusive; \textbf{M1}, \textbf{M3}, \textbf{M5},
+    \textbf{M7} unattempted, and the neuron count is set by a target range rather than by the data
+criteria:
+  C1:
+    name: Falsifiability
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The hypothesis is stated as a signed prediction on a measured quantity and is run in both
+      directions on 34 relations. Zeroing the identified activations should lower the correct-answer probability,
+      doubling them should raise it, and a count-matched control attributor should do neither. The control
+      could have reproduced either effect and reproduced neither: 1.47% against 29.03% under suppression,
+      and a 1.27% decrease against a 31.17% increase under amplification, where the control moves in the
+      wrong direction entirely. Predictions that could have come out the other way and did not are C.
+
+      '
+    notes:
+      verification: 'The 29.03% and 1.47% figures in the cell are verbatim in Figure 4''s caption, and
+        31.17% and 1.27% in Figure 5''s. The cell attributes them to §4.5, where the same numbers appear
+        in the body text; the captions are quoted here because they state the comparison in one span.
+        One refinement the cell does not make: the amplification control does not merely fail to help,
+        it lowers the correct probability, which is a sharper failure of the control than a null result.
+
+        '
+      legacy_evidence: 'Predictions are directional and quantitative: suppression should lower correct-answer
+        probability, amplification should raise it, and a count-matched activation baseline should do
+        neither. The baseline could have matched and did not ($-1.47\%$ against $-29.03\%$; their \S4.5)'
+  C2:
+    name: Structural plausibility
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The account names a concrete component and shows the algebra that makes it a memory. Equation
+      (3) is put beside Equation (2) and the two are read as the same query-key-value operation under
+      a different nonlinearity, which licenses treating the first FFN layer as keys and the second as
+      values. The intervention then lands on the object the account says holds the memory: editing modifies
+      the value slots of FFN(val), the row indexed by the neuron whose activation was attributed. Mechanism
+      and manipulation refer to the same structure, which is C.
+
+      '
+    notes:
+      verification: 'The Equation 2 / Equation 3 parallel the cell describes is stated by the authors
+        themselves in §2 and is verbatim. One qualification the cell omits: the source marks the identification
+        as an analogy and a hypothesis -- "it is reasonable to regard", "We hypothesize" -- and attributes
+        the key-value reading to Geva et al. (2020), whose own analysis §6 calls qualitative. The structural
+        account is borrowed and argued by analogy rather than derived here.
+
+        '
+      legacy_evidence: Grounded in the FFN key-value memory account (\S2, \S3; Geva et al.\ 2020), with
+        the algebraic parallel between Eq.~2 and Eq.~3 spelled out. Editing acts on $\mathrm{FFN}^{(\mathrm{val})}$
+        value slots --- the object the account says holds the memory
+  C3:
+    name: Convergent validity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The origin runs one attribution family against one contrast attributor. Integrated gradients
+      identifies the neurons; raw activation magnitude supplies the comparison; every downstream result
+      is computed on the sets those two produce. The only agreement with an independent instrument is
+      about layer depth, and it is agreement about where in the network the units sit rather than about
+      which units they are. Convergence that is real and confined to one coarse property is PC.
+
+      '
+    notes:
+      verification: 'The topmost-layer claim the cell attributes to Figure 3 is stated in §4.4 and is
+        verbatim. That claim is the origin side of the tension the cell records, since causal tracing
+        places the effect in middle FFN layers; Meng et al. (2022) is post-origin and cannot be checked
+        against this source. Note that the agreement the paper itself claims -- with Tenney et al. and
+        Geva et al. -- is agreement with the layer profile, not with an independently located neuron set.
+
+        '
+      legacy_evidence: 'One attribution family at origin (integrated gradients) against one contrast baseline
+        (raw activation). Independent convergence arrived with causal tracing \citep{meng2022locating},
+        but the agreement is partial in a way the origin does not reconcile: Dai et al.\ find knowledge
+        neurons in the \emph{topmost} layers (their Figure 3), causal tracing finds middle-layer FFNs'
+  C4:
+    name: Discriminant validity
+    status: D
+    short: ''
+    verified: true
+    reasoning: 'The neighbouring construct is named in the source. §3.3 says the coarse set may hold neurons
+      that express syntactic or lexical information, which is the competitor a knowledge construct has
+      to separate from. The paper then removes them by a sharing rule that rests on two stated hypotheses:
+      that true positives recur across paraphrases of a fact and false positives do not. No measurement
+      anywhere in the paper reports whether the retained neurons carry syntactic or lexical signal, so
+      the competing construct is excluded by assumption. Later work that ran the measurement found the
+      same machinery moves linguistic patterns as well, which is what carries the D.
+
+      '
+    notes:
+      verification: 'The cell''s quoted phrase "express other information (e.g., syntactic or lexical
+        information)" is verbatim (§3.3), and the cell''s reading of the refining strategy as a prompt-sharing
+        heuristic rather than a test is correct: both halves of the rule are introduced by "we hypothesize".
+        CONTRADICTION WITH THE CELL''S SOURCING, not with its status. The D is carried entirely by Niu
+        et al. (2024), which is post-origin and not checkable here. Against this source alone the criterion
+        is untested: the origin names the competing construct and never measures it.
+
+        '
+      legacy_evidence: 'The construct is ``knowledge'''' and the measure does not separate it from neighbouring
+        constructs. \S3.3 shows the authors saw the risk --- the refining strategy exists to filter neurons
+        that ``express other information (e.g., syntactic or lexical information)'''' --- but addresses
+        it by a prompt-sharing heuristic rather than a test. Niu et al.\ (2024) run the test: ``we can
+        edit the expression of certain linguistic phenomena using the same model editing methods,''''
+        concluding these patterns ``do not constitute `knowledge''.'''' A test capable of exposing the
+        failure was run and the criterion failed'
+  C5:
+    name: Nomological validity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The construct sits inside two existing theories and the paper says which. Language models
+      as knowledge bases supplies the reason a cloze probe counts as a knowledge test; FFN layers as key-value
+      memories supplies the reason an FFN neuron is the place to look. What the paper does not do is derive
+      a prediction that distinguishes this network of relations from a rival one, so the theoretical embedding
+      constrains where to look and never gets tested as a network. PC.
+
+      '
+    notes:
+      verification: 'Both theoretical anchors the cell names are stated in the source and are verbatim.
+        The contest the cell records -- Balogh (2026) placing the MLP in a routing role, Chen et al. (2024)
+        giving attention a larger part -- is post-origin. The origin''s own hedge is worth recording:
+        it describes Geva et al.''s key-value analysis as qualitative while inheriting its conclusion
+        whole.
+
+        '
+      legacy_evidence: 'Fits FFN-as-key-value-memory (Geva et al.\ 2020) and LM-as-knowledge-base (Petroni
+        et al.\ 2019). The theoretical link is now contested: Balogh (2026) place the MLP in a routing
+        role with the fact originating in attention; Chen et al.\ (2024) find attention plays a larger
+        role than the neuron account allows'
+  M1:
+    name: Reliability
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Every quantity in the paper is a mean reported once. Suppression is 29.03%, amplification
+      31.17%, neuron count 4.13, and none carries an interval, a resampling distribution or a repeated
+      run. The one knob whose variation would show how stable the identified set is -- the refining threshold
+      -- is moved only in one direction, toward a target neuron count, so its sweep measures nothing about
+      reliability. U.
+
+      '
+    notes:
+      verification: 'Read in full. No standard deviation, confidence interval, bootstrap or seed appears
+        anywhere in the paper, and Figures 4 and 5 render as bar charts with one bar per relation per
+        method and no error bars. The cell''s claim that the thresholds are tuned per relation to force
+        the count into [2, 5] is verbatim (§4.1). The per-relation spread that Figures 4 and 5 do show
+        is variation across relations, not across repetitions, and belongs to M6.
+
+        '
+      legacy_evidence: Unattempted. No seed variance, bootstrap, or repeated attribution runs; every number
+        is a single point estimate. Thresholds $t$ and $p\%$ are tuned per relation to force neuron count
+        into $[2,5]$ (\S4.1), and the sensitivity of the identified set to that tuning is not reported
+  M2:
+    name: Baseline separation
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'One negative control runs through the whole paper and is matched on the quantity that
+      would otherwise explain any gap. Raw activation magnitude is put through the identical refining
+      pipeline with its own thresholds tuned to the same [2, 5] target, yielding 3.96 neurons against
+      4.13, so the two sets are the same size. It then separates at every stage the paper measures: suppression,
+      amplification, prompt discrimination and edit success, where the control succeeds 0.0% of the time.
+      C.
+
+      '
+    notes:
+      verification: 'All four separations in the cell check out against the source: 29.03% against 1.47%
+        (Figure 4), 31.17% against 1.27% (Figure 5), 34.4% against 0.0% (Table 6), and T1 activation 0.485
+        against 2.472 (Table 4). The count-matching phrase the cell quotes is verbatim (§4.3). One reading
+        correction. The cell records the Table 4 comparison as "0.485 vs. 2.472, where the baseline cannot
+        distinguish prompt types at all". The baseline''s activations are higher than the method''s on
+        all three prompt types, which follows from selecting neurons by activation magnitude; the separation
+        being claimed is between prompt types within a method, not between methods within a prompt type.
+
+        '
+      legacy_evidence: 'An activation-magnitude attribution baseline is carried through every experiment
+        and count-matched ``to ensure the average number of knowledge neurons for each relation lies in
+        $[2,5]$'''' (\S4.3). It separates cleanly at every stage: $-29.03\%$ vs.\ $-1.47\%$ suppression;
+        $+31.17\%$ vs.\ $-1.27\%$ amplification; 34.4\% vs.\ 0.0\% update success; $T_1$ activation 0.485
+        vs.\ 2.472, where the baseline cannot distinguish prompt types at all'
+  M3:
+    name: Stability
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Three free settings determine the identified set: the attribution threshold at 0.2 of
+      a per-prompt maximum, the Riemann step count at 20, and the refining threshold. The paper states
+      all three and perturbs none. The only movement of any of them is a search over p% that stops when
+      the neuron count enters a target range, which reports where the search halted and nothing about
+      how far the identified set travels on the way. U.
+
+      '
+    notes:
+      verification: 'Read in full. The three values the cell names -- t = 0.2, m = 20, and the refining
+        threshold -- are verbatim and are the complete set of free parameters in the identification procedure.
+        No alternative value of any of them is reported, and no result is shown as a function of any of
+        them.
+
+        '
+      legacy_evidence: Unattempted. No perturbation of the attribution threshold ($t = 0.2$), the Riemann
+        step count ($m = 20$), or the refining threshold; no report of how the identified set moves under
+        any of them
+  M4:
+    name: Calibration
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The outcome quantities are calibrated and the selection quantity is not. A correct-probability
+      change ratio carries a sign, a zero meaning no effect, and a control value measured on the same
+      relations, so a reader can tell direction and magnitude apart; perplexity change has the same properties.
+      The attribution score is thresholded at 0.2 of its own maximum for that prompt, which rescales it
+      per prompt and leaves its absolute value uninterpretable, and the number of neurons that survive
+      is then set by driving a second threshold to a target range. PC.
+
+      '
+    notes:
+      verification: 'The cell''s account of the attribution score as "thresholded at a fraction of its
+        own maximum" is verbatim in §4.1, and the target-range procedure for the neuron count is verbatim
+        in the same paragraph. The perplexity column of Table 5 is included as an instance of a calibrated
+        outcome scale, with the caveat recorded at I4 that the paper never states what the perplexity
+        is computed over.
+
+        '
+      legacy_evidence: Probability change ratios and perplexity changes are meaningful and directional.
+        The attribution score itself is uncalibrated --- it is thresholded at a fraction of its own maximum,
+        so its absolute scale carries no interpretation, and the neuron count is set by a target range
+        rather than by the data
+  M5:
+    name: Sensitivity
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'The paper carries one control and it is a known negative: an attributor that should not
+      find the right neurons, and does not. A sensitivity test needs the opposite, a case where the answer
+      is known in advance so that a miss can be told apart from an absence. Nothing in the paper plants
+      a fact, writes a memory into a known FFN slot, or otherwise creates ground truth for the identification
+      procedure to recover, so no number bounds what the method fails to find. U.
+
+      '
+    notes:
+      verification: 'Read in full. Every identification in the paper runs on facts BERT already knows,
+        selected because it already knows them (§5.1 samples "ten facts learned by the pretrained model"),
+        so there is no case with a known location. The cell''s characterisation of the activation baseline
+        as a known-negative control is correct and is quoted here.
+
+        '
+      legacy_evidence: 'Unattempted. The activation baseline is a known-negative control. No known-positive:
+        no fact is planted and recovered, no synthetic FFN memory of known location is inserted and detected'
+  M6:
+    name: Invariance
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Invariance is checked on two axes and left open on the rest. Every intervention result
+      is broken out per relation across 34 relations, so the spread is visible rather than averaged away,
+      and §4.6 repeats the activation contrast on web-crawled text the neurons were not identified from.
+      Model, language, architecture and prompt length are held fixed throughout, and the one statement
+      the paper makes about generalising past BERT is an assertion with no experiment behind it. PC.
+
+      '
+    notes:
+      verification: 'The P178 anomaly the cell names is verbatim, and the cell reads it correctly: the
+        abnormal increase is in the baseline, not in the method. That leaves the method with no named
+        anomaly across 34 relations, so the cell''s "spread visible" rests on Figures 4 and 5 rather than
+        on any statement. The corpus check in §4.6 is verbatim. The BERT-only scope is recorded again
+        at E4 and V5, where the same sentence is the evidence.
+
+        '
+      legacy_evidence: Reported per relation across 34 relations (Figures 4, 5) with the spread visible
+        and one anomaly named (P178, where the baseline's correct probability ``abnormally increases'').
+        \S4.6 checks corpus invariance by moving from PARAREL templates to web-crawled BINGREL text. Not
+        checked across models, languages, or prompt lengths
+  M7:
+    name: Selection correction
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Selection happens at four places and is disclosed at all four: a swept refining threshold,
+      a 10% sharing filter before updating, four relations chosen from 34 for erasure, and 20 most-frequent
+      neurons chosen per relation. Nothing corrects for it. The paper reports no null distribution and
+      runs no test, and where it writes "more significantly activated" the word carries its descriptive
+      sense over a difference in means. Disclosed selection with no correction is U.
+
+      '
+    notes:
+      verification: 'The three selection steps the cell names are verbatim: the 0.05 sweep to target (§4.1),
+        the four relations "as examples" (§5.2), and the "shared by less than 10% of intra-relation facts"
+        filter (§5.1). The cell says "N is stated at each step", which holds for the dataset (253,448
+        prompts, 27,738 facts, 34 relations) and for the update study (ten facts per relation), and does
+        not hold for the erasure study, where the number of prompts the perplexities are computed over
+        is never given.
+
+        '
+      legacy_evidence: Unattempted. $p\%$ is swept per relation ``by 0.05 at a time'' until the neuron
+        count hits target (\S4.1); the erasure study selects 4 relations from 34 ``as examples''; the
+        update study keeps only neurons ``shared by less than 10\% of intra-relation facts.'' $N$ is stated
+        at each step; no multiplicity control is applied to any of it
+  I1:
+    name: Necessity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Zeroing the identified activations produces a large deficit that the matched control does
+      not reproduce, 29.03% against 1.47%, and the deficit is consistent across all 34 relations rather
+      than driven by a few. It is a decrement and not a collapse. The quantity reported is an average
+      change ratio, so a 29.03% drop leaves most of the correct-answer probability intact and the fact
+      still expressed after the neurons are switched off. One intervention method, one model, partial
+      deficit: PC.
+
+      '
+    notes:
+      verification: 'The 29.03% against 1.47% comparison the cell rests on is verbatim in both §4.5 and
+        Figure 4''s caption. The cell''s reading that "the fact is still expressed after the neurons are
+        removed" follows from the measure being a relative change in the correct-answer probability rather
+        than an accuracy; the paper never reports post-suppression accuracy, so the residual is inferred
+        from the ratio and not stated.
+
+        '
+      legacy_evidence: 'Zeroing the identified neurons lowers correct-answer probability by 29.03\% on
+        average against a matched baseline''s 1.47\% (\S4.5) --- a real deficit. One intervention method,
+        one model, and a decrement rather than a collapse: the fact is still expressed after the neurons
+        are removed'
+  I2:
+    name: Sufficiency
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Two results push toward sufficiency and neither reaches it. Doubling the activations raises
+      the correct probability by 31.17%, and rewriting the value slots makes the substituted entity the
+      top prediction 34.4% of the time against 0.0% for random neurons. Both are changes to a fact the
+      model already expresses through the rest of its machinery, so neither shows the fact can be produced
+      from these neurons alone, and the authors'' own remedy for the 34.4% is to include more neurons.
+      PC.
+
+      '
+    notes:
+      verification: 'The 31.17% and 34.4% figures the cell cites are verbatim (Figure 5, Table 6). The
+        cell''s "34.4% means the manipulation fails on two thirds of attempts" is supported by the neighbouring
+        change rate of 48.5%: the edit alters the prediction about half the time and installs the intended
+        target about a third of the time, so a further 14 points change the answer to something else.
+
+        '
+      legacy_evidence: Amplification raises correct-answer probability by 31.17\%, and value-slot surgery
+        makes $t'$ the top prediction 34.4\% of the time (\S5.1). Sufficiency in the sense of reconstructing
+        the fact from these neurons alone is untested, and 34.4\% means the manipulation fails on two
+        thirds of attempts
+  I3:
+    name: Minimality
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Set size in this paper is an input. The refining threshold is moved by 0.05 at a time
+      until the average count enters [2, 5], so the identified set is held at about four neurons before
+      any effect is measured and never exceeds what the manipulation uses. Minimality asks whether a discovered
+      set can be cut back without losing the effect, and a set whose size was fixed in advance offers
+      nothing to cut.
+
+      '
+    notes:
+      verification: 'The [2, 5] target and the "about four top knowledge neurons" the cell rests on are
+        both verbatim. CONTRADICTION WITH THE CELL, on the kind of N/A rather than on the status. This
+        is the weakest of the audit''s three N/A cells and does not stand on the same footing as I11 and
+        I12. Set size here is a tuned hyper-parameter, not a structural limit: the paper twice contemplates
+        varying it, proposing more top-k neurons for relations whose neurons are spread out (§4.5) and
+        more neurons to raise the update success rate (§5.1). A leave-one-out over four neurons runs inside
+        the apparatus the paper already has. Under the audit''s own distinction, that reads as unattempted
+        rather than untestable.
+
+        '
+      legacy_evidence: Untestable under the paper's own procedure. Set size is fixed to $[2,5]$ by threshold
+        tuning \emph{before} analysis (\S4.1), so there is no over-inclusive set to prune. A leave-one-out
+        over the $\sim$4 neurons was not run
+      status_change: 'N/A to U, 2026-08-07, on verification. N/A requires structural inapplicability.
+        The set size here is a tuned hyper-parameter -- p%% is swept by 0.05 until the count falls in
+        [2,5] -- not a structural limit, and the paper twice contemplates varying it (§4.5 ''we need to
+        manipulate more top-k neurons for better control''; §5.1 ''including more top knowledge neurons'').
+        A leave-one-out over roughly four neurons runs inside apparatus the paper already has. Under this
+        audit''s own untestable-versus-unattempted distinction that is unattempted, not inapplicable.
+        Contrast I11 and I12, which stay N/A: one released checkpoint, no training run, nothing indexed
+        by training time.'
+  I4:
+    name: Specificity
+    status: I
+    short: ''
+    verified: true
+    reasoning: 'The origin tests specificity three times and gets two answers. It holds at identification:
+      fact pairs from different relations share 0.09 neurons against the control''s 1.92. It holds at
+      erasure: zeroing a relation''s twenty most frequent neurons raises that relation''s perplexity by
+      36.7% to 141.2% while raising other relations'' by 1.1% to 10.1%. It reverses at update: rewriting
+      the value slots of the identified neurons raises inter-relation perplexity by 7.2 against 4.3 for
+      random neurons, so the located units damage unrelated facts more than arbitrary ones do. The same
+      table shows the mirror image inside the edited relation, 8.4 against 10.1, which is the opposite
+      of the pattern specificity predicts on both axes. The paper prints the table and writes that the
+      manipulation has little negative influence on other knowledge. Tested, with the results pointing
+      both ways, is I.
+
+      '
+    notes:
+      verification: 'BOTH NUMERIC CHECKS IN THE CELL CONFIRMED, from the tables rather than from the prose.
+        Table 5 gives +36.7% (P27), +106.6% (P19), +128.2% (P106) and +141.2% (P937) on the erased relation,
+        against +1.1%, +4.2%, +4.3% and +10.1% on other relations, so the cell''s two ranges are the exact
+        minima and maxima. Table 6 gives ∆inter-relation PPL 7.2 for knowledge neurons and 4.3 for random
+        neurons, and the paper''s own summary of that table is that the manipulation "has little negative
+        influence on other knowledge predictions". The cell''s reading is correct and the contradiction
+        is the paper''s, not the cell''s. Three qualifications the cell does not make. First, the random-neuron
+        comparison is not matched on how much was changed: random neurons succeed 0.0% of the time and
+        alter 4.7% of predictions, so they are close to a null edit, and a null edit should damage less
+        of everything. What the comparison does establish is that the paper''s only reference point for
+        "little negative influence" is more damaging on the inter-relation metric than the treatment.
+        Second, the intra-relation direction runs the other way, 8.4 against 10.1, and is the one place
+        in Table 6 where the identified neurons behave as specificity predicts. Third, the erasure study
+        never states what its perplexities are computed over: the only definition of either quantity is
+        in §5.1, where it belongs to the update study, and the four before-erasing values for other relations
+        differ across rows (120.3, 143.6, 120.1, 138.0), so the reference set is not held fixed across
+        the four erasures.
+
+        '
+      legacy_evidence: 'Tested, with results pointing both ways within the origin. Table 2 supports it
+        at identification: inter-relation fact pairs share 0.09 neurons against the baseline''s 1.92.
+        Table 5 supports it at erasure: $+36.7\%$ to $+141.2\%$ on the erased relation against $+1.1\%$
+        to $+10.1\%$ on others. Table 6 undercuts it at update: $\Delta$inter-relation PPL is 7.2 for
+        knowledge neurons against 4.3 for \emph{random} neurons, so editing the identified neurons damages
+        unrelated relations more than editing random ones. The paper reports this and does not address
+        it. Later work resolves toward failure (Niu et al.\ 2024; Chen et al.\ 2023, degenerate neurons)'
+  I5:
+    name: Rival mechanism exclusion
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'One alternative is ruled out and it is an alternative about method. The activation baseline
+      stands for the possibility that the identified units are merely input-sensitive, and the intersection
+      statistics push it away. A rival mechanism would be a different account of what these units do in
+      the forward pass -- routing a fact computed elsewhere, or amplifying a signal already present --
+      and the paper considers no such account. Its own framing forecloses the question by assuming the
+      FFN module is where facts live. U.
+
+      '
+    notes:
+      verification: 'The cell''s distinction between a rival method and a rival mechanism is borne out:
+        the only competitor named anywhere in the source is Attr_base, a different attributor applied
+        to the same units. Balogh (2026) on routing is post-origin. Worth recording that the source''s
+        rival is excluded on a statistic about neuron overlap (Table 2) rather than on any manipulation,
+        so even the method-level exclusion is correlational.
+
+        '
+      legacy_evidence: 'Unattempted. One rival is excluded --- raw activation magnitude as the attributor
+        --- but that is a rival \emph{method}, not a rival mechanism. The mechanism-level rival is not
+        considered: Balogh (2026) argue ``knowledge neurons function as routing infrastructure rather
+        than fact storage'''''
+  I6:
+    name: Double dissociation
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'A double dissociation needs two localised mechanisms and two behaviours, with each intervention
+      moving one behaviour and sparing the other. The source localises one mechanism and measures one
+      behaviour, the correct-answer probability on a cloze query, and never identifies a second set of
+      units for a second behaviour to trade against. U.
+
+      '
+    notes:
+      verification: 'Read in full. The nearest structure in the source is the T2 / T3 control design of
+        §4.6, quoted here because it is the strongest candidate and fails the criterion for a specific
+        reason: it varies the input across three prompt types while holding one mechanism fixed, which
+        is the transpose of what the criterion asks. Niu et al. (2024) reporting the converse result is
+        post-origin.
+
+        '
+      legacy_evidence: 'Unattempted. No converse test: no non-factual mechanism is localised and shown
+        intact under knowledge-neuron ablation. Niu et al.\ (2024) later report the opposite of the desired
+        dissociation --- the same machinery moves both'
+  I7:
+    name: Confound control
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Two confounds are controlled and one of them is controlled well. Prompt wording cannot
+      explain the identified set, because a neuron only survives refining if it recurs across roughly
+      nine differently worded templates for the same fact. Corpus is controlled in §4.6 by a three-way
+      design on web text: prompts carrying the relation activate at 0.485, prompts carrying only the head
+      entity at 0.019, and random prompts at -0.018, so entity presence alone does not drive the activation.
+      Entity frequency, tail-token frequency and relation cardinality are never measured. PC.
+
+      '
+    notes:
+      verification: 'The three activation values the cell names are verbatim in Table 4 and the 8.63 templates
+        per relation in §4.2. The T2 control is the sharper of the two the cell names, since it holds
+        the head entity fixed and removes only the relation. The cell''s list of uncontrolled confounds
+        is correct as far as the source goes: no frequency statistic of any kind appears in the paper.
+
+        '
+      legacy_evidence: 'Two confounds controlled. Prompt template: the refining strategy requires sharing
+        across $\sim$8.6 diverse templates per relation (\S3.3). Dataset: \S4.6 replicates the activation
+        contrast on web-crawled text with two control groups ($T_2 = 0.019$ head-only, $T_3 = -0.018$
+        random, against $T_1 = 0.485$ knowledge-expressing). Entity frequency, tail-token frequency, and
+        relation cardinality are uncontrolled'
+  I8:
+    name: Confounding sensitivity
+    status: U
+    short: ''
+    verified: false
+    reasoning: 'NOT SETTLED BY THE SOURCE. Nothing in the paper quantifies how strong an unmeasured confounder
+      would have to be to overturn a reported effect, and no quantity in it can be read as such a bound.
+
+      '
+    notes:
+      verification: 'Read in full. The paper''s causal claims rest on intervention rather than on adjustment,
+        so a sensitivity bound has no natural home in it. That explains the absence and is not evidence
+        against the U.
+
+        '
+      legacy_evidence: Unattempted. No E-value or sensitivity analysis for an unmeasured confounder
+  I9:
+    name: Epistatic interaction
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Every manipulation in the paper is applied to the whole identified set at once. Suppression
+      zeroes all of them, amplification doubles all of them, and the surgery rewrites all four value slots,
+      so no result separates a neuron''s own contribution from what it contributes in company. The authors
+      name the gap in their own conclusion. U.
+
+      '
+    notes:
+      verification: 'The cell''s quoted admission is verbatim (§7) and the joint manipulation of about
+        four neurons is verbatim (§5.1). Nothing in the paper reports a single-neuron or pairwise result,
+        so the absence is structural to the design rather than an omission from the reporting.
+
+        '
+      legacy_evidence: 'Unattempted, and the authors say so: ``The interactions between knowledge neurons
+        also remain under explored'''' (\S7). All manipulations are applied to the $\sim$4 neurons jointly;
+        no pairwise or leave-one-out decomposition'
+  I10:
+    name: Rescue reversibility
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'The damage the paper inflicts is analytic and invertible. Erasure writes zero vectors
+      into value slots whose original contents are known, and the update adds a closed-form shift built
+      from two word embeddings, so restoring the model is a matter of writing the saved rows back. The
+      paper measures the model before and after the edit and never after a restore, so no result shows
+      the behaviour returning when the mechanism does. Unattempted rather than untestable. U.
+
+      '
+    notes:
+      verification: 'The zero-vector erasure and the closed-form update the cell describes are both verbatim.
+        The cell''s judgement that restoring is trivial follows from the edits being explicit functions
+        of stored quantities; the paper does not say this and does not need to, since it reports only
+        before-and-after pairs.
+
+        '
+      legacy_evidence: Unattempted rather than untestable. Erasure sets value slots to zero vectors and
+        update applies $\mathrm{FFN}^{(\mathrm{val})}_i - \lambda_1 \mathbf{t} + \lambda_2 \mathbf{t}'$;
+        the original slots are known and restoring them is trivial. No restore-and-recheck experiment
+        is run
+  I11:
+    name: Onset coupling
+    status: N/A
+    short: ''
+    verified: true
+    reasoning: 'Onset coupling asks whether a mechanism appears when the behaviour it explains appears,
+      which requires a sequence of states in which the behaviour is first absent and then present. The
+      audited system is one released checkpoint of BERT-base-cased. Every fact studied is chosen because
+      the model already knows it, no weight is trained anywhere in the paper, and the absence of training
+      is the paper''s own selling point for the editing results. There is no time axis on which an onset
+      could be located, so the question does not attach to this design.
+
+      '
+    notes:
+      verification: 'The cell''s reason is confirmed and is structural rather than an omission. §4.1 names
+        one released checkpoint; §5.1 selects only facts already learned; and the paper says the work
+        requires no fine-tuning four times, once in the abstract and three times in §1. Read in full:
+        the paper reports no training step, no checkpoint index, no learning curve and no quantity indexed
+        by training time. The only sentences about training describe how other authors'' models were pretrained.
+
+        '
+      legacy_evidence: Untestable in this setting as run. BERT-base-cased is used as a released checkpoint
+        (\S4.1); no training checkpoints are used or produced. Testing whether knowledge neurons appear
+        when a fact becomes recallable requires a checkpointed pretraining run the paper does not have
+  I12:
+    name: Offset coupling
+    status: N/A
+    short: ''
+    verified: true
+    reasoning: 'Offset coupling asks whether a mechanism disappears when the behaviour disappears, and
+      needs the same time axis as onset for the same reason. One checkpoint supplies no interval over
+      which either could be observed to go.
+
+      '
+    notes:
+      verification: 'Confirmed on the same grounds as I11, with one thing to keep separate. §5.2 does
+        remove a relation from the model by zeroing value slots, which produces an offset of the behaviour.
+        That is an intervention on the mechanism measured by the behaviour it destroys, which is the necessity
+        test recorded at I1; the criterion here asks about a behaviour that disappears on its own and
+        whether the mechanism goes with it. Nothing in the source bears on that.
+
+        '
+      legacy_evidence: Untestable in this setting as run, for the same reason
+  E1:
+    name: Intervention reach
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Three intervention forms appear and they agree in direction: zeroing an activation, doubling
+      it, and rewriting the value slot the activation weights. Two of the three act on activations and
+      the third on the weights those activations multiply, so all three enter the forward pass at the
+      same point, and all three are applied to a set chosen by a single attributor. Agreement among interventions
+      that share an entry point and an upstream selection step is weaker than agreement among independent
+      methods. PC.
+
+      '
+    notes:
+      verification: 'The three forms the cell names are verbatim and the cell''s caveat is correct: activation
+        zeroing, activation doubling and value-slot surgery all reach the model through the same FFN neuron.
+        Integrated gradients is the only attributor used to select the targets, quoted here because it
+        is what makes the reach single-source.
+
+        '
+      legacy_evidence: Three intervention forms --- activation zeroing, activation doubling, and direct
+        weight surgery on $\mathrm{FFN}^{(\mathrm{val})}$ --- agree in direction. All three act on the
+        same identified neurons through the same pathway, so the agreement is weaker than three independent
+        methods. Attribution itself is single-method
+  E2:
+    name: Prompt generalization
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The identified set is required to survive paraphrase by construction, since refining keeps
+      only neurons shared across the roughly nine templates a relation has, and the pool those templates
+      generate is 253,448 prompts over 27,738 facts. The neurons are then taken to text from a different
+      generator entirely: web pages crawled for the same facts, which the paper says are unseen in PARA
+      R EL, with two control prompt types. Generalisation across prompt form is demonstrated rather than
+      assumed. C.
+
+      '
+    notes:
+      verification: 'The 253,448 prompts, 27,738 facts and 8.63 templates per relation the cell cites
+        are verbatim. The cell''s "476,237 web-crawled B ING R EL texts" is arithmetic the paper does
+        not perform: §4.6 reports 210,217 and 266,020 texts for the two crawl types, which sum to 476,237,
+        and no total appears in the source. The "unseen in PARA R EL" phrase is verbatim.
+
+        '
+      legacy_evidence: 253,448 PARAREL prompts over 34 relations, mean 8.63 templates each, with sparse-template
+        relations filtered out to guarantee diversity. \S4.6 extends to 476,237 web-crawled BINGREL texts
+        ``unseen in PARAREL,'' with two control prompt types
+  E3:
+    name: Cross-task generalization
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Every measurement in the paper is a single-word cloze completion, and the authors name
+      the restriction first among their limitations. No second task is attempted, so nothing shows whether
+      the identified neurons participate when the same fact has to be used rather than filled in. U.
+
+      '
+    notes:
+      verification: 'The cell''s quoted limitation is verbatim and is the first of the three the conclusion
+        lists. Wang et al. (2024) answering partly in the negative is post-origin. The third limitation
+        is quoted alongside it because the single-word blank is what confines the measurement, and the
+        paper states it as a simplification it expects to be lifted.
+
+        '
+      legacy_evidence: 'Unattempted at origin --- everything is single-word cloze --- and named by the
+        authors as the first limitation: ``It is an open question whether Transformer can utilize stored
+        knowledge in a generalized way, such as for reasoning'''' (\S7). Wang et al.\ (2024) later answer
+        partly in the negative'
+  E4:
+    name: Cross-model generalization
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The origin runs on one model. It asserts that the method generalises and supplies no experiment,
+      and its conclusion lists the multilingual case as future work, which concedes that the transfer
+      is untried. The transfers that later happened are what the cell''s PC rests on, and what transferred
+      is the attribution procedure rather than the reading placed on its output.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL''S SOURCING. The cell records PC, and this source supports
+        no part of it: BERT-base-cased is the only model in the paper, and the one cross-model sentence
+        is an assertion the cell itself flags as unsupported. Against the origin alone the criterion is
+        U. The protein language model, vision-language and multilingual results the PC depends on (Nori
+        et al. 2023, Sato \& Takagi 2025, Cao et al. 2024) are all post-origin and cannot be checked here.
+
+        '
+      legacy_evidence: Absent from the origin, which runs BERT-base-cased only while asserting the method
+        ``is not limited to BERT.'' The method has since transferred --- protein language models (Nori
+        et al.\ 2023), vision-language transformers (Sato \& Takagi 2025), multilingual settings (Cao
+        et al.\ 2024). What transfers is the attribution method; the storage interpretation is what later
+        work disputes
+  E5:
+    name: Graded response
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The intervention takes two values, zero and double, and the response reverses sign between
+      them, from -29.03% to +31.17%, which rules out a generic damage effect. Nothing between or beyond
+      those two points is reported: no interpolation toward the original activation, no multiplier sweep,
+      no curve of effect against strength. The authors say as much when they call the manipulation a proof
+      of concept and defer precise control. PC.
+
+      '
+    notes:
+      verification: 'The two magnitudes and the sign reversal are verbatim, as is the §4.5 sentence the
+        cell quotes about needing more top-k neurons. Note that this sentence grades the number of neurons
+        rather than the strength of the manipulation, so it anticipates a dose-response along the extent
+        axis, which is the axis I3 records as fixed.
+
+        '
+      legacy_evidence: 'Two intervention magnitudes --- zero and double --- with the response reversing
+        sign correctly between them. No strength sweep and no dose-response curve. \S4.5 anticipates the
+        gap: ``if the knowledge neurons for a relation are distributed more widely, we need to manipulate
+        more top-$k$ neurons for better control'''''
+  E6:
+    name: Novel prediction
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The prediction is derived from the account before the test and could have failed. If these
+      neurons carry a relational fact, then text the model never saw during identification should activate
+      them when it expresses that fact and leave them alone when it merely mentions the entities. Both
+      halves hold on web-crawled text: 0.485 for relation-bearing prompts against 0.019 for head-only
+      prompts, and the sharper form in Table 3, where the least-activating prompts contain both entities
+      and still fail to fire the neurons. C.
+
+      '
+    notes:
+      verification: 'The Table 3 result the cell describes is verbatim in the caption and in the §4.6
+        body. The cell''s "bottom-activating prompts contain both head and tail entities and still fail
+        to activate" is exactly what the source says. The prediction is novel in the sense the criterion
+        requires: it concerns a corpus built after identification, and the entity-matched control is what
+        makes a failure possible.
+
+        '
+      legacy_evidence: '\S4.6 is a genuine novel prediction: neurons identified from PARAREL templates
+        should be preferentially activated by \emph{unseen web text} expressing the same fact, and not
+        by text containing the same entities without the relation. Table 3 shows the sharp form --- bottom-activating
+        prompts contain both head and tail entities and still fail to activate'
+  V1:
+    name: Level declaration
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The unit of analysis is declared exactly -- an intermediate neuron of a named FFN layer
+      -- and the level of the claim is not. Storage and expression run together in the same sentences:
+      §3 says facts are stored in FFN memories and expressed by knowledge neurons without saying how the
+      two relate, and the abstract announces storage while the method identifies expression. A declared
+      unit with an undeclared level is PC.
+
+      '
+    notes:
+      verification: 'The interchange the cell describes is verbatim and appears in one sentence at §3,
+        where the storage and expression verbs are conjoined. The cell calls the level declaration "implicit
+        and internally inconsistent"; the source is better described as never raising the question, since
+        it offers no statement about what kind of claim it is making that could be inconsistent with another.
+
+        '
+      legacy_evidence: Implicit and internally inconsistent. The paper writes at an implementational level
+        (``how factual knowledge is \emph{stored}'') and at a functional one (``neurons that \emph{express}
+        a relational fact'') interchangeably, never distinguishing the two
+  V2:
+    name: Level-evidence match
+    status: D
+    short: ''
+    verified: true
+    reasoning: 'The claim and the evidence sit at different levels and the paper says both in its own
+      summary sentences. The title and the abstract claim storage, which is a claim about where a fact
+      is held in the weights. The abstract''s statement of the result and the contribution list both report
+      a positive correlation between activation and expression, which is a claim about a signal covarying
+      with an output. The strongest level-matched evidence is the value-slot surgery, and it installs
+      the intended fact 34.4% of the time. Correlation with expression plus a one-in-three edit does not
+      reach a storage claim. D.
+
+      '
+    notes:
+      verification: 'The two quoted phrases in the cell -- "how factual knowledge is stored in pretrained
+        Transformers" and "We hypothesize that factual knowledge is stored in FFN memories" -- are verbatim,
+        in the abstract and §3. The mismatch is visible inside the source without appeal to later work:
+        the paper''s own contribution list describes what it established as a positive correlation, while
+        the title and abstract describe storage. Niu et al. (2024) is post-origin.
+
+        '
+      legacy_evidence: 'The evidence supports a functional claim --- manipulating these neurons changes
+        fact expression --- while the paper makes an implementational storage claim, in the title, the
+        abstract (``how factual knowledge is stored in pretrained Transformers''''), and \S3 (``We hypothesize
+        that factual knowledge is stored in FFN memories''''). Activation correlated with expression plus
+        a 34.4\% edit success rate does not establish storage. Niu et al.\ (2024) tested the mismatch
+        directly: the KN thesis ``does not adequately explain the process of factual expression'''''
+  V3:
+    name: Alternative level
+    status: I
+    short: ''
+    verified: true
+    reasoning: 'One alternative reading is stated and rejected. The activation baseline stands for the
+      possibility that the identified units are the generally input-sensitive ones, and Table 2 pushes
+      it away by showing the baseline''s units are shared across unrelated facts while the method''s are
+      not. That leaves the readings that would place the same units at a different level of the computation
+      -- a routing stage, an amplifier for a fact assembled elsewhere -- untouched, and the subsequent
+      literature has not settled between them. I.
+
+      '
+    notes:
+      verification: 'The cell''s account of §4.3 as arguing that the baseline finds merely input-sensitive
+        neurons is verbatim, and the intersection statistics it cites are Table 2''s 0.09 against 1.92.
+        The split in later work that keeps the alternative live (Meng et al. 2022 against Balogh 2026)
+        is post-origin.
+
+        '
+      legacy_evidence: 'One alternative is addressed and rejected --- \S4.3 argues the activation baseline
+        finds merely input-sensitive neurons, using the intersection statistics of Table 2. The alternative
+        that the identified neurons are a routing or amplification stage is not addressed, and the subsequent
+        literature is split: \citet{meng2022locating} supports localisation, Balogh (2026) supports routing,
+        and both remain live'
+  V4:
+    name: Unlicensed labeling
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The name arrives before the measurement. §1 introduces the method and the label in one
+      sentence -- the neurons the method identifies "are named knowledge neurons" -- so the term states
+      what the procedure is assumed to find rather than abbreviating a result. What the paper then measures
+      is the quantity a nearby alternative predicts equally well. Its own summaries say so three times:
+      the abstract, the introduction and the contribution list all report that activation is positively
+      correlated with the expression of the fact, and every intervention result is a change in the correct-answer
+      probability. A unit that stores a fact and a unit carrying a signal that covaries with the model''s
+      probability for that fact both produce those numbers, and no experiment in the paper separates them.
+      §3.3 shows the authors saw the label needed protecting: they name a competing construct, neurons
+      expressing syntactic or lexical information, and build a filter for it. The filter is two hypotheses
+      about which neurons recur across paraphrases, applied without ever measuring what the surviving
+      neurons encode. Label attached at definition time, measurement compatible with the alternative,
+      competitor excluded by assumption: PC.
+
+      '
+    notes:
+      verification: 'THE CELL''S READING OF §3.3 IS CORRECT AND CAN BE SHARPENED. The refining strategy
+        does exist to filter neurons that "express other information (e.g., syntactic or lexical information)",
+        which is an acknowledgement that the label needs protecting from a neighbour. Two things the cell
+        does not say. The competitor §3.3 names is narrower than the one the criterion asks about: syntactic
+        or lexical content, not "a signal correlated with output probability", so the filter does not
+        engage the alternative that matters. And the filter is two stated hypotheses about prompt sharing,
+        applied with no measurement of what the retained neurons encode, so it cannot fail. The strongest
+        candidate for a separating experiment is §4.6, and it does not separate them. Knowledge neurons
+        activate at 0.485 on web text expressing the relation and at 0.019 on text containing only the
+        head entity, and Table 3''s least-activating prompts contain both entities. That distinguishes
+        relation-bearing input from entity-bearing input while measuring activation, which is what the
+        correlated-signal reading predicts too. ONE ADDITION THE CELL MISSES, which is the source''s own
+        strongest evidence against the licence. The label is applied to the units the control finds as
+        well: §4.3 runs the activation baseline through "the same pipeline to obtain the refined knowledge
+        neurons", and Table 2''s first row reports "Knowledge neurons 4.13 3.96" for the method and the
+        baseline side by side. The paper elsewhere argues that the baseline''s units are merely input-sensitive,
+        so the term is being used for units the paper itself says do not express knowledge. A name that
+        survives the demonstration that its referent is the wrong one is doing no work that the measurement
+        licenses. Niu et al. (2024) running the contrast is post-origin.
+
+        '
+      legacy_evidence: '``Knowledge neuron'''' projects a human epistemic category onto a unit whose measured
+        behaviour is activation correlated with output probability. \S3.3''s syntactic/lexical filter
+        shows the authors knew the label needed protecting. It is never contrastively tested --- no experiment
+        distinguishes ``stores knowledge'''' from ``carries a correlated signal.'''' Niu et al.\ (2024)
+        run that contrast and conclude the patterns ``do not constitute `knowledge'''''''
+  V5:
+    name: Scope declaration
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Scope is declared in the right place and with one gap. §7 lists three restrictions and
+      one open question, and §4.5 and §5 both label the manipulations a proof of concept before any application
+      is suggested. The restriction the paper never declares is the one a reader would most want: it runs
+      on a single model, and instead of saying so it asserts the method generalises to other pretrained
+      models with nothing behind the assertion. Four limits declared, one asserted past, is PC.
+
+      '
+    notes:
+      verification: 'All four §7 limits the cell names are verbatim, as is the BERT generalisation claim
+        it flags. One addition: the proof-of-concept hedge appears twice, at §4.5 for the activation manipulations
+        and at §5 for the editing studies, so the paper''s own confidence in the case studies is lower
+        than the cell allows.
+
+        '
+      legacy_evidence: '\S7 declares three limits (cloze-only, factual-only, single-word blanks) plus
+        one open interaction question. The model limit is not declared and is asserted past: ``our method
+        is not limited to BERT and can be easily generalized to other pretrained models'''' (\S4.1), with
+        no supporting experiment'

@@ -1,0 +1,14 @@
+citation: lindner2024interp
+depth: cited
+title: 'Tracr: Compiled Transformers as a Laboratory for Interpretability'
+authors:
+- Lindner, David
+- Kram'ar, J'anos
+- Farquhar, Sebastian
+- Rahtz, Matthew
+- McGrath, Thomas
+- Mikulik, Vladimir
+year: '2023'
+venue: NeurIPS
+url: https://arxiv.org/abs/2301.05062
+arxiv: '2301.05062'

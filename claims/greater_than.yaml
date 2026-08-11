@@ -1,0 +1,1085 @@
+claim: greater_than
+title: Greater-Than Circuit in Year-Span Prediction
+description: 'Iterative path patching over GPT-2 small recovers a circuit for prompts that supply a two-digit
+  start year and ask for an end year: attention heads carry the start year to the final position, and
+  MLPs 8--11 raise the probability of every year above it. Feeding the circuit real input while the rest
+  of the model receives 01-input recovers 72.7\% of an 81.7\% probability-difference baseline, measured
+  over 10,000 examples spanning 120 nouns and 768 years, and the inverse assignment drives the same quantity
+  to -36.6\%. The circuit also fires on prompts requiring less-than, where the model answers greater,
+  which the authors report as a property of the mechanism rather than a defect in the account. Description
+  mode: implementational, with the algorithmic question in the title left open.'
+source:
+  citation: hanna2023greater
+  title: ''
+  url: https://arxiv.org/abs/2305.00586
+  local: reference/hanna_2023_greater_than.pdf
+  sha256: c23636a032c05443bd82984c6e8949d1b24f8b84ae4afa3a9ca634abbc7d15d1
+  extract_cmd: pdftotext -layout
+  read_in_full: true
+claims:
+  C1:
+    quotes:
+    - exact: Probability difference verifies that model output reflects a greater-than operation by measuring
+        the extent to which GPT-2 assigns higher probability to years >YY. It ranges from -1 to 1; higher
+        is better.
+      prefix: ''
+      suffix: ''
+      section: §2, Quantitative Evaluation
+      page: null
+      line: null
+    - exact: In doing so, it checks that the model depends on YY, and does not produce constant (but valid)
+        output, e.g. by always outputting p(99) = 1.
+      prefix: ''
+      suffix: ''
+      section: §2, Quantitative Evaluation
+      page: null
+      line: null
+    - exact: If a component normally boosts logits of years>YY, patching it with the 01-dataset will cause
+        it to boost the logits of years > 01, inducing a larger error in the model.
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: 'We perform this evaluation with our same 10,000-element dataset; on this dataset, GPT-2
+        achieves 81.7% probability difference (SD: 19.3%) and a cutoff sharpness of 6.0% (SD: 7.2%).'
+      prefix: ''
+      suffix: ''
+      section: §2, Quantitative Evaluation
+      page: null
+      line: null
+    - exact: 'The circuit is also necessary: performing the opposite of the prior experiment, giving nodes
+        in our circuit the 01-dataset, and those outside it the normal dataset, leaves GPT-2 unable to
+        perform the task: it achieves a probability difference of -36.6%.'
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+  C2:
+    quotes:
+    - exact: At the relevant (end) position, in-circuit attention heads attend to the YY position, suggesting
+        that they detect the year which the output year must be greater than.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: Note that YY was not just upweighted highly compared other 2-digit years; YY was the most
+        highly upweighted token across all tokens.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: 'The results indicate that MLPs of 9 and 10 directly specify which years are greater than
+        YY: the logit lens of each layer’s output has an upper triangular pattern, indicating that they
+        upweight precisely those years greater than YY.'
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: Including more top neurons produces sharper approximations of greater-than; see Appendix
+        D for examples.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: Our prior experiments show that MLPs 9-11 directly compute greater-than. But how do they
+        do so? We cannot provide a conclusive answer, but identify avenues by which MLPs might compute
+        this.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: When we ablate the dimensions found through PCA, to test their importance to the greater-than
+        task, we found little change in model performance.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Similarly, removing linearly-extractable YY information from attention head output using
+        LEACE [5] yielded only slightly lower probability difference (64.7%) than the baseline (81.7%).
+        This indicates that structured YY information may not fully explain GPT-2’s greater-than abilities.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  C3:
+    quotes:
+    - exact: In this section, we will show that the logit lens results can be recreated with another technique,
+        direct effects via path patching, that avoids this flaw. The two techniques fortunately yield
+        the same insights.
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+    - exact: The results are essentially identical to the logit lens results, though they differ in magnitude.
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+    - exact: However, we note that all of our logit lens results (including those for entire MLPs and
+        attention heads) are reproducible using direct effects.
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+    - exact: To find a circuit, we use path patching, introduced by Wang et al. [50] and further described
+        by Goldowsky-Dill et al. [21].
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: When we ablate the dimensions found through PCA, to test their importance to the greater-than
+        task, we found little change in model performance.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Similarly, removing linearly-extractable YY information from attention head output using
+        LEACE [5] yielded only slightly lower probability difference (64.7%) than the baseline (81.7%).
+        This indicates that structured YY information may not fully explain GPT-2’s greater-than abilities.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  C4:
+    quotes:
+    - exact: GPT-2 even failed at some tasks that were solvable using the greater-than circuit, like “17YY
+        is smaller than 17”; it always predicted YY.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Across all such tasks, we found that GPT-2 relied on another set of heads and MLPs entirely.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: So GPT-2 does not use our circuit for all math; sometimes it does not rely on it even when
+        it should.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Answering this question fully would require an in-depth exploration of circuit similarity
+        that fall outside the scope of this paper. For the purposes of this investigation, we perform
+        primarily qualitative analyses of tasks that preserve the format and output space of year-span
+        prediction.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  C5:
+    quotes:
+    - exact: This mechanism surpasses simple memorization, but does not reflect full mathematical competence;
+        it lies between memorization and generalization. We thus add nuance to the memorization-generalization
+        dichotomy, and take the first step towards a rich characterization of the states in between them.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: 'Structured number representations have been implicated in mathematical capability before:
+        Liu et al. [27] train a toy transformer model on modular addition, and find that its number representations
+        become structured only after it stops overfitting and begins to generalize.'
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: We find, as in Wallace et al. [49], that structure already exists in the static year embeddings,
+        though the years 02-09 are clustered apart from the rest.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: As noted by Geva et al. [19], multiplying this row by the unembedding weights yields an (unnormalized)
+        distribution over the logits, indicating which outputs the neuron upweights when activated.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+  M1:
+    quotes:
+    - exact: 'We perform this evaluation with our same 10,000-element dataset; on this dataset, GPT-2
+        achieves 81.7% probability difference (SD: 19.3%) and a cutoff sharpness of 6.0% (SD: 7.2%).'
+      prefix: ''
+      suffix: ''
+      section: §2, Quantitative Evaluation
+      page: null
+      line: null
+    - exact: Figure 4 shows the results of this experiment; for computational reasons we run it using
+        a smaller dataset (490 datapoints, 5 per year YY).
+      prefix: ''
+      suffix: ''
+      section: §3.2, MLPs
+      page: null
+      line: null
+    - exact: The probability difference is 72.7% (89.5% of the original) and the cutoff sharpness is 8%—sharper
+        than pre-patching. This indicates that our circuit is mostly sufficient to compute this task.
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+    - exact: 'The circuit is also necessary: performing the opposite of the prior experiment, giving nodes
+        in our circuit the 01-dataset, and those outside it the normal dataset, leaves GPT-2 unable to
+        perform the task: it achieves a probability difference of -36.6%.'
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+  M2:
+    quotes:
+    - exact: If we target other circuits of a size and location similar to our circuit’s, performance
+        is related to the preservation of the paths from the input, to our attention heads, our MLPs (especially
+        MLPs 9 and 10), to the logits.
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+    - exact: If the paths are interrupted (i.e. no attention head or no MLP overlap with the original
+        circuit), performance is very low. If at least one path is preserved, performance improves with
+        each additional component in common with the original circuit; MLPs have the biggest impact.
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+    - exact: The probability difference is 72.7% (89.5% of the original) and the cutoff sharpness is 8%—sharper
+        than pre-patching. This indicates that our circuit is mostly sufficient to compute this task.
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+    - exact: 'The circuit is also necessary: performing the opposite of the prior experiment, giving nodes
+        in our circuit the 01-dataset, and those outside it the normal dataset, leaves GPT-2 unable to
+        perform the task: it achieves a probability difference of -36.6%.'
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+  M3:
+    quotes:
+    - exact: If patching a component caused model performance to change significantly, that component
+        contributed to the model’s computation of year-span prediction.
+      prefix: ''
+      suffix: ''
+      section: §3.2, MLPs
+      page: null
+      line: null
+    - exact: 'The heatmap indicates that MLPs 8-11 are the most important direct contributors to the logits,
+        along with a9.h1: attention layer 9’s head 1.'
+      prefix: ''
+      suffix: ''
+      section: §3.2, MLPs
+      page: null
+      line: null
+    - exact: MLP 9 relies on a9.h1, while MLP 8 relies on a8.h11, a8.h8, a7.h10, a6.h9, a5.h5, and a5.h1;
+        we add these to our circuit.
+      prefix: ''
+      suffix: ''
+      section: §3.2, Attention Heads
+      page: null
+      line: null
+  M4:
+    quotes:
+    - exact: Probability difference verifies that model output reflects a greater-than operation by measuring
+        the extent to which GPT-2 assigns higher probability to years >YY. It ranges from -1 to 1; higher
+        is better.
+      prefix: ''
+      suffix: ''
+      section: §2, Quantitative Evaluation
+      page: null
+      line: null
+    - exact: Cutoff sharpness ranges from -1 to 1; larger values indicate a sharper cutoff.
+      prefix: ''
+      suffix: ''
+      section: §2, Quantitative Evaluation
+      page: null
+      line: null
+    - exact: 'We perform this evaluation with our same 10,000-element dataset; on this dataset, GPT-2
+        achieves 81.7% probability difference (SD: 19.3%) and a cutoff sharpness of 6.0% (SD: 7.2%).'
+      prefix: ''
+      suffix: ''
+      section: §2, Quantitative Evaluation
+      page: null
+      line: null
+    - exact: The probability difference is 72.7% (89.5% of the original) and the cutoff sharpness is 8%—sharper
+        than pre-patching. This indicates that our circuit is mostly sufficient to compute this task.
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+    - exact: The circuit achieves a probability difference of 71.5% (98.3% of what we achieved earlier),
+        and a cutoff sharpness of 10.5% (again sharper than pre-patching).
+      prefix: ''
+      suffix: ''
+      section: Appendix B
+      page: null
+      line: null
+  M5:
+    quotes:
+    - exact: Having defined our circuit, we perform another path-patching experiment to ensure it is correct.
+        In this experiment, we give most of the model inputs from the 01-dataset. The model only receives
+        our standard dataset via the paths specified in our circuit.
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+    - exact: We stress that this is a difficult task, where the large majority of the model receives input
+        that should push it to poor performance.
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+    - exact: 'The circuit is also necessary: performing the opposite of the prior experiment, giving nodes
+        in our circuit the 01-dataset, and those outside it the normal dataset, leaves GPT-2 unable to
+        perform the task: it achieves a probability difference of -36.6%.'
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+  M6:
+    quotes:
+    - exact: Each example has a noun randomly drawn from our 120 nouns, and a year drawn randomly from
+        the 768 valid years from 1000 to 1899.
+      prefix: ''
+      suffix: ''
+      section: §2, Qualitative Evaluation
+      page: null
+      line: null
+    - exact: We sample the century XX of the sentence from {11, . . . , 17}, and the start year YY from
+        {02, . . . , 98}.
+      prefix: ''
+      suffix: ''
+      section: §2, Task and Dataset
+      page: null
+      line: null
+    - exact: 'In practice, attention patterns are not exactly constant as YY changes. While broad trends
+        are similar, the intensity of the attention to the YY position varies (though not linearly with
+        YY, as might make sense: see Figure 11). At YY=01, attention to the YY position is rather low,
+        meaning that model greater-than behavior is less pronounced when patched. Thus, the queries and
+        keys are somewhat important: patching them with bad data reduces performance by 15% with respect
+        to our partial circuit.'
+      prefix: ''
+      suffix: ''
+      section: Appendix B
+      page: null
+      line: null
+  M7:
+    quotes:
+    - exact: We consider as potential components GPT-2’s 144 attention heads (12 heads/layer×12 layers),
+        and 12 MLPs (1 per layer).
+      prefix: ''
+      suffix: ''
+      section: §3.2, MLPs
+      page: null
+      line: null
+    - exact: If we consider each of these, we will not miss any components that contribute to this task.
+      prefix: ''
+      suffix: ''
+      section: §3.2, MLPs
+      page: null
+      line: null
+    - exact: If patching a component caused model performance to change significantly, that component
+        contributed to the model’s computation of year-span prediction.
+      prefix: ''
+      suffix: ''
+      section: §3.2, MLPs
+      page: null
+      line: null
+    - exact: We path patch each of MLP 10’s 3072 neurons’ direct contributions to the logits with the
+        01-dataset.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+  I1:
+    quotes:
+    - exact: 'The circuit is also necessary: performing the opposite of the prior experiment, giving nodes
+        in our circuit the 01-dataset, and those outside it the normal dataset, leaves GPT-2 unable to
+        perform the task: it achieves a probability difference of -36.6%.'
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+    - exact: 'We perform this evaluation with our same 10,000-element dataset; on this dataset, GPT-2
+        achieves 81.7% probability difference (SD: 19.3%) and a cutoff sharpness of 6.0% (SD: 7.2%).'
+      prefix: ''
+      suffix: ''
+      section: §2, Quantitative Evaluation
+      page: null
+      line: null
+  I2:
+    quotes:
+    - exact: We stress that this is a difficult task, where the large majority of the model receives input
+        that should push it to poor performance.
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+    - exact: The probability difference is 72.7% (89.5% of the original) and the cutoff sharpness is 8%—sharper
+        than pre-patching. This indicates that our circuit is mostly sufficient to compute this task.
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+    - exact: The circuit achieves a probability difference of 71.5% (98.3% of what we achieved earlier),
+        and a cutoff sharpness of 10.5% (again sharper than pre-patching).
+      prefix: ''
+      suffix: ''
+      section: Appendix B
+      page: null
+      line: null
+  I3:
+    quotes:
+    - exact: 'In light of this, we examine GPT-2’s task performance by using causal techniques to identify
+        a circuit: a minimal computational subgraph of our model that suffices to compute the task [35,
+        14].'
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: 'We find that neuron contributions to the task are sparse: most neurons can be patched (ablated)
+        with near zero effect on our model performance, as observed in prior work [48].'
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: We confirm this by patching MLP 8’s direct contributions to the logits with the 01-dataset;
+        we do so again with its indirect contributions, through the other MLPs. In the former case, model
+        performance drops only 14%, while in the latter case, it drops by 39%.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: 'Other MLPs also have mixed effects: MLP 9 has roughly equal direct and indirect contributions
+        (28% vs. 32%), while MLP 10 contributes mostly directly (56% vs. 16%).'
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: But, a closer look at path patching results indicated that on this task, GPT-2 used not only
+        the entire year-span circuit, but also MLP 7 and two extra attention heads. After including those
+        nodes, GPT-2 recovered 90.3% of performance.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  I4:
+    quotes:
+    - exact: 'We also observe the opposite phenomenon: inappropriate activation of the greater-than circuit,
+        triggered by prompts like “The <noun> ended in the year 17YY and started in the year 17” and “The
+        <noun> lasted from the year 7YY BC to the year 7”.'
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: In these cases, GPT-2 ought to predict numbers smaller than YY; however, it predicts numbers
+        greater than YY. This is because it is using the exact same circuit used in the greater than case!
+        GPT-2 thus overgeneralizes the use of our circuit.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Beyond simple behavioral study, we conducted a circuits analysis on this task, and found
+        that our greater-than circuit also underlies this behavior. This provides another example of GPT-2’s
+        ability to identify greater-than situations is flawed.
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+  I5:
+    quotes:
+    - exact: When we ablate the dimensions found through PCA, to test their importance to the greater-than
+        task, we found little change in model performance.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Similarly, removing linearly-extractable YY information from attention head output using
+        LEACE [5] yielded only slightly lower probability difference (64.7%) than the baseline (81.7%).
+        This indicates that structured YY information may not fully explain GPT-2’s greater-than abilities.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: However, the presence of a greater-than circuit does not preclude memorization. Our circuit
+        could function internally as a lookup table, where attention heads transmit YY information to
+        MLPs that then upweight the years that they have memorized to be >YY.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Though our current evidence does not allow us to definitively attribute GPT-2’s behavior
+        to generalized mathematical ability or memorization, it suggests that the underlying mechanism
+        is something in between the two.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    refs:
+    - citation: nikankin2025
+      text: we classify as arithmetic heuristics 91% of the 3,200 top neurons for each operator
+      section: body
+      page: null
+      direction: neutral
+      local: reference/nikankin_2024_bag_of_heuristics.pdf
+      sha256: 8d141b698112693010f1183292cbd8f954108f22e4f1d1def465833d7f678410
+      extract_cmd: pdftotext -layout
+    - citation: nikankin2025
+      text: We focus on Llama3-8B in the main paper
+      section: body
+      page: null
+      direction: neutral
+      local: reference/nikankin_2024_bag_of_heuristics.pdf
+      sha256: 8d141b698112693010f1183292cbd8f954108f22e4f1d1def465833d7f678410
+      extract_cmd: pdftotext -layout
+  I6:
+    quotes:
+    - exact: 'The circuit is also necessary: performing the opposite of the prior experiment, giving nodes
+        in our circuit the 01-dataset, and those outside it the normal dataset, leaves GPT-2 unable to
+        perform the task: it achieves a probability difference of -36.6%.'
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+    - exact: Across all such tasks, we found that GPT-2 relied on another set of heads and MLPs entirely.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  I7:
+    quotes:
+    - exact: So, we exclude all single-token years from our year pool. Finally, we want each example to
+        have at least one correct and one incorrect validly tokenized answer, so we exclude each century’s
+        highest and lowest validly tokenized year from the pool of start years.
+      prefix: ''
+      suffix: ''
+      section: §2, Task and Dataset
+      page: null
+      line: null
+    - exact: We draw the nouns from a pool of 120 nouns that could have a duration, found using FrameNet
+        [1]; Appendix G lists the full pool of nouns.
+      prefix: ''
+      suffix: ''
+      section: §2, Task and Dataset
+      page: null
+      line: null
+    - exact: 'It assigns higher probability to the latter years, though not all of them: 15-20 years after
+        YY, probabilities drop. The exact length of the year-span receiving higher probability likely
+        reflects patterns in GPT-2’s training data.'
+      prefix: ''
+      suffix: ''
+      section: §2, Qualitative Evaluation
+      page: null
+      line: null
+  I9:
+    quotes:
+    - exact: Each neuron up- or down-weights certain output years depending on the input year YY, but
+        no individual neuron computes greater-than. No one neuron can do so, as each neuron’s activation
+        for each input only scales that neuron’s distribution over the logits, without changing its overall
+        shape.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: Though they do not do so individually, the top-10 neurons perform an imperfect greater-than
+        when summed together as a group.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: Including more top neurons produces sharper approximations of greater-than; see Appendix
+        D for examples.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: 'Other MLPs also have mixed effects: MLP 9 has roughly equal direct and indirect contributions
+        (28% vs. 32%), while MLP 10 contributes mostly directly (56% vs. 16%).'
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+  I10:
+    quotes:
+    - exact: In path patching, we specify new input tokens, and a path of components through which they
+        will reach the logits.
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: 'To perform path patching, we need a new dataset that replaces a node’s original inputs.
+        To this end, we create the “01-dataset”: we take each example in the original dataset and replace
+        the last two digits YY of the start year with “01”.'
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: We stress that this is a difficult task, where the large majority of the model receives input
+        that should push it to poor performance.
+      prefix: ''
+      suffix: ''
+      section: §3.2, Evaluation
+      page: null
+      line: null
+  I11:
+    quotes:
+    - exact: To understand the roots of these mathematical abilities, we study them in GPT-2 small1 [39],
+        which we show still possesses such abilities, despite its small size.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: 'Structured number representations have been implicated in mathematical capability before:
+        Liu et al. [27] train a toy transformer model on modular addition, and find that its number representations
+        become structured only after it stops overfitting and begins to generalize.'
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: 'We note that our conclusions are limited by the small size of our model and dataset, and
+        the simple phenomenon studied. Our study is very model-centric: data-driven interpretability techniques
+        would strengthen our work.'
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+  I12:
+    quotes:
+    - exact: To understand the roots of these mathematical abilities, we study them in GPT-2 small1 [39],
+        which we show still possesses such abilities, despite its small size.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: 'We note that our conclusions are limited by the small size of our model and dataset, and
+        the simple phenomenon studied. Our study is very model-centric: data-driven interpretability techniques
+        would strengthen our work.'
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+  E1:
+    quotes:
+    - exact: In path patching, we specify new input tokens, and a path of components through which they
+        will reach the logits.
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: 'We can test this by patching two paths at once: (Attn 10, MLP 10, logits) and (Attn 10,
+        MLP 10, MLP 11, logits), as in Figure 3.'
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: We path patch each of MLP 10’s 3072 neurons’ direct contributions to the logits with the
+        01-dataset.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: 'This can be done in three ways: via queries, keys, and values.'
+      prefix: ''
+      suffix: ''
+      section: Appendix B
+      page: null
+      line: null
+    - exact: When we ablate the dimensions found through PCA, to test their importance to the greater-than
+        task, we found little change in model performance.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Similarly, removing linearly-extractable YY information from attention head output using
+        LEACE [5] yielded only slightly lower probability difference (64.7%) than the baseline (81.7%).
+        This indicates that structured YY information may not fully explain GPT-2’s greater-than abilities.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  E2:
+    quotes:
+    - exact: We first qualitatively analyze GPT-2’s baseline behavior on this task by running it on a
+        dataset of 10,000 examples.
+      prefix: ''
+      suffix: ''
+      section: §2, Qualitative Evaluation
+      page: null
+      line: null
+    - exact: The model performs greater-than given all of these prompts (≥ 69% probability difference).
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: When we run GPT-2 on the first two tasks, ablating all edges not in our original year-span
+        circuit, we achieve 98.8% and 88.9% loss recovery respectively; for more details, see Appendix
+        F.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Answering this question fully would require an in-depth exploration of circuit similarity
+        that fall outside the scope of this paper. For the purposes of this investigation, we perform
+        primarily qualitative analyses of tasks that preserve the format and output space of year-span
+        prediction.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  E3:
+    quotes:
+    - exact: Moreover, the circuits found via path patching are similar to those in Sections 3.2 and 3.3.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: That said, these tasks’ circuits are not all identical to the greater-than circuit. GPT-2
+        recovers only 67.8% of its original performance on the last when ablating everything but the year-span
+        circuit.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Across all such tasks, we found that GPT-2 relied on another set of heads and MLPs entirely.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Similar tasks seem to use similar, but not identical, circuits.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: In these cases, GPT-2 ought to predict numbers smaller than YY; however, it predicts numbers
+        greater than YY. This is because it is using the exact same circuit used in the greater than case!
+        GPT-2 thus overgeneralizes the use of our circuit.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  E4:
+    quotes:
+    - exact: To understand the roots of these mathematical abilities, we study them in GPT-2 small1 [39],
+        which we show still possesses such abilities, despite its small size.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: 'We note that our conclusions are limited by the small size of our model and dataset, and
+        the simple phenomenon studied. Our study is very model-centric: data-driven interpretability techniques
+        would strengthen our work.'
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+    - exact: Similarly, studying larger models would confirm that our results hold for the models that
+        dominate natural language processing today.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+  E5:
+    quotes:
+    - exact: Including more top neurons produces sharper approximations of greater-than; see Appendix
+        D for examples.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: We see this weakly by viewing the top-10 neurons’ contributions, but more strongly in the
+        top-100 or 200 (of 3072) neurons (Figure 21).
+      prefix: ''
+      suffix: ''
+      section: Appendix D
+      page: null
+      line: null
+    - exact: But, a closer look at path patching results indicated that on this task, GPT-2 used not only
+        the entire year-span circuit, but also MLP 7 and two extra attention heads. After including those
+        nodes, GPT-2 recovered 90.3% of performance.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: 'To perform path patching, we need a new dataset that replaces a node’s original inputs.
+        To this end, we create the “01-dataset”: we take each example in the original dataset and replace
+        the last two digits YY of the start year with “01”.'
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+  E6:
+    quotes:
+    - exact: these tasks depend on MLPs 8-11 to compute greater-than; these MLPs depend on attention heads
+        that transmit information about YY.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: When we run GPT-2 on the first two tasks, ablating all edges not in our original year-span
+        circuit, we achieve 98.8% and 88.9% loss recovery respectively; for more details, see Appendix
+        F.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: In these cases, GPT-2 ought to predict numbers smaller than YY; however, it predicts numbers
+        greater than YY. This is because it is using the exact same circuit used in the greater than case!
+        GPT-2 thus overgeneralizes the use of our circuit.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  V1:
+    quotes:
+    - exact: 'In light of this, we examine GPT-2’s task performance by using causal techniques to identify
+        a circuit: a minimal computational subgraph of our model that suffices to compute the task [35,
+        14].'
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: While many causal methods aim to identify important components (nodes) of models [48, 11,
+        17], the circuits methodology instead considers important edges. Circuits thus examine not only
+        important nodes, but also their interactions, and how they work together to support model behavior.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: Then, we explain the role of each circuit component, showing that GPT-2 small’s final multi-layer
+        perceptrons boost the probability of end years greater than the start year.
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: Our prior experiments show that MLPs 9-11 directly compute greater-than. But how do they
+        do so? We cannot provide a conclusive answer, but identify avenues by which MLPs might compute
+        this.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+  V2:
+    quotes:
+    - exact: Our prior experiments show that MLPs 9-11 directly compute greater-than. But how do they
+        do so? We cannot provide a conclusive answer, but identify avenues by which MLPs might compute
+        this.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: 'Our full picture of the circuit so far is this: the attention heads communicate the start
+        year YY in embedding space.'
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: 'Other MLPs also have mixed effects: MLP 9 has roughly equal direct and indirect contributions
+        (28% vs. 32%), while MLP 10 contributes mostly directly (56% vs. 16%).'
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: Whether such cross-context activation reflects generalization or memorization is an open
+        question for circuits work in general.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+  V3:
+    quotes:
+    - exact: However, the presence of a greater-than circuit does not preclude memorization. Our circuit
+        could function internally as a lookup table, where attention heads transmit YY information to
+        MLPs that then upweight the years that they have memorized to be >YY.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Though our current evidence does not allow us to definitively attribute GPT-2’s behavior
+        to generalized mathematical ability or memorization, it suggests that the underlying mechanism
+        is something in between the two.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: However, even if we view this circuit as simply retrieving memorized facts, the retrieval
+        mechanism at work is sophisticated. GPT-2 can (imperfectly) identify greater-than scenarios and
+        the relevant operand; it then activates a dedicated mechanism that retrieves the correct answer.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: The lack of causal evidence for the role of structured number representations, and the fact
+        that GPT-2 cannot handle related operations like “less-than” or “equal-to” argue against generalized
+        math mechanisms.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  V4:
+    quotes:
+    - exact: Given our earlier analysis, we therefore hypothesize that these attention heads identify
+        the start year (at the YY position), and indicate it via a spike in unembedding space of the residual
+        stream at the end position; they thus communicate YY to downstream components.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: 'The results indicate that MLPs of 9 and 10 directly specify which years are greater than
+        YY: the logit lens of each layer’s output has an upper triangular pattern, indicating that they
+        upweight precisely those years greater than YY.'
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: 'However, the MLPs cannot act alone: to compute years>YY, these MLPs at the end of the sentence
+        must know the value of YY. But unlike attention heads, MLPs cannot attend to earlier tokens such
+        as the YY token.'
+      prefix: ''
+      suffix: ''
+      section: §3.2, MLPs
+      page: null
+      line: null
+    - exact: MLP 11 plays a similar role, but seems to upweight roughly the first 50 years after YY, enforcing
+        a maximum duration for the event in the sentence.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+  V5:
+    quotes:
+    - exact: Answering this question fully would require an in-depth exploration of circuit similarity
+        that fall outside the scope of this paper. For the purposes of this investigation, we perform
+        primarily qualitative analyses of tasks that preserve the format and output space of year-span
+        prediction.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Our prior experiments show that MLPs 9-11 directly compute greater-than. But how do they
+        do so? We cannot provide a conclusive answer, but identify avenues by which MLPs might compute
+        this.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: 'We note that our conclusions are limited by the small size of our model and dataset, and
+        the simple phenomenon studied. Our study is very model-centric: data-driven interpretability techniques
+        would strengthen our work.'
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+    - exact: Studying circuit performance across diverse tasks could better measure the degree to which
+        our circuit generalizes to all greater-than tasks.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+    - exact: Similarly, studying larger models would confirm that our results hold for the models that
+        dominate natural language processing today.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null

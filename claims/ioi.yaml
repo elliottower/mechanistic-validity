@@ -1,0 +1,1113 @@
+claim: ioi
+title: IOI Circuit
+description: 'Path patching over GPT-2 small identifies 26 attention heads in 7 classes---Previous Token,
+  Duplicate Token, Induction, S-Inhibition, Name Mover, Negative Name Mover, Backup Name Mover---for sentences
+  of the form ``When Mary and John went to the store, John gave a drink to \underline{\hspace{0.9cm}}''''.
+  Name Mover roles are supported at the weight level (OV copy score $>$95\%), the rest at the activation
+  level. Component-level redundancy (Backup Name Movers) is recorded under minimality (I3) rather than
+  necessity: a circuit whose parts compensate for one another is still necessary as a circuit. Description
+  mode: implementational-functional.'
+source:
+  citation: wang2023interpretability
+  title: Interpretability in the Wild
+  url: https://arxiv.org/abs/2211.00593
+  local: reference/wang_2023_ioi.pdf
+  sha256: af0ea3ca3912f819d2cd06b0f36f5c20bfcab72fbc83816d830c286af6872c91
+  extract_cmd: pdftotext -layout
+  read_in_full: true
+claims:
+  C1:
+    quotes:
+    - exact: Our explanation encompasses 26 attention heads grouped into 7 main classes, which we discovered
+        using a combination of interpretability approaches relying on causal interventions.
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: We evaluate the reliability of our explanation using three quantitative criteria–faithfulness,
+        completeness and minimality.
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: These criteria are faithfulness (the circuit can perform the task as well as the whole model),
+        completeness (the circuit contains all the nodes used to perform the task), and minimality (the
+        circuit doesn't contain nodes irrelevant to the task).
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: Our circuit shows significant improvements compared to a naïve (but faithful) circuit, but
+        fails to pass the most challenging tests.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: 'However, the third resulted in sets K that had high incompleteness score: up to 3.09 (87%
+        of the original logit difference).'
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  C2:
+    quotes:
+    - exact: To check that the Name Mover Heads copy names generally, we studied what values are written
+        via the heads’ OV matrix.
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: All three Name Mover Heads have a copy score above 95%, compared to less than 20% for an
+        average head.
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: These share all the same properties as Name Mover Heads except they (1) write in the opposite
+        direction of names they attend to and (2) have a large negative copy score–the copy score calculated
+        with the negative of the OV matrix (98% compared to 12% for an average head).
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: To fully validate the claimed function of the Duplicate Token and Induction Heads, we would
+        want to perform additional checks that we omitted due to time constraints.
+      prefix: ''
+      suffix: ''
+      section: §3.3, Missing validations and caveats
+      page: null
+      line: null
+    - exact: First, for Duplicate Token Heads, we would want to study the interaction of the QK matrix
+        with the token embeddings to test if it acts as a collision detector. Moreover, we would investigate
+        the OV matrix to ensure it is copying information from positional embeddings.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: For Induction Heads, we would perform the more thorough parameter analysis in Elhage et al.
+        (2021) to validate the copying and key composition properties at the parameter level.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: First, despite the detailed analysis presented here, we do not understand several components.
+        Those include the attention patterns of the S-Inhibition Heads, and the effect of MLPs and layer
+        norms.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  C3:
+    quotes:
+    - exact: To discover the circuit, we introduce a systematic approach that iteratively traces important
+        components back from the logits, using a causal intervention that we call “path patching”.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: We supplement this mainline approach with projections in the embedding space, attention pattern
+        analysis, and activation patching to understand the behavior of each component.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: Second, we characterize the newly identified heads by examining their attention patterns
+        and performing experiments tailored to their hypothesized function.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: As reported in Appendix H, Previous Token Heads attend primarily to the previous token and
+        2 Induction Heads demonstrate both prefix-matching and copying.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: As argued in Räuker et al. (2022), one way to evaluate the knowledge gained by interpretability
+        work is to use it for downstream applications. In this section, we do this by using knowledge
+        of the circuit to construct simple adversarial examples for the model.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+  C5:
+    quotes:
+    - exact: This matches the attention pattern of Induction Heads (Elhage et al., 2021), which recognize
+        the general pattern [A] [B] ... [A] and contribute to predicting [B] as the next token.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: To test the induction mechanism, we followed the method introduced in Olsson et al. (2022)
+        by checking for prefix-matching (attending to [B] on pattern like [A] [B] ... [A]) and copying
+        (increasing the logit of the [B] token) of Induction Heads on repeated random sequences of tokens.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: 5.5 and 6.9 are among the 5 heads with the highest induction score. This validates their
+        prefix-matching property introduced in Olsson et al. (2022).
+      prefix: ''
+      suffix: ''
+      section: Appendix H
+      page: null
+      line: null
+    - exact: Moreover, in the context we study, Induction Heads perform a different function compared
+        to what was described in their original discovery.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: In our circuit, Induction Heads’ outputs are used as positional signals for S-Inhibition
+        values. We did not investigate how this mechanism was implemented.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+  M1:
+    quotes:
+    - exact: Attention of Name Mover Heads on pIOI before and after path patching of S-Inhibition Heads
+        → Name Mover Heads’ queries for all four S-Inhibition Heads at once (black bars show the standard
+        deviation).
+      prefix: ''
+      suffix: ''
+      section: Figure 4 caption
+      page: null
+      line: null
+    - exact: Black bars represent the standard deviation.
+      prefix: ''
+      suffix: ''
+      section: Figure 10 caption
+      page: null
+      line: null
+    - exact: We additionally compute this logit difference as an average over N > 200 pairs (xorig , xnew
+        ).
+      prefix: ''
+      suffix: ''
+      section: Appendix B
+      page: null
+      line: null
+    - exact: We compute the proportion of samples that contain the input name token in the top 5 logits
+        (N = 1000) and call this the copy score.
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: 'The results are shown in Figure 3c: higher attention probability on the IO or S token is
+        correlated with higher output in the direction of the name (correlation ρ > 0.81, N = 500)'
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: Over 100,000 dataset examples, GPT-2 small has mean logit difference of 3.56 (IO predicted
+        over S 99.3% of the time), and mean IO probability of 49%.
+      prefix: ''
+      suffix: ''
+      section: §2, Task description
+      page: null
+      line: null
+  M2:
+    quotes:
+    - exact: The first one, faithfulness, asks that C has similar performance to the full model M, as
+        measured by |F(M) - F(C)|.
+      prefix: ''
+      suffix: ''
+      section: §4, opening definition
+      page: null
+      line: null
+    - exact: For the circuit C from Figure 2, we find that |F(M) - F(C)| = 0.46, or only 13% of F(M) =
+        3.56. In other words, C achieves 87% of the performance of M.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: To establish a baseline for these criteria, we compare to a naïve circuit that consists of
+        the Name Mover Heads (but no Backup nor Negative Name Mover Heads), S-Inhibition Heads, two Induction
+        Heads, two Duplicate Token Heads, and the Previous Token Heads.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: This circuit has a faithfulness score of 0.1, comparable to the full circuit C.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: 'However, the naïve circuit can be more easily proven incomplete: by sampling random sets
+        or by knocking-out by classes, we see that F(M \ K) is much higher than F(C \ K) (Figure 6a).'
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Nonetheless, when we applied the greedy heuristic to optimize for the incompleteness score,
+        both circuits have similarly large incompleteness scores.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: 'We show sets K obtained from different sampling strategies: 10 uniformly randomly chosen
+        K ⊆ C, K = ∅, K a class of heads from the circuit, and 10 K found by greedy optimization.'
+      prefix: ''
+      suffix: ''
+      section: Figure 6 caption
+      page: null
+      line: null
+    - exact: All three Name Mover Heads have a copy score above 95%, compared to less than 20% for an
+        average head.
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: These share all the same properties as Name Mover Heads except they (1) write in the opposite
+        direction of names they attend to and (2) have a large negative copy score–the copy score calculated
+        with the negative of the OV matrix (98% compared to 12% for an average head).
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+  M3:
+    quotes:
+    - exact: Perhaps because of this, we find zero ablation to lead to noisy results in practice.
+      prefix: ''
+      suffix: ''
+      section: §2.1
+      page: null
+      line: null
+    - exact: The exact choice of Backup Name Mover Heads doesn’t change significantly the behavior of
+        the circuit.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: 'The first two methods of sampling K suggested to us that our circuit was complete, as every
+        incompleteness score computed with those methods was small. However, the third resulted in sets
+        K that had high incompleteness score: up to 3.09 (87% of the original logit difference).'
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  M4:
+    quotes:
+    - exact: 'To quantify GPT-2 small’s performance on the IOI task, we use two different metrics: logit
+        difference and IO probability. Logit difference measures the difference in logit value between
+        the two names, where a positive score means the correct name (IO) has higher probability.'
+      prefix: ''
+      suffix: ''
+      section: §2, Task description
+      page: null
+      line: null
+    - exact: Over 100,000 dataset examples, GPT-2 small has mean logit difference of 3.56 (IO predicted
+        over S 99.3% of the time), and mean IO probability of 49%.
+      prefix: ''
+      suffix: ''
+      section: §2, Task description
+      page: null
+      line: null
+    - exact: The first one, faithfulness, asks that C has similar performance to the full model M, as
+        measured by |F(M) - F(C)|.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+  M5:
+    quotes:
+    - exact: Using F, we introduce three criteria for validating a circuit C.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+  M6:
+    quotes:
+    - exact: We create dataset samples for IOI using 15 templates (see Appendix E) with random single-token
+        names, places and items.
+      prefix: ''
+      suffix: ''
+      section: §2, Task description
+      page: null
+      line: null
+    - exact: All templates in the table fit the ‘BABA’ pattern, but we use templates that fit the ‘ABBA’
+        pattern as well (i.e, by swapping the first instances of [B] and [A] in all of the above).
+      prefix: ''
+      suffix: ''
+      section: Figure 14 caption, Appendix E
+      page: null
+      line: null
+    - exact: When patching in S2 Inhibition outputs from a distribution where prefixes to sentences are
+        longer (but the distance between S1 and S2 is constant), the logit difference doesn’t change (3.56
+        before patching vs 3.57 after).
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+    - exact: This suggests that the positional signal doesn’t depend on the absolute position of the tokens,
+        as long as the relative position of S1 and S2 stays the same.
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+  M7:
+    quotes:
+    - exact: GPT-2 small is a decoder-only transformer with 12 layers and 12 attention heads per attention
+        layer.
+      prefix: ''
+      suffix: ''
+      section: §2, Transformer architecture
+      page: null
+      line: null
+    - exact: We selected the eight heads with the highest direct influence on logit difference after knockout
+        and call them Backup Name Mover Heads.
+      prefix: ''
+      suffix: ''
+      section: §3.4
+      page: null
+      line: null
+    - exact: We arbitrarily chose to keep the eight heads that were not part of any other groups, and
+        affected the logit difference with an effect size above the threshold of 2%.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: We identified 4 heads with a significant negative effect on logit difference.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+  I1:
+    quotes:
+    - exact: To make sure that we didn’t miss any copies, we knocked out all the Name Mover Heads at once.
+        To our surprise, the circuit still worked (only 5% drop in logit difference).
+      prefix: ''
+      suffix: ''
+      section: §3.4
+      page: null
+      line: null
+    - exact: These heads compensate for the loss of function from the Name Mover Heads such that the logit
+        difference is only 5% lower.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: Formally, the minimality criterion is whether for every node v ∈ C there exists a subset
+        K ⊆ C \ {v} that has high minimality score |F(C \ (K ∪ {v})) - F(C \ K)|.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: What happens in practice for our circuit? We need to exhibit for every v a set K such that
+        the minimality score is high.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: The importance of different nodes varies, but all have a nontrivial impact (at least 1% of
+        the original logit difference). These results ensure that we did not interpret irrelevant nodes,
+        but do show that the individual contribution of some attention heads is small.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+  I2:
+    quotes:
+    - exact: Thus, C(x) is defined by knocking out all nodes in M \ C and taking the resulting logit outputs
+        in the modified computational graph.
+      prefix: ''
+      suffix: ''
+      section: §2.1
+      page: null
+      line: null
+    - exact: Mean-ablations remove the information that varies in the reference distribution (e.g. the
+        value of the name outputted by a head) but will preserve constant information (e.g. the fact that
+        a head is outputting a name).
+      prefix: ''
+      suffix: ''
+      section: §2.1
+      page: null
+      line: null
+    - exact: For the circuit C from Figure 2, we find that |F(M) - F(C)| = 0.46, or only 13% of F(M) =
+        3.56. In other words, C achieves 87% of the performance of M.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: However, as the Backup Name Mover Heads illustrate, faithfulness alone is not enough to ensure
+        a complete account.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+  I3:
+    quotes:
+    - exact: A faithful and complete circuit may contain unnecessary components, and so be overly complex.
+        To avoid this, we should check that each of its nodes v is actually necessary.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: The importance of different nodes varies, but all have a nontrivial impact (at least 1% of
+        the original logit difference). These results ensure that we did not interpret irrelevant nodes,
+        but do show that the individual contribution of some attention heads is small.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: The sets that were found for the minimality tests are listed in Figure 20.
+      prefix: ''
+      suffix: ''
+      section: Appendix K
+      page: null
+      line: null
+    - exact: Finally, Backup Name Mover Heads do not normally move the IO token to the output, but take
+        on this role if the regular Name Mover Heads are knocked out.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: However, these heads are also the ones with the less individual importance for the task (as
+        shown by their minimality score in Figure 7). The exact choice of Backup Name Mover Heads doesn’t
+        change significantly the behavior of the circuit.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+  I4:
+    quotes:
+    - exact: We also noticed that the majority of the Negative, Backup and regular Name Mover Heads appear
+        to write in the next token direction on repeated sequences of random tokens, and Negative Name
+        Movers Heads contribute negatively. This suggests that these heads are involved beyond the IOI
+        task to produce next-token prediction relying on contextual information.
+      prefix: ''
+      suffix: ''
+      section: Appendix H
+      page: null
+      line: null
+    - exact: 3.0 and 0.1 are among the three heads with the highest duplicate token score (Figure 18).
+        This is evidence of their role of Duplicate Token Heads outside the circuit for the IOI task.
+      prefix: ''
+      suffix: ''
+      section: Appendix I
+      page: null
+      line: null
+    - exact: 4.11 and 2.2 are the two heads with the highest previous token score on sequences of random
+        tokens. This is a strong validation of their role outside p_IOI.
+      prefix: ''
+      suffix: ''
+      section: Appendix H
+      page: null
+      line: null
+    - exact: 'To quantify GPT-2 small''s performance on the IOI task, we use two different metrics: logit
+        difference and IO probability.'
+      prefix: ''
+      suffix: ''
+      section: §2, Task description
+      page: null
+      line: null
+  I5:
+    quotes:
+    - exact: This circuit has a faithfulness score of 0.1, comparable to the full circuit C.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Nonetheless, when we applied the greedy heuristic to optimize for the incompleteness score,
+        both circuits have similarly large incompleteness scores.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: 'However, the third resulted in sets K that had high incompleteness score: up to 3.09 (87%
+        of the original logit difference). These greedily-found sets were usually not semantically interpretable
+        (containing heads from multiple categories), and investigating them would be an interesting direction
+        of future work.'
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: As visible in Figure 22 the sets found by the greedy search contain a combination of nodes
+        from different classes. This means that it is difficult to interpret how our circuit is incomplete,
+        as mentioned in the main text.
+      prefix: ''
+      suffix: ''
+      section: Appendix M
+      page: null
+      line: null
+    - exact: 'Yet Section 3.4 shows that our experimental methods do not fully account for all name-moving
+        in the model: some new heads take on this role after the main Name Mover Heads are knocked out.'
+      prefix: ''
+      suffix: ''
+      section: §4, opening
+      page: null
+      line: null
+    refs:
+    - citation: chen2026circuits
+      text: IoU(A, B) = 4.1%
+      section: body
+      page: null
+      direction: neutral
+      local: reference/chen_2026_circuits.pdf
+      sha256: aaec573dde3325cb351e85030b172b70dbe4ad219da5cfdf9f1d75b1e3b1198b
+      extract_cmd: pdftotext -layout
+    - citation: chen2026circuits
+      text: Both sheaves achieve perfect IOI accuracy and satisfy
+      section: body
+      page: null
+      direction: neutral
+      local: reference/chen_2026_circuits.pdf
+      sha256: aaec573dde3325cb351e85030b172b70dbe4ad219da5cfdf9f1d75b1e3b1198b
+      extract_cmd: pdftotext -layout
+  I6:
+    quotes:
+    - exact: Using F, we introduce three criteria for validating a circuit C.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+  I7:
+    quotes:
+    - exact: We discovered two signals through which S-Inhibition Heads do this. The first, the token
+        signal, contains the value of the token S and causes Name Mover Heads to avoid occurrences of
+        that token. The second, the position signal, contains information about the position of the S1
+        token, causing Name Mover Heads to avoid the S1 position no matter the value of the token at this
+        position.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: In total, we can create all six combinations of original, inverted, or uncorrelated token
+        signal with the original and inverted positional signal.
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+    - exact: Then the Figure 9 suggests that the logit difference can be well approximated by 2.31Spos
+        + 0.99Stok , with a mean error of 7% relative to the baseline logit difference.
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+    - exact: However, patching their output from a dataset with a different S1 and S2 token but at the
+        same position doesn’t change the logit difference (less than 8% of the drop induced by patching
+        S-Inhibition Heads).
+      prefix: ''
+      suffix: ''
+      section: §3.3, Locating the position signal
+      page: null
+      line: null
+    - exact: To ensure that grammatical information is constant when averaging, we compute the mean of
+        a node across samples of the same template.
+      prefix: ''
+      suffix: ''
+      section: §2.1
+      page: null
+      line: null
+    - exact: Each name was drawn from a list of 100 English first names, while the place and the object
+        were chosen among a hand-made list of 20 common words. All the words chosen were one token long
+        to ensure proper sequence alignment computation of the mean activations.
+      prefix: ''
+      suffix: ''
+      section: Appendix E
+      page: null
+      line: null
+  I9:
+    quotes:
+    - exact: Each type of head in our circuit has many copies, suggesting that the model implements redundant
+        behavior
+      prefix: ''
+      suffix: ''
+      section: §3.4
+      page: null
+      line: null
+    - exact: After the knockout, we found the new heads directly affecting the logits using the same path
+        patching experiment from Section 3.1. These new heads compensate for the loss of Name Movers Heads
+        by replacing their role.
+      prefix: ''
+      suffix: ''
+      section: §3.4
+      page: null
+      line: null
+    - exact: As shown in Figure 15, knocking-out the three main Name Mover Heads surprisingly changes
+        the behavior of the other heads that write in the IO-S direction (both positively and negatively).
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: We observe that the Negative Name Mover Heads have a less negative effect on logit difference,
+        and 10.7 even has a positive effect on the logit difference after the knockout.
+      prefix: ''
+      suffix: ''
+      section: Appendix F
+      page: null
+      line: null
+    - exact: This complicates the search for complete mechanisms, as different model structure is found
+        when some components are ablated.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: As visible in Figure 22 the sets found by the greedy search contain a combination of nodes
+        from different classes. This means that it is difficult to interpret how our circuit is incomplete,
+        as mentioned in the main text.
+      prefix: ''
+      suffix: ''
+      section: Appendix M
+      page: null
+      line: null
+  I10:
+    quotes:
+    - exact: Path patching replaces part of a model’s forward pass with activations from a different input.
+        Given inputs xorig and xnew , and a set of paths P emanating from a node h, path patching runs
+        a forward pass on xorig , but for the paths in P it replaces the activations for h with those
+        from xnew .
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: We will always take xorig to be a sample from pIOI , and xnew the corresponding sample from
+        pABC (i.e. where the names in the sentence are replaced by three random names).
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+  I11:
+    quotes:
+    - exact: We hypothesize that this compensation phenomenon is caused by the use of dropout during training.
+        Thus, the model was optimized for robustness to dysfunctional parts.
+      prefix: ''
+      suffix: ''
+      section: §3.4
+      page: null
+      line: null
+    - exact: In this work, we aim to mechanistically understand how GPT-2 small (Radford et al., 2019)
+        implements a simple natural language task.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+  E1:
+    quotes:
+    - exact: 'A first naïve knockout approach consists of simply deleting each node in K from M. The net
+        effect of this removal is to zero ablate K, meaning that we set its output to 0. This naïve approach
+        has an important limitation: 0 is an arbitrary value, and subsequent nodes might rely on the average
+        activation value as an implicit bias term. Perhaps because of this, we find zero ablation to lead
+        to noisy results in practice.'
+      prefix: ''
+      suffix: ''
+      section: §2.1
+      page: null
+      line: null
+    - exact: Mean-ablations remove the information that varies in the reference distribution (e.g. the
+        value of the name outputted by a head) but will preserve constant information (e.g. the fact that
+        a head is outputting a name).
+      prefix: ''
+      suffix: ''
+      section: §2.1
+      page: null
+      line: null
+    - exact: In this work, all knockouts are performed in a modified pIOI distribution called pABC.
+      prefix: ''
+      suffix: ''
+      section: §2.1
+      page: null
+      line: null
+    - exact: Path patching replaces part of a model's forward pass with activations from a different input.
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: In our case, h will be a fixed attention head and P consists of all direct paths from h to
+        a set of components R, i.e. paths through residual connections and MLPs (but not through other
+        attention heads); this measures the counterfactual effect of h on the members of R.
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: Instead of patching isolated paths, we patch the output of a set of heads and recompute the
+        forward pass of the model after this modification.
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+    - exact: In all of our experiments, we do not intervene on MLPs, layer norms, or embedding matrices,
+        focusing our investigation on understanding the attention heads.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+  E2:
+    quotes:
+    - exact: We create dataset samples for IOI using 15 templates (see Appendix E) with random single-token
+        names, places and items. We use the notation pIOI for the distribution over sentences generated
+        by this procedure.
+      prefix: ''
+      suffix: ''
+      section: §2, Task description
+      page: null
+      line: null
+    - exact: We find that this significantly reduces the logit difference and causes the model to predict
+        S over IO 23% of the time (Figure 8).
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: Moreover, we do not have a full understanding of the mechanisms at play in these adversarial
+        examples. For instance, the S-Inhibition Heads attend not only to S2, but also to the second occurrence
+        of IO. As this pattern is not present in pIOI nor in pABC , it is beyond the analysis presented
+        in Section 3.
+      prefix: ''
+      suffix: ''
+      section: §4.4, Limitations of the attack
+      page: null
+      line: null
+  E3:
+    quotes:
+    - exact: We also noticed that the majority of the Negative, Backup and regular Name Mover Heads appear
+        to write in the next token direction on repeated sequences of random tokens, and Negative Name
+        Movers Heads contribute negatively. This suggests that these heads are involved beyond the IOI
+        task to produce next-token prediction relying on contextual information.
+      prefix: ''
+      suffix: ''
+      section: Appendix H
+      page: null
+      line: null
+    - exact: 3.0 and 0.1 are among the three heads with the highest duplicate token score (Figure 18).
+        This is evidence of their role of Duplicate Token Heads outside the circuit for the IOI task.
+      prefix: ''
+      suffix: ''
+      section: Appendix I
+      page: null
+      line: null
+    - exact: 4.11 and 2.2 are the two heads with the highest previous token score on sequences of random
+        tokens. This is a strong validation of their role outside pIOI .
+      prefix: ''
+      suffix: ''
+      section: Appendix H
+      page: null
+      line: null
+    - exact: We identified heads compensating for the loss of function of other heads, and heads contributing
+        negatively to the next-token prediction. Early results suggest that the latter phenomenon occurs
+        for other tasks beyond IOI (see Appendix H).
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+  E4:
+    quotes:
+    - exact: As a starting point, we performed a preliminary analysis of GPT-2 medium. We found that this
+        model also has a sparse set of heads directly influencing the logits. However, not all of these
+        heads attend to IO and S, suggesting more complex behavior than the Name Movers Heads in GPT-2
+        small.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: Second, the number of parameters in GPT-2 small is orders of magnitude away from state-of-the-art
+        transformer language models. A future challenge is to scale this approach to these larger models.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    refs:
+    - citation: tigges2024llm
+      text: tend to replicate across model scale
+      section: body
+      page: null
+      direction: neutral
+      local: reference/tigges_2024_circuits_consistent.pdf
+      sha256: de26edd28d3792be78213005cc5d2e1f7999ee40a3a5a28743161f9a5ee9eba9
+      extract_cmd: pdftotext -layout
+    - citation: tigges2024llm
+      text: suddenly stops exhibiting this behavior
+      section: body
+      page: null
+      direction: neutral
+      local: reference/tigges_2024_circuits_consistent.pdf
+      sha256: de26edd28d3792be78213005cc5d2e1f7999ee40a3a5a28743161f9a5ee9eba9
+      extract_cmd: pdftotext -layout
+  E5:
+    quotes:
+    - exact: Plot of points (xK , yK ) = (F (C \ K), F (M \ K)) for (a) our circuit and (b) a naive circuit.
+        Each point is for a different choice of K.
+      prefix: ''
+      suffix: ''
+      section: Figure 6 caption
+      page: null
+      line: null
+    - exact: In practice, because the naïve and the full circuit are not of the same size, we chose respectively
+        k = 5 and k = 10 to ensure a similar amount of stochasticity in the process. We run the procedure
+        10 times and kept the 5 sets with the maximal important incompleteness score (including the intermediate
+        K).
+      prefix: ''
+      suffix: ''
+      section: Appendix M
+      page: null
+      line: null
+    - exact: Mean-ablations remove the information that varies in the reference distribution (e.g. the
+        value of the name outputted by a head) but will preserve constant information (e.g. the fact that
+        a head is outputting a name).
+      prefix: ''
+      suffix: ''
+      section: §2.1
+      page: null
+      line: null
+  E6:
+    quotes:
+    - exact: As presented in Section 3, the model relies on duplicate detection to differentiate between
+        S and IO. Motivated by this, we constructed passages where both the S and IO tokens are duplicated.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: We find that this significantly reduces the logit difference and causes the model to predict
+        S over IO 23% of the time (Figure 8).
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: To ensure that the observed effect is not an artifact of the additional sentences, we included
+        a control dataset using the same templates, but where the middle sentence contains S instead of
+        IO.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: On this distribution, the model has an even higher logit difference than on pIOI , and predicts
+        S over IO only 0.4% of the time.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: Despite being inspired by our understanding of our circuit, those examples are simple enough
+        that they could have been found without our circuit with enough effort.
+      prefix: ''
+      suffix: ''
+      section: §4.4, Limitations of the attack
+      page: null
+      line: null
+  V1:
+    quotes:
+    - exact: If we think of a model as a computational graph M where nodes are terms in its forward pass
+        (neurons, attention heads, embeddings, etc.) and edges are the interactions between those terms
+        (residual connections, attention, projections, etc.), a circuit C is a subgraph of M responsible
+        for some behavior (such as completing the IOI task).
+      prefix: ''
+      suffix: ''
+      section: §2.1
+      page: null
+      line: null
+    - exact: This definition of a circuit is more coarse-grained than the one presented in Olah et al.
+        (2020), where nodes are features (meaningful directions in the latent space of a model) instead
+        of model components.
+      prefix: ''
+      suffix: ''
+      section: §2.1
+      page: null
+      line: null
+    - exact: 'Below we present a circuit that we claim implements this functionality. Our circuit contains
+        three major classes of heads, corresponding to the three steps of the algorithm above:'
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+  V2:
+    quotes:
+    - exact: We discovered two signals through which S-Inhibition Heads do this. The first, the token
+        signal, contains the value of the token S and causes Name Mover Heads to avoid occurrences of
+        that token. The second, the position signal, contains information about the position of the S1
+        token, causing Name Mover Heads to avoid the S1 position no matter the value of the token at this
+        position.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: Then the Figure 9 suggests that the logit difference can be well approximated by 2.31Spos
+        + 0.99Stok , with a mean error of 7% relative to the baseline logit difference.
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+    - exact: To fully validate the claimed function of the Duplicate Token and Induction Heads, we would
+        want to perform additional checks that we omitted due to time constraints.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: In our circuit, Induction Heads’ outputs are used as positional signals for S-Inhibition
+        values. We did not investigate how this mechanism was implemented.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+  V3:
+    quotes:
+    - exact: To establish a baseline for these criteria, we compare to a naïve circuit that consists of
+        the Name Mover Heads (but no Backup nor Negative Name Mover Heads), S-Inhibition Heads, two Induction
+        Heads, two Duplicate Token Heads, and the Previous Token Heads.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: This circuit has a faithfulness score of 0.1, comparable to the full circuit C.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Nonetheless, when we applied the greedy heuristic to optimize for the incompleteness score,
+        both circuits have similarly large incompleteness scores.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+  V4:
+    quotes:
+    - exact: We hypothesize that these heads (i) attend to the correct name and (ii) copy whatever they
+        attend to. We therefore call these heads Name Mover Heads.
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: We therefore call these heads S-Inhibition Heads, since their effect is to decrease attention
+        to S1.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: We hypothesize that these heads attend to the previous occurrence of a duplicate token and
+        copy the position of this previous occurrence to the current position. We therefore call them
+        Duplicate Token Heads.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: A fourth major family of heads writes in the opposite direction of the Name Mover Heads,
+        thus decreasing the confidence of the predictions. We speculate that these Negative Name Mover
+        Heads might help the model “hedge” so as to avoid high cross-entropy loss when making mistakes.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: Finally, Backup Name Mover Heads do not normally move the IO token to the output, but take
+        on this role if the regular Name Mover Heads are knocked out.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+  V5:
+    quotes:
+    - exact: Though these criteria support our explanation, they also point to remaining gaps in our understanding.
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: Our circuit shows significant improvements compared to a naïve (but faithful) circuit, but
+        fails to pass the most challenging tests.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: In all of our experiments, we do not intervene on MLPs, layer norms, or embedding matrices,
+        focusing our investigation on understanding the attention heads.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: However, our work also has several limitations. First, despite the detailed analysis presented
+        here, we do not understand several components.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: In the same way model organisms in biology enable discoveries valuable beyond a specific
+        species, we think these highly detailed (though narrow) examples are crucial to developing a comprehensive
+        understanding of machine learning models.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null

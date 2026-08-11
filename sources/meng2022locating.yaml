@@ -1,0 +1,21 @@
+citation: meng2022locating
+depth: quoted
+title: Locating and Editing Factual Associations in GPT
+authors:
+- Meng, Kevin
+- Bau, David
+- Andonian, Alex
+- Belinkov, Yonatan
+year: '2022'
+venue: NeurIPS
+url: https://arxiv.org/abs/2202.05262
+arxiv: '2202.05262'
+local: reference/meng_2022_rome.pdf
+sha256: d7c17f896cca512fb258261421b073baa6f4e6e44b6bb7ada5c90185f423054a
+quotes:
+- text: decisive in a model
+  section: body
+  direction: neutral
+- text: restore the prediction
+  section: body
+  direction: neutral

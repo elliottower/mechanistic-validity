@@ -1,0 +1,172 @@
+citation: leask2025canonical
+depth: quoted
+title: Sparse Autoencoders Do Not Find Canonical Units of Analysis
+authors:
+- Leask, Patrick
+- Bussmann, Bart
+- Pearce, Michael
+- Bloom, Joseph
+- Tigges, Curt
+- Al Moubayed, Noura
+- Sharkey, Lee
+- Nanda, Neel
+year: '2025'
+venue: International Conference on Learning Representations (ICLR)
+url: https://arxiv.org/abs/2502.04878
+arxiv: '2502.04878'
+local: reference/leask_2025_canonical_units.pdf
+sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+quotes:
+- text: If we stitch a latent from a larger SAE into a smaller SAE and the reconstruction
+  section: §4.2, p.6
+  direction: raises
+- text: performance improves, this indicates that the latent is adding new information to the smaller
+    SAE.
+  section: §4.2, p.6
+  direction: raises
+- text: Recently, sparse autoencoders (SAEs) have emerged as a promising alternative by decomposing the
+    activations of LLMs into a dictionary of interpretable and monosemantic features (Bricken et al.,
+    2023; Cunningham et al., 2023).
+  section: §1, p.2
+  direction: raises
+- text: Our findings challenge the idea that SAEs can discover a canonical set of features.
+  section: §7, p.10
+  direction: lowers
+- text: Using meta-SAEs - SAEs trained on the decoder matrix of another SAE - we find that latents in
+    SAEs often decompose into combinations of latents from a smaller SAE, showing that larger SAE latents
+    are not atomic.
+  section: Abstract, p.1
+  direction: lowers
+- text: On a random sample of 1,000 SAE latents, GPT-4o-mini chose the correct answer of the five options
+    73% of the time.
+  section: §5.1, p.9
+  direction: lowers
+- text: The existence of the novel group of latents demonstrates that smaller SAEs are incomplete, and
+    that larger SAE learn features that are missed by the smaller SAE.
+  section: §4.2, p.6
+  direction: lowers
+- text: Averaging this metric across all 657 latents in GPT-1536 that have low maximum cosine similarity
+    with all latents in GPT-768, we see a similar pattern
+  section: Appendix A.4, p.18
+  direction: lowers
+- text: Adding in all the latents with cosine similarity ≤ 0.7 from GPT-1536 in GPT-768 reduces the MSE
+    by almost 10%.
+  section: Figure 17 caption, p.21
+  direction: lowers
+- text: We find that meta-SAEs learn similar latents to similar sized SAEs trained on the original reconstruction
+    problem.
+  section: §5.2, p.7
+  direction: lowers
+- text: The sparsity penalty incentivizes larger SAEs to learn compositions of latents rather than atomic
+    latents.
+  section: Figure 2 caption, p.3
+  direction: lowers
+- text: This supports the predictions of Wattenberg & Viégas (2024); Bricken et al. (2023); Anders et
+    al. (2024) that the sparsity penalty results in the undesirable composition of features that may be
+    sparser, but do not add any new information.
+  section: §4.2, p.6
+  direction: lowers
+- text: We found that when comparing SAEs with the same size, 94% of the latents are reconstruction latents
+    (cosine similarity > 0.7).
+  section: Appendix A.7, p.21
+  direction: raises
+- text: We compared the proportion of reconstruction latents between SAEs of the same size and SAEs of
+    different sizes.
+  section: Appendix A.7, p.21
+  direction: raises
+- text: In our experiments we set the cosine threshold to 0.7 for the GPT-2 SAEs, and 0.4 for the Gemmascope
+    SAEs, based on our exploratory analysis.
+  section: §4.2, p.6
+  direction: lowers
+- text: These findings suggest that there is no single SAE width at which it learns a unique and complete
+    dictionary of atomic features that can be used to explain the behavior of the model.
+  section: §7, p.10
+  direction: lowers
+- text: For a given latent we prompt GPT-4o-mini with the explanations of the meta-SAE latents that are
+    active on that latent, and ask it to choose which of 5 SAE latent explanations most relate to the
+    explanations of the meta-SAE latents.
+  section: §5.1, pp.8-9
+  direction: raises
+- text: Similarly to Gao et al. (2024), we use sparse probes to evaluate the presence of known ground-truth
+    features in our SAEs.
+  section: Appendix A.9.1, p.24
+  direction: raises
+- text: We experiment with stitching on eight SAEs trained on the residual stream of layer 8 of GPT 2
+    Small (Radford et al., 2019) with dictionary sizes ranging from 768 to 98,304 and two of the Gemma
+    Scope SAEs (Lieberum et al., 2024) trained on Gemma 2 2B (Team et al., 2024) with dictionary size
+    16,384 and 32,768.
+  section: §4.1, p.5
+  direction: raises
+- text: In order to validate that the SAE stitching results are not an artifact of GPT-2 small or the
+    SAEs that we trained, we applied the same methods to the open-source Gemma Scope SAEs.
+  section: Appendix A.7.1, p.22
+  direction: raises
+- text: However, we find some reconstruction group latents have high decoder cosine similarity to multiple
+    latents in the smaller SAE, suggesting the large SAE latent is an interpolation or composition of
+    the smaller SAE latents
+  section: §4.2, p.6
+  direction: lowers
+- text: These findings suggest that there is no single SAE width at which it learns a unique and complete
+    dictionary of atomic features that can be used to explain the behavior of the model.
+  section: §7, p.10
+  direction: lowers
+- text: Whilst here there is a general downward trend, the accuracy is not monotonically decreasing with
+    SAE size.
+  section: Appendix A.9.2, p.25
+  direction: lowers
+- text: The sparsity penalty incentivizes larger SAEs to learn compositions of latents rather than atomic
+    latents.
+  section: Figure 2 caption, p.3
+  direction: lowers
+- text: This supports the predictions of Wattenberg & Viégas (2024); Bricken et al. (2023); Anders et
+    al. (2024) that the sparsity penalty results in the undesirable composition of features that may be
+    sparser, but do not add any new information.
+  section: §4.2, p.6
+  direction: lowers
+- text: If large SAE features are indeed compositions rather than atomic, it may be possible to decompose
+    them into more fundamental units.
+  section: §5, p.7
+  direction: lowers
+- text: We find that meta-latents are similar to latents in smaller SAEs, demonstrating that latents from
+    larger SAEs can be interpreted as the composition of latents from smaller SAEs.
+  section: §1, p.3
+  direction: lowers
+- text: They show that the relationship between the size of the SAE and the evaluation accuracy is complex
+    and dataset dependent.
+  section: Appendix A.9.1, p.24
+  direction: lowers
+- text: We experiment with stitching on eight SAEs trained on the residual stream of layer 8 of GPT 2
+    Small (Radford et al., 2019) with dictionary sizes ranging from 768 to 98,304 and two of the Gemma
+    Scope SAEs (Lieberum et al., 2024) trained on Gemma 2 2B (Team et al., 2024) with dictionary size
+    16,384 and 32,768.
+  section: §4.1, p.5
+  direction: raises
+- text: 'Interpolating between SAE pairs of increasing dictionary size (768→1536→3072→6144→12288) through
+    two steps per phase: adding novel latents (increasing L0) then swapping groups of reconstruction latents
+    (decreasing L0 on average).'
+  section: Figure 5 caption, p.8
+  direction: raises
+- text: 'Sparse autoencoders (SAEs) are a popular method for finding these features in LLMs, and it has
+    been postulated that they can be used to find a canonical set of units: a unique and complete list
+    of atomic features.'
+  section: Abstract, p.1
+  direction: neutral
+- text: Our findings challenge the idea that SAEs can discover a canonical set of features.
+  section: §7, p.10
+  direction: lowers
+- text: This indicates that the choice of SAE size should be guided by the specific interpretability task
+    at hand, accepting that no single SAE configuration provides a universal solution.
+  section: §7, p.10
+  direction: lowers
+- text: We suggest taking a pragmatic approach to applying SAEs to mechanistic interpretability tasks,
+    trying SAEs of several widths to see which is best suited.
+  section: §1, p.3
+  direction: lowers
+- text: Furthermore, our work only studies two LLMs and does not include very large SAEs, such as in Templeton
+    (2024).
+  section: §7, p.10
+  direction: raises
+- text: We are uncertain whether canonical units of analysis exist, but our results suggest that alternative
+    approaches should be explored.
+  section: §1, p.3
+  direction: raises

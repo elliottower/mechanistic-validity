@@ -1,0 +1,1253 @@
+claim: probing
+verdict: Proposed
+readings:
+- statement: A probing result licenses that property $z$ is extractable from the representation by a classifier
+    of the stated capacity
+  verdict: Proposed
+  missing: 'Necessity: the method performs no removal of its own, and where removal was performed the
+    studies the anchor reports disagree four ways (I1, E1)'
+  primary: true
+- statement: A good probe score shows that the model represents $z$
+  verdict: Disconfirmed
+  missing: 'Nothing --- tested and failed: control tasks attribute most of a nonlinear probe''s accuracy
+    to the probe itself, and even random features decode the property (C4)'
+  primary: false
+- statement: A good probe score shows that the model uses $z$ in producing its output
+  verdict: Disconfirmed
+  missing: 'Nothing --- tested and failed: a control dataset holds $z$ non-discriminative for the original
+    task and the probe recovers it anyway, so decodability does not localise to the task (I4)'
+  primary: false
+- statement: Interventions on a probe-identified direction show which features the model uses
+  verdict: Underdetermined
+  missing: A result that decides the four-way disagreement among the intervention studies of \S4.3 (I1,
+    E1). This is the broad scope, under which \textbf{I2} and \textbf{E5} are unattempted; under probing
+    as \S2 defines it, a read-out with no path writing back in, they are not applicable
+  primary: false
+hypotheses:
+- id: H1
+  view: Instrumental
+  label: a probing result licenses that the property is extractable from the representation by a classifier
+    of the stated capacity
+- id: H2
+  view: Object
+  label: the model represents the property in the probed representation
+- id: H3
+  view: Role
+  label: the model uses the property in producing its output
+- id: H4
+  view: Role
+  label: the direction the probe identifies is one the model reads, so intervening on it shows what the
+    model uses
+- id: H5
+  view: Object
+  label: the property is decodable from any representation of the same dimensionality, so no determinate
+    structure carries it
+- id: H6
+  view: Instrumental
+  label: the score is produced by the probe's own capacity rather than by the representation
+views_evidence:
+- criterion: M2
+  evidence: Even random features capture significant information the probe can decode, so performance
+    on learned features has to be read against that
+  cells:
+    H1: C
+    H2: I
+    H3: I
+    H4: '-'
+    H5: C
+    H6: C
+  designed_for:
+  - H2
+  - H5
+- criterion: C4
+  evidence: Control tasks give nonlinear probes high accuracy at low selectivity, which the anchor reads
+    as memorisation by the probe
+  cells:
+    H1: C
+    H2: I
+    H3: I
+    H4: '-'
+    H5: '-'
+    H6: C
+  designed_for:
+  - H2
+  - H6
+- criterion: I5
+  evidence: Selectivity separates linear from nonlinear probes, excluding the memorisation rival for the
+    former and confirming it for the latter
+  cells:
+    H1: C
+    H2: C
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: C
+  designed_for:
+  - H2
+  - H6
+- criterion: I4
+  evidence: A control dataset holds the property non-discriminative for the original task and the probe
+    recovers it anyway
+  cells:
+    H1: C
+    H2: C
+    H3: I
+    H4: '-'
+    H5: C
+    H6: '-'
+  designed_for:
+  - H3
+- criterion: I1
+  evidence: Projecting a well-decoded property out of the representation need not cost the original task
+  cells:
+    H1: C
+    H2: '-'
+    H3: I
+    H4: I
+    H5: C
+    H6: C
+  designed_for:
+  - H3
+- criterion: E1
+  evidence: The intervention studies disagree four ways about whether probe-identified directions name
+    features the model uses
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: I
+    H5: '-'
+    H6: C
+  designed_for:
+  - H3
+  - H4
+- criterion: M4
+  evidence: The anchor opens its shortcomings section by asking what a probing performance of 87.8 should
+    be compared to
+  cells:
+    H1: C
+    H2: I
+    H3: I
+    H4: '-'
+    H5: '-'
+    H6: C
+  designed_for: []
+- criterion: V2
+  evidence: The anchor states as its main limitation that a correlation between representation and property
+    does not tell us whether the property is involved in the model's predictions
+  cells:
+    H1: C
+    H2: I
+    H3: I
+    H4: '-'
+    H5: '-'
+    H6: '-'
+  designed_for: []
+- criterion: V3
+  family: Analyst-choice
+  evidence: Minimum description length and information gain reframe the well-posed quantity as difficulty
+    of extraction rather than presence
+  cells:
+    H1: C
+    H2: I
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: '-'
+  designed_for:
+  - H1
+  - H2
+- criterion: M3
+  evidence: Rankings of two representations that hold under accuracy may reverse under selectivity, and
+    the anchor does not say which to prefer
+  cells:
+    H1: C
+    H2: I
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: C
+  designed_for:
+  - H2
+  - H6
+- criterion: E4
+  family: Analyst-choice
+  evidence: The formalism has applied to every architecture family it has been pointed at, from static
+    word embeddings through transformers to speech and vision
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: C
+    H6: C
+  designed_for:
+  - H1
+- criterion: E6
+  evidence: Four probing results led to design changes that then worked, which the anchor calls few such
+    successful examples
+  cells:
+    H1: C
+    H2: C
+    H3: C
+    H4: '-'
+    H5: I
+    H6: I
+  designed_for:
+  - H3
+tiers:
+- name: Proposed
+  requires: C1--C2; one admissible measurement
+  missing: '---'
+- name: Causally Suggestive
+  requires: Necessity (I1); baselines (M2)
+  missing: '\textbf{I1} inconclusive: the anchor sets Giulianelli''s positive conclusion against Elazar''s
+    negative one and prefers neither'
+- name: Mechanistically Supported
+  requires: Sufficiency (I2); reach (E1); specificity (I4)
+  missing: '\textbf{I4} Disconfirmed; \textbf{E1} inconclusive; \textbf{I2} not applicable: a read-out
+    has no write path'
+- name: Triangulated
+  requires: Convergence (C3); replication (E2/E4); dissociation (I6)
+  missing: '\textbf{I6} unattempted: one property and one behavior per experiment; \textbf{C3}: probe
+    families agree under accuracy and reverse under selectivity'
+- name: Validated
+  requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
+  missing: \textbf{M4}, \textbf{V2} Disconfirmed; \textbf{M3} inconclusive; \textbf{M1}, \textbf{M7} unattempted
+criteria:
+  C1:
+    name: Falsifiability
+    status: C
+    short: The prediction can fail and did, in work the anchor reports side by side
+    verified: true
+    reasoning: 'The claim form yields a prediction that can come out either way, and it came out both
+      ways in work the anchor reports side by side. Modify a representation along a probe-identified direction
+      and the original model''s behaviour should move: Giulianelli et al. find it does, on the examples
+      the property is defined over, and Elazar et al. find that removing a well-decoded property need
+      not cost the original task. The selectivity test is a second falsifiable prediction with a definite
+      outcome — popular probes could have shown high selectivity and the nonlinear ones did not. A method
+      whose central prediction has been tested to opposite results is falsifiable in the sense the criterion
+      asks about.
+
+      '
+    notes:
+      verification: 'The two opposite outcomes are both in the anchor''s own voice (§4.3), so this C does
+        not depend on reading the cited papers. The cell''s gloss of amnesic probing as finding "probing
+        performance and task importance uncorrelated" is stronger than the anchor, which reports only
+        that high probing performance "does not necessarily entail a large drop" in original task performance
+        — a hedged negative, not a null correlation. The correlational claim is Elazar et al.''s, not
+        Belinkov''s.
+
+        '
+      legacy_evidence: The claim form makes a testable prediction and has been tested twice with opposite
+        outcomes, which is what falsifiability looks like. Amnesic probing predicts that removing a property
+        the probe found should degrade the original task; \citet{elazar2021amnesic} found probing performance
+        and task importance uncorrelated, while Giulianelli et al.\ (2018) found the opposite on subject--verb
+        agreement. Control tasks likewise could have shown popular probes to be selective, and did not
+  C2:
+    name: Structural plausibility
+    status: PC
+    short: Every symbol a probing result depends on is named and typed
+    verified: true
+    reasoning: 'The measured object is specified without residue. Every symbol a probing result depends
+      on is named and typed — the original model, its dataset and its performance measure, the layer output,
+      the probe, its dataset and its performance measure — and the information-theoretic reading fixes
+      what the probe estimates. What the specification omits is a path from the probe back to the model.
+      The anchor states the omission as the framework''s main limitation: g and f are separate objects
+      trained in separate steps, so nothing in the formalism says how f would read the direction g found.
+      A structure fully specified for the quantity it measures and silent on the mechanism it is used
+      to claim is PC.
+
+      '
+    notes:
+      verification: 'The formalism in the cell checks out symbol for symbol, with one correction: the
+        anchor writes the model as f : x 7→ ŷ, mapping to a *prediction* ŷ, and the probe as g : fl (x)
+        7→ ẑ. The cell drops the hats. That is not cosmetic where the criterion is about what the framework
+        measures, since the hat is what distinguishes the model''s output from the gold label y in DO
+        = {x(i), y(i)}. Figure 1(a) lists nine basic components and Figure 1(b) ten more.
+
+        '
+      legacy_evidence: 'The framework is formally specified --- $f: x \mapsto y$, $f_l(x)$, $g: f_l(x)
+        \mapsto z$, $\mathrm{PERF}(g, f, D_O, D_P)$, with an information-theoretic reading as maximising
+        $I(z; h)$ --- so what is being measured is unambiguous. What is missing is any account of how
+        the model would \emph{read} the decoded direction; the framework contains no mechanism by which
+        extractability becomes use, which is why the causal question arises at all'
+  C3:
+    name: Convergent validity
+    status: PC
+    short: Probe families agree under accuracy and reverse under other measures
+    verified: true
+    reasoning: 'Agreement between instruments holds under one metric and reverses under another, which
+      is the definition of partial convergence. Probe families rank two representations the same way on
+      accuracy — a real convergence, though the anchor marks it "somewhat anecdotally" — and the same
+      ranking may flip under selectivity. Two proposed controls do converge, and the anchor reports Zhu
+      & Rudzicz showing control tasks and control functions almost equivalent theoretically and empirically.
+      The genuinely independent instrument, parameter-free probing, is positioned on the complexity axis
+      rather than checked for agreement with parameterised probes. PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, twice, both quotation errors. The cell reads "this pattern
+        may be flipped when considering alternative measures"; the anchor reads "under alternative measures".
+        The cell says Belinkov "places them [parameter-free probes] on the low end of the complexity axis";
+        the anchor hedges — "such work should perhaps be placed on the low end of the complexity axis,
+        although the complexity of the parsing algorithm could also be taken into account". The hedge
+        matters here, because the cell''s reading is that Belinkov positions rather than tests, and the
+        anchor is even less committal than that. The first quote is truncated at "Belinkov" because the
+        citation year runs onto the next line and the page furniture intervenes.
+
+        '
+      legacy_evidence: 'Convergent under one metric and divergent under another, and the anchor states
+        both: ``a few studies observed better performance with more complex probes, but reported similar
+        relative trends \ldots However, this pattern may be flipped when considering alternative measures,
+        such as selectivity (Hewitt and Liang 2019).'''' Parameter-free probing --- attention weights,
+        representational similarity analysis, pairwise distance scores --- offers genuinely independent
+        instruments, and Belinkov places them ``on the low end of the complexity axis'''' rather than
+        reporting agreement'
+      legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
+        in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
+        Use the quotes block, not the legacy text.
+  C4:
+    name: Discriminant validity
+    status: D
+    short: 'Two neighbours the instrument must separate: probe memorisation, random features'
+    verified: true
+    reasoning: 'The construct is "the model represents z", and it has two neighbours that a good instrument
+      must separate it from: "the probe learned z from its own training data" and "any representation
+      of this dimensionality carries z". Both separation tests were run and both came back negative. Control
+      tasks show nonlinear probes reaching high accuracy at low selectivity, which the anchor reads as
+      memorisation by the probe rather than information in the representation. Random baselines show that
+      untrained features already decode the property. Tests capable of exposing the failure were run and
+      it failed, which is D.
+
+      '
+    notes:
+      verification: 'THE D IS EARNED FROM THE ANCHOR, in its own voice, for both neighbouring constructs:
+        the memorisation reading of low selectivity and the random-feature result are Belinkov''s sentences,
+        not quotations from the papers he reviews. CONTRADICTION WITH THE CELL, on sourcing rather than
+        on the verdict. The cell''s specifics are imported: the phrase "not selective", the numbers 97.3,
+        92.8 and the selectivity of 4.5 appear nowhere in the anchor, which reports the finding only qualitatively
+        ("linear probes tend to have high selectivity, while nonlinear probes tend to have low selectivity").
+        Hewitt & Liang (2019) is cited by the anchor and predates it, so this is a cited-work import rather
+        than a post-origin one — but it is still not a quotation from the source the cell attributes it
+        to.
+
+        '
+      legacy_evidence: 'The construct is ``the model represents $z$''''; both neighbouring constructs
+        have been tested and not separated. From the probe side: \citet{hewitt2019designing} show popular
+        probes are ``not selective'''' --- MLP-1 reaches 97.3 on part-of-speech against 92.8 on a control
+        task with randomised per-word-type outputs, a selectivity of 4.5, so most of the accuracy is memorisation.
+        From the representation side: even random features ``capture significant information that can
+        be decoded by the probing classifier.'''' Tests capable of exposing the failure were run and it
+        failed'
+  C5:
+    name: Nomological validity
+    status: PC
+    short: Tied to mutual information, description length and information gain
+    verified: true
+    reasoning: 'Probing performance is tied to defined quantities in three different ways — mutual information,
+      minimum description length, information gain relative to a control function — so the measure is
+      embedded in a theory rather than standing alone. The three do not resolve to one prescription. Pimentel
+      et al. argue the estimate is best served by the most complex probe available; the same authors elsewhere
+      ask for the accuracy–complexity trade-off and probes that are simple and accurate; Hewitt & Liang''s
+      selectivity favours the simple probe outright. One proposed distinction inside the network collapses,
+      with control functions and control tasks shown almost equivalent. A network of relations that exists
+      and does not close is PC.
+
+      '
+    notes:
+      verification: 'All three formalisations and the Zhu & Rudzicz collapse are verbatim in the anchor.
+        The cell''s characterisation of the disagreement is right and understated: Pimentel et al. (2020b)
+        and Pimentel et al. (2020a) are on opposite sides of it in consecutive sentences of §4.2, the
+        first arguing for the most complex probe and the second calling for probes "that are both simple
+        and accurate".
+
+        '
+      legacy_evidence: 'Three formalisations exist and connect probing to defined quantities: mutual information
+        $I(z;h)$, minimum description length $\mathrm{MDL}(g,f,D_O,D_P)$, and information gain under a
+        control function $G(z,h,c) = I(z;h) - I(z;c(h))$. They do not agree on what should be maximised
+        --- Pimentel et al.\ argue for the most complex probe, Hewitt \& Liang for the most selective
+        --- and Zhu \& Rudzicz find control tasks and control functions ``almost equivalent, both theoretically
+        and empirically,'''' collapsing one proposed distinction'
+  M1:
+    name: Reliability
+    status: U
+    short: A review reports no variance; the anchor states what it requires of studies
+    verified: true
+    reasoning: 'A review reports no variance of its own, so the evidence for this criterion is what the
+      review requires of the studies it reviews. The anchor states its coverage as five concerns — controls,
+      probe choice, causal claims, datasets versus tasks, pre-defined properties — and closes with a list
+      of what a probing experiment should do. Neither mentions repeated runs, seeds, confidence intervals
+      or significance testing. A criterion absent from both the survey''s enumeration of shortcomings
+      and its prescription has not been attempted at the level of the framework. U.
+
+      '
+    notes:
+      verification: 'Verified against a full read of the ten-page squib rather than a term count: §4.1
+        through §4.5 are the complete shortcomings section and none of them is about estimator variance,
+        and the §5 prescription runs from upper and lower bounds through controls, complexity and intervention
+        without reaching repetition. CONTRADICTION WITH THE CELL, on sourcing. Everything concrete in
+        it — the missing seeds, the two Hewitt & Liang tables disagreeing at 89.0/6.6 against 89.7/6.7
+        and 92.3/−0.7 against 92.5/−1.0, the ten probes used only for hand inspection — is from Hewitt
+        & Liang (2019) and appears nowhere in the anchor. The U survives without it, on the bounding quotes
+        above.
+
+        '
+      legacy_evidence: Unattempted in the evidence base. \citet{hewitt2019designing} report no seeds,
+        confidence intervals, or significance tests, and their two tables disagree on nominally identical
+        configurations without comment (bilinear dependency 89.0 / selectivity 6.6 in Table 1 against
+        89.7 / 6.7 in Table 2; MLP-1 92.3 / $-0.7$ against 92.5 / $-1.0$). Ten probes are trained in one
+        study and used only for hand inspection of aggregate confusion matrices, with no variance reported
+  M2:
+    name: Baseline separation
+    status: C
+    short: The criterion the literature solved; three control families formalised
+    verified: true
+    reasoning: 'This is the criterion the literature solved, and the anchor''s contribution is to catalogue
+      the solutions as first-class components rather than as advice. Lower bounds come in three kinds
+      — majority, simpler-representation and randomised-model — and upper bounds in three more. On top
+      of them sit three controls that hold a specific confound fixed: control tasks against probe memorisation,
+      control functions against representation content, control datasets against task relevance. The decisive
+      result is itself a baseline result, that random features already decode the property, which is what
+      makes the bare number uninterpretable. C.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, on the locator. It says the control types are "catalogued
+        in the anchor''s Figure 2". The anchor has exactly one figure. The catalogue is Figure 1(b), "Additional
+        Components", which lists ten rows: skyline, baseline, control task, control function, control
+        task dataset, control dataset, selectivity, information gain, MDL, and the post-intervention representation.
+        Second, the cell says "four distinct control types" and then lists five (majority and simpler-representation
+        baselines; random baselines; control tasks; control functions; control datasets). The five-item
+        list is right and the count is wrong. The selectivity formula and the random-features sentence
+        are verbatim.
+
+        '
+      legacy_evidence: 'The criterion the literature actually solved, with four distinct control types
+        catalogued in the anchor''s Figure 2: majority and simpler-representation baselines; random-representation
+        baselines; control tasks with a selectivity statistic $\mathrm{SEL} = \mathrm{PERF}(g,f,D_O,D_P)
+        - \mathrm{PERF}(g,f,D_O,D_{P,\mathrm{Rand}})$; control functions with information gain; and control
+        datasets in which $z$ is non-discriminative. The decisive result is a baseline result: ``even
+        random features capture significant information that can be decoded by the probing classifier,
+        so performance on learned features should be viewed in such a perspective'''''
+      legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
+        in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
+        Use the quotes block, not the legacy text.
+  M3:
+    name: Stability
+    status: I
+    short: Ordering survives under accuracy and inverts under an alternative measure
+    verified: true
+    reasoning: 'Stability was tested and the answer depends on which measure is asked. Under accuracy
+      the ordering of two representations survives a change of probe, which is the stability the method
+      needs; under selectivity the same ordering may reverse. Since the two measures are computed on the
+      same probes and the same representations, that is the same object receiving two rankings, and the
+      anchor does not say which to prefer. The stabilising instrument is itself scope-limited, applying
+      to word-level properties and not clearly extending to sentence-level ones. Tested, informative,
+      undecided: I.
+
+      '
+    notes:
+      verification: 'The metric-dependence is the anchor''s, but the *demonstration* the cell leans on
+        is not. The ELMo1/ELMo2 inversion (97.2 against 96.6 on accuracy, 26.0 against 31.4 on selectivity)
+        and the sentence "raises the question of which layer better represents parts-of-speech" are Hewitt
+        & Liang''s, and neither the numbers nor the string "ELMo" occurs anywhere in the anchor. The same
+        holds for "all worked except dropout and early stopping, though never for a broad range of hyperparameters".
+        The anchor supports the I at the level of the claim — orderings flip under selectivity — without
+        any of the specifics the cell attributes to it. Note also the anchor''s hedge "Somewhat anecdotally",
+        which the cell''s "broadly stable across probe families" does not carry.
+
+        '
+      legacy_evidence: 'Tested, with the answer depending on the metric. Accuracy orderings are broadly
+        stable across probe families; selectivity orderings are not, and the two disagree about the same
+        object: ELMo1 beats ELMo2 on part-of-speech accuracy (97.2 against 96.6) while ELMo2 beats ELMo1
+        on selectivity (31.4 against 26.0), which the authors state ``raises the question of which layer
+        better represents parts-of-speech.'''' Complexity control is itself unstable --- six methods ``all
+        worked except dropout and early stopping, though never for a broad range of hyperparameters'''''
+  M4:
+    name: Calibration
+    status: D
+    short: The shortcomings section opens by denying the measurement has a scale
+    verified: true
+    reasoning: 'The anchor opens its shortcomings section by denying that the measurement has a scale.
+      87.8 is offered as a probing result with the two questions that cannot be answered from it, and
+      the section that follows exists to supply the missing reference points: baselines below, skylines
+      above, selectivity and information gain as differences rather than levels. Every proposed repair
+      is a subtraction, which concedes that the raw number carries no meaning on its own. The summary
+      makes the concession general — absolute claims about representation quality are difficult, relative
+      ones are what the improvements buy. A quantity whose author states it has no interpretable level
+      is D.
+
+      '
+    notes:
+      verification: 'THE D IS EARNED FROM THE ANCHOR. The 87.8 passage, the random-features result and
+        the retreat to relative claims are all Belinkov''s own sentences, and the criterion is decided
+        by them without reference to any cited work. CONTRADICTION WITH THE CELL, quotation error. It
+        renders the passage as "Suppose we run a probing classifier experiment and obtain performance
+        of PERF(g, f, D_O, D_P) = 87.8"; the anchor reads "Suppose we run such an experiment and obtain
+        a performance of", the clause "probing classifier experiment" belonging to the preceding sentence.
+        The content is unaffected.
+
+        '
+      legacy_evidence: 'The anchor opens its shortcomings section by denying calibration: ``Suppose we
+        run a probing classifier experiment and obtain performance of $\mathrm{PERF}(g, f, D_O, D_P) =
+        87.8$. Is that a high/low number? What should we compare it to?'''' Probe accuracy has no intrinsic
+        scale, and the proposed repairs --- MDL, information gain, selectivity --- exist because it does
+        not. The number is meaningful only relative to a control, and the control is optional in practice'
+      legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
+        in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
+        Use the quotes block, not the legacy text.
+  M5:
+    name: Sensitivity
+    status: PC
+    short: Skylines and floors exist; no planted property is ever recovered
+    verified: true
+    reasoning: 'Known-reference settings exist in the framework and none of them is a planted mechanism.
+      Skylines say what performance is attainable when nothing is withheld, which bounds the instrument
+      from above without telling us what it would miss. Feder et al.''s positively trained gC is a genuine
+      positive control, but it controls a property that should survive removal rather than measuring detection
+      of a property known to be present in a known place. The closest to a known-answer setting runs the
+      other way: control datasets are built so the property should *not* be picked up, and the probe finds
+      it anyway. Positive-control machinery present, no recovery test built on it: PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, on sourcing, and it is the load-bearing kind. The cell''s
+        entire case — Kumar et al. (2022) proving that "even under the most favorable conditions ... when
+        a concept''s relevant features in representation space alone can provide 100% accuracy" a probe
+        is likely to use non-concept features — rests on a paper the anchor does not cite and could not
+        have: the squib was accepted 8 September 2021. This is post-origin work, not a cited-work import.
+        Nothing in the anchor states that the instrument misbehaves in a known-positive setting. What
+        the anchor does supply is the machinery quoted above, which is why the PC is not obviously wrong;
+        but the failure half of the cell''s argument is not checkable here.
+
+        '
+      legacy_evidence: Known-positive settings have been constructed and the instrument behaves badly
+        in them. \citet{kumar2022probing} prove and confirm empirically that ``even under the most favorable
+        conditions \ldots when a concept's relevant features in representation space alone can provide
+        100\% accuracy,'' a probe is likely to use non-concept features. The instrument detects the planted
+        property and misattributes what carries it. No positive control is standard practice
+  M6:
+    name: Invariance
+    status: PC
+    short: Invariance is what probing measures, so the instrument is the question
+    verified: true
+    reasoning: 'Invariance is what probing is used to measure — the whole point is to compare layers,
+      models and tasks — so the criterion asks whether the instrument itself behaves the same way across
+      those comparisons, and the anchor''s answer is that it does not. The measure is a function of four
+      arguments, two of which vary with the comparison being made, which makes cross-model comparison
+      confounded by construction: models differ in their training data as well as their architecture.
+      Rankings that hold under accuracy may reverse under selectivity. The control that would rescue the
+      comparison is itself not invariant, being suited to word-level and unclear at sentence level. PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, quotation error. It reads "common models $f$ tend to
+        be trained on different datasets $D_O$, making any statements about models confounded with issues
+        of datasets". The anchor reads "Unfortunately, models f tend to be trained on different datasets
+        DO , making statements about models confounded with issues of datasets" — no "common", no "any".
+        The inserted "any" strengthens a general claim into a universal one. The within-model failure
+        the cell rests on, the ELMo1/ELMo2 accuracy-versus-selectivity inversion, is Hewitt & Liang''s
+        and is not in the anchor; the anchor supports the same point in general form ("this pattern may
+        be flipped under alternative measures").
+
+        '
+      legacy_evidence: 'Consistency across layers, models and tasks is what probing is used to \emph{measure},
+        and where it has been checked the metric does not behave consistently: the accuracy-versus-selectivity
+        inversion across two ELMo layers is a within-model failure of measurement invariance. Cross-model
+        comparison is explicitly confounded --- ``common models $f$ tend to be trained on different datasets
+        $D_O$, making any statements about models confounded with issues of datasets'''''
+      legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
+        in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
+        Use the quotes block, not the legacy text.
+  M7:
+    name: Selection correction
+    status: U
+    short: Three control families catalogued; the omission from the catalogue is the gap
+    verified: true
+    reasoning: 'The anchor catalogues controls exhaustively enough that an omission from the catalogue
+      is informative. Three control families are named and formalised as components, and the closing prescription
+      names bounds, controls, complexity measurement and intervention. No item in either list is a correction
+      for the number of configurations searched, even though the framework invites such a search: the
+      accuracy–complexity trade-off is explicitly to be reported "along a range of probes", which means
+      the reported probe is selected from a swept set. Selection is built into the recommended practice
+      and no correction accompanies it. U.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, on sourcing. Its concrete case — five or six complexity-control
+        methods swept across hyperparameter grids, then "used selectivity to hand-pick a hyperparameter
+        setting for each probe" — is Hewitt & Liang''s and appears nowhere in the anchor; the string "hand-pick"
+        does not occur in it. The cell''s own last clause is what the anchor supports and is verified
+        here: no multiplicity control is proposed in its catalogue of controls.
+
+        '
+      legacy_evidence: Unattempted. \citet{hewitt2019designing} sweep five or six complexity-control methods
+        across hyperparameter grids and then ``used selectivity to hand-pick a hyperparameter setting
+        for each probe,'' reporting the hand-picked settings as a result. $N$ is visible from the figures;
+        no multiplicity control is applied, and none is proposed in the anchor's catalogue of controls
+  I1:
+    name: Necessity
+    status: I
+    short: Standard probing performs no removal; removal studies disagree four ways
+    verified: true
+    reasoning: 'Standard probing performs no removal, so on its own it cannot address necessity at all;
+      the anchor puts this as having forgotten the original task. Where removal was performed, the result
+      went against the claim: projecting a property out of the representation need not cost the original
+      task, however well the probe decoded it, and the authors of that experiment conclude probing does
+      not always identify features the model uses. The failure is a tested failure rather than a gap,
+      which is what separates D from U.
+
+      '
+    notes:
+      verification: 'THE D IS EARNED FROM THE ANCHOR ONLY IN PART, and this is the cell most worth re-reading.
+        First, sourcing: both phrases the cell quotes — "conventional probing performance is not correlated
+        to task importance" and the call "for increased scrutiny of claims that draw behavioral or causal
+        conclusions from probing results" — are Elazar et al.''s, not Belinkov''s, and neither string
+        occurs in the anchor; "amnesic" appears in it only in the bibliography. The anchor''s own rendering
+        is weaker: high probing performance "does not necessarily entail a large drop" and probing classifiers
+        "do not always identify features that are actually used by the model". Both are hedged. Second,
+        and more serious, the anchor does not present the removal evidence as one-sided. In the same subsection
+        it reports Giulianelli et al. concluding the opposite, Lovering et al. finding MDL-extractability
+        correlated with the model''s predictions, and Feder et al. accurately estimating property effects
+        on downstream tasks. The audit scores that same paragraph as I at E1. Reading it as D at I1 and
+        I at E1 is not consistent: either the anchor records a settled negative or it records a disagreement,
+        and it records a disagreement. On the anchor alone the defensible reading of I1 is I.
+
+        '
+      legacy_evidence: '\textbf{The claim''s defining failure, and it is a tested failure rather than
+        an untested gap.} Standard probing performs no removal and cannot establish necessity. When removal
+        was performed, the answer was negative: amnesic probing removes a property by iterated null-space
+        projection and measures the effect on the original task, finding that ``conventional probing performance
+        is not correlated to task importance,'''' and calls ``for increased scrutiny of claims that draw
+        behavioral or causal conclusions from probing results'''''
+      status_change: D to I, 2026-08-07, on verification against the anchor. The D rested on two quotes
+        belonging to Elazar et al. rather than to Belinkov -- 'amnesic' appears in the anchor only in
+        the bibliography. The anchor's own rendering is hedged twice ('does not necessarily entail a large
+        drop', 'do not always identify features that are actually used') and the same subsection reports
+        the opposite finding from Giulianelli et al., Lovering et al. and Feder et al. This audit already
+        scores that paragraph as I at E1; D at I1 and I at E1 on identical evidence cannot both stand.
+      legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
+        in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
+        Use the quotes block, not the legacy text.
+  I2:
+    name: Sufficiency
+    status: N/A
+    short: Probing is a map out of the representation, with no path writing back in
+    verified: true
+    reasoning: 'Probing as the anchor defines it is a map out of the representation. g reads fl (x) and
+      emits ẑ; nothing in the definition writes a value of z back into f , and the two models are trained
+      in separate steps with no path from the second to the first. Sufficiency asks what happens when
+      the property is installed, so within the method as specified there is no operation the criterion
+      could attach to. N/A rather than U, because the missing test is not one the method declined to run.
+
+      '
+    notes:
+      verification: 'THE N/A IS STRUCTURAL ONLY UNDER A NARROW SCOPE, AND THE AUDIT DOES NOT APPLY THAT
+        SCOPE CONSISTENTLY. Under the narrow reading — the claim is standard probing, §2 — the N/A is
+        right: a read-out has no write path and the criterion is inapplicable, not unrun. But §4.3 of
+        the anchor describes installation interventions inside the probing literature. Giulianelli et
+        al. push representations along the probe''s gradient and report the predicted increase in original-model
+        performance on number-agreement examples, which is an installed property producing the behaviour
+        it should. Tucker et al. do the same to build counterfactual representations. The audit''s I1
+        draws its D from the removal half of that same subsection. Scoping removal interventions into
+        the claim and installation interventions out of it is an asymmetry with no basis in the anchor,
+        which introduces both in one sentence as "improvements to the probing classifier paradigm". Under
+        the broad scope that I1 uses, I2 is at least PC on Giulianelli et al. The N/A and the D at I1
+        cannot both stand on the same reading of scope.
+
+        '
+      legacy_evidence: Untestable within the method as defined. A probe reads out; it does not write in.
+        Establishing sufficiency requires an intervention that installs the property, which is a different
+        method --- distributed alignment search, activation steering, or counterfactual editing --- and
+        lies outside the claim being audited
+  I3:
+    name: Minimality
+    status: U
+    short: The unit is a whole intermediate output; no operation removes part of one
+    verified: true
+    reasoning: 'The unit of analysis is a whole intermediate output — a layer''s representation, or another
+      component taken entire — and the framework offers no operation that removes part of it and asks
+      whether the rest still supports the property. Minimisation in the anchor is applied to the probe
+      instead: the trade-off to report is accuracy against probe complexity, and the one method that does
+      prune the model''s own weights is presented as a way to improve that trade-off rather than to identify
+      a minimal sufficient component set. Nothing tests whether each part of the representation is load-bearing.
+      U.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, on the quote and on which result is nearest. The cell
+        attributes to the anchor the phrase "over-parameterized and needlessly high-capacity if using
+        defaults like full-rank weight matrices, hidden states with a few hundred dimensions, and moderate
+        dropout". That is Hewitt & Liang''s; "over-parameter" does not occur in the anchor. The genuinely
+        adjacent result the cell misses is Cao, Sanh & Rush''s pruning-based probe, which learns a mask
+        on the weights of f itself. That is closer to a minimality test than anything the cell cites —
+        it selects a subset of the model — though the anchor reports it as an accuracy-complexity result
+        and not as a test of which components are necessary. The U stands; the cell''s reason for it is
+        weaker than the anchor''s.
+
+        '
+      legacy_evidence: 'Unattempted. Probes consume the full representation and no component set is pruned
+        to test whether each part is load-bearing. The adjacent result is about the probe rather than
+        the mechanism: probes are ``over-parameterized and needlessly high-capacity if using defaults
+        like full-rank weight matrices, hidden states with a few hundred dimensions, and moderate dropout'''''
+  I4:
+    name: Specificity
+    status: D
+    short: A control dataset holds the property constant and probing fails on it
+    verified: true
+    reasoning: 'The discriminating experiment exists and probing fails it. A control dataset holds the
+      property constant so it cannot help the original task, which means a model trained on it has no
+      reason to encode the property for the task''s sake; if decodability tracked task-relevant use, the
+      probe should come back empty. It does not. The property is decodable anyway, and the anchor draws
+      the conclusion the criterion asks about, that this casts doubt on causal claims about the effect
+      of an encoded property on the original task. Decodability does not localise to the task. D.
+
+      '
+    notes:
+      verification: 'THE D IS EARNED FROM THE ANCHOR, in its own voice: the design, its rationale and
+        the negative outcome are all Belinkov''s sentences in §4.1. Two quotation errors in the cell,
+        neither changing the verdict. It renders the design as "all examples in it have the same value
+        for property $z$"; the anchor reads "where all examples have the same value for property z". And
+        the Ravichander et al. phrase it quotes — properties encoded "considerably above chance-level
+        even when distributed in the data as random noise" — is from that paper, not the anchor; neither
+        "chance-level" nor "random noise" occurs in the squib.
+
+        '
+      legacy_evidence: The discriminating experiment exists and probing fails it. Control datasets are
+        built so that ``all examples in it have the same value for property $z$,'' making $z$ non-discriminative
+        for the original task; a probe still recovers $z$ above chance. Ravichander, Belinkov \& Hovy
+        report models encode properties ``considerably above chance-level even when distributed in the
+        data as random noise,'' which they read as ``casting doubts on causal claims concerning the effect
+        that property encoded in the representation may have on the original task.'' Decodability does
+        not localise to the task
+      legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
+        in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
+        Use the quotes block, not the legacy text.
+  I5:
+    name: Rival mechanism exclusion
+    status: PC
+    short: Control tasks are solvable only by memorisation, and separate cleanly
+    verified: true
+    reasoning: 'One rival has a dedicated instrument and the instrument works selectively. Control tasks
+      are designed so that only memorisation can solve them, which makes selectivity a direct test of
+      the rival "the probe learned this itself", and it separates linear probes from nonlinear ones —
+      the rival is excluded for the former and confirmed for the latter. Two limits keep this short of
+      full exclusion. The instrument is scope-limited to word-level properties, and the second rival —
+      the property is present but the model does not use it — is excludable only by the causal approaches
+      of §4.3, which the anchor describes as something probing may be extended with rather than something
+      it does. PC.
+
+      '
+    notes:
+      verification: 'The anchor supports the shape of the cell without its numbers. Selectivity 26.0 at
+        default settings, 33.0 when designed for it, 4.5 for MLPs and −0.7 on dependency edge prediction
+        are Hewitt & Liang''s and none appears in the anchor, which reports only the qualitative split
+        between linear and nonlinear probes. The cell''s second half — that the mechanism-level rival
+        is excludable only by causal follow-up — is directly supported by §5.
+
+        '
+      legacy_evidence: 'The instrument for excluding the probe-memorisation rival exists and works for
+        some probes: with control tasks, linear part-of-speech probes reach selectivity 26.0 at default
+        settings and 33.0 when designed for it, at essentially unchanged accuracy. It fails for MLPs at
+        default settings (4.5, and $-0.7$ on dependency edge prediction), and it is optional in practice.
+        The mechanism-level rival --- property present but unused --- is excludable only by causal follow-up,
+        which is outside the method'
+  I6:
+    name: Double dissociation
+    status: U
+    short: Needs two properties and two behaviours; the framework supplies one of each
+    verified: true
+    reasoning: 'A double dissociation needs two properties and two behaviours, with removal of each property
+      costing one behaviour and sparing the other. The framework has one original task and one probed
+      property per experiment, and the anchor''s enumeration of concerns and its closing prescription
+      both stop at single-property interventions. It also puts the intervention literature that operates
+      without probing classifiers outside its scope, so no design of that kind is inherited from elsewhere.
+      Absent rather than attempted: U.
+
+      '
+    notes:
+      verification: 'Verified against a full read. The nearest thing in the anchor is Feder et al.''s
+        adversarially removed z paired with a positively controlled zC, which is two properties and one
+        behaviour — a control for specificity of removal, not a crossed design over two behaviours. Nothing
+        else comes close.
+
+        '
+      legacy_evidence: Unattempted. No standard design shows that removing property $A$ breaks behaviour
+        $X$ while sparing $Y$, and removing $B$ does the converse
+  I7:
+    name: Confound control
+    status: PC
+    short: Probe capacity, information in a random baseline and task difficulty
+    verified: true
+    reasoning: 'Three confounds are controlled by construction and named as components: the probe''s own
+      capacity to memorise, the information already present in an arbitrary representation, and the property''s
+      relevance to the original task. The confound the anchor reports as uncontrolled is the one that
+      lives in the experimental design rather than in the probe — models differ in their training data
+      as well as in their architecture, so a comparison between models is confounded with a comparison
+      between datasets, and the experiments that would separate them are missing. The probing dataset''s
+      size and composition are unstudied on the same grounds. Controlled where controls were built, uncontrolled
+      where they were not: PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, quotation error, and it fuses two sentences from different
+        paragraphs. The cell reads: "in an ideal world, we would want to compare models $f$ trained on
+        the same dataset $D_O$. Such experiments are currently lacking." The anchor reads "However, in
+        an ideal world, we would compare different architectures {f i} trained on the same dataset DO
+        or the same f trained on different datasets {DO}" — architectures, not models, and a second disjunct
+        the cell drops — and, two sentences later and about Zhang et al.''s experiments specifically,
+        "More such experiments are currently lacking." Dropping "More" turns a statement that too few
+        such experiments exist into a statement that none do. Second error: the cell has "more careful
+        investigations are necessary"; the anchor has "more careful investigations are needed".
+
+        '
+      legacy_evidence: 'Three control families are defined and used, covering probe capacity, representation
+        content, and task relevance. The one the anchor names as uncontrolled is the design-level confound:
+        ``in an ideal world, we would want to compare models $f$ trained on the same dataset $D_O$. Such
+        experiments are currently lacking.'''' Probing-dataset size and composition are likewise unstudied
+        --- ``more careful investigations are necessary'''''
+      legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
+        in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
+        Use the quotes block, not the legacy text.
+  I8:
+    name: Confounding sensitivity
+    status: U
+    short: The anchor answers confounding with designed controls, never with a bound
+    verified: true
+    reasoning: 'The criterion asks how strong an unmeasured confounder would have to be to overturn a
+      reported probing result. The anchor''s response to confounding is to control it by design — randomise
+      the labels, randomise the model, hold the property non-discriminative — and never to bound the effect
+      of a confounder left uncontrolled. No quantity in the framework, and none in the prescription, can
+      be read as such a bound. U.
+
+      '
+    notes:
+      verification: 'Verified against a full read rather than a term count: §4.1 is the complete treatment
+        of controls and it is entirely design-based, and §4.4''s discussion of the dataset confound states
+        that the disentangling experiments are lacking without proposing any sensitivity bound in their
+        place. The cell''s claim that no formal sensitivity analysis appears in the probing methodology
+        literature is broader than this source can settle; what is verified is that none appears in the
+        anchor.
+
+        '
+      legacy_evidence: Unattempted. No E-value or formal sensitivity analysis appears in the probing methodology
+        literature
+  I9:
+    name: Epistatic interaction
+    status: U
+    short: Non-additivity needs two manipulable components; the object is one output
+    verified: true
+    reasoning: 'Non-additive interaction needs at least two components that can be manipulated separately
+      and together. The framework''s object is one intermediate output at a time, taken whole, and its
+      interventions remove or shift a single property from that whole. There is no decomposition over
+      which an interaction could even be written down, so the criterion has nothing to test. U.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL. It says that "where probing has been narrowed to individual
+        units (Lakretz et al. 2019, Bau et al. 2019) the interventions are single-unit and no interaction
+        is tested", implying those studies sit inside the claim''s evidence base. The anchor''s footnote
+        11 names exactly those two papers, plus Vig et al., describes them as performing interventions
+        "without involving probing classifiers", and states they "are left out of the present scope".
+        They are not narrow probing; they are excluded from the framework. The U stands and its reason
+        changes: the framework has no component decomposition, which the cell also says and which is the
+        part the anchor supports.
+
+        '
+      legacy_evidence: Unattempted. The framework has no component decomposition over which non-additive
+        interaction could be defined; where probing has been narrowed to individual units (Lakretz et
+        al.\ 2019, Bau et al.\ 2019) the interventions are single-unit and no interaction is tested
+      legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
+        in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
+        Use the quotes block, not the legacy text.
+  I10:
+    name: Rescue reversibility
+    status: U
+    short: Every catalogued intervention runs one way, projecting or training out
+    verified: true
+    reasoning: 'Every intervention the anchor catalogues runs one way. A property is projected out or
+      trained out and the resulting deficit on the original task is measured; the framework''s single
+      interventional component is the representation *after* an intervention, with no inverse defined
+      and no second measurement after restoration. Nothing puts the removed subspace back to check that
+      the behaviour returns, so no rescue result exists in the anchor. U.
+
+      '
+    notes:
+      verification: 'Verified against a full read. The cell''s observation that the projection is known
+        and the removal therefore reversible by construction is correct and is not stated by the anchor
+        — it follows from the method Elazar et al. use, which the anchor describes as "projecting them
+        out of the representation". That is an inference, not a quotation, and is left as such.
+
+        '
+      legacy_evidence: 'Unattempted. The nearest design removes without restoring: amnesic probing projects
+        a property out and measures the deficit, but no study restores the removed subspace to confirm
+        recovery. Reversible by construction, since the projection is known'
+  I11:
+    name: Onset coupling
+    status: U
+    short: The original model is taken as given and trained once
+    verified: true
+    reasoning: 'The framework takes the original model as given. f is trained once and thereafter used
+      only to emit representations, so there is no sequence of training states in which a property''s
+      decodability could be timed against the appearance of the capability that uses it. The anchor marks
+      the one study that keeps updating f as departing from standard practice, which confirms that the
+      static setting is the norm rather than an accident of the studies reviewed. U.
+
+      '
+    notes:
+      verification: 'One correction to the cell, which says no work the anchor cites tracks probing against
+        acquisition. Zhang et al. (2021) is closer than that: it varies training data volume and reports
+        how much is needed before a property is encoded, which is an onset measurement on the representation
+        side. It still does not couple onset to the corresponding behaviour, so the U stands. "Checkpoint"
+        does not occur in the anchor.
+
+        '
+      legacy_evidence: Unattempted as part of this claim's evidence base. Probing across training checkpoints
+        is standard practice elsewhere; none of the works the anchor cites for the framework's validity
+        tracks probe accuracy against acquisition of the corresponding capability
+  I12:
+    name: Offset coupling
+    status: U
+    short: The converse needs the training sequence onset coupling also lacks
+    verified: true
+    reasoning: 'The converse timing test — remove a capability and check that the probe''s target becomes
+      undecodable — needs the same thing onset coupling needs, a model observed in more than one state
+      of competence, and the framework supplies a single trained f . The anchor''s interventions modify
+      representations rather than capabilities, and it names no study that degrades a behaviour and re-probes.
+      U.
+
+      '
+    notes:
+      verification: 'Verified against a full read. Feder et al.''s continued updating of f is the only
+        place the model itself changes, and there the change is fine-tuning with adversarial removal,
+        which measures the effect of a property on a downstream task rather than the effect of losing
+        a capability on decodability. Nothing in the anchor bears on this criterion directly.
+
+        '
+      legacy_evidence: Unattempted. No work in the anchor's evidence base removes a capability and checks
+        whether the probe's target becomes undecodable
+  E1:
+    name: Intervention reach
+    status: I
+    short: Probing has no intervention of its own; those applied to it disagree
+    verified: true
+    reasoning: 'Probing has no intervention of its own, so reach is measured by whether interventions
+      applied to probe-identified directions agree about what the model uses. They do not. The anchor
+      sets Giulianelli''s positive conclusion against Elazar''s negative one explicitly, marking the second
+      as contrary to the first, and the surrounding sentences add two more results on the positive side
+      and one more on the negative. No result is retracted and none is preferred. A criterion on which
+      the source records an unresolved disagreement is I.
+
+      '
+    notes:
+      verification: 'Both conclusions are verbatim and the direction of each is as the cell has it. CONTRADICTION
+        WITH THE CELL, minor and locational: it says the anchor records the disagreement "in consecutive
+        sentences". They are ten lines apart in §4.3, separated by Tucker et al.''s counterfactual representations
+        and by the description of Elazar et al.''s method. The cell also understates the spread. The disagreement
+        in the anchor is four-way, not two-way: Lovering et al. and Feder et al. side with Giulianelli,
+        Tamkin et al. with Elazar. That strengthens the I rather than weakening it.
+
+        '
+      legacy_evidence: 'The audit''s central point, made precise: probing has no intervention of its own,
+        so reach is measured by whether interventions applied to probe-identified directions agree. They
+        do not, and the anchor records the disagreement in consecutive sentences --- Giulianelli et al.\
+        (2018) ``conclude that probing classifiers can identify features that are actually used by the
+        model''''; \citet{elazar2021amnesic}, ``contrary to Giulianelli et al.\ (2018), \ldots conclude
+        that probing classifiers do not always identify features that are actually used by the model.''''
+        Both results stand'
+  E2:
+    name: Prompt generalization
+    status: PC
+    short: One line of work reports the same property across several datasets
+    verified: true
+    reasoning: 'The framework has been applied across many probing datasets, and the anchor names one
+      line of work reporting the same property on several of them, so the axis is not untouched. What
+      is missing is any study of the axis itself. The anchor separates the two claims cleanly: results
+      exist on multiple datasets, and the effect of the choice — size, composition — has not been studied,
+      which is the difference between varying a factor and measuring its influence. Breadth without a
+      controlled comparison is PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, quotation error conflating two sentences. It reads "The
+        effect of the probing dataset $D_P$ --- its size, composition, etc.--- is similarly not widely
+        studied." The anchor has "and so forth" for "etc." and "not well studied" for "not widely studied";
+        the phrase "has not been widely studied" belongs to the *previous* sentence, which is about the
+        choice of datasets generally. Two sentences have been merged into one attributed quotation. The
+        cell''s narrow-base example — one treebank, one language, two tasks, development-set numbers —
+        is from Hewitt & Liang and is not in the anchor.
+
+        '
+      legacy_evidence: 'The evidence base spans many datasets and languages, but the anchor names the
+        axis as uncontrolled: ``The effect of the probing dataset $D_P$ --- its size, composition, etc.---
+        is similarly not widely studied.'''' Where a single study is examined closely, the base is narrow:
+        \citet{hewitt2019designing} use one treebank, one language, two tasks, and report development-set
+        numbers only'
+      legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
+        in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
+        Use the quotes block, not the legacy text.
+  E3:
+    name: Cross-task generalization
+    status: PC
+    short: Transfers to any property with an annotated dataset, which is the appeal
+    verified: true
+    reasoning: 'The method transfers to any property with an annotated dataset, which is its principal
+      appeal and the reason the anchor can survey applications across morphology, syntax, semantics and
+      phonetics with one formalism. The conclusions do not transfer with it. A property is decodable whether
+      or not it matters to the original task, so a positive probing result on one task licenses nothing
+      about another, and the properties available to probe are constrained in advance by which annotations
+      exist. Portable instrument, non-portable conclusion: PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, quotation error. It attributes to the anchor the phrase
+        that properties are encoded "even if they are not needed for the task". That is Ravichander et
+        al.''s wording; the anchor writes "even when it is not discriminative with respect to the original
+        task of mapping x 7→ y". Same content, different sentence. "potentially leading to biased conclusions"
+        is verbatim.
+
+        '
+      legacy_evidence: 'The \emph{method} transfers to any property with an annotated dataset, which is
+        its principal appeal. The \emph{conclusion} does not: Ravichander, Belinkov \& Hovy show properties
+        are encoded ``even if they are not needed for the task,'''' so a probing result on one task licenses
+        nothing about another. The anchor also flags that the property must be chosen in advance, ``potentially
+        leading to biased conclusions'''''
+      legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
+        in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
+        Use the quotes block, not the legacy text.
+  E4:
+    name: Cross-model generalization
+    status: C
+    short: Portability is established without qualification, from static embeddings on
+    verified: true
+    reasoning: 'Portability is the one thing the anchor establishes without qualification. §3 traces the
+      framework from static word embeddings through recurrent translation models, sentence encoders and
+      recursive networks to transformers, and outward to speech recognition and, concurrently, to computer
+      vision. The same formalism covers all of them, because the only thing it requires of a model is
+      that it emit an intermediate representation. Whatever else is in doubt, the method has been pointed
+      at every architecture family available and has applied to each. C.
+
+      '
+    notes:
+      verification: 'Every architecture family the cell names is traceable in §3 or §5. Two quotes are
+        split at page and column breaks: the sentence-embeddings sentence begins "The framework has taken
+        up a more" on the previous page, and the speech sentence begins "An analysis of" on the previous
+        page, so each is quoted from the fragment that runs contiguously in the extraction. Transformers
+        enter through footnote 6 rather than the body.
+
+        '
+      legacy_evidence: The framework has been applied across every architecture family it has been pointed
+        at --- static word embeddings, recurrent and recursive networks, sentence encoders, transformers,
+        speech recognition systems, and computer-vision models via Alain \& Bengio --- and the anchor's
+        \S3 traces exactly this spread. Whatever else is in doubt, the method's portability is not
+  E5:
+    name: Graded response
+    status: N/A
+    short: No intervention, so no strength to dial and no response to grade
+    verified: true
+    reasoning: 'A graded response needs an intervention whose strength can be dialled and a behaviour
+      that tracks it. Standard probing applies no intervention at all — it maps a representation to a
+      property and reports a number — so there is no dose to vary and the criterion has nothing to attach
+      to. The nearest graded quantity in the anchor is the accuracy–complexity trade-off reported along
+      a range of probes, and that varies a property of the measuring instrument rather than the strength
+      of anything applied to the model. N/A.
+
+      '
+    notes:
+      verification: 'THE N/A IS SOUND UNDER THE NARROW SCOPE AND BECOMES U UNDER THE BROAD ONE, the same
+        scope question as I2. Under §2''s definition the method has no intervention, so no dose exists
+        and the criterion is inapplicable — that is structural, not unrun, and the cell''s reasoning is
+        correct. Under the broad scope the audit uses at I1 and E1, §4.3''s interventions do have an obvious
+        strength parameter — the size of the gradient update in Giulianelli et al. and Tucker et al.,
+        the number of projection iterations in Elazar et al. — and no study the anchor cites varies it
+        or reports a curve, which would be U. Either way nothing here supports a graded finding. Unlike
+        I2, the N/A changes nothing about which evidence exists, because no dose-response result is in
+        the anchor under either scope.
+
+        '
+      legacy_evidence: Untestable in this setting. With no intervention there is no dose to grade. The
+        nearest graded quantity, the accuracy--complexity trade-off along a range of probes, varies a
+        property of the \emph{probe} rather than an intervention strength applied to the model, so it
+        does not test the criterion
+  E6:
+    name: Novel prediction
+    status: PC
+    short: Four design changes followed probing results and then worked
+    verified: true
+    reasoning: 'Probing results have led to design changes that then worked, and the anchor names four:
+      decoupling question and passage processing in a question-answering model, an efficient transfer-learning
+      procedure from a redundancy analysis, phonetic supervision on intermediate layers, and machine-translation
+      model selection. Each is a prediction that the representation-level finding would survive being
+      acted on, and each did. The anchor sets the level itself in the sentence that introduces them: presently
+      there are few such successful examples. A track record that exists and is thin is PC.
+
+      '
+    notes:
+      verification: 'All four cases and the anchor''s own assessment are verbatim in §5. The Cao et al.
+        (2020) question-answering case is not quoted here because the sentence hyphenates "ques-tion"
+        across a line break in the extraction; it reads as the cell describes it. Note the anchor''s hedge
+        on the third case, "partly motivated", which the cell does not carry.
+
+        '
+      legacy_evidence: 'Four cases are named in which probing results led to a design change that then
+        worked: decoupling question and passage processing in a question-answering model, an efficient
+        transfer-learning procedure from a redundancy analysis, phonetic multi-task supervision on intermediate
+        layers, and machine-translation model selection. The anchor''s own assessment sets the level:
+        ``Presently, there are few such successful examples'''''
+  V1:
+    name: Level declaration
+    status: PC
+    short: The formalism fixes which objects a probing result is about
+    verified: true
+    reasoning: 'The anchor''s formalism is a level declaration: it fixes which objects a probing result
+      is about, down to the dependence of the reported number on four separate arguments, and the figure
+      enumerates the components so the reader can see what is being held fixed. Practice does not declare.
+      The anchor opens by reciting the informal reading it is written against, and §3 reports that the
+      terms in which probing results are stated — quality, readability, usability — appear without precise
+      definitions. Declared by the review, undeclared by the literature it reviews: PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, quotation error. It renders the opening as "However,
+        upon closer inspection, it will turn out that there is much more involved here". The anchor reads
+        "However, upon closer inspection, it turns out that much more is involved here" — present tense,
+        different construction. The cell''s "Figure 1 enumerates all nine components" describes panel
+        (a) only; Figure 1(b) adds ten more, including every control the audit relies on elsewhere.
+
+        '
+      legacy_evidence: 'The anchor''s formalism is a level declaration --- it specifies exactly which
+        objects a probing result is about, and Figure 1 enumerates all nine components. Practice does
+        not declare: the anchor''s opening paragraph describes the slide it is written against --- ``If
+        the classifier performs well, we say that the model has learned information relevant for the property.
+        However, upon closer inspection, it will turn out that there is much more involved here'''''
+      legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
+        in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
+        Use the quotes block, not the legacy text.
+  V2:
+    name: Level-evidence match
+    status: D
+    short: The evidence supports extractability; the claim made is representation
+    verified: true
+    reasoning: 'The evidence supports a statement about extractability: property z can be recovered from
+      these activations by a classifier of some capacity. The claim as used is representational and computational
+      — the model encodes z and uses it — and the anchor states the gap as the framework''s main limitation,
+      that a correlation between representation and property says nothing about whether the property is
+      involved in the model''s predictions. It also names the repair, and the repair is a retreat in level:
+      absolute claims about representation quality are difficult, relative claims about how extractable
+      a property is are what the improvements support. Evidence at one level, claim at another, with the
+      author saying so: D.
+
+      '
+    notes:
+      verification: 'THE D IS EARNED FROM THE ANCHOR, in its own voice and as its stated main limitation.
+        CONTRADICTION WITH THE CELL, and this one is a fabricated quotation. The cell presents the repair
+        as: probing should "focus on how difficult it is to extract a property from a representation,
+        rather than making absolute statements about its presence". No such sentence exists in the anchor.
+        Neither "how difficult it is to extract" nor "absolute statements" occurs in it. The content is
+        right and comes from two §5 sentences quoted above — "Absolute claims about representation quality
+        seem difficult to make" and the sentence about relative claims and extractability — but the cell''s
+        rendering is a paraphrase inside quotation marks. The limitation quote is verbatim apart from
+        the cell inserting "the model" before f ; it is quoted here split at the page break the extraction
+        imposes.
+
+        '
+      legacy_evidence: 'The evidence supports ``property $z$ is extractable from these activations by
+        a classifier of capacity $c$.'''' The claim as used is that the model represents and uses $z$
+        --- representational and computational. The anchor states the mismatch as its main limitation:
+        probing ``does not tell us whether this property is involved in predictions of the model $f$.''''
+        It also states the repair, which is a retreat in level: ``focus on how difficult it is to extract
+        a property from a representation, rather than making absolute statements about its presence'''''
+      legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
+        in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
+        Use the quotes block, not the legacy text.
+  V3:
+    name: Alternative level
+    status: C
+    short: Every rival reading of a good score is given a measure of its own
+    verified: true
+    reasoning: 'Every rival reading of a good probing score is not only acknowledged but given a measure.
+      The probe learned the task: control tasks, and selectivity as the difference between the two. The
+      property is incidentally encoded: control datasets in which it cannot help the original task. Presence
+      is the wrong quantity: minimum description length and information gain, which reframe the result
+      as difficulty of extraction. The property is present but unused: interventional approaches. Four
+      alternatives, four named instruments, and the summary states which claims survive. C.
+
+      '
+    notes:
+      verification: 'All four alternatives and their attached measures are verbatim in the anchor, and
+        the cell''s description of them is accurate. Note that the anchor does not merely list the alternatives,
+        it formalises them as components of the framework in Figure 1(b), which is stronger than the cell
+        claims.
+
+        '
+      legacy_evidence: 'The alternatives are enumerated, formalised, and instrumented rather than merely
+        acknowledged: the probe learned the task (control tasks, selectivity), the property is incidentally
+        encoded (control datasets), extractability rather than presence is the well-posed quantity (MDL,
+        information gain), and the property is present but causally inert (amnesic probing). Each has
+        a named measure attached'
+  V4:
+    name: Unlicensed labeling
+    status: PC
+    short: '``The model knows z'''' projects an epistemic relation onto decodability'
+    verified: true
+    reasoning: '"The model knows z" projects an epistemic relation onto a decodability result, and the
+      anchor documents the projection in the literature''s own words: a classifier succeeding means the
+      encoder is "storing readable" information, and the vocabulary of quality, readability and usability
+      is used without definition. §4.5 gives the structural reason the labels are hard to discipline —
+      the property must be named from an existing annotation scheme before looking, so the label is chosen
+      before the evidence and the space of alternative labels is bounded by which datasets exist. The
+      one attempt to escape it is marked isolated, and the section closes conceding that probing needs
+      prior expectations about the property. Named, diagnosed, unrepaired: PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, quotation error. It says Michael, Botha & Tenney''s
+        approach is "described as \"at present, isolated\"". The anchor''s phrasing is "In an isolated
+        effort to alleviate this limitation" — the isolation is of the effort at the time of writing,
+        and "at present" is not in the sentence. The cell is otherwise supported, and understates its
+        own case: footnotes 7 through 10 collect the field''s epistemic vocabulary verbatim from the papers
+        using it, which is direct evidence for unlicensed labelling that the cell does not cite.
+
+        '
+      legacy_evidence: '``The model knows / encodes / represents $z$'''' projects an epistemic relation
+        onto a decodability result, and the anchor''s \S4.5 identifies the structural reason the projection
+        is hard to check --- the property must be chosen from an existing annotation scheme before looking,
+        which ``constrains the work to existing annotated datasets'''' and risks ``biased conclusions.''''
+        Michael, Botha \& Tenney''s latent-cluster approach is named as the one attempt to escape it,
+        and described as ``at present, isolated'''''
+      legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
+        in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
+        Use the quotes block, not the legacy text.
+  V5:
+    name: Scope declaration
+    status: C
+    short: A scope declaration end to end, conceding limits before any content
+    verified: true
+    reasoning: 'The anchor is a scope declaration end to end. The abstract concedes methodological limitations
+      before any content, §1 names the four families of critique, §4 states its coverage as five specific
+      shortcomings and then supplies one subsection each, and the figure separates the framework''s components
+      from the controls added to it. The closing paragraph calibrates how far the prescription reaches,
+      declining to require every control of every study while asking that the complexity be taken into
+      account. Scope stated at every level at which it could be stated: C.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, quotation error, twice in one sentence. It reads "We
+        do not argue that any given study should perform all the various controls..."; the anchor reads
+        "that every study must perform". And it ends the quotation at "its apparent weaknesses"; the anchor
+        reads "its apparent shortcomings, and available advances". Dropping "and available advances" removes
+        the constructive half of the sentence and makes the closing read more sceptical than it is. The
+        cell''s "five shortcomings under explicit headings" is right: §4.1 through §4.5. The component
+        table is Figure 1, not Figure 2 as the M2 cell has it.
+
+        '
+      legacy_evidence: 'The anchor is a scope declaration end to end: five shortcomings under explicit
+        headings, a component table separating the framework''s parts from its controls, and a closing
+        statement calibrating how far the prescription goes --- ``We do not argue that any given study
+        should perform all the various controls and report all the alternative measures summarized here.
+        However, future work seeking to use probing classifiers would do well to take into account the
+        complexity of the framework and its apparent weaknesses'''''
+      legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
+        in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
+        Use the quotes block, not the legacy text.

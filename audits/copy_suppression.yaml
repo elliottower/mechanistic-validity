@@ -1,0 +1,1149 @@
+claim: copy_suppression
+verdict: Mechanistically Supported
+readings:
+- statement: Copy suppression is the main role of Negative Head L10H7 in GPT-2 Small, covering at least
+    76.9\% of its direct effect
+  verdict: Mechanistically Supported
+  missing: A dissociation from the backup-head mechanism the same ablation moves (I6), a known-strength
+    positive control fixing the method's floor (M5), and correction for the top-5\% slices the headline
+    figures are computed on (M7)
+  primary: true
+- statement: The token the head suppresses is the source token itself
+  verdict: Disconfirmed
+  missing: 'Nothing --- tested and failed: in 42.00\% of large-attention pairs the source token is suppressed
+    without being the most suppressed, and a semantically related token takes first place in 90\% of those
+    (M6); the authors conclude the mechanism is better read as semantic copy suppression and keep the
+    coarser name elsewhere (V3)'
+  primary: false
+- statement: Copy suppression is what separates L10H7 from the other heads in its layers
+  verdict: Underdetermined
+  missing: Either half of the instrument alone clears 50\% recovered KL for many layer 9--11 heads, so
+    the conjunction rather than the mechanism does the separating (I4, C4); the queryside direction perpendicular
+    to the IO unembedding matters more than the parallel one and is left uncharacterised (I5)
+  primary: false
+- statement: Negative Heads do copy suppression across models
+  verdict: Proposed
+  missing: The structured ablation is never run outside GPT-2 Small (E4); GPT-2 Medium recovers two of
+    its three most negative heads, Pythia's copy suppression is weaker, and Stanford GPT-2 Small E's analogue
+    attends to IO and S2 equally (M1)
+  primary: false
+hypotheses:
+- id: H1
+  view: Role
+  label: the head's main function is copy suppression, covering most of its direct effect
+- id: H2
+  view: Role
+  label: the suppression is pure --- the source token itself is the most suppressed
+- id: H3
+  view: Role
+  label: the suppression is semantic --- a token related to the source is the most suppressed
+- id: H4
+  view: Object
+  label: the negative effect is spread across the layer 9--11 heads with no head-specific mechanism
+- id: H5
+  view: Contrastive
+  label: Negative Heads do copy suppression generally rather than L10H7 in GPT-2 Small alone
+- id: H6
+  view: Instrumental
+  label: the structure is an artifact of the measurement rather than a mechanism in the model
+views_evidence:
+- criterion: C2
+  evidence: 84.70\% of tokens carry their OV diagonal among the ten most negative entries of its column
+    and 95.72\% of QK rows carry the diagonal as the largest entry, read off the weights before any ablation
+  cells:
+    H1: C
+    H2: C
+    H3: C
+    H4: I
+    H5: '-'
+    H6: I
+  designed_for:
+  - H1
+- criterion: C4
+  evidence: A same-matching QK baseline built for the tied-embedding rival, Duplicate Token Heads under
+    the same lookup tables, and Name Mover Heads at a best median rank of 561 against L10H7's rank-1 majority
+  cells:
+    H1: C
+    H2: C
+    H3: '-'
+    H4: I
+    H5: '-'
+    H6: I
+  designed_for:
+  - H1
+  - H6
+- criterion: I1
+  evidence: The path decomposition assigns most of the head's loss change to its direct route rather than
+    to anything downstream of it
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: '-'
+  designed_for:
+  - H1
+- criterion: I2
+  evidence: A structured ablation deleting every function of the head except the OV projection onto source-token
+    unembeddings and the QK filter to top-predicted source tokens preserves 76.9\% of its KL effect
+  cells:
+    H1: C
+    H2: C
+    H3: C
+    H4: I
+    H5: '-'
+    H6: C
+  designed_for:
+  - H1
+- criterion: I4
+  evidence: CSPA over every layer 9--11 head recovers most for L10H7, while its OV and QK halves taken
+    separately clear 50\% recovered KL for many of the others
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: C
+    H5: '-'
+    H6: '-'
+  designed_for:
+  - H4
+- criterion: I5
+  evidence: The queryside direction perpendicular to the IO unembedding matters more than the parallel
+    one, and the authors state they do not know what it represents
+  cells:
+    H1: I
+    H2: '-'
+    H3: '-'
+    H4: C
+    H5: '-'
+    H6: '-'
+  designed_for:
+  - H1
+- criterion: M3
+  evidence: The headline recomputes to 82\% and 45\% under two loss metrics, and projecting the key input
+    onto the effective embedding moves attention by a median of -0.09
+  cells:
+    H1: I
+    H2: '-'
+    H3: '-'
+    H4: C
+    H5: '-'
+    H6: C
+  designed_for:
+  - H1
+- criterion: M5
+  evidence: Every control is a known-negative; no copy-suppression mechanism of known strength is planted
+    and recovered, so the floor of the method is unmeasured
+  cells:
+    H1: '-'
+    H2: '-'
+    H3: '-'
+    H4: C
+    H5: '-'
+    H6: C
+  designed_for: []
+- criterion: M7
+  evidence: The 80\% behavioural figure and both faithfulness appendices are computed on the top 5\% of
+    completions ranked by the head's own effect, and nothing is recomputed off that slice
+  cells:
+    H1: '-'
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: C
+  designed_for: []
+- criterion: V3
+  evidence: In 42.00\% of large-attention pairs the source token is suppressed without being the most
+    suppressed, and a semantically related token takes first place in 90\% of those
+  cells:
+    H1: C
+    H2: I
+    H3: C
+    H4: '-'
+    H5: '-'
+    H6: '-'
+  designed_for:
+  - H2
+  - H3
+- criterion: V4
+  evidence: The abstract asserts the head improves overall model calibration; Appendix D calls that one
+    possible role and possibly merely incidental
+  cells:
+    H1: I
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: '-'
+  designed_for: []
+- criterion: E3
+  evidence: Copy-suppression scores on IOI and anti-induction scores on repeated random tokens correlate
+    across GPT, Pythia and SoLU models, with L10H7 ranked first on both
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: I
+    H5: C
+    H6: I
+  designed_for:
+  - H1
+  - H5
+- criterion: E4
+  evidence: GPT-2 Medium recovers two of its three most negative heads, Pythia's copy suppression is weaker,
+    and Stanford GPT-2 Small E's analogue attends to IO and S2 equally
+  cells:
+    H1: '-'
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: I
+    H6: '-'
+  designed_for:
+  - H5
+tiers:
+- name: Proposed
+  requires: C1--C2; one admissible measurement
+  missing: '---'
+- name: Causally Suggestive
+  requires: Necessity (I1); baselines (M2)
+  missing: '---'
+- name: Mechanistically Supported
+  requires: Sufficiency (I2); reach (E1); specificity (I4)
+  missing: '---'
+- name: Triangulated
+  requires: Convergence (C3); replication (E2/E4); dissociation (I6)
+  missing: \textbf{I6} unattempted; the backup-head mechanism is never shown intact under an ablation
+    that removes copy suppression, and the structured ablation is never applied to it
+- name: Validated
+  requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
+  missing: \textbf{M5}, \textbf{M7} unattempted, and the behavioural and faithfulness figures are computed
+    on a top-5\% slice chosen by the head's own effect; \textbf{I8}, \textbf{I10}, \textbf{I12} unattempted
+criteria:
+  C1:
+    name: Falsifiability
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The claim is committed to before it is measured, at two levels, and each commitment had
+      a way of coming out wrong. Behaviorally, the three qualitative steps are turned into three conjunctive
+      conditions checked per completion, and 80% of a sample satisfies all three; a conjunction of three
+      top-k conditions is a threshold that a vague hypothesis would fail. At the weight level the predictions
+      are sharper still, because the paper states what the matrices must look like and then measures them:
+      the OV diagonal had to be among the most negative entries in its column and the QK diagonal had
+      to be the largest in its row, and either could have come out flat. C.
+
+      '
+    notes:
+      verification: 'The 80% figure, the three conditions and both weight predictions are verbatim, and
+        the predictions are stated in the sentences preceding their measurements in both §3.1 and §3.2,
+        which is what the cell''s "stated before being measured" asserts. One qualification the cell omits:
+        the 80% is computed on a sample drawn from the top 5% of completions by L10H7''s own effect, so
+        the behavioral test is run where the hypothesis is most likely to hold. That is disclosed in the
+        same sentence and is recorded at M7.
+
+        '
+      legacy_evidence: 'The three qualitative steps are operationalised as three conjunctive conditions
+        checked per completion (their \S2.1), and 80\% of a sample from the top 5\% of completions meet
+        all three --- a number that could have come out near zero. The weights predictions are sharper:
+        the OV diagonal could have failed to be negative and the QK diagonal could have failed to be maximal,
+        and both are stated before being measured'
+      verdict_derivation: 'Verdict computed from the criteria on 2026-08-07 rather than asserted: Mechanistically
+        Supported, blocked above that by I6=U. The 35-criterion table scores the primary reading, so the
+        criteria, the primary reading''s verdict and the overall verdict are one number by construction.'
+  C2:
+    name: Structural plausibility
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The mechanism is read off the weights before any ablation is run, and both halves of it
+      are quantified over the entire vocabulary: 84.70% of tokens have their OV diagonal among the ten
+      most negative entries in their column, 98.86% in the bottom 5%, and 95.72% of QK rows have the diagonal
+      as the largest entry. Structural evidence of this kind is usually the missing piece; here it is
+      the core of the paper. It is also checked against behaviour rather than left as an idealisation,
+      holding at 78.24% on real source-destination pairs from OpenWebText. C.
+
+      '
+    notes:
+      verification: 'All four percentages are verbatim and the cell reports them correctly, including
+        the distinction between the static 84.70% and the dynamic 78.24%. One caveat the cell notes only
+        at M3: the paper states the QK idealisation "does not completely faithfully represent L10H7''s
+        real functioning", and Appendix M.2 measures the gap at a median attention change of -0.09 against
+        an average attention of 0.21. The structural account of the OV circuit survives that caveat; the
+        QK half is idealised and known by the authors to be so.
+
+        '
+      legacy_evidence: 'The mechanism is read off the weights before any ablation. OV circuit $W_U W_{OV}
+        \mathrm{MLP}_0(W_E)$: 84.70\% of vocabulary tokens have their diagonal among the ten most negative
+        entries in their column, 98.86\% in the bottom 5\% (\S3.1). QK circuit $W_U W_{QK} \mathrm{MLP}_0(W_E)$:
+        95.72\% of rows have the diagonal as the largest entry (\S3.2). Both are checked against on-distribution
+        behaviour --- the OV result holds at 78.24\% on real (source, destination) pairs from OpenWebText
+        (Appendix F)'
+  C3:
+    name: Convergent validity
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'Four instruments bear on the same claim and agree. Weight products give 84.70% and 95.72%
+      with no intervention at all; hand-coding of dataset examples gives 80%; a structured ablation that
+      deletes everything except the two weight mechanisms preserves 76.9% of the head''s effect; and out-of-distribution
+      behaviour on repeated random tokens ranks the same head first. These differ in kind rather than
+      in granularity — one is a property of the parameters, one is observational, one is causal, one is
+      a different distribution — so their agreement is not arithmetic. C.
+
+      '
+    notes:
+      verification: 'The four families in the cell are all present and the numbers are verbatim. Two dependencies
+        the cell does not mention. The behavioral coding and the CSPA QK filter both use the logit lens
+        to define what the model "predicts", so those two families share an instrument; and both are evaluated
+        on completions selected by L10H7''s own effect. The weights analysis and the anti-induction correlation
+        are free of both dependencies, which is what carries the C. Campregher et al. and Urdshals & Urdshals
+        are post-origin.
+
+        '
+      legacy_evidence: 'Four families at origin, agreeing: weights (\S3.1--3.2), behavioural coding of
+        dataset examples (\S2.1, 80\%), structured ablation (\S3.3, CSPA), and out-of-distribution behaviour
+        on repeated random tokens (Appendix A). Independent later convergence: Campregher et al.\ (2025),
+        a reproducibility study reconciling three papers, finds attention heads promote factual output
+        ``via general copy suppression rather than selective counterfactual suppression''''; Urdshals
+        \& Urdshals (2025) find copy suppression arising de novo in a one-layer attention-only transformer
+        trained from scratch on list sorting'
+  C4:
+    name: Discriminant validity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Three separations are run and all three are against the rivals that matter. The same-matching
+      baseline addresses the confound tied embeddings create, Duplicate Token Heads are shown to behave
+      differently under the same lookup tables, and Name Mover Heads reach a best median rank of 561 across
+      every configuration against L10H7''s rank-1 majority. Discrimination fails one level down. The components
+      of the instrument — the OV and QK ablations taken separately — recover more than half the KL divergence
+      for many other heads, so what separates L10H7 is the conjunction rather than either mechanism. PC.
+
+      '
+    notes:
+      verification: 'TWO CONTRADICTIONS WITH THE CELL, both about Figure 19b. First, the cell reads "L10H7''s
+        diagonal median rank is 21,904 of 50,257" — the figure is captioned "Studying the number of Top-1
+        tokens for L3H0, a Duplicate Token Head", with a "Count" colour scale, so 21904/50257 is a count
+        of vocabulary tokens whose diagonal ranks first, not a median rank. Under the caption the number
+        says L3H0 matches strongly in effective-embedding space, the opposite of what the cell uses it
+        for; the discriminant point is the 289/50257 it reaches in the copy-suppression configuration
+        with W_U queryside. The prose of Appendix M.1 calls the same quantity a median rank, so the paper
+        is internally inconsistent about what Figure 19b plots. Second, the cell describes the same-matching
+        baseline as giving "much worse diagonal ranks"; the paper''s words are "much smaller", which read
+        literally means better ranks. The argument requires the cell''s reading, and the extraction does
+        not carry the bar values that would settle it. The 561 figure and the >50% recovery are verbatim
+        and correctly attributed.
+
+        '
+      legacy_evidence: 'Three separations are shown, all in appendices. Against a ``same matching''''
+        QK circuit, the rival that tied embeddings make live (Figure 3, blue bars). Against Duplicate
+        Token Heads --- L3H0''s diagonal median rank is 21{,}904 of 50{,}257 with an effective-embedding
+        queryside (Figure 19b). Against Name Mover Heads --- ``across all key and queryside lookup tables
+        the best median rank is 561'''' (Appendix M.1). What is not separated is the ablation instrument:
+        the OV and QK ablations alone recover $>$50\% of KL for many other heads (Appendix J.3)'
+  C5:
+    name: Nomological validity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The strongest nomological work available here is unification, and the paper does it: two
+      independently named phenomena, negative name mover heads from the IOI literature and anti-induction
+      heads from the induction literature, are brought under one mechanism, and the unification is quantified
+      as a correlation of per-head scores across three model families. Placement in the wider theory is
+      thinner. The paper locates itself in the iterative-inference line by noting no connection has been
+      made there before, and it declines to explain why such heads form, listing three candidate theories
+      with tests it does not run. Unified and unexplained is PC.
+
+      '
+    notes:
+      verification: 'The unification sentence and the iterative-inference sentence are verbatim, and Appendix
+        E is explicitly framed as speculation with proposed tests, as the cell says. Figure 9 carries
+        the cross-model correlation the cell cites, and the paper reports no correlation coefficient,
+        no head count and no significance test for it — "a strong correlation" is the whole of the statistical
+        claim.
+
+        '
+      legacy_evidence: The claim unifies two previously named and separately described phenomena --- ``negative
+        name mover heads'' \citep{wang2023interpretability} and ``anti-induction heads'' \citep{olsson2022context}
+        --- which is the strongest form of nomological work available here, and the unification is quantified
+        (Figure 9, correlated scores across GPT, Pythia and SoLU models). It sits inside the iterative-inference
+        / logit-lens line, where the paper notes ``no connections have yet been made to Negative Heads''
+        (\S5). Why such heads form is unexplained; Appendix E lists three ``speculative theories'' with
+        tests proposed and not run
+  M1:
+    name: Reliability
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Every headline quantity is an average over OpenWebText reported as one number. The paper
+      shows spread across data, binning completions into 100 percentiles of effect size, which is a real
+      and unusual disclosure; it shows no spread across estimates, since GPT-2 Small is one released checkpoint
+      and no bootstrap, resampling or interval accompanies 76.9%, 84.70%, 95.72% or 78.24%. The one glance
+      at a second pretraining run of the same architecture is informal and partly negative: the analogous
+      head in Stanford GPT-2 Small E attends to IO and S2 equally, which GPT-2 Small''s does not. Reliability
+      across data, silence across estimates, is PC.
+
+      '
+    notes:
+      verification: 'The Appendix Q sentence is verbatim and the cell quotes it accurately. Verified against
+        a full read for the absence: no confidence interval, bootstrap or repeated run appears in the
+        body or in Appendices A through R. Figure 5''s 100 percentiles are the only dispersion reported,
+        and they are dispersion of the estimand across the corpus rather than of the estimate.
+
+        '
+      legacy_evidence: 'GPT-2 Small is a single released checkpoint and every number is a single point
+        estimate --- no seed variance, bootstrap, or confidence interval. The one seed-level check is
+        informal and partly negative: Appendix Q reports that in Stanford GPT-2 Small E, a different pretraining
+        run of the same architecture, a head writes against the correct token after Name Mover ablation
+        but ``is distinct from the copy suppression heads in GPT-2 Small in that it attended to both the
+        IO and S2 tokens equally on a clean run.'''' Spread across data is reported (Figure 5, 100 percentiles);
+        spread across estimates is not'
+  M2:
+    name: Baseline separation
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Two baselines carry the argument and both are the right shape. Mean ablation of the direct
+      effect is the denominator of the effect-explained ratio, so every percentage in the paper is already
+      expressed against a null; and the same-matching QK circuit is a baseline chosen because tied embeddings
+      make that rival live. A third check puts every layer 9-11 head through CSPA and finds L10H7 recovers
+      most. What is missing is a null for 76.9% itself. The paper''s own Appendix J.3 shows the component
+      ablations clear 50% for many heads, so the reference distribution matters and is not constructed.
+      PC.
+
+      '
+    notes:
+      verification: 'The effect-explained definition and the Appendix J.3 test are verbatim, and Figure
+        17 is the right locator for the layer 9-11 comparison. See C4 for the wording discrepancy in the
+        same-matching sentence: the paper says the baseline''s diagonal ranks are "much smaller", the
+        cell says "much worse", and only the cell''s reading supports the conclusion the paper draws from
+        it.
+
+        '
+      legacy_evidence: 'Two baselines carry every number and both separate. Mean ablation of L10H7''s
+        direct effect is the denominator of the effect-explained ratio by construction. The ``same matching''''
+        QK baseline, with the effective embedding on both sides, gives much worse diagonal ranks (Figure
+        3). Figure 17 puts all layer 9--11 heads through CSPA and L10H7 recovers the most. Missing: a
+        matched-random null for 76.9\% itself, which matters because the component ablations recover $>$50\%
+        for many heads (Appendix J.3)'
+  M3:
+    name: Stability
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Perturbations are run against the paper''s own result and reported when they hurt. Including
+      the query and key biases leaves the QK distribution unchanged; the static 84.70% is rechecked dynamically
+      at 78.24%; the headline is recomputed under two loss metrics giving 82% and 45%. The two perturbations
+      that matter most come out against the idealisation: projecting the key input onto the effective
+      embedding moves attention by a median of -0.09, and the better context-free approximation still
+      moves it by -0.06. Stability tested, partly failed, and disclosed is PC.
+
+      '
+    notes:
+      verification: 'All five numbers in the cell are verbatim. One wording correction: the cell renders
+        the bias check as results that are "identical … except a tiny difference in the Rank 1-2 bar heights";
+        the paper writes "seem identical", a hedge the cell drops. The 45% absolute-loss figure is the
+        largest instability in the paper and the cell records it at I2 rather than here.
+
+        '
+      legacy_evidence: Perturbations are run and reported against the paper. QK results with and without
+        bias terms are ``identical \ldots except a tiny difference in the Rank 1-2 bar heights'' (Figure
+        19a). The static OV result (84.70\%) is checked dynamically (78.24\%, Appendix F). Three metrics
+        are reported (Appendix J.2). Appendices M.2 and M.3 perturb the idealised key and query approximations
+        and find both unfaithful --- median attention change $-0.09$ under the effective-embedding keyside,
+        improving to $-0.06$ with a context-free residual state
+  M4:
+    name: Calibration
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The validation metric is well chosen and its failure mode is stated by the authors. KL
+      divergence has a meaningful zero, is linear in the log-probabilities the ablation produces, and
+      Appendix J.1 names the case it will miss — a logit change too small to move a small probability,
+      which costs loss and not KL. Calibration of the underlying effect is where it thins out. The head''s
+      whole direct contribution is about a thousandth of the model''s OpenWebText loss, the same explanation
+      scores 82% or 45% depending on which loss metric is chosen, and the head is harmful on almost as
+      many completions as it helps. A percentage of a small and sign-unstable effect is PC.
+
+      '
+    notes:
+      verification: 'The KL rationale and its stated flaw are verbatim. The absolute magnitudes the cell
+        uses — a loss increase of 0.0102 nats from about 3.030 — are axis annotations in Figure 2 rather
+        than in-text numbers, which is why they are not quoted here; Appendix I independently gives the
+        model''s average OpenWebText loss as 3.047 on a 3000-document sample, so the cell''s arithmetic
+        of roughly 0.3% holds. The 82% and 45% pair is verbatim in Appendix J.2 and is the sharper calibration
+        problem.
+
+        '
+      legacy_evidence: 'KL divergence is well motivated, with 0 having ``a natural interpretation as the
+        ablated and clean distributions being identical,'''' and its failure mode is stated in Appendix
+        J.1. The absolute scale is small: mean-ablating L10H7''s direct path raises OpenWebText loss by
+        0.0102 nats from about 3.030 (Figure 2), so 76.9\% is a fraction of roughly 0.3\% of the model''s
+        loss. Figure 16a shows the head is harmful on almost as many completions as it helps'
+  M5:
+    name: Sensitivity
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Every control in the paper is a known-negative. The same-matching baseline, the layer
+      9-11 head sweep and mean ablation all establish what the measurement returns when copy suppression
+      should be absent or weaker. None establishes what it returns when a copy-suppression mechanism of
+      known strength is present, because no such mechanism is planted and recovered and no model is constructed
+      where the answer is known in advance. The floor of the method is therefore unmeasured: a head with
+      half the mechanism would score some number, and nothing says which. U.
+
+      '
+    notes:
+      verification: 'Verified against a full read. The quotes bound the control set rather than asserting
+        the absence. Appendix J.3 is the closest the paper comes, and its logic is explicitly the negative
+        direction — the measure "should be smaller for heads in GPT-2 Small that aren''t negative heads".
+
+        '
+      legacy_evidence: 'Unattempted. No known-positive control: no copy-suppression circuit of known strength
+        is planted and recovered, and no model is constructed where the correct answer is known in advance.
+        Every control in the paper is a known-negative (same matching, other heads, mean ablation)'
+  M6:
+    name: Invariance
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The claim is evaluated across the whole of OpenWebText rather than a template set, binned
+      into 100 percentiles of effect size, under three metrics, at two granularities and in three further
+      model settings. Conditions that would stress it are absent: no breakdown by document domain, sequence
+      length or token frequency band appears. Appendix K then shows the operationalisation is itself condition-dependent,
+      since in 42.00% of large-attention pairs the source token is suppressed without being the most suppressed,
+      and in 90% of those the winner is a semantically related token. Broad coverage with an unstable
+      definition at the margin is PC.
+
+      '
+    notes:
+      verification: 'The 42.00% and 90% figures are verbatim and the cell reports them correctly. Note
+        these two numbers cut both ways: they are evidence of non-invariance of the strict operationalisation,
+        and evidence for the semantic reading the paper adopts in Appendix K and records at V3.
+
+        '
+      legacy_evidence: 'Reported across the full OpenWebText distribution binned into 100 effect-size
+        percentiles, under three metrics, at two granularities (weights-static and on-distribution), and
+        across three further model settings in appendices. Not reported across document domains, sequence
+        lengths, or token frequency bands. Appendix K shows the operationalisation is itself condition-dependent:
+        in 42.00\% of large-attention pairs the source token is suppressed but not most-suppressed, and
+        in 90\% of those the most-suppressed token is semantically related to the source'
+  M7:
+    name: Selection correction
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Selection runs through the paper and is disclosed at every step. L10H7 is chosen as the
+      most negative head in GPT-2 Small; the 80% behavioral figure is computed on a sample from the top
+      5% of completions by L10H7''s own effect; the QK ablation retains the top 5% of predicted source
+      tokens; the two faithfulness appendices evaluate on the top 5% again. Each choice is stated with
+      its reason, which is more than most papers offer. None is corrected for, and no quantity is recomputed
+      on a held-out or unselected slice, so nothing bounds how much of 76.9% is a property of the selection.
+      U.
+
+      '
+    notes:
+      verification: 'The four selections are verbatim and the cell lists them correctly, including the
+        stated justification that the top 5% "accounted for half of the attention head''s loss reducing
+        effect". Verified against a full read for the absence of any correction or held-out evaluation.
+        Appendix N is the one exception and it points the other way: it reports "We never train on the
+        test set we evaluate on" for the learned per-token scaling, a discipline applied nowhere else.
+
+        '
+      legacy_evidence: Unattempted. L10H7 is selected as the most negative head in GPT-2 Small; the 80\%
+        behavioural figure is computed on a sample from the top 5\% of completions by L10H7's own effect,
+        chosen because they ``accounted for half of the attention head's loss reducing effect''; the QK
+        ablation retains the top 5\% of source tokens; Appendices M.2 and M.3 evaluate faithfulness on
+        the top 5\% again. Each selection is stated; none is corrected for
+  I1:
+    name: Necessity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Necessity is established for a path and not for the head. Decomposing the head''s effect
+      into direct and indirect routes shows the direct path carries most of the loss change, which localises
+      the contribution cleanly and justifies studying that path alone. In absolute terms nothing depends
+      on the head. Its whole direct effect is a thousandth of the model''s loss, the sign of its contribution
+      is close to balanced across completions, and the same is true of most heads in its layers. A clean
+      localisation of a small and two-sided effect is PC.
+
+      '
+    notes:
+      verification: 'The direct/indirect split the cell quantifies as +0.0102 against +0.0016 is read
+        from the axis annotations of Figure 2 rather than from the text; the text states only that most
+        of the effect is direct. Appendix C corroborates the smaller number independently: controlling
+        the L10H7 to L11H10 path halves the indirect loss increase, which is consistent with 0.0016 and
+        0.0008 as plotted in Figure 12.
+
+        '
+      legacy_evidence: 'Path decomposition localises the head''s contribution cleanly --- ablating the
+        direct path raises loss by 0.0102, ablating indirect paths by 0.0016 (Figure 2) --- which is a
+        necessity result for the \emph{path}, not for the head. In absolute terms the head is not necessary
+        for anything: removing it costs about 0.3\% of the model''s loss, and Figure 16a shows the sign
+        of its contribution is close to balanced across completions'
+  I2:
+    name: Sufficiency
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'CSPA is a well-built sufficiency test: delete every function of the head except the OV
+      projection onto source-token unembeddings and the QK filter to top-predicted source tokens, and
+      76.9% of the KL effect survives, rising to 88.1% where mean ablation is most destructive. The figure
+      moves a great deal with the metric. The same preserved mechanism explains 81.1% under OV alone,
+      95.2% under QK alone, 82% of net loss and 45% of absolute loss, and Appendix N''s stricter query
+      projection recovers 25% before per-token scaling and semantic expansion lift it to 61%. Sufficient
+      under the reported metric, unstable across the alternatives, is PC.
+
+      '
+    notes:
+      verification: 'Every number in the cell is verbatim. Note the 81.1% and 95.2% figures are higher
+        than the 76.9% headline because each is a weaker deletion, so the conjunction is what costs, as
+        the cell says at I3. The 88.1% is recorded in prose that the two-column extraction interleaves
+        with Figure 5, which is why it is quoted as a fragment.
+
+        '
+      legacy_evidence: 'CSPA is the sufficiency test and it is well constructed: delete every function
+        of L10H7 except the OV projection onto source-token unembeddings and the QK filter to top-predicted
+        source tokens, and 76.9\% of the KL effect survives, rising to 88.1\% in the most-affected percentile.
+        The figure is strongly metric-dependent --- 81.1\% (OV only), 95.2\% (QK only), 82\% (net loss),
+        45\% (absolute loss) --- and Appendix N''s stricter query-projection variant recovers 25\% naively
+        and 61\% after per-token scaling and semantic expansion'
+  I3:
+    name: Minimality
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The object under study is a single attention head, so minimality can only be tested inside
+      the explanation rather than over a component set, and that is what happens. Preserving the QK mechanism
+      alone recovers 95.2% and the OV mechanism alone 81.1%, while preserving both and deleting everything
+      else recovers 76.9%: each half is individually mild and their conjunction is what costs, which is
+      evidence that both earn their place. Finer variants of each half are also run, including a query
+      projection that recovers 25% naively and 61% after per-token scaling. Below that there is nothing
+      left to prune. PC.
+
+      '
+    notes:
+      verification: 'The three CSPA figures and the Appendix N pair are verbatim. Figure 17 carries the
+        comparison the cell describes between keeping only negative OV components and projecting onto
+        the unembeddings, which Appendix J.3 states as the two forms of the experiment.
+
+        '
+      legacy_evidence: 'Tested by decomposition into the two preserved mechanisms, and both earn their
+        place: preserving QK alone recovers 95.2\% and OV alone 81.1\%, while preserving both and deleting
+        everything else recovers 76.9\%, so each ablation is individually mild and their conjunction is
+        what costs. Finer variants of each half are also run: Figure 17 compares keeping only the negative
+        OV components against projecting onto the unembeddings, and Appendix N replaces the QK filter
+        with a query projection, recovering 25\% naively and 61\% after per-token scaling. Below that
+        there is no component set to prune --- the object is one attention head'
+  I4:
+    name: Specificity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Specificity is tested and comes out split, with both halves in the same appendix. CSPA
+      applied to every layer 9-11 head recovers most for L10H7, which is the result the criterion asks
+      for. The components of that instrument do not discriminate: the OV and QK ablations taken separately
+      clear 50% recovered KL for many other heads, so what is specific to L10H7 is the conjunction rather
+      than either mechanism. A second gap is internal — the queryside direction perpendicular to the IO
+      unembedding is slightly more important than the parallel one, so part of what drives the head is
+      outside the account. PC.
+
+      '
+    notes:
+      verification: 'The >50% statement and the perpendicular-direction finding are verbatim and the cell
+        attributes both correctly, including the location of the perpendicular result in Appendix L rather
+        than in §4.2''s main text.
+
+        '
+      legacy_evidence: 'Tested, with the two halves in the same appendix. CSPA applied to every layer
+        9--11 head recovers most for L10H7 (Figure 17), which is the specificity result. But ``the QK
+        and OV ablations \ldots lead to large ($>$ 50\%) KL divergence recovered for many other heads,
+        too'''' (Appendix J.3), so the components of the instrument do not discriminate. \S4.2 adds an
+        internal specificity gap: the queryside direction perpendicular to $W_U[\mathrm{IO}]$ is ``slightly
+        more important than the parallel direction'''' (Appendix L)'
+  I5:
+    name: Rival mechanism exclusion
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Two rivals are named and addressed at origin. Tied embeddings make a same-matching QK
+      circuit the obvious alternative explanation for the diagonal, and the paper runs the baseline that
+      separates them rather than arguing the point. Indirect mediation is excluded by the path decomposition,
+      which shows the head''s effect running through the direct path. One rival is left standing and the
+      authors say so: something in the queryside component perpendicular to the unembedding direction
+      drives the head, they state they do not know what it represents, and Appendix L finds it matters
+      more than the parallel component. PC.
+
+      '
+    notes:
+      verification: '"We''re not sure what this perpendicular component represents" is verbatim (Appendix
+        M.3) and is the sharpest statement of the unexcluded rival; the cell refers to it without quoting
+        it. See C4 for the wording problem in the same-matching sentence. Campregher et al. is post-origin.
+
+        '
+      legacy_evidence: 'Two rivals named and excluded at origin. Same matching: GPT-2 Small ties $W_E$
+        and $W_U$, so a matrix that merely matches similar vectors would produce the observed QK diagonal;
+        the effective-embedding baseline separates them (\S3.2). Indirect mediation: Figure 2 shows the
+        head''s effect runs through the direct path ($+0.0102$) rather than downstream components ($+0.0016$).
+        Campregher et al.\ (2025) later run the head-to-head against selective counterfactual suppression
+        and copy suppression wins. Unexcluded: whatever the perpendicular queryside component computes'
+  I6:
+    name: Double dissociation
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'The source has the materials for a double dissociation and never assembles one. Two mechanisms
+      are identified in the same setting, copy suppression in Negative Heads and a different mechanism
+      in backup heads, and Table 2 states that they respond in opposite directions to the same upstream
+      ablation. No manipulation removes one while leaving the other. Nothing shows a second mechanism
+      intact under a copy-suppression-removing ablation, and CSPA is never applied to the backup heads
+      to test the converse. U.
+
+      '
+    notes:
+      verification: 'Verified against a full read. §4 and Appendix R come closest, since both mechanisms
+        are measured under the same Name Mover ablation, but the ablation is upstream of both and so moves
+        them together rather than dissociating them.
+
+        '
+      legacy_evidence: 'Unattempted. No converse test: no second mechanism in GPT-2 Small is shown intact
+        under a copy-suppression-removing ablation, and no manipulation removes that second mechanism
+        while leaving copy suppression'
+  I7:
+    name: Confound control
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Two confounds are controlled by construction, and both are structural features of GPT-2
+      Small that would otherwise manufacture the result. Tied embeddings are handled by using the effective
+      embedding keyside and running the same-matching baseline; LayerNorm is handled by weight processing
+      that strips centering and rescaling, plus renormalisation of the query and key inputs to simulate
+      its effect. Confounds in the data are untouched. Token frequency, position in document and text
+      domain are never controlled, and Appendix N shows the third one bites: the intervention''s failure
+      cases concentrate on capitalised words far above their base rate. PC.
+
+      '
+    notes:
+      verification: 'The effective-embedding and LayerNorm treatments are verbatim and correctly located
+        in Appendices H, I and M.1. One qualification: the cell reads the Appendix N capitalisation result
+        as evidence that domain is uncontrolled. Capitalisation is a token-class property rather than
+        a domain, and the paper''s own reading is that the projection fails to detect cases the head does
+        suppress, so the failure is in the approximation rather than in the head.
+
+        '
+      legacy_evidence: 'Two confounds controlled by construction, both structural to GPT-2 Small. Tied
+        embeddings: the effective embedding $\mathrm{MLP}_0(W_E)$ is used keyside and the same-matching
+        baseline is run (\S3.2, Appendix I). LayerNorm: weight processing removes centering and rescaling,
+        and query and key inputs are renormalised to $\sqrt{d_{\mathrm{model}}}$ to simulate it (Appendices
+        H, M.1). Token frequency, position in document, and domain are uncontrolled --- and Appendix N
+        shows the third matters, since the failure cases concentrate on capitalised words at ``far above
+        the base rate'''''
+  I8:
+    name: Confounding sensitivity
+    status: U
+    short: ''
+    verified: false
+    reasoning: 'NOT SETTLED BY THE SOURCE. Nothing in the paper bounds how strong an unmeasured confounder
+      would have to be to overturn a reported effect, and no quantity in it can be read as such a bound.
+
+      '
+    notes:
+      verification: 'Read in full. The causal claims rest on ablation rather than on adjustment, so the
+        E-value framing has no natural home here. The nearest thing in the paper is the perpendicular
+        queryside component, an identified but uncharacterised influence that a sensitivity analysis would
+        be the natural way to price.
+
+        '
+      legacy_evidence: Unattempted. No E-value or sensitivity analysis for an unmeasured confounder
+  I9:
+    name: Epistatic interaction
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'One interaction is isolated and quantified rather than noted. Appendix C controls the
+      path from L10H7 to L11H10 separately and finds the loss increase roughly twice as large when it
+      is left uncontrolled, because ablating the first Negative Head makes the second copy-suppress more
+      — copy suppression acting on itself. Section 4 is an interaction study by construction, with Negative
+      and Backup heads responding in opposite directions to the same upstream ablation. What is absent
+      is any systematic grid: no pair of components is ablated together and compared against the sum of
+      its singles across the model. PC.
+
+      '
+    notes:
+      verification: '"Roughly twice as large" is verbatim and the mechanism the cell describes is the
+        paper''s own. Figure 12''s annotations put the two loss increases at +0.0008 and +0.0016, which
+        is the arithmetic behind the phrase. The cell''s Table 2 citation for the opposite responses is
+        correct.
+
+        '
+      legacy_evidence: 'One interaction is isolated and quantified: Appendix C controls the L10H7 $\to$
+        L11H10 path separately and finds the loss increase ``roughly twice as large'''' when it is not
+        controlled, because ablating the first Negative Head makes the second copy-suppress more --- copy
+        suppression is a self-repair mechanism acting on itself. \S4 is an interaction study by construction,
+        with Negative and Backup heads responding oppositely to the same upstream ablation (Table 2).
+        No systematic pairwise grid'
+  I10:
+    name: Rescue reversibility
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Every intervention in the paper is subtractive or additive at the query, and none restores
+      what was removed. CSPA deletes function and measures what survives, with the clean activations already
+      in hand, so restoring the deleted components and rechecking would cost one forward pass and is never
+      done. The nearest experiment runs a different design: Appendix R adds a scaled vector to the queryside
+      residual stream and watches attention track it, which is a dose-response curve rather than a rescue.
+      U.
+
+      '
+    notes:
+      verification: 'Verified against a full read. CSPA''s construction is verbatim and confirms the cell''s
+        reading that the clean activations are available throughout. Appendix R''s method is quoted here
+        because it is the experiment the cell says is nearest and it is the one that shows the restoration
+        would have been cheap.
+
+        '
+      legacy_evidence: 'Unattempted rather than untestable. CSPA is a subtractive edit with the clean
+        activations already in hand, so restoring the removed components and rechecking is cheap. The
+        nearest experiment runs a different design: Appendix R scales a signal into the query and watches
+        attention track it, which is dose-response rather than restoration'
+  I11:
+    name: Onset coupling
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The origin runs no onset experiment and names it three times as the experiment to run.
+      Appendix E states the paper explains what the head does rather than why it forms, offers three theories
+      for its formation, and attaches a checkpointed-model test to each: watch the loss cases as the head
+      is forming, check whether negative heads appear concurrently with copying behaviour elsewhere, and
+      inspect attention patterns early in training. The appendix also draws the distinction the criterion
+      rests on, between why a head forms and how it reduces loss once trained.
+
+      '
+    notes:
+      verification: 'All three proposed tests are verbatim and all three name checkpointed models, so
+        the cell''s "named three times as the test to run" is exact. The recorded PC has no origin-side
+        support: nothing here observes onset. The status rests entirely on Urdshals & Urdshals (2025),
+        which is post-origin and in a one-layer model trained on list sorting rather than in GPT-2 Small.
+        Note the contrast with the greater_than audit, where the same criterion is N/A — this paper already
+        uses Pythia in Appendix B, which has public checkpoints, so the experiment is available to it
+        and untried rather than unavailable.
+
+        '
+      legacy_evidence: 'Not run at origin, and named three times as the test to run: Appendix E proposes
+        checkpointed-model analysis for all three theories of why negative heads form. Urdshals \& Urdshals
+        (2025) supply the onset direction in a different system, tracking when copy suppression develops
+        in a one-layer sorter trained from scratch'
+  I12:
+    name: Offset coupling
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Offset coupling asks whether a mechanism''s disappearance tracks the behaviour''s, which
+      requires at least two points on a training trajectory. GPT-2 Small has no public checkpoints, but
+      the paper already runs experiments in Pythia, which does, and Appendix E shows the authors know
+      checkpointed analysis is the route. Nothing in the source observes any component losing its role
+      over training. Available and not attempted is U.
+
+      '
+    notes:
+      verification: 'The Pythia experiment is verbatim in Appendix B and is what makes the cell''s "available
+        in a system the paper already uses" accurate. Verified against a full read for the absence of
+        any training-time observation.
+
+        '
+      legacy_evidence: Unattempted. GPT-2 Small has no public checkpoints; Pythia, used in Appendix B,
+        does, so the experiment is available in a system the paper already uses
+  E1:
+    name: Intervention reach
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Four intervention forms appear and the variation among them is real: mean ablation of
+      direct and indirect paths, CSPA''s structured OV projection and QK filter, projection of the queryside
+      input onto and away from the IO unembedding, and scaled additions to the query. They differ in what
+      they remove and in whether they remove or add. All four are activation edits on one head in one
+      model. No weight edit, no training-time intervention and no steering of model outputs appears, so
+      nothing tests whether the account survives a change in the kind of intervention rather than its
+      target. PC.
+
+      '
+    notes:
+      verification: 'The four forms in the cell are verbatim and correctly located. Note that two of them
+        disagree in a way the cell does not record: the queryside projection in §4.2 and the scaled query
+        addition in Appendix R both find the perpendicular component matters, which the OV and QK ablations
+        cannot see.
+
+        '
+      legacy_evidence: 'Four forms at origin: mean ablation of direct and indirect paths; CSPA''s structured
+        OV projection and QK filter; projection of the queryside input onto and away from $W_U[\mathrm{IO}]$
+        (\S4.2); and scaled additions to the query (Appendix R). Real variation, but all four are activation
+        edits on one head. No weight editing, no training-time intervention, no steering of model outputs'
+  E2:
+    name: Prompt generalization
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'This is the claim''s distinguishing feature. The headline number is an average over OpenWebText,
+      GPT-2''s own pretraining distribution, rather than over a template set built for the hypothesis,
+      and it is reported per percentile of effect size rather than only in aggregate, with the preserved
+      fraction highest where mean ablation is most destructive. Two further distributions are checked,
+      IOI and repeated sequences of uniformly random tokens, the second of which shares no structure with
+      the first. An account measured across a pretraining distribution rather than a prompt set is C.
+
+      '
+    notes:
+      verification: 'The definition of the average and the 88.1% maximal percentile are verbatim, and
+        the cell reports the design correctly. The one selection inside this generality is the top-5%
+        sampling used for the behavioral coding and the faithfulness appendices, which is recorded at
+        M7 and does not touch the CSPA average.
+
+        '
+      legacy_evidence: 'The claim''s distinguishing feature. The headline number is an average over OpenWebText
+        --- GPT-2''s pretraining distribution --- rather than over a template set, and it is reported
+        per percentile of effect size rather than only in aggregate (Figure 5), with the preserved fraction
+        highest (88.1\%) where mean ablation is most destructive. Two further distributions are checked:
+        IOI (\S4) and repeated random token sequences (Appendix A)'
+  E3:
+    name: Cross-task generalization
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'Transfer is measured across two distributions that share nothing. Copy-suppression scores
+      from IOI and anti-induction scores from repeated sequences of uniformly random tokens correlate
+      across GPT, Pythia and SoLU models, and L10H7 ranks first on both, which is the result a task-specific
+      mechanism could not produce. The paper draws the right conclusion from it, that the negative behaviour
+      on IOI is not task-dependent. C.
+
+      '
+    notes:
+      verification: 'The "not task-dependent" sentence is verbatim and the cell''s rendering matches apart
+        from typographic emphasis. Two limits on the strength of the C that the cell does not record.
+        What transfers is the behavioural score, since CSPA and the 76.9% decomposition are never run
+        on the second distribution; and the correlation is asserted from Figure 9 with no coefficient,
+        no head count and no test. Saraipour & Zhang, Urdshals & Urdshals and Campregher et al. are post-origin.
+
+        '
+      legacy_evidence: 'Appendix A is the strongest single result on this criterion in the batch. Copy-suppression
+        scores measured on IOI and anti-induction scores measured on repeated random tokens correlate
+        strongly across GPT, Pythia and SoLU model classes, with L10H7 ranked first on both: ``the negative
+        behavior displayed by certain heads on the IOI task is \textbf{not task-dependent}.'''' Later
+        transfers: syllogisms (Saraipour \& Zhang 2025), list sorting (Urdshals \& Urdshals 2025), factual-versus-counterfactual
+        competition (Campregher et al.\ 2025)'
+  E4:
+    name: Cross-model generalization
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Three further systems are examined and each returns a partial result the paper states
+      plainly. The QK experiment in GPT-2 Medium recovers two of the three most negative IOI heads; copy
+      suppression appears in Pythia, which has untied embeddings and no dropout, though weaker; and Stanford
+      GPT-2 Small E has an analogue that attends to IO and S2 equally, unlike GPT-2 Small''s. The authors
+      name transferability as one of two limitations and state they lack a mechanistic understanding in
+      the larger models. Replication of the phenomenon without replication of the mechanism is PC.
+
+      '
+    notes:
+      verification: 'All three appendix results and both limitation statements are verbatim, and the cell
+        reports them correctly including the 2/3 count in GPT-2 Medium. Tigges et al. (2024) is post-origin.
+
+        '
+      legacy_evidence: 'Three further systems in appendices, with a named difference in each. GPT-2 Medium:
+        the QK experiment recovers 2 of the 3 most negative IOI heads (Appendix B). Pythia, which has
+        untied embeddings and no dropout: copy suppression present ``though weaker.'''' Stanford GPT-2
+        Small E: a partial analogue that attends to IO and S2 equally, unlike GPT-2 Small (Appendix Q).
+        The authors name transferability as a limitation. Later, Tigges et al.\ (2024) find copy-suppression
+        heads contribute \emph{positively} to IOI in Pythia, by downweighting the incorrect name'
+  E5:
+    name: Graded response
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Appendix R is a genuine dose-response experiment. A scaled vector is added to the queryside
+      residual stream before LayerNorm and attention to the IO token rises with the scale, including when
+      the added vector is only the IO-unembedding projection of a Name Mover''s output, which is the graded
+      version of the paper''s own mechanism. The same sweep is reported to fail for backup heads, evidence
+      against the paper''s simplest account that it prints rather than buries. Everything else is binary:
+      ablation is all-or-nothing and Figure 5''s percentiles grade effect size rather than intervention
+      strength. PC.
+
+      '
+    notes:
+      verification: 'The sweep and its failure for backup heads are verbatim. One correction to the cell:
+        it says attention "rises monotonically with s"; the paper says the Negative Heads "have a positive
+        slope across all of the IO subgraphs", which asserts a direction rather than monotonicity, and
+        no per-step values are reported.
+
+        '
+      legacy_evidence: 'Appendix R is a genuine dose-response: a scaled vector $s\vec{v}$ is added to
+        the queryside residual stream before LayerNorm and attention to the IO token rises monotonically
+        with $s$, including when $\vec{v}$ is only the $W_U[\mathrm{IO}]$ projection of a Name Mover''s
+        output --- and the same sweep fails to produce the predicted slope for backup heads, which the
+        paper reports as evidence against its own simplest account. Ablation itself is binary; Figure
+        5''s percentiles are graded in effect size rather than intervention strength'
+  E6:
+    name: Novel prediction
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The prediction has the right form and the right risk. If the negative behaviour on IOI
+      is copy suppression rather than an IOI-specific mechanism, then the same heads should show anti-induction
+      on repeated sequences of uniformly random tokens, a distribution with no semantic content and no
+      relation to the task the heads were found on. The scores correlate across three model families and
+      L10H7 ranks first on both axes, and a task-specific account predicts no such correspondence. C.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, in degree. The legacy evidence calls this "a novel prediction
+        in the strict sense". Anti-induction heads were already documented by Olsson et al. (2022), and
+        the paper says so in the sentence that introduces them, so the phenomenon is not new. What is
+        new, and what the copy-suppression hypothesis predicts, is the head-level correspondence between
+        the two scores. The C survives on that reading; "in the strict sense" does not.
+
+        '
+      legacy_evidence: Appendix A is a novel prediction in the strict sense. If the negative behaviour
+        on IOI is copy suppression rather than an IOI-specific mechanism, the same heads should show anti-induction
+        on repeated sequences of \emph{uniformly random tokens} --- a distribution with no semantic content
+        and no relation to the task the heads were found on. The scores correlate across three model families
+        and L10H7 ranks first on both axes
+  V1:
+    name: Level declaration
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The level of the claim is declared and then held to. The mechanism is stated as three
+      numbered steps in the introduction, each step is mapped to a specific matrix in Section 3, and the
+      claim about the head is quantified as a fraction of its role rather than asserted as an identity.
+      The scope of the claim is qualified in the same paragraph that makes it, since the paper states
+      it does not explain when or how much copy suppression fires in a given context. A quantified claim
+      about one component''s role, with the unexplained remainder named, is C.
+
+      '
+    notes:
+      verification: 'The central claim and the three-step definition are verbatim and the cell quotes
+        them accurately, including "at least 76.9%". The mapping from step to matrix is explicit in §3''s
+        numbered list, which is what makes the declaration checkable rather than rhetorical.
+
+        '
+      legacy_evidence: 'Declared as three numbered steps in \S1, each mapped to a specific matrix in \S3,
+        and stated as a fraction rather than an identity: ``at least 76.9\% of the role of attention head
+        L10H7 on GPT-2 Small''s training distribution is copy suppression.'''' The quantifier ``main role''''
+        is defined by the measurement rather than assumed'
+  V2:
+    name: Level-evidence match
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Evidence and claim are matched on two of three axes. The mechanism claim is carried by
+      weight-level evidence, which is the right level for a claim about what a matrix does, and the coverage
+      claim is carried by a distribution-level average, which is the right level for a claim about a training
+      distribution. The unmatched axis is the one the authors name: when and how much copy suppression
+      fires. Both idealised approximations shift real attention substantially, and the queryside direction
+      that matters most is perpendicular to the one the account uses. PC.
+
+      '
+    notes:
+      verification: 'The §1 gap statement, the §3.2 limitation and the two median attention changes are
+        verbatim, and the cell locates all of them correctly.
+
+        '
+      legacy_evidence: 'The mechanism claim is matched by weight-level evidence and the coverage claim
+        by distribution-level evidence. The gap is the ``when,'''' stated by the authors in \S1: ``we
+        do not explain precisely when or how much copy suppression is activated in different contexts.''''
+        Appendices M.2 and M.3 quantify it --- the idealised query and key approximations both shift real
+        attention substantially, and \S4.2 shows the perpendicular query component matters more than the
+        parallel one'
+  V3:
+    name: Alternative level
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'One alternative description is examined and partly accepted. Appendix K measures the cases
+      where the source token is suppressed without being most suppressed, finds a semantically related
+      token in first place in 90% of them, and concludes the mechanism is better thought of as semantic
+      copy suppression. A simpler alternative, a same-matching QK circuit exploiting tied embeddings,
+      is addressed and rejected with a baseline. A third is raised and left open, since the paper states
+      it does not know what the perpendicular queryside component represents. Alternatives entertained,
+      one of them favoured over the paper''s own name for the mechanism, is PC.
+
+      '
+    notes:
+      verification: 'The Appendix K conclusion and both supporting figures are verbatim, and the cell
+        quotes them accurately. Worth recording that the paper adopts the alternative in Appendix K and
+        keeps the original name everywhere else, including in the title and in the 76.9% claim; that tension
+        is the substance of the V4 note below.
+
+        '
+      legacy_evidence: 'One alternative is examined and partly accepted: Appendix K argues the mechanism
+        ``is better thought of as \emph{semantic} copy suppression, i.e. all tokens semantically related
+        to the source token are suppressed, rather than pure copy suppression,'''' on the strength of
+        90\% of near-miss cases having a semantically related token in first place. The simpler alternative
+        --- a same-matching QK circuit exploiting tied embeddings --- is addressed and rejected. The alternative
+        that the perpendicular component computes something else is raised and left open'
+  V4:
+    name: Unlicensed labeling
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'Each label redescribes something measured. "Copy suppression" is introduced as three numbered
+      steps, and each step becomes a measurable object: a logit-lens prediction, an attention pattern,
+      a negative OV diagonal. "Negative Head" is defined by the direction of a head''s effect on confidence,
+      which is what direct logit attribution measures. "Backup head" is defined by response to ablation,
+      which is the experiment in Section 4. No intentional vocabulary attaches to any component. The one
+      interpretive claim, that the mechanism improves calibration, is not left as a gloss: Appendix D
+      defines an overconfidence metric and measures every head against it. C.
+
+      '
+    notes:
+      verification: 'PRIORITY CHECK on all three labels, each traced to where it is introduced. "Copy
+        suppression" is defined by the three steps in §1 and each is operationalised in §2.1 and §3; "Negative
+        Head" by §1''s definition, repeated in the glossary; "backup head" by footnote 2 in §1 and the
+        glossary, both purely in terms of response to ablation. The cell is right that all three name
+        operations. Three qualifications. The glossary marks the Negative Head definition "a qualitative
+        definition", and no threshold separates a Negative Head from an ordinary head with a negative
+        direct effect — Appendix J.2 reports most layer 9-11 heads are harmful on over 25% of completions.
+        CONTRADICTION, on the calibration claim: it does have its own analysis, as the cell says, and
+        that analysis declines to endorse it. Appendix D states the calibration role is "one possible
+        role" and that the result may be "merely incidental", while the abstract asserts flatly that L10H7
+        "suppresses naive copying behavior which improves overall model calibration". Assertion in the
+        abstract, hedge in the appendix it rests on. Third, under this criterion as renamed, a name is
+        licensed when something was run to separate it from a nearby alternative. Here something was:
+        Appendix K separates pure from semantic copy suppression and finds the semantic reading fits better,
+        and the paper keeps the coarser name in the title and in the headline claim. That is the strongest
+        argument against the C, and it is disclosed by the authors rather than hidden.
+
+        '
+      legacy_evidence: 'Labels name measured operations throughout: ``copy suppression'''' names an attention
+        pattern plus a negative OV diagonal, ``Negative Head'''' is defined by measured logit effect,
+        ``backup head'''' by response to ablation. No intentional vocabulary. The one interpretive claim
+        --- that the mechanism ``improves overall model calibration'''' --- has its own analysis (Appendix
+        D), and the three candidate explanations for why the heads form are labelled ``speculative theories''''
+        with tests attached'
+  V5:
+    name: Scope declaration
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'Scope is declared where a reader meets each claim rather than collected in a closing paragraph.
+      The central claim is stated as a lower bound on one head in one model, and the sentence immediately
+      after it names what the paper does not explain. The QK analysis carries its own limitation at the
+      point of use, pointing to the three appendices that quantify the shortfall. The conclusion names
+      two limitations and concedes that generalisation to larger models is behavioural rather than mechanistic,
+      and Appendix E states the why-question is out of scope. Declared at every level and specific about
+      what is missing is C.
+
+      '
+    notes:
+      verification: 'All the cell''s locators check out: the abstract''s "at least 76.9%", §1''s when-and-how-much
+        gap, §3.2''s QK limitation and §6''s two limitations are verbatim. One small correction: the cell
+        gives §4.2''s title as "Complicating the Story"; the full heading is "Complicating the Story:
+        Component Intervention Experiments".
+
+        '
+      legacy_evidence: Declared in the abstract (one head, one model, ``at least 76.9\%''), in \S1 (the
+        when-and-how-much gap, stated immediately after the central claim), in \S3.2 (``one limitation
+        of our analysis of the QK circuit is that this idealised setup does not completely faithfully
+        represent L10H7's real functioning''), and in \S6, which names two limitations. \S4.2 is titled
+        ``Complicating the Story''

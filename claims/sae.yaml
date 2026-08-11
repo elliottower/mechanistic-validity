@@ -1,0 +1,1279 @@
+claim: sae
+title: SAE Features as Units of Analysis
+description: 'Sparse autoencoders are trained on residual-stream activations to recover an overcomplete
+  dictionary of directions, evaluated two ways: automated interpretability scoring of 150 features per
+  method against six baselines (default basis, random directions, PCA, ICA, top-$K$ PCA, top-$K$ ICA),
+  and activation patching on 50 IOI data points. Systems: Pythia-70M and 410M at origin, GPT-2 small and
+  Gemma 2 2B in the follow-up. Being a method-level claim, these are the systems the evidence was gathered
+  on rather than one audited model. Description mode: representational.'
+source:
+  citation: cunningham2023sparse
+  title: Sparse Autoencoders Find Highly Interpretable Features
+  url: https://arxiv.org/abs/2309.08600
+  local: reference/cunningham_2023_sparse_autoencoders.pdf
+  sha256: 0475237e835c07738a74b2f372f0b7aa33ac047dce6affd49bb750dc4009e661
+  extract_cmd: pdftotext -layout
+  read_in_full: true
+claims:
+  C1:
+    quotes:
+    - exact: In particular, we compare interpretability scores on our dictionary features to those produced
+        by a) the default basis, b) random directions, c) Principal Component Analysis (PCA), and d) Independent
+        Component Analysis (ICA).
+      prefix: ''
+      suffix: ''
+      section: §3.2, p.3
+      page: null
+      line: null
+    - exact: We find that the strength of this effect declines as we move through the model, being comparable
+        to ICA in layer 4 and showing minimal improvement in the final layer.
+      prefix: ''
+      suffix: ''
+      section: §3.2, p.5
+      page: null
+      line: null
+    - exact: To test whether this difference is responsible for the higher scores, we run a variant of
+        PCA and ICA in which we have a fixed number of directions, K, which can be active for any single
+        datapoint.
+      prefix: ''
+      suffix: ''
+      section: Appendix G, p.18
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: If we stitch a latent from a larger SAE into a smaller SAE and the reconstruction
+      section: §4.2, p.6
+      page: null
+      direction: raises
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: performance improves, this indicates that the latent is adding new information to the smaller
+        SAE.
+      section: §4.2, p.6
+      page: null
+      direction: raises
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  C2:
+    quotes:
+    - exact: Since a vector space can only have as many orthogonal vectors as it has dimensions, this
+        means the network would learn an overcomplete basis of non-orthogonal features.
+      prefix: ''
+      suffix: ''
+      section: §1, p.1
+      page: null
+      line: null
+    - exact: This suggests that we may be able to recover the network’s features by finding a set of directions
+        in activation space such that each activation vector can be reconstructed from a sparse linear
+        combinations of these directions.
+      prefix: ''
+      suffix: ''
+      section: §1, p.2
+      page: null
+      line: null
+    - exact: There is evidence that they may be applicable to the MLPs (see Appendix C), but the training
+        pipeline used to train the dictionaries in this paper is not able to robustly learn overcomplete
+        bases in the intermediate layers of the MLP.
+      prefix: ''
+      suffix: ''
+      section: §6.2, p.9
+      page: null
+      line: null
+    - exact: For learning features in MLP layers, we find that we retain a larger number of features if
+        we use a different matrix for the encoder and decoder, so that Equations 1 and 2 become
+      prefix: ''
+      suffix: ''
+      section: Appendix C.3, p.15
+      page: null
+      line: null
+    - exact: We’re excited by future work investigating what changes can be made to better understand
+        the computations performed by the attention heads and MLP layers, each of which poses different
+        challenges.
+      prefix: ''
+      suffix: ''
+      section: §6.2, p.9
+      page: null
+      line: null
+  C3:
+    quotes:
+    - exact: First, we show that our features are on average more interpretable than neurons and other
+        matrix decomposition techniques, as measured by autointerpretability scores (Section 3) (Bills
+        et al., 2023).
+      prefix: ''
+      suffix: ''
+      section: §1, p.2
+      page: null
+      line: null
+    - exact: Next, we show that we are able to pinpoint the features used for a set task more precisely
+        than other methods (Section 4).
+      prefix: ''
+      suffix: ''
+      section: §1, p.2
+      page: null
+      line: null
+    - exact: We do this via activation patching, a form of causal mediation analysis (Vig et al., 2020),
+        through which we edit the model’s internal activations along the directions indicated by our dictionary
+        features and measure the changes to the model’s outputs.
+      prefix: ''
+      suffix: ''
+      section: §4, p.5
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: Recently, sparse autoencoders (SAEs) have emerged as a promising alternative by decomposing
+        the activations of LLMs into a dictionary of interpretable and monosemantic features (Bricken
+        et al., 2023; Cunningham et al., 2023).
+      section: §1, p.2
+      page: null
+      direction: raises
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: Our findings challenge the idea that SAEs can discover a canonical set of features.
+      section: §7, p.10
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  C4:
+    quotes:
+    - exact: We would like learn a dictionary of vectors, called dictionary features, {fk }nk=1 feat ⊂
+        Rd where for any network feature gj there exists a dictionary feature fk such that gj ≈ fk .
+      prefix: ''
+      suffix: ''
+      section: §2, p.2
+      page: null
+      line: null
+    - exact: In this section, we investigate individual dictionary features, highlighting several that
+        appear to correspond to a single human-understandable explanation (i.e., that are monosemantic).
+      prefix: ''
+      suffix: ''
+      section: §5, p.6
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: Using meta-SAEs - SAEs trained on the decoder matrix of another SAE - we find that latents
+        in SAEs often decompose into combinations of latents from a smaller SAE, showing that larger SAE
+        latents are not atomic.
+      section: Abstract, p.1
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: On a random sample of 1,000 SAE latents, GPT-4o-mini chose the correct answer of the five
+        options 73% of the time.
+      section: §5.1, p.9
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: The existence of the novel group of latents demonstrates that smaller SAEs are incomplete,
+        and that larger SAE learn features that are missed by the smaller SAE.
+      section: §4.2, p.6
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: Averaging this metric across all 657 latents in GPT-1536 that have low maximum cosine similarity
+        with all latents in GPT-768, we see a similar pattern
+      section: Appendix A.4, p.18
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: Adding in all the latents with cosine similarity ≤ 0.7 from GPT-1536 in GPT-768 reduces the
+        MSE by almost 10%.
+      section: Figure 17 caption, p.21
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: We find that meta-SAEs learn similar latents to similar sized SAEs trained on the original
+        reconstruction problem.
+      section: §5.2, p.7
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  C5:
+    quotes:
+    - exact: Elhage et al. (2022b) investigate why polysemanticity might arise and hypothesise that it
+        may result from models learning more distinct features than there are dimensions in the layer.
+      prefix: ''
+      suffix: ''
+      section: §1, p.1
+      page: null
+      line: null
+    - exact: This suggests that we may be able to recover the network’s features by finding a set of directions
+        in activation space such that each activation vector can be reconstructed from a sparse linear
+        combinations of these directions. This is equivalent to the well-known problem of sparse dictionary
+        learning (Olshausen & Field, 1997).
+      prefix: ''
+      suffix: ''
+      section: §1, p.2
+      page: null
+      line: null
+    - exact: It can be shown empirically (Sharkey et al., 2023) and theoretically (Wright & Ma, 2022)
+        that reconstruction with an ℓ1 penalty can recover the ground-truth features that generated the
+        data.
+      prefix: ''
+      suffix: ''
+      section: §2, p.3
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: The sparsity penalty incentivizes larger SAEs to learn compositions of latents rather than
+        atomic latents.
+      section: Figure 2 caption, p.3
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: This supports the predictions of Wattenberg & Viégas (2024); Bricken et al. (2023); Anders
+        et al. (2024) that the sparsity penalty results in the undesirable composition of features that
+        may be sparser, but do not add any new information.
+      section: §4.2, p.6
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  M1:
+    quotes:
+    - exact: The autoencoders are trained with the Adam optimiser with a learning rate of 1e-3 and are
+        trained on 5-50M activation vectors for 1-3 epochs, with larger dictionaries taking longer to
+        converge.
+      prefix: ''
+      suffix: ''
+      section: Appendix B, p.12
+      page: null
+      line: null
+    - exact: A single training run using this quantity of data completes in under an hour on a single
+        A40 GPU.
+      prefix: ''
+      suffix: ''
+      section: Appendix B, p.12
+      page: null
+      line: null
+    - exact: 'Figure 2: Average top-and-random autointerpretability score of our learned directions in
+        the residual stream, compared to a number of baselines, using 150 features each. Error bars show
+        95% confidence intervals around means. The feature dictionaries used here were trained for 10
+        epochs using α = .00086 and R = 2.'
+      prefix: ''
+      suffix: ''
+      section: Figure 2 caption, p.4
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: We found that when comparing SAEs with the same size, 94% of the latents are reconstruction
+        latents (cosine similarity > 0.7).
+      section: Appendix A.7, p.21
+      page: null
+      direction: raises
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: We compared the proportion of reconstruction latents between SAEs of the same size and SAEs
+        of different sizes.
+      section: Appendix A.7, p.21
+      page: null
+      direction: raises
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  M2:
+    quotes:
+    - exact: For the random directions and for the default basis in the residual stream, we replace negative
+        activations with zeros so that all feature activations are nonnegative
+      prefix: ''
+      suffix: ''
+      section: §3.2, p.3
+      page: null
+      line: null
+    - exact: Figure 2 shows that our dictionary features are far more interpretable by this measure than
+        dictionary features found by comparable techniques.
+      prefix: ''
+      suffix: ''
+      section: §3.2, p.5
+      page: null
+      line: null
+    - exact: We do not find residual stream basis directions to be any more interpretable than random
+        directions.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2, p.15
+      page: null
+      line: null
+    - exact: Matching Bills et al. (2023), we find that random-only scores are significantly smaller than
+        top-and-random scores, but also that our learned features still consistently outperform the baselines,
+        especially in the early layers.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2, p.13
+      page: null
+      line: null
+  M3:
+    quotes:
+    - exact: When varying the hyperparameter α which controls the importance of the sparsity loss term,
+        we consistently find a smooth tradeoff between the sparsity and accuracy of our autoencoder, as
+        shown in Figure 6.
+      prefix: ''
+      suffix: ''
+      section: Appendix B, p.12
+      page: null
+      line: null
+    - exact: The lack of a ‘bump’ or ‘knee’ in these plots provides some evidence that there is not a
+        single correct way to decompose activation spaces into a sparse basis, though to confirm this
+        would require many additional experiments.
+      prefix: ''
+      suffix: ''
+      section: Appendix B, p.12
+      page: null
+      line: null
+    - exact: We find that larger interpretability scores of our feature dictionaries are not limited to
+        overcomplete dictionaries (where the ratio, R, of dictionary features to model dimensions is >
+        1), but occurs even in dictionaries that are smaller than the underlying basis, as shown in Figure
+        8.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.1, p.13
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: In our experiments we set the cosine threshold to 0.7 for the GPT-2 SAEs, and 0.4 for the
+        Gemmascope SAEs, based on our exploratory analysis.
+      section: §4.2, p.6
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: These findings suggest that there is no single SAE width at which it learns a unique and complete
+        dictionary of atomic features that can be used to explain the behavior of the model.
+      section: §7, p.10
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  M4:
+    quotes:
+    - exact: Compute the correlation of the simulated activations and the actual activations. This correlation
+        is the autointerpretability score of the feature.
+      prefix: ''
+      suffix: ''
+      section: Appendix A, step 4, p.12
+      page: null
+      line: null
+    - exact: The correlation between the model’s predicted activations and the actual activations is that
+        feature’s interpretability score.
+      prefix: ''
+      suffix: ''
+      section: §3.1, p.3
+      page: null
+      line: null
+    - exact: 'Table 1: Results of autointerpretation on the first five features found in the layer 1 residual
+        stream. Autointerpretation produces a description of what the feature means and a score for how
+        well that description predicts other activations.'
+      prefix: ''
+      suffix: ''
+      section: Table 1 caption, p.4
+      page: null
+      line: null
+    - exact: The features shown are the first five under the (arbitrary) ordering in the dictionary.
+      prefix: ''
+      suffix: ''
+      section: §3.1, p.3
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: For a given latent we prompt GPT-4o-mini with the explanations of the meta-SAE latents that
+        are active on that latent, and ask it to choose which of 5 SAE latent explanations most relate
+        to the explanations of the meta-SAE latents.
+      section: §5.1, pp.8-9
+      page: null
+      direction: raises
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  M5:
+    quotes:
+    - exact: It can be shown empirically (Sharkey et al., 2023) and theoretically (Wright & Ma, 2022)
+        that reconstruction with an ℓ1 penalty can recover the ground-truth features that generated the
+        data.
+      prefix: ''
+      suffix: ''
+      section: §2, p.3
+      page: null
+      line: null
+    - exact: In particular, we compare interpretability scores on our dictionary features to those produced
+        by a) the default basis, b) random directions, c) Principal Component Analysis (PCA), and d) Independent
+        Component Analysis (ICA).
+      prefix: ''
+      suffix: ''
+      section: §3.2, p.3
+      page: null
+      line: null
+    - exact: We also show that this does not happen if we train a non- sparse dictionary (α = 0).
+      prefix: ''
+      suffix: ''
+      section: §4.2, p.6
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: Similarly to Gao et al. (2024), we use sparse probes to evaluate the presence of known ground-truth
+        features in our SAEs.
+      section: Appendix A.9.1, p.24
+      page: null
+      direction: raises
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  M6:
+    quotes:
+    - exact: We mainly study residual streams in Pythia-70M and Pythia 410-M, for which the residual streams
+        are of size din = 512 and din = 1024, respectively (Biderman et al., 2023)
+      prefix: ''
+      suffix: ''
+      section: §2 footnote 1, p.2
+      page: null
+      line: null
+    - exact: 'Table 2: Correlation of interpretability score with feature moments across residual stream
+        results, all layers, with dictionary size ratios R ∈ {0.5, 1, 2, 4, 8}.'
+      prefix: ''
+      suffix: ''
+      section: Table 2 caption, p.16
+      page: null
+      line: null
+    - exact: 'Figure 17: Divergence from target output against number of features patched and magnitude
+        of edits for layers 3, 7, 11, 15, 19 and 23 of the residual stream of Pythia-410M.'
+      prefix: ''
+      suffix: ''
+      section: Figure 17 caption, p.19
+      page: null
+      line: null
+    - exact: In Figure 9 we show autointerpretability scores for fragments using only random fragments.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2, p.13
+      page: null
+      line: null
+    - exact: We find that the strength of this effect declines as we move through the model, being comparable
+        to ICA in layer 4 and showing minimal improvement in the final layer.
+      prefix: ''
+      suffix: ''
+      section: §3.2, p.5
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: We experiment with stitching on eight SAEs trained on the residual stream of layer 8 of GPT
+        2 Small (Radford et al., 2019) with dictionary sizes ranging from 768 to 98,304 and two of the
+        Gemma Scope SAEs (Lieberum et al., 2024) trained on Gemma 2 2B (Team et al., 2024) with dictionary
+        size 16,384 and 32,768.
+      section: §4.1, p.5
+      page: null
+      direction: raises
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: In order to validate that the SAE stitching results are not an artifact of GPT-2 small or
+        the SAEs that we trained, we applied the same methods to the open-source Gemma Scope SAEs.
+      section: Appendix A.7.1, p.22
+      page: null
+      direction: raises
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  M7:
+    quotes:
+    - exact: 'Figure 2: Average top-and-random autointerpretability score of our learned directions in
+        the residual stream, compared to a number of baselines, using 150 features each.'
+      prefix: ''
+      suffix: ''
+      section: Figure 2 caption, p.4
+      page: null
+      line: null
+    - exact: The top activating feature in our dictionary was an outlier dimension feature (i.e., a feature
+        direction that mainly reads from an outlier dimension of the residual stream), the apostrophes
+      prefix: ''
+      suffix: ''
+      section: Appendix D.3, p.16 (sentence begins)
+      page: null
+      line: null
+    - exact: after O (and predicted O’Brien, O’Donnell, O’Connor, O’clock, etc), then the apostrophe-preceding-s
+        feature.
+      prefix: ''
+      suffix: ''
+      section: Appendix D.3, p.17 (same sentence, continued)
+      page: null
+      line: null
+    - exact: For this target dictionary feature, we find its maximum activation M across our dataset,
+        then sample 20
+      prefix: ''
+      suffix: ''
+      section: §5.3, p.7 (sentence begins)
+      page: null
+      line: null
+    - exact: contexts that cause the target feature to activate in the range [M/2, M ].
+      prefix: ''
+      suffix: ''
+      section: §5.3, p.8 (same sentence, continued)
+      page: null
+      line: null
+    - exact: If, amongst the 50,000 fragments, there are fewer than 20 which contain non-zero variation
+        in activation, then the feature is skipped entirely.
+      prefix: ''
+      suffix: ''
+      section: Appendix A step 5, p.12
+      page: null
+      line: null
+  I1:
+    quotes:
+    - exact: In addition to looking at which tokens activate the dictionary feature, we investigate how
+        dictionary features affect the model’s output predictions for the next token by ablating the feature
+        from the residual stream
+      prefix: ''
+      suffix: ''
+      section: §5.2, p.7
+      page: null
+      line: null
+    - exact: Specifically we use less-than-rank-one ablation, where we lower the activation vector in
+        the direction of the feature only up to the point where the feature is no longer active.
+      prefix: ''
+      suffix: ''
+      section: §5.2 footnote 5, p.7
+      page: null
+      line: null
+    - exact: We see in Figure 4 (Right) that the effect of removing the apostrophe feature mainly reduces
+        the logit for the following “s”.
+      prefix: ''
+      suffix: ''
+      section: §5.2, p.7
+      page: null
+      line: null
+    - exact: For each dictionary feature in the previous layer, we rerun the model while ablating this
+        feature and sort the previous-layer features by how much their ablation decreased the target feature.
+      prefix: ''
+      suffix: ''
+      section: §5.3, p.8
+      page: null
+      line: null
+  I2:
+    quotes:
+    - exact: In our experiment, we run the model on a counterfactual target sentence, which is a variant
+        of the base IOI sentence with the indirect object changed (e.g., with “Bob” replaced by “Vanessa”);
+        save the encoded activations of our dictionary features; and use the saved activations to edit
+        the model’s residual stream when run on the base sentence.
+      prefix: ''
+      suffix: ''
+      section: §4.1, p.5
+      page: null
+      line: null
+    - exact: Finally, compute the KL divergence DKL (z||y), which measures how close the patched model’s
+        predictions are to the target’s.
+      prefix: ''
+      suffix: ''
+      section: §4.1, p.5
+      page: null
+      line: null
+    - exact: In particular, we use their Algorithm 4.1 on our features, treating them as a flat computational
+        graph in which every feature contributes an independent change to the DKL output metric, as described
+        above and averaged over a test set of 50 IOI data points.
+      prefix: ''
+      suffix: ''
+      section: §4.1, p.5
+      page: null
+      line: null
+    - exact: We find that patching a relatively small number of dictionary features is more effective
+        than patching PCA components and features from the non-sparse α = 0 dictionary.
+      prefix: ''
+      suffix: ''
+      section: Figure 3 caption, p.5
+      page: null
+      line: null
+    - exact: For instance, replacing the residual stream activations in layer 2 of Pythia-70M with our
+        reconstruction of those activations increases the perplexity on the Pile (Gao et al., 2020) from
+        25 to 40.
+      prefix: ''
+      suffix: ''
+      section: §6.2, p.9
+      page: null
+      line: null
+  I3:
+    quotes:
+    - exact: To select the feature subset F , we use the Automated Circuit Discovery (ACDC) algorithm
+        of Conmy et al. (2023).
+      prefix: ''
+      suffix: ''
+      section: §4.1, p.5
+      page: null
+      line: null
+    - exact: The result is an ordering on the features so that patching the next feature usually results
+        in a smaller DKL loss than each previous feature.
+      prefix: ''
+      suffix: ''
+      section: §4.1, p.5
+      page: null
+      line: null
+    - exact: Then our feature subsets F are the first k features under this ordering. We applied ACDC
+        separately on each decomposition.
+      prefix: ''
+      suffix: ''
+      section: §4.1, p.5
+      page: null
+      line: null
+    - exact: We show in Figure 3 that our sparse feature dictionaries allow the same amount of model editing,
+        as measured by KL divergence from the target, in fewer patches (Left) and with smaller edit magnitude
+        (Right) than the PCA decomposition.
+      prefix: ''
+      suffix: ''
+      section: §4.2, p.6
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: However, we find some reconstruction group latents have high decoder cosine similarity to
+        multiple latents in the smaller SAE, suggesting the large SAE latent is an interpolation or composition
+        of the smaller SAE latents
+      section: §4.2, p.6
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: These findings suggest that there is no single SAE width at which it learns a unique and complete
+        dictionary of atomic features that can be used to explain the behavior of the model.
+      section: §7, p.10
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  I4:
+    quotes:
+    - exact: (Right) We show which token predictions are suppressed by ablating the feature, as measured
+        by the difference in logits between the ablated and unablated model. We find that the token whose
+        prediction decreases the most is the “s” token. Note that there are 12k logits negatively effected,
+        but we set a threshold of 0.1 for visual clarity.
+      prefix: ''
+      suffix: ''
+      section: Figure 4 caption, p.7
+      page: null
+      line: null
+    - exact: If our dictionary feature is interpretable, subtracting its value from the residual stream
+        should have a logical effect on the predictions of the next token.
+      prefix: ''
+      suffix: ''
+      section: §5.2, p.7
+      page: null
+      line: null
+    - exact: This matches what one would expect from a dictionary feature that detects apostrophes and
+        is used by the model to predict the “s” token that would appear immediately after the apostrophe
+        in possessives and contractions like “let’s”.
+      prefix: ''
+      suffix: ''
+      section: §5.2, p.7
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: Whilst here there is a general downward trend, the accuracy is not monotonically decreasing
+        with SAE size.
+      section: Appendix A.9.2, p.25
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: bal2026causal
+      text: 'we find that up to 77% of features passing a standard recovery bar (cosine ≥ 0.90) in a degraded
+        SAE—and 9% in a well-trained one—are causally inert: the matched atom never fires when the feature
+        is present'
+      section: Abstract
+      page: null
+      direction: lowers
+      local: reference/bal_2026_causal_inertness.pdf
+      sha256: 0c5c3a9888ae0ce3ea3558e7ef6daa7ec32dd68e7f7c0ca8b11c069d9a498d68
+      extract_cmd: pdftotext -layout
+    - citation: bal2026causal
+      text: 'This is 17 of 22 pairs (77%), not a dredged-up edge case. The good SAE exhibits the same
+        mode at a lower rate: 2 of 22 matches (9%), both at cosine > 0.9999.'
+      section: '6.3'
+      page: null
+      direction: lowers
+      local: reference/bal_2026_causal_inertness.pdf
+      sha256: 0c5c3a9888ae0ce3ea3558e7ef6daa7ec32dd68e7f7c0ca8b11c069d9a498d68
+      extract_cmd: pdftotext -layout
+  I5:
+    quotes:
+    - exact: In particular, we compare interpretability scores on our dictionary features to those produced
+        by a) the default basis, b) random directions, c) Principal Component Analysis (PCA), and d) Independent
+        Component Analysis (ICA).
+      prefix: ''
+      suffix: ''
+      section: §3.2, p.3
+      page: null
+      line: null
+    - exact: We set this K to be equal to the average number of active features for a sparse coding dictionary
+        with ratio R = 1 and α = 8.6e − 4 trained on the layer in question.
+      prefix: ''
+      suffix: ''
+      section: Appendix G, p.18
+      page: null
+      line: null
+    - exact: We also show that this does not happen if we train a non- sparse dictionary (α = 0).
+      prefix: ''
+      suffix: ''
+      section: §4.2, p.6
+      page: null
+      line: null
+    - exact: This also explains why Independent Component Analysis (ICA), which maximises the non- Gaussianity
+        of the found components, is the best performing of the alternatives that we considered.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.4, p.15
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: The sparsity penalty incentivizes larger SAEs to learn compositions of latents rather than
+        atomic latents.
+      section: Figure 2 caption, p.3
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: This supports the predictions of Wattenberg & Viégas (2024); Bricken et al. (2023); Anders
+        et al. (2024) that the sparsity penalty results in the undesirable composition of features that
+        may be sparser, but do not add any new information.
+      section: §4.2, p.6
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  I6:
+    quotes:
+    - exact: 'We perform three analyses of our dictionary features to determine their semantic meanings:
+        (1) Input: We identify which tokens activate the dictionary feature and in which contexts, (2)
+        Output: We determine how ablating the feature changes the output logits of the model, and (3)
+        Intermediate features: We identify the dictionary features in previous layers that cause the analysed
+        feature to activate.'
+      prefix: ''
+      suffix: ''
+      section: §5, p.6
+      page: null
+      line: null
+    - exact: In our experiment, we run the model on a counterfactual target sentence, which is a variant
+        of the base IOI sentence with the indirect object changed (e.g., with “Bob” replaced by “Vanessa”);
+        save the encoded activations of our dictionary features; and use the saved activations to edit
+        the model’s residual stream when run on the base sentence.
+      prefix: ''
+      suffix: ''
+      section: §4.1, p.5
+      page: null
+      line: null
+  I7:
+    quotes:
+    - exact: We also show that this does not happen if we train a non- sparse dictionary (α = 0).
+      prefix: ''
+      suffix: ''
+      section: §4.2, p.6
+      page: null
+      line: null
+    - exact: A possible concern is that the autointerpretability method described in Section 3 combines
+        top activating fragments (which are usually large) with random activations (which are usually
+        small), making it relatively easy to identify activations.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2, p.13
+      page: null
+      line: null
+    - exact: Following the lead of Bills et al. (2023), we control for this by recomputing the autointerpretation
+        scores by modifying Step 3 using only randomly selected fragments.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2, p.13
+      page: null
+      line: null
+    - exact: We compare the results in Figure 18, showing that this change does not explain more than
+        a small fraction of the improvement in scores.
+      prefix: ''
+      suffix: ''
+      section: Appendix G, p.18
+      page: null
+      line: null
+  I9:
+    quotes:
+    - exact: In particular, we use their Algorithm 4.1 on our features, treating them as a flat computational
+        graph in which every feature contributes an independent change to the DKL output metric, as described
+        above and averaged over a test set of 50 IOI data points.
+      prefix: ''
+      suffix: ''
+      section: §4.1, p.5
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: If large SAE features are indeed compositions rather than atomic, it may be possible to decompose
+        them into more fundamental units.
+      section: §5, p.7
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: We find that meta-latents are similar to latents in smaller SAEs, demonstrating that latents
+        from larger SAEs can be interpreted as the composition of latents from smaller SAEs.
+      section: §1, p.3
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: chanin2024absorption
+      text: into more specific latents
+      section: body
+      page: null
+      direction: neutral
+      local: reference/chanin_2024_feature_absorption.pdf
+      sha256: fc4175d560e35e2a36d41924ed35d0be791fab555e851df1aea656a14410e6ef
+      extract_cmd: pdftotext -layout
+    - citation: chanin2024absorption
+      text: varying SAE sizes or sparsity is insufficient
+      section: body
+      page: null
+      direction: neutral
+      local: reference/chanin_2024_feature_absorption.pdf
+      sha256: fc4175d560e35e2a36d41924ed35d0be791fab555e851df1aea656a14410e6ef
+      extract_cmd: pdftotext -layout
+  I10:
+    quotes:
+    - exact: In our experiment, we run the model on a counterfactual target sentence, which is a variant
+        of the base IOI sentence with the indirect object changed (e.g., with “Bob” replaced by “Vanessa”);
+        save the encoded activations of our dictionary features; and use the saved activations to edit
+        the model’s residual stream when run on the base sentence.
+      prefix: ''
+      suffix: ''
+      section: §4.1, p.5
+      page: null
+      line: null
+    - exact: Then, run the model on the base sentence up through the intervention layer, compute the encoded
+        features c1 , ..., ck at each token, and at each position replace the residual stream vector xi
+        with the patched vector
+      prefix: ''
+      suffix: ''
+      section: §4.1, p.5
+      page: null
+      line: null
+  I11:
+    quotes:
+    - exact: We mainly study residual streams in Pythia-70M and Pythia 410-M, for which the residual streams
+        are of size din = 512 and din = 1024, respectively (Biderman et al., 2023)
+      prefix: ''
+      suffix: ''
+      section: §2 footnote 1, p.2
+      page: null
+      line: null
+  E1:
+    quotes:
+    - exact: We do this via activation patching, a form of causal mediation analysis (Vig et al., 2020),
+        through which we edit the model’s internal activations along the directions indicated by our dictionary
+        features and measure the changes to the model’s outputs.
+      prefix: ''
+      suffix: ''
+      section: §4, p.5
+      page: null
+      line: null
+    - exact: Specifically we use less-than-rank-one ablation, where we lower the activation vector in
+        the direction of the feature only up to the point where the feature is no longer active.
+      prefix: ''
+      suffix: ''
+      section: §5.2 footnote 5, p.7
+      page: null
+      line: null
+    - exact: 'We perform three analyses of our dictionary features to determine their semantic meanings:
+        (1) Input: We identify which tokens activate the dictionary feature and in which contexts, (2)
+        Output: We determine how ablating the feature changes the output logits of the model, and (3)
+        Intermediate features: We identify the dictionary features in previous layers that cause the analysed
+        feature to activate.'
+      prefix: ''
+      suffix: ''
+      section: §5, p.6
+      page: null
+      line: null
+    - exact: Our method may serve as a foundation for future mechanistic interpretability work, which
+        we hope will enable greater model transparency and steerability.
+      prefix: ''
+      suffix: ''
+      section: Abstract, p.1
+      page: null
+      line: null
+  E2:
+    quotes:
+    - exact: To train the sparse autoencoder described in Section 2, we use data from the Pile (Gao et
+        al., 2020), a large, public webtext corpus.
+      prefix: ''
+      suffix: ''
+      section: Appendix B, p.12
+      page: null
+      line: null
+    - exact: On each of the first 50,000 lines of OpenWebText, take a 64-token sentence-fragment, and
+        measure the feature’s activation on each token of this fragment.
+      prefix: ''
+      suffix: ''
+      section: Appendix A step 1, p.11
+      page: null
+      line: null
+    - exact: This task was chosen because it captures a simple, previously-studied model behaviour.
+      prefix: ''
+      suffix: ''
+      section: §4, p.6
+      page: null
+      line: null
+    - exact: In both figures, the feature dictionaries were trained on the first 10,000 elements of the
+        Pile (Gao et al., 2020) (approximately 7 million activations) using the indicated α and R values,
+        on layer 11 of Pythia-410M (see Appendix F for results on other layers).
+      prefix: ''
+      suffix: ''
+      section: Figure 3 caption, p.5
+      page: null
+      line: null
+  E3:
+    quotes:
+    - exact: In Section 4, we show that for the IOI task, behaviour is dependent on a relatively small
+        number of features.
+      prefix: ''
+      suffix: ''
+      section: §6.2, p.9
+      page: null
+      line: null
+    - exact: Because our dictionary is trained in a task-agnostic way, we expect this result to generalize
+        to similar tasks and behaviours, but more work is needed to confirm this suspicion.
+      prefix: ''
+      suffix: ''
+      section: §6.2, p.9
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: They show that the relationship between the size of the SAE and the evaluation accuracy is
+        complex and dataset dependent.
+      section: Appendix A.9.1, p.24
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  E4:
+    quotes:
+    - exact: We mainly study residual streams in Pythia-70M and Pythia 410-M, for which the residual streams
+        are of size din = 512 and din = 1024, respectively (Biderman et al., 2023)
+      prefix: ''
+      suffix: ''
+      section: §2 footnote 1, p.2
+      page: null
+      line: null
+    - exact: In Figure 17 we show results of the procedure in Section 4 across a range of layers in Pythia-410M.
+      prefix: ''
+      suffix: ''
+      section: Appendix F, p.18
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: We experiment with stitching on eight SAEs trained on the residual stream of layer 8 of GPT
+        2 Small (Radford et al., 2019) with dictionary sizes ranging from 768 to 98,304 and two of the
+        Gemma Scope SAEs (Lieberum et al., 2024) trained on Gemma 2 2B (Team et al., 2024) with dictionary
+        size 16,384 and 32,768.
+      section: §4.1, p.5
+      page: null
+      direction: raises
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  E5:
+    quotes:
+    - exact: (Left) Number of features patched vs KL divergence from target, using various residual stream
+        decompositions.
+      prefix: ''
+      suffix: ''
+      section: Figure 3 caption, p.5
+      page: null
+      line: null
+    - exact: (Right) Mean edit magnitude vs KL divergence from target as we increase the number of patched
+        features. We find that our sparse dictionaries improve the Pareto frontier of edit magnitude vs
+        thoroughness of editing.
+      prefix: ''
+      suffix: ''
+      section: Figure 3 caption, p.5
+      page: null
+      line: null
+    - exact: Specifically we use less-than-rank-one ablation, where we lower the activation vector in
+        the direction of the feature only up to the point where the feature is no longer active.
+      prefix: ''
+      suffix: ''
+      section: §5.2 footnote 5, p.7
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: 'Interpolating between SAE pairs of increasing dictionary size (768→1536→3072→6144→12288)
+        through two steps per phase: adding novel latents (increasing L0) then swapping groups of reconstruction
+        latents (decreasing L0 on average).'
+      section: Figure 5 caption, p.8
+      page: null
+      direction: raises
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  E6:
+    quotes:
+    - exact: Recall that the training of our feature dictionaries does not emphasize any particular task.
+      prefix: ''
+      suffix: ''
+      section: §4, p.6
+      page: null
+      line: null
+    - exact: In this section, we quantify whether our learned dictionary features localise a specific
+        model behaviour more tightly than the PCA decomposition of the model’s activations.
+      prefix: ''
+      suffix: ''
+      section: §4, p.5
+      page: null
+      line: null
+  V1:
+    quotes:
+    - exact: To reverse engineer a neural network, it is necessary to break it down into smaller units
+        (features) that can be analysed in isolation.
+      prefix: ''
+      suffix: ''
+      section: §1, p.1
+      page: null
+      line: null
+    - exact: Our parameter matrix M is our feature dictionary, consisting of dhid rows of dictionary features
+        fi .
+      prefix: ''
+      suffix: ''
+      section: §2, p.3
+      page: null
+      line: null
+    - exact: The correlation between the model’s predicted activations and the actual activations is that
+        feature’s interpretability score.
+      prefix: ''
+      suffix: ''
+      section: §3.1, p.3
+      page: null
+      line: null
+    - exact: An idealised monosemantic dictionary feature will only activate on text corresponding to
+        a single real-world feature, whereas a polysemantic dictionary feature might activate in unrelated
+        contexts.
+      prefix: ''
+      suffix: ''
+      section: §5.1, p.6
+      page: null
+      line: null
+  V2:
+    quotes:
+    - exact: These autoencoders learn sets of sparsely activating features that are more interpretable
+        and monosemantic than directions identified by alternative approaches, where interpretability
+        is measured by automated methods.
+      prefix: ''
+      suffix: ''
+      section: Abstract, p.1
+      page: null
+      line: null
+    - exact: This work indicates that it is possible to resolve superposition in language models using
+        a scalable, unsupervised method.
+      prefix: ''
+      suffix: ''
+      section: Abstract, p.1
+      page: null
+      line: null
+    - exact: In this section, we investigate individual dictionary features, highlighting several that
+        appear to correspond to a single human-understandable explanation (i.e., that are monosemantic).
+      prefix: ''
+      suffix: ''
+      section: §5, p.6
+      page: null
+      line: null
+    - exact: We have demonstrated that the dictionary features we learn are more interpretable by autointerpretation,
+        letting us pinpoint the features responsible for a given behaviour more finely, and are more monosemantic
+        than comparable methods.
+      prefix: ''
+      suffix: ''
+      section: §6.3, p.9
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: 'Sparse autoencoders (SAEs) are a popular method for finding these features in LLMs, and it
+        has been postulated that they can be used to find a canonical set of units: a unique and complete
+        list of atomic features.'
+      section: Abstract, p.1
+      page: null
+      direction: neutral
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: Our findings challenge the idea that SAEs can discover a canonical set of features.
+      section: §7, p.10
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  V3:
+    quotes:
+    - exact: The lack of a ‘bump’ or ‘knee’ in these plots provides some evidence that there is not a
+        single correct way to decompose activation spaces into a sparse basis, though to confirm this
+        would require many additional experiments.
+      prefix: ''
+      suffix: ''
+      section: Appendix B, p.12
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: This indicates that the choice of SAE size should be guided by the specific interpretability
+        task at hand, accepting that no single SAE configuration provides a universal solution.
+      section: §7, p.10
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: We suggest taking a pragmatic approach to applying SAEs to mechanistic interpretability tasks,
+        trying SAEs of several widths to see which is best suited.
+      section: §1, p.3
+      page: null
+      direction: lowers
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+  V4:
+    quotes:
+    - exact: An idealised monosemantic dictionary feature will only activate on text corresponding to
+        a single real-world feature, whereas a polysemantic dictionary feature might activate in unrelated
+        contexts.
+      prefix: ''
+      suffix: ''
+      section: §5.1, p.6
+      page: null
+      line: null
+    - exact: We find dictionary features that only activate on apostrophes (Figure 4); periods; the token
+        “ the”; and newline characters.
+      prefix: ''
+      suffix: ''
+      section: §5.1, p.7
+      page: null
+      line: null
+    - exact: Although the dictionary feature discussed in the previous section activates only for apostrophes,
+        it does not activate on all apostrophes.
+      prefix: ''
+      suffix: ''
+      section: §5.1, p.7
+      page: null
+      line: null
+    - exact: This can be seen in Figures 14 and 15 in Appendix D.2, showing two other apostrophe-activating
+        dictionary features, but for different contexts (such as “[I/We/They]’ll” and “[don/won/wouldn]’t”).
+      prefix: ''
+      suffix: ''
+      section: §5.1, p.7
+      page: null
+      line: null
+    - exact: In this section, we investigate individual dictionary features, highlighting several that
+        appear to correspond to a single human-understandable explanation (i.e., that are monosemantic).
+      prefix: ''
+      suffix: ''
+      section: §5, p.6
+      page: null
+      line: null
+  V5:
+    quotes:
+    - exact: While we have presented evidence that our dictionary features are interpretable and causally
+        important, we do not achieve 0 reconstruction loss (Equation 4), indicating that our dictionaries
+        fail to capture all the information in a layer’s activations.
+      prefix: ''
+      suffix: ''
+      section: §6.2, pp.8-9
+      page: null
+      line: null
+    - exact: For instance, replacing the residual stream activations in layer 2 of Pythia-70M with our
+        reconstruction of those activations increases the perplexity on the Pile (Gao et al., 2020) from
+        25 to 40.
+      prefix: ''
+      suffix: ''
+      section: §6.2, p.9
+      page: null
+      line: null
+    - exact: We attempted a weight-based method going from the dictionary in layer 4 to the dictionary
+        in layer 5 by multiplying a feature by the MLP and checking the cosine similarity with features
+        in layer 5. There were no meaningful connections.
+      prefix: ''
+      suffix: ''
+      section: Appendix D.4, p.17
+      page: null
+      line: null
+    - exact: Because our dictionary is trained in a task-agnostic way, we expect this result to generalize
+        to similar tasks and behaviours, but more work is needed to confirm this suspicion.
+      prefix: ''
+      suffix: ''
+      section: §6.2, p.9
+      page: null
+      line: null
+    refs:
+    - citation: leask2025canonical
+      text: Furthermore, our work only studies two LLMs and does not include very large SAEs, such as
+        in Templeton (2024).
+      section: §7, p.10
+      page: null
+      direction: raises
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout
+    - citation: leask2025canonical
+      text: We are uncertain whether canonical units of analysis exist, but our results suggest that alternative
+        approaches should be explored.
+      section: §1, p.3
+      page: null
+      direction: raises
+      local: reference/leask_2025_canonical_units.pdf
+      sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
+      extract_cmd: pdftotext -layout

@@ -1,0 +1,50 @@
+[project]
+name = "mechval"
+version = "0.1.0"
+description = "Mechanistic Validity: a validity theory, research methodology, and evidence standard for mechanistic claims"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Elliot Tower", email = "elliot@elliottower.ai" }]
+
+# Pinned exactly. Ranges have cost this project five failed launches; the lockfile is not
+# a substitute, because a fresh resolve on another machine is what breaks.
+dependencies = [
+    "pydantic==2.9.2",
+    "pyyaml==6.0.2",
+]
+
+[project.optional-dependencies]
+# Only what the experiments need. Kept apart so verifying the audits does not require torch.
+experiments = [
+    "torch==2.2.2",
+    "transformers==4.46.3",
+    "transformer_lens==2.11.0",
+    "numpy==1.26.4",
+    "pandas==2.2.3",
+    "scipy==1.13.1",
+    "datasets==2.21.0",
+]
+dev = ["pytest==8.3.3", "ruff==0.7.4"]
+
+[project.scripts]
+mechval-verify = "mechval.verify:main"
+mechval-score = "mechval.score:main"
+mechval-render = "mechval.render:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mechval"]
+
+[tool.ruff]
+line-length = 96
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

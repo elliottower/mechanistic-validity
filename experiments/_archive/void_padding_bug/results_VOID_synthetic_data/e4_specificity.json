@@ -1,0 +1,65 @@
+{
+  "n": 1000,
+  "seed": 0,
+  "conditions": {
+    "zero": {
+      "deficits": {
+        "ioi": {
+          "mean": 1.0382051467895508,
+          "sem": 0.06470072269439697,
+          "relative": 0.5044607520103455,
+          "independent": false
+        },
+        "greater_than": {
+          "mean": 0.39435961842536926,
+          "sem": 0.0075955200009047985,
+          "relative": 0.45811229944229126,
+          "independent": true
+        },
+        "two_name": {
+          "mean": 0.0961935892701149,
+          "sem": 0.03372205048799515,
+          "relative": 0.09125595539808273,
+          "independent": false
+        },
+        "natural": {
+          "mean": -0.052800193428993225,
+          "sem": 0.008463357575237751,
+          "relative": -0.005865592509508133,
+          "independent": true
+        }
+      },
+      "ioi_exceeds_independent_controls": true
+    },
+    "resample": {
+      "deficits": {
+        "ioi": {
+          "mean": 1.0377751588821411,
+          "sem": 0.07566238194704056,
+          "relative": 0.5042517781257629,
+          "independent": false
+        },
+        "greater_than": {
+          "mean": 0.7179623246192932,
+          "sem": 0.013286668807268143,
+          "relative": 0.8340290784835815,
+          "independent": true
+        },
+        "two_name": {
+          "mean": 0.08668690174818039,
+          "sem": 0.04286540299654007,
+          "relative": 0.08223724365234375,
+          "independent": false
+        },
+        "natural": {
+          "mean": -1.1399576663970947,
+          "sem": 0.009100439958274364,
+          "relative": -0.1266382932662964,
+          "independent": true
+        }
+      },
+      "ioi_exceeds_independent_controls": false
+    }
+  },
+  "criterion_met": false
+}

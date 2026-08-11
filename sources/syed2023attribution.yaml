@@ -1,0 +1,11 @@
+citation: syed2023attribution
+depth: cited
+title: Attribution Patching Outperforms Automated Circuit Discovery
+authors:
+- Syed, Aaquib
+- Rager, Can
+- Conmy, Arthur
+year: '2023'
+venue: NeurIPS Workshop on Attributing Model Behavior at Scale
+url: https://arxiv.org/abs/2310.10348
+arxiv: '2310.10348'

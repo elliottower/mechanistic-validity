@@ -1,0 +1,87 @@
+{
+  "n": 1000,
+  "n_perm": 1000,
+  "seed": 0,
+  "gt_heads_only": false,
+  "baseline": {
+    "ioi": 0.5849999785423279,
+    "greater_than": 0.9909999966621399
+  },
+  "conditions": {
+    "zero": {
+      "deficits": {
+        "ioi": {
+          "ioi": {
+            "mean": 0.10100000351667404,
+            "sem": 0.011442461982369423
+          },
+          "greater_than": {
+            "mean": 0.08900000154972076,
+            "sem": 0.009008892811834812
+          }
+        },
+        "greater_than": {
+          "ioi": {
+            "mean": 0.027000000700354576,
+            "sem": 0.0153788011521101
+          },
+          "greater_than": {
+            "mean": 0.5730000138282776,
+            "sem": 0.015649789944291115
+          }
+        }
+      },
+      "decisive": true,
+      "crosses": true,
+      "p_permutation": 0.057942057942057944
+    },
+    "resample": {
+      "deficits": {
+        "ioi": {
+          "ioi": {
+            "mean": 0.10100000351667404,
+            "sem": 0.012921531684696674
+          },
+          "greater_than": {
+            "mean": 0.4449999928474426,
+            "sem": 0.015723302960395813
+          }
+        },
+        "greater_than": {
+          "ioi": {
+            "mean": 0.03999999910593033,
+            "sem": 0.015704987570643425
+          },
+          "greater_than": {
+            "mean": 0.6650000214576721,
+            "sem": 0.014933117665350437
+          }
+        }
+      },
+      "decisive": true,
+      "crosses": false,
+      "p_permutation": 1.0
+    },
+    "native": {
+      "deficits": {
+        "ioi": {
+          "ioi": {
+            "mean": 0.10599999874830246,
+            "sem": 0.009841792285442352
+          }
+        },
+        "greater_than": {
+          "greater_than": {
+            "mean": 0.7979999780654907,
+            "sem": 0.01270265132188797
+          }
+        }
+      },
+      "decisive": false,
+      "crosses": null,
+      "p_permutation": null,
+      "note": "native corruptions are task-specific; the off-diagonal is undefined, so this condition cannot test a crossing"
+    }
+  },
+  "criterion_met": false
+}

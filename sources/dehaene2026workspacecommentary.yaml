@@ -1,0 +1,16 @@
+citation: dehaene2026workspacecommentary
+depth: quoted
+title: Commentary on ``Verbalizable Representations Form a Global Workspace in Language Models''
+authors:
+- Dehaene, Stanislas
+- Naccache, Lionel
+year: '2026'
+venue: Solicited external commentary, in Anthropic, emphExternal commentary on Verbalizable Representations
+  Form a Global Workspace in Language Models
+url: https://unicog.org/wp_2025/wp-content/uploads/2026/07/Dehaene-and-Naccache-Workspace-commentary-on-Gurnee-Lindsey-June-2026.pdf
+local: reference/anthropic_2026_workspace_external_commentary.pdf
+sha256: d202214e25ddff879d5b1a81c494cbc1a5e82af9c67a4b43af1e1d9dd2a3ccd7
+quotes:
+- text: this number of 25 concepts may be artificially elevated by the technique to extract them (output
+  section: Dehaene and Naccache commentary, capacity
+  direction: lowers

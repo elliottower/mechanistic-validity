@@ -1,0 +1,1107 @@
+claim: greater_than
+verdict: Mechanistically Supported
+readings:
+- statement: A subgraph of attention heads and MLPs 8--11 performs greater-than on year-span prompts in
+    GPT-2 small
+  verdict: Mechanistically Supported
+  missing: A second instrument for circuit discovery (C3), a dissociation from the components serving
+    the tasks the circuit fails (I6), and a second model (E4)
+  primary: true
+- statement: The circuit computes the comparison rather than retrieving memorized year associations
+  verdict: Underdetermined
+  missing: The paper's own structured-number-representation account fails two causal tests and memorization
+    is never tested (I5); no experiment separates a lookup table from a computation (V3)
+  primary: false
+- statement: The circuit implements greater-than as such, firing where the relation applies and not elsewhere
+  verdict: Disconfirmed
+  missing: 'Nothing --- tested and failed: two prompts requiring less-than recruit the same circuit and
+    the model answers greater, and a non-monotone sequence case does the same (I4, E3)'
+  primary: false
+- statement: The same circuit is the mechanism for greater-than beyond GPT-2 small
+  verdict: Disconfirmed
+  missing: 'Nothing --- tested and failed: the disconfirming evidence is post-origin and in three other
+    model families (E4), and the origin itself runs GPT-2 small only and names the gap'
+  primary: false
+hypotheses:
+- id: H1
+  view: Object
+  label: the identified attention heads and MLPs 8 to 11 carry year-span prediction
+- id: H2
+  view: Object
+  label: no determinate subgraph carries it and comparable subgraphs do as well
+- id: H3
+  view: Role
+  label: the circuit computes the comparison from the start year
+- id: H4
+  view: Role
+  label: the circuit retrieves memorised year associations, a lookup table keyed on the start year
+- id: H5
+  view: Contrastive
+  label: the circuit is specific to greater-than and fires where the relation applies
+- id: H6
+  view: Instrumental
+  label: the circuit is a product of the discovery procedure and its single corruption dataset
+views_evidence:
+- criterion: C2
+  evidence: In-circuit heads attend to the start-year position and make it the most highly upweighted
+    token across all tokens, and MLPs 9 and 10 show an upper-triangular logit-lens pattern
+  cells:
+    H1: C
+    H2: I
+    H3: C
+    H4: C
+    H5: C
+    H6: '-'
+  designed_for:
+  - H1
+- criterion: C3
+  evidence: Appendix E recomputes every logit-lens result as a direct effect via path patching and the
+    two agree, while every component enters the circuit through one patching method
+  cells:
+    H1: C
+    H2: '-'
+    H3: C
+    H4: C
+    H5: '-'
+    H6: C
+  designed_for: []
+- criterion: M2
+  evidence: Circuits of comparable size and location are scored and performance tracks how much of the
+    original path structure they retain, reported in prose with no count or distribution
+  cells:
+    H1: C
+    H2: I
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: C
+  designed_for: []
+- criterion: M7
+  evidence: 144 heads, 12 MLPs and all 3072 neurons of MLP 10 are screened, and the metric that selects
+    the components also scores the circuit they compose
+  cells:
+    H1: C
+    H2: '-'
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: C
+  designed_for: []
+- criterion: I1
+  evidence: Routing 01-input through the circuit while the rest of the model receives real input drives
+    probability difference from 81.7 percent to -36.6 percent
+  cells:
+    H1: C
+    H2: I
+    H3: C
+    H4: C
+    H5: C
+    H6: C
+  designed_for:
+  - H1
+- criterion: I2
+  evidence: Feeding the circuit real input while the rest of the model receives 01-input recovers 72.7
+    percent of the 81.7 percent baseline with a sharper cutoff than the unpatched model
+  cells:
+    H1: C
+    H2: I
+    H3: C
+    H4: C
+    H5: C
+    H6: C
+  designed_for:
+  - H1
+- criterion: I3
+  evidence: Most neurons of MLP 10 can be ablated with near-zero effect and direct and indirect contributions
+    are separated per MLP, with no member of the circuit removed on its own
+  cells:
+    H1: C
+    H2: C
+    H3: '-'
+    H4: '-'
+    H5: '-'
+    H6: C
+  designed_for: []
+- criterion: I4
+  evidence: Two prompts requiring less-than recruit the same circuit and the model answers greater, and
+    a non-monotone sequence case does the same
+  cells:
+    H1: C
+    H2: '-'
+    H3: C
+    H4: C
+    H5: I
+    H6: '-'
+  designed_for:
+  - H5
+- criterion: I5
+  evidence: Ablating the PCA dimensions changes little and LEACE erasure of linearly-extractable start-year
+    information leaves 64.7 percent against an 81.7 percent baseline
+  cells:
+    H1: C
+    H2: '-'
+    H3: I
+    H4: '-'
+    H5: '-'
+    H6: '-'
+  designed_for:
+  - H3
+- criterion: E3
+  evidence: Three related tasks recover 67.8 to 98.8 percent under the same circuit, three tasks it should
+    serve recruit another set of heads and MLPs entirely, and two less-than tasks fire it anyway
+  cells:
+    H1: C
+    H2: I
+    H3: '-'
+    H4: '-'
+    H5: I
+    H6: I
+  designed_for:
+  - H5
+- criterion: E6
+  evidence: Prompts supplying the start year in a different frame were predicted to recruit the same components
+    and recovered 98.8 and 88.9 percent, while the corollary of silence under less-than failed
+  cells:
+    H1: C
+    H2: '-'
+    H3: C
+    H4: C
+    H5: I
+    H6: I
+  designed_for:
+  - H1
+  - H6
+tiers:
+- name: Proposed
+  requires: C1--C2; one admissible measurement
+  missing: '---'
+- name: Causally Suggestive
+  requires: Necessity (I1); baselines (M2)
+  missing: '---'
+- name: Mechanistically Supported
+  requires: Sufficiency (I2); reach (E1); specificity (I4)
+  missing: '---'
+- name: Triangulated
+  requires: Convergence (C3); replication (E2/E4); dissociation (I6)
+  missing: '\textbf{C3}: every component enters the circuit through one patching method; \textbf{I6} unattempted,
+    with the rival component set located but never intervened on; \textbf{E4} Disconfirmed'
+- name: Validated
+  requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
+  missing: \textbf{M1}, \textbf{M3}, \textbf{M5}, \textbf{M7} unattempted, and the metric that selects
+    the components also scores the circuit they compose; \textbf{I8}, \textbf{I10} unattempted; \textbf{E4}
+    Disconfirmed
+criteria:
+  C1:
+    name: Falsifiability
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The claim is stated so that it could have come out flat and did not. Probability difference
+      carries a sign and a two-sided range, the prediction attached to each component is directional and
+      named before the test, and the necessity experiment moves the quantity from +81.7% to -36.6%, past
+      the indifference point rather than merely toward it. The second metric is designed against a specific
+      way of passing for the wrong reason: a model that always emitted p(99) = 1 would score well on probability
+      difference and would show no cutoff at all. Risk taken and survived is C.
+
+      '
+    notes:
+      verification: 'The legacy evidence''s paraphrase of the cutoff-sharpness rationale is verbatim from
+        §2 apart from the opening "In doing so,", which the cell drops. The +81.7% and -36.6% figures
+        are verbatim in §2 and §3.2 and are the same quantity, so the sign reversal the cell describes
+        is arithmetic rather than inferred.
+
+        '
+      legacy_evidence: 'Named components with directional path-patching predictions, and a necessity test
+        with an explicit failure mode that could have come out flat: giving circuit nodes the 01-dataset
+        and everything else the real dataset takes probability difference from $+81.7\%$ to $-36.6\%$
+        (their \S3.2), a sign reversal. The second metric exists to block a degenerate pass --- cutoff
+        sharpness ``checks that the model depends on YY, and does not produce constant (but valid) output,
+        e.g.\ by always outputting $p(99) = 1$'''' (\S2)'
+      verdict_derivation: 'Verdict computed from the criteria on 2026-08-07 rather than asserted: Mechanistically
+        Supported, blocked above that by E4=D, I6=U. The 35-criterion table scores the primary reading,
+        so the criteria, the primary reading''s verdict and the overall verdict are one number by construction.'
+  C2:
+    name: Structural plausibility
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Information flow through the circuit is established at three granularities: heads attend
+      to the YY position and put YY at the top of the whole vocabulary in unembedding space, MLPs 9 and
+      10 show the upper-triangular logit-lens signature of greater-than, and successively larger neuron
+      subsets of MLP 10 sharpen into the same pattern. The comparison itself is left open by the authors,
+      and their one structural hypothesis about how it might work — number representations with linear
+      structure — is put to two causal tests and survives neither. Mechanism located and not derived is
+      PC.
+
+      '
+    notes:
+      verification: 'The 64.7% and 81.7% pair is verbatim in §4.1 and §2 and is a like-for-like comparison:
+        both are probability difference on the same behaviour, so the LEACE erasure costs 17 points. The
+        cell''s "No QK/OV analysis of any head" is verified against a full read rather than against a
+        statement: the logit lens is applied to head *outputs* (§3.3), never to a weight product, and
+        no attention head''s QK or OV matrix is examined anywhere in the paper or its nine appendices.
+
+        '
+      legacy_evidence: 'The information flow is established at three granularities: attention heads attend
+        to the YY position and make YY ``the most highly upweighted token across all tokens'''' in unembedding
+        space (\S3.3); MLPs 9--11 show an upper-triangular logit-lens pattern; and MLP 10''s top-10, top-100
+        and top-200 neurons progressively sharpen into greater-than (\S4.2, Fig.~21). The comparison mechanism
+        itself is unresolved by the authors --- ``We cannot provide a conclusive answer'''' (\S4) ---
+        and their one structural hypothesis is causally rejected: PCA-dimension ablation gives ``little
+        change in model performance,'''' and LEACE erasure of linear YY information leaves 64.7\% against
+        an 81.7\% baseline (\S4.1). No QK/OV analysis of any head'
+  C3:
+    name: Convergent validity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'One cross-validation at origin is genuine and is run for a stated reason: the logit lens
+      ignores the final LayerNorm, so Appendix E recomputes every logit-lens result as a direct effect
+      measured by path patching, a quantity that carries interpretable units, and the two agree up to
+      scale. Circuit discovery has no such second instrument. Every component enters the circuit through
+      iterative path patching against one corruption dataset, and the two methods that are independent
+      of patching — PCA-dimension ablation and LEACE erasure — converge on a negative result about the
+      representation rather than corroborating the mechanism. Agreement where the instruments overlap,
+      single-method where they do not, is PC.
+
+      '
+    notes:
+      verification: 'The legacy evidence renders the Appendix E result as "essentially identical … though
+        they differ in magnitude"; the elided words are "to the logit lens results," and the full sentence
+        is quoted here. The cell''s characterisation of Appendix E as avoiding the LayerNorm nonlinearity
+        is the paper''s own stated motivation.
+
+        '
+      legacy_evidence: 'Several instruments and one genuine cross-validation: Appendix E reproduces every
+        logit-lens result with direct-effect path patching, which avoids the LayerNorm nonlinearity, and
+        reports them ``essentially identical … though they differ in magnitude.'''' Against that, circuit
+        \emph{discovery} is single-method throughout --- iterative path patching with one corruption dataset
+        --- and the PCA and LEACE analyses converge on a negative rather than corroborating the mechanism'
+  C4:
+    name: Discriminant validity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Separation from a neighbouring construct is tested at origin and found. Three tasks that
+      a greater-than mechanism should cover recruit a different set of components entirely, which is the
+      result a construct with no boundaries could not produce. The contrasts available are all of one
+      kind. Every task the paper compares against changes the operation, the frame, or both, and the design
+      is declared qualitative in advance, so nothing isolates the frame while holding the operation fixed.
+      Separation shown along one axis is PC.
+
+      '
+    notes:
+      verification: '"GPT-2 relied on another set of heads and MLPs entirely" is verbatim (§5) and the
+        cell attributes it correctly to §5 and Appendix F. The path-patching plots the cell cites are
+        Figures 24 and 26 in Appendix F. Merullo et al.''s 3/18 overlap statistic is post-origin and cannot
+        be checked here.
+
+        '
+      legacy_evidence: 'Tested at origin and confirmed later. \S5 and Appendix F show that on three tasks
+        where the circuit should apply and fails, ``GPT-2 relied on another set of heads and MLPs entirely,''''
+        with path-patching plots supplied. \citet{merullo2024circuit} then use greater-than as a deliberate
+        low-overlap control against IOI: 3/18 = 16.7\% shared components, against 78\% for Colored Objects.
+        What is missing is a matched-surface-form non-comparison task --- every contrast either changes
+        the operation or changes the frame, never the frame alone'
+  C5:
+    name: Nomological validity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The result is placed inside a named theoretical dichotomy and the placement is the stated
+      contribution: the circuit sits between memorization and generalization, and the paper claims to
+      add nuance to that pair rather than to pick a side. Two further connections are operational rather
+      than rhetorical, since the neuron-level analysis runs on Geva et al.''s key-value reading of feed-forward
+      layers and the PCA analysis checks Wallace et al.''s structured number representations in the same
+      embeddings. No theory predicts what a comparison circuit should look like, so nothing here is a
+      derivation the circuit could have contradicted. PC.
+
+      '
+    notes:
+      verification: 'The dichotomy sentence is verbatim in §1 and the cell quotes it accurately. The Liu
+        et al. sentence is the paper''s only discussion of when a mechanism forms during training, and
+        it is about someone else''s toy model, which is why it does not reach I11.
+
+        '
+      legacy_evidence: 'Positioned against a named theoretical dichotomy --- memorization versus generalization
+        --- and the paper''s contribution is to place the result between them: ``it lies between memorization
+        and generalization. We thus add nuance to the memorization-generalization dichotomy'''' (\S1).
+        Connected to FFN key-value memories (Geva et al.\ 2021) for the neuron-level analysis and to structured
+        number representations (Wallace et al.\ 2019). No formal theory of what a comparison circuit should
+        look like'
+  M1:
+    name: Reliability
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Dispersion is reported exactly twice and both times for the model''s behaviour before
+      any circuit exists: 19.3% on probability difference and 7.2% on cutoff sharpness. Every quantity
+      that carries the argument — 72.7%, 89.5%, -36.6%, the loss recoveries in §5 — is a single number
+      with no interval, no resampling and no per-example spread, and the sweep that selects the circuit
+      runs on 490 datapoints for stated computational reasons while the 10,000-example dataset sits available.
+      One released checkpoint rules out cross-run variance and rules out nothing else. U.
+
+      '
+    notes:
+      verification: 'Both standard deviations are verbatim and both are on the behavioural baseline, as
+        the cell states. The 490-datapoint sweep and its stated reason are verbatim. Verified against
+        a full read for the absence: no bootstrap, confidence interval, repeated run or variance estimate
+        appears in the body or in Appendices A through I.
+
+        '
+      legacy_evidence: Unattempted. The strings \texttt{seed} and \texttt{standard deviation} occur zero
+        and zero times respectively in the body; two SDs are reported and both are on the \emph{behavioural}
+        baseline (19.3\% and 7.2\%), never on a circuit result. The main circuit-discovery sweep uses
+        490 datapoints ``for computational reasons.'' GPT-2 small is one released checkpoint, so cross-run
+        variance is unavailable in principle, but bootstrap over the 10,000-example dataset is not
+  M2:
+    name: Baseline separation
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'A size- and location-matched comparison exists and it is the right comparison to make:
+      circuits of comparable extent are scored, and performance is reported to track how much of the original
+      path structure they retain. The comparison is delivered entirely in prose. No count of alternative
+      circuits, no figure, no distribution and no number appear, so 89.5% has no reference class to sit
+      in, and the -36.6% inverted-patch condition supplies a floor rather than a null. A baseline run
+      and not reported is PC.
+
+      '
+    notes:
+      verification: 'The cell''s quotation is verbatim with two elisions it marks: "(especially MLPs 9
+        and 10), to the logits" and "(i.e. no attention head or no MLP overlap with the original circuit)".
+        Both are restored here. The cell is right that no N, figure or distribution accompanies the passage;
+        verified against a full read, the alternative-circuit sweep appears nowhere else in the paper.
+
+        '
+      legacy_evidence: 'A size- and location-matched alternative-circuit comparison exists and is reported
+        in prose without numbers: ``If we target other circuits of a size and location similar to our
+        circuit''s, performance is related to the preservation of the paths from the input, to our attention
+        heads, our MLPs …. If the paths are interrupted …, performance is very low. If at least one path
+        is preserved, performance improves with each additional component in common with the original
+        circuit'''' (\S3.2). No $N$, no figure, no distribution. The $-36.6\%$ inverted-patch condition
+        is a floor, and the 89.5\% faithfulness figure has no random-circuit reference'
+  M3:
+    name: Stability
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Circuit membership is decided by reading path-patching heatmaps. The paper says a component
+      joins when patching it changes performance "significantly", names the components that qualify, and
+      states no threshold, sweeps none, and reports no sensitivity of the resulting circuit to where the
+      line falls. No member is swapped for a neighbour and no boundary is perturbed, so the circuit''s
+      dependence on its own selection rule is unmeasured. U.
+
+      '
+    notes:
+      verification: 'Verified against a full read: the word "significantly" in §3.2 is the only stated
+        criterion for membership anywhere in the paper, and Appendix C, which walks the selection through
+        step by step with five further heatmaps, adds no numerical cutoff. Anani et al. (2026) is post-origin.
+
+        '
+      legacy_evidence: Unattempted. The circuit boundary is set by visual inspection of path-patching
+        heatmaps with no threshold stated or swept, and no head or MLP is swapped for a neighbour to test
+        sensitivity. Anani et al.\ (2026) later certify circuit discovery under bounded dataset perturbation
+        with greater-than as one of three benchmarks, reporting up to 56\% higher accuracy with 80\% fewer
+        components --- the manual circuit carries components certification discards
+  M4:
+    name: Calibration
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Both outcome metrics are well calibrated. Each is bounded on [-1, 1], each carries a sign,
+      zero means indifference between valid and invalid years, and each has a measured model value over
+      10,000 examples to read a change against. The validation quantity inherits none of that. Faithfulness
+      is expressed as a percentage of the unpatched model, 89.5%, which is interpretable only against
+      a distribution of comparable circuits the paper does not supply. Cutoff sharpness then rises under
+      patching, from 6.0% to 8% for the core circuit and 10.5% for the full one, and both increases are
+      reported without an account of how a circuit can be sharper than the model it is a subgraph of.
+      Calibrated outcome, uncalibrated validation quantity, is PC.
+
+      '
+    notes:
+      verification: 'All four numbers in the cell check out: 6.0% baseline (§2), 8% core circuit (§3.2),
+        10.5% full circuit (Appendix B), and the authors flag both increases as "sharper than pre-patching"
+        without interpreting them, as the cell states.
+
+        '
+      legacy_evidence: Both metrics are well designed and interpretable, and the second is purpose-built
+        as an anti-degeneracy check (\S2). Faithfulness is reported as a percentage of the unpatched model
+        (72.7\% is ``89.5\% of the original''), which is meaningful only against a distribution of comparable
+        circuits that is not supplied. Cutoff sharpness \emph{rises} under patching (6.0\% $\to$ 8\% core,
+        10.5\% full), which the authors note without interpreting
+  M5:
+    name: Sensitivity
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'The validation set is exactly two experiments, the complement and its inverse, and both
+      run on the real model where the true circuit is the object under dispute. A sensitivity test needs
+      a mechanism of known extent — planted, compiled or synthetic — so that a component the pipeline
+      fails to recover can be distinguished from a component that was never there. Nothing of that kind
+      is constructed, so the detection floor of iterative path patching is unmeasured. U.
+
+      '
+    notes:
+      verification: 'Verified against a full read. The quotes bound the validation set rather than asserting
+        the absence: §3.2 contains both directions of the circuit evaluation, Appendix B repeats them
+        for the full circuit, and Appendix F repeats them for the generalization tasks. No known-positive
+        control appears in any of them.
+
+        '
+      legacy_evidence: 'Unattempted. No known-positive control: no synthetic or compiled circuit of known
+        structure is planted in a comparable model and recovered by this pipeline, so the method''s detection
+        floor is unquantified'
+  M6:
+    name: Invariance
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The design makes per-condition variation visible instead of averaging it away. Every behavioural
+      result is a heatmap over start year crossed with predicted year on 10,000 examples spanning 120
+      nouns and 768 years, so a reader can see where the account holds. One non-invariance is documented
+      and costed: attention to the YY position varies non-monotonically with YY, bottoms out at YY=01,
+      and patching queries and keys costs 15% of partial-circuit performance. The conditions that would
+      test the claim hardest stay fixed. One tokenizer, one model, one century range, one sentence frame.
+      PC.
+
+      '
+    notes:
+      verification: 'The 120 nouns, 768 years and 10,000 examples are verbatim, as is the 15% figure and
+        the YY=01 dip. Note that YY=01 is the corruption value used throughout the paper, so the condition
+        the circuit is validated against is the condition where the attention the circuit depends on is
+        weakest; Appendix B reports this without drawing that consequence.
+
+        '
+      legacy_evidence: Behaviour is measured across 120 nouns and 768 years on 10,000 examples, and every
+        result is presented as a heatmap over start year YY $\times$ predicted year, so per-condition
+        variation is visible rather than averaged away. Appendix B, Figure 11 documents one such variation
+        and its consequence --- attention to the YY position varies non-monotonically with YY, is low
+        at YY=01, and patching the queries and keys costs 15\%. Not checked across models, tokenizers,
+        or centuries outside $\{11,\ldots,17\}$
+  M7:
+    name: Selection correction
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'The selection is disclosed completely and corrected nowhere. Every candidate is screened
+      — 144 heads and 12 MLPs against the logits, then the sweep repeats through MLPs 11, 10, 9 and 8,
+      then all 3072 neurons of MLP 10 individually — and the paper states the pool at each stage. The
+      same probability-difference metric picks the components and then scores the circuit they compose,
+      so the reported recovery is measured on the quantity that selected its parts. "Significantly" is
+      used with no test and no null distribution behind it. Disclosed selection with no multiplicity control
+      is U.
+
+      '
+    notes:
+      verification: 'The 144-head pool and the 3072-neuron sweep are verbatim, so the cell''s "N is stated
+        at each stage" is right; note that the paper writes 144 itself, unlike Wang et al. Verified against
+        a full read for the absence of any correction, null distribution or significance test.
+
+        '
+      legacy_evidence: Unattempted. 144 heads plus 12 MLPs are screened for direct effects on the logits,
+        then the procedure repeats through MLPs 11, 10, 9, 8, then 3,072 neurons of MLP 10 are screened
+        individually --- and the same probability-difference metric selects the components and then scores
+        the assembled circuit. $N$ is stated at each stage; no multiplicity control is applied at any
+  I1:
+    name: Necessity
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The necessity test is the strong form. Routing the 01-dataset through the circuit while
+      the rest of the model receives real input drives probability difference to -36.6% against a +81.7%
+      baseline, so the model stops preferring valid years and starts preferring invalid ones. Degradation
+      alone would be consistent with the circuit carrying part of a distributed signal; a sign reversal
+      says the circuit''s output is what determines which side of YY the mass falls on. C.
+
+      '
+    notes:
+      verification: 'Both figures are verbatim and are the same metric, so the reversal is direct rather
+        than inferred. The cell reports them correctly.
+
+        '
+      legacy_evidence: 'The inverted-patch test is a strong necessity result: routing the 01-dataset through
+        the circuit while the rest of the model receives real input drives probability difference to $-36.6\%$
+        from a baseline of $+81.7\%$, so the model does not merely degrade --- it reverses (\S3.2)'
+  I2:
+    name: Sufficiency
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'The complement test is run under conditions that favour failure and it passes. Every path
+      outside the circuit carries 01-input, which the authors state should push the model to poor performance,
+      and the circuit alone recovers 72.7% of a 81.7% baseline. The anti-degeneracy metric moves the same
+      way: cutoff sharpness rises to 8%, so the recovered behaviour still depends on YY rather than collapsing
+      onto a constant prediction. Appendix B repeats the test for the full input-to-logits circuit and
+      reaches 71.5% and 10.5%. C.
+
+      '
+    notes:
+      verification: 'All five numbers in the cell are verbatim: 72.7%, 89.5%, 8% for the core circuit
+        and 71.5%, 10.5% for the full circuit. The authors'' own framing of the design as difficult is
+        quoted accurately.
+
+        '
+      legacy_evidence: 'The complement test is run under a deliberately hostile design the authors flag
+        --- ``the large majority of the model receives input that should push it to poor performance''''
+        --- and passed: probability difference 72.7\%, i.e.\ 89.5\% of the original, with cutoff sharpness
+        8\%, \emph{sharper} than the unpatched model. The full circuit of Appendix B reaches 71.5\% and
+        10.5\%'
+  I3:
+    name: Minimality
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Minimality is asserted in the definition of a circuit and probed by decomposition rather
+      than by pruning. The evidence that exists is real: neuron-level patching shows most of MLP 10 can
+      be ablated with near-zero effect, and each MLP''s direct and indirect contributions are separated
+      and quantified, which bounds how much of the circuit''s mass sits where. No component of the published
+      circuit is ever removed on its own and the remainder rescored, so no member has been shown to earn
+      its place. The one accretion result runs the other way, adding MLP 7 and two heads to lift a related
+      task from 67.8% to 90.3%. PC.
+
+      '
+    notes:
+      verification: 'The three direct/indirect pairs in the cell are verbatim: MLP 8 at 14% and 39%, MLP
+        9 at 28% and 32%, MLP 10 at 56% and 16%. The 67.8% to 90.3% accretion is verbatim in §5 and Appendix
+        F. Verified against a full read for the absence of leave-one-out. Shi et al. and Li & Janson are
+        post-origin.
+
+        '
+      legacy_evidence: 'Partial and by decomposition rather than pruning. Neuron-level path patching shows
+        contributions are sparse --- ``most neurons can be patched (ablated) with near zero effect''''
+        --- and direct-versus-indirect contributions are separated for each MLP (MLP 8: 14\% direct /
+        39\% indirect; MLP 9: 28\% / 32\%; MLP 10: 56\% / 16\%). The accretion test on the sequence task
+        adds MLP 7 and two heads to move 67.8\% $\to$ 90.3\%. No leave-one-out over the identified set.
+        Later work is adverse: Shi et al.\ (2024) find ``the G-T and IOI canonical circuits are not minimal'''';
+        Li \& Janson (2024) place the optimal-ablation Pareto frontier 42\% below the manual circuit'
+  I4:
+    name: Specificity
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Specificity is tested in the direction that can embarrass the claim, and it fails there.
+      Two prompts requiring less-than recruit the same circuit and produce greater-than output, and a
+      third case on non-monotone random sequences does the same, so the circuit fires on inputs its label
+      does not cover. The authors report this as a property of the mechanism rather than smoothing it
+      away. The converse test is missing: no ablation of the circuit is followed by measurement of damage
+      to capabilities that should be untouched, so the false-positive rate is characterised and the false-negative
+      cost is not. PC.
+
+      '
+    notes:
+      verification: 'The overgeneralization sentence and both prompt templates are verbatim (§5), and
+        Appendix A supplies the third case as the cell states. Appendix F confirms both misfiring tasks
+        reach >90% performance recovery under the year-span circuit, which is the evidence that the same
+        circuit is running.
+
+        '
+      legacy_evidence: 'Tested, with an adverse result the authors report in their own words: on ``The
+        <noun> ended in the year 17YY and started in the year 17'''' and ``The <noun> lasted from the
+        year 7YY BC to the year 7,'''' where less-than is required, GPT-2 predicts greater --- ``This
+        is because it is using the exact same circuit used in the greater than case! GPT-2 thus overgeneralizes
+        the use of our circuit'''' (\S5). Appendix A adds a third case on random non-monotone sequences.
+        Untested is the converse: no ablation of the circuit followed by measurement of damage to unrelated
+        capabilities'
+  I5:
+    name: Rival mechanism exclusion
+    status: I
+    short: ''
+    verified: true
+    reasoning: 'Two rival accounts are on the table and neither is disposed of. Structured number representations
+      are tested causally, twice, and fail both times: ablating the PCA dimensions changes little, and
+      erasing linearly-extractable YY information with LEACE costs 17 points of probability difference
+      against a baseline of 81.7%. A failed test of a rival leaves the rival unsupported rather than the
+      main account supported. Memorization is not tested at all, and the authors state their circuit could
+      be a lookup table and conclude the truth lies between the two. Rivals addressed and left live is
+      I.
+
+      '
+    notes:
+      verification: 'The 64.7% versus 81.7% comparison is verbatim and the cell reports it correctly.
+        The lookup-table sentence and "something in between the two" are verbatim in §5. Nikankin et al.
+        (2024) is post-origin. Note the direction of the LEACE result: it weakens the structured-representation
+        rival, and because that rival was the paper''s own hypothesis about the mechanism, the same evidence
+        weakens the mechanistic account the circuit was supposed to carry.
+
+        '
+      legacy_evidence: 'Two rivals, one tested and \emph{failed}, one live by the authors'' own verdict.
+        Structured number representations were tested causally and rejected (PCA-dimension ablation, ``little
+        change''''; LEACE, 64.7\% vs 81.7\% baseline). Memorization is not excluded: ``Our circuit could
+        function internally as a lookup table, where attention heads transmit YY information to MLPs that
+        then upweight the years that they have memorized to be $>$YY,'''' and the paper concludes ``the
+        underlying mechanism is something in between the two.'''' Nikankin et al.\ (2024) later argue
+        LLM arithmetic generally rests on ``a bag of heuristics'''' --- different models and task family,
+        so it undercuts the inference rather than falsifying the circuit'
+  I6:
+    name: Double dissociation
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'A double dissociation needs two mechanisms and two behaviours, with each intervention
+      moving one and sparing the other. The source has the makings of the first half and never runs the
+      second. Ablating the circuit destroys year-span prediction, and a different set of heads and MLPs
+      is identified for the tasks the circuit does not serve, but that second set is located observationally
+      and never intervened on. Nothing shows it intact under circuit ablation, and nothing removes it
+      while leaving greater-than behaviour. U.
+
+      '
+    notes:
+      verification: 'Verified against a full read. §5 and Appendix F come closest, reporting that failed
+        tasks rely on other components, with probability heatmaps in Figure 24 and path-patching plots
+        in Figure 26; no ablation of those components is performed. Merullo et al. and Hanna et al. (2024)
+        are post-origin.
+
+        '
+      legacy_evidence: 'Unattempted. No converse test: no second circuit in GPT-2 small is shown intact
+        under greater-than-circuit ablation. \citet{merullo2024circuit}''s 16.7\% overlap statistic is
+        structural rather than a converse intervention, and \citet{hanna2024faith} report near-zero cross-task
+        faithfulness generally, which is a warning rather than a dissociation'
+  I7:
+    name: Confound control
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'One confound is controlled to the point of shaping the dataset. Byte-pair encoding makes
+      frequent years single tokens, which would let the model score well for a reason unrelated to comparison,
+      so single-token years are excluded and each century''s extremes are dropped so every example admits
+      both a correct and an incorrect answer. Lexical content is randomised over 120 nouns. The confound
+      the authors themselves identify is left in: nouns carry duration priors that shape which years get
+      probability, the effect is visible as the 15-to-20-year drop-off, and nothing separates it from
+      the comparison the circuit is credited with. Per-year token frequency and century are handled by
+      restriction rather than by measurement. PC.
+
+      '
+    notes:
+      verification: 'The tokenization exclusions and the FrameNet noun pool are verbatim, and the duration-prior
+        sentence is verbatim and is the authors'' own. The cell reports all three correctly.
+
+        '
+      legacy_evidence: 'Tokenization is controlled carefully and explicitly --- single-token years excluded
+        because ``1700'''' is one token in normal data, and each century''s extreme years excluded so
+        every example has both a correct and an incorrect answer (\S2). Noun is randomised over 120 items.
+        Uncontrolled: per-year token frequency, century, and the duration prior the authors themselves
+        identify as shaping the output --- ``15-20 years after YY, probabilities drop. The exact length
+        of the year-span receiving higher probability likely reflects patterns in GPT-2''s training data'''''
+  I8:
+    name: Confounding sensitivity
+    status: U
+    short: ''
+    verified: false
+    reasoning: 'NOT SETTLED BY THE SOURCE. No quantity in the paper bounds how strong an unmeasured confounder
+      would have to be to overturn a reported effect, and none can be read as such a bound.
+
+      '
+    notes:
+      verification: 'Read in full. The causal claims rest on intervention rather than on adjustment, so
+        the E-value framing has no natural home here; that explains the absence rather than excusing it,
+        since the duration prior named in I7 is exactly the kind of unmeasured influence a sensitivity
+        bound would price.
+
+        '
+      legacy_evidence: Unattempted. No E-value or sensitivity analysis for an unmeasured confounder
+  I9:
+    name: Epistatic interaction
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Non-additivity is the neuron-level finding rather than a side observation, and the argument
+      for it is structural: a neuron''s activation scales its logit distribution without reshaping it,
+      so no single neuron can produce a pattern whose shape depends on YY, and the operation appears only
+      in sums. The demonstration is graded, with top-10, top-100 and top-200 subsets sharpening toward
+      greater-than, and the direct/indirect split is measured for all four MLPs. What is missing is any
+      test of interaction as such: no pair of components is ablated together and compared against the
+      sum of its singles, and no interaction statistic is computed. PC.
+
+      '
+    notes:
+      verification: 'The "no individual neuron computes greater-than" passage is verbatim (§4.2) and the
+        cell quotes it accurately. Figures 10 and 21 are the right locators for the top-10, top-100 and
+        top-200 sums. Note the paper''s argument is analytic rather than empirical: the impossibility
+        of a single neuron computing greater-than follows from the rank-one form of a neuron''s contribution,
+        so it is not itself an interaction measurement.
+
+        '
+      legacy_evidence: 'Non-additivity is the neuron-level finding: ``no individual neuron computes greater-than.
+        No one neuron can do so, as each neuron''s activation for each input only scales that neuron''s
+        distribution over the logits, without changing its overall shape'''' --- and the top-10, top-100
+        and top-200 sums progressively recover the operation (\S4.2, Figs.~10, 21). Direct/indirect decomposition
+        is measured for all four MLPs. No pairwise ablation grid and no formal interaction statistic'
+  I10:
+    name: Rescue reversibility
+    status: U
+    short: ''
+    verified: true
+    reasoning: 'Every intervention in the source substitutes 01-input for real input along chosen paths,
+      and behaviour is read off the result. The direction is fixed by the instrument rather than by choice,
+      since path patching is defined as replacing a node''s inputs with those from another dataset. Restoring
+      a component inside an otherwise damaged run and measuring how much behaviour returns is never framed
+      or reported as such. U.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, and it is not small. The legacy evidence says "The complement
+        experiment is a substitution rather than a restoration". The complement experiment gives the large
+        majority of the model 01-input and feeds real input only through the circuit''s paths, and recovers
+        72.7% of an 81.7% baseline. Under the reading I10 is given elsewhere in this batch — restore a
+        component inside an otherwise corrupted run and measure how much behaviour returns — that design
+        qualifies, and the difference between substituting and restoring is a matter of which run is called
+        the reference. What the origin genuinely lacks is a graded or per-component version: the restoration
+        is all-or-nothing over the whole circuit and is never repeated for single members. The recorded
+        U should be defended on that narrower ground or revised.
+
+        '
+      legacy_evidence: Unattempted rather than untestable. Path patching caches clean activations by construction,
+        so corrupt-then-restore costs one forward pass. The complement experiment is a substitution rather
+        than a restoration
+  I11:
+    name: Onset coupling
+    status: N/A
+    short: ''
+    verified: true
+    reasoning: 'The audited system is one released checkpoint of a model whose intermediate checkpoints
+      were never published, so there is no training trajectory in which the circuit''s appearance could
+      be timed against the behaviour''s. The paper''s one engagement with mechanism onset is a citation:
+      Liu et al.''s toy model develops structured number representations at the point it starts generalizing,
+      an observation the authors import as motivation and cannot run on GPT-2. The limitation the paper
+      names is model size rather than checkpoint access, which is the same constraint from the other side.
+      N/A records an experiment the claim''s object cannot support.
+
+      '
+    notes:
+      verification: 'PRIORITY CHECK, and the N/A holds on the claim''s shape rather than on the experiment
+        being merely unrun. The claim is about a circuit in GPT-2 small, and the source studies exactly
+        that one checkpoint end to end; no second model appears anywhere, unlike McDougall et al., who
+        bring Pythia into their appendices and thereby make the same test available to themselves. Two
+        qualifications. First, the untestability is a property of the audited system rather than of the
+        criterion, so a claim about greater-than in any checkpointed family would take a status. Second,
+        the cell''s own legacy note says Pythia "makes the experiment possible in a different model family",
+        which concedes the point; the N/A is defensible only because the claim names GPT-2 small and the
+        source never leaves it. Tigges et al. (2024) is post-origin and runs IOI rather than greater-than.
+
+        '
+      legacy_evidence: Untestable in this setting as run. GPT-2 small is used as a released checkpoint;
+        no training checkpoints are used or produced. \citet{biderman2023pythia} makes the experiment
+        possible in a different model family, and Tigges et al.\ (2024) run it for IOI in Pythia --- never
+        for greater-than
+  I12:
+    name: Offset coupling
+    status: N/A
+    short: ''
+    verified: true
+    reasoning: 'Offset coupling asks whether a mechanism''s disappearance tracks the behaviour''s, which
+      requires at least two points on a training trajectory. The source observes one checkpoint at one
+      time and never varies it, so there is no interval across which either could be seen to lapse. N/A
+      for the same structural reason as I11.
+
+      '
+    notes:
+      verification: 'Read in full. Nothing in the paper reports a component changing role over training,
+        and nothing could: the only variation the source introduces is over prompts and tasks, never over
+        model states. The same qualification as I11 applies — this is untestable for GPT-2 small, not
+        untestable in principle.
+
+        '
+      legacy_evidence: 'Untestable in this setting as run, for the same reason: no checkpoints and no
+        training run to intervene on'
+  E1:
+    name: Intervention reach
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Three intervention families appear, and they are not variants of each other. Path patching
+      runs at four granularities — whole components, multi-edge paths, individual neurons, and queries,
+      keys and values separately — against one counterfactual dataset. Alongside it, §4.1 ablates PCA
+      dimensions and erases linearly-extractable YY information with LEACE, neither of which routes through
+      the 01-dataset or through the computational graph at all. The families disagree usefully: patching
+      supports the circuit while both erasure methods decline to support the representational story behind
+      it. What no method touches is the weights, and the circuit''s own causal claims all rest on the
+      single counterfactual. PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL. The legacy evidence opens "One intervention primitive
+        --- path patching against a single counterfactual" and closes "No mean ablation, no zero ablation,
+        no steering, no weight edit". Two further primitives are in §4.1 and the cell does not count them:
+        PCA-dimension ablation, which zeroes activations along chosen directions, and LEACE concept erasure,
+        which is a closed-form projection removing linearly-extractable YY information. The LEACE numbers
+        are verbatim — 64.7% against an 81.7% baseline — and the comparison is like-for-like on probability
+        difference. This is the finding that withdrew the earlier E1 downgrade and it survives re-checking:
+        the criterion asks whether different intervention families agree, and this paper has three families
+        whose disagreement is itself reported. The cell''s list of what is missing is accurate for weight
+        editing and steering. Li & Janson and Shi et al. are post-origin.
+
+        '
+      legacy_evidence: 'One intervention primitive --- path patching against a single counterfactual,
+        the 01-dataset --- applied at genuinely varied granularities: whole components, specified multi-edge
+        paths, individual neurons, and queries/keys/values separately (Appendix B). Appendix E uses the
+        same primitive as a measurement instrument. No mean ablation, no zero ablation, no steering, no
+        weight edit. Method dependence has since been shown to matter here: Li \& Janson (2024) report
+        ``resample ablation loss is relatively low for Greater-Than but relatively high for IOI,'''' and
+        Shi et al.\ (2024) find that under STR ablation ``knocking down the complete model has less impact
+        than knocking down the candidate circuit,'''' a sign flip absent under zero ablation'
+  E2:
+    name: Prompt generalization
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Coverage is broad inside one frame and the frame is held fixed by design. The origin runs
+      10,000 examples over 120 nouns and 768 years, then three variant prompts that change the surface
+      form while keeping the two-digit year answer space, and the circuit recovers 98.8% and 88.9% on
+      the first two. The authors state the restriction themselves: the variants preserve the format and
+      output space of year-span prediction. Nothing tests a prompt whose answer space differs, so generalization
+      across the dimension most likely to break the account is untested. PC.
+
+      '
+    notes:
+      verification: 'The 69% floor, the two loss recoveries and the scope sentence are verbatim, and the
+        cell reports them correctly. Appendix F adds that the second variant reaches only 75% probability
+        difference against 90% for year-span prediction, a spread the cell does not mention. uit de Bos
+        & Garriga-Alonso is post-origin.
+
+        '
+      legacy_evidence: Broad within one frame. 10,000 examples over 120 nouns $\times$ 768 years at origin,
+        plus three variant families in \S5 at $\geq$69\% probability difference with loss recovery 98.8\%,
+        88.9\%, and 67.8\% rising to 90.3\% once three components are added. All variants ``preserve the
+        format and output space of year-span prediction'' by the authors' own statement, so the two-digit
+        year answer space is held fixed throughout. uit de Bos \& Garriga-Alonso (2024) later stress-test
+        over 1,000,000 benign pairs and find greater-than the best-behaved of the three canonical GPT-2
+        circuits --- model-vs-circuit KL mean 2.09, max 5.31, against IOI's 5.15/14.64 and docstring's
+        3.91/12.07
+  E3:
+    name: Cross-task generalization
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Section 5 is this criterion''s experiment and it is reported at full width. Three related
+      tasks recruit similar circuits with recoveries from 67.8% to 98.8%, three tasks that should have
+      used the circuit recruit different components entirely, and two tasks requiring less-than fire the
+      circuit anyway. The mixed outcome is the result rather than an embarrassment in it, and the authors
+      state the boundary in their own words. Transfer holds for tasks sharing the year frame and fails
+      outside it, which is generalization of a bounded kind. PC.
+
+      '
+    notes:
+      verification: 'All three outcomes and the 67.8% figure are verbatim. Merullo et al. and Hanna et
+        al. (2024) are post-origin; note the cell attributes the latter to "the origin''s first author",
+        which is right — Hanna is first author here as well.
+
+        '
+      legacy_evidence: '\S5 and Appendix F are exactly this test and the result is mixed by design and
+        honestly reported: three related tasks succeed with similar circuits, three fail and ``GPT-2 relied
+        on another set of heads and MLPs entirely,'''' and two fire the circuit where less-than is required.
+        \citet{merullo2024circuit} find 16.7\% component overlap with IOI; \citet{hanna2024faith} ---
+        the origin''s first author --- report that the smallest EAP circuit containing $\geq$90\% of the
+        manual greater-than nodes reaches 51\% faithfulness, better than IOI''s 0\% and still half'
+  E4:
+    name: Cross-model generalization
+    status: D
+    short: ''
+    verified: true
+    reasoning: 'The origin runs one model and says so. GPT-2 small is the object of study throughout,
+      model size is named as a limitation in the conclusion, and studying larger models is listed as the
+      work that would establish whether the result holds beyond it. No second model appears, so the source
+      supplies the absence and nothing about the outcome.
+
+      '
+    notes:
+      verification: 'PRIORITY CHECK, and the recorded D is NOT verifiable against this source. A Disconfirmed
+        cell requires a test that was run and failed; what the origin provides is the authors'' own statement
+        that the test is outstanding, which is the evidence for U. The whole weight of the D rests on
+        Xu (arXiv:2606.05378), which is post-origin, in three other model families, and cannot be checked
+        here. The cell''s first half — "absent from the origin, which runs GPT-2 small only and names
+        the gap" — is verbatim-supported; the second half is not this paper''s.
+
+        '
+      legacy_evidence: 'Absent from the origin, which runs GPT-2 small only and names the gap: ``studying
+        larger models would confirm that our results hold for the models that dominate natural language
+        processing today'''' (\S6). The test has since been run and failed. Xu (arXiv:2606.05378) applies
+        the standard discovery-plus-verification recipe --- heads selected by task-pattern selectivity,
+        verified by causal ablation against a matched-random null over ten seeds --- to greater-than plus
+        three other tasks across Pythia-1B, OLMo-1B and OLMoE-1B-7B, and reports that across the twelve
+        task-model cells ``no two share the same primary causal screen at comparable effect size.''''
+        Same task, same behaviour, different causal structure per model'
+  E5:
+    name: Graded response
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'One axis is graded and it is the wrong one for this criterion. Circuit extent varies smoothly
+      — the logit lens of MLP 10 is shown for the top 3, 10, 100 and 200 neurons with the greater-than
+      pattern sharpening as the set grows, and adding MLP 7 and two heads lifts a related task from 67.8%
+      to 90.3%. Intervention strength never varies. Patching replaces a node''s input with 01-input outright,
+      with no interpolation between the clean and corrupted activation and no scaling parameter to sweep,
+      so no dose-response curve exists for the intervention itself. PC.
+
+      '
+    notes:
+      verification: 'The top-100 and top-200 comparison is verbatim in Appendix D and Figure 21 is the
+        right locator, as the cell states. The binary character of the intervention follows from the definition
+        of the 01-dataset rather than from any statement, which is why the definition is quoted.
+
+        '
+      legacy_evidence: 'Graded in circuit \emph{size} rather than intervention \emph{strength}: MLP 10''s
+        logit lens is shown for the top 3, top 10, top 100 and top 200 neurons with the greater-than pattern
+        sharpening monotonically (Figs.~10, 21), and the sequence task moves 67.8\% $\to$ 90.3\% as components
+        are added. Path patching is binary per path; there is no interpolation between clean and 01-input
+        activations'
+  E6:
+    name: Novel prediction
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The mechanism yields a prediction before the test that could have failed. If MLPs 9-11
+      perform the comparison on a YY value delivered by attention heads, then any prompt supplying YY
+      in a different frame should recruit the same components, and the first two variants recover 98.8%
+      and 88.9% of performance under the original circuit. A second prediction is implicit and fails informatively:
+      a circuit that tracked the greater-than operation should stay silent when less-than is required,
+      and instead it fires and the model answers greater. The authors report the failure as a finding.
+      A confirmed prediction with no matched control and one falsified corollary is PC.
+
+      '
+    notes:
+      verification: 'The recoveries and the misfire are verbatim. Note the prediction''s derivation is
+        reconstructed from §3.3''s account of the mechanism and §5''s design; the paper never writes the
+        prediction down before running the test, which is the difference between this cell and a preregistered
+        one.
+
+        '
+      legacy_evidence: 'One prediction of the right form, made and confirmed: if MLPs 9--11 compute the
+        comparison from YY supplied by the attention heads, then prompts that supply YY in a different
+        frame should recruit the same circuit --- and \S5''s first two variants recover 98.8\% and 88.9\%.
+        The implicit prediction that the circuit tracks the greater-than \emph{operation} fails in an
+        informative direction: it fires where less-than is correct, and the authors report that as a discovery
+        rather than smoothing it away'
+  V1:
+    name: Level declaration
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The unit of description is declared precisely: a minimal computational subgraph over components
+      and the edges between them, with the edge-level emphasis marked as the difference from node-level
+      attribution methods. That declaration is implementational. The question in the title is algorithmic,
+      and §4 opens by asking how the MLPs compute greater-than as though it were a separate question,
+      which it is. The two levels are used side by side and the relation between them is never stated,
+      so a reader must decide for themselves whether "the circuit computes greater-than" is a claim about
+      an algorithm or a claim about where information travels. PC.
+
+      '
+    notes:
+      verification: 'The definition the cell quotes — "a minimal computational subgraph of our model that
+        suffices to compute the task" — is verbatim and sits in §3, as the cell says. The cell''s reading
+        of the title and abstract as algorithmic is an interpretation rather than a quotable statement;
+        the abstract sentence quoted here is the clearest case, since "boost the probability of end years
+        greater than the start year" describes an effect on outputs while the section it summarises describes
+        a subgraph.
+
+        '
+      legacy_evidence: 'Implicit. The definition given is implementational --- ``a circuit: a minimal
+        computational subgraph of our model that suffices to compute the task'''' (\S3) --- while the
+        title and abstract are pitched at the algorithmic level (``How does GPT-2 compute greater-than?'''').
+        The two are used interchangeably and the relation between them is never stated'
+  V2:
+    name: Level-evidence match
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'Evidence matches claim wherever the claim is about topography or flow. Which components
+      carry YY, which upweight years above it, and how much each contributes directly versus indirectly
+      are all measured, and the measurements are at the level of the assertions they support. The algorithmic
+      claim in the title outruns them, and the authors say so twice: §4 declines to answer how the MLPs
+      compute the comparison, and the conclusion leaves memorization versus generalization open. Matched
+      at two levels, unmatched at the one the title advertises, is PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, minor and locational. The legacy evidence attributes
+        "an open question for circuits work in general" to §5; the sentence is in §6, the conclusion.
+        The §4 concession "We cannot provide a conclusive answer" is verbatim and correctly located. Palumbo
+        et al. does not appear in this cell.
+
+        '
+      legacy_evidence: 'The topographic and flow claims are well matched to the evidence: which components
+        carry YY, which upweight years above it, and how much each contributes directly versus indirectly
+        are all measured. The algorithmic claim in the title is matched more weakly, and the authors say
+        so --- \S4 concedes ``We cannot provide a conclusive answer'''' on how the MLPs compute the comparison,
+        and \S5 leaves the memorization-versus-generalization question open, ``an open question for circuits
+        work in general'''''
+  V3:
+    name: Alternative level
+    status: PC
+    short: ''
+    verified: true
+    reasoning: 'The competing description is named, entertained seriously, and partly accepted. A lookup
+      table over memorized year associations would produce the same circuit diagram, the authors say so,
+      and they then do the harder thing: they state what would remain true under that reading, namely
+      that the retrieval is selective and operand-sensitive. They also list the evidence pointing the
+      alternative''s way, including their own failed causal tests. No experiment separates the two, so
+      the alternative is bounded rather than excluded. PC.
+
+      '
+    notes:
+      verification: 'Both sentences the cell quotes are verbatim in §5. The cell describes this as "an
+        honest bounding of the claim without an experiment to settle it", which the full read confirms:
+        no test distinguishing lookup from computation is run anywhere.
+
+        '
+      legacy_evidence: 'The alternative is named and partly accepted rather than dismissed: ``the presence
+        of a greater-than circuit does not preclude memorization. Our circuit could function internally
+        as a lookup table.'''' The authors then state what would still be true under that reading ---
+        ``even if we view this circuit as simply retrieving memorized facts, the retrieval mechanism at
+        work is sophisticated'''' --- which is an honest bounding of the claim without an experiment to
+        settle it'
+  V4:
+    name: Unlicensed labeling
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'Every component label redescribes a measurement. Heads "communicate YY" after the logit
+      lens shows YY as the top-ranked token in their output; MLPs "upweight precisely those years greater
+      than YY" after the upper-triangular pattern is shown; MLP 11 "enforces a maximum duration" after
+      the 50-year window is visible in its logit lens. The construct name is a mathematical relation defined
+      by the task rather than a faculty attributed to the model, and no component is given an intention.
+      The one mentalistic verb, that the MLPs "must know the value of YY", is cashed out in the same sentence
+      as a routing constraint about what MLPs can attend to. C.
+
+      '
+    notes:
+      verification: 'The cell''s quoted phrases are verbatim and "know" is used exactly once in the sense
+        the cell describes. One tension with the criterion as renamed, which asks whether a nearby alternative
+        would satisfy the same name with nothing run to separate them: "MLPs 9-11 directly compute greater-than"
+        is a mechanism label, and the paper''s own lookup-table alternative would satisfy it equally,
+        with no experiment separating them (see V3 and I5). The component-level labels survive that test
+        because each is tied to a specific measured pattern; the operation-level label does not, and a
+        stricter reading of V4 would make this PC.
+
+        '
+      legacy_evidence: 'The label names a mathematical relation, not a mental state, and no component
+        is given an intentional role. Component descriptions are operational throughout: heads ``communicate
+        the start year YY in embedding space,'''' MLPs ``upweight precisely those years greater than YY.''''
+        The one interpretive term used --- ``knows'''' in ``these MLPs at the end of the sentence must
+        know the value of YY'''' --- is immediately cashed out as an information-routing constraint'
+  V5:
+    name: Scope declaration
+    status: C
+    short: ''
+    verified: true
+    reasoning: 'Scope is declared before the evidence and again after it. Section 5 bounds the generalization
+      test in advance, calling the analyses qualitative and restricting them to tasks that keep the year
+      format and output space, so a reader knows what the results will not settle before seeing them.
+      Section 4 concedes the central mechanism question outright. The conclusion names four limits — model
+      size, dataset size, phenomenon simplicity, and a model-centric method — and pairs two of them with
+      the experiments that would close them. Declared in both directions and specific about the remedy
+      is C.
+
+      '
+    notes:
+      verification: 'All four limits and both proposed experiments are verbatim in §6, and the §5 scope
+        sentence is verbatim, so the cell''s account is accurate throughout. The one thing the paper never
+        bounds is its own selection procedure; that omission is recorded at M3 and M7 rather than here.
+
+        '
+      legacy_evidence: 'Declared twice and in both directions. \S5 bounds the generalization test before
+        running it: ``Answering this question fully would require an in-depth exploration of circuit similarity
+        that fall outside the scope of this paper. For the purposes of this investigation, we perform
+        primarily qualitative analyses of tasks that preserve the format and output space of year-span
+        prediction.'''' \S6 names four limits --- model size, dataset size, phenomenon simplicity, and
+        a model-centric method --- and states the two experiments that would close them'

@@ -1,0 +1,1131 @@
+claim: ioi
+verdict: Causally Suggestive
+readings:
+- statement: A circuit comprising these 26 heads performs IOI in GPT-2 small on the origin templates
+  verdict: Causally Suggestive
+  missing: Independent evidence (C3), separation from other circuits (I6), and robustness to method and
+    prompt (M3, M6)
+  primary: true
+- statement: These 26 heads are \emph{the} mechanism, to the exclusion of others
+  verdict: Underdetermined
+  missing: A test that discriminates among rival head sets; na\"ive and greedy-search circuits reach comparable
+    faithfulness (I5)
+  primary: false
+- statement: The mechanism generalizes across prompts and models
+  verdict: Disconfirmed
+  missing: 'Nothing --- tested and failed: model and circuit diverge at $10^6$ prompt pairs (E2), and
+    faithfulness varies across the origin''s own templates (M6)'
+  primary: false
+- statement: The seven classes compose in the stated order, each performing the role its name asserts
+  verdict: Underdetermined
+  missing: Weight-level accounts for four of seven classes (C2); role semantics currently exceed the evidence
+    (V2)
+  primary: false
+hypotheses:
+- id: H1
+  view: Object
+  label: the 26 heads in seven classes as described
+- id: H2
+  view: Object
+  label: a smaller core subset carries it
+- id: H3
+  view: Object
+  label: the computation is distributed across no fixed head set
+- id: H4
+  view: Contrastive
+  label: the structure is specific to the origin templates
+- id: H5
+  view: Instrumental
+  label: the structure is an artifact of the ablation protocol
+views_evidence:
+- criterion: C2
+  evidence: Path patching identifies 26 heads with consistent role assignments
+  cells:
+    H1: C
+    H2: C
+    H3: I
+    H4: C
+    H5: C
+  designed_for:
+  - H1
+- criterion: M2
+  evidence: OV copy score above 95 percent for Name Movers against under 20 percent average
+  cells:
+    H1: C
+    H2: C
+    H3: I
+    H4: C
+    H5: I
+  designed_for:
+  - H1
+- criterion: I1
+  evidence: Knocking out all three Name Movers costs only 5 percent of logit difference
+  cells:
+    H1: C
+    H2: I
+    H3: C
+    H4: C
+    H5: C
+  designed_for:
+  - H1
+- criterion: I9
+  evidence: Backup Name Movers take over the function after knockout
+  cells:
+    H1: C
+    H2: I
+    H3: C
+    H4: C
+    H5: '-'
+  designed_for:
+  - H1
+- criterion: I2
+  evidence: Circuit alone recovers 87 percent of logit difference under mean ablation
+  cells:
+    H1: C
+    H2: C
+    H3: I
+    H4: C
+    H5: C
+  designed_for:
+  - H1
+- criterion: M2
+  evidence: The naive circuit's faithfulness gap of 0.1 is smaller than the published circuit's 0.46,
+    so on faithfulness, where lower is better, the two are comparable and separation comes only from the
+    completeness tests
+  cells:
+    H1: I
+    H2: C
+    H3: C
+    H4: C
+    H5: I
+  designed_for:
+  - H1
+- criterion: I5
+  evidence: Greedy search finds head sets of comparable faithfulness
+  cells:
+    H1: I
+    H2: C
+    H3: C
+    H4: C
+    H5: C
+  designed_for:
+  - H2
+  - H3
+- criterion: M3
+  evidence: Six method choices move faithfulness below 0 percent to over 100 percent
+  cells:
+    H1: I
+    H2: I
+    H3: C
+    H4: C
+    H5: C
+  designed_for: []
+- criterion: M4
+  evidence: Faithfulness exceeding 100 percent leaves the metric with no interpretable ceiling
+  cells:
+    H1: I
+    H2: I
+    H3: C
+    H4: C
+    H5: C
+  designed_for: []
+- criterion: M6
+  evidence: Faithfulness is systematically greater on the discovery templates
+  cells:
+    H1: I
+    H2: I
+    H3: C
+    H4: C
+    H5: C
+  designed_for:
+  - H4
+- criterion: E2
+  evidence: Model and circuit behaviour diverge at a million prompt pairs
+  cells:
+    H1: I
+    H2: I
+    H3: C
+    H4: C
+    H5: C
+  designed_for: []
+- criterion: I4
+  evidence: 78 percent head overlap with the Colored Objects circuit alongside near-zero cross-task faithfulness
+  cells:
+    H1: I
+    H2: I
+    H3: C
+    H4: C
+    H5: C
+  designed_for: []
+- criterion: E4
+  evidence: Tigges et al. reproduce the three-step algorithm across Pythia 70m to 2.8b with step metrics
+    generally above 50 percent, while the origin's own preliminary GPT-2 medium check finds a sparse direct-effect
+    head set whose members do not all attend to IO and S
+  cells:
+    H1: C
+    H2: C
+    H3: I
+    H4: I
+    H5: I
+  designed_for:
+  - H4
+  - H5
+tiers:
+- name: Proposed
+  requires: C1--C2; one admissible measurement
+  missing: '---'
+- name: Causally Suggestive
+  requires: Necessity (I1); baselines (M2)
+  missing: '---'
+- name: Mechanistically Supported
+  requires: Sufficiency (I2); reach (E1); specificity (I4)
+  missing: \textbf{E1}, \textbf{I4} inconclusive
+- name: Triangulated
+  requires: Convergence (C3); replication (E2/E4); dissociation (I6)
+  missing: '\textbf{C3}: the five families all descend from ablation; \textbf{E2} Disconfirmed; \textbf{I6}
+    unattempted'
+- name: Validated
+  requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
+  missing: \textbf{M3}, \textbf{M6}, \textbf{E2} Disconfirmed
+criteria:
+  C1:
+    name: Falsifiability
+    status: C
+    short: 26 heads named with roles; criteria stated as failable quantities
+    verified: true
+    reasoning: 'Each of the 26 heads carries a role assignment tied to a path-patching prediction that
+      the experiment could have contradicted, and the three validation criteria are stated as quantities
+      with the direction of failure fixed before they are computed. The strongest evidence that the criteria
+      are live is that the paper reports failing one of them and says so in the introduction. Falsifiable
+      and falsified in part is C.
+
+      '
+    notes:
+      verification: 'Head count checks out against Figure 2: 2 Previous Token, 3 Duplicate Token, 4 Induction,
+        4 S-Inhibition, 2 Negative Name Mover, 3 Name Mover, 8 Backup Name Mover = 26. §1 gives the density
+        as "1.1% of the total number of (head, token position) pairs." The legacy evidence''s "greedy
+        incompleteness up to 3.09" is verbatim.
+
+        '
+      legacy_evidence: Twenty-six heads are named with role assignments, each making a path-patching prediction
+        that could have failed. The three validation criteria are stated as quantities with failure conditions
+        before they are computed, and the circuit fails one of them (their \S4.1, greedy incompleteness
+        up to 3.09)
+      verdict_derivation: 'Verdict computed from the criteria on 2026-08-07 rather than asserted: Causally
+        Suggestive, blocked above that by E1=I, I4=I. The 35-criterion table scores the primary reading,
+        so the criteria, the primary reading''s verdict and the overall verdict are one number by construction.'
+  C2:
+    name: Structural plausibility
+    status: PC
+    short: Weight-level for two of seven classes; three omissions the authors name
+    verified: true
+    reasoning: 'Weight-level validation exists and is quantitative for the two Name Mover classes: the
+      copy score pushes the residual stream through the head''s OV matrix and the unembedding, and it
+      separates from an average head by a wide margin in both directions. For the remaining classes the
+      paper names the parameter-level checks it would need and states it did not run them, and §5 records
+      that one class''s attention pattern is not understood at all. Structural evidence present for some
+      classes and explicitly absent for others is PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL, arithmetical. The legacy evidence says weight-level
+        analysis is "explicitly not done" for "four of the seven classes". The paper names two classes
+        in §3.3 (Duplicate Token, Induction) and one more in §5 (S-Inhibition). Previous Token Heads and
+        Backup Name Mover Heads get no weight-level analysis either, so five of seven lack it and three
+        are named as omissions by the authors. Four is neither count. The legacy evidence quotes "checks
+        that we omitted due to time constraints"; the paper reads "additional checks that we omitted due
+        to time constraints". The 95%/20% and 98%/12% figures are verbatim.
+
+        '
+      legacy_evidence: 'Weight-level analysis exists for one head class: the OV copy score reaches $>$95\%
+        for all three Name Movers against $<$20\% for an average head, and 98\% negative copy score for
+        the Negative Name Movers (their \S3.1). For four of the seven classes it is explicitly not done
+        --- \S3.3 lists QK collision detection, OV positional copying, and Elhage-style parameter analysis
+        as ``checks that we omitted due to time constraints,'''' and \S5 states the S-Inhibition Heads''
+        attention patterns are not understood'
+  C3:
+    name: Convergent validity
+    status: PC
+    short: Five evidence types, but only three share the mean-ablation primitive
+    verified: true
+    reasoning: 'Five method families appear at origin and they agree on the head assignments. They are
+      not five independent instruments. Path patching, knockout and activation patching are three granularities
+      of one primitive, mean ablation against p_ABC, so agreement among them is close to arithmetic. The
+      two that are genuinely independent of ablation — the OV copy score, computed from weights alone,
+      and attention-pattern inspection — are applied to some head classes and not others. Convergence
+      is real and partial, which is PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL''S `short`, which reads "Five families at origin, all
+        descended from ablation". Two of the five are not: the OV copy score (§3.1) is a weight computation
+        with no intervention, and attention-pattern inspection is observational. Three of the five share
+        the mean-ablation primitive. The steelman of the `short` is that head *identification* always
+        starts from path patching and the other families only characterise heads already selected — true,
+        and a sharper statement than the one recorded. The post-origin agreement (ACDC, EAP, EAP-IG, SAE
+        circuits, edge pruning) is not verifiable against this source.
+
+        '
+      legacy_evidence: 'Five families at origin: path patching, attention-pattern inspection, weight-level
+        copy scores, out-of-distribution validation on repeated random tokens (Appendices H, I), and a
+        behavioural adversarial test (\S4.4). Later agreement is broad --- ACDC \citep{conmy2023towards},
+        EAP \citep{syed2023attribution}, EAP-IG \citep{hanna2024faith}, SAE circuits (O''Neill \& Bui
+        2024), edge pruning (Bhaskar et al.\ 2024) all recover overlapping head sets. The cap is that
+        agreement is method-conditional: seven independent groups report that varying the ablation or
+        the metric changes the recovered set'
+  C4:
+    name: Discriminant validity
+    status: I
+    short: 78\% head overlap with Colored Objects; opposite result elsewhere
+    verified: false
+    reasoning: 'NOT SETTLED BY THE SOURCE. The paper never compares the IOI circuit against a circuit
+      for a different task, in this or any model, so nothing in it bears on whether the construct separates
+      from a neighbouring one.
+
+      '
+    notes:
+      verification: 'Read in full. The only cross-setting material is the GPT-2 medium note in §5, which
+        is cross-model (E4), and the repeated-random-token validations in Appendices H and I, which test
+        the same components on a different distribution rather than against a competing construct. Merullo
+        et al. and Hanna et al. are post-origin and cannot be checked here.
+
+        '
+      legacy_evidence: Tested twice with opposite results in different models. \citet{merullo2024circuit}
+        find 25/32 = 78\% head overlap between the IOI and Colored Objects circuits in GPT-2 \emph{Medium}
+        at a top-2\% threshold, against 3/18 for Greater-Than as a control; \citet{hanna2024faith} find
+        cross-task faithfulness near zero for most task pairs in GPT-2 \emph{small}, with the smallest
+        EAP circuit containing $\geq$90\% of the manual IOI nodes reaching 0\% faithfulness. Different
+        models, different quantities, unreconciled
+  C5:
+    name: Nomological validity
+    status: PC
+    short: Induction-head theory applied operationally; no formal derivation
+    verified: true
+    reasoning: 'The circuit is connected to induction-head theory operationally rather than by analogy:
+      the paper imports Olsson et al.''s own two-part definition, runs both tests on repeated random sequences,
+      and reports that heads 5.5 and 6.9 pass. The connection then breaks in an informative way. The heads
+      satisfy the induction definition and do something else inside this circuit, supplying a positional
+      signal, and the paper states it did not investigate how. Theory applied and found not to transfer,
+      with no derivation replacing it, is PC.
+
+      '
+    notes:
+      verification: 'The legacy evidence''s quoted phrase "in the context we study, Induction Heads perform
+        a different function compared to what was described in their original discovery" is verbatim (§3.3),
+        and the top-five ranking is verbatim (Appendix H). One correction: the cell says the heads serve
+        "as positional signals (§3.3)"; the paper says their *outputs* are used as positional signals
+        for S-Inhibition values, which is a claim about where the output is read, not about what the head
+        computes.
+
+        '
+      legacy_evidence: 'Connected to induction-head theory through its operational definition, not by
+        analogy: Appendix H applies Olsson et al.''s prefix-matching and copying scores on repeated random
+        sequences and 5.5, 6.9 rank among the top five induction heads. The theory does not survive contact
+        --- ``in the context we study, Induction Heads perform a different function compared to what was
+        described in their original discovery,'''' serving as positional signals (\S3.3), a mechanism
+        the paper does not explain'
+  M1:
+    name: Reliability
+    status: I
+    short: SDs plotted for attention probabilities; none on faithfulness
+    verified: true
+    reasoning: 'Sample sizes are disclosed for every estimate the paper computes, and dispersion is shown
+      where the quantity is an attention probability. The quantity the argument rests on gets neither:
+      faithfulness is reported once, as 0.46, with no interval, no resampling and no per-example spread,
+      and the same holds for the incompleteness and minimality scores. Dispersion reported for the peripheral
+      measurements and withheld from the central one is I.
+
+      '
+    notes:
+      verification: 'All five N values in the legacy evidence check out: N > 200 (Appendix B), N = 500
+        (§3.1 attention-vs-projection correlation), N = 1000 (§3.1 copy score), 100,000 (§2 model baseline).
+        Standard deviations appear in Figures 4c and 10 as the cell states. No confidence interval or
+        bootstrap appears anywhere in §4 or Appendix K. The Méloux et al. Jaccard figures are post-origin.
+
+        '
+      legacy_evidence: 'Partial at origin: standard deviations are plotted for Name Mover attention probabilities
+        (Figures 4c, 10), $N$ is stated for every estimate ($N > 200$ path-patching pairs, $N = 500$ and
+        $N = 1000$ for copy scores, 100{,}000 for the model baseline). No bootstrap or confidence interval
+        on faithfulness. Measured later and the answer is middling: M\''eloux et al.\ (2025) report mean
+        pairwise Jaccard 0.67 under bootstrap resampling on gpt2-small IOI, against the 0.8 bar those
+        authors propose, rising to 0.88--0.89 under paraphrase resampling'
+  M2:
+    name: Baseline separation
+    status: PC
+    short: Na\"ive circuit scores 0.1 against the full circuit's 0.46
+    verified: true
+    reasoning: 'Three baselines are present in the source and the quotes fix what each one is. The copy-score
+      baselines are average-head comparisons and separate cleanly (>95% vs <20%; 98% vs 12%). The completeness
+      test carries a random-subset baseline, ten uniformly sampled K. The circuit-level baseline is the
+      naïve circuit of §4.3, and it does not separate on faithfulness: the paper''s own word is "comparable,"
+      and because faithfulness is defined as the gap |F(M) - F(C)| the naïve circuit''s 0.1 is a *smaller*
+      gap than the published circuit''s 0.46. Separation between the two circuits comes only from the
+      completeness tests, and even that is partial, since the greedy sampler gives both circuits similarly
+      large incompleteness scores. That pattern — baselines present, one of them failing to separate on
+      the headline quantity — supports PC.
+
+      '
+    notes:
+      verification: 'RESOLVES THE RECORDED CONTRADICTION. audit_tables_full/ACH_IOI.tex line 45 ("A naïve
+        circuit reaches faithfulness 0.1 against the full circuit''s 0.46, §4.3") and mechanistic_validity_v17.tex
+        line 786 ("the paper''s own naïve baseline circuit reaches comparable faithfulness, §4.3") are
+        both factually correct against the source and are not in conflict. The paper defines faithfulness
+        as the absolute gap |F(M) - F(C)| in logit-difference units, so lower is better; 0.1 and 0.46
+        are gaps, not scores where higher is better. The naïve circuit''s gap is 0.1 against a model baseline
+        of F(M) = 3.56, i.e. it reproduces roughly 97% of the model''s logit difference against the published
+        circuit''s 87%. On the paper''s own headline quantity the naïve circuit is the better of the two.
+        The residual problem is presentational: the ACH_IOI.tex phrasing "0.1 against the full circuit''s
+        0.46" reads, under the ordinary convention that higher faithfulness is better, as the naïve circuit
+        being four times worse. That cell should state the direction (lower is better, it is a gap) or
+        the reader will invert it. UNITS: logit difference between the IO and S tokens, averaged over
+        p_IOI, not a probability and not normalised. F(M) = 3.56 over 100,000 examples (§2). SOURCE ERROR:
+        §4.3 cites "(Figure 6a)" for the naïve circuit''s completeness results, but the Figure 6 caption
+        assigns (a) to "our circuit" and (b) to "a naive circuit," and the panel headers read "Full circuit
+        completeness tests" and "Naive circuit completeness tests." The §4.3 reference should be Figure
+        6b. Math notation in the quotes is normalised from the PDF''s typeset form (the pdftotext layout
+        extraction renders it as "|F (M ) − F (C)|").
+
+        '
+      legacy_evidence: Three baselines exist and one of them fails to separate. The na\"ive baseline circuit
+        scores 0.1 against the published circuit's 0.46 on a measure where lower is better, so the origin
+        calls it ``comparable to the full circuit $C$'' (\S4.3); separation comes only from the completeness
+        tests, and under greedy search ``both circuits have similarly large incompleteness scores.'' Ten
+        uniformly-random subsets $K$ are sampled in the completeness test (Figure 6). Copy scores carry
+        an average-head baseline ($>$95\% vs $<$20\%; 98\% vs 12\%). What is missing is a capacity-matched
+        random \emph{circuit} null for the 87\% figure; Shi et al.\ (2024) supply it later, finding IOI
+        significantly more faithful than random circuits up to 90\% of model size
+  M3:
+    name: Stability
+    status: D
+    short: Six method choices move the same quantity below 0\% to over 100\%
+    verified: true
+    reasoning: 'The source runs no stability analysis: every reported number comes from one ablation value,
+      one metric and one dataset, and no quantity is recomputed under a varied methodological choice.
+      Two origin-side remarks bear on stability and point in opposite directions. Zero ablation is reported
+      as noisy relative to mean ablation, which is an observation that the choice of ablation value moves
+      results, though no numbers are given. Against that, the paper asserts the circuit is robust to which
+      Backup Name Movers are included, without supporting data. The recorded D therefore rests entirely
+      on post-origin work, which this source cannot settle.
+
+      '
+    notes:
+      verification: 'The status D is NOT verifiable against this source. Miller et al., Zhang & Nanda
+        and Méloux et al. are all post-origin and none of their quantities appear here. What the source
+        does show is that the origin ran no stability check, which is consistent with D but does not establish
+        it. Closest origin analogue: the completeness result in §4.1 is itself an instability across sampling
+        strategies for the same quantity — random and by-class sampling give small incompleteness scores,
+        greedy sampling gives up to 3.09. That is a search strategy varying, not a metric or ablation
+        varying, so it belongs to I5 rather than M3, but it is the only place the origin recomputes one
+        number under a changed procedure and gets a different answer.
+
+        '
+      legacy_evidence: 'Tested by five independent groups and failed. \citet{miller2024transformer} vary
+        six methodological choices and the same quantity ranges ``from below 0\% to well over 100\%,''''
+        with the variant that ``best represents the hypothesis of Wang et al.'''' scoring a median well
+        over 100\%. Zhang \& Nanda (2023): symmetric token replacement and Gaussian noising ``detect different
+        sets of heads as important'''' for any fixed metric. M\''eloux et al.\ (2025): across estimator
+        and aggregation choices on gpt2-small IOI the circuit size ranges from 5 to 21 edges while circuit
+        error stays flat at 0.10--0.14'
+  M4:
+    name: Calibration
+    status: PC
+    short: Logit difference has sign, null and baseline; faithfulness does not
+    verified: true
+    reasoning: 'The outcome metric is well calibrated. Logit difference carries a sign, a zero point that
+      means indifference between IO and S, and a measured model value of 3.56 over 100,000 examples, so
+      a change in it can be read for direction and against a reference. The validation metric inherits
+      the units and none of the calibration: faithfulness is an unsigned distance with no upper bound,
+      no null value and no stated threshold separating faithful from unfaithful, reported as a single
+      average. Calibrated outcome, uncalibrated validation quantity, is PC.
+
+      '
+    notes:
+      verification: 'The 3.56 baseline and the sign convention are verbatim. The unboundedness of |F(M)
+        - F(C)| follows from the definition rather than from any statement; the paper never sets a threshold
+        for what counts as faithful, which is the substance of the cell''s complaint. The Miller et al.
+        inter-quartile figure and the Mueller et al. CPR/CMD replacement are post-origin. Math notation
+        is normalised from the PDF''s typeset form.
+
+        '
+      legacy_evidence: 'Logit difference is well chosen --- it has a sign, a null value, and a stated
+        model baseline of 3.56. Faithfulness as $|F(M) - F(C)|$ is not calibrated: it has no upper bound,
+        is reported as a single average, and \citet{miller2024transformer} show its inter-quartile range
+        across examples reaches 50\% with outliers ``tens of thousands of percent.'''' \citet{mueller2025mib}
+        replace it with CPR and CMD for this reason'
+  M5:
+    name: Sensitivity
+    status: U
+    short: Unattempted; no planted circuit of known extent
+    verified: true
+    reasoning: 'The source''s validation set is exactly three criteria, all computed on the discovered
+      circuit inside the real model. A sensitivity test needs a circuit of known extent to recover — a
+      planted or synthetic mechanism — so that a miss can be distinguished from an absence. Nothing of
+      that kind appears, so there is no measurement of what the discovery procedure would fail to find.
+      U.
+
+      '
+    notes:
+      verification: 'Verified against a full read rather than a statement of omission: §4 and its subsections
+        contain all validation performed, Appendices K and M give its parameters, and no known-positive
+        control appears anywhere. The quote bounds the validation set; it does not assert the absence
+        directly. Conmy et al.''s reset networks and Mueller et al.''s purpose-trained model are post-origin.
+
+        '
+      legacy_evidence: 'Unattempted. No known-positive control: no synthetic IOI circuit of known extent
+        is planted in GPT-2 small and recovered. The nearest instruments arrived later and target the
+        discovery \emph{method} rather than this circuit --- \citet{conmy2023towards} Appendix L introduces
+        reset networks as a hallucination control, and \citet{mueller2025mib} substitutes a purpose-trained
+        model whose IOI-like circuit is known by construction'
+  M6:
+    name: Invariance
+    status: D
+    short: Faithfulness differs across the origin's own templates
+    verified: true
+    reasoning: 'The origin''s own distribution contains both name orders and fifteen syntactic frames,
+      so any later split between ABBA and BABA is a split inside the set the circuit was validated on.
+      The origin never breaks a result down by template or by order; every reported number is an average
+      over the whole generator, which is what makes the invariance question answerable only from outside.
+      One invariance check does exist and passes: the positional signal survives lengthening the sentence
+      prefix, moving logit difference from 3.56 to 3.57.
+
+      '
+    notes:
+      verification: 'The recorded D is NOT verifiable against this source. Miller et al. and Franco et
+        al. are post-origin. What the source supplies is the precondition for their result — both orders
+        are in scope — and one passing invariance test the cell does not mention (Appendix A, prefix length).
+        A cell recording M6 as tested and failed should note that the origin''s single invariance test
+        passed.
+
+        '
+      legacy_evidence: 'Tested and failed on the origin''s own template set. \citet{miller2024transformer}:
+        faithfulness is ``systematically greater for the prompts of form BABA than prompts of form ABBA.''''
+        Franco et al.\ (2026) show the same split in the traced mechanism --- per-prompt IOI circuits
+        in GPT-2 Small cluster into an ABBA cluster and a BABA cluster with no substructure from surface
+        wording. Zhang \& Nanda (2023): under S2 corruption every metric misses at least two of the three
+        Name Movers; under S1+IO corruption all three are found and no S-Inhibition Heads are'
+  M7:
+    name: Selection correction
+    status: U
+    short: N is unstated for the post-knockout sweep, the selection step itself
+    verified: true
+    reasoning: 'Every head class is selected by thresholding a swept quantity over the model''s full head
+      set, and the source discloses the sweep, the threshold and the arbitrariness of the cutoff in its
+      own words. What it never applies is any correction for the number of comparisons that selection
+      involves. The word "significant" is used descriptively throughout, with no test and no null distribution
+      behind it. Disclosed selection with no correction is U.
+
+      '
+    notes:
+      verification: '"We arbitrarily chose" and the 2% threshold are verbatim (Appendix F). The cell''s
+        "candidate pool (144 heads)" is arithmetic from §2 (12 layers × 12 heads); the paper never writes
+        144. CONTRADICTION WITH THE CELL: it says "The candidate pool (144 heads) and N are stated at
+        every step". N is stated for path patching, the copy scores and the model baseline, but not for
+        the post-knockout sweep in §3.4 from which the Backup Name Movers are drawn, which is the step
+        the criterion is about.
+
+        '
+      legacy_evidence: Unattempted. Eight Backup Name Movers are chosen from the post-knockout sweep because
+        they ``were not part of any other groups, and affected the logit difference with an effect size
+        above the threshold of 2\%'' --- the paper writes ``we arbitrarily chose.'' The candidate pool
+        (144 heads) and $N$ are stated at every step; no multiplicity control is applied to any of it
+  I1:
+    name: Necessity
+    status: PC
+    short: Name Mover knockout costs only 5\%; the paper says so itself
+    verified: true
+    reasoning: 'Necessity is demonstrated by knockout, and the source reports the demonstration failing
+      at the level of the circuit''s headline component class: removing all three Name Mover Heads leaves
+      95% of the logit difference. The per-node necessity test is existentially quantified — "there exists
+      a subset K" — so each minimality score is conditional on a co-ablated set selected to make that
+      score large, and the paper states the resulting effects are small. Necessity is therefore established
+      for the circuit under a favourable conditioning set rather than for its components unconditionally,
+      which is PC.
+
+      '
+    notes:
+      verification: 'Both quantities in the legacy evidence check out verbatim: "only 5% drop in logit
+        difference" (§3.4) and "at least 1% of the original logit difference" (§4.2). The legacy evidence''s
+        characterisation of the minimality sets as "chosen to maximise them" is an accurate reading of
+        the existential quantifier in the §4.2 definition, though the paper does not use the word "maximise"
+        for the choice of K; the greedy maximisation in Appendix M is applied to the completeness score,
+        not to minimality. Appendix K (Figure 20) prints the K set, F(C \ (K ∪ {v})) and F(C \ K) for
+        all 26 nodes, so the conditioning is fully disclosed. The S-Inhibition rows are the strongest
+        necessity evidence in the paper and are not cited in the cell: with K the four S-Inhibition Heads,
+        F(C \ K) falls from 0.43-1.01 to 0.24.
+
+        '
+      legacy_evidence: 'Weak at the component level and the paper says so. Knocking out all three Name
+        Mover Heads costs ``only 5\% drop in logit difference'''' (\S3.4). Minimality scores are conditional
+        on a co-ablated set $K$ chosen to maximise them, and even so ``the individual contribution of
+        some attention heads is small'''' (\S4.2, Figure 7, all $\geq$1\%). Gong et al.\ (2026) quantify
+        the reason: the name-mover module is 1.9$\times$ super-additive, so removing primaries costs 0.22
+        logit difference and removing primaries plus backups costs 1.15'
+  I2:
+    name: Sufficiency
+    status: PC
+    short: Mean-ablating outside the circuit leaves 87\% of the logit difference
+    verified: true
+    reasoning: 'Sufficiency is measured directly and the quotes give both the number and its protocol:
+      everything outside the circuit is mean-ablated against the p_ABC reference distribution, and the
+      surviving average logit difference is 87% of the model''s. The source reports a single average over
+      p_IOI with no dispersion and no per-example figure, and the paper itself flags that this number
+      does not settle the account. One protocol, one aggregate, no interval — PC.
+
+      '
+    notes:
+      verification: 'The 0.46 / 13% / 87% figures and the quoted phrase "or only 13% of F(M) = 3.56" are
+        verbatim from §4. The ablation value is the mean over p_ABC, computed per-template (§2.1), which
+        the cell does not state and which matters: the reference distribution is not the task distribution.
+        Math notation in the quotes is normalised from the PDF''s typeset form.
+
+        '
+      legacy_evidence: 'Mean-ablating everything outside the circuit leaves $|F(M)-F(C)| = 0.46$, ``or
+        only 13\% of $F(M)=3.56$'''' (\S4), which is the 87\% figure. It holds on average and under one
+        protocol. Per example it does not: \citet{miller2024transformer} report an inter-quartile range
+        up to 50\%, and uit de Bos \& Garriga-Alonso (2024) find the model-circuit KL over 1{,}000{,}000
+        input pairs has mean 5.15 and max 14.64. Shi et al.\ (2024) find IOI passes a relaxed sufficiency
+        test up to 90\% of model size'
+  I3:
+    name: Minimality
+    status: I
+    short: Every node clears 1\%; Backup heads make components individually replaceable
+    verified: true
+    reasoning: 'Minimality is tested at origin against a stated threshold and every node clears it, so
+      on the paper''s own terms the criterion passes and the K sets are disclosed in Appendix K. The same
+      source supplies the reason the pass is weak. Backup Name Mover Heads are defined as components that
+      take over when others are removed, and the paper states their individual importance is the lowest
+      in the circuit and that swapping which eight are included does not change the circuit''s behaviour.
+      A criterion whose pass depends on a conditioning set, applied to components the authors say are
+      interchangeable, does not establish that the circuit is minimal — I.
+
+      '
+    notes:
+      verification: '"at least 1% of the original logit difference" is verbatim (§4.2). Appendix K Figure
+        20 prints per-node K sets with both F values, confirming the cell. The Appendix F sentence "The
+        exact choice of Backup Name Mover Heads doesn''t change significantly the behavior of the circuit"
+        is an explicit origin-side statement that eight of the 26 nodes are substitutable, which strengthens
+        the recorded I beyond what the cell cites. It is asserted without supporting data in the paper.
+
+        '
+      legacy_evidence: 'Tested at origin and passed on its own terms --- every node has ``at least 1\%
+        of the original logit difference'''' impact (\S4.2, Figure 7), with the K sets printed in Appendix
+        K. Contested since, and the disagreement is traceable to the ablation method: Shi et al.\ (2024)
+        remove about 20\% of IOI''s edges with faithfulness non-monotonic in the removal; Li \& Janson
+        (2024) find that under \emph{optimal} ablation the manual circuit is ``approximately optimal for
+        its size'''' and attribute the apparent slack under mean/resample/counterfactual ablation to spoofing
+        artifacts'
+  I4:
+    name: Specificity
+    status: I
+    short: Verdict depends on whether head overlap or task effect is measured
+    verified: true
+    reasoning: 'The source runs no off-target test. It defines exactly two outcome measures, both functions
+      of the same two logits on the same task, so there is no second quantity on which a specificity failure
+      could register. What the source does supply is evidence pointing the other way: every head class
+      it validates outside p_IOI is validated by showing the head performs its role on non-IOI input.
+      Duplicate Token, Previous Token, Induction and Name Mover heads are all shown to be active on repeated
+      random sequences. Components shared with other behaviours, no measure that could detect an off-target
+      effect: the recorded I does not overstate what the origin settles.
+
+      '
+    notes:
+      verification: 'The origin evidence here is unattributed in the cell, which reads as though I4 were
+        tested only by post-origin work. It is not: Appendices H and I are specificity evidence in the
+        negative direction, showing the circuit''s components are not IOI-specific, and Appendix C reports
+        the fuzzy Duplicate Token Head 0.10 attending to duplicates on Open Web Text. That strengthens
+        the recorded I from the source itself rather than only from Merullo and Hanna. The Merullo and
+        Hanna results in the legacy evidence are post-origin and are not verifiable against this PDF.
+
+        '
+      legacy_evidence: Tested, with results that depend on the quantity measured. \citet{merullo2024circuit}
+        find 78\% head overlap between the IOI and Colored Objects circuits in GPT-2 Medium and raise
+        Colored Objects accuracy from 49.6\% to 93.7\% by forcing IOI-style inhibition; \citet{hanna2024faith}
+        find cross-task faithfulness near zero in GPT-2 small and conclude ``overlap is not a good predictor
+        of cross-task faithfulness.'' Shared components, unshared behaviour
+  I5:
+    name: Rival mechanism exclusion
+    status: I
+    short: Greedy search finds knockout sets carrying 87\% of the behaviour
+    verified: true
+    reasoning: 'Two rivals are present in the source and neither is ruled out. The naïve circuit is a
+      strictly smaller specification that the paper reports as reaching comparable faithfulness, and the
+      greedy completeness search finds knockout sets under which the model still performs the task while
+      the circuit does not, recovering up to 87% of the original logit difference outside the published
+      circuit. The paper does not characterise what carries the behaviour in those cases, calling the
+      sets not semantically interpretable and the incompleteness difficult to interpret. Rivals exhibited
+      and left standing is I.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL''S `short`. The `short` reads "Naïve and greedy-search
+        circuits reach comparable faithfulness." The greedy search does not produce a circuit and does
+        not produce a faithfulness score. It produces sets K to knock out, and 3.09 is an incompleteness
+        score |F(C \ K) - F(M \ K)|, a different quantity from the faithfulness |F(M) - F(C)| that yields
+        0.1 and 0.46. The finding is real and arguably stronger than the `short` claims — it says components
+        outside the published circuit can carry 87% of the behaviour — but it is not a rival circuit measured
+        on faithfulness. The legacy evidence states this correctly; the `short` compresses it wrongly.
+        Same error in audit_tables_full/ACH_IOI.tex line 46, "Greedy search finds head sets of comparable
+        faithfulness." Status left unchanged. The correction runs the same direction as I, so the recorded
+        status stands on the corrected reading. The Chen et al. sheaf results in the legacy evidence are
+        post-origin and not verifiable against this PDF.
+
+        '
+      legacy_evidence: 'Rival sets exist and are not excluded. \citet{wang2023interpretability} report
+        a na\"ive circuit reaching comparable faithfulness (\S4.3) and greedy search finding subsets with
+        incompleteness score ``up to 3.09 (87\% of the original logit difference)'''' that ``were usually
+        not semantically interpretable'''' (\S4.1). Chen et al.\ (2026) push it further: two IOI sheaves
+        at 100\% accuracy with edge IoU 4.1\%, and across twenty sheaves a shared core of 11 edges out
+        of a 7382-edge union --- with the caveat that node-level IoU is 64.2\%, so the near-disjointness
+        is in routing'
+  I6:
+    name: Double dissociation
+    status: U
+    short: Unattempted; no published test located
+    verified: true
+    reasoning: 'A double dissociation needs two mechanisms and two behaviours, with each intervention
+      moving one and sparing the other. The source defines one circuit for one behaviour and validates
+      it against three criteria, none of which is comparative in that sense, and it never localises a
+      second mechanism to trade against. The design is absent, not attempted and inconclusive. U.
+
+      '
+    notes:
+      verification: 'Verified against a full read. The nearest thing in the source is the token/position
+        decomposition in §3.2 and Appendix A, which dissociates two *signals* carried by one head class
+        rather than two mechanisms behind two behaviours, and so does not meet the criterion. Feucht et
+        al. and Li & Subramani are post-origin.
+
+        '
+      legacy_evidence: 'Unattempted, and searched for. \texttt{IOI\_LITERATURE.md} \S1.6 records no published
+        double-dissociation test on IOI. The nearest published design runs the full cross-task ablation
+        matrix on other models and finds no dissociation at all: Li \& Subramani (2026) report that ``ablating
+        one task''s circuit damages another task''s performance about as much as that task''s own circuit
+        does,'''' with IOI the extreme case'
+  I7:
+    name: Confound control
+    status: PC
+    short: Sequence length controlled twice; name frequency is not
+    verified: true
+    reasoning: 'One confound is controlled to the point of being a main result. Position and token identity
+      are separated by a factorial design — six datasets crossing three token conditions with two position
+      conditions — and the resulting additive model predicts logit difference to within 7%, which is what
+      licenses the claim that the S-Inhibition signal is positional. Syntax is controlled by construction,
+      since the mean used for ablation is computed within template. Other confounds are handled by restriction
+      rather than by measurement, and name frequency is not addressed at all. Strong control on the confound
+      that matters most, none on the rest, is PC.
+
+      '
+    notes:
+      verification: 'The "less than 8%" figure is verbatim and is correctly attributed by the cell to
+        the converse control on Duplicate Token and Induction Head outputs (§3.3), not to S-Inhibition
+        Heads directly. The 15 templates and within-template mean are verbatim (§2, §2.1). CONTRADICTION
+        WITH THE CELL, partial: it says "Name frequency and sequence length are uncontrolled". Sequence
+        length is controlled twice — Appendix E restricts every name, place and object to one token so
+        positions align, and Appendix A reports that lengthening the sentence prefix leaves logit difference
+        unchanged (3.56 vs 3.57). Name frequency is genuinely uncontrolled: names are drawn from a fixed
+        100-name list with no frequency stratification.
+
+        '
+      legacy_evidence: 'Two confounds controlled, and one of them is a main-text section. Position versus
+        token identity: \S3.2 and Appendix A build six counterfactual datasets isolating the two signals
+        and report the decomposition (Figure 9), then \S3.3 locates the position signal upstream, with
+        the converse control showing that changing S1/S2 tokens at fixed position moves logit difference
+        by ``less than 8\%'''' of the S-Inhibition effect. Syntax: 15 templates in both orders, with mean
+        ablation computed per template ``to ensure that grammatical information is constant'''' (\S2.1).
+        Name frequency and sequence length are uncontrolled, at origin and since'
+  I8:
+    name: Confounding sensitivity
+    status: U
+    short: Unattempted; no E-value or sensitivity analysis
+    verified: false
+    reasoning: 'NOT SETTLED BY THE SOURCE. Nothing in the paper quantifies how strong an unmeasured confounder
+      would have to be to overturn a reported effect, and no quantity in it can be read as such a bound.
+
+      '
+    notes:
+      verification: 'Read in full. The source''s causal claims rest on intervention rather than on adjustment,
+        so the E-value framing has no natural home in it; that is an explanation for the absence, not
+        evidence against the U.
+
+        '
+      legacy_evidence: Unattempted. No E-value or sensitivity analysis for an unmeasured confounder
+  I9:
+    name: Epistatic interaction
+    status: PC
+    short: Backup Name Movers are a discovered non-additivity
+    verified: true
+    reasoning: 'Non-additivity is the organising discovery of §3.4 rather than an incidental observation.
+      The paper re-runs its entire path-patching sweep after knocking out a head class, finds that heads
+      change role, and reports one head reversing the sign of its contribution. The finding is then built
+      into the validation: the minimality criterion is defined as an effect conditional on a co-ablated
+      set, so interaction is assumed rather than tested. What is missing is any systematic grid. The only
+      search over interacting sets is greedy, and the paper says the sets it returns mix classes and resist
+      interpretation. PC.
+
+      '
+    notes:
+      verification: 'The 10.7 sign flip is verbatim (Appendix F) and Figure 15 is the right locator. The
+        conditional form of the minimality score is verbatim in §4.2 and the per-head K sets are in Appendix
+        K, Figure 20. The Gong et al. super-additivity figures are post-origin.
+
+        '
+      legacy_evidence: Non-additivity is discovered, named, and made structural. \S3.4 re-runs the whole
+        path-patching sweep after knocking out a head class and finds heads change role --- Negative Name
+        Mover 10.7 flips sign (Figure 15) --- which is what Backup Name Movers are. The minimality criterion
+        is itself defined as a conditional effect $|F(C \setminus (K \cup \{v\})) - F(C \setminus K)|$,
+        with the co-ablated set printed per head (Appendix K). No systematic pairwise grid; the greedy
+        completeness sets mixing classes are ``difficult to interpret'' (\S4.1)
+  I10:
+    name: Rescue reversibility
+    status: PC
+    short: Direction reversed at origin; corrupt-then-restore run later
+    verified: true
+    reasoning: 'Every intervention in the source runs in one direction. Corrupted activations are written
+      into an otherwise clean forward pass and the damage is measured; the word "always" in the second
+      quote fixes that direction for the whole paper. The complementary test — restore one component inside
+      an otherwise corrupted run and measure how much behaviour returns — is never performed, so no rescue
+      result exists at origin.
+
+      '
+    notes:
+      verification: '"We will always take xorig to be a sample from pIOI" is the decisive sentence and
+        is verbatim. The cell''s characterisation of the direction is correct. The Chhabra et al. corrupt-then-retrain
+        result that lifts this to PC is post-origin and operates at the training level rather than the
+        activation level, so it is a different kind of rescue from the one the criterion describes.
+
+        '
+      legacy_evidence: 'Not run at origin --- path patching writes corruption into a clean run rather
+        than restoring a corrupted one, so the direction is reversed. Run later at the training level:
+        Chhabra et al.\ (2025) corrupt GPT-2 small by fine-tuning on corrupted IOI and find retraining
+        recovers the original circuit at 95--96\% faithfulness, and that clean fine-tuning amplifies existing
+        mechanisms without introducing new ones'
+  I11:
+    name: Onset coupling
+    status: N/A
+    short: Untestable in GPT-2 small, a released checkpoint with no training run
+    verified: true
+    reasoning: 'The audited system is a single released checkpoint. The source''s one statement about
+      training is a hypothesis about why the compensation effect exists, offered without any training-time
+      observable to test it against, which is exactly the position the N/A records: there is no training
+      run to intervene on and no sequence of checkpoints in which a mechanism''s onset could be timed
+      against the behaviour''s.
+
+      '
+    notes:
+      verification: 'Read in full. The dropout sentence is the only mention of training dynamics in the
+        paper and it is marked as a hypothesis. No checkpoint, training step or emergence curve appears
+        anywhere. The Tigges et al. Pythia result in the cell is cross-model and post-origin, which is
+        why the cell routes it to E4.
+
+        '
+      legacy_evidence: Untestable in this setting as run. GPT-2 small is a released checkpoint with no
+        pretraining checkpoints and no training run to intervene on, the same structural bar that makes
+        greater-than I11 not applicable. \citet{tigges2024llm} track 154 Pythia checkpoints and find name-mover
+        heads emerging at 2--8 $\times 10^9$ tokens ``during or just before IOI behavior appears'', which
+        is cross-model evidence (E4) rather than onset coupling in the audited system
+  I12:
+    name: Offset coupling
+    status: PC
+    short: One Pythia-160m head loses name-mover behavior while the algorithm persists elsewhere
+    verified: false
+    reasoning: 'NOT SETTLED BY THE SOURCE. The paper contains no observation of a component losing its
+      role, because it observes one checkpoint at one time.
+
+      '
+    notes:
+      verification: 'Read in full. Both results behind the recorded PC — the Pythia-160m head that loses
+        name-mover behaviour and the OLMo-2 reuse decline — are post-origin and in other models. Nothing
+        here bears on them.
+
+        '
+      legacy_evidence: One Pythia-160m head \emph{loses} name-mover behavior at 3 $\times 10^{10}$ tokens
+        while the algorithm persists in other heads \citep{tigges2024llm}, and \citet{lisubramani2026howmuch}
+        find IOI circuit reuse in OLMo-2 peaking in the first $\sim$76B tokens and then declining. Observed
+        rather than induced, and in other models
+  E1:
+    name: Intervention reach
+    status: I
+    short: One ablation value at origin, three granularities; methods disagree
+    verified: true
+    reasoning: 'One intervention value is used throughout — the mean over p_ABC — and it is applied at
+      three granularities: edge-level path patching, node-level knockout, and whole-class activation patching
+      with the forward pass recomputed. Zero ablation is considered and rejected on evidence rather than
+      by omission. The reach stops there: the paper states it never intervenes on MLPs, layer norms or
+      embeddings, no weight-level or steering intervention is performed, and no dose-graded version of
+      any ablation is reported. A single ablation value across three granularities, with the alternative
+      value the authors tried described as noisy, is the origin half of the recorded I.
+
+      '
+    notes:
+      verification: 'The quoted "0 is an arbitrary value" and "we find zero ablation to lead to noisy
+        results in practice" are verbatim and appear in the same sentence pair; the legacy evidence joins
+        them with an ellipsis, which the schema forbids inside a sentence. Quoted here in full instead.
+        The recorded I turns on the post-origin disagreement between resample and mean ablation (Miller
+        et al.), which is not verifiable against this source. The origin half is verified. The cell''s
+        granularity attributions are correct: path patching is Appendix B, knockout is §2.1, whole-class
+        activation patching with recomputation is Appendix A. Appendix A gives the reason for the third:
+        "the output of later (Backup) Name Mover Heads and Negative Heads depend on earlier heads from
+        these classes, such that it is not possible to ignore the interactions between heads inside a
+        class."
+
+        '
+      legacy_evidence: 'One ablation \emph{value} at origin, applied at three granularities: path patching
+        (edge-level, Appendix B), knockout (node-level, \S2.1), and activation patching of a whole head
+        class with the forward pass recomputed (Appendix A). Zero ablation is tried and rejected on evidence
+        --- ``0 is an arbitrary value \ldots we find zero ablation to lead to noisy results in practice''''
+        (\S2.1). The number moves with the primitive, in both directions: \citet{miller2024transformer}
+        find resample ablation systematically lower than mean at the node level ($p = 10^{-5}$) while
+        the edge-level, specific-position variant that ``best represents the hypothesis of Wang et al.''''
+        has ``a median score well over 100\%.'''' No steering, no weight intervention, no dose-graded
+        ablation at origin'
+  E2:
+    name: Prompt generalization
+    status: D
+    short: At $10^6$ clean/corrupted pairs, model and circuit diverge
+    verified: true
+    reasoning: 'All circuit validation happens on p_IOI, a fifteen-template generator, and every reported
+      number is an average over it; the source holds out no prompt set and reports no per-example distribution.
+      The one occasion it steps outside that generator, the circuit''s account stops covering the model''s
+      behaviour and the paper says so, naming an S-Inhibition attention pattern its analysis does not
+      reach. The origin therefore shows the account is bound to its prompt distribution.
+
+      '
+    notes:
+      verification: 'The §4.4 admission that behaviour outside p_IOI is "beyond the analysis presented
+        in Section 3" is origin-side evidence for the recorded D that the cell does not cite; the cell
+        rests entirely on uit de Bos & Garriga-Alonso, which is post-origin. Their KL figures cannot be
+        checked here.
+
+        '
+      legacy_evidence: Tested at scale on the origin task and failed. uit de Bos \& Garriga-Alonso (2024)
+        form 1{,}000{,}000 clean/corrupted pairs on gpt2-small and report model-vs-circuit KL with mean
+        5.15, median 5.12, max 14.64, worst points ``more than 5 standard deviations away from the mean,''
+        concluding the IOI circuit fails ``even on completely benign inputs from the original task.''
+        The failures have a content signature --- worst pairs ``often seem to involve romantic items''
+  E3:
+    name: Cross-task generalization
+    status: PC
+    short: Repeated-random-token generalization at origin, one direction
+    verified: true
+    reasoning: 'Generalisation is present at origin and runs one way: components identified on IOI are
+      shown to perform their assigned operation on repeated random sequences, which is a distribution
+      with no names, no syntax and no indirect object. That establishes the components are not IOI-specific.
+      It does not establish that the circuit as an assembled mechanism performs any other task, and no
+      second task is attempted. Component-level transfer without circuit-level transfer is PC.
+
+      '
+    notes:
+      verification: 'The legacy evidence renders the Appendix H sentence as "suggest[ing] that these heads
+        are involved beyond the IOI task", a bracketed alteration; the verbatim sentence is quoted here
+        in full. §5 independently flags the negative-head phenomenon as occurring beyond IOI. Merullo
+        et al., McDougall et al. and Hanna et al. are post-origin.
+
+        '
+      legacy_evidence: 'Present at origin in one direction: Appendix H shows Name Mover, Backup and Negative
+        heads writing in the next-token direction on repeated random sequences, ``suggest[ing] that these
+        heads are involved beyond the IOI task.'''' Later, \citet{merullo2024circuit} raise Colored Objects
+        accuracy from 49.6\% to 93.7\% by forcing IOI-style inhibition, and \citet{mcdougall2023copy}
+        show the negative name mover is a general copy-suppression mechanism (76.9\% of L10H7''s effect
+        on OpenWebText). Against this, \citet{hanna2024faith} report near-zero transfer on most task pairs'
+  E4:
+    name: Cross-model generalization
+    status: PC
+    short: GPT-2 medium preliminary; not all heads attend to IO and S
+    verified: true
+    reasoning: 'The source attempts one cross-model check and reports it as preliminary. What replicates
+      is the coarse property — a sparse set of heads with direct effect on the logits — and what does
+      not replicate is the mechanism, since the paper states the analogous heads in GPT-2 medium do not
+      all attend to IO and S. A partial replication in one larger model of the same family, declared preliminary,
+      is PC.
+
+      '
+    notes:
+      verification: '"not all of these heads attend to IO and S" is verbatim (§5) and the cell attributes
+        it correctly. Everything else in the cell — Merullo, Tigges, Mueller, and the GPT-2 Large and
+        XL overlap figures — is post-origin.
+
+        '
+      legacy_evidence: The origin's own preliminary GPT-2 medium analysis reports a sparse set of direct-effect
+        heads but ``not all of these heads attend to IO and S'' (\S5). \citet{merullo2024circuit} reproduce
+        the circuit in GPT-2 Medium with ``minor differences,'' with the negative mover behaving differently
+        (attending only to S2). Tigges et al.\ (2024) reproduce the three-step algorithm across Pythia
+        70m--2.8b, step metrics ``generally above 50\%,'' with copy-suppression heads flipping sign. \citet{mueller2025mib}
+        localize IOI in four model families. Component overlap with other tasks falls to 5/10 heads in
+        GPT-2 Large and 0/10 in XL
+  E5:
+    name: Graded response
+    status: PC
+    short: Graded in circuit extent, never in intervention strength
+    verified: true
+    reasoning: 'A dose-response curve exists on one axis. Figure 6 plots circuit performance against model
+      performance over many knockout sets of different sizes, and the greedy procedure keeps its intermediate
+      sets, so the curve is populated at several extents rather than at two endpoints. Intervention strength
+      is never graded: the ablation is the full mean over p_ABC every time, with no interpolation between
+      the clean and ablated activation. Graded in extent and binary in strength is PC.
+
+      '
+    notes:
+      verification: 'Figure 6''s caption confirms the many-K design and Appendix M confirms the intermediate
+        sets are retained, both as the cell states. Mueller et al.''s CPR/CMD and Shi et al.''s non-monotonicity
+        result are post-origin.
+
+        '
+      legacy_evidence: Graded in circuit \emph{extent} rather than intervention \emph{strength}, at origin
+        and since. Figure 6 plots $F(C \setminus K)$ against $F(M \setminus K)$ over many $K$ of different
+        sizes, and the greedy procedure records the intermediate sets. \citet{mueller2025mib} integrate
+        faithfulness over circuit size $k$ to define CPR and CMD; Shi et al.\ (2024) sweep edge removal
+        and find IOI's faithfulness ``does not vary monotonically as more edges are knocked out.'' No
+        interpolation between clean and ablated activations
+  E6:
+    name: Novel prediction
+    status: C
+    short: Duplicated-name prediction, with a matched control
+    verified: true
+    reasoning: 'The prediction is derived from the mechanism before the test and is directional in a way
+      that could have failed: duplicating the indirect object should break the model because duplicate
+      detection is what distinguishes the two names, while duplicating the subject should not. Both halves
+      hold, and the second half is run as a matched control on the same templates, which rules out the
+      added sentence as the cause. The authors'' hedge concerns whether the circuit was needed to think
+      of the prediction, not whether the prediction held. C.
+
+      '
+    notes:
+      verification: 'Figure 8 gives the full table and confirms every number in the cell: p_IOI 3.55 /
+        0.49 / 0.7%, additional S 3.64 / 0.59 / 0.4%, additional IO 1.23 / 0.36 / 23.4%. The main text
+        of §4.4 rounds 23.4% to 23%. The cell reports these correctly.
+
+        '
+      legacy_evidence: '\S4.4 is a novel prediction in the strict sense with a matched control. From duplicate
+        detection, the mechanism predicts that duplicating the \emph{IO} in a natural sentence should
+        break the model while duplicating the \emph{S} should not. Both halves hold: S over IO rises from
+        0.7\% on pIOI to 23.4\% with an extra IO, and \emph{falls} to 0.4\% with an extra S, where logit
+        difference also rises (3.55 $\to$ 1.23 and 3.64). The authors hedge only whether the circuit was
+        needed to generate it'
+  V1:
+    name: Level declaration
+    status: PC
+    short: Circuits formally defined in \S2.1; description level not declared
+    verified: true
+    reasoning: 'The unit of description is declared exactly: a subgraph over model components, with the
+      contrast against feature-level circuits stated rather than left implicit. The algorithm is also
+      stated, as three steps mapped one-to-one onto three head classes. What is never declared is the
+      relation between the two descriptions. The paper says the circuit implements the functionality without
+      saying whether the three-step algorithm is a claim about the computation the heads perform or a
+      summary of where information travels. PC.
+
+      '
+    notes:
+      verification: 'The §2.1 definition and the Olah et al. contrast are verbatim, confirming the cell''s
+        "formally defined". The cell''s second half — that the paper moves between "the circuit performs
+        IOI" and "these heads implement this algorithm" without marking the shift — is a reading of the
+        paper''s usage rather than a quotable statement; the §3 sentence quoted here is the clearest instance
+        of the elision.
+
+        '
+      legacy_evidence: Circuits are formally defined (\S2.1, an induced subgraph of the computational
+        graph with knockout semantics) and the algorithm is stated as three steps mapped onto three head
+        classes (\S3). The implementational--functional level is never named as such, and the paper moves
+        between ``the circuit performs IOI'' and ``these heads implement this algorithm'' without marking
+        the shift
+  V2:
+    name: Level-evidence match
+    status: PC
+    short: Topography and information flow supported; role semantics exceed it
+    verified: true
+    reasoning: 'The evidence matches the claim at one step of three. For S-Inhibition the paper measures
+      the content of what is moved, decomposes it into a token and a position component, and shows an
+      additive model of the two predicts logit difference to within 7% — that is algorithm-level evidence
+      for an algorithm-level claim. For duplicate detection and induction the corresponding parameter-level
+      evidence is named and not run, and the paper states it did not investigate how the induction-to-position
+      mechanism works. Topographic and information-flow claims are supported throughout; the algorithmic
+      claim is supported in part. PC.
+
+      '
+    notes:
+      verification: 'The 7% additive decomposition is verbatim (Appendix A) and is the strongest level-matched
+        evidence in the paper; the cell refers to it as "the token/position decomposition" without the
+        number. The Palumbo et al. quotation is post-origin.
+
+        '
+      legacy_evidence: 'Evidence supports the topographic claim (which heads, at which positions, in which
+        order) and the information-flow claims (what each reads from where). The algorithm-level claim
+        is supported for the S-Inhibition step by the token/position decomposition, and asserted for the
+        Duplicate Token and Induction steps, whose parameter-level validation \S3.3 states was not done.
+        Palumbo et al.\ (2024) decline to evaluate the circuit against their axioms for exactly this reason:
+        ``Wang et al.\ (2023) leaves key components of the interpretation unspecified'''''
+  V3:
+    name: Alternative level
+    status: I
+    short: The na\"ive circuit is simpler and not clearly worse
+    verified: true
+    reasoning: 'A strictly simpler description of the same behaviour is built at origin. It drops the
+      Backup and Negative Name Movers and half the Duplicate Token and Induction heads, and it matches
+      the published circuit on the criterion the paper leads with. Two of the three completeness samplers
+      separate them; the third separates neither. The source therefore constructs its own simpler rival
+      and does not defeat it on faithfulness, which is I.
+
+      '
+    notes:
+      verification: 'Same numbers as M2 and the same direction caveat applies: faithfulness is the gap
+        |F(M) - F(C)|, so the naïve circuit''s 0.1 is the better score, not the worse one. The cell''s
+        phrasing "is not clearly worse" is right and is more careful than the corresponding row in audit_tables_full/ACH_IOI.tex.
+        The Merullo et al. generalisation is post-origin.
+
+        '
+      legacy_evidence: 'A simpler description is tested at origin and is not clearly worse: the na\"ive
+        circuit reaches faithfulness 0.1 against the full circuit''s 0.46 (\S4.3), and is separated only
+        by the by-class and random completeness tests, since ``when we applied the greedy heuristic \ldots
+        both circuits have similarly large incompleteness scores.'''' A more general description arrived
+        later and is supported: \citet{merullo2024circuit} argue the mechanism ``boils down to a more
+        generic algorithm for copying from a list of potential options, rather than strictly indirect
+        object identification'''''
+  V4:
+    name: Unlicensed labeling
+    status: PC
+    short: '``Hedge'''' for the Negative Name Movers, marked by the authors as speculation'
+    verified: true
+    reasoning: 'Naming is disciplined for most classes. Each label arrives immediately after the measurement
+      it abbreviates, in the recurring form "we therefore call these heads X", so the name is a shorthand
+      for a measured operation rather than an attribution. Two exceptions carry more than the measurement.
+      S-Inhibition imports a mechanism term for what is measured as a shift in attention probability,
+      and the "hedge" gloss attributes a purpose the paper marks as speculation. No label is tested against
+      a competing label. PC.
+
+      '
+    notes:
+      verification: 'CONTRADICTION WITH THE CELL''S `short`, which reads "Labels name operations; ``Backup''''
+        implies intent never shown". The source introduces "Backup" operationally — heads that take on
+        the role when the Name Movers are knocked out — which is exactly what is measured in §3.4. The
+        intent-bearing label in the source is "hedge", applied to the Negative Name Movers and explicitly
+        marked "We speculate". The legacy evidence names the right two labels (S-Inhibition and hedge);
+        the `short` names the wrong one. The McDougall copy-suppression replacement is post-origin.
+
+        '
+      legacy_evidence: 'Most labels name measured operations --- ``Name Mover'''' names a copy, ``Duplicate
+        Token'''' names a match, ``Previous Token'''' names an attention pattern. Two do more work than
+        the evidence: ``S-Inhibition'''' imports a neuroscience mechanism term for what is measured as
+        an attention-probability shift, and the Negative Name Movers are said to ``help the model \emph{hedge}
+        so as to avoid high cross-entropy loss,'''' which the paper marks as speculation and \citet{mcdougall2023copy}
+        later replaces with copy suppression. No label is contrastively tested'
+  V5:
+    name: Scope declaration
+    status: C
+    short: Limits declared in the abstract, \S1, \S3 and \S5
+    verified: true
+    reasoning: 'Scope is declared in five places and in the two that matter most: the abstract concedes
+      remaining gaps before any result is given, and the introduction states the circuit fails the hardest
+      of the paper''s own tests. The exclusions are stated as design decisions rather than discovered
+      afterwards, and §5 frames the whole result as a model organism, which names the generalisation limit
+      rather than leaving the reader to infer it. C.
+
+      '
+    notes:
+      verification: 'All five locators in the cell check out. §3.3 carries the heading "Missing validations
+        and caveats" and §4.4 carries "Limitations of the attack", both as the cell states; headings are
+        not quoted here because the layout extraction renders them inline with the following sentence.
+
+        '
+      legacy_evidence: 'Declared in the abstract (``they also point to remaining gaps in our understanding''''),
+        in \S1 (``fails to pass the most challenging tests''''), in \S3 (MLPs, layer norms and embeddings
+        excluded by design), in \S3.3 (``Missing validations and caveats''''), in \S4.4 (``Limitations
+        of the attack''''), and in \S5, which names the scale limit and frames the work as a model organism:
+        ``these highly detailed (though narrow) examples'''''

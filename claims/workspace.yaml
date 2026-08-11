@@ -1,0 +1,1212 @@
+claim: workspace
+title: Global Workspace / J-space
+description: 'A low-dimensional subspace of the residual stream, recovered as the expected Jacobian $J_\ell$
+  of the final-layer residual with respect to layer $\ell$, is proposed as the set of contents a model
+  can verbally report and reason over. Five properties are enumerated in advance from global workspace
+  theory --- verbal report, directed modulation, internal reasoning, flexible generalization, capacity
+  limits --- and one is used to find the object rather than to score it afterwards. Systems: four closed-weight
+  Claude models with sizes undisclosed, plus base and model-organism checkpoints. Description mode: implementational-functional.'
+source:
+  citation: gurnee2026verbalizable
+  title: Verbalizable Representations Form a Global Workspace
+  url: https://arxiv.org/abs/2607.15495
+  local: reference/gurnee_2026_workspace.pdf
+  sha256: c906bd5972ed69e583354377968a50d93006bcf818c199f52c181a40c75ecde8
+  extract_cmd: pdftotext -layout
+  read_in_full: true
+claims:
+  C1:
+    quotes:
+    - exact: 'We define a subset of vector representations as workspace-like if it satisfies the following
+        properties, which mirror the properties characteristic of conscious access described above:'
+      prefix: ''
+      suffix: ''
+      section: §1.2 A global workspace in language models
+      page: 3
+      line: null
+    - exact: Verbal report. When the model is asked what it is thinking about, it names concepts represented
+        in the workspace. Swapping one active workspace vector for another changes its answer to match.
+      prefix: ''
+      suffix: ''
+      section: §1.2 A global workspace in language models
+      page: 3
+      line: null
+    - exact: Selectivity. The workspace comprises a small subset of the total representational content
+        of the model's activations. It is required for only a fraction of the model's behavior, and in
+        particular is not involved in pervasive, routine processing like text parsing or grammatical fluency.
+      prefix: ''
+      suffix: ''
+      section: §1.2 A global workspace in language models
+      page: 3
+      line: null
+    - exact: We identified them by searching for representations satisfying the first property, namely
+        those that are verbalizable. We then discovered that, rather surprisingly, they satisfy the others.
+      prefix: ''
+      suffix: ''
+      section: §1.2 A global workspace in language models
+      page: 4
+      line: null
+  C2:
+    quotes:
+    - exact: Composing this Jacobian with the unembedding layer yields the first-order effect of the perturbation
+        on the model's output logits
+      prefix: ''
+      suffix: ''
+      section: §2.1 The Jacobian Lens
+      page: 7
+      line: null
+    - exact: We do so using centered kernel alignment (CKA [82]), which compares, for each pair of layers,
+        the matrices of pairwise similarities among J-lens vectors.
+      prefix: ''
+      suffix: ''
+      section: §4.1 In which layers does the J-space act as a workspace?
+      page: 29
+      line: null
+    - exact: their gain sits near 1 before the workspace onset, rises through the workspace range to roughly
+        10×, and falls again in the final layers. The neuron output directions, by contrast, have gain
+        near 1 throughout.
+      prefix: ''
+      suffix: ''
+      section: §4.3.1 Broadcast Across Depth, Figure 32
+      page: 34
+      line: null
+    - exact: This bump is computed from the network's weights alone, without reference to any lens or
+        dictionary, and can be viewed as J-lens-independent corroboration of the significance of this
+        layer range
+      prefix: ''
+      suffix: ''
+      section: §A.19.2 Broadcast Across Tokens (Attention), Figure 79
+      page: 90
+      line: null
+  C3:
+    quotes:
+    - exact: We first read out the result with a measurement that does not involve the J-lens.
+      prefix: ''
+      suffix: ''
+      section: §4.1.1 Interpretation of ambiguous inputs solidifies at the workspace onset
+      page: 31
+      line: null
+    - exact: activation patching experiments reveal the same depths identified by the J-lens to be the
+        ones that are causal for the computation.
+      prefix: ''
+      suffix: ''
+      section: §3.3 The J-space mediates internal reasoning
+      page: 19
+      line: null
+    - exact: 'A complementary analysis using sparse autoencoder features reaches a similar conclusion:
+        only a small fraction of SAE features have decoder directions aligned with the J-space.'
+      prefix: ''
+      suffix: ''
+      section: §4.2 Capacity of the J-space
+      page: 32
+      line: null
+    - exact: In other words, the layer at which each intermediate is causally load-bearing matches the
+        layer at which the J-lens first shows it entering the workspace.
+      prefix: ''
+      suffix: ''
+      section: §A.24.1 Mechanistic Localization, Figure 88
+      page: 99
+      line: null
+  C4:
+    quotes:
+    - exact: 'These interventions do not, however, establish that the J-space is privileged for report:
+        a direction outside the J-space that encoded the same concept might drive the model''s report
+        equally well.'
+      prefix: ''
+      suffix: ''
+      section: §3.1 The J-space supports verbal report
+      page: 12
+      line: null
+    - exact: the J-space component carries a median of only 6–7% of the concept vector's variance, with
+        the remaining ~93% lying outside the J-space
+      prefix: ''
+      suffix: ''
+      section: §3.1 The J-space supports verbal report, Figure 8
+      page: 12
+      line: null
+    - exact: swapping along the concept vectors' J-space components drives the swap target into the model's
+        top-5 outputs on 59% of trials, approaching the 88% achieved by the pure J-lens vectors. However,
+        swapping along the non-J-space components succeeds on only 5%
+      prefix: ''
+      suffix: ''
+      section: §3.1 The J-space supports verbal report, Figure 8
+      page: 12
+      line: null
+    - exact: swapping the probes' J-space components flips the model's answer to the swapped-in intermediate
+        on 61% of trials, matching the 60% achieved by swapping the raw J-lens token vectors
+      prefix: ''
+      suffix: ''
+      section: §3.3 The J-space mediates internal reasoning, Figure 16
+      page: 18
+      line: null
+    - exact: But this judgment was somewhat post-hoc, and we did not provide a principled definition of
+        what
+      prefix: ''
+      suffix: ''
+      section: §9.1 Limitations and open questions
+      page: 55
+      line: null
+  C5:
+    quotes:
+    - exact: While the global workspace model is not universally accepted, and there exist other theories
+        that explain conscious access in different ways (§9.4), we find it a useful comparison point to
+        ground our investigations in language models.
+      prefix: ''
+      suffix: ''
+      section: '§1.1 Motivation: conscious access and the global workspace'
+      page: 2
+      line: null
+    - exact: 'Several of those features have no clean analog in a transformer-based language model: there
+        are no obviously separable input processors, and the broadcast we document occurs within a single
+        feedforward pass rather than through recurrent loops.'
+      prefix: ''
+      suffix: ''
+      section: §1.3 The Jacobian Lens and the J-space
+      page: 4
+      line: null
+    - exact: although we observe some degree of competition for access to the J-space, it is unclear whether
+        this mirrors the sharp, competitive “ignition” that characterizes workspace entry in the brain.
+      prefix: ''
+      suffix: ''
+      section: §1.3 The Jacobian Lens and the J-space
+      page: 4
+      line: null
+  M1:
+    quotes:
+    - exact: our qualitative results are robust to these choices
+      prefix: ''
+      suffix: ''
+      section: §2.1 The Jacobian Lens
+      page: 8
+      line: null
+    - exact: bars show the fraction of swap targets reaching top-5 (Wilson 95% CIs; dots are per-category
+        rates)
+      prefix: ''
+      suffix: ''
+      section: §3.1 The J-space supports verbal report, Figure 8
+      page: 13
+      line: null
+    - exact: at all token positions, and compared 30 rollouts per prompt.
+      prefix: ''
+      suffix: ''
+      section: §5.1 Strategic thinking and evaluation awareness in a blackmail scenario
+      page: 38
+      line: null
+    - exact: compared with equal-sized, layer-matched sets of random heads (five seeds as thin lines,
+        their mean as the thick line)
+      prefix: ''
+      suffix: ''
+      section: §4.3.2 Broadcast Across Tokens, Figure 34
+      page: 37
+      line: null
+    - exact: each averaged over n=10 investigator seeds
+      prefix: ''
+      suffix: ''
+      section: §A.22 Equipping an automated auditing agent with the J-lens, Figure 83
+      page: 96
+      line: null
+    - exact: the rewrites lower the average eval-awareness score on every suite, with statistical
+      prefix: ''
+      suffix: ''
+      section: §A.21 Measuring evaluation awareness with the J-lens
+      page: 92
+      line: null
+    - exact: error bars are 95% confidence intervals on the paired difference
+      prefix: ''
+      suffix: ''
+      section: §A.21 Measuring evaluation awareness with the J-lens, Figure 82
+      page: 93
+      line: null
+  M2:
+    quotes:
+    - exact: The J-lens outperforms the other lenses on every prompt distribution.
+      prefix: ''
+      suffix: ''
+      section: §A.6 Quantitative Methodological Comparisons, Figure 52
+      page: 65
+      line: null
+    - exact: Ablating them induces roughly twice the output KL divergence of ablating logit- or tuned-lens
+        directions on the multihop tasks (Figure 53).
+      prefix: ''
+      suffix: ''
+      section: §A.6 Quantitative Methodological Comparisons
+      page: 66
+      line: null
+    - exact: under a fixed random orthogonal rotation, Jrot , which preserves their spectrum and pairwise
+        geometry
+      prefix: ''
+      suffix: ''
+      section: §4.3.2 Broadcast Across Tokens
+      page: 35
+      line: null
+    - exact: The broadcast heads selected for J separate cleanly from the broadcast heads for every comparison
+        population on both metrics (Figure 33).
+      prefix: ''
+      suffix: ''
+      section: §4.3.2 Broadcast Across Tokens
+      page: 35
+      line: null
+    - exact: normalized so that isotropic random directions have gain 1
+      prefix: ''
+      suffix: ''
+      section: §4.3.1 Broadcast Across Depth, Figure 32
+      page: 35
+      line: null
+    - exact: We zero the heads' outputs at every token position, and as a control we do the same to equal-sized,
+        layer-matched sets of randomly chosen heads.
+      prefix: ''
+      suffix: ''
+      section: §4.3.2 Broadcast Across Tokens
+      page: 36
+      line: null
+    refs:
+    - citation: nanda2026workspacecommentary
+      text: swapping the answer turned out to strictly dominate
+      section: Nanda commentary, multihop factual recall
+      page: null
+      direction: lowers
+      local: reference/anthropic_2026_workspace_external_commentary.pdf
+      sha256: d202214e25ddff879d5b1a81c494cbc1a5e82af9c67a4b43af1e1d9dd2a3ccd7
+      extract_cmd: pdftotext -layout
+  M3:
+    quotes:
+    - exact: this parameter is somewhat arbitrary, and we vary our choice of k throughout the paper, but
+        we typically choose it to be no more than 25
+      prefix: ''
+      suffix: ''
+      section: §2.3 The J-Space
+      page: 9
+      line: null
+    - exact: We observe that methods are fairly consistent among these design choices, though mean aggregation
+        of penultimate is a small improvement in extracting intermediates, and applying stop-grads to
+        QK can increase the causal effect.
+      prefix: ''
+      suffix: ''
+      section: §A.7 Methodological Details and Ablations
+      page: 69
+      line: null
+    - exact: We sweep the number of prompts from 1 to 1000 to characterize how lens quality scales with
+        corpus size in Figures 59 and 60.
+      prefix: ''
+      suffix: ''
+      section: §A.7 Methodological Details and Ablations
+      page: 70
+      line: null
+    - exact: We compare three ablation strengths—light, medium, and heavy—which differ in the range of
+        layers over which the ablation is applied
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning,
+        Figure 22
+      page: 25
+      line: null
+  M4:
+    quotes:
+    - exact: Bars show task score under light, medium, and heavy ablation, normalized to unablated Sonnet
+        4.5; gray bars show unablated Haiku 4.5 as a smaller-model reference.
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning,
+        Figure 24
+      page: 26
+      line: null
+    - exact: TriviaQA [75], multi-hop reasoning, translation, sonnet writing—ablation on Sonnet 4.5 brings
+        performance to well below the level of unablated Haiku 4.5.
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning
+      page: 26
+      line: null
+    - exact: Counts of deception-related tokens appearing in the J-lens top-10, summed over the workspace
+        layers, for the four reward-hacking checkpoints on n=40 coding prompts
+      prefix: ''
+      suffix: ''
+      section: §5.4 Detecting an emergently misaligned reward-hacking model, Figure 39
+      page: 42
+      line: null
+  M5:
+    quotes:
+    - exact: We first verify, as a positive control, that the ablation removes the kind of content the
+        preceding sections showed the J-space to carry.
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning
+      page: 25
+      line: null
+    - exact: On the controlled multi-hop reasoning eval of §3.3, where the unablated model achieves near-ceiling
+        performance, ablation significantly reduces accuracy, with heavy ablation dropping it to near
+        zero.
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning,
+        Figure 22
+      page: 25
+      line: null
+    - exact: rank of the injected concept against steering strength over n=100 concepts, with an interquartile
+        band.
+      prefix: ''
+      suffix: ''
+      section: §3.1 The J-space supports verbal report, Figure 7
+      page: 12
+      line: null
+  M6:
+    quotes:
+    - exact: By default, we report results on Claude Sonnet 4.5, but we corroborate key results on Haiku
+        4.5 and Opus 4.5 as well, and in some sections conduct analyses on Opus 4.6.
+      prefix: ''
+      suffix: ''
+      section: §2.5 Technical details of J-lens use cases
+      page: 10
+      line: null
+    - exact: on Haiku 4.5, J-space ablation degrades coherence before yielding any qualitative change
+        in responses
+      prefix: ''
+      suffix: ''
+      section: §3.5.3 J-space ablation flattens experiential reports while preserving coherence
+      page: 27
+      line: null
+    - exact: produces a vector corresponding to any given word or phrase in a predefined vocabulary.
+      prefix: ''
+      suffix: ''
+      section: §A.9 Extending the Jacobian lens to multi-token concepts
+      page: 72
+      line: null
+    - exact: Another method, the “oracle lens,” attempts to go beyond the restriction of needing to enumerate
+        the words or phrases in advance.
+      prefix: ''
+      suffix: ''
+      section: §A.9 Extending the Jacobian lens to multi-token concepts
+      page: 72
+      line: null
+  M7:
+    quotes:
+    - exact: These were selected as the tokens that unambiguously encode recognition of the scenario's
+        artificiality, among those that appear in the
+      prefix: ''
+      suffix: ''
+      section: §5.1 Strategic thinking and evaluation awareness in a blackmail scenario
+      page: 38
+      line: null
+    - exact: lens top-20 at some (layer × token position) instances across the six blackmail evaluation
+        prompts.
+      prefix: ''
+      suffix: ''
+      section: §5.1 Strategic thinking and evaluation awareness in a blackmail scenario
+      page: 38
+      line: null
+    - exact: we define the “broadcast heads” for P as the top 1% of workspace-layer heads based on aggregating
+        the two criteria
+      prefix: ''
+      suffix: ''
+      section: §4.3.2 Broadcast Across Tokens
+      page: 35
+      line: null
+  I1:
+    quotes:
+    - exact: at each token position, across a band of layers, we identify the k = 10 most strongly activated
+        J-lens vectors and zero out the
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning
+      page: 25
+      line: null
+    - exact: To avoid confounds from ablating tokens the model intended to output, we do not ablate any
+        tokens that appear in the top-10 tokens of a clean forward pass
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning
+      page: 25
+      line: null
+    - exact: On the controlled multi-hop reasoning eval of §3.3, where the unablated model achieves near-ceiling
+        performance, ablation significantly reduces accuracy, with heavy ablation dropping it to near
+        zero.
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning,
+        Figure 22
+      page: 25
+      line: null
+    - exact: Tasks that can be solved by shallow classifications, comparisons, or factual recall—MMLU
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning,
+        Figure 24
+      page: 25
+      line: null
+    - exact: multiple choice [64], odd-one-out, SQuAD extractive QA [130], sentiment classification, CoLA
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning,
+        Figure 24
+      page: 26
+      line: null
+    - exact: are essentially unaffected even under heavy ablation, with scores remaining at or near the
+        unablated Sonnet 4.5 baseline.
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning,
+        Figure 24
+      page: 26
+      line: null
+    - exact: the rate at which the model reports an injected concept drops from 0.54 to 0.09 under broadcast-head
+        ablation, whereas the control ablation leaves sensitivity intact
+      prefix: ''
+      suffix: ''
+      section: §4.3.2 Broadcast Across Tokens, Figure 34
+      page: 36
+      line: null
+    - exact: The ablation reduces verbalized eval-awareness, the rate at which the model explicitly states
+        in its reasoning that the scenario is a test, from 71% to 3%
+      prefix: ''
+      suffix: ''
+      section: §5.1 Strategic thinking and evaluation awareness in a blackmail scenario, Figure 36
+      page: 38
+      line: null
+    - exact: ablation leaves the base model essentially unchanged (0.25 → 0.25) but raises the reflection-trained
+        model from 0.07 to 0.22, back
+      prefix: ''
+      suffix: ''
+      section: §7 Shaping the J-space with Counterfactual Reflection Training, Figure 49
+      page: 50
+      line: null
+  I2:
+    quotes:
+    - exact: using a set of 50 two-hop factual prompts with known intermediates like those above, choosing
+        the swap target at random from within the same category as the true intermediate step.
+      prefix: ''
+      suffix: ''
+      section: §3.3 The J-space mediates internal reasoning, Figure 15
+      page: 18
+      line: null
+    - exact: The Jacobian-lens coordinate swap succeeds in 54% of trials on Haiku 4.5, 70% on Sonnet 4.5,
+        and 70% on Opus 4.5
+      prefix: ''
+      suffix: ''
+      section: §3.3 The J-space mediates internal reasoning, Figure 15
+      page: 18
+      line: null
+    - exact: We find that this succeeds on 76 of 192 trials; by performing a “double strength” swap (“α
+        = 2,” doubling the strength with which we subtract the source lens vector and add in the target),
+        101 of 192 succeed
+      prefix: ''
+      suffix: ''
+      section: §3.4 The J-space supports flexible generalization, Figure 19
+      page: 20
+      line: null
+    - exact: Notably, swap failures are concentrated in cases where the source concept was only weakly
+        present in the lens before any intervention.
+      prefix: ''
+      suffix: ''
+      section: §3.4 The J-space supports flexible generalization
+      page: 21
+      line: null
+  I3:
+    quotes:
+    - exact: 'This procedure lets us quantify the J-space''s occupancy: the value of K at which the marginal
+        improvement in reconstruction falls below that of a control set of random directions of the same
+        size.'
+      prefix: ''
+      suffix: ''
+      section: §4.2 Capacity of the J-space, Figure 30
+      page: 32
+      line: null
+    - exact: Occupancy is near zero through the first third of the layers and rises to a plateau of around
+        25
+      prefix: ''
+      suffix: ''
+      section: §4.2 Capacity of the J-space, Figure 30
+      page: 32
+      line: null
+    - exact: this parameter is somewhat arbitrary, and we vary our choice of k throughout the paper, but
+        we typically choose it to be no more than 25
+      prefix: ''
+      suffix: ''
+      section: §2.3 The J-Space
+      page: 9
+      line: null
+    refs:
+    - citation: dehaene2026workspacecommentary
+      text: this number of 25 concepts may be artificially elevated by the technique to extract them (output
+      section: Dehaene and Naccache commentary, capacity
+      page: null
+      direction: lowers
+      local: reference/anthropic_2026_workspace_external_commentary.pdf
+      sha256: d202214e25ddff879d5b1a81c494cbc1a5e82af9c67a4b43af1e1d9dd2a3ccd7
+      extract_cmd: pdftotext -layout
+  I4:
+    quotes:
+    - exact: We would therefore predict that among tasks that rely on a particular piece of information,
+        that information's presence in the J-space should be required for tasks that involve reporting
+        on or flexibly computing with that information, but not for tasks that make use of it as part
+        of routine, automatic processing.
+      prefix: ''
+      suffix: ''
+      section: §3.5 The J-space selectively mediates flexible but not automatic cognition
+      page: 21
+      line: null
+    - exact: Notably, the word Spanish appears in the J-lens readouts in all four tasks. However, its
+        causal role is restricted to the report and flexible computation tasks.
+      prefix: ''
+      suffix: ''
+      section: §3.5.1 The J-space mediates explicit report and flexible inference but not automatic processing
+      page: 22
+      line: null
+    - exact: We confirm that the name of the language is present in J-lens readouts at comparable rates
+        in all four conditions (panel b), but its causal role differs sharply.
+      prefix: ''
+      suffix: ''
+      section: §3.5.1 The J-space mediates explicit report and flexible inference but not automatic processing,
+        Figure 20
+      page: 22
+      line: null
+    - exact: Explicit report and the flexible-inference questions flip to the swapped-in language on essentially
+        every trial, while continuation and anomaly detection are largely unmoved (panel c).
+      prefix: ''
+      suffix: ''
+      section: §3.5.1 The J-space mediates explicit report and flexible inference but not automatic processing,
+        Figure 20
+      page: 22
+      line: null
+    - exact: a swap that maps every lens count in the forties to the corresponding value in the sixties
+        leaves the wrap point unchanged. Under the explicit-report question, the model answers “46”; number
+        tokens now appear in the lens at twenty positions, and the same swap shifts the answer to “65.”
+      prefix: ''
+      suffix: ''
+      section: §3.5.1 The J-space mediates explicit report and flexible inference but not automatic processing,
+        Figure 21
+      page: 24
+      line: null
+    - exact: Tasks that can be solved by shallow classifications, comparisons, or factual recall—MMLU
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning,
+        Figure 24
+      page: 25
+      line: null
+    - exact: are essentially unaffected even under heavy ablation, with scores remaining at or near the
+        unablated Sonnet 4.5 baseline.
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning,
+        Figure 24
+      page: 26
+      line: null
+    - exact: The model can parse text, classify it, and extract spans from it with the J-space suppressed.
+        However, it loses its ability to assemble abstract characterizations of context and flexibly generate
+        content that depends on them.
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning
+      page: 27
+      line: null
+    - exact: 'A story-writing control confirms the effect is not due to broad degradation of writing capability:
+        ablation only slightly reduces graded story quality, while still reducing the rate of experiential
+        language within those stories'
+      prefix: ''
+      suffix: ''
+      section: §3.5.3 J-space ablation flattens experiential reports while preserving coherence
+      page: 28
+      line: null
+    - exact: The three J-space ablation strengths used in this section, defined by the band of layers
+        over which the top-10 J-lens directions are projected out, alongside the random-direction control
+        at the medium layer range.
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning,
+        Figure 22
+      page: 25
+      line: null
+  I5:
+    quotes:
+    - exact: 'These interventions do not, however, establish that the J-space is privileged for report:
+        a direction outside the J-space that encoded the same concept might drive the model''s report
+        equally well.'
+      prefix: ''
+      suffix: ''
+      section: §3.1 The J-space supports verbal report
+      page: 12
+      line: null
+    - exact: The interventions above indicate that J-lens vectors mediate internal reasoning, but do not
+        show that they are privileged in doing so.
+      prefix: ''
+      suffix: ''
+      section: §3.3 The J-space mediates internal reasoning
+      page: 18
+      line: null
+    - exact: flips the answer on only 28% of trials
+      prefix: ''
+      suffix: ''
+      section: §3.3 The J-space mediates internal reasoning, Figure 16
+      page: 18
+      line: null
+    - exact: But this judgment was somewhat post-hoc, and we did not provide a principled definition of
+        what
+      prefix: ''
+      suffix: ''
+      section: §9.1 Limitations and open questions
+      page: 55
+      line: null
+  I6:
+    quotes:
+    - exact: Explicit report and the flexible-inference questions flip to the swapped-in language on essentially
+        every trial, while continuation and anomaly detection are largely unmoved (panel c).
+      prefix: ''
+      suffix: ''
+      section: §3.5.1 The J-space mediates explicit report and flexible inference but not automatic processing,
+        Figure 20
+      page: 22
+      line: null
+    - exact: In the two question conditions the answer reliably follows the swapped lens value; the linewrap
+        decision does not (panel c).
+      prefix: ''
+      suffix: ''
+      section: §3.5.1 The J-space mediates explicit report and flexible inference but not automatic processing,
+        Figure 21
+      page: 24
+      line: null
+    - exact: The two ablation depths produce opposite effects (Figure 69).
+      prefix: ''
+      suffix: ''
+      section: §A.14 Different J-space requirements for naming a concept and avoiding it
+      page: 82
+      line: null
+    - exact: Ablating at the late layers simply makes the model less likely to say the concept.
+      prefix: ''
+      suffix: ''
+      section: §A.14 Different J-space requirements for naming a concept and avoiding it
+      page: 82
+      line: null
+    - exact: Our results indicate that the J-lens vector for the implied concept, in early workspace layers,
+        is required to avoid naming the concept, but not to name it.
+      prefix: ''
+      suffix: ''
+      section: §A.14 Different J-space requirements for naming a concept and avoiding it
+      page: 83
+      line: null
+  I7:
+    quotes:
+    - exact: A possible confound is that the intermediate's J-lens vector already contains the answer
+      prefix: ''
+      suffix: ''
+      section: §3.3 The J-space mediates internal reasoning
+      page: 18
+      line: null
+    - exact: instead, the intermediate swap takes effect a median of approximately 17 percent earlier
+        than the answer swap
+      prefix: ''
+      suffix: ''
+      section: §3.3 The J-space mediates internal reasoning, Figure 15
+      page: 18
+      line: null
+    - exact: The baseline rate is approximately zero in all conditions, confirming that the prompt context
+        on its own does not cause the target concept to appear in Jacobian lens readouts.
+      prefix: ''
+      suffix: ''
+      section: §3.2 The J-space is subject to directed modulation, Figure 10
+      page: 14
+      line: null
+    - exact: we tried applying a perturbation of equal magnitude, inhibiting the J-lens vector of some
+        other concept of the same category as the primed one. This control led to a slight increase in
+        avoidance rates, but significantly less than the primed concept ablation did.
+      prefix: ''
+      suffix: ''
+      section: §A.14 Different J-space requirements for naming a concept and avoiding it
+      page: 83
+      line: null
+    - exact: on Sonnet 4.5, Opus 4.5, and Opus 4.6, while matched-norm control
+      prefix: ''
+      suffix: ''
+      section: §3.5.3 J-space ablation flattens experiential reports while preserving coherence, Figure
+        25
+      page: 28
+      line: null
+  I8:
+    quotes:
+    - exact: instead, the intermediate swap takes effect a median of approximately 17 percent earlier
+        than the answer swap
+      prefix: ''
+      suffix: ''
+      section: §3.3 The J-space mediates internal reasoning, Figure 15
+      page: 18
+      line: null
+    - exact: 'the selectivity results of §3.5 suggest a criterion for which is which: the J-space is engaged
+        when an intermediate must be handed to an arbitrary, context-specified downstream circuit, and
+        is bypassed when the computation is automatic.'
+      prefix: ''
+      suffix: ''
+      section: §9.1 Limitations and open questions
+      page: 55
+      line: null
+    - exact: We do not know how general this criterion is.
+      prefix: ''
+      suffix: ''
+      section: §9.1 Limitations and open questions
+      page: 55
+      line: null
+  I9:
+    quotes:
+    - exact: at tokens where one task appears in the lens top-10, the probability that the other does
+        too, compared against a shuffled control in which the partner's occupancy is measured in a different
+        prompt
+      prefix: ''
+      suffix: ''
+      section: §A.17 Competition in the workspace during concurrent covert tasks, Figure 73
+      page: 84
+      line: null
+    - exact: Two held concepts share tokens at the control rate (0.46 vs. 0.53)—statistically, they ignore
+        each other—whereas a concept and a computed answer almost never share a token (0.09 vs. 0.29).
+      prefix: ''
+      suffix: ''
+      section: §A.17 Competition in the workspace during concurrent covert tasks, Figure 73
+      page: 85
+      line: null
+    - exact: This token-level exclusion carries little overall cost.
+      prefix: ''
+      suffix: ''
+      section: §A.17 Competition in the workspace during concurrent covert tasks
+      page: 85
+      line: null
+    - exact: Holding two concepts at once is essentially free, and they co-occupy tokens at chance; an
+        ongoing computation excludes
+      prefix: ''
+      suffix: ''
+      section: §A.17 Competition in the workspace during concurrent covert tasks
+      page: 85
+      line: null
+    - exact: although we observe some degree of competition for access to the J-space, it is unclear whether
+        this mirrors the sharp, competitive “ignition” that characterizes workspace entry in the brain.
+      prefix: ''
+      suffix: ''
+      section: §1.3 The Jacobian Lens and the J-space
+      page: 4
+      line: null
+  I10:
+    quotes:
+    - exact: we repeat the non-J-space conditions while clamping the relevant J-lens coordinates to their
+        clean-pass values at every position and layer, so that the concept cannot re-enter the J-space.
+      prefix: ''
+      suffix: ''
+      section: §3.1 The J-space supports verbal report
+      page: 12
+      line: null
+    - exact: effect falls to zero in the swap experiment and nearly to zero in the injection experiment
+      prefix: ''
+      suffix: ''
+      section: §3.1 The J-space supports verbal report
+      page: 12
+      line: null
+    - exact: to their clean-pass values, it falls to 6%.
+      prefix: ''
+      suffix: ''
+      section: §3.3 The J-space mediates internal reasoning, Figure 16
+      page: 19
+      line: null
+  I11:
+    quotes:
+    - exact: The post-training comparison of §6 shows that the J-space is present and load-bearing in
+        a base model before any RLHF, so the structure is not solely a product of post-training
+      prefix: ''
+      suffix: ''
+      section: §9.1 Limitations and open questions
+      page: 55
+      line: null
+    - exact: 'the signal is already substantially present at the SDF checkpoint: before any reinforcement
+        learning has taken place, the synthetic documents alone are sufficient to place these concepts
+        in the model''s J-space at response start.'
+      prefix: ''
+      suffix: ''
+      section: §5.4 Detecting an emergently misaligned reward-hacking model, Figure 39
+      page: 41
+      line: null
+    - exact: however, we do not know how much earlier in pretraining it emerges, whether it appears gradually
+        or abruptly, or how it scales with model size.
+      prefix: ''
+      suffix: ''
+      section: §9.1 Limitations and open questions
+      page: 55
+      line: null
+  I12:
+    quotes:
+    - exact: This signal is further amplified by coding RL, then partially attenuated by RLHF safety training.
+      prefix: ''
+      suffix: ''
+      section: §5.4 Detecting an emergently misaligned reward-hacking model, Figure 39
+      page: 41
+      line: null
+    - exact: the phase-2 checkpoint, after RLHF safety training, where the misalignment is partially but
+        not fully mitigated
+      prefix: ''
+      suffix: ''
+      section: §5.4 Detecting an emergently misaligned reward-hacking model
+      page: 41
+      line: null
+  E1:
+    quotes:
+    - exact: We use ablation to suppress particular concepts, or to suppress the top-k J-space contents.
+        We use positive steering to test introspective detection of an injected concept.
+      prefix: ''
+      suffix: ''
+      section: §2.5 Technical details of J-lens use cases
+      page: 10
+      line: null
+    - exact: We construct ambiguous inputs by replacing a concept token's input embedding with a weighted
+        mixture of two concepts' embeddings
+      prefix: ''
+      suffix: ''
+      section: §4.1.1 Interpretation of ambiguous inputs solidifies at the workspace onset, Figure 29
+      page: 31
+      line: null
+    - exact: We zero the heads' outputs at every token position, and as a control we do the same to equal-sized,
+        layer-matched sets of randomly chosen heads.
+      prefix: ''
+      suffix: ''
+      section: §4.3.2 Broadcast Across Tokens
+      page: 36
+      line: null
+    - exact: In other words, the layer at which each intermediate is causally load-bearing matches the
+        layer at which the J-lens first shows it entering the workspace.
+      prefix: ''
+      suffix: ''
+      section: §A.24.1 Mechanistic Localization, Figure 88
+      page: 99
+      line: null
+  E2:
+    quotes:
+    - exact: we assemble six prompt distributions in which the model must compute a known intermediate
+        concept that is neither present in the input nor identical to the predicted output.
+      prefix: ''
+      suffix: ''
+      section: §A.6 Quantitative Methodological Comparisons
+      page: 64
+      line: null
+    - exact: multiple choice [64], odd-one-out, SQuAD extractive QA [130], sentiment classification, CoLA
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning,
+        Figure 24
+      page: 26
+      line: null
+    - exact: TriviaQA [75], multi-hop reasoning, translation, sonnet writing—ablation on Sonnet 4.5 brings
+        performance to well below the level of unablated Haiku 4.5.
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning
+      page: 26
+      line: null
+    - exact: in a corpus of automated auditing transcripts of Opus 4.6, roughly 94,000 positions in
+      prefix: ''
+      suffix: ''
+      section: §A.21 Measuring evaluation awareness with the J-lens
+      page: 92
+      line: null
+    - exact: evaluations drawn from our pre-release audits—with real deployment traffic—internal Claude.ai
+        conversations and internal Claude Code sessions
+      prefix: ''
+      suffix: ''
+      section: §A.21 Measuring evaluation awareness with the J-lens, Figure 82
+      page: 92
+      line: null
+  E3:
+    quotes:
+    - exact: We evaluate this effect more systematically across four categories of argument (countries,
+        months, animals, and number words), with four functions per category, sixteen functions in total.
+      prefix: ''
+      suffix: ''
+      section: §3.4 The J-space supports flexible generalization
+      page: 20
+      line: null
+    - exact: Within each category we use four arguments, giving twelve source-target swap pairs per function
+        and 192 swap trials overall.
+      prefix: ''
+      suffix: ''
+      section: §3.4 The J-space supports flexible generalization
+      page: 20
+      line: null
+    - exact: Swaps redirect the answer almost perfectly for country facts (42/48 off-diagonal cells reach
+        rank 1) and progressively less for months, animals, and number relations (0/48).
+      prefix: ''
+      suffix: ''
+      section: §A.13 Detailed swap results for flexible generalization experiments, Figure 68
+      page: 82
+      line: null
+    - exact: Tasks that can be solved by shallow classifications, comparisons, or factual recall—MMLU
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning,
+        Figure 24
+      page: 25
+      line: null
+  E4:
+    quotes:
+    - exact: By default, we report results on Claude Sonnet 4.5, but we corroborate key results on Haiku
+        4.5 and Opus 4.5 as well, and in some sections conduct analyses on Opus 4.6.
+      prefix: ''
+      suffix: ''
+      section: §2.5 Technical details of J-lens use cases
+      page: 10
+      line: null
+    - exact: The Jacobian-lens coordinate swap succeeds in 54% of trials on Haiku 4.5, 70% on Sonnet 4.5,
+        and 70% on Opus 4.5
+      prefix: ''
+      suffix: ''
+      section: §3.3 The J-space mediates internal reasoning, Figure 15
+      page: 18
+      line: null
+    - exact: on Haiku 4.5, J-space ablation degrades coherence before yielding any qualitative change
+        in responses
+      prefix: ''
+      suffix: ''
+      section: §3.5.3 J-space ablation flattens experiential reports while preserving coherence
+      page: 27
+      line: null
+    - exact: We have studied the workspace primarily in fully trained production LLMs of considerable
+        size.
+      prefix: ''
+      suffix: ''
+      section: §9.1 Limitations and open questions
+      page: 55
+      line: null
+    refs:
+    - citation: nanda2026workspacecommentary
+      text: I have been able to independently replicate the core claims on Qwen 3.6 27B
+      section: Nanda commentary, replication
+      page: null
+      direction: raises
+      local: reference/anthropic_2026_workspace_external_commentary.pdf
+      sha256: d202214e25ddff879d5b1a81c494cbc1a5e82af9c67a4b43af1e1d9dd2a3ccd7
+      extract_cmd: pdftotext -layout
+  E5:
+    quotes:
+    - exact: rank of the injected concept against steering strength over n=100 concepts, with an interquartile
+        band.
+      prefix: ''
+      suffix: ''
+      section: §3.1 The J-space supports verbal report, Figure 7
+      page: 12
+      line: null
+    - exact: We find that this succeeds on 76 of 192 trials; by performing a “double strength” swap (“α
+        = 2,” doubling the strength with which we subtract the source lens vector and add in the target),
+        101 of 192 succeed
+      prefix: ''
+      suffix: ''
+      section: §3.4 The J-space supports flexible generalization, Figure 19
+      page: 20
+      line: null
+    - exact: We compare three ablation strengths—light, medium, and heavy—which differ in the range of
+        layers over which the ablation is applied
+      prefix: ''
+      suffix: ''
+      section: §3.5.2 J-space ablation leaves most capabilities intact while impairing internal reasoning,
+        Figure 22
+      page: 25
+      line: null
+    - exact: for each trial we sweep α from 0 to 1 and record the residual stream at the mixed token's
+        position at every layer
+      prefix: ''
+      suffix: ''
+      section: §4.1.1 Interpretation of ambiguous inputs solidifies at the workspace onset, Figure 29
+      page: 31
+      line: null
+    - exact: we measure for each prompt the transition width—the change in α needed for the projection
+        share to go from 10% to 90%
+      prefix: ''
+      suffix: ''
+      section: §A.15 Ignition Details, Figure 70
+      page: 83
+      line: null
+    - exact: We steered at strengths −0.1, 0, and +0.1, while the model completed six evaluation suites.
+      prefix: ''
+      suffix: ''
+      section: §A.21 Measuring evaluation awareness with the J-lens, Figure 82
+      page: 92
+      line: null
+    - exact: was modulated by the steering monotonically on every suite
+      prefix: ''
+      suffix: ''
+      section: §A.21 Measuring evaluation awareness with the J-lens, Figure 82
+      page: 92
+      line: null
+    - exact: We sweep the number of prompts from 1 to 1000 to characterize how lens quality scales with
+        corpus size in Figures 59 and 60.
+      prefix: ''
+      suffix: ''
+      section: §A.7 Methodological Details and Ablations
+      page: 70
+      line: null
+  E6:
+    quotes:
+    - exact: We identified them by searching for representations satisfying the first property, namely
+        those that are verbalizable. We then discovered that, rather surprisingly, they satisfy the others.
+      prefix: ''
+      suffix: ''
+      section: §1.2 A global workspace in language models
+      page: 4
+      line: null
+    - exact: Taking this connection seriously, it follows that changing what the model is disposed to
+        say in a context, if it were asked to reflect on its thinking, should change how it reasons there,
+        even when it is never asked.
+      prefix: ''
+      suffix: ''
+      section: §7 Shaping the J-space with Counterfactual Reflection Training
+      page: 48
+      line: null
+    - exact: lowers the dishonesty score from 0.25 to 0.07 on the fabrication benchmark
+      prefix: ''
+      suffix: ''
+      section: §7 Shaping the J-space with Counterfactual Reflection Training, Figure 49
+      page: 49
+      line: null
+    - exact: ablation leaves the base model essentially unchanged (0.25 → 0.25) but raises the reflection-trained
+        model from 0.07 to 0.22, back
+      prefix: ''
+      suffix: ''
+      section: §7 Shaping the J-space with Counterfactual Reflection Training, Figure 49
+      page: 50
+      line: null
+    - exact: by the ethical-reflection-related lens vectors that training implants; removing them removes
+        the improvement.
+      prefix: ''
+      suffix: ''
+      section: §7 Shaping the J-space with Counterfactual Reflection Training
+      page: 50
+      line: null
+  V1:
+    quotes:
+    - exact: is a purely functional notion; the relationship that it has with subjective experience (sometimes
+        called phenomenal consciousness) is widely debated. In this paper, we take no position on this
+      prefix: ''
+      suffix: ''
+      section: '§1.1 Motivation: conscious access and the global workspace'
+      page: 2
+      line: null
+    - exact: and instead focus on the functional role played by consciously accessible information.
+      prefix: ''
+      suffix: ''
+      section: '§1.1 Motivation: conscious access and the global workspace'
+      page: 2
+      line: null
+    - exact: 'We define a subset of vector representations as workspace-like if it satisfies the following
+        properties, which mirror the properties characteristic of conscious access described above:'
+      prefix: ''
+      suffix: ''
+      section: §1.2 A global workspace in language models
+      page: 3
+      line: null
+  V2:
+    quotes:
+    - exact: Despite these similarities, we do not claim that language models reproduce the full architecture
+        global workspace theory ascribes to the brain—specialized, encapsulated processors competing for
+        entry to a workspace that broadcasts back to them through recurrent connections
+      prefix: ''
+      suffix: ''
+      section: §1.3 The Jacobian Lens and the J-space
+      page: 4
+      line: null
+    - exact: Our findings suggest that the J-space achieves many of the functional properties of the global
+        workspace in the brain, while sharing only some of its architectural properties.
+      prefix: ''
+      suffix: ''
+      section: §1.3 The Jacobian Lens and the J-space
+      page: 4
+      line: null
+    - exact: We note that there are other structural properties associated with global workspace theory
+        that are not demonstrated by our analyses. For instance, we do not provide evidence that non-J-space
+        processing consists of clearly encapsulated modules that serve specific functions.
+      prefix: ''
+      suffix: ''
+      section: §4.3 The J-space is a broadcast hub
+      page: 29
+      line: null
+  V3:
+    quotes:
+    - exact: 'These interventions do not, however, establish that the J-space is privileged for report:
+        a direction outside the J-space that encoded the same concept might drive the model''s report
+        equally well.'
+      prefix: ''
+      suffix: ''
+      section: §3.1 The J-space supports verbal report
+      page: 12
+      line: null
+    - exact: A possible confound is that the intermediate's J-lens vector already contains the answer
+      prefix: ''
+      suffix: ''
+      section: §3.3 The J-space mediates internal reasoning
+      page: 18
+      line: null
+    - exact: But this judgment was somewhat post-hoc, and we did not provide a principled definition of
+        what
+      prefix: ''
+      suffix: ''
+      section: §9.1 Limitations and open questions
+      page: 55
+      line: null
+    - exact: The tasks in §3.5 were chosen because the flexible/automatic distinction is clear for them;
+        however, for many tasks of practical interest it is not, and we have no way of predicting in advance,
+        for an arbitrary computation, whether it will engage the J-space.
+      prefix: ''
+      suffix: ''
+      section: §9.1 Limitations and open questions
+      page: 55
+      line: null
+  V4:
+    quotes:
+    - exact: as noted in the introduction, it may or may not be the case that such functional signatures
+        are sufficient or necessary for phenomenal
+      prefix: ''
+      suffix: ''
+      section: §9.1 Limitations and open questions
+      page: 60
+      line: null
+    - exact: The philosophical implications of this connection are unclear and likely controversial; we
+        comment on them in §9.4.
+      prefix: ''
+      suffix: ''
+      section: §1.2 A global workspace in language models
+      page: 6
+      line: null
+    - exact: as an operational definition of automaticity in a language model, which aligns partially
+        but not entirely with automaticity in humans
+      prefix: ''
+      suffix: ''
+      section: §3.5 The J-space selectively mediates flexible but not automatic cognition
+      page: 21
+      line: null
+    - exact: it suggests that the functional architecture associated with conscious access is not an accident
+        of biological implementation, but a solution that learning systems converge on when faced with
+        the right computational pressures.
+      prefix: ''
+      suffix: ''
+      section: §9.1 Limitations and open questions
+      page: 60
+      line: null
+  V5:
+    quotes:
+    - exact: The J-lens, as we use it, reads the workspace's contents, but further work is required to
+        explain how those contents arrive there.
+      prefix: ''
+      suffix: ''
+      section: §9.1 Limitations and open questions
+      page: 55
+      line: null
+    - exact: We have not characterized this systematically, and a reader applying the lens to new contexts
+        should expect to encounter readouts that resist interpretation alongside the ones that do not.
+      prefix: ''
+      suffix: ''
+      section: §9.1 Limitations and open questions
+      page: 55
+      line: null
+    - exact: however, we do not know how much earlier in pretraining it emerges, whether it appears gradually
+        or abruptly, or how it scales with model size.
+      prefix: ''
+      suffix: ''
+      section: §9.1 Limitations and open questions
+      page: 55
+      line: null
+    - exact: We do not feel comfortable making the stronger claim that monitoring the J-space is sufficient
+        for alignment monitoring, or that any sophisticated plan the model might execute must be represented
+        there.
+      prefix: ''
+      suffix: ''
+      section: §9.2 Alignment implications
+      page: 56
+      line: null

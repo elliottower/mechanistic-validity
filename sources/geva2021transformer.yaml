@@ -1,0 +1,12 @@
+citation: geva2021transformer
+depth: uncited
+title: Transformer Feed-Forward Layers Are Key-Value Memories
+authors:
+- Geva, Mor
+- Schuster, Roei
+- Berant, Jonathan
+- Levy, Omer
+year: '2021'
+venue: Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing (EMNLP)
+url: https://aclanthology.org/2021.emnlp-main.446/
+arxiv: '2012.14913'

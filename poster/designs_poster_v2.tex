@@ -1,0 +1,386 @@
+% Experiment Designs poster — NEMI 2026, v2
+% Six experiment designs grounded in the mechanistic validity paper's
+% actual criteria (C6, I6, I9, I10, I11/I12, E5).
+% All source disciplines match the paper.
+%
+%   cd poster && lualatex designs_poster_v2.tex
+
+\documentclass[25pt, a0paper, portrait]{tikzposter}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+\tikzposterlatexaffectionproofoff
+
+% ── Color palette ───────────────────────────────────────
+\definecolor{darktext}{HTML}{2C3E50}
+\definecolor{blockbg}{HTML}{FFFFFF}
+\definecolor{hookred}{HTML}{C0392B}
+\definecolor{designblue}{HTML}{2980B9}
+\definecolor{constructgreen}{HTML}{27AE60}
+\definecolor{internalblue}{HTML}{2980B9}
+\definecolor{externalpurple}{HTML}{8E44AD}
+
+% ── Theme ───────────────────────────────────────────────
+\usetheme{Default}
+
+\definecolorstyle{DesignColors}{
+  \definecolor{colorOne}{HTML}{2C3E50}
+  \definecolor{colorTwo}{HTML}{3498DB}
+  \definecolor{colorThree}{HTML}{ECF0F1}
+}{
+  \colorlet{backgroundcolor}{colorThree}
+  \colorlet{framecolor}{colorOne}
+  \colorlet{titlefgcolor}{white}
+  \colorlet{titlebgcolor}{colorOne}
+  \colorlet{blocktitlebgcolor}{designblue}
+  \colorlet{blocktitlefgcolor}{white}
+  \colorlet{blockbodybgcolor}{blockbg}
+  \colorlet{blockbodyfgcolor}{darktext}
+  \colorlet{notefgcolor}{darktext}
+  \colorlet{notebgcolor}{designblue!12}
+  \colorlet{notefrcolor}{designblue}
+}
+\usecolorstyle{DesignColors}
+
+\defineblockstyle{DesignBlock}{
+  titlewidthscale=1.0, bodywidthscale=1.0, titleleft,
+  titleoffsetx=0pt, titleoffsety=0pt,
+  bodyoffsetx=0pt, bodyoffsety=0pt, bodyverticalshift=0pt,
+  roundedcorners=12, linewidth=2pt, titleinnersep=10pt, bodyinnersep=14pt
+}{
+  \draw[rounded corners=\blockroundedcorners, color=blocktitlebgcolor,
+        fill=blockbodybgcolor, line width=\blocklinewidth]
+    (blockbody.south west) rectangle (blocktitle.north east);
+  \ifBlockHasTitle
+    \draw[rounded corners=\blockroundedcorners,
+          fill=blocktitlebgcolor, color=blocktitlebgcolor,
+          line width=\blocklinewidth]
+      (blocktitle.south west) rectangle (blocktitle.north east);
+  \fi
+}
+\useblockstyle{DesignBlock}
+
+\definetitlestyle{DesignTitle}{
+  width=\paperwidth, roundedcorners=0, linewidth=0pt, innersep=20pt,
+  titletotopverticalspace=15mm, titletoblockverticalspace=25mm
+}{
+  \draw[fill=titlebgcolor, color=titlebgcolor]
+    (\titleposleft, \titleposbottom)
+    rectangle (\titleposright, \titlepostop);
+}
+\usetitlestyle{DesignTitle}
+
+\title{%
+  \parbox{0.92\linewidth}{\centering\bfseries
+    Experiment Designs We Haven't Run Yet}}
+\author{Elliot Tower\quad\texttt{elliot@elliottower.ai}}
+\institute{}
+
+\begin{document}
+
+\maketitle[width=\paperwidth]
+
+% ════════════════════════════════════════════════════════
+% ROW 1 — THE PITCH + COMPLEMENTATION (C6)
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.45}
+
+{
+\colorlet{blocktitlebgcolor}{hookred}
+\block{Six Criteria, Four Source Disciplines}{
+  Cardiac stenting for stable angina was standard for three
+  decades---500,000 procedures a year in the US. The first trial
+  comparing stenting against a matched control (ORBITA, 2017)
+  found no significant improvement in exercise tolerance. The
+  intervention was real. The causal attribution to the specific
+  intervention had never been tested against a procedure that
+  matched everything except the active ingredient.
+
+  \vspace{5mm}
+  Circuit ablation studies face the same gap. We audit 16
+  mechanistic claims against 36 validity criteria drawn from
+  philosophy of science, psychometrics, genetics, neuroscience,
+  medical microbiology, and pharmacology. Six of these criteria
+  map to concrete experiment designs that are rarely or never
+  used in mechanistic interpretability.
+
+  \vspace{5mm}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.3}
+  {\small
+  \begin{tabular}{@{}llll@{}}
+    \toprule
+    \textbf{ID} & \textbf{Design} & \textbf{Source} & \textbf{Cost} \\
+    \midrule
+    C6  & Complementation  & Genetics         & 2 passes \\
+    I6  & Double dissoc.   & Neuroscience     & 1 cond. \\
+    I9  & Epistatic inter. & Genetics         & 1 cond. \\
+    I10 & Rescue           & Genetics         & 1 pass \\
+    I11/12 & Onset/offset  & Microbiology     & Varies \\
+    E5  & Dose--response   & Pharmacology     & Free \\
+    \bottomrule
+  \end{tabular}}
+  \end{center}
+}
+}
+
+\column{0.55}
+
+{
+\colorlet{blocktitlebgcolor}{constructgreen}
+\block{C6: Complementation --- Same Unit or Different?}{
+  In genetics, two mutations that both break a function might be in
+  the same gene or in different genes. Benzer's cis-trans test (1955)
+  distinguishes them: place one mutation on each chromosome (the
+  \emph{trans} configuration). If function recovers, the mutations
+  are in different genes---they \emph{complement} each other.
+
+  \vspace{5mm}
+  \textbf{The MI translation.} S-inhibition heads and negative name
+  movers both suppress the repeated name in IOI. To test whether
+  they are the same functional unit: run two forward passes, one
+  with each group intact. Construct a hybrid activation by taking
+  the S-inhibition contribution from pass~1 and the negative
+  name-mover contribution from pass~2 (the trans configuration).
+  If the model recovers, they serve independent roles. If the
+  hybrid fails like either single ablation, they are the same
+  functional unit.
+
+  \vspace{5mm}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.3}
+  {\large
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    \textbf{Configuration} & \textbf{Result} & \textbf{Interpretation} \\
+    \midrule
+    Trans (hybrid pass) & Recovers & Different units \\
+    Trans (hybrid pass) & Fails    & Same unit \\
+    Cis (single pass)   & Works    & Control \\
+    \bottomrule
+  \end{tabular}}
+  \end{center}
+
+  \vspace{5mm}
+  Across 16 audited claims, this test has been applied
+  \textbf{zero times}. Circuit papers identify component classes
+  (``name movers,'' ``S-inhibition heads,'' ``backup name movers'')
+  without testing whether those classes are functionally distinct.
+
+  \vspace{4mm}
+  \textbf{Cost:} two forward passes + hybrid assembly.
+
+  \vspace{3mm}
+  {\footnotesize Genetics. Benzer's cis-trans test (1955), standard
+  in functional genomics.}
+}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 2 — THREE INTERNAL/EXTERNAL CRITERIA
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.33}
+
+\block{I6: Double Dissociation}{
+  Two interventions that cross: A breaks function X and spares
+  function Y; B breaks Y and spares X. One arm alone shows
+  involvement. The crossing shows specificity---neither effect
+  can be explained by generalized disruption.
+
+  \vspace{4mm}
+  \textbf{In MI:} patching a belief-tracking subspace in
+  Llama-3-70B yields IIA~$= 1.0$ on belief-framed questions
+  and $0.0$ on reality-framed questions about identical
+  underlying facts. The subspace responds to the epistemic
+  framing, not the information.
+
+  \vspace{4mm}
+  Across 16 audited claims, exactly \textbf{one} meets this
+  criterion---by different authors (Feucht et~al.\ 2025),
+  three years after the original paper.
+
+  \vspace{4mm}
+  \textbf{Cost:} one extra condition.
+
+  \vspace{3mm}
+  {\footnotesize Neuroscience. Double dissociation logic,
+  Shallice (1988).}
+}
+
+\column{0.34}
+
+\block{I9: Epistatic Interaction}{
+  Do circuit components interact non-additively? Ablate A alone,
+  ablate B alone, ablate both. If the joint deficit differs from
+  the sum of single deficits, the components interact.
+
+  \vspace{4mm}
+  \textbf{In MI:} sub-additive interaction (joint~$<$~sum) means
+  redundancy---A and B partially substitute for each other.
+  Super-additive interaction (joint~$>$~sum) means synergy---the
+  components depend on each other and the circuit is more than
+  the sum of its parts.
+
+  \vspace{4mm}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Pattern} & \textbf{Interpretation} \\
+    \midrule
+    Joint $=$ sum   & Independent \\
+    Joint $<$ sum   & Redundancy \\
+    Joint $>$ sum   & Synergy \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \vspace{4mm}
+  \textbf{Cost:} one extra ablation condition.
+
+  \vspace{3mm}
+  {\footnotesize Genetics. Fisher's epistasis; interaction
+  structure in gene networks.}
+}
+
+\column{0.33}
+
+{
+\colorlet{blocktitlebgcolor}{externalpurple}
+\block{E5: Graded Response}{
+  Partial intervention should produce partial effect. A step
+  function means you measured a threshold, not a mechanism.
+
+  \vspace{4mm}
+  \textbf{In MI:} sweep ablation strength from 0\% to 100\%
+  instead of reporting one on/off number. The shape of the
+  curve distinguishes specific mechanisms (graded, monotonic)
+  from nonspecific disruption (all-or-nothing collapse at some
+  threshold).
+
+  \vspace{4mm}
+  Most published circuit evaluations report a single ablation
+  point. The curve between zero and complete ablation carries
+  more information than either endpoint---and recording it
+  costs nothing because the interpolation is already available.
+
+  \vspace{4mm}
+  \textbf{Cost:} free.
+
+  \vspace{3mm}
+  {\footnotesize Pharmacology. Dose-response curves, Hill
+  (1910), receptor theory.}
+}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 3 — RESCUE, ONSET/OFFSET, TAKEAWAY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.33}
+
+\block{I10: Rescue / Reversibility}{
+  Remove a component, observe the deficit, then restore it. If
+  function does not recover, the ablation caused collateral
+  damage beyond what the mechanism hypothesis predicts.
+
+  \vspace{4mm}
+  \textbf{In MI:} re-inject the clean activation after ablation
+  and measure recovery. Rescue separates ``this component is
+  necessary'' from ``removing this component broke something
+  downstream.''
+
+  \vspace{4mm}
+  Activation patching already contains the rescue logic: patching
+  in a clean activation \emph{is} a rescue experiment. Almost no
+  published evaluation reports the recovery rate alongside the
+  degradation rate.
+
+  \vspace{4mm}
+  \textbf{Cost:} one forward pass.
+
+  \vspace{3mm}
+  {\footnotesize Genetics. Rescue experiments in functional
+  genomics.}
+}
+
+\column{0.34}
+
+\block{I11/I12: Onset and Offset Coupling}{
+  A mechanism should appear when its capability appears (onset
+  coupling, I11) and disappear when the capability is removed
+  (offset coupling, I12). Onset alone is suggestive. Offset
+  alone is suggestive. Together they establish a bidirectional
+  link between mechanism and capability.
+
+  \vspace{4mm}
+  \textbf{In MI:} onset coupling is reported for induction
+  heads---the circuit forms at a training phase transition
+  when in-context copying emerges. The partner test, offset
+  coupling, has not been reported: fine-tune or unlearn the
+  capability, then check whether the circuit degrades in
+  tandem. If the circuit persists after the capability is
+  gone, the causal link runs in one direction only.
+
+  \vspace{4mm}
+  \textbf{Cost:} onset = checkpoint tracking (cheap).
+  Offset = fine-tuning or unlearning (expensive).
+
+  \vspace{3mm}
+  {\footnotesize Medical microbiology. Fredricks \& Relman
+  (1996), guidelines for establishing microbial causation.}
+}
+
+\column{0.33}
+
+{
+\colorlet{blocktitlebgcolor}{colorOne}
+\block{Takeaway}{
+  {\Large\bfseries Six experiment designs from four source
+  disciplines. Most cost one extra condition. Almost none
+  have been tried.}
+
+  \vspace{5mm}
+  \begin{itemize}[leftmargin=*, itemsep=3mm]
+    \item \textbf{1/16} audited claims meets double
+      dissociation (I6)
+    \item \textbf{0/16} meets complementation (C6)
+    \item \textbf{0/16} reports offset coupling (I12)
+    \item \textbf{0/16} reports epistatic interaction
+      structure (I9)
+    \item Dose--response (E5) is free and almost never
+      reported
+  \end{itemize}
+
+  \vspace{4mm}
+  {\small These six criteria are part of a 36-criterion
+  framework spanning five validity types. The framework also
+  introduces interpretive validity (V1--V5)---the requirement
+  that the description mode match the evidence---for which
+  no source discipline has a counterpart.}
+
+  \vspace{5mm}
+  \begin{center}
+  \texttt{elliot@elliottower.ai}
+
+  \vspace{2mm}
+  {\small Paper:}
+  \texttt{doi.org/10.5281/zenodo.20478480}
+  \end{center}
+}
+}
+
+\end{columns}
+
+\end{document}

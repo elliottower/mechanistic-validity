@@ -1,0 +1,3674 @@
+claim: knowledge_neurons
+title: Knowledge Neurons
+description: 'Integrated gradients over the intermediate activations of a feed-forward layer attribute
+  a relational fact to about four neurons, which the paper reads as the value slots of the key--value
+  memory that layer implements. Zeroing those activations lowers the correct-answer probability by 29.03\%
+  and doubling them raises it by 31.17\%, where a count-matched attribution baseline moves the same quantity
+  by $-1.47\%$ and $-1.27\%$; rewriting the value slots installs a substituted entity as the top prediction
+  34.4\% of the time against the baseline''s 0.0\%. Systems: BERT-base-cased at one released checkpoint,
+  on 253,448 ParaRel cloze prompts covering 27,738 facts across 34 relations, with no training run anywhere
+  in the paper. Description mode: implementational-functional.'
+source:
+  citation: dai2022knowledge
+  title: Knowledge Neurons in Pretrained Transformers
+  url: https://arxiv.org/abs/2104.08696
+  local: reference/dai_2022_knowledge_neurons.pdf
+  sha256: 7b297c75bae91e9b61d20f195522a3997f6eb640ff87bf66d3fbeb76d52d43af
+  extract_cmd: pdftotext -layout
+  read_in_full: true
+claims:
+  C1:
+    quotes:
+    - exact: Given a relational fact, we manipulate its
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: 'knowledge neurons in two ways: (1) suppressing knowledge neurons'
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: by setting their activations to
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: 0; (2) amplifying knowledge neurons by doubling
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: their activations.
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: Suppressing knowledge neurons de-
+      prefix: ''
+      suffix: ''
+      section: Figure 4 caption
+      page: null
+      line: null
+    - exact: creases the correct probability by 29.03% on average. For the baseline, the decreasing ratio
+        is 1.47% on average.
+      prefix: ''
+      suffix: ''
+      section: Figure 4 caption
+      page: null
+      line: null
+    - exact: Amplifying knowledge neurons increases the correct probability by 31.17% on average. For
+        the baseline, the correct probability even decreases by 1.27%.
+      prefix: ''
+      suffix: ''
+      section: Figure 5 caption
+      page: null
+      line: null
+    - exact: the identified knowledge neurons are more signifi-
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: cantly activated by knowledge-expressing prompts
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: (T1 = 0.485), compared with the control groups
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: (T2 = 0.019 and T3 = −0.018). By contrast, for
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: the baseline, the activation of identified neurons cannot distinguish three types of prompts.
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+  C2:
+    quotes:
+    - exact: Comparing Equation (2) and Equation (3), we no-
+      prefix: ''
+      suffix: ''
+      section: §2, Connections Between Self-Attention and FFN
+      page: null
+      line: null
+    - exact: tice that the formula of FFN(·) is quite similar to
+      prefix: ''
+      suffix: ''
+      section: §2, Connections Between Self-Attention and FFN
+      page: null
+      line: null
+    - exact: Self-Att(·), except the activation function gelu in
+      prefix: ''
+      suffix: ''
+      section: §2, Connections Between Self-Attention and FFN
+      page: null
+      line: null
+    - exact: FFN and softmax in self-attention. Thus, similar
+      prefix: ''
+      suffix: ''
+      section: §2, Connections Between Self-Attention and FFN
+      page: null
+      line: null
+    - exact: to the query-key-value mechanism in self-attention,
+      prefix: ''
+      suffix: ''
+      section: §2, Connections Between Self-Attention and FFN
+      page: null
+      line: null
+    - exact: it is reasonable to regard the input of the FFN as a query vector, and two linear layers
+        of the FFN as
+      prefix: ''
+      suffix: ''
+      section: §2, Connections Between Self-Attention and FFN
+      page: null
+      line: null
+    - exact: keys and values, respectively.
+      prefix: ''
+      suffix: ''
+      section: §2, Connections Between Self-Attention and FFN
+      page: null
+      line: null
+    - exact: Similar to (Geva et al., 2020), we view FFNs in
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: Transformer as key-value memories as illustrated
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: in Figure 2. We hypothesize that factual knowl-
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: edge is stored in FFN memories and expressed by
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: knowledge neurons. In this section, we propose a
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: knowledge attribution method and a refining strat-
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: egy to identify these knowledge neurons.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: The first linear layer FFN(key) computes intermediate neurons through inner product. Taking
+        the activation of these neurons as weights, the second linear layer FFN(val) integrates value
+        vectors through weighted sum.
+      prefix: ''
+      suffix: ''
+      section: Figure 2 caption
+      page: null
+      line: null
+    - exact: Finally, we directly
+      prefix: ''
+      suffix: ''
+      section: §5.1, Methods
+      page: null
+      line: null
+    - exact: modify the corresponding value slots in FFN(val)
+      prefix: ''
+      suffix: ''
+      section: §5.1, Methods
+      page: null
+      line: null
+  C3:
+    quotes:
+    - exact: Inspired by Hao et al. (2021), we propose a knowl-
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: edge attribution method based on integrated gradi-
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: ents (Sundararajan et al., 2017).
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: Our baseline method takes the neuron activation
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: value as the attribution score
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: We notice that most fact-related neurons are distributed in the topmost layers of pre-
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: trained Transformers. The finding also agrees with
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: Tenney et al. (2019) and Geva et al. (2020).
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    refs:
+    - citation: meng2022locating
+      text: decisive in a model
+      section: body
+      page: null
+      direction: neutral
+      local: reference/meng_2022_rome.pdf
+      sha256: d7c17f896cca512fb258261421b073baa6f4e6e44b6bb7ada5c90185f423054a
+      extract_cmd: pdftotext -layout
+    - citation: meng2022locating
+      text: restore the prediction
+      section: body
+      page: null
+      direction: neutral
+      local: reference/meng_2022_rome.pdf
+      sha256: d7c17f896cca512fb258261421b073baa6f4e6e44b6bb7ada5c90185f423054a
+      extract_cmd: pdftotext -layout
+  C4:
+    quotes:
+    - exact: In order to identify knowledge neurons more accu-
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: rately, we further propose a refining strategy. Be-
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: sides “true-positive” knowledge neurons that ex-
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: press factual knowledge, the coarse set of knowl-
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: edge neurons may contain “false-positive” knowl-
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: edge neurons that express other information (e.g.,
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: syntactic or lexical information). The refining strat-
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: egy aims to filter out these “false-positive” neurons.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: For different prompts corresponding to the same
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: fact, we hypothesize that they share the same set
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: of “true-positive” knowledge neurons, since they
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: express the same factual knowledge. Meanwhile,
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: we hypothesize that they do not share the “false-
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: positive” knowledge neurons as long as the prompts
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: are diverse enough.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: considering all the
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: coarse sets together, retain the knowledge neurons
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: shared by more than p% prompts.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+  C5:
+    quotes:
+    - exact: with a language modeling objective on large-scale
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: corpora, such as Wikipedia, where exists oceans
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: of factual knowledge. Pretrained language models
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: naturally play as a free-text knowledge base by pre-
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: dicting texts (Bosselut et al., 2019). Petroni et al.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: (2019) and Jiang et al. (2020b) probe factual knowl-
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: edge stored in pretrained language models by fill-
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: in-the-blank cloze queries.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: Similar to (Geva et al., 2020), we view FFNs in
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: Transformer as key-value memories as illustrated
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: in Figure 2. We hypothesize that factual knowl-
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: edge is stored in FFN memories and expressed by
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: knowledge neurons. In this section, we propose a
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: knowledge attribution method and a refining strat-
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: egy to identify these knowledge neurons.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: Recently, Wu et al. (2019) and Dong et al.
+      prefix: ''
+      suffix: ''
+      section: §6, Analysis of Transformer
+      page: null
+      line: null
+    - exact: (2021) have pointed out that the feed-forward net-
+      prefix: ''
+      suffix: ''
+      section: §6, Analysis of Transformer
+      page: null
+      line: null
+    - exact: work module also matters to Transformer. Geva
+      prefix: ''
+      suffix: ''
+      section: §6, Analysis of Transformer
+      page: null
+      line: null
+    - exact: et al. (2020) attempt to connect feed-forward net-
+      prefix: ''
+      suffix: ''
+      section: §6, Analysis of Transformer
+      page: null
+      line: null
+    - exact: works with key-value memories by qualitative anal-
+      prefix: ''
+      suffix: ''
+      section: §6, Analysis of Transformer
+      page: null
+      line: null
+    - exact: ysis. In this paper, we identify and analyze knowl-
+      prefix: ''
+      suffix: ''
+      section: §6, Analysis of Transformer
+      page: null
+      line: null
+    - exact: edge neurons in feed-forward networks for given
+      prefix: ''
+      suffix: ''
+      section: §6, Analysis of Transformer
+      page: null
+      line: null
+    - exact: factual knowledge. Moreover, we present how to leverage knowledge neurons to explicitly edit
+        fac-
+      prefix: ''
+      suffix: ''
+      section: §6, Analysis of Transformer
+      page: null
+      line: null
+    - exact: tual knowledge stored in pretrained Transformers.
+      prefix: ''
+      suffix: ''
+      section: §6, Analysis of Transformer
+      page: null
+      line: null
+  M1:
+    quotes:
+    - exact: we set the attribution threshold t to 0.2 times the
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: maximum attribution score. For each relation, we
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: initialize the refining threshold p% (Section 3.3)
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: as 0.7. Then, we increase or decrease it by 0.05
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: at a time until the average number of knowledge
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: neurons lies in [2, 5].
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Suppressing knowledge neurons de-
+      prefix: ''
+      suffix: ''
+      section: Figure 4 caption
+      page: null
+      line: null
+    - exact: creases the correct probability by 29.03% on average. For the baseline, the decreasing ratio
+        is 1.47% on average.
+      prefix: ''
+      suffix: ''
+      section: Figure 4 caption
+      page: null
+      line: null
+    - exact: On average, we identify 4.13 knowledge neurons
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: for each relational fact using our knowledge attri-
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: bution method, and 3.96 using the baseline method.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: On average, it costs
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: 13.3 seconds to identify knowledge neurons for a
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: relational fact with 9 prompts.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  M2:
+    quotes:
+    - exact: Our baseline method takes the neuron activation
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: value as the attribution score
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: After computing attribution scores,
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: we follow the same pipeline to obtain the refined
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: knowledge neurons. For a fair comparison, we
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: employ the same method to choose the hyper-
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: parameters t and p% for the baseline to ensure
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: the average number of knowledge neurons for each
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: relation lies in [2, 5].
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: On average, we identify 4.13 knowledge neurons
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: for each relational fact using our knowledge attri-
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: bution method, and 3.96 using the baseline method.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: Their same order of magnitude guarantees the fair-
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: ness of the subsequent comparisons in the paper.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: Suppressing knowledge neurons de-
+      prefix: ''
+      suffix: ''
+      section: Figure 4 caption
+      page: null
+      line: null
+    - exact: creases the correct probability by 29.03% on average. For the baseline, the decreasing ratio
+        is 1.47% on average.
+      prefix: ''
+      suffix: ''
+      section: Figure 4 caption
+      page: null
+      line: null
+    - exact: Amplifying knowledge neurons increases the correct probability by 31.17% on average. For
+        the baseline, the correct probability even decreases by 1.27%.
+      prefix: ''
+      suffix: ''
+      section: Figure 5 caption
+      page: null
+      line: null
+    - exact: the identified knowledge neurons are more signifi-
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: cantly activated by knowledge-expressing prompts
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: (T1 = 0.485), compared with the control groups
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: (T2 = 0.019 and T3 = −0.018). By contrast, for
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: the baseline, the activation of identified neurons cannot distinguish three types of prompts.
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: Containing head and tail (T1 ) 0.485            2.472
+      prefix: ''
+      suffix: ''
+      section: Table 4
+      page: null
+      line: null
+    - exact: Success rate↑           34.4%             0.0%
+      prefix: ''
+      suffix: ''
+      section: Table 6
+      page: null
+      line: null
+  M3:
+    quotes:
+    - exact: we set the attribution threshold t to 0.2 times the
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: maximum attribution score. For each relation, we
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: initialize the refining threshold p% (Section 3.3)
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: as 0.7. Then, we increase or decrease it by 0.05
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: at a time until the average number of knowledge
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: neurons lies in [2, 5].
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: m = 20 is the number of approximation steps.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+  M4:
+    quotes:
+    - exact: Therefore, the attribution score
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: can measure the contribution of the neuron
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: With the attribution algorithm, we can identify a
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: coarse set of knowledge neurons whose attribution
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: scores are greater than a threshold t.
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: we set the attribution threshold t to 0.2 times the
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: maximum attribution score. For each relation, we
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: initialize the refining threshold p% (Section 3.3)
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: as 0.7. Then, we increase or decrease it by 0.05
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: at a time until the average number of knowledge
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: neurons lies in [2, 5].
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Suppressing knowledge neurons de-
+      prefix: ''
+      suffix: ''
+      section: Figure 4 caption
+      page: null
+      line: null
+    - exact: creases the correct probability by 29.03% on average. For the baseline, the decreasing ratio
+        is 1.47% on average.
+      prefix: ''
+      suffix: ''
+      section: Figure 4 caption
+      page: null
+      line: null
+    - exact: P937 (work_location)                       58.0         140.0 (+141.2%)         138.0          151.9
+        (+10.1%)
+      prefix: ''
+      suffix: ''
+      section: Table 5
+      page: null
+      line: null
+  M5:
+    quotes:
+    - exact: Our baseline method takes the neuron activation
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: value as the attribution score
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: The method based on neuron activation is a rea-
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: sonable baseline.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: For each relation, we randomly sample ten facts
+      prefix: ''
+      suffix: ''
+      section: §5.1, Setup
+      page: null
+      line: null
+    - exact: learned by the pretrained model.
+      prefix: ''
+      suffix: ''
+      section: §5.1, Setup
+      page: null
+      line: null
+    - exact: we present preliminary studies on how fac-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: tual knowledge is stored in pretrained Trans-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: formers by introducing the concept of knowl-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: edge neurons. Specifically, we examine the fill-in-the-blank cloze task for BERT.
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+  M6:
+    quotes:
+    - exact: In order to guarantee
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: the template diversity, we filter out relations with
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: fewer than 4 prompt templates and finally keep 34 relations, where each relation has 8.63
+        differ-
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: ent prompt templates on average.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: Notably, for
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: the relation P178 (developer), the correct prob-
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: ability abnormally increases by using the baseline.
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: In addition,
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: since our comparison is based on the web-
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: crawled B ING R EL dataset, we validate the general-
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: ization of knowledge neurons to open-domain texts
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: that are unseen in PARA R EL.
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: Notice that our method is
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: not limited to BERT and can be easily general-
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: ized to other pretrained models.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+  M7:
+    quotes:
+    - exact: we set the attribution threshold t to 0.2 times the
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: maximum attribution score. For each relation, we
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: initialize the refining threshold p% (Section 3.3)
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: as 0.7. Then, we increase or decrease it by 0.05
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: at a time until the average number of knowledge
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: neurons lies in [2, 5].
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Then, we retain the knowledge
+      prefix: ''
+      suffix: ''
+      section: §5.1, Methods
+      page: null
+      line: null
+    - exact: neurons that are shared by less than 10% of intra-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Methods
+      page: null
+      line: null
+    - exact: relation facts, to reduce the influence on other facts with the same relation.
+      prefix: ''
+      suffix: ''
+      section: §5.1, Methods
+      page: null
+      line: null
+    - exact: Then, we retain 20 knowledge neurons that appear
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: most frequently among these facts. Finally, we
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: set the value slots in FFN(val) (see Figure 2) cor-
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: responding to these knowledge neurons to 0, i.e.,
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: zero vectors.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: Specifically, we take four relations in
+      prefix: ''
+      suffix: ''
+      section: §5.2
+      page: null
+      line: null
+    - exact: PARA R EL as examples
+      prefix: ''
+      suffix: ''
+      section: §5.2
+      page: null
+      line: null
+    - exact: the identified knowledge neurons are more signifi-
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: cantly activated by knowledge-expressing prompts
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: (T1 = 0.485), compared with the control groups
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: (T2 = 0.019 and T3 = −0.018). By contrast, for
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: the baseline, the activation of identified neurons cannot distinguish three types of prompts.
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: Prompt templates in PARA R EL produce 253,448 knowledge-expressing prompts in total for 27,738
+        relational facts.
+      prefix: ''
+      suffix: ''
+      section: Table 1 caption
+      page: null
+      line: null
+  I1:
+    quotes:
+    - exact: Given a relational fact, we manipulate its
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: 'knowledge neurons in two ways: (1) suppressing knowledge neurons'
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: by setting their activations to
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: 0; (2) amplifying knowledge neurons by doubling
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: their activations.
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: Suppressing knowledge neurons de-
+      prefix: ''
+      suffix: ''
+      section: Figure 4 caption
+      page: null
+      line: null
+    - exact: creases the correct probability by 29.03% on average. For the baseline, the decreasing ratio
+        is 1.47% on average.
+      prefix: ''
+      suffix: ''
+      section: Figure 4 caption
+      page: null
+      line: null
+    - exact: Figure 4 shows that suppressing knowledge
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: neurons identified by our knowledge attribution
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: method leads to a consistent decrease (29.03% on
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: average) in the correct probability.
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+  I2:
+    quotes:
+    - exact: Amplifying knowledge neurons increases the correct probability by 31.17% on average. For
+        the baseline, the correct probability even decreases by 1.27%.
+      prefix: ''
+      suffix: ''
+      section: Figure 5 caption
+      page: null
+      line: null
+    - exact: Success rate↑           34.4%             0.0%
+      prefix: ''
+      suffix: ''
+      section: Table 6
+      page: null
+      line: null
+    - exact: Change rate↑            48.5%             4.7%
+      prefix: ''
+      suffix: ''
+      section: Table 6
+      page: null
+      line: null
+    - exact: As shown in Table 6, the surgery of
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: knowledge neurons achieves a nontrivial success rate for updating facts, while random neurons
+        are
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: insufficient.
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: Moreover, we find that such manipu-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: lation has little negative influence on other knowl-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: edge predictions. It is promising that we can
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: change very few (i.e., about four in the above exper-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: iments) neurons to affect certain facts in pretrained
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: Transformers. We can further improve the success r-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: ate by including more top knowledge neurons in
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: the update process.
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+  I3:
+    quotes:
+    - exact: we set the attribution threshold t to 0.2 times the
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: maximum attribution score. For each relation, we
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: initialize the refining threshold p% (Section 3.3)
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: as 0.7. Then, we increase or decrease it by 0.05
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: at a time until the average number of knowledge
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: neurons lies in [2, 5].
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: On average, we identify 4.13 knowledge neurons
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: for each relational fact using our knowledge attri-
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: bution method, and 3.96 using the baseline method.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: We only manipulate about four top knowledge neu-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Setup
+      page: null
+      line: null
+    - exact: rons as in Section 4.4.
+      prefix: ''
+      suffix: ''
+      section: §5.1, Setup
+      page: null
+      line: null
+    - exact: For example, if the knowledge
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: neurons for a relation are distributed more widely,
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: we need to manipulate more top-k neurons for bet-
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: ter control. We use the above experiments as a
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: proof of concept while leaving precise control for
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: Moreover, we find that such manipu-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: lation has little negative influence on other knowl-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: edge predictions. It is promising that we can
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: change very few (i.e., about four in the above exper-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: iments) neurons to affect certain facts in pretrained
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: Transformers. We can further improve the success r-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: ate by including more top knowledge neurons in
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: the update process.
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+  I4:
+    quotes:
+    - exact: of inter-rel. fact pairs   0.09     1.92
+      prefix: ''
+      suffix: ''
+      section: Table 2
+      page: null
+      line: null
+    - exact: of intra-rel. fact pairs   1.23     2.85
+      prefix: ''
+      suffix: ''
+      section: Table 2
+      page: null
+      line: null
+    - exact: The difference in knowl-
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: edge neuron intersections suggests that our method
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: can identify more exclusive knowledge neurons.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: P27 (country_of_citizenship)               28.0          38.3 (+36.7%)          143.6          149.5
+        (+4.2%)
+      prefix: ''
+      suffix: ''
+      section: Table 5
+      page: null
+      line: null
+    - exact: P937 (work_location)                       58.0         140.0 (+141.2%)         138.0          151.9
+        (+10.1%)
+      prefix: ''
+      suffix: ''
+      section: Table 5
+      page: null
+      line: null
+    - exact: P19 (place_of_birth)                     1450.0        2996.0 (+106.6%)         120.3          121.6
+        (+1.1%)
+      prefix: ''
+      suffix: ''
+      section: Table 5
+      page: null
+      line: null
+    - exact: P106 (occupation)                        2279.0        5202.0 (+128.2%)         120.1          125.3
+        (+4.3%)
+      prefix: ''
+      suffix: ''
+      section: Table 5
+      page: null
+      line: null
+    - exact: The knowledge erasing operation significantly affects the erased relation, and has just a
+        moderate influence on the expression of other knowledge.
+      prefix: ''
+      suffix: ''
+      section: Table 5 caption
+      page: null
+      line: null
+    - exact: ∆Intra-rel. PPL↓          8.4              10.1
+      prefix: ''
+      suffix: ''
+      section: Table 6
+      page: null
+      line: null
+    - exact: ∆Inter-rel. PPL↓          7.2              4.3
+      prefix: ''
+      suffix: ''
+      section: Table 6
+      page: null
+      line: null
+    - exact: Moreover, we find that such manipu-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: lation has little negative influence on other knowl-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: edge predictions. It is promising that we can
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: change very few (i.e., about four in the above exper-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: iments) neurons to affect certain facts in pretrained
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: Transformers. We can further improve the success r-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: ate by including more top knowledge neurons in
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: the update process.
+      prefix: ''
+      suffix: ''
+      section: §5.1, Results
+      page: null
+      line: null
+    - exact: In addition, we measure the influence on other knowledge by the following two
+      prefix: ''
+      suffix: ''
+      section: §5.1, Evaluation Metrics
+      page: null
+      line: null
+    - exact: 'metrics: (1) ∆intra-relation PPL, the increase of perplexity on the prompts with the same
+        relation r;'
+      prefix: ''
+      suffix: ''
+      section: §5.1, Evaluation Metrics
+      page: null
+      line: null
+    - exact: (2) ∆inter-relation PPL, the increase of perplexity
+      prefix: ''
+      suffix: ''
+      section: §5.1, Evaluation Metrics
+      page: null
+      line: null
+    - exact: on the prompts with different relations.
+      prefix: ''
+      suffix: ''
+      section: §5.1, Evaluation Metrics
+      page: null
+      line: null
+    - exact: As shown in Table 5, we report model
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+    - exact: perplexity before and after knowledge erasing.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+    - exact: With the erasing operation, the perplexity of the re-
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+    - exact: moved knowledge increases as expected. Moreover,
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+    - exact: the model perplexity of other relations remains sim-
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+    - exact: ilar. We argue that knowledge neurons provide a
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+    - exact: promising way to erase undesired knowledge with
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+    - exact: minimal efforts.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+  I5:
+    quotes:
+    - exact: Our baseline method takes the neuron activation
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: value as the attribution score
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: which measures how sensitive a neuron is
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: to the input.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: The difference in knowl-
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: edge neuron intersections suggests that our method
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: can identify more exclusive knowledge neurons.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: We hypothesize that knowledge neurons in the FFN module are responsible for expressing factual
+        knowledge.
+      prefix: ''
+      suffix: ''
+      section: Figure 2 caption
+      page: null
+      line: null
+  I6:
+    quotes:
+    - exact: Given a relational fact, we manipulate its
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: 'knowledge neurons in two ways: (1) suppressing knowledge neurons'
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: by setting their activations to
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: 0; (2) amplifying knowledge neurons by doubling
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: their activations.
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: In order to conduct a controlled ex-
+      prefix: ''
+      suffix: ''
+      section: §4.6
+      page: null
+      line: null
+    - exact: periment, we mask random words for the second
+      prefix: ''
+      suffix: ''
+      section: §4.6
+      page: null
+      line: null
+    - exact: type of texts, forming a control group (T2 ). More-
+      prefix: ''
+      suffix: ''
+      section: §4.6
+      page: null
+      line: null
+    - exact: over, we employ randomly sampled prompts as
+      prefix: ''
+      suffix: ''
+      section: §4.6
+      page: null
+      line: null
+    - exact: another control group (T3 ).
+      prefix: ''
+      suffix: ''
+      section: §4.6
+      page: null
+      line: null
+  I7:
+    quotes:
+    - exact: In order to guarantee
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: the template diversity, we filter out relations with
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: fewer than 4 prompt templates and finally keep 34 relations, where each relation has 8.63
+        differ-
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: ent prompt templates on average.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: Therefore, given multiple diverse prompts, we can refine the coarse set of
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: knowledge neurons by retaining only neurons that
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: are widely shared among these prompts.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: In order to conduct a controlled ex-
+      prefix: ''
+      suffix: ''
+      section: §4.6
+      page: null
+      line: null
+    - exact: periment, we mask random words for the second
+      prefix: ''
+      suffix: ''
+      section: §4.6
+      page: null
+      line: null
+    - exact: type of texts, forming a control group (T2 ). More-
+      prefix: ''
+      suffix: ''
+      section: §4.6
+      page: null
+      line: null
+    - exact: over, we employ randomly sampled prompts as
+      prefix: ''
+      suffix: ''
+      section: §4.6
+      page: null
+      line: null
+    - exact: another control group (T3 ).
+      prefix: ''
+      suffix: ''
+      section: §4.6
+      page: null
+      line: null
+    - exact: Containing head and tail (T1 ) 0.485            2.472
+      prefix: ''
+      suffix: ''
+      section: Table 4
+      page: null
+      line: null
+    - exact: Containing only head (T2 )     0.019            2.312
+      prefix: ''
+      suffix: ''
+      section: Table 4
+      page: null
+      line: null
+    - exact: Randomly sampled (T3 )         -0.018           2.244
+      prefix: ''
+      suffix: ''
+      section: Table 4
+      page: null
+      line: null
+  I9:
+    quotes:
+    - exact: The interactions between knowledge
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: neurons also remain under explored.
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: We only manipulate about four top knowledge neu-
+      prefix: ''
+      suffix: ''
+      section: §5.1, Setup
+      page: null
+      line: null
+    - exact: rons as in Section 4.4.
+      prefix: ''
+      suffix: ''
+      section: §5.1, Setup
+      page: null
+      line: null
+    - exact: Given a relational fact, we manipulate its
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: 'knowledge neurons in two ways: (1) suppressing knowledge neurons'
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: by setting their activations to
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: 0; (2) amplifying knowledge neurons by doubling
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: their activations.
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+  I10:
+    quotes:
+    - exact: Then, we retain 20 knowledge neurons that appear
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: most frequently among these facts. Finally, we
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: set the value slots in FFN(val) (see Figure 2) cor-
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: responding to these knowledge neurons to 0, i.e.,
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: zero vectors.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: denotes the value slot corresponding to
+      prefix: ''
+      suffix: ''
+      section: §5.1, Methods
+      page: null
+      line: null
+    - exact: the i-th knowledge neuron; t and t0 are the word
+      prefix: ''
+      suffix: ''
+      section: §5.1, Methods
+      page: null
+      line: null
+    - exact: embeddings of t and t0 , respectively; λ1 and λ2 are
+      prefix: ''
+      suffix: ''
+      section: §5.1, Methods
+      page: null
+      line: null
+    - exact: set to 1 and 8 in our experiments.
+      prefix: ''
+      suffix: ''
+      section: §5.1, Methods
+      page: null
+      line: null
+    - exact: As shown in Table 5, we report model
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+    - exact: perplexity before and after knowledge erasing.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+    - exact: With the erasing operation, the perplexity of the re-
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+    - exact: moved knowledge increases as expected. Moreover,
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+    - exact: the model perplexity of other relations remains sim-
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+    - exact: ilar. We argue that knowledge neurons provide a
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+    - exact: promising way to erase undesired knowledge with
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+    - exact: minimal efforts.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Results
+      page: null
+      line: null
+  I11:
+    quotes:
+    - exact: We conduct experiments for BERT-base-cased (De-
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: vlin et al., 2019), one of the most widely-used pre-
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: trained models. It contains 12 Transformer blocks,
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: where the hidden size is 768 and the FFN inner
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: hidden size is 3,072.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: In our case studies, we try to leverage knowl-
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: edge neurons to explicitly edit factual knowledge
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: in pretrained Transformers without any fine-tuning.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: For each relation, we randomly sample ten facts
+      prefix: ''
+      suffix: ''
+      section: §5.1, Setup
+      page: null
+      line: null
+    - exact: learned by the pretrained model.
+      prefix: ''
+      suffix: ''
+      section: §5.1, Setup
+      page: null
+      line: null
+    - exact: The evaluation shows
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: that pretrained Transformers have a strong ability
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: to recall factual knowledge without any fine-tuning.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+  I12:
+    quotes:
+    - exact: We conduct experiments for BERT-base-cased (De-
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: vlin et al., 2019), one of the most widely-used pre-
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: trained models. It contains 12 Transformer blocks,
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: where the hidden size is 768 and the FFN inner
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: hidden size is 3,072.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: For each relation, we randomly sample ten facts
+      prefix: ''
+      suffix: ''
+      section: §5.1, Setup
+      page: null
+      line: null
+    - exact: learned by the pretrained model.
+      prefix: ''
+      suffix: ''
+      section: §5.1, Setup
+      page: null
+      line: null
+    - exact: Then, we retain 20 knowledge neurons that appear
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: most frequently among these facts. Finally, we
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: set the value slots in FFN(val) (see Figure 2) cor-
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: responding to these knowledge neurons to 0, i.e.,
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: zero vectors.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+  E1:
+    quotes:
+    - exact: Given a relational fact, we manipulate its
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: 'knowledge neurons in two ways: (1) suppressing knowledge neurons'
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: by setting their activations to
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: 0; (2) amplifying knowledge neurons by doubling
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: their activations.
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: Finally, we directly
+      prefix: ''
+      suffix: ''
+      section: §5.1, Methods
+      page: null
+      line: null
+    - exact: modify the corresponding value slots in FFN(val)
+      prefix: ''
+      suffix: ''
+      section: §5.1, Methods
+      page: null
+      line: null
+    - exact: Then, we retain 20 knowledge neurons that appear
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: most frequently among these facts. Finally, we
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: set the value slots in FFN(val) (see Figure 2) cor-
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: responding to these knowledge neurons to 0, i.e.,
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: zero vectors.
+      prefix: ''
+      suffix: ''
+      section: §5.2, Methods
+      page: null
+      line: null
+    - exact: Inspired by Hao et al. (2021), we propose a knowl-
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: edge attribution method based on integrated gradi-
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+    - exact: ents (Sundararajan et al., 2017).
+      prefix: ''
+      suffix: ''
+      section: §3.2
+      page: null
+      line: null
+  E2:
+    quotes:
+    - exact: Prompt templates in PARA R EL produce 253,448 knowledge-expressing prompts in total for 27,738
+        relational facts.
+      prefix: ''
+      suffix: ''
+      section: Table 1 caption
+      page: null
+      line: null
+    - exact: In order to guarantee
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: the template diversity, we filter out relations with
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: fewer than 4 prompt templates and finally keep 34 relations, where each relation has 8.63
+        differ-
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: ent prompt templates on average.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: For each of the 27,738
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: 'facts in PARA R EL, we crawl two types of texts: (1)'
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: up to ten texts containing both the head and the tail
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: entities (210,217 texts crawled in total); (2) up to t-
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: en texts containing only the head entity without
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: restricting tail entities (266,020 texts crawled in
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: total). Following the distant supervision assump-
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: tion (Mintz et al., 2009), the first type of texts tends
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: to express the whole relational fact, while the sec-
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: ond type does not.
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: In addition,
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: since our comparison is based on the web-
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: crawled B ING R EL dataset, we validate the general-
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: ization of knowledge neurons to open-domain texts
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: that are unseen in PARA R EL.
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+  E3:
+    quotes:
+    - exact: First, we examine knowledge neurons based
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: on the fill-in-the-blank cloze task, while knowl-
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: edge can be expressed in a more implicit way. It is
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: an open question whether Transformer can utilize
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: stored knowledge in a generalized way, such as for
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: reasoning. The interactions between knowledge
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: neurons also remain under explored.
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: focus on factual knowledge for ease of evaluation,
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: even though our method is also applicable for other
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: types of knowledge. Third, we use the single-word
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: blank in cloze queries for simplicity, which requires
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: multi-word extensions (Jiang et al., 2020a). Be-
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: sides, an interesting future direction is to figure out
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: how knowledge neurons work in multilingual pre-
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: trained Transformers (Conneau and Lample, 2019;
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: Conneau et al., 2020; Chi et al., 2021).
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+  E4:
+    quotes:
+    - exact: We conduct experiments for BERT-base-cased (De-
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: vlin et al., 2019), one of the most widely-used pre-
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: trained models. It contains 12 Transformer blocks,
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: where the hidden size is 768 and the FFN inner
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: hidden size is 3,072.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: Notice that our method is
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: not limited to BERT and can be easily general-
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: ized to other pretrained models.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: focus on factual knowledge for ease of evaluation,
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: even though our method is also applicable for other
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: types of knowledge. Third, we use the single-word
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: blank in cloze queries for simplicity, which requires
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: multi-word extensions (Jiang et al., 2020a). Be-
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: sides, an interesting future direction is to figure out
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: how knowledge neurons work in multilingual pre-
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: trained Transformers (Conneau and Lample, 2019;
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: Conneau et al., 2020; Chi et al., 2021).
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+  E5:
+    quotes:
+    - exact: Given a relational fact, we manipulate its
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: 'knowledge neurons in two ways: (1) suppressing knowledge neurons'
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: by setting their activations to
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: 0; (2) amplifying knowledge neurons by doubling
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: their activations.
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: Suppressing knowledge neurons de-
+      prefix: ''
+      suffix: ''
+      section: Figure 4 caption
+      page: null
+      line: null
+    - exact: creases the correct probability by 29.03% on average. For the baseline, the decreasing ratio
+        is 1.47% on average.
+      prefix: ''
+      suffix: ''
+      section: Figure 4 caption
+      page: null
+      line: null
+    - exact: Amplifying knowledge neurons increases the correct probability by 31.17% on average. For
+        the baseline, the correct probability even decreases by 1.27%.
+      prefix: ''
+      suffix: ''
+      section: Figure 5 caption
+      page: null
+      line: null
+    - exact: For example, if the knowledge
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: neurons for a relation are distributed more widely,
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: we need to manipulate more top-k neurons for bet-
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: ter control. We use the above experiments as a
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: proof of concept while leaving precise control for
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+  E6:
+    quotes:
+    - exact: In order to study what prompts can activate knowl-
+      prefix: ''
+      suffix: ''
+      section: §4.6
+      page: null
+      line: null
+    - exact: edge neurons, we compare the average activation of knowledge neurons for different types
+        of prompts.
+      prefix: ''
+      suffix: ''
+      section: §4.6
+      page: null
+      line: null
+    - exact: For each of the 27,738
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: 'facts in PARA R EL, we crawl two types of texts: (1)'
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: up to ten texts containing both the head and the tail
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: entities (210,217 texts crawled in total); (2) up to t-
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: en texts containing only the head entity without
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: restricting tail entities (266,020 texts crawled in
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: total). Following the distant supervision assump-
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: tion (Mintz et al., 2009), the first type of texts tends
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: to express the whole relational fact, while the sec-
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: ond type does not.
+      prefix: ''
+      suffix: ''
+      section: §4.6, B ING R EL Dataset
+      page: null
+      line: null
+    - exact: Containing head and tail (T1 ) 0.485            2.472
+      prefix: ''
+      suffix: ''
+      section: Table 4
+      page: null
+      line: null
+    - exact: Containing only head (T2 )     0.019            2.312
+      prefix: ''
+      suffix: ''
+      section: Table 4
+      page: null
+      line: null
+    - exact: As shown in Table 3, the top-2 activating
+      prefix: ''
+      suffix: ''
+      section: §4.6, Example Prompts
+      page: null
+      line: null
+    - exact: prompts express exactly the corresponding rela-
+      prefix: ''
+      suffix: ''
+      section: §4.6, Example Prompts
+      page: null
+      line: null
+    - exact: tional fact. In contrast, despite containing the
+      prefix: ''
+      suffix: ''
+      section: §4.6, Example Prompts
+      page: null
+      line: null
+    - exact: same head and tail entities, the bottom-2 activating
+      prefix: ''
+      suffix: ''
+      section: §4.6, Example Prompts
+      page: null
+      line: null
+    - exact: prompts do not express the correct relation. For
+      prefix: ''
+      suffix: ''
+      section: §4.6, Example Prompts
+      page: null
+      line: null
+    - exact: example, although the bottom-2 activating prompts
+      prefix: ''
+      suffix: ''
+      section: §4.6, Example Prompts
+      page: null
+      line: null
+    - exact: for hIreland, capital, Dublini express
+      prefix: ''
+      suffix: ''
+      section: §4.6, Example Prompts
+      page: null
+      line: null
+    - exact: information like “Dublin is a city in Ireland”, they
+      prefix: ''
+      suffix: ''
+      section: §4.6, Example Prompts
+      page: null
+      line: null
+    - exact: do not reflect the capital relation.
+      prefix: ''
+      suffix: ''
+      section: §4.6, Example Prompts
+      page: null
+      line: null
+    - exact: The top-2 activating prompts express exactly the relation, but the bottom-2 do not.
+      prefix: ''
+      suffix: ''
+      section: Table 3 caption
+      page: null
+      line: null
+  V1:
+    quotes:
+    - exact: we present preliminary studies on how fac-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: tual knowledge is stored in pretrained Trans-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: formers by introducing the concept of knowl-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: edge neurons. Specifically, we examine the fill-in-the-blank cloze task for BERT.
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: As shown in Figure 1, we propose a knowl-
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: edge attribution method to identify the neurons
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: that express a relational fact, where such neurons
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: are named knowledge neurons.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: Similar to (Geva et al., 2020), we view FFNs in
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: Transformer as key-value memories as illustrated
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: in Figure 2. We hypothesize that factual knowl-
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: edge is stored in FFN memories and expressed by
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: knowledge neurons. In this section, we propose a
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: knowledge attribution method and a refining strat-
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: egy to identify these knowledge neurons.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: In this paper, rather than just examining the model out-
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: puts, we identify the specific knowledge neurons
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: that express factual knowledge.
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+  V2:
+    quotes:
+    - exact: Knowledge Neurons in Pretrained Transformers
+      prefix: ''
+      suffix: ''
+      section: Title
+      page: null
+      line: null
+    - exact: we present preliminary studies on how fac-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: tual knowledge is stored in pretrained Trans-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: formers by introducing the concept of knowl-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: edge neurons. Specifically, we examine the fill-in-the-blank cloze task for BERT.
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: We find that the activation
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: of such knowledge neurons is positively cor-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: related to the expression of their correspond-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: ing facts. In our case studies, we attempt to
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: leverage knowledge neurons to edit (such as update, and erase) specific factual knowledge
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: without fine-tuning. Our results shed light
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: on understanding the storage of knowledge
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: within pretrained Transformers.
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: We conduct both qualitative and quantitative
+      prefix: ''
+      suffix: ''
+      section: §1, contributions
+      page: null
+      line: null
+    - exact: analysis to show that knowledge neurons are
+      prefix: ''
+      suffix: ''
+      section: §1, contributions
+      page: null
+      line: null
+    - exact: positively correlated to knowledge expression.
+      prefix: ''
+      suffix: ''
+      section: §1, contributions
+      page: null
+      line: null
+    - exact: Similar to (Geva et al., 2020), we view FFNs in
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: Transformer as key-value memories as illustrated
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: in Figure 2. We hypothesize that factual knowl-
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: edge is stored in FFN memories and expressed by
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: knowledge neurons. In this section, we propose a
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: knowledge attribution method and a refining strat-
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: egy to identify these knowledge neurons.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: Success rate↑           34.4%             0.0%
+      prefix: ''
+      suffix: ''
+      section: Table 6
+      page: null
+      line: null
+  V3:
+    quotes:
+    - exact: The method based on neuron activation is a rea-
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: sonable baseline. It is motivated by FFNs’s analogy
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: with the self-attention mechanism (as described in
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Section 2), because self-attention scores are usu-
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: ally used as a strong attribution baseline
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: which measures how sensitive a neuron is
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: to the input.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: of inter-rel. fact pairs   0.09     1.92
+      prefix: ''
+      suffix: ''
+      section: Table 2
+      page: null
+      line: null
+    - exact: The difference in knowl-
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: edge neuron intersections suggests that our method
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: can identify more exclusive knowledge neurons.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+  V4:
+    quotes:
+    - exact: As shown in Figure 1, we propose a knowl-
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: edge attribution method to identify the neurons
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: that express a relational fact, where such neurons
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: are named knowledge neurons.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: we present preliminary studies on how fac-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: tual knowledge is stored in pretrained Trans-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: formers by introducing the concept of knowl-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: edge neurons. Specifically, we examine the fill-in-the-blank cloze task for BERT.
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: We hypothesize that knowledge neurons in the FFN module are responsible for expressing factual
+        knowledge.
+      prefix: ''
+      suffix: ''
+      section: Figure 2 caption
+      page: null
+      line: null
+    - exact: We find that the activation
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: of such knowledge neurons is positively cor-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: related to the expression of their correspond-
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: ing facts. In our case studies, we attempt to
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: leverage knowledge neurons to edit (such as update, and erase) specific factual knowledge
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: without fine-tuning. Our results shed light
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: on understanding the storage of knowledge
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: within pretrained Transformers.
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: Extensive analysis shows that the activation of
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: the identified knowledge neurons is positively cor-
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: related to the knowledge expression, which shows
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: the effectiveness of the proposed knowledge at-
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: tribution method. First, suppressing and ampli-
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: fying knowledge neurons notably affects the ex-
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: pression of the corresponding knowledge.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: We conduct both qualitative and quantitative
+      prefix: ''
+      suffix: ''
+      section: §1, contributions
+      page: null
+      line: null
+    - exact: analysis to show that knowledge neurons are
+      prefix: ''
+      suffix: ''
+      section: §1, contributions
+      page: null
+      line: null
+    - exact: positively correlated to knowledge expression.
+      prefix: ''
+      suffix: ''
+      section: §1, contributions
+      page: null
+      line: null
+    - exact: In order to identify knowledge neurons more accu-
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: rately, we further propose a refining strategy. Be-
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: sides “true-positive” knowledge neurons that ex-
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: press factual knowledge, the coarse set of knowl-
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: edge neurons may contain “false-positive” knowl-
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: edge neurons that express other information (e.g.,
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: syntactic or lexical information). The refining strat-
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: egy aims to filter out these “false-positive” neurons.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: For different prompts corresponding to the same
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: fact, we hypothesize that they share the same set
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: of “true-positive” knowledge neurons, since they
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: express the same factual knowledge. Meanwhile,
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: we hypothesize that they do not share the “false-
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: positive” knowledge neurons as long as the prompts
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: are diverse enough.
+      prefix: ''
+      suffix: ''
+      section: §3.3
+      page: null
+      line: null
+    - exact: After computing attribution scores,
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: we follow the same pipeline to obtain the refined
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: knowledge neurons. For a fair comparison, we
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: employ the same method to choose the hyper-
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: parameters t and p% for the baseline to ensure
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: the average number of knowledge neurons for each
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: relation lies in [2, 5].
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: Knowledge   neurons          4.13     3.96
+      prefix: ''
+      suffix: ''
+      section: Table 2
+      page: null
+      line: null
+    - exact: the identified knowledge neurons are more signifi-
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: cantly activated by knowledge-expressing prompts
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: (T1 = 0.485), compared with the control groups
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: (T2 = 0.019 and T3 = −0.018). By contrast, for
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+    - exact: the baseline, the activation of identified neurons cannot distinguish three types of prompts.
+      prefix: ''
+      suffix: ''
+      section: §4.6, Results
+      page: null
+      line: null
+  V5:
+    quotes:
+    - exact: First, we examine knowledge neurons based
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: on the fill-in-the-blank cloze task, while knowl-
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: edge can be expressed in a more implicit way. It is
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: an open question whether Transformer can utilize
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: stored knowledge in a generalized way, such as for
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: reasoning. The interactions between knowledge
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: neurons also remain under explored.
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: focus on factual knowledge for ease of evaluation,
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: even though our method is also applicable for other
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: types of knowledge. Third, we use the single-word
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: blank in cloze queries for simplicity, which requires
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: multi-word extensions (Jiang et al., 2020a). Be-
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: sides, an interesting future direction is to figure out
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: how knowledge neurons work in multilingual pre-
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: trained Transformers (Conneau and Lample, 2019;
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: Conneau et al., 2020; Chi et al., 2021).
+      prefix: ''
+      suffix: ''
+      section: §7
+      page: null
+      line: null
+    - exact: Notice that our method is
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: not limited to BERT and can be easily general-
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: ized to other pretrained models.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: We use the case studies as a proof of concept while
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: leaving precise fact editing for future work.
+      prefix: ''
+      suffix: ''
+      section: §5
+      page: null
+      line: null
+    - exact: For example, if the knowledge
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: neurons for a relation are distributed more widely,
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: we need to manipulate more top-k neurons for bet-
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: ter control. We use the above experiments as a
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null
+    - exact: proof of concept while leaving precise control for
+      prefix: ''
+      suffix: ''
+      section: §4.5
+      page: null
+      line: null

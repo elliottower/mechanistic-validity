@@ -1,0 +1,23 @@
+citation: chanin2024absorption
+depth: quoted
+title: 'A is for Absorption: Studying Feature Splitting and Absorption in Sparse Autoencoders'
+authors:
+- Chanin, David
+- Wilken-Smith, James
+- Dulka, Tom'av s
+- Bhatnagar, Hardik
+- Golechha, Satvik
+- Bloom, Joseph
+year: '2025'
+venue: Advances in Neural Information Processing Systems (NeurIPS)
+url: https://arxiv.org/abs/2409.14507
+arxiv: '2409.14507'
+local: reference/chanin_2024_feature_absorption.pdf
+sha256: fc4175d560e35e2a36d41924ed35d0be791fab555e851df1aea656a14410e6ef
+quotes:
+- text: into more specific latents
+  section: body
+  direction: neutral
+- text: varying SAE sizes or sparsity is insufficient
+  section: body
+  direction: neutral

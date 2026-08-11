@@ -1,0 +1,229 @@
+{
+  "n": 1000,
+  "mode": "zero",
+  "seed": 0,
+  "baseline": 0.49628233909606934,
+  "ablated": -0.12194041907787323,
+  "full_restoration_identity": 0.49628233909606934,
+  "full_restoration_from_neighbour": -0.16985246539115906,
+  "restoration_gap_abs": 0.7835643887519836,
+  "recovers_within_1pct": false,
+  "curve_monotone": false,
+  "curve": [
+    {
+      "shift": 0,
+      "k": 0,
+      "restored": [],
+      "n_heads": 0,
+      "own_answer": -0.12194041907787323,
+      "neighbour_answer": -0.30494073033332825,
+      "sem": 0.05173783376812935
+    },
+    {
+      "shift": 0,
+      "k": 1,
+      "restored": [
+        "name_mover"
+      ],
+      "n_heads": 3,
+      "own_answer": 0.6336654424667358,
+      "neighbour_answer": -0.5356708765029907,
+      "sem": 0.0714566558599472
+    },
+    {
+      "shift": 0,
+      "k": 2,
+      "restored": [
+        "name_mover",
+        "negative_name_mover"
+      ],
+      "n_heads": 5,
+      "own_answer": 0.16962246596813202,
+      "neighbour_answer": -0.469913512468338,
+      "sem": 0.050551582127809525
+    },
+    {
+      "shift": 0,
+      "k": 3,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover"
+      ],
+      "n_heads": 13,
+      "own_answer": 0.37053388357162476,
+      "neighbour_answer": -0.8016554117202759,
+      "sem": 0.05626466125249863
+    },
+    {
+      "shift": 0,
+      "k": 4,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover",
+        "s_inhibition"
+      ],
+      "n_heads": 17,
+      "own_answer": 0.5569432377815247,
+      "neighbour_answer": -0.7082046270370483,
+      "sem": 0.06469553709030151
+    },
+    {
+      "shift": 0,
+      "k": 5,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover",
+        "s_inhibition",
+        "induction"
+      ],
+      "n_heads": 21,
+      "own_answer": 0.574345052242279,
+      "neighbour_answer": -0.7124427556991577,
+      "sem": 0.06590311229228973
+    },
+    {
+      "shift": 0,
+      "k": 6,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover",
+        "s_inhibition",
+        "induction",
+        "duplicate_token"
+      ],
+      "n_heads": 24,
+      "own_answer": 0.4886610805988312,
+      "neighbour_answer": -0.7080609202384949,
+      "sem": 0.06329616904258728
+    },
+    {
+      "shift": 0,
+      "k": 7,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover",
+        "s_inhibition",
+        "induction",
+        "duplicate_token",
+        "previous_token"
+      ],
+      "n_heads": 26,
+      "own_answer": 0.49628233909606934,
+      "neighbour_answer": -0.7132164239883423,
+      "sem": 0.06367263942956924
+    },
+    {
+      "shift": 1,
+      "k": 0,
+      "restored": [],
+      "n_heads": 0,
+      "own_answer": -0.12194041907787323,
+      "neighbour_answer": -0.30494073033332825,
+      "sem": 0.05173783376812935
+    },
+    {
+      "shift": 1,
+      "k": 1,
+      "restored": [
+        "name_mover"
+      ],
+      "n_heads": 3,
+      "own_answer": -0.1321967989206314,
+      "neighbour_answer": 0.5301316976547241,
+      "sem": 0.05301681533455849
+    },
+    {
+      "shift": 1,
+      "k": 2,
+      "restored": [
+        "name_mover",
+        "negative_name_mover"
+      ],
+      "n_heads": 5,
+      "own_answer": -0.13126671314239502,
+      "neighbour_answer": 0.024072006344795227,
+      "sem": 0.05165238678455353
+    },
+    {
+      "shift": 1,
+      "k": 3,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover"
+      ],
+      "n_heads": 13,
+      "own_answer": -0.13499702513217926,
+      "neighbour_answer": 0.5583987832069397,
+      "sem": 0.05256054922938347
+    },
+    {
+      "shift": 1,
+      "k": 4,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover",
+        "s_inhibition"
+      ],
+      "n_heads": 17,
+      "own_answer": -0.14736522734165192,
+      "neighbour_answer": 0.5772460103034973,
+      "sem": 0.05329008400440216
+    },
+    {
+      "shift": 1,
+      "k": 5,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover",
+        "s_inhibition",
+        "induction"
+      ],
+      "n_heads": 21,
+      "own_answer": -0.15263880789279938,
+      "neighbour_answer": 0.568003237247467,
+      "sem": 0.05370604991912842
+    },
+    {
+      "shift": 1,
+      "k": 6,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover",
+        "s_inhibition",
+        "induction",
+        "duplicate_token"
+      ],
+      "n_heads": 24,
+      "own_answer": -0.1708277016878128,
+      "neighbour_answer": 0.3838849663734436,
+      "sem": 0.0567903034389019
+    },
+    {
+      "shift": 1,
+      "k": 7,
+      "restored": [
+        "name_mover",
+        "negative_name_mover",
+        "backup_name_mover",
+        "s_inhibition",
+        "induction",
+        "duplicate_token",
+        "previous_token"
+      ],
+      "n_heads": 26,
+      "own_answer": -0.16985246539115906,
+      "neighbour_answer": 0.40696728229522705,
+      "sem": 0.05664443224668503
+    }
+  ],
+  "note": "classes are restored in the fixed order given by IOI_CLASSES, so the curve is one ordering of many; it tests monotonicity, not importance. shift=0 restores the values that were removed and recovers by construction; it is reported only as a control on shift=1."
+}

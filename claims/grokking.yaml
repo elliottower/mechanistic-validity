@@ -1,0 +1,1020 @@
+claim: grokking
+title: Fourier Multiplication in Modular Addition
+description: 'A one-layer transformer trained on $a+b \bmod 113$ maps each input to $\cos$ and $\sin$
+  at five key frequencies, multiplies those components so the products encode $a+b$, and reads the sum
+  off at the same five frequencies. The frequencies are identified from the embedding''s Fourier spectrum;
+  the account is validated by ablating in Fourier space and by two progress measures, restricted and excluded
+  loss, tracked across training. Restricted and excluded loss move before test accuracy does, which is
+  what makes the account predictive rather than descriptive. Description mode: algorithmic.'
+source:
+  citation: nanda2023progress
+  title: Progress Measures for Grokking
+  url: https://arxiv.org/abs/2301.05217
+  local: reference/nanda_2023_grokking.pdf
+  sha256: 93dcdafc2ecf75d31ab2e32e74cdc11e2e488fec42edfef58ad3d4b6515bcd5f
+  extract_cmd: pdftotext -layout
+  read_in_full: true
+claims:
+  C1:
+    quotes:
+    - exact: The loss of the transformer (lower=better) when ablating each frequency k ∈ {1, 2, ..., 56}
+        and everything except for the five key frequencies (restricted loss). We include the original
+        unablated loss for reference. Ablating key frequencies causes a performance drop, while the other
+        ablations do not harm performance.
+      prefix: ''
+      suffix: ''
+      section: Figure 6
+      page: null
+      line: null
+    - exact: As reported in Figure 6, ablating any key frequency causes a significant increase in loss.
+        This confirms that the five frequencies identified in previous sections are indeed necessary components
+        of the transformer. In contrast, ablating other frequencies does not hurt the model at all.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: If we instead projected the MLP activations onto the nullspace of these 10 directions, loss
+        increases to 5.27—worse than uniform.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: The idea is that the memorizing solution should be spread out in the Fourier domain, so that
+        ablating a few directions will leave it mostly unaffected, while the generalizing solution will
+        be hurt significantly.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+  C2:
+    quotes:
+    - exact: The embedding matrix WE is sparse in the Fourier basis–it only has significant nonnegligible
+        norm at 6 frequencies. Of these frequencies, only 5 appear to be used significantly in later parts
+        of the model (corresponding to k ∈ {14, 35, 41, 42, 52}). We dub these the key frequencies of
+        the model.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: the residual has Frobenius norm that is under 0.55% of the norm of WL .
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: This fit explain 99.02%, 95.21%, 99.10%, 92.42% of the variance of Cj respectively.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.1.3
+      page: null
+      line: null
+    - exact: We speculate that this is because of weight decay encouraging the embeddings WE to be small,
+        causing the network to allocate two of its attention heads to effectively increasing the size
+        of WE .
+      prefix: ''
+      suffix: ''
+      section: Appendix C.1.3
+      page: null
+      line: null
+  C3:
+    quotes:
+    - exact: We confirm this understanding with four lines of evidence (Section 4)
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: Our first line of evidence involves examining the network weights and activations and observing
+        consistent periodic structure that is unlikely to occur by chance (Section 4.1).
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: We next look into the actual mechanisms implemented in the model weights (Section 4.2).
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: Finally, we use ablations to confirm that our interpretation is faithful (Section 4.4).
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: 'We translate the ablations in Section 4.4 into two progress measures: restricted and excluded
+        loss.'
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+  C4:
+    quotes:
+    - exact: The idea is that the memorizing solution should be spread out in the Fourier domain, so that
+        ablating a few directions will leave it mostly unaffected, while the generalizing solution will
+        be hurt significantly.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: Circuit formation (Epochs 1.4k–9.4k). In this phase, excluded loss rises, sum of squared
+        weights falls, restricted loss starts to fall, and test and train loss stay flat.
+      prefix: ''
+      suffix: ''
+      section: §5.2
+      page: null
+      line: null
+    - exact: As reported in Figure 6, ablating any key frequency causes a significant increase in loss.
+        This confirms that the five frequencies identified in previous sections are indeed necessary components
+        of the transformer. In contrast, ablating other frequencies does not hurt the model at all.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+  C5:
+    quotes:
+    - exact: Barak et al. (2022) introduce the notion of progress measures—metrics that improve smoothly
+        and that precede emergent behavior.
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: The style of post-hoc mechanistic interpretability in Section 4 is heavily inspired by the
+        Circuits approach of Cammarata et al. (2020), Elhage et al. (2021), and Olsson et al. (2022).
+      prefix: ''
+      suffix: ''
+      section: §2
+      page: null
+      line: null
+    - exact: As demonstrated in Section 4 and Appendix C.2.1, small transformers trained on this task
+        use several different frequencies which they add together. The reason for this is to end up with
+        a function whose value at x = 0 mod 113 is significantly larger than any other x.
+      prefix: ''
+      suffix: ''
+      section: Appendix B
+      page: null
+      line: null
+  M1:
+    quotes:
+    - exact: The train and test accuracy (left) and train and test loss (right) of one-layer transformers
+        on the modular addition task described in Section 3, over 5 random seeds.
+      prefix: ''
+      suffix: ''
+      section: Figure 2
+      page: null
+      line: null
+    - exact: In this section, we provide evidence that all 4 other runs (i.e., random seeds) using the
+        experimental setup of our mainline model also use the Fourier multiplication algorithm
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2.1
+      page: null
+      line: null
+    - exact: We then compute the fraction of variance explained (FVE) if we replace the projection with
+        a single term proportional to cos (wk (a + b)) or sin (wk (a + b)), and find that it is consistently
+        close to 1.
+      prefix: ''
+      suffix: ''
+      section: Table 1
+      page: null
+      line: null
+    - exact: (We report the standard deviation of loss over the runs in parentheses.)
+      prefix: ''
+      suffix: ''
+      section: Table 6
+      page: null
+      line: null
+  M2:
+    quotes:
+    - exact: The loss of the transformer (lower=better) when ablating each frequency k ∈ {1, 2, ..., 56}
+        and everything except for the five key frequencies (restricted loss). We include the original
+        unablated loss for reference. Ablating key frequencies causes a performance drop, while the other
+        ablations do not harm performance.
+      prefix: ''
+      suffix: ''
+      section: Figure 6
+      page: null
+      line: null
+    - exact: As reported in Figure 6, ablating any key frequency causes a significant increase in loss.
+        This confirms that the five frequencies identified in previous sections are indeed necessary components
+        of the transformer. In contrast, ablating other frequencies does not hurt the model at all.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: We then ablate all 113 · 113 − 40 of the Fourier components besides key frequencies; this
+        ablation actually improves performance (loss drops 70% to 7.24 · 10−8 ).
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: As with the mainline model, ablating all of the key frequencies reduces performance to worse
+        than chance, while ablating everything but the key frequencies improves test performance.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2.1
+      page: null
+      line: null
+  M3:
+    quotes:
+    - exact: We find that grokking occurs for the modular addition task with P = 113 for many data fractions
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2.2
+      page: null
+      line: null
+    - exact: For P = 401 (Figure 25), we could not get grokking, even by varying the weight decay parameter
+        λ ∈ {0.3, 0.5, 1, 3, 5, 8}.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2.2
+      page: null
+      line: null
+    - exact: In order to find the key frequencies to calculate the excluded and restricted loss, we perform
+        a DFT on the neuron-logit map WL , then take the frequencies with nontrivial coefficients
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2
+      page: null
+      line: null
+    - exact: As shown in Figure 5, out of 512 total neurons, 433 (84.6%) have over 85% of their variance
+        explained with a single frequency.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+  M4:
+    quotes:
+    - exact: If we instead projected the MLP activations onto the nullspace of these 10 directions, loss
+        increases to 5.27—worse than uniform.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: As with the mainline model, ablating all of the key frequencies reduces performance to worse
+        than chance, while ablating everything but the key frequencies improves test performance.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2.1
+      page: null
+      line: null
+    - exact: 1       2.07 · 10−7                     6.5 · 100                                         5.7
+        · 10−8
+      prefix: ''
+      suffix: ''
+      section: Table 4
+      page: null
+      line: null
+  M5:
+    quotes:
+    - exact: As reported in Figure 6, ablating any key frequency causes a significant increase in loss.
+        This confirms that the five frequencies identified in previous sections are indeed necessary components
+        of the transformer. In contrast, ablating other frequencies does not hurt the model at all.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: We verify that these approximations are faithful to the model’s functionality, by replacing
+        each component with its approximation. This generally does not hurt the performance of the model
+        and in some cases improves it.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+  M6:
+    quotes:
+    - exact: For each of the models in Appendices C.2.3 and D.1 that generalizes to test data, we report
+        the test loss, the Gini coefficients of the norms of the Fourier components of WE and WL (Section
+        5.1), the key frequencies of the network
+      prefix: ''
+      suffix: ''
+      section: Table 5
+      page: null
+      line: null
+    - exact: We find that every model trained with weight decay and that generalizes correctly implements
+        some variation of the Fourier multiplication algorithm.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2.3
+      page: null
+      line: null
+    - exact: Interestingly, the embedding and unembedding matrices of the models trained with dropout
+        are not sparse in the Fourier basis
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2.3
+      page: null
+      line: null
+  M7:
+    quotes:
+    - exact: The embedding matrix WE is sparse in the Fourier basis–it only has significant nonnegligible
+        norm at 6 frequencies. Of these frequencies, only 5 appear to be used significantly in later parts
+        of the model (corresponding to k ∈ {14, 35, 41, 42, 52}). We dub these the key frequencies of
+        the model.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: As reported in Figure 6, ablating any key frequency causes a significant increase in loss.
+        This confirms that the five frequencies identified in previous sections are indeed necessary components
+        of the transformer. In contrast, ablating other frequencies does not hurt the model at all.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: As shown in Figure 5, out of 512 total neurons, 433 (84.6%) have over 85% of their variance
+        explained with a single frequency.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: In order to find the key frequencies to calculate the excluded and restricted loss, we perform
+        a DFT on the neuron-logit map WL , then take the frequencies with nontrivial coefficients
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2
+      page: null
+      line: null
+    - exact: One method for getting a general (model-independent) progress measure for this task is to
+        compute the excluded loss for each of the 56 unique frequencies and then take the max.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2, footnote 3
+      page: null
+      line: null
+  I1:
+    quotes:
+    - exact: As reported in Figure 6, ablating any key frequency causes a significant increase in loss.
+        This confirms that the five frequencies identified in previous sections are indeed necessary components
+        of the transformer. In contrast, ablating other frequencies does not hurt the model at all.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: As with the mainline model, ablating all of the key frequencies reduces performance to worse
+        than chance, while ablating everything but the key frequencies improves test performance.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2.1
+      page: null
+      line: null
+    - exact: 1       2.07 · 10−7                     6.5 · 100                                         5.7
+        · 10−8
+      prefix: ''
+      suffix: ''
+      section: Table 4
+      page: null
+      line: null
+    - exact: 2        2.1 · 10−7                     1.1 · 101                                         6.2
+        · 10−8
+      prefix: ''
+      suffix: ''
+      section: Table 4
+      page: null
+      line: null
+    - exact: If we instead projected the MLP activations onto the nullspace of these 10 directions, loss
+        increases to 5.27—worse than uniform.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: The matrices are sparse in the Fourier basis, enabling us to identify 3 or 4 key frequencies
+        for each of the seeds.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2.1
+      page: null
+      line: null
+  I2:
+    quotes:
+    - exact: To measure this, we perform a 2D DFT on the logits to write them as a linear combination
+        of waves in a and b, and set all terms besides the constant term and the 20 terms corresponding
+        to cos(wk (a + b)) and sin(wk (a + b)) for the five key frequencies to 0. We then measure the
+        loss of the ablated network.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: We then ablate all 113 · 113 − 40 of the Fourier components besides key frequencies; this
+        ablation actually improves performance (loss drops 70% to 7.24 · 10−8 ).
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: If we project the MLP activations to these 10 directions, loss decreases 50% to 1.19 · 10−7
+        .
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: This increases loss by only 3% in relative terms (from 2.41 · 10−7 to 2.48 · 10−7 ) and has
+        no effect on accuracy.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+  I3:
+    quotes:
+    - exact: As reported in Figure 6, ablating any key frequency causes a significant increase in loss.
+        This confirms that the five frequencies identified in previous sections are indeed necessary components
+        of the transformer. In contrast, ablating other frequencies does not hurt the model at all.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: In Figure 15, we plot the excluded loss if we exclude each of the five key frequencies (as
+        opposed to all five key frequencies).
+      prefix: ''
+      suffix: ''
+      section: Appendix C.1.5
+      page: null
+      line: null
+    - exact: As shown in Figure 5, out of 512 total neurons, 433 (84.6%) have over 85% of their variance
+        explained with a single frequency.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: We replace each of these neurons’ activation value by the corresponding polynomial, leaving
+        the other neurons untouched.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+  I4:
+    quotes:
+    - exact: We train transformers to perform addition mod P . The input to the model is of the form “a
+        b =”, where a and b are encoded as P -dimensional one-hot vectors, and = is a special token above
+        which we read the output c.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: Note that loss is only calculated from the logits on the final token, and information only
+        moves between tokens during the attention layer
+      prefix: ''
+      suffix: ''
+      section: Appendix A
+      page: null
+      line: null
+    - exact: As there are only 113 · 113 possible pairs, we evaluate test loss and accuracy on all pairs
+        of inputs not used for training.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: As reported in Figure 6, ablating any key frequency causes a significant increase in loss.
+        This confirms that the five frequencies identified in previous sections are indeed necessary components
+        of the transformer. In contrast, ablating other frequencies does not hurt the model at all.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+  I5:
+    quotes:
+    - exact: The idea is that the memorizing solution should be spread out in the Fourier domain, so that
+        ablating a few directions will leave it mostly unaffected, while the generalizing solution will
+        be hurt significantly.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: Circuit formation (Epochs 1.4k–9.4k). In this phase, excluded loss rises, sum of squared
+        weights falls, restricted loss starts to fall, and test and train loss stay flat.
+      prefix: ''
+      suffix: ''
+      section: §5.2
+      page: null
+      line: null
+    - exact: 'The core issue is that the model has two possible solutions: memorization (with low train
+        loss and high test loss) and a generalization (with low train loss and low test loss).'
+      prefix: ''
+      suffix: ''
+      section: Appendix E.1
+      page: null
+      line: null
+    - exact: Fourier Multiplication Algorithm is the generalization solution.
+      prefix: ''
+      suffix: ''
+      section: Appendix E.1
+      page: null
+      line: null
+  I6:
+    quotes:
+    - exact: As reported in Figure 6, ablating any key frequency causes a significant increase in loss.
+        This confirms that the five frequencies identified in previous sections are indeed necessary components
+        of the transformer. In contrast, ablating other frequencies does not hurt the model at all.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: 'both the attention heads and the skip connection around them are crucial to the functioning
+        of the model: zero ablating attention heads increases loss to 24.3, while zero ablating the skip
+        connection around the attention heads increases loss to 19.1, both significantly worse than chance'
+      prefix: ''
+      suffix: ''
+      section: Appendix A.1
+      page: null
+      line: null
+  I7:
+    quotes:
+    - exact: As the figure shows, no grokking occurs, and excluded loss does not increase, suggesting
+        that the model does not form the circuit for generalizing algorithm at all.
+      prefix: ''
+      suffix: ''
+      section: Appendix D.1
+      page: null
+      line: null
+    - exact: In each case, we ran three random seeds. We show the results in Figure 28. While grokking
+        did not occur with ℓ1 regularization, we found that it does occur for all three seeds using dropout
+        with p = 0.2 or p = 0.5.
+      prefix: ''
+      suffix: ''
+      section: Appendix D.1
+      page: null
+      line: null
+    - exact: In this section, we provide further evidence that small transformers grok on the modular
+        addition task, by varying the size of the network, the amount of training data, and the size of
+        the prime P .
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2.2
+      page: null
+      line: null
+  I9:
+    quotes:
+    - exact: The unembedding matrix also adds together cos (wk (a + b − c)) for the various ks. This causes
+        the cosine waves to constructively interfere at c∗ = a + b mod p (giving c∗ a large logit), and
+        destructively interfere everywhere else (thus giving small logits to other cs).
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: 'However, other values of x cause this function to be close to 1: f14 (8) = f14 (105) = 0.998,
+        f14 (16) = f14 (89) = 0.994, etc.'
+      prefix: ''
+      suffix: ''
+      section: Appendix B
+      page: null
+      line: null
+    - exact: it turns out that f35 (8) = f35 (105) = −0.990. This means that by adding together f14 and
+        f35 , we end up with a function that is not close to 1 at x = 8 mod 113.
+      prefix: ''
+      suffix: ''
+      section: Appendix B
+      page: null
+      line: null
+    - exact: As reported in Figure 6, ablating any key frequency causes a significant increase in loss.
+        This confirms that the five frequencies identified in previous sections are indeed necessary components
+        of the transformer. In contrast, ablating other frequencies does not hurt the model at all.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+  I10:
+    quotes:
+    - exact: We verify that these approximations are faithful to the model’s functionality, by replacing
+        each component with its approximation. This generally does not hurt the performance of the model
+        and in some cases improves it.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: We replace various components of the model by the components of the Fourier multiplication
+        algorithm and find that doing so consistently does not harm and sometimes even improves model
+        performance.
+      prefix: ''
+      suffix: ''
+      section: §4
+      page: null
+      line: null
+    - exact: If we instead projected the MLP activations onto the nullspace of these 10 directions, loss
+        increases to 5.27—worse than uniform.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+  I11:
+    quotes:
+    - exact: 'We translate the ablations in Section 4.4 into two progress measures: restricted and excluded
+        loss.'
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: Circuit formation (Epochs 1.4k–9.4k). In this phase, excluded loss rises, sum of squared
+        weights falls, restricted loss starts to fall, and test and train loss stay flat.
+      prefix: ''
+      suffix: ''
+      section: §5.2
+      page: null
+      line: null
+    - exact: Notably, the circuit is formed well before grokking occurs.
+      prefix: ''
+      suffix: ''
+      section: §5.2
+      page: null
+      line: null
+    - exact: Surprisingly, the sudden transition to perfect test accuracy in grokking occurs during cleanup,
+        after the generalizing mechanism is learned.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: As with the mainline model, restricted loss consistently declines prior to train loss.
+      prefix: ''
+      suffix: ''
+      section: Figure 18
+      page: null
+      line: null
+  I12:
+    quotes:
+    - exact: As the figure shows, no grokking occurs, and excluded loss does not increase, suggesting
+        that the model does not form the circuit for generalizing algorithm at all.
+      prefix: ''
+      suffix: ''
+      section: Appendix D.1
+      page: null
+      line: null
+    - exact: Training, test, and full excluded loss for a 1-layer version of the original architecture
+        without weight decay. One random seed chosen for readability. Note that not having weight decay
+        prevents grokking.
+      prefix: ''
+      suffix: ''
+      section: Figure 26
+      page: null
+      line: null
+  E1:
+    quotes:
+    - exact: We then ablate all 113 · 113 − 40 of the Fourier components besides key frequencies; this
+        ablation actually improves performance (loss drops 70% to 7.24 · 10−8 ).
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: If we project the MLP activations to these 10 directions, loss decreases 50% to 1.19 · 10−7
+        .
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: This increases loss by only 3% in relative terms (from 2.41 · 10−7 to 2.48 · 10−7 ) and has
+        no effect on accuracy.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: We validate that this is all that is going on, by replacing the sigmoid with the best linear
+        fit. This improves performance, decreasing test loss from 2.41 · 10−7 to 2.12 · 10−7 .
+      prefix: ''
+      suffix: ''
+      section: Appendix C.1.3
+      page: null
+      line: null
+    - exact: Concretely, if we set it to zero or to its average (zero or mean ablation) then model accuracy
+        is unchanged, and loss goes from 2.4 · 10−7 to 9.12 · 10−7 and 7.25 · 10−7 respectively.
+      prefix: ''
+      suffix: ''
+      section: Appendix A.1
+      page: null
+      line: null
+  E2:
+    quotes:
+    - exact: Our mainline dataset consists of 30% of the entire set of possible inputs (that is, 30% of
+        the 113 ·
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: As there are only 113 · 113 possible pairs, we evaluate test loss and accuracy on all pairs
+        of inputs not used for training.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: To do so, we take a 2D DFT on the 113 · 113 · 113 logit matrix over all 113 · 113 pairs of
+        inputs to get the logits in the Fourier basis, then set various frequencies in this basis to 0.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+  E3:
+    quotes:
+    - exact: We now provide addition analysis of grokking phenomena on 3 additional algorithmic tasks
+        and confirm that limited data is an important part of grokking
+      prefix: ''
+      suffix: ''
+      section: Appendix D.3
+      page: null
+      line: null
+    - exact: Taken together, these results echo the importance of limited data for grokking.
+      prefix: ''
+      suffix: ''
+      section: Appendix D.3
+      page: null
+      line: null
+    - exact: We use a 1-layer full transformer for 5-digit addition, a 2-layer attention only transformer
+        for predicting repeated subsequences, and a 1-layer attention only transformer for the skip trigram
+        task.
+      prefix: ''
+      suffix: ''
+      section: Appendix D.3
+      page: null
+      line: null
+  E4:
+    quotes:
+    - exact: In our mainline experiment, we take P = 113 and use a one-layer ReLU transformer, token embeddings
+        with d = 128, learned positional embeddings, 4 attention heads of dimension d/4 = 32, and n =
+        512 hidden units in the MLP. In other experiments, we vary the depth and dimension of the model.
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: As shown in Figure 22, 2-layer transformers also exhibit some degree of grokking.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2.2
+      page: null
+      line: null
+    - exact: For P = 109, we saw exactly the same behavior as with the mainline model.
+      prefix: ''
+      suffix: ''
+      section: Appendix C.2.2
+      page: null
+      line: null
+  E5:
+    quotes:
+    - exact: The loss of the transformer (lower=better) when ablating each frequency k ∈ {1, 2, ..., 56}
+        and everything except for the five key frequencies (restricted loss). We include the original
+        unablated loss for reference. Ablating key frequencies causes a performance drop, while the other
+        ablations do not harm performance.
+      prefix: ''
+      suffix: ''
+      section: Figure 6
+      page: null
+      line: null
+    - exact: then set various frequencies in this basis to 0
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: To measure this, we perform a 2D DFT on the logits to write them as a linear combination
+        of waves in a and b, and set all terms besides the constant term and the 20 terms corresponding
+        to cos(wk (a + b)) and sin(wk (a + b)) for the five key frequencies to 0. We then measure the
+        loss of the ablated network.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+  E6:
+    quotes:
+    - exact: 'We translate the ablations in Section 4.4 into two progress measures: restricted and excluded
+        loss.'
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: Both metrics improve continuously prior to when grokking occurs.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: The restricted loss begins declining before test loss declines, but has an inflection point
+        when grokking begins to occur.
+      prefix: ''
+      suffix: ''
+      section: Figure 7
+      page: null
+      line: null
+    - exact: (4) ablating key frequencies used by the model reduces performance to chance, while ablating
+        the other 95% of frequencies slightly improves performance.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: We then ablate all 113 · 113 − 40 of the Fourier components besides key frequencies; this
+        ablation actually improves performance (loss drops 70% to 7.24 · 10−8 ).
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+  V1:
+    quotes:
+    - exact: We fully reverse engineer the algorithm learned by these networks, which uses discrete Fourier
+        transforms and trigonometric identities to convert addition to rotation about a circle.
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: We confirm the algorithm by analyzing the activations and weights
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: A mechanistic explanation aims to reverse engineer the mechanisms of the network, generally
+        by identifying the circuits (Cammarata et al., 2020; Elhage et al., 2021) within a model that
+        implement a behavior.
+      prefix: ''
+      suffix: ''
+      section: §1
+      page: null
+      line: null
+    - exact: 'We claim that the learned networks use the following algorithm (Figure 1):'
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+  V2:
+    quotes:
+    - exact: We fully reverse engineer the algorithm learned by these networks, which uses discrete Fourier
+        transforms and trigonometric identities to convert addition to rotation about a circle.
+      prefix: ''
+      suffix: ''
+      section: Abstract
+      page: null
+      line: null
+    - exact: This approximation explains 95% of the variance in the original logits.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: As shown in Figure 5, out of 512 total neurons, 433 (84.6%) have over 85% of their variance
+        explained with a single frequency.
+      prefix: ''
+      suffix: ''
+      section: §4.3
+      page: null
+      line: null
+    - exact: We speculate that this is because of weight decay encouraging the embeddings WE to be small,
+        causing the network to allocate two of its attention heads to effectively increasing the size
+        of WE .
+      prefix: ''
+      suffix: ''
+      section: Appendix C.1.3
+      page: null
+      line: null
+  V3:
+    quotes:
+    - exact: The idea is that the memorizing solution should be spread out in the Fourier domain, so that
+        ablating a few directions will leave it mostly unaffected, while the generalizing solution will
+        be hurt significantly.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: We check empirically that the terms uTk MLP(a, b) and vkT MLP(a, b) are approximate multiples
+        of cos (wk (a + b)) and sin (wk (a + b)) (> 90% of variance explained). Thus the network computes
+        trigonometric functions in the MLP and reads them off as claimed.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+    - exact: This approximation explains 95% of the variance in the original logits.
+      prefix: ''
+      suffix: ''
+      section: §4.2
+      page: null
+      line: null
+  V4:
+    quotes:
+    - exact: The embedding matrix WE is sparse in the Fourier basis–it only has significant nonnegligible
+        norm at 6 frequencies. Of these frequencies, only 5 appear to be used significantly in later parts
+        of the model (corresponding to k ∈ {14, 35, 41, 42, 52}). We dub these the key frequencies of
+        the model.
+      prefix: ''
+      suffix: ''
+      section: §4.1
+      page: null
+      line: null
+    - exact: As reported in Figure 6, ablating any key frequency causes a significant increase in loss.
+        This confirms that the five frequencies identified in previous sections are indeed necessary components
+        of the transformer. In contrast, ablating other frequencies does not hurt the model at all.
+      prefix: ''
+      suffix: ''
+      section: §4.4
+      page: null
+      line: null
+    - exact: We refer to this algorithm as Fourier multiplication, and will justify our claim in detail
+        in Section 4.
+      prefix: ''
+      suffix: ''
+      section: §3.1
+      page: null
+      line: null
+    - exact: We therefore also study the P × n neuron-logit map WL = WU Wout
+      prefix: ''
+      suffix: ''
+      section: §3
+      page: null
+      line: null
+    - exact: To measure this, we perform a 2D DFT on the logits to write them as a linear combination
+        of waves in a and b, and set all terms besides the constant term and the 20 terms corresponding
+        to cos(wk (a + b)) and sin(wk (a + b)) for the five key frequencies to 0. We then measure the
+        loss of the ablated network.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: Instead of keeping the important frequencies wk , we next remove only those key frequencies
+        from the logits but keep the rest.
+      prefix: ''
+      suffix: ''
+      section: §5.1
+      page: null
+      line: null
+    - exact: We find that training splits into three phases, which we call the memorization, circuit formation,
+        and cleanup phases.
+      prefix: ''
+      suffix: ''
+      section: §5.2
+      page: null
+      line: null
+    - exact: We speculate that this is because of weight decay encouraging the embeddings WE to be small,
+        causing the network to allocate two of its attention heads to effectively increasing the size
+        of WE .
+      prefix: ''
+      suffix: ''
+      section: Appendix C.1.3
+      page: null
+      line: null
+  V5:
+    quotes:
+    - exact: In this work, we studied the behavior of small transformers on a simple algorithmic task,
+        solved with a single circuit.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+    - exact: The analysis reported in this work required significant amounts of manual effort, and our
+        progress metrics are specific to small networks on one particular algorithmic task.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
+    - exact: we lack a general notion of criticality that would allow us to predict when the phase transition
+        will happen ex ante.
+      prefix: ''
+      suffix: ''
+      section: §6
+      page: null
+      line: null
