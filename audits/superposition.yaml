@@ -294,8 +294,8 @@ criteria:
         and a geometric characterisation (feature dimensionality, tegum factors, uniform polytopes) that
         uses neither. Later convergence from methods the origin did not use: feature-capacity theory (Scherlis
         et al.\ 2022, three weeks later, independently deriving the same tradeoff), sparse probing across
-        seven real models 70M--6.9B (Gurnee et al.\ 2023), dictionary learning \citep{cunningham2023sparse,
-        bricken2024monosemanticity}, and a scaling-law derivation confirmed in open-weight LLMs (Liu,
+        seven real models 70M--6.9B (Gurnee et al.\ 2023), dictionary learning \citep{cunningham2024sparse,
+        bricken2023monosemanticity}, and a scaling-law derivation confirmed in open-weight LLMs (Liu,
         Liu \& Gore 2025)'
       verification: 'The cell understates the origin-time evidence and overstates one part of it. The
         three replications reported in Comments & Replications and named in the acknowledgments are the

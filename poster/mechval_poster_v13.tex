@@ -1,0 +1,520 @@
+% Mechanistic Validity — NEMI 2026 poster, v13
+% Five rows by validity type.
+% Left: criteria table (bold ID+name, description, source).
+% Right: two case studies per row.
+%
+%   cd poster && lualatex mechval_poster_v13.tex
+
+\documentclass[25pt, a0paper, portrait]{tikzposter}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+\tikzposterlatexaffectionproofoff
+
+% ── Colors ────────────────────────────────────────────
+\definecolor{darktext}{HTML}{2C3E50}
+\definecolor{blockbg}{HTML}{FFFFFF}
+\definecolor{constructgreen}{HTML}{27AE60}
+\definecolor{measureblue}{HTML}{2980B9}
+\definecolor{internalorange}{HTML}{E67E22}
+\definecolor{externalpurple}{HTML}{8E44AD}
+\definecolor{interpteal}{HTML}{16A085}
+
+% ── Theme ─────────────────────────────────────────────
+\usetheme{Default}
+
+\definecolorstyle{MechValColors}{
+  \definecolor{colorOne}{HTML}{2C3E50}
+  \definecolor{colorTwo}{HTML}{3498DB}
+  \definecolor{colorThree}{HTML}{ECF0F1}
+}{
+  \colorlet{backgroundcolor}{colorThree}
+  \colorlet{framecolor}{colorOne}
+  \colorlet{titlefgcolor}{white}
+  \colorlet{titlebgcolor}{colorOne}
+  \colorlet{blocktitlebgcolor}{colorTwo}
+  \colorlet{blocktitlefgcolor}{white}
+  \colorlet{blockbodybgcolor}{blockbg}
+  \colorlet{blockbodyfgcolor}{darktext}
+  \colorlet{notefgcolor}{darktext}
+  \colorlet{notebgcolor}{colorTwo!12}
+  \colorlet{notefrcolor}{colorTwo}
+}
+\usecolorstyle{MechValColors}
+
+\defineblockstyle{MechValBlock}{
+  titlewidthscale=1.0, bodywidthscale=1.0, titleleft,
+  titleoffsetx=0pt, titleoffsety=0pt,
+  bodyoffsetx=0pt, bodyoffsety=0pt, bodyverticalshift=0pt,
+  roundedcorners=12, linewidth=2pt, titleinnersep=10pt, bodyinnersep=12pt
+}{
+  \draw[rounded corners=\blockroundedcorners, color=blocktitlebgcolor,
+        fill=blockbodybgcolor, line width=\blocklinewidth]
+    (blockbody.south west) rectangle (blocktitle.north east);
+  \ifBlockHasTitle
+    \draw[rounded corners=\blockroundedcorners,
+          fill=blocktitlebgcolor, color=blocktitlebgcolor,
+          line width=\blocklinewidth]
+      (blocktitle.south west) rectangle (blocktitle.north east);
+  \fi
+}
+\useblockstyle{MechValBlock}
+
+\definetitlestyle{MechValTitle}{
+  width=\paperwidth, roundedcorners=0, linewidth=0pt, innersep=20pt,
+  titletotopverticalspace=12mm, titletoblockverticalspace=18mm
+}{
+  \draw[fill=titlebgcolor, color=titlebgcolor]
+    (\titleposleft, \titleposbottom)
+    rectangle (\titleposright, \titlepostop);
+}
+\usetitlestyle{MechValTitle}
+
+\title{%
+  \parbox{0.92\linewidth}{\centering\bfseries
+    Mechanistic Validity: A Validity Framework for Mechanistic Interpretability}}
+\author{Elliot Tower\quad\texttt{elliot@elliottower.ai}}
+\institute{}
+
+\begin{document}
+
+\maketitle[width=\paperwidth]
+
+% ════════════════════════════════════════════════════════
+% ROW 1: CONSTRUCT VALIDITY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.40}
+
+{
+\colorlet{blocktitlebgcolor}{constructgreen}
+\block{Construct Validity --- Is the target concept well-defined?}{
+  A claim is bounded by its weakest validity dimension.
+  Five types form a dependency chain: construct validity
+  is a ceiling on all others.
+
+  \vspace{4mm}
+  \renewcommand{\arraystretch}{1.3}
+  {\small
+  \begin{tabular}{@{} >{\bfseries}l >{\bfseries}p{0.47\linewidth} >{\bfseries}l @{}}
+    \toprule
+    \textbf{ID} & \textbf{Description} & \textbf{Source} \\
+    \midrule
+    C1 Falsifiability & Can the claim be refuted? & Phil.\ of science \\
+    C2 Structural plaus. & Physically possible in the architecture? & Phil.\ of science \\
+    C3 Convergent & Do independent methods agree? & Measurement theory \\
+    C4 Discriminant & Distinguishes from neighboring constructs? & Measurement theory \\
+    C5 Nomological & Fits into a broader theory? & Phil.\ of science \\
+    C6 Complementation & Are labeled subdivisions functionally distinct? & Genetics \\
+    \bottomrule
+  \end{tabular}}
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{constructgreen}
+\block{C4: Discriminant Validity}{
+  Does the measure distinguish this construct from
+  neighboring constructs?
+
+  \vspace{4mm}
+  \textbf{Knowledge Neurons:} neurons identified by
+  activation magnitude, but the criterion cannot separate
+  factual knowledge from linguistic regularity. Suppressing
+  these neurons produces off-target effects \textbf{worse
+  than suppressing random neurons} (Dai, 2022).
+
+  \vspace{4mm}
+  \textbf{Gender Bias Circuits:} heads that correlate with
+  gendered outputs, but the method never tests whether
+  those heads encode bias specifically or linguistic
+  competence generally. Bias and competence are never
+  separated (Vig, 2020).
+
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{constructgreen}
+\block{C6: Complementation}{
+  Are labeled subdivisions functionally distinct?
+
+  \vspace{4mm}
+  \textbf{IOI Component Classes:} the circuit identifies
+  ``name movers,'' ``S-inhibition heads,'' and ``backup
+  name movers.'' Whether these labels name distinct
+  functional units or overlapping contributions to a single
+  mechanism has never been tested (Wang, 2023).
+
+  \vspace{4mm}
+  \textbf{Adapted Cis-Trans Test (Genetics):} run two
+  forward passes, one with each component intact, and
+  construct a hybrid activation (trans configuration). If
+  the hybrid recovers, the components serve independent
+  functional roles. If the hybrid fails, they participate
+  in the same unit (Benzer, 1955).
+
+}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 2: MEASUREMENT VALIDITY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.40}
+
+{
+\colorlet{blocktitlebgcolor}{measureblue}
+\block{Measurement Validity --- Does the metric measure what it claims?}{
+  \renewcommand{\arraystretch}{1.3}
+  {\small
+  \begin{tabular}{@{} >{\bfseries}l >{\bfseries}p{0.47\linewidth} >{\bfseries}l @{}}
+    \toprule
+    \textbf{ID} & \textbf{Description} & \textbf{Source} \\
+    \midrule
+    M1 Reliability & Repeated measurements agree? & Measurement theory \\
+    M2 Baseline sep. & Distinguishable from random baselines? & Measurement theory \\
+    M3 Stability & Classification robust to perturbation? & Measurement theory \\
+    M4 Calibration & Numbers meaningful on absolute scale? & Measurement theory \\
+    M5 Sensitivity & Detects known-true effects? & Measurement theory \\
+    M6 Invariance & Consistent across conditions? & Measurement theory \\
+    M7 Selection corr. & Multiplicity controlled across $N$ candidates? & Statistics \\
+    \bottomrule
+  \end{tabular}}
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{measureblue}
+\block{M2: Baseline Separation}{
+  Is the score distinguishable from a random baseline?
+
+  \vspace{4mm}
+  \textbf{SAE Interpretability Scores:} automated
+  interpretability scores on sparse autoencoders trained
+  over randomly initialized transformers match those from
+  trained models---the instrument cannot distinguish model
+  structure from dictionary structure (Heap, 2025).
+
+  \vspace{4mm}
+  \textbf{IIA Baselines:} unconstrained nonlinear alignment
+  maps achieve 100\% interchange intervention accuracy on
+  randomly initialized models. The metric measures the
+  alignment map's flexibility, not the model's
+  representational structure (Sutter, 2025).
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{measureblue}
+\block{M3: Stability}{
+  Is the classification robust to perturbation?
+
+  \vspace{4mm}
+  Vary the ablation method, the corruption scheme, or the
+  aggregation rule. If the circuit changes, the result is
+  a property of the analysis pipeline, not the model.
+
+  \vspace{4mm}
+  \textbf{IOI Faithfulness:} the headline ``87\%'' spans
+  \textbf{below 0\% to over 100\%} across six
+  methodological choices (Miller, 2024).
+  \textbf{Corruption Method:} symmetric token replacement
+  and Gaussian noising detect \textbf{different sets of
+  heads} for any fixed metric (Zhang, 2023).
+  \textbf{Circuit Size:} across estimator and aggregation
+  choices, the circuit ranges from 5 to 21 edges while
+  circuit error stays flat (Meloux, 2025).
+}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 3: INTERNAL VALIDITY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.40}
+
+{
+\colorlet{blocktitlebgcolor}{internalorange}
+\block{Internal Validity --- Is the causal claim warranted?}{
+  \renewcommand{\arraystretch}{1.2}
+  {\small
+  \begin{tabular}{@{} >{\bfseries}l >{\bfseries}p{0.42\linewidth} >{\bfseries}l @{}}
+    \toprule
+    \textbf{ID} & \textbf{Description} & \textbf{Source} \\
+    \midrule
+    I1 Necessity & Is the circuit required? & Neuroscience \\
+    I2 Sufficiency & Is the circuit enough? & Neuroscience \\
+    I3 Minimality & Every component earns its place? & Causal inf. \\
+    I4 Specificity & More effect than matched controls? & Medicine \\
+    I5 Rival exclusion & \emph{The} mechanism or \emph{a} mechanism? & Phil.\ of sci. \\
+    I6 Double dissoc. & Two interventions, crossed effects? & Neuroscience \\
+    I7 Confound ctrl & Alternative explanations ruled out? & Causal inf. \\
+    I8 Confound sens. & Unmeasured confounder strength? & Causal inf. \\
+    I9 Epistasis & Non-additive component interaction? & Genetics \\
+    I10 Rescue & Restoring component recovers behavior? & Genetics \\
+    I11 Onset coupling & Mechanism appears with capability? & Med.\ micro. \\
+    I12 Offset coupling & Mechanism goes when cap.\ removed? & Med.\ micro. \\
+    \bottomrule
+  \end{tabular}}
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{internalorange}
+\block{I6: Double Dissociation}{
+  Do two interventions show crossed effects?
+
+  \vspace{4mm}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    & \textbf{Behavior X} & \textbf{Behavior Y} \\
+    \midrule
+    Ablate mech.\ A & Large deficit & Small deficit \\
+    Ablate mech.\ B & Small deficit & Large deficit \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{4mm}
+  A selective effect in one row is a single dissociation:
+  one intervention affects one behavior. The crossed pattern
+  across both rows rules out generalized disruption---neither
+  effect can be explained by nonspecific damage.
+
+  \vspace{4mm}
+  \textbf{Induction Heads:} across audited claims, only
+  induction heads for token copying meet this criterion,
+  achieved three years after the original paper
+  (Feucht, 2025).
+
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{internalorange}
+\block{I9: Epistatic Interaction}{
+  Do circuit components interact non-additively?
+
+  \vspace{4mm}
+  Ablate A alone, B alone, and both together. Compare the
+  joint deficit with the sum of single deficits.
+
+  \vspace{4mm}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Pattern} & \textbf{Interpretation} \\
+    \midrule
+    Joint $=$ sum & Independent contributions \\
+    Joint $<$ sum & Redundancy or shared bottleneck \\
+    Joint $>$ sum & Synergy or mutual dependence \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{4mm}
+  Sub-additivity can indicate redundancy \emph{or} a shared
+  downstream bottleneck; super-additivity can indicate synergy
+  \emph{or} a ceiling effect. The additive null must be
+  assessed on an appropriate scale for bounded metrics.
+
+}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 4: EXTERNAL VALIDITY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.40}
+
+{
+\colorlet{blocktitlebgcolor}{externalpurple}
+\block{External Validity --- Does the finding generalize?}{
+  \renewcommand{\arraystretch}{1.3}
+  {\small
+  \begin{tabular}{@{} >{\bfseries}l >{\bfseries}p{0.47\linewidth} >{\bfseries}l @{}}
+    \toprule
+    \textbf{ID} & \textbf{Description} & \textbf{Source} \\
+    \midrule
+    E1 Intervention reach & Do two different methods agree? & Causal inf. \\
+    E2 Prompt general. & Works on diverse prompts? & Causal inf. \\
+    E3 Cross-task & Transfers to related tasks? & Causal inf. \\
+    E4 Cross-model & Appears in other models? & Causal inf. \\
+    E5 Graded response & Partial ablation, partial effect? & Pharmacology \\
+    E6 Novel prediction & Predicts untested behaviors? & Phil.\ of sci. \\
+    \bottomrule
+  \end{tabular}}
+
+  \vspace{3mm}
+  E2 (prompt generalization) is disconfirmed for IOI:
+  the circuit classification changes across prompt
+  distributions.
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{externalpurple}
+\block{E1: Intervention Reach}{
+  Do two different intervention methods agree?
+
+  \vspace{4mm}
+  \textbf{IOI Circuit:} six published evaluations of the
+  same circuit, using different intervention methods,
+  produce faithfulness scores spanning \textbf{below 0\%
+  to over 100\%} (Miller, 2024; Zhang, 2023; Meloux, 2025).
+
+  \vspace{4mm}
+  When independent methods disagree on the \emph{direction}
+  of an effect, the result is a property of the method,
+  not the circuit.
+
+  \vspace{4mm}
+  The field's most studied mechanism, evaluated by the most
+  methods, shows the widest disagreement.
+
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{externalpurple}
+\block{E5: Graded Response}{
+  Does partial intervention produce partial effect?
+
+  \vspace{4mm}
+  A dose-response curve between zero and complete ablation
+  carries more information than either endpoint alone. The
+  curve shape distinguishes threshold effects from graded
+  mechanisms, reveals compensation and saturation, and
+  detects non-monotonicity invisible at a single dose.
+
+  \vspace{4mm}
+  Genuine mechanisms can produce thresholds; nonspecific
+  disruption can produce smooth monotonic decline. The curve
+  is informative, not dispositive.
+
+}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 5: INTERPRETIVE VALIDITY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.40}
+
+{
+\colorlet{blocktitlebgcolor}{interpteal}
+\block{Interpretive Validity --- Is the interpretation justified?}{
+  \textbf{Novel contribution.} No existing validity framework
+  includes these criteria. Interpretive validity asks whether
+  the description mode matches the evidence.
+
+  \vspace{4mm}
+  \renewcommand{\arraystretch}{1.3}
+  {\small
+  \begin{tabular}{@{} >{\bfseries}l >{\bfseries}p{0.47\linewidth} >{\bfseries}l @{}}
+    \toprule
+    \textbf{ID} & \textbf{Description} & \textbf{Source} \\
+    \midrule
+    V1 Level declaration & At what level is the claim made? & Marr (1982) \\
+    V2 Level-evidence & Evidence supports that level? & Messick (1995) \\
+    V3 Alternative level & Explained at a different level? & Marr (1982) \\
+    V4 Unlicensed labeling & Name imports unmeasured property? & Messick (1995) \\
+    V5 Scope declaration & What does the claim not cover? & Reporting std. \\
+    \bottomrule
+  \end{tabular}}
+
+  \vspace{3mm}
+  Activation-level evidence does not license weight-level
+  claims. Single-task evidence does not license universal
+  claims.
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{interpteal}
+\block{V1: Level Declaration}{
+  At what description level is the claim made?
+
+  \vspace{4mm}
+  A claim about \emph{which components} are active
+  (implementational) differs from a claim about
+  \emph{what information} the model encodes
+  (representational), which differs from a claim about
+  \emph{what the model computes} (computational). Each
+  level requires evidence the level below cannot provide.
+
+  \vspace{4mm}
+  \textbf{Global Workspace / J-Space:} the Jacobian lens
+  recovers a residual-stream subspace (implementational-
+  statistical evidence). The paper says the subspace
+  encodes what the model can report (representational
+  claim). The narrative frames the subspace as a ``global
+  workspace'' the model reasons in (computational
+  claim)---three levels deep on evidence that reaches
+  the representational level at best (Gurnee, 2026).
+
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{interpteal}
+\block{V2: Level-Evidence Match}{
+  Does the evidence support claims at the declared level?
+
+  \vspace{4mm}
+  Pharmacology names the distinction: a drug that binds
+  a receptor (affinity) is not evidence for how the
+  receptor works (efficacy). In MI, a direction that is
+  a sufficient behavioral \emph{lever} is routinely
+  narrated as \emph{the representation} the model uses
+  for the concept.
+
+  \vspace{4mm}
+  \textbf{Steering ``Refusal Direction'':} the direction
+  controls refusal across 13 models in five families
+  (Arditi, 2024). A later study finds a distinct
+  harmfulness direction with different steering
+  consequences---steering along harmfulness makes the
+  model read harmless instructions as harmful, while
+  steering along refusal elicits refusal without moving
+  the judgment (Zhao, 2025). The lever and the
+  representation come apart.
+}
+}
+
+\end{columns}
+
+\end{document}

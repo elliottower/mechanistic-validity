@@ -7,7 +7,7 @@ description: 'Sparse autoencoders are trained on residual-stream activations to 
   Gemma 2 2B in the follow-up. Being a method-level claim, these are the systems the evidence was gathered
   on rather than one audited model. Description mode: representational.'
 source:
-  citation: cunningham2023sparse
+  citation: cunningham2024sparse
   title: Sparse Autoencoders Find Highly Interpretable Features
   url: https://arxiv.org/abs/2309.08600
   local: reference/cunningham_2023_sparse_autoencoders.pdf
@@ -865,7 +865,7 @@ claims:
       local: reference/leask_2025_canonical_units.pdf
       sha256: 27d45ba26a8ec59d99cd752559b387ead0bbbca635a5f0bcb6730a0c49a4195e
       extract_cmd: pdftotext -layout
-    - citation: chanin2024absorption
+    - citation: chanin2025absorption
       text: into more specific latents
       section: body
       page: null
@@ -873,7 +873,7 @@ claims:
       local: reference/chanin_2024_feature_absorption.pdf
       sha256: fc4175d560e35e2a36d41924ed35d0be791fab555e851df1aea656a14410e6ef
       extract_cmd: pdftotext -layout
-    - citation: chanin2024absorption
+    - citation: chanin2025absorption
       text: varying SAE sizes or sparsity is insufficient
       section: body
       page: null
