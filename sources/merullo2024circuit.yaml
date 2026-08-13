@@ -1,5 +1,5 @@
 citation: merullo2024circuit
-depth: cited
+depth: quoted
 title: Circuit Component Reuse Across Tasks in Transformer Language Models
 authors:
 - Merullo, Jack
@@ -9,3 +9,5 @@ year: '2024'
 venue: ICLR
 url: https://arxiv.org/abs/2310.08744
 arxiv: '2310.08744'
+local: reference/merullo_2024_circuit_reuse.pdf
+sha256: e4b5a79c6280723859cbfd7405cb57bf5c11c983995a6b98a9c83bb381e65266

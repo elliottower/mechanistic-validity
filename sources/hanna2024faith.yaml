@@ -1,5 +1,5 @@
 citation: hanna2024faith
-depth: cited
+depth: quoted
 title: 'Have Faith in Faithfulness: Going Beyond Circuit Overlap When Finding Model Mechanisms'
 authors:
 - Hanna, Michael
@@ -9,3 +9,5 @@ year: '2024'
 venue: Conference on Language Modeling (COLM)
 url: https://arxiv.org/abs/2403.17806
 arxiv: '2403.17806'
+local: reference/hanna_2024_faithfulness.pdf
+sha256: 387cd4f2125ccfbf34ce9ab2a3105a93945ad8c67908786e0be08d28c17e4719

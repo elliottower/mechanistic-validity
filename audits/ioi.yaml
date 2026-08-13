@@ -296,6 +296,25 @@ criteria:
         cross-task faithfulness near zero for most task pairs in GPT-2 \emph{small}, with the smallest
         EAP circuit containing $\geq$90\% of the manual IOI nodes reaching 0\% faithfulness. Different
         models, different quantities, unreconciled
+    refs:
+    - citation: merullo2024circuit
+      text: thresholding at the 2% most important heads for each circuit, we find that 25/32, or 78% of
+        the circuit is shared
+      section: body
+      page: null
+      direction: lowers
+      local: reference/merullo_2024_circuit_reuse.pdf
+      sha256: e4b5a79c6280723859cbfd7405cb57bf5c11c983995a6b98a9c83bb381e65266
+      extract_cmd: pdftotext -layout
+    - citation: hanna2024faith
+      text: we cannot assess whether overlap predicts faithfulness, without any task pairs whose circuits
+        exhibit cross-task faithfulness
+      section: body
+      page: null
+      direction: raises
+      local: reference/hanna_2024_faithfulness.pdf
+      sha256: 387cd4f2125ccfbf34ce9ab2a3105a93945ad8c67908786e0be08d28c17e4719
+      extract_cmd: pdftotext -layout
   C5:
     name: Nomological validity
     status: PC
@@ -837,7 +856,7 @@ criteria:
   I12:
     name: Offset coupling
     status: PC
-    short: One Pythia-160m head loses name-mover behavior while the algorithm persists elsewhere
+    short: A Pythia name-mover head loses the behavior late in training
     verified: false
     reasoning: 'NOT SETTLED BY THE SOURCE. The paper contains no observation of a component losing its
       role, because it observes one checkpoint at one time.
@@ -853,6 +872,15 @@ criteria:
         while the algorithm persists in other heads \citep{tigges2024llm}, and \citet{lisubramani2026howmuch}
         find IOI circuit reuse in OLMo-2 peaking in the first $\sim$76B tokens and then declining. Observed
         rather than induced, and in other models
+    refs:
+    - citation: tigges2024llm
+      text: the name-mover head (4,6) suddenly stops exhibiting this behavior at 3
+      section: body
+      page: null
+      direction: raises
+      local: reference/tigges_2024_circuits_consistent.pdf
+      sha256: de26edd28d3792be78213005cc5d2e1f7999ee40a3a5a28743161f9a5ee9eba9
+      extract_cmd: pdftotext -layout
   E1:
     name: Intervention reach
     status: I
