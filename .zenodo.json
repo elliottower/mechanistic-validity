@@ -1,0 +1,27 @@
+{
+  "title": "Mechanistic Validity: A Validity Theory and Evidence Standard for Mechanistic Claims",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "description": "Thirty-six criteria across five validity types for grading claims about how neural networks compute, applied to sixteen published claims. Each claim decomposes into an ordered family of readings varying by mechanistic specificity and scope, and every reading is scored against the same evidence record. Selection correction and confounding sensitivity are untested in all sixteen claims; five further criteria are attempted repeatedly and confirmed nowhere. Audit records pin every quotation to its source PDF by SHA-256, and the paper's appendix tables are generated from those records.",
+  "creators": [
+    {
+      "name": "Tower, Elliot",
+      "orcid": "0000-0001-7004-8884"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "mechanistic interpretability",
+    "construct validity",
+    "evidence standards",
+    "research methodology",
+    "circuit analysis"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/elliottower/mechanistic-validity",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

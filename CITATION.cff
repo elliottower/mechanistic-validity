@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Mechanistic Validity: A Validity Theory and Evidence Standard for Mechanistic Claims"
+authors:
+  - family-names: Tower
+    given-names: Elliot
+    email: elliot@elliottower.ai
+    orcid: "https://orcid.org/0000-0001-7004-8884"
+type: software
+license: MIT
+repository-code: "https://github.com/elliottower/mechanistic-validity"
+doi: "10.5281/zenodo.20478480"

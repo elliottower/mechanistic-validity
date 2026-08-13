@@ -20,3 +20,6 @@ __pycache__/
 # editor and build leftovers
 *.bak
 *_backup_*.tex
+
+# submission bundles are built artifacts, never tracked
+submission/
