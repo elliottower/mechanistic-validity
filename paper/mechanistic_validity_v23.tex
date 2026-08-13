@@ -1,4 +1,4 @@
-% Mechanistic Validity: A Validity Theory, Research Methodology, and Evidence Standard for Mechanistic Claims
+% Mechanistic Validity: A Validity Theory and Evidence Standard for Mechanistic Claims
 \pdfoutput=1
 
 \documentclass{article}
@@ -36,7 +36,7 @@
 \usepackage{caption}
 \captionsetup[table]{skip=8pt}
 
-\title{Mechanistic Validity: A Validity Theory, Research Methodology, and Evidence Standard for Mechanistic Claims
+\title{Mechanistic Validity: A Validity Theory and Evidence Standard for Mechanistic Claims
 \thanks{Version 23. Earlier versions were circulated privately; this is the first to carry the criterion audits in the same document.}}
 
 \author{\name Elliot Tower \\
@@ -267,22 +267,12 @@ Two further literatures explain where the ambiguity comes from and how it spread
 \citet{platt1964strong} decomposes a different axis, and the two axes are easily conflated. Strong inference proceeds by devising ``a crucial experiment (or several of them), with alternative possible outcomes, each of which will, as nearly as possible, exclude one or more'' hypotheses. Platt disaggregates the space of \emph{rival} mechanisms; readings disaggregate one mechanism claim into propositions of increasing strength. Both decompositions appear in this framework and they are orthogonal: the rival axis is what I5 tests and what the Underdetermined label records, and the reading axis is what the tier ladder measures. \citet{colombo2015models} formulate the same pair in defining a how-actually model as one that is both well confirmed by the available evidence and best confirmed among the available models of the phenomenon. The first condition is the tier; the second is rival exclusion. This also explains why Underdetermined terminates rather than caps: resolving it requires scoring the rivals, and the rivals are usually not published claims that an audit of one paper can reach.
 
 % ------------------------------------------------------------------
-\subsection{Interpretive validity}
-\label{sec:related-interpretive}
-
-Three of the interpretive criteria have no counterpart we have located in the validity frameworks surveyed above. V1 asks whether a claim declares the description mode at which it is pitched, V2 whether its evidence supports a claim at that level, and V3 whether a simpler description would account for the same evidence. The remaining two are less novel and we do not claim them: scope declaration (V5) is required by every reporting standard in medicine, and unlicensed labeling (V4) is arguably a special case of construct validity.
-
-The absence of V1--V3 elsewhere is explicable. A treatment effect cannot be pitched at the wrong level of description, and a test score either measures its construct or does not. A claim about how a system works can be well measured, causally established, and still wrong about what its components do, because the label attached to a component asserts more than the intervention that identified it can support. Marr's levels and the mechanistic literature on levels of organization supply the conceptual apparatus for describing this---\citet{shagrir2017marr} analyze how Marr's computational level delineates the phenomenon a mechanistic explanation targets---but levels there are a taxonomy of description rather than a criterion an auditor applies to evidence. Turning the taxonomy into a scored criterion is the step we take.
-
-% ------------------------------------------------------------------
 \subsection{Completeness and support}
 \label{sec:related-completeness}
 
 \citet{craver2006when} states both of the distinctions this dimension rests on. Mechanistic models ``can lie anywhere on a continuum between a mechanism sketch and an ideally complete description of the mechanism,'' where a sketch ``characterizes some parts, activities, or features of the mechanism's organization, but it has gaps'' that are often ``masked by filler terms.'' Separately, how-possibly models are ``only loosely constrained conjectures about the mechanism that produces the explanandum phenomenon'' while how-actually models ``describe real components, activities, and organizational features of the mechanism that in fact produces the phenomenon.''
 
 Whether the second distinction is ontological or epistemic is contested, and the answer matters for what a tier can mean. Craver's own language is ontological. \citet{weiskopf2011models} argues the dimension must be epistemic, since any one of a set of how-possibly models might turn out to be accurate, so their placement ``cannot just be in terms of accuracy''; the dimension represents ``the degree of confirmation of the claim that the model corresponds to the mechanism.'' \citet{colombo2015models} adopt that reading and note that Craver ``does not spell out how we should determine whether a given model is nearer to the how-possibly or how-actually end.'' We adopt the epistemic reading, because a validity framework rates warrant rather than truth, and we flag it as our reading of Craver rather than his stated position.
-
-What we have not found in Craver or in the commentary is the two distinctions crossed. Sketch-to-complete and how-possibly-to-how-actually are presented in separate sections, and no source we have read claims they vary independently or reports a claim's position on both. Reporting them as a pair is what lets the framework distinguish a well-evidenced sketch from a poorly evidenced schema, which are different results that a single label conflates. Two claims in our case studies reach the same tier from opposite ends of this dimension.
 
 % ------------------------------------------------------------------
 \subsection{Where the criteria come from}
@@ -291,6 +281,29 @@ What we have not found in Craver or in the commentary is the two distinctions cr
 Every criterion is borrowed from a field that already enforces it. Convergent, discriminant and nomological validity are \citeauthor{cronbach1955construct}'s; reliability, calibration, sensitivity and invariance are psychometric; selection correction is multiple-comparison control; necessity and sufficiency correspond to \citeauthor{craver2007explaining}'s interference and stimulation experiments and offset coupling to the top-down leg of mutual manipulability; double dissociation is neuropsychological; confound control and confounding sensitivity come from causal inference, and \citet{woodward2003making} supplies the interventionist account they operationalize; epistatic interaction and rescue reversibility are genetic; the recording of insufficiency as a graded conclusion follows the USPSTF \citep{uspstf2021}.
 
 Assembling these into one instrument required adapting each of them, because each was developed for a field with an evidential capacity that mechanistic interpretability does not share. Genetics can perform a complementation test \citep{benzer1955fine} because it can construct the double heterozygote; the analogous construction is available for neural networks (C6); epidemiology cannot examine a mechanism's parts; interpretability can read every weight and cannot observe a system it did not train. What the assembly produces is a single instrument under which a claim's construct definition, its measurement properties, its causal warrant, its reach and its interpretation are assessed together and in a stated order, so that a strong result on one dimension stops standing in for the others.
+
+% ------------------------------------------------------------------
+\subsection{What the framework adds to its sources}
+\label{sec:related-novelty}
+
+Four things are new, and each is narrower than the section that introduced it
+might suggest.  The first is the object.  A test score, a study design, a
+treatment effect and a gene--disease assertion each have a settled propositional
+content an assessor can take as given, where a mechanistic claim has parts, an
+organization, a level of description and a scope that can each be asserted at
+more or less strength independently of the others.
+
+The second is the reading ladder, and it is the most heavily populated
+neighbourhood: four recent proposals arrange one claim by inferential strength,
+and \Cref{sec:related-readings} states what survives contact with them---readings
+derived from what a given paper asserted rather than fixed by domain, varying
+along two stated axes, and scored against one evidence record.
+
+Three of the interpretive criteria have no counterpart we have located in the validity frameworks surveyed above. V1 asks whether a claim declares the description mode at which it is pitched, V2 whether its evidence supports a claim at that level, and V3 whether a simpler description would account for the same evidence. The remaining two are less novel and we do not claim them: scope declaration (V5) is required by every reporting standard in medicine, and unlicensed labeling (V4) is arguably a special case of construct validity.
+
+The absence of V1--V3 elsewhere is explicable. A treatment effect cannot be pitched at the wrong level of description, and a test score either measures its construct or does not. A claim about how a system works can be well measured, causally established, and still wrong about what its components do, because the label attached to a component asserts more than the intervention that identified it can support. Marr's levels and the mechanistic literature on levels of organization supply the conceptual apparatus for describing this---\citet{shagrir2017marr} analyze how Marr's computational level delineates the phenomenon a mechanistic explanation targets---but levels there are a taxonomy of description rather than a criterion an auditor applies to evidence. Turning the taxonomy into a scored criterion is the step we take.
+
+What we have not found in Craver or in the commentary is the two distinctions crossed. Sketch-to-complete and how-possibly-to-how-actually are presented in separate sections, and no source we have read claims they vary independently or reports a claim's position on both. Reporting them as a pair is what lets the framework distinguish a well-evidenced sketch from a poorly evidenced schema, which are different results that a single label conflates. Two claims in our case studies reach the same tier from opposite ends of this dimension.
 
 % ------------------------------------------------------------------
 \subsection{Evaluation infrastructure in mechanistic interpretability}
