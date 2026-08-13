@@ -1,0 +1,562 @@
+% Mechanistic Validity — NEMI 2026 poster, v7
+% Five rows by validity type.
+% Left: criteria table (bold ID+name, definition, source).
+% Right: two case studies per row, padded to match height.
+%
+%   cd poster && lualatex mechval_poster_v7.tex
+
+\documentclass[25pt, a0paper, portrait]{tikzposter}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+\tikzposterlatexaffectionproofoff
+
+% ── Colors ────────────────────────────────────────────
+\definecolor{darktext}{HTML}{2C3E50}
+\definecolor{blockbg}{HTML}{FFFFFF}
+\definecolor{constructgreen}{HTML}{27AE60}
+\definecolor{measureblue}{HTML}{2980B9}
+\definecolor{internalorange}{HTML}{E67E22}
+\definecolor{externalpurple}{HTML}{8E44AD}
+\definecolor{interpteal}{HTML}{16A085}
+
+% ── Theme ─────────────────────────────────────────────
+\usetheme{Default}
+
+\definecolorstyle{MechValColors}{
+  \definecolor{colorOne}{HTML}{2C3E50}
+  \definecolor{colorTwo}{HTML}{3498DB}
+  \definecolor{colorThree}{HTML}{ECF0F1}
+}{
+  \colorlet{backgroundcolor}{colorThree}
+  \colorlet{framecolor}{colorOne}
+  \colorlet{titlefgcolor}{white}
+  \colorlet{titlebgcolor}{colorOne}
+  \colorlet{blocktitlebgcolor}{colorTwo}
+  \colorlet{blocktitlefgcolor}{white}
+  \colorlet{blockbodybgcolor}{blockbg}
+  \colorlet{blockbodyfgcolor}{darktext}
+  \colorlet{notefgcolor}{darktext}
+  \colorlet{notebgcolor}{colorTwo!12}
+  \colorlet{notefrcolor}{colorTwo}
+}
+\usecolorstyle{MechValColors}
+
+\defineblockstyle{MechValBlock}{
+  titlewidthscale=1.0, bodywidthscale=1.0, titleleft,
+  titleoffsetx=0pt, titleoffsety=0pt,
+  bodyoffsetx=0pt, bodyoffsety=0pt, bodyverticalshift=0pt,
+  roundedcorners=12, linewidth=2pt, titleinnersep=10pt, bodyinnersep=12pt
+}{
+  \draw[rounded corners=\blockroundedcorners, color=blocktitlebgcolor,
+        fill=blockbodybgcolor, line width=\blocklinewidth]
+    (blockbody.south west) rectangle (blocktitle.north east);
+  \ifBlockHasTitle
+    \draw[rounded corners=\blockroundedcorners,
+          fill=blocktitlebgcolor, color=blocktitlebgcolor,
+          line width=\blocklinewidth]
+      (blocktitle.south west) rectangle (blocktitle.north east);
+  \fi
+}
+\useblockstyle{MechValBlock}
+
+\definetitlestyle{MechValTitle}{
+  width=\paperwidth, roundedcorners=0, linewidth=0pt, innersep=20pt,
+  titletotopverticalspace=12mm, titletoblockverticalspace=18mm
+}{
+  \draw[fill=titlebgcolor, color=titlebgcolor]
+    (\titleposleft, \titleposbottom)
+    rectangle (\titleposright, \titlepostop);
+}
+\usetitlestyle{MechValTitle}
+
+\title{%
+  \parbox{0.92\linewidth}{\centering\bfseries
+    Mechanistic Validity\\[6pt]
+    {\large A Validity Framework for Mechanistic Interpretability}}}
+\author{Elliot Tower\quad\texttt{elliot@elliottower.ai}}
+\institute{}
+
+\begin{document}
+
+\maketitle[width=\paperwidth]
+
+% ════════════════════════════════════════════════════════
+% ROW 1: CONSTRUCT VALIDITY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.40}
+
+{
+\colorlet{blocktitlebgcolor}{constructgreen}
+\block{Construct Validity --- Is the target concept well-defined?}{
+  A claim is bounded by its weakest validity dimension.
+  Five types form a dependency chain: construct validity
+  is a ceiling on all others.
+
+  \vspace{4mm}
+  \renewcommand{\arraystretch}{1.3}
+  {\small
+  \begin{tabular}{@{} >{\bfseries}l >{\bfseries}p{0.47\linewidth} >{\bfseries}l @{}}
+    \toprule
+    \textbf{ID} & \textbf{Description} & \textbf{Source} \\
+    \midrule
+    C1 Falsifiability & Can the claim be refuted? & Phil.\ of science \\
+    C2 Structural plaus. & Physically possible in the architecture? & Phil.\ of science \\
+    C3 Convergent & Do independent methods agree? & Measurement theory \\
+    C4 Discriminant & Distinguishes from neighboring constructs? & Measurement theory \\
+    C5 Nomological & Fits into a broader theory? & Phil.\ of science \\
+    C6 Complementation & Are labeled subdivisions functionally distinct? & Genetics \\
+    \bottomrule
+  \end{tabular}}
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{constructgreen}
+\block{C4: Discriminant Validity}{
+  Does the measure distinguish this construct from
+  neighboring constructs?
+
+  \vspace{4mm}
+  \textbf{Knowledge Neurons} (Dai 2022): neurons identified
+  by activation magnitude, but the criterion cannot
+  separate factual knowledge from linguistic regularity.
+  Suppressing these neurons produces off-target effects
+  \textbf{worse than suppressing random neurons}.
+
+  \vspace{4mm}
+  \textbf{Gender Bias Circuits} (Vig 2020): heads that
+  correlate with gendered outputs, but the method never
+  tests whether those heads encode bias specifically
+  or linguistic competence generally. Bias and competence
+  are never separated.
+
+  \vspace{4mm}
+  {\footnotesize Source: psychometrics (Campbell \& Fiske 1959).}
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{constructgreen}
+\block{C6: Complementation}{
+  Are labeled subdivisions functionally distinct?
+
+  \vspace{4mm}
+  IOI identifies ``name movers,'' ``S-inhibition heads,''
+  and ``backup name movers.'' Whether these labels name
+  distinct functional units or overlapping contributions
+  to a single mechanism has never been tested.
+
+  \vspace{4mm}
+  Benzer's cis-trans test (1955): run two forward passes,
+  one with each component intact, and construct a hybrid
+  activation (trans configuration). If the hybrid recovers,
+  the components serve independent functional roles. If the
+  hybrid fails, they participate in the same unit.
+
+  \vspace{4mm}
+  {\footnotesize Source: genetics (Benzer 1955, cis-trans test).}
+}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 2: MEASUREMENT VALIDITY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.40}
+
+{
+\colorlet{blocktitlebgcolor}{measureblue}
+\block{Measurement Validity --- Does the metric measure what it claims?}{
+  \renewcommand{\arraystretch}{1.3}
+  {\small
+  \begin{tabular}{@{} >{\bfseries}l >{\bfseries}p{0.47\linewidth} >{\bfseries}l @{}}
+    \toprule
+    \textbf{ID} & \textbf{Description} & \textbf{Source} \\
+    \midrule
+    M1 Reliability & Repeated measurements agree? & Psychometrics \\
+    M2 Baseline sep. & Distinguishable from random baselines? & Psychometrics \\
+    M3 Stability & Classification robust to perturbation? & Psychometrics \\
+    M4 Calibration & Numbers meaningful on absolute scale? & Psychometrics \\
+    M5 Sensitivity & Detects known-true effects? & Psychometrics \\
+    M6 Invariance & Consistent across conditions? & Psychometrics \\
+    M7 Selection corr. & Multiplicity controlled across $N$ candidates? & Statistics \\
+    \bottomrule
+  \end{tabular}}
+
+  \vspace{3mm}
+  M4 (calibration): attempted in every audited claim,
+  confirmed in none.
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{measureblue}
+\block{M2: Baseline Separation}{
+  Is the score distinguishable from a random baseline?
+
+  \vspace{4mm}
+  Three independent failures caught by one criterion:
+
+  \vspace{3mm}
+  \textbf{SAE interpretability scores} produce the same
+  distribution on random, untrained models as on trained
+  ones. The metric cannot distinguish learned features
+  from noise.
+
+  \vspace{3mm}
+  \textbf{IIA baselines} (Sutter): interchange intervention
+  accuracy exceeds majority-class rates before any causal
+  structure is identified.
+
+  \vspace{3mm}
+  \textbf{SAE reconstruction} (Heap): scores appear strong
+  but are indistinguishable from a baseline that ignores
+  the learned dictionary entirely.
+
+  \vspace{4mm}
+  {\footnotesize Source: psychometrics (floor and ceiling checks).}
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{measureblue}
+\block{M6: Measurement Invariance}{
+  Does the metric behave consistently across conditions?
+
+  \vspace{4mm}
+  \textbf{IOI circuit faithfulness}: the same circuit,
+  measured by the same underlying concept (faithfulness),
+  produces scores spanning \textbf{below 0\% to over 100\%}
+  across six methodological choices.
+
+  \vspace{4mm}
+  The headline ``87\% faithfulness'' is not a single number.
+  It is a point in a distribution that includes contradictory
+  values depending on intervention type, metric formula, and
+  ablation target.
+
+  \vspace{4mm}
+  If the instrument's reading changes when you swap the
+  instrument, the reading is a property of the instrument,
+  not the circuit.
+
+  \vspace{4mm}
+  {\footnotesize Source: psychometrics (Meredith's measurement
+  invariance).}
+}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 3: INTERNAL VALIDITY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.40}
+
+{
+\colorlet{blocktitlebgcolor}{internalorange}
+\block{Internal Validity --- Is the causal claim warranted?}{
+  \renewcommand{\arraystretch}{1.2}
+  {\small
+  \begin{tabular}{@{} >{\bfseries}l >{\bfseries}p{0.42\linewidth} >{\bfseries}l @{}}
+    \toprule
+    \textbf{ID} & \textbf{Description} & \textbf{Source} \\
+    \midrule
+    I1 Necessity & Is the circuit required? & Neuroscience \\
+    I2 Sufficiency & Is the circuit enough? & Neuroscience \\
+    I3 Minimality & Every component earns its place? & Causal inf. \\
+    I4 Specificity & More effect than matched controls? & Medicine \\
+    I5 Rival exclusion & \emph{The} mechanism or \emph{a} mechanism? & Phil.\ of sci. \\
+    I6 Double dissoc. & Two interventions, crossed effects? & Neuroscience \\
+    I7 Confound ctrl & Alternative explanations ruled out? & Causal inf. \\
+    I8 Confound sens. & Unmeasured confounder strength? & Causal inf. \\
+    I9 Epistasis & Non-additive component interaction? & Genetics \\
+    I10 Rescue & Restoring component recovers behavior? & Genetics \\
+    I11 Onset coupling & Mechanism appears with capability? & Med.\ micro. \\
+    I12 Offset coupling & Mechanism goes when cap.\ removed? & Med.\ micro. \\
+    \bottomrule
+  \end{tabular}}
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{internalorange}
+\block{I6: Double Dissociation}{
+  Do two interventions show crossed effects?
+
+  \vspace{4mm}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    & \textbf{Behavior X} & \textbf{Behavior Y} \\
+    \midrule
+    Ablate mech.\ A & Large deficit & Small deficit \\
+    Ablate mech.\ B & Small deficit & Large deficit \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{4mm}
+  A selective effect in one row is a single dissociation:
+  one intervention affects one behavior. The crossed pattern
+  across both rows rules out generalized disruption---neither
+  effect can be explained by nonspecific damage.
+
+  \vspace{4mm}
+  Across audited claims, only induction heads for token
+  copying meet this criterion, achieved by Feucht et al.\
+  (2025)---three years after the original paper.
+
+  \vspace{4mm}
+  {\footnotesize Source: neuroscience (Shallice 1988).}
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{internalorange}
+\block{I9: Epistatic Interaction}{
+  Do circuit components interact non-additively?
+
+  \vspace{4mm}
+  Ablate A alone, B alone, and both together. Compare the
+  joint deficit with the sum of single deficits.
+
+  \vspace{4mm}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Pattern} & \textbf{Interpretation} \\
+    \midrule
+    Joint $=$ sum & Independent contributions \\
+    Joint $<$ sum & Redundancy or shared bottleneck \\
+    Joint $>$ sum & Synergy or mutual dependence \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{4mm}
+  Sub-additivity can indicate redundancy \emph{or} a shared
+  downstream bottleneck; super-additivity can indicate synergy
+  \emph{or} a ceiling effect. The additive null must be
+  assessed on an appropriate scale for bounded metrics.
+
+  \vspace{4mm}
+  {\footnotesize Source: genetics (Fisher's epistasis).}
+}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 4: EXTERNAL VALIDITY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.40}
+
+{
+\colorlet{blocktitlebgcolor}{externalpurple}
+\block{External Validity --- Does the finding generalize?}{
+  \renewcommand{\arraystretch}{1.3}
+  {\small
+  \begin{tabular}{@{} >{\bfseries}l >{\bfseries}p{0.47\linewidth} >{\bfseries}l @{}}
+    \toprule
+    \textbf{ID} & \textbf{Description} & \textbf{Source} \\
+    \midrule
+    E1 Intervention reach & Do two different methods agree? & Causal inf. \\
+    E2 Prompt general. & Works on diverse prompts? & Causal inf. \\
+    E3 Cross-task & Transfers to related tasks? & Causal inf. \\
+    E4 Cross-model & Appears in other models? & Causal inf. \\
+    E5 Graded response & Partial ablation, partial effect? & Pharmacology \\
+    E6 Novel prediction & Predicts untested behaviors? & Phil.\ of sci. \\
+    \bottomrule
+  \end{tabular}}
+
+  \vspace{3mm}
+  E2 (prompt generalization) is disconfirmed for IOI:
+  the circuit classification changes across prompt
+  distributions.
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{externalpurple}
+\block{E1: Intervention Reach}{
+  Do two different intervention methods agree?
+
+  \vspace{4mm}
+  \textbf{IOI} is the sharpest failure on this criterion.
+  Six published evaluations of the same circuit, using
+  different intervention methods, produce faithfulness
+  scores spanning \textbf{below 0\% to over 100\%}.
+
+  \vspace{4mm}
+  When independent methods disagree on the \emph{direction}
+  of an effect, the result is a property of the method,
+  not the circuit.
+
+  \vspace{4mm}
+  The field's most studied mechanism, evaluated by the most
+  methods, shows the widest disagreement. Convergent evidence
+  from independent methods is what distinguishes the higher
+  verdict tiers.
+
+  \vspace{4mm}
+  {\footnotesize Source: causal inference (multi-method convergence).}
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{externalpurple}
+\block{E5: Graded Response}{
+  Does partial intervention produce partial effect?
+
+  \vspace{4mm}
+  A dose-response curve between zero and complete ablation
+  carries more information than either endpoint alone. The
+  curve shape distinguishes threshold effects from graded
+  mechanisms, reveals compensation and saturation, and
+  detects non-monotonicity invisible at a single dose.
+
+  \vspace{4mm}
+  Most published circuit evaluations report a single ablation
+  point. The interpolation between intact and fully ablated is
+  available in standard activation patching frameworks but is
+  almost never recorded or reported.
+
+  \vspace{4mm}
+  Genuine mechanisms can produce thresholds; nonspecific
+  disruption can produce smooth monotonic decline. The curve
+  is informative, not dispositive.
+
+  \vspace{4mm}
+  {\footnotesize Source: pharmacology (Hill 1910, dose-response).}
+}
+}
+
+\end{columns}
+
+% ════════════════════════════════════════════════════════
+% ROW 5: INTERPRETIVE VALIDITY + TAKEAWAY
+% ════════════════════════════════════════════════════════
+\begin{columns}
+\column{0.40}
+
+{
+\colorlet{blocktitlebgcolor}{interpteal}
+\block{Interpretive Validity --- Is the interpretation justified?}{
+  \textbf{Novel contribution.} No existing validity framework
+  includes these criteria. Interpretive validity asks whether
+  the description mode matches the evidence.
+
+  \vspace{4mm}
+  \renewcommand{\arraystretch}{1.3}
+  {\small
+  \begin{tabular}{@{} >{\bfseries}l >{\bfseries}p{0.47\linewidth} >{\bfseries}l @{}}
+    \toprule
+    \textbf{ID} & \textbf{Description} & \textbf{Source} \\
+    \midrule
+    V1 Level declaration & At what level is the claim made? & Marr (1982) \\
+    V2 Level-evidence & Evidence supports that level? & Messick (1995) \\
+    V3 Alternative level & Explained at a different level? & Marr (1982) \\
+    V4 Unlicensed labeling & Name imports unmeasured property? & Messick (1995) \\
+    V5 Scope declaration & What does the claim not cover? & Reporting std. \\
+    \bottomrule
+  \end{tabular}}
+
+  \vspace{3mm}
+  Activation-level evidence does not license weight-level
+  claims. Single-task evidence does not license universal
+  claims.
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{interpteal}
+\block{V4: Unlicensed Labeling}{
+  Does a name import a property that was not measured?
+
+  \vspace{4mm}
+  \textbf{Othello ``world model''} (Li 2023): a probe
+  recovers board state from internal representations. The
+  label ``world model'' imports spatial reasoning, planning,
+  and structured representation---none of which were
+  contrastively tested. Vafa et al.\ later tested
+  counterfactual board states: one checkpoint passes, the
+  other fails. The label was premature.
+
+  \vspace{4mm}
+  \textbf{Steering ``refusal direction''} (Arditi 2024):
+  the direction controls refusal behavior across 13 models.
+  But controlling a behavior is evidence for a \emph{lever},
+  not evidence for how the model \emph{represents} refusal.
+  The label imports representational content the evidence
+  does not establish.
+
+  \vspace{4mm}
+  {\footnotesize Source: Messick (1995, consequential validity).}
+}
+}
+
+\column{0.30}
+
+{
+\colorlet{blocktitlebgcolor}{colorOne}
+\block{Takeaway}{
+  {\large\bfseries A mechanistic claim is only as strong
+  as its weakest validity dimension.}
+
+  \vspace{4mm}
+  \begin{itemize}[leftmargin=*, itemsep=3mm]
+    \item \textbf{36} criteria across \textbf{5} validity
+      types, drawn from \textbf{8} source disciplines
+    \item \textbf{16} claims from \textbf{15} papers audited
+    \item The field's most studied circuit (IOI) is
+      disconfirmed on measurement stability, measurement
+      invariance, and prompt generalization
+    \item Same paper, two claims, two tiers: induction heads
+      for token copying (Triangulated) vs general in-context
+      learning (Disconfirmed)
+    \item Interpretive validity (V1--V5) has no counterpart
+      in any existing validity framework
+  \end{itemize}
+
+  \vspace{4mm}
+  \begin{center}
+  \texttt{elliot@elliottower.ai}
+
+  \vspace{2mm}
+  {\small Paper:}
+  \texttt{doi.org/10.5281/zenodo.20478480}
+  \end{center}
+}
+}
+
+\end{columns}
+
+\end{document}

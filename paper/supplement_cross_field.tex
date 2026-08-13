@@ -1,0 +1,553 @@
+% Mechanistic Validity: A Validity Theory, Research Methodology, and Evidence Standard for Mechanistic Claims
+\pdfoutput=1
+
+\documentclass{article}
+
+\usepackage[preprint]{tmlr}
+
+\newcommand{\openreview}{\url{https://openreview.net/forum?id=XXXX}}
+\def\month{06}
+\def\year{2026}
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{enumitem}
+\usepackage{placeins}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{longtable}
+
+% --- Macros ---
+% No abbreviation — spell out "Mechanistic Validity" in full
+\newcommand{\ie}{i.e.}
+\newcommand{\eg}{e.g.}
+\newcommand{\cf}{cf.}
+
+% tight tables
+\newcommand{\tighttable}{\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.05}}
+
+% add space between caption and table rule
+\usepackage{caption}
+\captionsetup[table]{skip=8pt}
+
+\title{Mechanistic Validity: A Validity Theory, Research Methodology, and Evidence Standard for Mechanistic Claims}
+
+\author{\name Elliot Tower \\
+      \email elliot@elliottower.ai}
+
+
+
+
+
+\title{Mechanistic Validity Across the Sciences:\\ Foundations, Domain Routes, and Evidential Capacity}
+\author{\name Elliot Tower \\ \email elliot@elliottower.ai}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This supplement carries the cross-field material of \emph{Mechanistic Validity}: the eight disciplinary
+foundations the criteria are drawn from, the routes by which fields that cannot intervene establish
+internal validity, and a survey of what twelve fields can and cannot measure in each evidence family.
+It stands alone: the main paper does not depend on it, and nothing here requires
+the main paper to have been read first.
+\end{abstract}
+
+{\small\setlength{\parskip}{0pt}\setcounter{tocdepth}{2}\tableofcontents}
+\newpage
+
+\section{Theoretical Foundations (Extended)}
+\label{app:foundations}
+
+This section outlines the theoretical foundations of our framework. We draw on eight disciplines that each developed rigorous standards for a different validity question, and we apply them to mechanistic interpretability as lenses. A lens is an analytical vocabulary that shapes which questions you ask of a claim and how you read the answers. Each of the eight --- philosophy of science, psychometrics, causal inference, neuroscience, pharmacology, genetics, medical microbiology, and mechanistic interpretability itself --- contributes the conditions it requires before an inference is accepted, and names the failure modes it guards against.
+
+
+
+Each lens maps to a corresponding validity type, and answers a core question about a given claim: philosophy of science asks \emph{is the construct well-defined?} Causal inference and neuroscience ask \emph{does the component implement the computation?} Psychometrics asks \emph{is the measurement accurate?} Pharmacology asks \emph{does it generalize?} And mechanistic interpretability asks \emph{does the interpretation match the evidence?}
+
+\subsection{Philosophy of science}
+\label{sec:phil-sci}
+
+The construct validity criteria (C1--C6) draw on Popper's falsifiability criterion, Mayo's severe testing \citep{mayo2018statistical}, and Glennan's new mechanical philosophy \citep{glennan2017new}. A key distinction is between \emph{confirmation} and \emph{corroboration}: a circuit discovered by activation patching and evaluated by activation patching has only been shown to pass the test it was built to pass. Corroboration requires a genuinely risky test the circuit was not optimized for---a behavioral prediction on held-out prompts, a weight-space analysis, a different causal method. The verdict tier system reflects this hierarchy: single-method evidence (Causally Suggestive) is qualitatively weaker than convergent evidence from independent methods (Triangulated).
+
+C5 (nomological validity) requires that the claim fit into a broader theoretical network, following Cronbach and Meehl's nomological network concept. The Duhem-Quine underdetermination thesis \citep{quine1951two, duhem1906theorie} is directly relevant: observational evidence (faithfulness scores, IIA) is always consistent with multiple theories (circuits), because the theory under test never faces the evidence alone---it is conjoined with auxiliary hypotheses about ablation semantics, baseline distributions, and metric validity. \citet{meloux2025everything}'s finding that alternative head sets achieve comparable faithfulness is this thesis instantiated: the ``circuit'' is underdetermined by the data.
+
+Glymour's bootstrapping theory of confirmation \citep{glymour1980theory} provides the constructive response. Glymour argues that evidence confirms a hypothesis when it can be used to \emph{compute} a consequence of the hypothesis that is also independently testable---and crucially, this computation must use the hypothesis non-trivially, not just any hypothesis that entails the same prediction. Applied to MI: a circuit claim is bootstrapped when the evidence bears on the claim in a way that would not equally confirm a rival circuit. Convergent evidence from independent methods (ablation, weight analysis, information flow) satisfies this condition because each method's auxiliary hypotheses are different; a finding that survives across methods has been non-trivially tested. This is the formal justification for requiring convergent evidence (C3) at higher tiers: single-method evidence cannot resolve underdetermination, but cross-method convergence can progressively narrow the space of compatible theories.
+
+\begin{table}[H]
+\centering\small
+\caption{Philosophy of science foundations.}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{2cm}l>{\raggedright\arraybackslash}p{4.5cm}@{}}
+\toprule
+\textbf{Concept} & \textbf{Source} & \textbf{Criterion} & \textbf{MI analog} \\
+\midrule
+Falsifiability & \citet{popper1959logic} & C1 & What evidence would refute ``this is a name mover''? \\
+\midrule
+Nomological network & \citet{cronbach1955construct} & C5 & Does the claim connect to in-context learning theory? \\
+\midrule
+MTMM matrix & \citet{campbell1959convergent} & C3, C4 & Convergent: probing + patching agree. Discriminant: feature $\neq$ neighboring feature \\
+\midrule
+Underdetermination & \citet{quine1951two, duhem1906theorie} & I5 & Multiple circuits explain the same behavior \\
+\midrule
+Bootstrapping & \citet{glymour1980theory} & C3 & Cross-method convergence narrows the space of compatible theories \\
+\midrule
+Severe testing & \citet{mayo2018statistical} & C1 & A test that could easily have failed but did not \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Psychometrics}
+\label{sec:psychometrics}
+
+The measurement validity criteria (M1--M6) draw on psychometric test construction. Classical test theory decomposes an observed score into true score plus error ($X = T + E$); M1 (reliability) is the proportion of true-score variance. Generalizability theory extends this by decomposing error into distinct sources---prompt variation, random seed, checkpoint selection---each of which can be quantified and reduced independently. M7 (selection correction) draws instead on frequentist multiple comparison correction \citep{benjamini1995controlling}: when $k$ findings are selected from $N$ candidates, the family-wise error rate grows with $N/k$ unless controlled.
+
+\begin{table}[H]
+\centering\small
+\caption{Psychometrics foundations.}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{2.2cm}l>{\raggedright\arraybackslash}p{4.5cm}@{}}
+\toprule
+\textbf{Concept} & \textbf{Source} & \textbf{Criterion} & \textbf{MI analog} \\
+\midrule
+Classical test theory & \citet{lord1968statistical} & M1 & Same metric, same model $\to$ same answer \\
+\midrule
+Generalizability theory & \citet{cronbach1972dependability} & M6 & Decompose variance into prompt/seed/checkpoint \\
+\midrule
+Signal detection ($d'$) & \citet{green1966signal} & M2 & Is the score distinguishable from random? \\
+\midrule
+MTMM matrix & \citet{campbell1959convergent} & C3, C4 & Convergent + discriminant validity \\
+\midrule
+Selectivity & \citet{hewitt2019designing} & I4 & Probe accuracy minus control accuracy \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The closest prior art in psychometrics is \citet{borsboom2004concept}'s causal account of validity: a measure is valid if and only if the attribute exists and variation in it causally produces variation in the measurement outcome. This is our core claim, extended from trait measurement to mechanism claims. Campbell and Fiske's \citep{campbell1959convergent} multi-trait multi-method matrix directly grounds our convergent (C3) and discriminant (C4) validity criteria. Where we go beyond the psychometric tradition: psychometrics assumes the construct exists and asks whether the measure is valid. We add that mechanistic validity requires first declaring the \emph{description mode}---what kind of thing the construct is---because different modes generate different validity criteria and different evidence requirements. A claim about ``which components are active'' (implementational-topographic) and a claim about ``what algorithm the model runs'' (algorithmic) require fundamentally different evidence, even when they concern the same model and the same task.
+
+An important insight is that a reliable metric pointed at the wrong target produces confident wrong answers. \citet{sutter2025nonlinear} demonstrated that unconstrained nonlinear IIA achieves near-perfect scores on randomly initialized models---but this is a property of the \emph{unconstrained} alignment map, not of nonlinear causal abstraction in general. Structured generative models that satisfy identifiability conditions \citep{khemakhem2020variational}---reconstruction objectives, label-conditional priors, sparsity constraints---provably avoid this degeneracy: intervention diversity ratios near 1.0 confirm that the encoder preserves natural variation rather than collapsing to a lookup table. The framework addresses the general problem through M2 (baseline separation): not ``IIA = 0.48'' but ``$\Delta_{\text{random}} = 0.10$, $\Delta_{\text{untrained}} = 0.15$.'' A modest absolute number with a large delta is a genuine finding; a large absolute number with a tiny delta is not. The SAEBench audit \citep{karvonen2025saebench} supplies a worked instance of the control being run. Comparing sparse autoencoders trained on a fully trained Pythia-1B against ones trained on a randomly initialised copy, across five metrics, they report that the trained set ``significantly outperformed'' the random set on most. Targeted Probe Perturbation inverted: SAEs on the random model scored higher. The authors ``caution against interpreting this result as indicative of poor evaluation quality,'' because the metric measures relative change in probe accuracy within a model and the random model's probes start from a much lower base. The episode illustrates both halves of M2---a baseline control is what surfaced the inversion, and interpreting the inversion required knowing what the metric is relative to.
+
+
+\subsection{Causal inference}
+\label{sec:causal}
+
+The internal validity criteria draw on causal inference methodology \citep{pearl2009causality, spirtes2000causation}. The necessity/sufficiency distinction maps to Woodward's interventionist causation \citep{woodward2003making}: necessity (I1) corresponds to ``would the behavior persist if the component were absent?'' and sufficiency (I2) to ``would the component alone produce the behavior?'' Pearl and Bareinboim's transportability theory \citep{pearl2011transportability} provides the formal conditions under which causal findings transfer across settings, grounding E4 (cross-model generalization). Rubin's potential outcomes framework grounds E5 (graded response) by formalizing heterogeneous treatment effects across input subpopulations---not all prompts may respond to ablation equally.
+
+A distinction that the MI literature routinely elides: ablation and activation patching are formally different do-operators. Ablation performs $\mathrm{do}(h := 0)$ or $\mathrm{do}(h := \mathbb{E}[h])$---it removes a component. Patching performs $\mathrm{do}(h := h')$ where $h'$ comes from a counterfactual input---it inserts a specific value. These correspond to different interventional distributions and can yield different causal conclusions. The method-conditionality finding (E1)---where mean ablation and resample ablation produce different faithfulness numbers---partly reflects this: they are formally different interventions that happen to share a name. Making this explicit sharpens E1: cross-method consistency requires agreement not only across ablation variants but across genuinely distinct do-operators.
+
+To illustrate how do-calculus formalizes a circuit claim, consider a minimal structural causal model for IOI. Let $S$ = subject name, $IO$ = indirect object, $H_{\text{SI}}$ = S-inhibition heads, $H_{\text{NM}}$ = name-mover heads, and $Y$ = output logit. The claimed mechanism is: $S \to H_{\text{SI}} \to H_{\text{NM}} \to Y$ and $IO \to H_{\text{NM}} \to Y$. The necessity claim (I1) is $P(Y \mid \mathrm{do}(H_{\text{NM}} := 0)) \neq P(Y)$; the sufficiency claim (I2) is $P(Y \mid \mathrm{do}(\text{all except circuit} := 0)) \approx P(Y)$; and the specificity claim (I4)---currently untested---is $P(Y_{\text{SVA}} \mid \mathrm{do}(H_{\text{NM}} := 0)) \approx P(Y_{\text{SVA}})$ for an unrelated task like subject-verb agreement. The SCM makes the untested link visible: I4 is a conditional independence claim that has never been checked.
+
+\begin{table}[H]
+\centering\small
+\caption{Causal inference foundations.}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{2.5cm}l>{\raggedright\arraybackslash}p{4.2cm}@{}}
+\toprule
+\textbf{Concept} & \textbf{Source} & \textbf{Criterion} & \textbf{MI analog} \\
+\midrule
+do-calculus / SCM & \citet{pearl2009causality} & I1, I2 & Formal language for ablation claims \\
+\midrule
+Interventionism & \citet{woodward2003making} & I1 & ``Would behavior persist if component absent?'' \\
+\midrule
+Transportability & \citet{pearl2011transportability} & E4 & Conditions for circuit generalization across models \\
+\midrule
+Causal discovery & \citet{spirtes2000causation} & --- & Learning circuit structure from data \\
+\midrule
+Potential outcomes & \citet{rubin1974estimating} & E5 & Heterogeneous effects across input subpopulations \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Neuroscience}
+\label{sec:neuro}
+
+The internal validity criteria (I1--I2, I4, I6--I7) are adapted from neuroscience's toolkit for establishing that a neural circuit implements a computation. I1 (necessity) corresponds to lesion studies; I2 (sufficiency) to stimulation; I6 (double dissociation) is the gold standard for functional specificity \citep{woodward2003making}. The critical distinction between necessity and sufficiency---well-established in neuroscience but often elided in MI---is central to the framework and marks a qualitative transition between verdict tiers.
+
+A less appreciated requirement is Craver's \emph{mutual manipulability}: constitutive relevance requires not only that intervening on the component changes the behavior, but that intervening on the behavior changes the component's activity. We depart from Craver's standard account on one point. Mutual manipulability presupposes that mechanism \emph{identity} is settled before intervention---you already know what you are intervening on. But when methods disagree (activation patching says head 4.4 matters, weight geometry says it does not), mutual manipulability provides no adjudication procedure, because the identity criterion is ambiguous between description modes. Our framework resolves this by requiring the description mode to be declared \emph{before} intervention, making the identity criterion explicit rather than inherited silently. This is an extension, not a rejection: mutual manipulability remains the correct criterion once the description mode is fixed. The second direction---does fine-tuning away IOI capability cause name-mover heads to lose their OV copying structure?---is almost never tested in MI, yet it is what ``implementation'' actually requires. The \emph{parcellation problem} is directly relevant. Neuroscience found no modality that fixes cortical boundaries on its own, and treats agreement across independent markers as evidence that a boundary is biologically real rather than as the boundary's definition \citep{eickhoff2018imaging}. The most widely used multimodal atlas still had a trained observer accept or reject each automatically detected border \citep{glasser2016multi}. Convergence licenses a unit without constituting it. When EAP, weight classification, and ablation disagree on component membership, the ``circuit'' is probably method-dependent, and cross-method agreement would not remove the analyst's decision about where to cut.
+
+A further distinction that neuroscience draws---and MI often does not---is between \emph{structural} and \emph{functional} connectivity. Two brain regions can be structurally connected (axons linking them) without being functionally connected during a specific task (no task-relevant information flows between them during that computation). In MI, two attention heads can be compositionally connected in weight space (one's output lies in the other's input subspace) without actually passing task-relevant information during inference. Weight-space composition scores and OV circuit analysis measure structural connectivity; path patching and activation correlation during task performance measure functional connectivity. A circuit claim grounded only in structural connectivity (``these heads compose'') is weaker than one grounded in functional connectivity (``task-relevant information flows along this path during this computation''). The strongest claims establish both and show they converge.
+
+\paragraph{Sketches, schemata, and filler terms.} Craver draws a second axis alongside constitutive relevance: mechanistic models ``can lie anywhere on a continuum between a mechanism sketch and an ideally complete description of the mechanism'' \citep{craver2007explaining}. A sketch ``characterizes some parts, activities, or features of the mechanism's organization, but it has gaps,'' and those gaps are often ``masked by \emph{filler terms}''---``activate,'' ``inhibit,'' ``encode,'' ``cause,'' ``produce,'' ``process,'' and ``represent,'' words that ``indicate a kind of activity in a mechanism without providing any detail about exactly what activity fills that role.'' Craver supplies the test for when this matters: filler terms are ``innocuous when they stand as place-holders for future work'' and become ``barriers to progress when they veil failures of understanding,'' the difference lying in whether their provisional status is acknowledged or forgotten. Between the two ends lies ``a continuum of mechanism schemata that abstract away to a greater or lesser extent.'' Within mechanistic interpretability, components are frequently named by the role they play, and several of those role names are Craver's terms.
+
+\begin{table}[H]
+\centering\small
+\caption{Neuroscience foundations.}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{2cm}l>{\raggedright\arraybackslash}p{4.5cm}@{}}
+\toprule
+\textbf{Concept} & \textbf{Source} & \textbf{Criterion} & \textbf{MI analog} \\
+\midrule
+Lesion studies & \citet{shallice1988neuropsychology} & I1 & Ablation degrades behavior \\
+\midrule
+Double dissociation & \citet{shallice1988neuropsychology} & I6 & Circuit A breaks task X not Y; circuit B breaks Y not X \\
+\midrule
+Mutual manipulability & \citet{craver2007explaining} & I1 + I12 & Fine-tuning away the task changes the component \\
+\midrule
+Mechanism sketch & \citet{craver2007explaining} & completeness & Components named by role without an account at the level below \\
+\midrule
+Multimodal parcellation & \citet{glasser2016multi} & C3 & Circuit boundaries should converge across methods \\
+\midrule
+Neural manifolds & \citet{gallego2017neural} & V2 & Representation geometry constrains algorithmic claims \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Genetics}
+\label{sec:genetics}
+
+The four lenses above leave a gap in \emph{interaction structure}: neuroscience provides single-component interventions (lesion, stimulation), but does not ask whether circuit components interact non-additively. Molecular genetics fills this gap. Over a century of work from \emph{Drosophila} to human GWAS cohorts, genetics developed four techniques that map directly onto MI interventions and answer questions no other lens covers.
+
+First, \emph{epistasis mapping}. Fisher defined epistasis as the non-additive interaction between genetic loci. Let $d_A$, $d_B$, and $d_{AB}$ be the degradation caused by ablating components $A$, $B$, and both. The interaction is sub-additive when $d_{AB} < d_A + d_B$ and super-additive when $d_{AB} > d_A + d_B$. Sub-additive interaction indicates a shared pathway: one ablation already blocks the computation, so the second adds nothing. Super-additive interaction indicates mutual compensation: each component partially covers for the loss of the other, so removing both costs more than the sum of removing each---the pattern \citet{gong2026conditional} report for the name-mover module at $1.9\times$ super-additivity. Super-additive interaction can also indicate joint computation: two components that individually produce near-zero degradation but jointly produce a large one implement a function neither performs alone. Near-zero interaction indicates additive structure: the components contribute independently. Both readings require a guard: neither $d_A$ nor $d_B$ may exceed a stated fraction of the maximum achievable degradation, because a saturated measure cannot move further and will register as sub-additive regardless of the underlying structure. Pairs failing the guard are scored Untested rather than sub-additive. This grounds criterion I9 (epistatic interaction).
+
+Second, \emph{rescue experiments}. In genetics, a rescue experiment re-introduces the wild-type gene into a knockout organism to verify that the phenotypic deficit was specifically caused by the gene's absence rather than by collateral damage. In MI, corrupting a circuit component (mean or resample ablation) and then restoring the clean activation at that site tests whether the deficit is specifically reversible---distinct from sufficiency (I2), which asks whether the circuit alone produces the behavior. A rescue that succeeds establishes that the ablation deficit reflected genuine loss of computation, not cascading distributional disruption. This grounds criterion I10 (rescue reversibility).
+
+Third, \emph{sensitivity analysis}. The E-value quantifies how strong an unmeasured confounder would need to be to explain away an observed causal effect. Every ablation study has potential unmeasured confounders---information in the residual stream that correlates with both the ablated component and the output. An E-value of 3.0 means a confounder would need to triple both associations to nullify the finding. This complements confound control (I7), which addresses \emph{known} confounders, by quantifying robustness to confounders the experimenter did not measure. This grounds criterion I8 (confounding sensitivity).
+
+Fourth, \emph{computational complementation}. Discriminant validity (C4) tests outward separation: does the construct separate from its neighbors? Complementation validity (C6) tests inward carving: are the construct's labeled sub-components functionally distinct? The test adapts Benzer's cis-trans procedure. In the original design, two mutant genomes share one cell in the \emph{trans} configuration---each broken at a different locus---and function is assessed. If function is restored, the mutations are in different complementation groups (distinct functional units); if it remains broken, they are in the same group. The \emph{cis} configuration, in which both mutations sit on one copy alongside an intact copy, serves as the control: cis is expected to recover function regardless, and failure of the cis control invalidates the trans result.
+
+In a transformer, the trans construction uses two forward passes---one with component $A$ ablated and one with $B$ ablated---and assembles a hybrid pass that draws each component's contribution from the run where it is intact. The cis control assembles a hybrid where both components are drawn from the \emph{same} damaged run while an intact pass supplies the rest; if cis does not recover, the composition rule is broken and the trans result is uninterpretable. Unlike I9, which reads the magnitude and sign of the interaction term, C6 asks whether function is restored when intact copies are made available in \emph{trans}---a question about construct boundaries rather than causal structure.
+
+Two admissibility conditions constrain the test. First, the ablation must be loss-of-function rather than gain-of-function: zero ablation approximates a null allele, while mean ablation injects an off-distribution signal that may constitute a neomorphic perturbation, and the framework's existing ablation-sensitivity findings confirm that the choice of ablation can flip conclusions. Second, complementation is testable only for contributions that are \emph{diffusible}---in genetics, trans complementation succeeds when a gene product can act on the other copy's substrate. In a transformer, writes to the residual stream are diffusible (a shared additive channel), so OV-mediated contributions are testable. A head's own QK routing is cis-acting---it determines what the head reads, and no other copy can supply it---scoring Not Applicable under C6. This grounds criterion C6 (complementation validity).
+
+\begin{table}[H]
+\centering\small
+\caption{Genetics foundations.}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{2.2cm}l>{\raggedright\arraybackslash}p{4.5cm}@{}}
+\toprule
+\textbf{Concept} & \textbf{Source} & \textbf{Criterion} & \textbf{MI analog} \\
+\midrule
+Epistasis & \citet{fisher1918correlation} & I9 & Pairwise ablation reveals synergy or buffering \\
+\midrule
+Rescue / complementation & \citet{brenner1974genetics} & I10 & Restore corrupted component; does behavior recover? \\
+\midrule
+Complementation & \citet{benzer1955fine} & C6 & Hybrid-pass cis-trans test; does function recover when intact copies are supplied in \emph{trans}? \\
+\midrule
+E-value / sensitivity & \citet{vanderweele2017sensitivity} & I8 & How strong must an unmeasured confounder be? \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The analogy has limits. In genetics, knockouts are permanent: the organism develops without the gene, and compensatory mechanisms may emerge over developmental time. In neural networks, ablation is instantaneous---the component was present during all of training. Network ``knockouts'' are closer to acute pharmacological blockade than to developmental gene deletion, which makes rescue experiments (I10) especially important for distinguishing genuine computational loss from distributional disruption.
+
+
+\subsection{Medical microbiology}
+\label{sec:microbiology}
+
+The lenses above share an assumption: that the component under study can be isolated. Genetics knocks out a gene, neuroscience lesions a region, pharmacology blocks a receptor. Interpretability often cannot isolate---backup name movers assume the role of name movers once those are ablated, and component sets sharing few edges reach comparable performance on the same task. Medical microbiology revised its evidence standards three times in response to the same difficulty, and what it contributes is those revisions rather than a single technique.
+
+Koch's postulates (1890) require that the organism be isolated in pure culture and induce the disease anew. Viruses and unculturable organisms break that requirement outright: the pathogen is detectable but never separable from its host. \citet{fredricks1996sequence} trace the consequences, quoting Rivers in 1936 that ``it is unfortunate that so many workers blindly followed the rules, because Koch himself quickly realized that in certain instances all the conditions could not be met,'' and recording Falkow's recasting of the postulates for genes before offering their own for sequence data. Each revision replaced isolation with a different form of evidence.
+
+First, \emph{graded presence}. Fredricks and Relman abandon presence-absence for relative abundance, noting that their guidelines ``refer to relative numbers of sequence copies rather than to their presence or absence.'' Guideline (iii) makes the requirement temporal: with resolution of disease the copy number ``should decrease or become undetectable. With clinical relapse, the opposite should occur.'' A mechanism claim admits the same treatment---the measured strength of a structure should rise as a capability is acquired and fall as it is removed. This grounds criteria I11 and I12 (onset--offset coupling), tested by metric A14.
+
+Koch's third postulate cannot be satisfied for viruses or for organisms that cannot be grown in culture, and the field kept the postulate rather than weakening it. That is the reading this framework adopts: a criterion a claim cannot satisfy in principle records a limit on the evidence available in that setting, which is information about the setting. \Cref{tab:domain-routes} states the routes by which each domain can establish the internal-validity criteria; where no route exists, the criterion returns Untested with the obstruction named.
+
+Second, \emph{evidence at the level of the claim}. Guideline (vi) requires that sequence-disease correlates ``be sought at the cellular level,'' demonstrated by in situ hybridization to areas of tissue pathology rather than inferred from bulk tissue. Bulk detection establishes that the organism is present somewhere; it does not establish that it is present where the pathology is. Read through the levels of analysis this framework declares---molecular, cellular, organism, population in biology, and the description modes of the main framework in interpretation---the guideline states a general requirement: evidence must be gathered at the level the claim is pitched at. The parallel failure in interpretability is claiming algorithmic understanding on topographic evidence. This grounds criterion V2 (level-evidence match).
+
+Third, \emph{partial satisfaction}. Fredricks and Relman state that ``strict adherence to every one of these guidelines may not be required for a compelling argument regarding causation,'' and that they ``do not believe that every criterion for sequence-based evidence of causation needs to be fulfilled in order to incriminate a presumptive microorganism in disease.'' The guidelines decline to be a checklist, asking instead that the evidence be internally consistent and integrate with previous observations. This grounds the verdict tier system: tiers report how far the evidence reaches rather than whether a threshold was cleared.
+
+\begin{table}[H]
+\centering\small
+\caption{Medical microbiology foundations.}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{2.2cm}l>{\raggedright\arraybackslash}p{4.5cm}@{}}
+\toprule
+\textbf{Concept} & \textbf{Source} & \textbf{Criterion} & \textbf{MI analog} \\
+\midrule
+Graded presence & \citet{fredricks1996sequence}, guideline (iii) & I11/I12 & Structure's measured strength tracks the capability in both directions \\
+\midrule
+Cellular-level evidence & \citet{fredricks1996sequence}, guideline (vi) & V2 & Evidence must be gathered at the level the claim is pitched at \\
+\midrule
+Partial satisfaction & \citet{fredricks1996sequence} & Tiers & Verdicts report evidential reach rather than pass or fail \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The analogy has limits. Microbial causation concerns an organism external to the host, whereas a circuit is constitutive of the model implementing it; the closest counterpart to inoculating a naive host is a counterfactual circuit transplant, which moves a component into a model that lacks it but cannot make that model naive to the capability. The postulates also assume one causal organism per disease, an assumption interpretability cannot make while circuits sharing few edges reach comparable performance on the same task. What transfers is the response to non-isolability rather than the postulates themselves.
+
+
+\subsection{Pharmacology}
+\label{sec:pharma}
+
+The external validity criteria draw on pharmacology's dose-response methodology \citep{rang2006drug}. A causally relevant component should produce graded effects: partial ablation should produce partial behavioral change, and the relationship should be monotonic or at least systematic (E5). The framework treats dose-response as a minimum bar for causal claims about magnitude---a requirement absent from most MI evaluations, which typically report binary ablation (all-or-nothing).
+
+The \emph{affinity vs.\ efficacy} distinction maps with surprising precision to MI. Activation patching measures affinity: is this component engaged during the task? Ablation measures efficacy: does removing it change the output? But even ablation conflates efficacy with the system's compensatory capacity---a load-bearing head can show small ablation effects if backup mechanisms compensate. The observed effect magnitude is a joint property of the component's role and the network's reserve, and a single ablation cannot separate them. The practical implication is the \emph{therapeutic window}: sweeping ablation strength from 0 to 1 reveals whether there is a range where on-task effects grow before off-target degradation begins. A circuit with no therapeutic window cannot be cleanly separated from the network's general processing.
+
+\begin{table}[H]
+\centering\small
+\caption{Pharmacology foundations.}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{2.2cm}l>{\raggedright\arraybackslash}p{4.5cm}@{}}
+\toprule
+\textbf{Concept} & \textbf{Source} & \textbf{Criterion} & \textbf{MI analog} \\
+\midrule
+Dose-response curve & \citet{hill1910possible} & E5 & Partial ablation $\to$ partial effect \\
+\midrule
+Affinity vs efficacy & \citet{stephenson1956modification} & I1 vs I2 & Participation $\neq$ causation \\
+\midrule
+System reserve & \citet{black1983operational} & I2 & Backup circuits compensate after ablation \\
+\midrule
+Functional selectivity & \citet{kenakin2004functional} & E1 & Ablation method determines the finding \\
+\midrule
+Phase I/II/III trials & --- & Verdict tiers & Calibrate $\to$ establish causality $\to$ generalize \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Mechanistic interpretability}
+\label{sec:mi-lens}
+
+Interpretive validity (V1--V5) is the one validity type not imported from another field. Every MI result pairs a measurement with an interpretation---an IIA score with ``the model represents this variable here,'' a faithfulness percentage with ``this circuit implements IOI.'' Whether the interpretation is justified depends on whether the claim is stated at a level the evidence can actually support. Three distinctions, drawn from MI's own empirical track record, ground the interpretive criteria.
+
+First, \emph{description vs.\ explanation}: most published ``explanations'' are descriptions in explanatory language. ``The name-mover head copies the IO name to the output'' sounds like an explanation but is a description of observed behavior on specific inputs. An explanation would answer: what structural property of the $W_{OV}$ matrix forces name-copying? Under what conditions would this head fail? Descriptions are bound to the cases observed; explanations predict what happens in cases not yet tested.
+
+Second, \emph{faithfulness vs.\ understanding}: a circuit can be maximally faithful---100\% performance recovery when isolated, total degradation when ablated---without being understood at all. Faithfulness is a property of the circuit relative to the task; understanding is a property of the researcher relative to the circuit. They are independent axes.
+
+Third, \emph{component identity vs.\ component role}: ``Head 9.9 is in the IOI circuit'' (identity) and ``Head 9.9 is a name mover'' (role) are different claims requiring different evidence. Identity requires only causal evidence---ablating the component changes the output. Role requires mechanistic evidence---the weight structure matches the claimed function, the component does not perform this function on non-target inputs, and the role label makes predictions that can be tested independently. The slide from identity to role typically happens in one sentence and is a common overclaim \citep{wang2023interpretability}.
+
+These distinctions motivate the interpretive criteria: V1 (level declaration) requires stating the description mode before collecting evidence; V2 (level-evidence match) checks that the evidence supports claims at that level; V3 (alternative level) asks whether the evidence could be explained at a different level; V4 (unlicensed labeling) asks whether a name redescribes what was measured or imports a construct that some nearby alternative would satisfy equally; and V5 (scope declaration) requires stating what the claim does not cover.
+
+\begin{table}[H]
+\centering\small
+\caption{Mechanistic interpretability foundations.}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{2.2cm}l>{\raggedright\arraybackslash}p{4.5cm}@{}}
+\toprule
+\textbf{Concept} & \textbf{Source} & \textbf{Criterion} & \textbf{MI analog} \\
+\midrule
+Description vs explanation & \citet{olsson2022context} & V2 & Most ``explanations'' are descriptions in explanatory language \\
+\midrule
+Faithfulness vs understanding & \citet{wang2023interpretability} & V1, V2 & Independent axes: a faithful circuit need not be understood \\
+\midrule
+Identity vs role & \citet{wang2023interpretability} & V4 & ``In the circuit'' (causal) vs ``is a name mover'' (mechanistic) \\
+\midrule
+Circuit non-uniqueness & \citet{meloux2025everything} & V3 & Exhaustive enumeration returns \emph{a} circuit, not \emph{the} circuit \\
+\midrule
+Level drift & \citet{marr1982vision} & V1, V2 & Implementational evidence narrated in computational language \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ============================================================
+\section{Internal Validity Across Domains}
+\label{app:domains}
+
+The internal-validity criteria ask whether a component is necessary (I1) and
+sufficient (I2) for the behavior attributed to it. Those questions are
+domain-general. What answers them is not.
+
+Interventional experiments are the most direct route, and where they are
+available they carry the lightest assumptions. Many sciences that make
+mechanism claims cannot run them: one cannot randomize a supernova, a species,
+or a century of tobacco use. Those fields answer I1 and I2 by other means, and
+the framework applies to them so long as the substitution is declared.
+
+\begin{table}[H]
+\centering
+\caption{Routes to necessity and sufficiency by domain, with the assumptions each carries. The criteria are constant; the admissible evidence is local. A claim should declare which route it used, because the routes are not equivalent in what they require.}
+\label{tab:domain-routes}
+\small
+\begin{tabular}{lp{4.6cm}p{4.6cm}}
+\toprule
+Domain & Route to I1/I2 & Assumptions carried \\
+\midrule
+Mechanistic interpretability &
+Ablation, activation patching, causal scrubbing &
+Interventions do not move the model off-distribution; the patch site is the causal locus \\
+\midrule
+Molecular biology &
+Knockout, knockdown, rescue &
+No compensatory pathway; the rescue restores the same function \\
+\midrule
+Epidemiology &
+Natural experiments, instrumental variables, Mendelian randomization, regression discontinuity, difference-in-differences &
+Instrument relevance, exclusion restriction, and independence; parallel trends where applicable \\
+\midrule
+Astronomy, palaeontology, historical sciences &
+Natural variation across cases; the comparative method &
+The comparison set spans the relevant variation; no systematic selection on the outcome \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two consequences follow. First, a claim that establishes necessity by
+instrumental variable has met I1 under assumptions a knockout does not require,
+so the assumption load belongs in the audit record alongside the verdict.
+Second, a field with no route at all to I1 or I2 cannot reach the tiers that
+require them, and reporting that is more useful than relaxing the criterion.
+
+\clearpage
+% ============================================================
+\section{Evidential Capacity Across Twelve Fields}
+\label{app:field-capacity}
+
+Fields differ in which validity types they can address, and the differences are structural: an ethical prohibition, a physical impossibility, or a substrate that refuses the intervention fixes what evidence is available before any methodological choice is made. Each field has also built instruments against its own constraints, which makes those instruments candidates for export to fields constrained differently. What follows condenses a sourced survey of twelve fields; every claim is attributed to that field's own literature, and where the survey searched for a self-criticism literature and found none, the negative result is reported as such.
+
+\subsection{Genetics}
+
+The complementation test assigns mutations to loci through a functional assay that needs no molecular knowledge of the entity: two recessive mutations are placed in \emph{trans}, and the phenotype of the double heterozygote decides one locus or two \citep{yook2005complementation}. Rescue is the field's causal-attribution instrument, and ClinGen's gene--disease validity framework gives models and rescue experiments the most weight of any experimental evidence \citep{strande2017evaluating}. Two limits come from the substrate rather than from convention. Clean removal of a gene is unavailable because mutant mRNA decay upregulates paralogues, so the measured null is a compensated state \citep{elbrolosy2019genetic}. ``The gene for trait X'' fails as a construct for complex traits, since roughly 62\% of common SNPs carry a non-zero effect on height \citep{boyle2017expanded}.
+
+Randomization, blinding, and sample-size justification are routine in clinical research and rare in model-organism work: random allocation was reported in 12\% of 271 animal studies, and none of the 48 studies examined in detail justified its sample size \citep{kilkenny2009survey}. Re-curating gene--disease claims already in clinical use is equally available and equally rare; run for Brugada syndrome, it reclassified all 20 limited-evidence genes as disputed \citep{hosseini2018reappraisal}. Genetics is strongest on internal validity, which follows from intervening on the causal variable and then reversing the intervention. It is weakest on interpretive validity, where the causal experiment holds and the label attached to it does not \citep{hosseini2018reappraisal, border2019no, schnoes2009annotation}.
+
+\subsection{Medical microbiology}
+
+Controlled human infection gives the field an interventional design in the target species, and a WHO working group set out eight criteria for when deliberate infection of healthy volunteers is acceptable \citep{jamrozik2021key}. The field also wrote its causal criteria down in public and revised them as they became unsatisfiable, most recently for sequence-based detection \citep{fredricks1996sequence}. Falkow's molecular postulates carry out the same revision for genes rather than organisms: the trait belongs to pathogenic members of the taxon, inactivating the gene responsible produces a measurable loss of virulence, and restoring the gene restores pathogenicity \citep{falkow1988molecular}. Pure culture, required by Koch's second postulate, has never been achieved for some human pathogens; \emph{Mycobacterium leprae} has resisted axenic media for 150 years \citep{gotorrivera2025silence}. Causal attribution from detection alone is underdetermined, because presence is equally consistent with colonization, past infection, and contamination \citep{zautner2017more}. Challenge cohorts are bounded to healthy adults aged 18--30, so the sample is structurally unlike the population the pathogen harms \citep{jamrozik2021key}.
+
+The transfer experiment is available and over-read: 36 of 38 published studies (95\%) using human-microbiota-associated rodents reported transfer of the pathological phenotype, a rate the reviewing authors call implausible \citep{walter2020establishing}. Negative controls in sequencing cost little and are omitted; contaminating DNA is ubiquitous in extraction kits, and by the fifth serial dilution contamination dominated the sequencing result \citep{salter2014reagent}. The field is strongest on internal validity, exercised unevenly between its classical-pathogen and microbiome wings. It is weakest on interpretive and measurement validity, where an assay returns presence and the label ``the causative organism'' has to come from elsewhere \citep{zautner2017more}.
+
+\subsection{Epidemiology}
+
+Target trial emulation makes the analyst write down the randomized trial that cannot be run, then align eligibility, assignment, and time zero to it \citep{hernan2016specifying}. Negative control exposures and outcomes let an observational study detect confounding it cannot adjust away \citep{lipsitch2010negative}, and the E-value states the minimum confounder association that would explain an estimate away \citep{vanderweele2017sensitivity}. Randomizing smoking, poverty, or air pollution is prohibited rather than impossible, which is why this apparatus exists at all. Ruling out unmeasured confounding is logically foreclosed: the E-value bounds it under assumptions and cannot establish its absence, so an observational study can be made arbitrarily large without converging on the randomized estimand.
+
+Quantitative bias analysis appeared 238 times across 233 articles between 2006 and 2019; 60\% of applications moved the point estimate by more than 10\%, and 63\% of authors left their interpretation unchanged \citep{petersen2021systematic}. E-values are read as clearances rather than bounds, and few studies relate their magnitude to the strength of confounders already known in the field \citep{blum2020use}. Bradford Hill's nine viewpoints are still taught as causal criteria, a term he never used and a status he denied them \citep{phillips2004missed}. Epidemiology is strongest on external validity, since population sampling frames and unselected exposure distributions make its estimates the most transportable of any field here. It is weakest on construct and measurement validity, where the exposure is whatever the cohort instrument recorded.
+
+\subsection{Clinical medicine}
+
+Registration changed what gets published: 17 of 30 large NHLBI cardiovascular trials published before 2000 reported significant benefit on the primary outcome, against 2 of 25 published afterwards \citep{kaplan2015likelihood}. The field also measured what a badly executed randomization costs: across 250 controlled trials drawn from 33 meta-analyzes, odds ratios were exaggerated by 41\% where allocation concealment was inadequate and by 30\% where it was unclear \citep{schulz1995empirical}. The field can also place a placebo where a physical intervention occurred, and occasionally does; ORBITA found a 16.6\,s difference in exercise time between percutaneous coronary intervention and a sham procedure \citep{alhabib2018orbita}. Equipoise forecloses randomizing a suspected harm, so everything known about tobacco and asbestos in humans is observational. Generalizing to non-enrolled patients is foreclosed by the design, and Rothwell records that investigators, funders, journals, and regulators alike neglect external validity \citep{rothwell2005external}. Outcomes beyond the trial horizon are foreclosed within the design; the substitute requires a surrogate that captures the entire treatment effect on the true endpoint \citep{prentice1989surrogate}. Fleming and DeMets record the substitute failing that condition and state the constraint as ``a correlate does not a surrogate make'' \citep{fleming1996surrogate}.
+
+Reporting the outcomes it pre-specified is the largest documented gap. Across 67 trials in five CONSORT-endorsing journals, 58 (87\%) had discrepancies breaching CONSORT, with a mean of 5.4 undeclared new outcomes per trial \citep{goldacre2019compare}. Registration and CONSORT are both in place; applying them is the missing step. Clinical medicine is strongest on internal validity and on measurement validity for diagnostics, where an explicit reference standard and standing risk-of-bias instruments apply. It is weakest on external and interpretive validity, both documented from inside the field \citep{rothwell2005external, goldacre2019compare}.
+
+\subsection{Psychology}
+
+Psychology wrote the validity taxonomy this framework uses. Cronbach and Meehl defined construct validity for the case where an operational definition is unavailable \citep{cronbach1955construct}, and Campbell and Stanley drew the internal/external distinction and enumerated twelve threats to it \citep{campbell1963experimental}. It also built the apparatus for asking whether a score carries the same meaning in two groups: Meredith defines weak measurement invariance, strong factorial invariance, and strict factorial invariance as a nested hierarchy, and argues that strict invariance is the condition fairness in testing requires \citep{meredith1993measurement}. Random assignment of humans to laboratory conditions, within-subject designs, and counterbalancing are available together, which is rare among fields studying humans. Life-history variables---adversity, bereavement, years of schooling---cannot be assigned, so the field's most consequential evidence is quasi-experimental. Latent constructs cannot be observed directly, since a construct is defined by its indicators \citep{hussey2020hidden}. Un-learning is foreclosed, which removes the within-subject design wherever the manipulation is acquisition: prior treatments are not erasable \citep{campbell1963experimental}.
+
+Applying the measurement apparatus it invented is the field's clearest unused capability. Assessed by internal consistency alone, 88\% of 26 scales appeared to have good validity; assessed by internal consistency, test--retest reliability, factor structure, and measurement invariance together, 4\% did \citep{hussey2020hidden}. Invariance is the prerequisite for any cross-group comparison and is rarely tested; the review of the applied literature to 1999 turned up 67 substantive applications \citep{vandenberg2000review}. Four routine analytic freedoms combine to a 61\% false-positive rate, and the remedy appeared as a six-item disclosure checklist in the same paper \citep{simmons2011false}. Direct replication is available and was run once at scale: across 100 studies from three psychology journals, 97\% of the originals reported statistically significant results and 36\% of the replications did, with the mean effect size falling from $r = 0.403$ to $r = 0.197$ \citep{osc2015estimating}. Discriminant-validity tests are similarly available and delayed: grit accumulated a large literature before a meta-analysis found it very strongly correlated with conscientiousness \citep{crede2017much}. Psychology is strongest on internal validity for laboratory manipulations and weakest on external validity, with 96\% of samples drawn from countries holding 12\% of the world's population \citep{henrich2010weirdest}.
+
+\subsection{Economics}
+
+Synthetic control builds a counterfactual for a single treated aggregate unit from a weighted combination of untreated units, which supplies a causal estimate when the treatment lands on one state or one country; the California estimate for Proposition 99 was about 26 packs per capita lower by 2000 \citep{abadie2010synthetic}. The prize committee named both routes to a causal estimate: the 2021 award cites Angrist and Imbens ``for their methodological contributions to the analysis of causal relationships'' \citep{nobel2021economic}, and the 2019 award cites Banerjee, Duflo, and Kremer ``for their experimental approach to alleviating global poverty'' \citep{nobel2019economic}. Economics is also the only field surveyed that targets external validity in advance, through structural estimation of preference and technology parameters intended to survive a change of policy regime \citep{lucas1976econometric}. Lucas states the failure mode that motivates it: ``any change in policy will systematically alter the structure of econometric models'' \citep{lucas1976econometric}. Randomizing macroeconomic policy is foreclosed by the system: there is one economy and no control unit, and synthetic control is a constructed substitute for the control unit the world does not supply. Rerunning history is impossible, so every macroeconomic series has $n = 1$ in the dimension that matters.
+
+Statistical power is computable and mostly not computed. Across 159 empirical literatures drawing on 64,076 estimates, median power is 18\% or less and nearly 80\% of reported effects are exaggerated \citep{ioannidis2017power}. Leamer named the specification search forty years ago and the sensitivity analysis he asked for is still not standard: fitting ``many, perhaps thousands, of statistical models'' and reporting the ones the researcher finds pleasing ``invalidates the traditional theories of inference'' \citep{leamer1983lets}. Olken counted every randomized-trial paper in the top five journals from 2013 to mid-2014 and found none with a pre-analysis plan \citep{olken2015promises}. Fewer than 10\% of experimental papers in leading journals mention measurement error; where it is estimated, 30--40\% of variance in choices is attributable to it \citep{gillen2019experimenting}. Bertrand and Mullainathan name the divide from inside the field: the unwillingness to rely on subjective survey questions ``marks an important divide between economists and other social scientists'' \citep{bertrand2001people}. The field is strongest on internal validity wherever quasi-experimental identification is available, and weakest on measurement validity, where reliability is treated as an econometric nuisance rather than an instrument property.
+
+\subsection{Neuroscience}
+
+Optogenetics gives millisecond-timescale control of a genetically defined neuronal population inside an intact behaving animal, an intervention with no counterpart among fields studying macroscopic systems \citep{boyden2005millisecond}. Double dissociation is the field's logic for functional separability, and Shallice's statement of what the pattern buys carries its condition on the face of it: ``If modules exist, then \ldots\ double dissociations are a relatively reliable way of uncovering them'' \citep{shallice1988neuropsychology}. The field also published the demonstration that its flagship inference underdetermines its flagship conclusion: damaging a connectionist network with no separable components recovers a double dissociation, so observing the pattern leaves modularity open \citep{plaut1995double}. Human lesions follow vascular territory and cannot be assigned. Whole-brain single-neuron resolution in a mammal is foreclosed at present, with fMRI trading resolution for coverage and electrophysiology trading coverage for resolution, so the full causal graph is never observed. Research-only invasive recording in healthy humans is prohibited, which makes the human single-unit sample permanently clinical.
+
+Median statistical power across 49 meta-analyzes comprising 730 studies is 21\% \citep{nord2017power}. Of 134 fMRI studies from five journals, 57 (42\%) contained at least one non-independent selective analysis \citep{kriegeskorte2009circular}. Test--retest reliability is computable from any repeated-measures design and is rarely published; a meta-analysis of 90 experiments gives a mean intraclass correlation of 0.397 \citep{elliott2020test}. Reverse inference can be graded, and the field's own worked case for Broca's area and language returns a Bayes factor of 2.3 \citep{poldrack2006cognitive}. Neuroscience is strongest on internal validity, which is what optogenetics, chemogenetics, and reversible inactivation buy. It is weakest on construct and interpretive validity, where task names supply the labels.
+
+\subsection{Ecology}
+
+Ecology applies a treatment to an entire functioning system at natural scale with an adjacent untreated system as control. Lake 226 was split with a curtain, nitrogen and carbon added to both basins and phosphorus to one; the phosphate-enriched basin became eutrophic while the other held at prefertilization conditions \citep{schindler1974eutrophication}. The field also has a worked account of which parameter each perturbation type recovers: pulse perturbations yield direct interactions, and press perturbations yield direct interactions mixed with indirect effects mediated through other species \citep{bender1984perturbation}. Replication at biome or planetary scale is foreclosed because the units do not exist in replicate. Succession to completion is foreclosed by the observation window rather than by the manipulation, a temporal constraint shared with geology and cosmology. Blinding is impractical, since a cut watershed is visible.
+
+Pseudoreplication occurred in 27\% of 176 experimental studies, or 48\% of those applying inferential statistics \citep{hurlbert1984pseudoreplication}; 29 years later, 68\% of 77 studies of logging effects on tropical forest biodiversity were definitively pseudoreplicated \citep{ramage2013pseudoreplication}. Occupancy modeling corrects for imperfect detection and was used in 23\% of 537 articles, while estimated detection probabilities were usually below 0.5 \citep{kellner2014accounting}. Text-mining 38,730 papers across 160 journals returned nine self-described replications \citep{kelly2019rate}. Ecology is strongest on external validity, since its results come from real systems at real scale over real durations, and weakest on measurement validity.
+
+\subsection{Pharmacology and toxicology}
+
+Pharmacology's measurement standards are written into regulatory guidance with numeric acceptance criteria: mean values within 15\% of nominal, precision within a 15\% coefficient of variation, and blank matrices from at least six sources \citep{fdabioanalytical}. The field also publishes a quantitative rule for when a compound may be \emph{called} selective---potency below 100\,nM, more than 30-fold selectivity against sequence-related proteins, cell activity below 1\,$\mu$M, and an inactive close analogue as negative control \citep{arrowsmith2015promise}. The human TD50 cannot be measured, so the therapeutic index is reached by extrapolation from animal no-observed-adverse-effect levels. The species gap is quantified rather than closed: rodent and non-rodent species together give 71\% concordance with human toxicity events \citep{olson2000concordance}. Single-target perturbation is unavailable for many targets, with 243 clinically evaluated kinase drugs binding across 220 of the 518 human kinases \citep{klaeger2017target}.
+
+A random PubMed sample of in vivo research reported blinded outcome assessment in 3\% of publications and a sample size calculation in none \citep{macleod2015risk}. Randomizing 1,689 manuscripts to a reporting-checklist request left no manuscript in either arm fully compliant \citep{hair2019randomised}. Two industry audits put a figure on the literature the field builds on. Of 53 landmark preclinical cancer studies, findings were confirmed in 6 (11\%) \citep{begley2012drug}, and across 67 in-house target-validation projects the published data were completely in line with in-house findings in roughly 20--25\% \citep{prinz2011believe}. Discredited chemical probes stay in circulation; LY294002 returned 1,190 Google Scholar results for 2016 alone \citep{blagg2017choose}. The field is strongest on measurement validity wherever regulation reaches, and weakest on external validity, which is foreclosed at the species boundary.
+
+\subsection{Astronomy and astrophysics}
+
+Unable to age a star, astronomy observes stars of every age and reassembles the sequence within an evolutionary model; the field's philosophy-of-science literature is careful that this is matching rather than randomization, because earlier-epoch objects differ from present counterparts in environment as well as in age \citep{anderl2016astronomy}. Blind analysis prevents experimenter bias by construction, on the stated ground that the size of such a bias cannot be estimated after the fact \citep{klein2005blind}, and the 5$\sigma$ convention sets the discovery threshold at $p \le 3 \times 10^{-7}$ because 3$\sigma$ and 4$\sigma$ effects have repeatedly gone away with more data \citep{lyons2013discovering}. The threshold travels outward as an explicit proposal: 72 authors ask the biomedical and social sciences to move the default for claims of new discoveries from $p < 0.05$ to $p < 0.005$, citing genomics and high-energy physics as the precedent \citep{benjamin2018redefine}. Intervention is foreclosed physically rather than ethically. Cosmic variance is the formal ceiling: the surface of last scattering probes a finite slice, so large-angle statistics are one draw from the parent distribution and no instrument improves the draw \citep{kamionkowski1997getting}. Simulation, the substitute for intervention, can be tested only against static observations, which give a weak measure of adequacy \citep{anderl2016astronomy}.
+
+Blind analysis is described from inside cosmology as recently entering the field \citep{brieden2020blind}. A survey of the exoplanet atmosphere literature found widespread use of an invalid formula for converting Bayesian model comparison values into sigmas, with the correct method available throughout \citep{thorngren2025bayesian}. Source code was downloadable for 58\% of the 285 unique codes used across 166 articles \citep{allen2018schroedinger}.
+
+Astronomy studies selective publication under its own name. \citet{schaefer2008bandwagon} shows 31 post-2002 distance measures to the Large Magellanic Cloud clustering so tightly on the then-canonical value that the distribution departs from Gaussian at above 3$\sigma$, and \citet{vaughan2008xray} find the strength of 38 claimed shifted X-ray lines correlating with its own uncertainty, the signature of a literature filtered by publication bias. \citet{degrijs2017publication} test six quantities and attribute the clustering to correlated measurements rather than selective publication. The vocabulary is \emph{bandwagon effect} rather than publication bias, which is why the literature is easy to miss from outside.
+
+Pre-registration is the clearer gap. No astronomy-specific journal surveyed offers registered reports, while \emph{Royal Society Open Science} offers the format and lists astronomy within scope, so the instrument is available and unused. Frozen analysis plans inside large collaborations are a functional substitute and are not a field-level institution. Blind analysis extends past cosmology---to the stellar distance ladder and, by construction, to asteroseismology's hare-and-hounds exercises---though the papers reporting those exercises do not use the word, so the subfield cannot cite its own practice. Searches of the astronomy preprint corpus for \emph{p-hacking}, \emph{file drawer}, \emph{p-curve}, \emph{excess significance}, \emph{researcher degrees of freedom}, and \emph{significance inflation} return nothing, and \citet{bailey2017not}, which analyzes 41{,}000 measurements across medicine, physics, and chemistry, excludes astronomy.
+
+Selection-effect treatment is the field's distinctive strength. Malmquist and Eddington bias are named, dated, and kept separate \citep{teerikorpi1997observational}, and modern estimators carry the selection function inside the likelihood \citep{kelly2007some}. Any field that thresholds detections and reports what passed inherits the same problem; interpretability does so whenever a circuit is selected by a cutoff, which is the substance of criterion M7. Astronomy is strongest on measurement validity, backed by physical calibration and independent detectors, and weakest on internal validity, where no intervention is available. Its self-criticism interrogates the error bar where psychology's interrogates the effect.
+
+\subsection{Climate science}
+
+Optimal fingerprinting extracts a causal signal from a single uncontrolled realization by filtering an assumed signal pattern through the inverse of the climate variability covariance matrix \citep{hasselmann1993optimal}. The successor method makes the structure eliminative: a detected signal is attributed to a forcing only when every other candidate mechanism in a finite set is rejected at the same confidence level \citep{hasselmann1997multi}. The IPCC fixes in advance, for all authors, what its hedging words mean numerically, keeps the evidence-and-agreement axis separate from the likelihood axis, and asks each author to record an individual assessment before group discussion \citep{mastrandrea2010guidance}. There is one Earth. The assessment body states that unequivocal attribution would require controlled experimentation with the climate system, that this is not possible, and defines the substitute \citep{hegerl2007understanding}. The controlled experiment is relocated to the model, which makes model fidelity load-bearing for every internal-validity claim.
+
+Tuning is performed and not reported: 22 of 23 modeling centres reported adjusting parameters to obtain desired properties, and the tuning strategy was not part of the required CMIP5 documentation \citep{hourdin2017art}. Models are treated as independent while sharing code and ancestry; within-institution distances are a factor of three to ten smaller than between-institution distances, and assessments weight all models equally \citep{knutti2013climate}. Knutti had already named the practice ``one-model-one-vote'' and asked whether model democracy should end \citep{knutti2010end}. Screening models on demonstrated sensitivity bias is endorsed at the top and unadopted below it: more than a quarter of CMIP6 models have an equilibrium climate sensitivity above 4.7\,$^\circ$C, the highest value anywhere in CMIP5, and around a fifth reach 5\,$^\circ$C, so the sixth assessment weights models by how well they reproduce other evidence and the rest of the community does not \citep{hausfather2022climate}. Climate science is the one field here marked strong on interpretive validity, an effect of the calibrated-language instrument. Its weakest point is internal validity, where the counterfactual is simulated.
+
+\subsection{Forensic science}
+
+Forensic science was audited from outside and published the audit. The National Research Council found that outside nuclear DNA analysis, no forensic method has been shown to connect evidence to a specific source consistently and with a high degree of certainty \citep{nrc2009strengthening}. A later report splits foundational validity from validity as applied, maps each onto a distinct legal test, and makes a black-box study a necessary condition for the first \citep{pcast2016forensic}. The field produces measured error rates for expert judgment: across 169 latent-print examiners the overall false positive rate was 0.1\% and the false negative rate 7.5\% \citep{ulery2011accuracy}. Ground truth in real casework is unknowable, so error rates cannot be estimated from operational output---the correct answer is what the process exists to determine \citep{pcast2016forensic}. Crimes cannot be randomized or repeated.
+
+Koehler set out what a proficiency test has to be before its error rate is usable in court: blind, externally designed and administered, and drawn from samples that approximate the evidence casework actually produces \citep{koehler2013proficiency}. Blind proficiency testing is feasible, demonstrated, and rare; most laboratory programs rely entirely on declared tests \citep{mejia2020implementing}, while one program submitted 973 blind samples of which analysts identified 51 as tests \citep{hundl2020implementation}. Of 403 examiners across 21 countries, fewer than half supported blind testing \citep{kukucka2017cognitive}. Contextual bias controls exist and were resisted: when five experts were covertly re-shown prints they had previously matched, four reached different decisions \citep{dror2006contextual}. Internal validity is foreclosed, since the causal question cannot be settled by intervention on the case and casework yields no ground truth. Interpretive validity is the weakest type and the best documented, and the correction arrived from a government commission and an attorney-general memorandum.
+
+\subsection{Summary by validity type}
+
+\Cref{tab:field-validity} collects the markings assigned in each field entry above. Two patterns sit in the columns rather than in any row. Interpretive validity is the weakest column, with eleven of twelve fields marked weak or mixed, and in every case the marking comes from the field's own documentation of the gap. Internal and external validity trade against each other: the four fields marked strong on internal validity are all marked weak on external, and the two marked strong on external gave up randomization to obtain population-scale or ecosystem-scale samples. An intervention precise enough to establish necessity is usually available only in a system chosen for its tractability.
+
+\begin{table}[H]
+\centering\small
+\caption{Evidential capacity by field and validity type. Each marking is the one assigned in that field's entry above, which carries the sourcing. \emph{Strong} means the field has both the apparatus and the routine practice; \emph{mixed} usually means the apparatus exists and the practice is uneven; \emph{weak} means the field's own literature documents the deficit; \emph{foreclosed} means a structural constraint blocks the type.}
+\label{tab:field-validity}
+\tighttable
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Field & Construct & Measurement & Internal & External & Interpretive \\
+\midrule
+Genetics & mixed & strong & strong & weak & weak \\
+Medical microbiology & mixed & weak & strong & weak & weak \\
+Epidemiology & weak & weak & mixed & strong & weak \\
+Clinical medicine & mixed & strong & strong & weak & weak \\
+Psychology & mixed & mixed & strong & weak & weak \\
+Economics & mixed & weak & strong & mixed & weak \\
+Neuroscience & weak & mixed & strong & weak & weak \\
+Ecology & mixed & weak & mixed & strong & mixed \\
+Pharmacology and toxicology & mixed & strong & mixed & foreclosed & mixed \\
+Astronomy and astrophysics & mixed & strong & weak & foreclosed & mixed \\
+Climate science & strong & strong & mixed & mixed & strong \\
+Forensic science & weak & mixed & foreclosed & weak & weak \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Four cells carry qualifications from the field entries. Epidemiology's internal validity is mixed because randomization is foreclosed and a compensating apparatus was built in its place. Psychology's is strong for laboratory manipulations and foreclosed for life-history variables, and economics' is strong where quasi-experimental identification is available and foreclosed for macroeconomic policy. Pharmacology's external validity is foreclosed at the species boundary, and astronomy's is foreclosed at cosmological scale while remaining strong at stellar scale.
+
+\subsection{Export pairings}
+
+Each row of \Cref{tab:field-exports} places one field's routine method against another field's structural gap. Both halves of every pairing are sourced in the entries above. No claim is made that any pairing has been attempted, and where a receiving field has already solved the problem in its own idiom, that is noted rather than counted as evidence the export works.
+
+\begin{table}[H]
+\centering\small
+\caption{Export pairings: a routine method in one field set against a documented gap in another. Sources for both halves appear in the field entries above. These are candidate transfers; none is reported here as tested.}
+\label{tab:field-exports}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{8.9cm}@{}}
+\toprule
+Method (source field) & Receiving fields & Gap addressed \\
+\midrule
+Measurement invariance and reliability estimation (psychology) & Economics, neuroscience & An instrument whose stability is never estimated cannot bound the effect it measures \citep{hussey2020hidden, gillen2019experimenting, elliott2020test} \\
+\midrule
+Quantitative bias analysis and E-values (epidemiology) & Ecology, astronomy, genetics & A reported estimate with no stated sensitivity to the quantity that cannot be measured. The audit caution transfers with the method: 63\% of authors who ran the analysis did not revise their interpretation \citep{vanderweele2017sensitivity, petersen2021systematic} \\
+\midrule
+Blind analysis and blind injection (astronomy) & Forensic science, neuroscience, psychology & Analyst degrees of freedom exercised after the answer is visible \citep{klein2005blind, botviniknezer2020variability, simmons2011false} \\
+\midrule
+Rescue and complementation (genetics) & Neuroscience and any lesion-based field & Necessity established by removal with no restoration arm; separately, a functional assay for whether two constructs are one \citep{strande2017evaluating, crede2017much} \\
+\midrule
+Calibrated uncertainty language (climate science) & Forensic science, and every field that hedges & A confidence term whose referent is the speaker \citep{mastrandrea2010guidance, pcast2016forensic} \\
+\midrule
+Foundational validity vs.\ validity as applied (forensic science) & Genetics, neuroscience, microbiology & A validated instrument whose per-case application carries no measured error rate \citep{pcast2016forensic, zautner2017more} \\
+\midrule
+Black-box studies of expert judgment (forensic science) & Wherever a human applies a label & An interpretive step with no measured error rate \citep{ulery2011accuracy, schnoes2009annotation} \\
+\midrule
+Target trial emulation (epidemiology) & Ecology, economics, astronomy & A substitution for the foreclosed experiment made silently \citep{hernan2016specifying, carpenter1989replication, anderl2016astronomy} \\
+\midrule
+Occupancy models and detection probability (ecology) & Genetics, microbiology, neuroscience & Non-detection read as absence: a compensated null, an uncultivable organism, an underpowered lesion result \citep{kellner2014accounting, elbrolosy2019genetic} \\
+\midrule
+Selectivity standards for a semantic label (pharmacology) & Genetics, neuroscience, ecology & A name governed by no numeric threshold \citep{arrowsmith2015promise} \\
+\midrule
+Model genealogy correction (climate science) & Astronomy, genetics, meta-analysis generally & A count of independent measurements that is not a count of independent measurements \citep{knutti2013climate, husain2026fifty} \\
+\midrule
+The formal one-realization limit (astronomy) & Climate science, macroeconomics & An $n = 1$ system whose $n = 1$ cost is not quantified \citep{kamionkowski1997getting} \\
+\midrule
+Human challenge governance (medical microbiology) & Any field with a decisive but risky experiment & A prohibition treated as permanent because nobody wrote down its terms \citep{jamrozik2021key} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+These pairings extend \Cref{app:domains} beyond internal validity. The criteria are constant across fields, while the admissible evidence and the compensating instrument are both local. A claim that declares its route and its borrowed instrument carries its assumption load into the audit record.
+
+
+
+\bibliographystyle{tmlr}
+\bibliography{references}
+
+\end{document}
