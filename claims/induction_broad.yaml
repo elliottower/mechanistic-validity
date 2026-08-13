@@ -5,7 +5,7 @@ description: 'The two-head composition that performs in-context copying is advan
   context earlier is the literal case of in-context nearest-neighbour retrieval. In-context learning is
   operationalized as the difference in loss between the 500th and the 50th token of the context, and the
   claim rests on induction-head formation, the jump in that quantity, a loss bump and a PCA pivot all
-  arriving together in a 2.5e9--5e9 token window. Systems: the same 34 decoder-only models, with the co-occurrence
+  arriving together in a 2.5e9--5e9 token window. Evaluated on: the same 34 decoder-only models, with the co-occurrence
   observed across all of them and ablation confined to the twelve small models at $d_{\mathrm{model}}
   = 768$, so no causal evidence touches the models the claim is about. Description mode: implementational-functional,
   carried to a claim about a computational-level capability by Argument 6''s continuity argument.'

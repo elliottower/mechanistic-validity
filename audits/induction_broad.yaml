@@ -214,7 +214,7 @@ criteria:
   C1:
     name: Falsifiability
     status: C
-    short: ''
+    short: Argument 6 names the falsifier precisely, whatever the eventual outcome
     verified: true
     reasoning: 'The broad claim is stated in a form that could fail and the authors write down the condition
       under which it would. Argument 6 names the falsifier precisely — non-induction composition heads
@@ -242,7 +242,7 @@ criteria:
   C2:
     name: Structural plausibility
     status: PC
-    short: ''
+    short: Weight-level for small attention-only models; the extension is analogy
     verified: true
     reasoning: 'The weight-level mechanism exists for small attention-only models and stops there, which
       the paper states three times in three places. For the abstract behaviours the extension is labelled
@@ -267,7 +267,7 @@ criteria:
   C3:
     name: Convergent validity
     status: PC
-    short: ''
+    short: Six lines of evidence, but at scale the paper's own table reads correlational
     verified: true
     reasoning: 'Six lines of evidence, and the paper labels which of them carry weight where. Only ablation
       and the smeared-key manipulation are interventional, and both stop at the small models; for large
@@ -294,7 +294,7 @@ criteria:
   C4:
     name: Discriminant validity
     status: D
-    short: ''
+    short: The title says general in-context learning; the measure is loss at token 500
     verified: true
     reasoning: 'The construct named in the title is general in-context learning; the construct measured
       is loss at token 500 against token 50. The paper knows these are different, sets out both conceptions,
@@ -328,7 +328,7 @@ criteria:
   C5:
     name: Nomological validity
     status: PC
-    short: ''
+    short: Connected in three directions, mostly by analogy rather than derivation
     verified: true
     reasoning: 'The claim is connected outward in three directions and the connections are of different
       quality. The scaling-law link is the strongest, because it makes a retrodiction: one-layer transformers
@@ -353,7 +353,7 @@ criteria:
   M1:
     name: Reliability
     status: U
-    short: ''
+    short: One run per model, and at scale the evidence is timing across fifteen snapshots
     verified: true
     reasoning: 'One training run per model, no interval on any quantity. For the broad claim this bites
       harder than for the narrow one, because the evidence at scale is a co-occurrence in training time
@@ -378,7 +378,7 @@ criteria:
   M2:
     name: Baseline separation
     status: PC
-    short: ''
+    short: The one-layer model is a clean negative for all four signature quantities
     verified: true
     reasoning: 'The one-layer model is a clean negative control for the entire package: no induction heads,
       no phase change, no loss bump, no PCA pivot, and the paper checks all four. Within the ablated models
@@ -402,7 +402,7 @@ criteria:
   M3:
     name: Stability
     status: PC
-    short: ''
+    short: Free constants perturbed and the between-model picture survives
     verified: true
     reasoning: 'The metric''s free constants are perturbed and the conclusion survives: redefining in-context
       learning score against the final context token instead of the 500th leaves the between-model picture
@@ -426,7 +426,7 @@ criteria:
   M4:
     name: Calibration
     status: I
-    short: ''
+    short: Validated evaluators, but footnote 17 documents a sign-inverting artifact
     verified: true
     reasoning: 'The evidence points both ways inside the origin. In favour: the outcome is in nats, the
       head evaluators are validated against weight-level quantities, and the arbitrary constants are shown
@@ -460,7 +460,7 @@ criteria:
   M5:
     name: Sensitivity
     status: U
-    short: ''
+    short: The only known-positive is literal copying in a two-layer model
     verified: true
     reasoning: 'The only known-positive available at origin is the two-layer attention-only induction
       circuit derived from weights in the previous paper, and it is a known-positive for literal copying.
@@ -481,7 +481,7 @@ criteria:
   M6:
     name: Invariance
     status: PC
-    short: ''
+    short: The signature recurs across four series; a correlate's invariance is not the claim's
     verified: true
     reasoning: 'Two different things are invariant to two different degrees. The signature — phase change,
       in-context learning jump, PCA pivot, induction-head formation — recurs across four series, two datasets
@@ -508,7 +508,7 @@ criteria:
   M7:
     name: Selection correction
     status: U
-    short: ''
+    short: Top scorers examined on the data that ranked them, and the sample is biased
     verified: true
     reasoning: 'Heads are ranked by prefix-matching score and the top scorers are the ones examined, on
       the same data used to rank them, with no correction. At full scale the plotted sample is stated
@@ -530,7 +530,7 @@ criteria:
   I1:
     name: Necessity
     status: I
-    short: ''
+    short: Ablation carries the metric in twelve models and the construct nowhere
     verified: true
     reasoning: 'Necessity is demonstrated for the operationalised outcome in the models where ablation
       was run, and the paper is careful about how far that reaches. It calls the same evidence "only suggestive"
@@ -558,7 +558,7 @@ criteria:
   I2:
     name: Sufficiency
     status: U
-    short: ''
+    short: A semi-empirical argument stands in; nothing reconstructs the behaviour
     verified: true
     reasoning: 'Nothing reconstructs general in-context learning from induction heads. The paper''s substitute
       is a semi-empirical argument — nearest-neighbour retrieval must improve with more context, so heads
@@ -582,7 +582,7 @@ criteria:
   I3:
     name: Minimality
     status: U
-    short: ''
+    short: Every ablation marginal and single-head, in the redundancy regime that defeats it
     verified: true
     reasoning: 'No minimal set is identified whose removal abolishes in-context learning, and the design
       cannot easily produce one. Every ablation is marginal and single-head, and the authors name the
@@ -604,7 +604,7 @@ criteria:
   I4:
     name: Specificity
     status: PC
-    short: ''
+    short: Ablating non-induction heads raises the score, which runs against the claim
     verified: true
     reasoning: 'Off-target effects on the metric are measured for every head and the result is reported:
       ablating non-induction heads raises the in-context learning score, with the mechanism given. That
@@ -627,7 +627,7 @@ criteria:
   I5:
     name: Rival mechanism exclusion
     status: D
-    short: ''
+    short: The composition rival is named twice by the authors and excluded neither time
     verified: true
     reasoning: 'The rival is named twice by the authors and excluded neither time. Argument 1 raises the
       possibility that the phase change is when the model learns to compose layers at all, enabling induction
@@ -657,7 +657,7 @@ criteria:
   I6:
     name: Double dissociation
     status: U
-    short: ''
+    short: No second head population is defined that could be ablated against a second outcome
     verified: true
     reasoning: 'At origin no dissociation of any kind is attempted. The ablation data supports exactly
       two views, both keyed to the phase change, and no second head population is defined that could be
@@ -681,7 +681,7 @@ criteria:
   I7:
     name: Confound control
     status: PC
-    short: ''
+    short: Exogenous confounds located outside the window; the shared latent is untouched
     verified: true
     reasoning: 'Exogenous confounds are handled well and the confound that matters is not handled at all.
       Scheduled hyperparameter changes are located outside the phase-change window or named where they
@@ -706,7 +706,7 @@ criteria:
   I8:
     name: Confounding sensitivity
     status: U
-    short: ''
+    short: Every caution is verbal; the leading alternative is left unquantified
     verified: true
     reasoning: 'The confounds are enumerated and none is bounded. Every entry in the caution list is verbal
       — low resolution with no interval, a shared latent variable with no magnitude, a baseline-drift
@@ -726,7 +726,7 @@ criteria:
   I9:
     name: Epistatic interaction
     status: PC
-    short: ''
+    short: Composition is the subject and no joint ablation measures it
     verified: true
     reasoning: 'Composition between heads is the paper''s subject and Argument 6''s alternative is itself
       an interaction hypothesis — that all composition mechanisms form together during the phase change.
@@ -747,7 +747,7 @@ criteria:
   I10:
     name: Rescue reversibility
     status: U
-    short: ''
+    short: The clean patterns are already cached; the restore costs one pass and is not run
     verified: true
     reasoning: 'The pattern-preserving ablation already caches every attention pattern from a clean forward
       pass, so restoring an ablated head and rechecking would cost one additional pass on infrastructure
@@ -763,7 +763,7 @@ criteria:
   I11:
     name: Onset coupling
     status: C
-    short: ''
+    short: Four quantities move together in one token window, and an intervention shifts them
     verified: true
     reasoning: 'The onset direction is the paper''s centrepiece and it is strong even for the broad claim.
       Four quantities move together in a 2.5e9--5e9 token window across the whole sweep, including the
@@ -785,7 +785,7 @@ criteria:
   I12:
     name: Offset coupling
     status: D
-    short: ''
+    short: The manipulation runs one way only; nothing suppresses formation and re-tests
     verified: true
     reasoning: 'At origin the manipulation runs in one direction only: it makes induction cheaper to express
       and brings the whole cluster forward. Nothing suppresses induction head formation in a model that
@@ -809,7 +809,7 @@ criteria:
   E1:
     name: Intervention reach
     status: PC
-    short: ''
+    short: Two levers of different kinds, neither reaching the models the claim is about
     verified: true
     reasoning: 'Two levers of genuinely different kinds, one on a trained model and one on training, which
       is more reach than most claims in this set. Neither reaches the models the broad claim is about.
@@ -836,7 +836,7 @@ criteria:
   E2:
     name: Prompt generalization
     status: C
-    short: ''
+    short: The defining stimulus is off-distribution by construction
     verified: true
     reasoning: 'The defining stimulus is off-distribution by construction — repeated uniform-random tokens
       with the frequency extremes removed — so head identification cannot be riding on natural-text statistics.
@@ -858,7 +858,7 @@ criteria:
   E3:
     name: Cross-task generalization
     status: PC
-    short: ''
+    short: Three heads in one model on three tasks, labelled Plausibility by the authors
     verified: true
     reasoning: 'Argument 4 is the broad claim''s cross-task test and the authors label it Plausibility
       in both rows of its own strength table. Three heads in one 13B model, on copying, translation and
@@ -884,7 +884,7 @@ criteria:
   E4:
     name: Cross-model generalization
     status: D
-    short: ''
+    short: The signature holds across 34 models; nothing distinguishes the heads at scale
     verified: true
     reasoning: 'Two claims generalise differently across models and the paper reports both. The correlational
       signature holds everywhere it is measured — 34 models, four series, and Argument 6 states the measurements
@@ -910,7 +910,7 @@ criteria:
   E5:
     name: Graded response
     status: PC
-    short: ''
+    short: Continuous scores throughout and an all-or-nothing intervention
     verified: true
     reasoning: 'Graded in measurement, binary in intervention. Both head evaluators return continuous
       scores on stated ranges, footnote 5 describes the construct as a continuum, and the outcome is tracked
@@ -932,7 +932,7 @@ criteria:
   E6:
     name: Novel prediction
     status: C
-    short: ''
+    short: The smeared-key architecture predicted the shift in advance, and it moved
     verified: true
     reasoning: 'Two predictions, both of which could have failed. The smeared-key architecture predicted
       in advance that easing induction-head formation would move the in-context learning phase change,
@@ -955,7 +955,7 @@ criteria:
   V1:
     name: Level declaration
     status: C
-    short: ''
+    short: Every sub-claim graded in a table, by reach and by model class
     verified: true
     reasoning: 'The epistemic level of every sub-claim is declared in a table, once for the paper and
       once per argument, crossing claim reach against model class with entries running from Strong Causal
@@ -978,7 +978,7 @@ criteria:
   V2:
     name: Level-evidence match
     status: D
-    short: ''
+    short: The assertion is mechanistic and unbounded where the tables say correlational
     verified: true
     reasoning: 'The assertion is mechanistic and unbounded in scale — the mechanistic source of general
       in-context learning in transformer models of any size — while the evidence at that scale is labelled
@@ -1004,7 +1004,7 @@ criteria:
   V3:
     name: Alternative level
     status: PC
-    short: ''
+    short: The shared-latent alternative is stated precisely twice and tested never
     verified: true
     reasoning: 'The alternative at the competing level is stated with unusual precision in two places
       and tested in neither. Argument 1 gives it as a shared latent variable — the phase change being
@@ -1026,7 +1026,7 @@ criteria:
   V4:
     name: Unlicensed labeling
     status: PC
-    short: ''
+    short: Both loaded terms hedged, and neither contrastively tested
     verified: true
     reasoning: 'Two loaded terms, both hedged. Induction is declared an analogy to inductive reasoning.
       In-context learning is defended against the stronger metalearning reading in footnote 3, which rejects
@@ -1051,7 +1051,7 @@ criteria:
   V5:
     name: Scope declaration
     status: C
-    short: ''
+    short: Scoped structurally, with the missing evidence graded rather than hedged
     verified: true
     reasoning: 'This is the best-scoped claim in the audit set and the scoping is structural rather than
       rhetorical. The evidence is called preliminary and indirect in the abstract, graded in a table for

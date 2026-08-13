@@ -4,7 +4,7 @@ description: 'One attention head maps an ordinal token to its successor, and the
   of four weight matrices --- embedding, $\mathrm{MLP}_0$, the head''s OV circuit, unembedding --- evaluated
   directly, with no activation from any prompt entering it. Mod-10 features recovered from $\mathrm{MLP}_0$
   by sparse autoencoders, by a linear probe and by single-neuron ablation carry the index the head increments.
-  Systems: GPT-2, Pythia and Llama-2 from 31M to 12B for behavioural recurrence, with the feature-level
+  Evaluated on: GPT-2, Pythia and Llama-2 from 31M to 12B for behavioural recurrence, with the feature-level
   case study on Pythia-1.4B L12H0 and two appendix replications. Description mode: implementational-functional.'
 source:
   citation: gould2023successor

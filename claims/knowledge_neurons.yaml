@@ -5,7 +5,7 @@ description: 'Integrated gradients over the intermediate activations of a feed-f
   memory that layer implements. Zeroing those activations lowers the correct-answer probability by 29.03\%
   and doubling them raises it by 31.17\%, where a count-matched attribution baseline moves the same quantity
   by $-1.47\%$ and $-1.27\%$; rewriting the value slots installs a substituted entity as the top prediction
-  34.4\% of the time against the baseline''s 0.0\%. Systems: BERT-base-cased at one released checkpoint,
+  34.4\% of the time against the baseline''s 0.0\%. Evaluated on: BERT-base-cased at one released checkpoint,
   on 253,448 ParaRel cloze prompts covering 27,738 facts across 34 relations, with no training run anywhere
   in the paper. Description mode: implementational-functional.'
 source:

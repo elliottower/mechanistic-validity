@@ -209,7 +209,7 @@ criteria:
   C1:
     name: Falsifiability
     status: C
-    short: ''
+    short: Two predictions in opposite directions, with the outcome measure fixed first
     verified: true
     reasoning: 'The claim states two predictions in opposite directions and fixes an outcome measure before
       either is tested: ablation must stop refusal on harmful instructions, addition must start it on
@@ -243,7 +243,7 @@ criteria:
   C2:
     name: Structural plausibility
     status: C
-    short: ''
+    short: The edit is enumerated over the five matrix kinds that write to the stream
     verified: true
     reasoning: 'The mechanism is stated in the weights. §4.1 enumerates the five kinds of matrix that
       write to the residual stream and defines the edit that removes the direction from all of them, and
@@ -269,7 +269,7 @@ criteria:
   C3:
     name: Convergent validity
     status: PC
-    short: ''
+    short: Two interventions agree on outcome; the estimate itself is never replicated
     verified: true
     reasoning: 'Convergence is real on the intervention side and absent on the extraction side. Directional
       ablation and activation addition are separate operations that agree on the behavioural outcome,
@@ -297,7 +297,7 @@ criteria:
   C4:
     name: Discriminant validity
     status: PC
-    short: ''
+    short: The estimator is a harmfulness contrast, and separation is argued by citation
     verified: true
     reasoning: 'The neighbouring construct is harmfulness, and the paper''s own description of the estimator
       is a description of a harmfulness contrast: the vector is defined as the axis along which mean harmful
@@ -327,7 +327,7 @@ criteria:
   C5:
     name: Nomological validity
     status: PC
-    short: ''
+    short: The linear representation hypothesis does not entail the central parameter
     verified: true
     reasoning: 'The claim is placed in a theory that predates it. The linear representation hypothesis
       supplies the form of the answer, difference-in-means supplies the estimator with a prior track record
@@ -352,7 +352,7 @@ criteria:
   M1:
     name: Reliability
     status: PC
-    short: ''
+    short: Sampling error over prompts throughout; nothing quantifies the instrument
     verified: true
     reasoning: 'Every uncertainty the paper reports is sampling error over prompts. §D.4 gives a binomial
       standard error at n = 100 for the two headline figures, §H.2 a standard deviation over 128 prompts
@@ -380,7 +380,7 @@ criteria:
   M2:
     name: Baseline separation
     status: PC
-    short: ''
+    short: Five attacks and a fine-tuning comparator, and no baseline for the estimate
     verified: true
     reasoning: 'The external baselines are unusually rich: five optimised jailbreak attacks, human-written
       templates, a direct-response floor, and a fine-tuning comparator with an independent literature
@@ -409,7 +409,7 @@ criteria:
   M3:
     name: Stability
     status: U
-    short: ''
+    short: Three thresholds and one objective, none of them moved
     verified: true
     reasoning: 'The selection rule is a fixed point in a search with three hard thresholds and a single
       objective, and none of the four is ever moved. No result is reported under a different kl_score
@@ -433,7 +433,7 @@ criteria:
   M4:
     name: Calibration
     status: PC
-    short: ''
+    short: Both metrics' failure modes shown by example and never counted
     verified: true
     reasoning: 'The two outcome measures have documented failure modes rather than assumed validity. §2.5
       states what the string match cannot see, §D.3 exhibits both directions of disagreement between the
@@ -458,7 +458,7 @@ criteria:
   M5:
     name: Sensitivity
     status: PC
-    short: ''
+    short: LoRA is an independently established positive and the instrument detects it
     verified: true
     reasoning: 'A known-positive exists and the instrument detects it. LoRA fine-tuning on 243 harmful
       instruction-completion pairs is an intervention independently established to disable refusal, and
@@ -481,7 +481,7 @@ criteria:
   M6:
     name: Invariance
     status: C
-    short: ''
+    short: 13 models, 5 families, 40x parameters, including where the effect degrades
     verified: true
     reasoning: 'The result is reported across every axis the design varies: 13 models in 5 families over
       a 40x parameter range, both alignment paradigms, four harmful instruction sources plus Alpaca, six
@@ -507,7 +507,7 @@ criteria:
   M7:
     name: Selection correction
     status: U
-    short: ''
+    short: Positions crossed with layers, and the search size is never written down
     verified: true
     reasoning: 'The search is large and its size is never written as a number. Every post-instruction
       position crossed with every layer gives |I| x L candidates, the winner is the minimiser of bypass_score
@@ -530,7 +530,7 @@ criteria:
   I1:
     name: Necessity
     status: PC
-    short: ''
+    short: 0.95 to 0.01 on all 13 models; unnecessary for refusal produced on instruction
     verified: true
     reasoning: 'Removing the direction removes refusal, and the demonstration runs on all 13 models rather
       than on a chosen one. The single case with numbers attached drops refusal from 0.95 to 0.01 and
@@ -556,7 +556,7 @@ criteria:
   I2:
     name: Sufficiency
     status: PC
-    short: ''
+    short: Harmless prompts refused across 13 models, on a direction chosen for sufficiency
     verified: true
     reasoning: 'Adding the vector at its extraction layer makes models refuse instructions that carry
       no harm at all, down to a request for the benefits of yoga, and the result holds across the 13 models.
@@ -586,7 +586,7 @@ criteria:
   I3:
     name: Minimality
     status: PC
-    short: ''
+    short: Nothing to prune inside rank one, and no higher rank is compared against
     verified: true
     reasoning: 'The object under test is one dimension, so minimality holds trivially in the downward
       direction: there is nothing inside a rank-one projection to prune. The test that would make it a
@@ -610,7 +610,7 @@ criteria:
   I4:
     name: Specificity
     status: PC
-    short: ''
+    short: Six benchmarks and three corpora, with TruthfulQA's fall left unresolved
     verified: true
     reasoning: 'Off-target cost is measured on six benchmarks across all 13 models, on cross-entropy loss
       over three corpora, and qualitatively on harmless generations, and the adverse findings are reported
@@ -638,7 +638,7 @@ criteria:
   I5:
     name: Rival mechanism exclusion
     status: PC
-    short: ''
+    short: Token suppression eliminated on one case; the second rival pre-empted by design
     verified: true
     reasoning: 'The deflationary rival is named and tested. If the edit worked by blocking refusal strings,
       the edited model could not produce them; §L.1 asks it to and it does, which is a real elimination
@@ -663,7 +663,7 @@ criteria:
   I6:
     name: Double dissociation
     status: U
-    short: ''
+    short: One direction and one behaviour, tested in both directions of effect
     verified: true
     reasoning: 'A double dissociation needs two directions and two behaviours, with each intervention
       moving one and sparing the other. The paper localises one direction for one behaviour and tests
@@ -686,7 +686,7 @@ criteria:
   I7:
     name: Confound control
     status: PC
-    short: ''
+    short: Disjoint train, validation and evaluation sets; nothing on the extraction axis
     verified: true
     reasoning: 'Three confounds are controlled, each by construction rather than by adjustment: train,
       validation and both evaluation sets are pairwise disjoint, so the reported effects are not the selection
@@ -711,7 +711,7 @@ criteria:
   I8:
     name: Confounding sensitivity
     status: U
-    short: ''
+    short: Unattempted; nothing bounds an unmeasured confounder
     verified: false
     reasoning: 'NOT SETTLED BY THE SOURCE. Nothing in the paper quantifies how strong an unmeasured confounder
       would have to be to overturn a reported effect, and no quantity in it can be read as such a bound.
@@ -727,7 +727,7 @@ criteria:
   I9:
     name: Epistatic interaction
     status: U
-    short: ''
+    short: Eight contributors measured one at a time, with no joint test
     verified: true
     reasoning: 'The eight largest contributors to the direction are measured one at a time, by projecting
       each head''s output onto the direction, and their suppression under the adversarial suffix is read
@@ -751,7 +751,7 @@ criteria:
   I10:
     name: Rescue reversibility
     status: U
-    short: ''
+    short: The inverse is known in closed form and the restore is never run
     verified: true
     reasoning: 'Every intervention in the paper runs one way: the direction is removed or added and the
       damage to refusal is measured. The complementary test --- break the behaviour by other means, then
@@ -774,7 +774,7 @@ criteria:
   I11:
     name: Onset coupling
     status: I
-    short: ''
+    short: Base models express the direction as strongly as chat models do
     verified: true
     reasoning: 'The coupling test was run and it came back the wrong way. §J compares base and chat models
       on the same direction and finds the base models express it just as the chat models do, high on harmful
@@ -802,7 +802,7 @@ criteria:
   I12:
     name: Offset coupling
     status: U
-    short: ''
+    short: Fine-tuning drives refusal to 0.00 and the direction is never re-measured
     verified: true
     reasoning: '§I.2 fine-tunes LLAMA-3 8B INSTRUCT until it stops refusing, driving the refusal score
       from 0.95 to 0.00, which is exactly the behavioural offset an offset-coupling test needs. The measurement
@@ -825,7 +825,7 @@ criteria:
   E1:
     name: Intervention reach
     status: PC
-    short: ''
+    short: A projection and an additive shift, agreeing on outcome and differing on cost
     verified: true
     reasoning: 'Two genuinely different operations reach the claim: a projection that removes a component
       at every layer and position, and an additive shift at one layer. They agree on the behavioural outcome
@@ -850,7 +850,7 @@ criteria:
   E2:
     name: Prompt generalization
     status: C
-    short: ''
+    short: Evaluation prompts disjoint from extraction by construction, across 10 categories
     verified: true
     reasoning: 'The evaluation prompts are disjoint from the extraction prompts by construction and cover
       more ground than the 128 instructions the direction was fitted on: 100 JailbreakBench instructions
@@ -873,7 +873,7 @@ criteria:
   E3:
     name: Cross-task generalization
     status: U
-    short: ''
+    short: Every behaviour tested is refusal or its absence
     verified: true
     reasoning: 'Every behaviour the direction is tested against is refusal or its absence. The two places
       the paper looks outside refusal ask whether other behaviour survives the edit, which is specificity,
@@ -894,7 +894,7 @@ criteria:
   E4:
     name: Cross-model generalization
     status: C
-    short: ''
+    short: 13 models, 5 families and a 40x range, not near-copies
     verified: true
     reasoning: 'Cross-model scope is the design rather than a robustness check appended to it: 13 models,
       5 architecture families, a 40x parameter range, and both alignment paradigms, with the intervention
@@ -918,7 +918,7 @@ criteria:
   E5:
     name: Graded response
     status: U
-    short: ''
+    short: Strength is promised in 2.4 and every intervention has a coefficient of 1
     verified: true
     reasoning: 'No intervention in the paper has a strength parameter. §2.4 promises to "modulate the
       strength" of the feature and then defines activation addition as adding r with an implicit coefficient
@@ -944,7 +944,7 @@ criteria:
   E6:
     name: Novel prediction
     status: PC
-    short: ''
+    short: An unrelated attack shows up as suppression, with a matched random control
     verified: true
     reasoning: '§5 is a prediction the direction was not built for: if refusal is carried by this direction,
       then an attack that bypasses refusal by an unrelated route should show up as suppression of it.
@@ -969,7 +969,7 @@ criteria:
   V1:
     name: Level declaration
     status: PC
-    short: ''
+    short: Three description modes appear in the first paragraph and none is declared
     verified: true
     reasoning: 'The description mode is never declared and three of them appear in the first paragraph.
       "Mediated by" is a causal-behavioural claim about what makes the output happen, "mechanisms remain
@@ -993,7 +993,7 @@ criteria:
   V2:
     name: Level-evidence match
     status: PC
-    short: ''
+    short: The interventions license a lever; the title asserts representational organisation
     verified: true
     reasoning: 'The evidence establishes a lever: remove this direction and refusal stops, add it and
       refusal starts, on 13 models. The title makes a claim about the model''s representational organisation,
@@ -1019,7 +1019,7 @@ criteria:
   V3:
     name: Alternative level
     status: PC
-    short: ''
+    short: The token-suppression reading is retired; the level-of-measure one is untouched
     verified: true
     reasoning: 'One alternative description is addressed and refuted. If the edit worked at the level
       of output tokens, the model could not be made to emit refusal strings on request, and §L.1 shows
@@ -1091,7 +1091,7 @@ criteria:
   V5:
     name: Scope declaration
     status: C
-    short: ''
+    short: Four limitations named, each pointing at what the evidence does not reach
     verified: true
     reasoning: 'Four limitations are declared by name and each names something the evidence does not reach:
       untested models and scales, an extraction procedure the authors call heuristic, an adversarial analysis

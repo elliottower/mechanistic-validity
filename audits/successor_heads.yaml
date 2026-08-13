@@ -228,7 +228,7 @@ criteria:
   C1:
     name: Falsifiability
     status: C
-    short: ''
+    short: A fixed token list and a committed threshold; some models have no head
     verified: true
     reasoning: 'The claim is stated as a test before any model is scored. The token list is fixed, the
       comparison set is fixed to the head''s own task class, and the threshold is a stated proportion,
@@ -256,7 +256,7 @@ criteria:
   C2:
     name: Structural plausibility
     status: C
-    short: ''
+    short: A product of four matrices tested directly, with no prompt entering it
     verified: true
     reasoning: 'The mechanism claim is a statement about weights and is tested as one. The object is a
       product of four matrices — embedding, MLP0, one head''s OV, unembedding — and the successor test
@@ -282,7 +282,7 @@ criteria:
   C3:
     name: Convergent validity
     status: C
-    short: ''
+    short: A probe at 0.708 cosine and single neurons, sharing nothing with the SAE
     verified: true
     reasoning: 'The paper poses the artifact question itself and answers it with two instruments that
       share nothing with the sparse autoencoder. A supervised linear probe recovers directions whose average
@@ -312,7 +312,7 @@ criteria:
   C4:
     name: Discriminant validity
     status: PC
-    short: ''
+    short: Top head eight times the runner-up; no neighbouring construct attempted
     verified: true
     reasoning: 'Separation from the null case is shown twice and quantified: one model has no head above
       the cutoff, and in the case-study model the top head''s score is eight times the runner-up. Separation
@@ -338,7 +338,7 @@ criteria:
   C5:
     name: Nomological validity
     status: PC
-    short: ''
+    short: Weak universality imported, tested, and partly returned
     verified: true
     reasoning: 'The result is placed inside a named hypothesis with prior formal content rather than described
       by analogy: Chughtai et al.''s weak universality, cited and used to structure the paper''s three
@@ -365,7 +365,7 @@ criteria:
   M1:
     name: Reliability
     status: PC
-    short: ''
+    short: Modes over a hundred autoencoders; the central score has no interval
     verified: true
     reasoning: 'The estimates most exposed to run-to-run noise are the ones the paper averages. The mod-10
       features are defined as a mode taken over a hundred separately trained sparse autoencoders, the
@@ -391,7 +391,7 @@ criteria:
   M2:
     name: Baseline separation
     status: PC
-    short: ''
+    short: Cutting the head leaves under one percent and returns bigrams instead
     verified: true
     reasoning: 'Two negative baselines, one of them sharp. The Tuned Lens control cuts the head out of
       the path and asks what the embedding plus MLP0 can do alone; the answer is under one percent, and
@@ -421,7 +421,7 @@ criteria:
   M3:
     name: Stability
     status: PC
-    short: ''
+    short: Three perturbations, one aimed at the paper's own premise
     verified: true
     reasoning: 'Three perturbations are run and one of them attacks the paper''s own premise. The behavioural
       decomposition is recomputed across effect types and ablation values, and successorship stays dominant
@@ -456,7 +456,7 @@ criteria:
   M4:
     name: Calibration
     status: PC
-    short: ''
+    short: A proportion against a stated threshold; importance gives rank, not magnitude
     verified: true
     reasoning: 'The primary measure is calibrated by construction. The successor score is a proportion
       of a stated token set with a stated threshold, so any value can be read against both endpoints,
@@ -484,7 +484,7 @@ criteria:
   M5:
     name: Sensitivity
     status: U
-    short: ''
+    short: Every control a known-negative; no planted circuit recovered
     verified: true
     reasoning: 'Every control in the paper is a known-negative: a path with the head removed, a model
       with no qualifying head, a chance level. None of them measures what the procedure would fail to
@@ -505,7 +505,7 @@ criteria:
   M6:
     name: Invariance
     status: C
-    short: ''
+    short: Three families over three orders of magnitude, failures kept in
     verified: true
     reasoning: 'The core result is reported along every axis that could plausibly break it: three model
       families across roughly three orders of magnitude, eight tasks with a per-task breakdown rather
@@ -530,7 +530,7 @@ criteria:
   M7:
     name: Selection correction
     status: U
-    short: ''
+    short: Selection at three levels, disclosed at each and corrected at none
     verified: true
     reasoning: 'Selection runs at three levels and is disclosed at each. The case-study head is the maximum-scoring
       head in its model; the mod-10 features are modes of a per-token argmax over an importance measure
@@ -554,7 +554,7 @@ criteria:
   I1:
     name: Necessity
     status: PC
-    short: ''
+    short: Winning head on all 64 prompts, which ranks the head without measuring it
     verified: true
     reasoning: 'The authors name the gap themselves and then close part of it. On 64 numbered-listing
       prompts collected from real text, the successor head is the winning head every time, which is a
@@ -579,7 +579,7 @@ criteria:
   I2:
     name: Sufficiency
     status: C
-    short: ''
+    short: The OV circuit alone ranks the successor above every alternative
     verified: true
     reasoning: 'Sufficiency is demonstrated at the weight level, which is stronger than the activation-level
       version the criterion usually gets. The effective OV circuit alone — four matrices, no attention
@@ -606,7 +606,7 @@ criteria:
   I3:
     name: Minimality
     status: PC
-    short: ''
+    short: Minimal by construction; the droppable component contributes under a percent
     verified: true
     reasoning: 'The circuit is minimal by construction — embedding, MLP0, one head, unembedding — and
       the one component that could have been dropped is tested and found to contribute under a percent.
@@ -634,7 +634,7 @@ criteria:
   I4:
     name: Specificity
     status: PC
-    short: ''
+    short: Off-target function measured across five ablation regimes and found present
     verified: true
     reasoning: 'Specificity is measured directly and at length. The head is run over natural text and
       every prompt where it matters is classified, so the question is not whether the head does anything
@@ -661,7 +661,7 @@ criteria:
   I5:
     name: Rival mechanism exclusion
     status: PC
-    short: ''
+    short: Artifact and pre-head computation both excluded by built experiments
     verified: true
     reasoning: 'Two rivals are excluded, each with an experiment built for it. That the mod-10 features
       are an artifact of sparse autoencoders is excluded by recovering them with a probe and with single
@@ -688,7 +688,7 @@ criteria:
   I6:
     name: Double dissociation
     status: U
-    short: ''
+    short: Neither arm run, and the polysemantic head makes the converse hard
     verified: true
     reasoning: 'A double dissociation needs an intervention that removes succession while leaving some
       other mechanism intact, and a converse. Neither arm is run. The paper''s central finding about this
@@ -709,7 +709,7 @@ criteria:
   I7:
     name: Confound control
     status: PC
-    short: ''
+    short: Tokenization handled by construction; letter collisions explained, not tested
     verified: true
     reasoning: 'Two confounds are controlled by construction. Tokenization is handled by carrying spaced
       and capitalised variants of every token through the whole pipeline and by taking the MLP0 output
@@ -736,7 +736,7 @@ criteria:
   I8:
     name: Confounding sensitivity
     status: U
-    short: ''
+    short: Unattempted; nothing bounds an unmeasured confounder
     verified: false
     reasoning: 'NOT SETTLED BY THE SOURCE. Nothing in the paper bounds how strong an unmeasured confounder
       would have to be to overturn a reported effect, and no quantity in it can be read as such a bound.
@@ -752,7 +752,7 @@ criteria:
   I9:
     name: Epistatic interaction
     status: PC
-    short: ''
+    short: Indirect effect bounded under both ablation values; no feature-level grid
     verified: true
     reasoning: 'One interaction is bounded by measurement rather than assumed away. The indirect effect
       of the head — everything it achieves by changing what downstream components do — is computed under
@@ -777,7 +777,7 @@ criteria:
   I10:
     name: Rescue reversibility
     status: U
-    short: ''
+    short: Both ablations reversible and the clean run in hand; restore never run
     verified: true
     reasoning: 'Both ablation methods are reversible and the clean activations are in hand, so a restore-and-measure
       experiment is available at no extra cost and is not run. The nearest construction in the paper is
@@ -798,7 +798,7 @@ criteria:
   I11:
     name: Onset coupling
     status: I
-    short: ''
+    short: Emergence observed across checkpoints; coupling to behaviour is not
     verified: true
     reasoning: 'The experiment is run and the sharp version of the result does not appear. Successor scores
       are tracked across training checkpoints in two model families and the heads are seen to emerge,
@@ -826,7 +826,7 @@ criteria:
   I12:
     name: Offset coupling
     status: U
-    short: ''
+    short: The checkpoint data exists and is read in the forward direction only
     verified: true
     reasoning: 'Offset coupling asks what happens when a mechanism goes away — whether the behaviour departs
       with it. The checkpoint data that would answer it exists and is used, but only in the forward direction:
@@ -845,7 +845,7 @@ criteria:
   E1:
     name: Intervention reach
     status: C
-    short: ''
+    short: Five intervention forms spanning removal and addition, and they agree
     verified: true
     reasoning: 'Five intervention forms are used and they span both directions. Removal appears at three
       granularities — a feature ablated from a reconstruction, a single neuron ablated from MLP0, a head
@@ -870,7 +870,7 @@ criteria:
   E2:
     name: Prompt generalization
     status: PC
-    short: ''
+    short: A constructed token list and 128 natural contexts, the harder one genuinely hard
     verified: true
     reasoning: 'Two distributions of very different kinds are used and the harder one is genuinely hard.
       The succession dataset is a constructed token list, which makes the weight test clean and says nothing
@@ -893,7 +893,7 @@ criteria:
   E3:
     name: Cross-task generalization
     status: C
-    short: ''
+    short: Eight tasks scored individually; Roman numerals decode though never trained
     verified: true
     reasoning: 'Transfer is shown at three widths. Inside the construct, eight tasks are scored individually
       rather than pooled. Outside it, Roman numerals were deliberately kept out of every training set
@@ -922,7 +922,7 @@ criteria:
   E4:
     name: Cross-model generalization
     status: PC
-    short: ''
+    short: Behaviour recurs across three families; the mechanism is single-model
     verified: true
     reasoning: 'The paper''s headline is recurrence across models, and the two halves of it are supported
       very differently. Behavioural recurrence is broad: successor scores are reported for three families
@@ -950,7 +950,7 @@ criteria:
   E5:
     name: Graded response
     status: PC
-    short: ''
+    short: A two-sided dose criterion, and every other ablation all-or-nothing
     verified: true
     reasoning: 'One genuine dose-response exists and it has a two-sided criterion, which is what makes
       it more than a tuning sweep: the edit has to be large enough to change the numeric index and small
@@ -975,7 +975,7 @@ criteria:
   E6:
     name: Novel prediction
     status: C
-    short: ''
+    short: Roman numerals fitted out of every training set and decoded anyway
     verified: true
     reasoning: 'The Roman-numeral test is a novel prediction in the strict sense. The projections were
       fitted without any Roman numeral, and the compositional hypothesis says that adding an index projected
@@ -1002,7 +1002,7 @@ criteria:
   V1:
     name: Level declaration
     status: C
-    short: ''
+    short: 'The level is fixed by the object: a product of four weight matrices'
     verified: true
     reasoning: 'The level is fixed by the object rather than announced in prose. A successor head is defined
       by what a product of four weight matrices does to a column, so the claim cannot drift between weights
@@ -1023,7 +1023,7 @@ criteria:
   V2:
     name: Level-evidence match
     status: PC
-    short: ''
+    short: Weights tested on weights; the recurrence claim rests mostly on behaviour
     verified: true
     reasoning: 'Three claims sit at three levels and the evidence matches unevenly. The mechanism claim
       is about weights and is tested on weights, which is the cleanest match in the paper. The feature-level
@@ -1048,7 +1048,7 @@ criteria:
   V3:
     name: Alternative level
     status: PC
-    short: ''
+    short: Two alternatives closed by experiment; the paper's own third left open
     verified: true
     reasoning: 'Two alternatives are raised as questions and answered with experiments: that the features
       are an artifact of the decomposition technique, and that the computation happens before the head.
@@ -1072,7 +1072,7 @@ criteria:
   V4:
     name: Unlicensed labeling
     status: C
-    short: ''
+    short: Each label defined in the sentence that introduces its measurement
     verified: true
     reasoning: 'Each label redescribes the measurement that produced it, at the place the measurement
       is defined. "Successor head" is a threshold on a stated OV-circuit test and is introduced in the
@@ -1106,7 +1106,7 @@ criteria:
   V5:
     name: Scope declaration
     status: PC
-    short: ''
+    short: Three limits declared beside the results they bound; one gap remains
     verified: true
     reasoning: 'Three limits are declared in the main text, each next to the result it bounds: the feature
       account does not reproduce the greater-than bias, the features do not steer two of the eight tasks,

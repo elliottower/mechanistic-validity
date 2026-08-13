@@ -4,7 +4,7 @@ description: 'A classifier $g$ is trained on a model''s intermediate output $f_l
   $z$, and its accuracy is reported as evidence that the model has learned information relevant to $z$.
   The audited object is the method rather than one experiment: the anchor is a review that runs none of
   its own, so the evidence sits in the studies it formalises, and its Figure 1 separates the nine components
-  a probing result depends on from the ten controls the literature has added to them. Systems: every architecture
+  a probing result depends on from the ten controls the literature has added to them. Evaluated on: every architecture
   family the method has been pointed at, from static word embeddings through recurrent and recursive networks
   to transformers, and outward to speech recognition and computer vision. Description mode: representational.'
 source:

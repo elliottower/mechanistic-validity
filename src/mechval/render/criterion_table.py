@@ -68,6 +68,27 @@ VERDICT = {"ioi": "Causally Suggestive", "sae": "Causally Suggestive",
            "workspace": "Mechanistically Supported"}
 
 
+def _evidence_cell(crit, cap=130):
+    """The one-line Evidence cell.
+
+    `short` is hand-written and is used verbatim when present. Seven claims have
+    none, and a blank cell reads as "no evidence" when the record in fact holds a
+    full justification. So fall back to the first sentence of `reasoning`, marked
+    with a trailing ellipsis when it is cut, and keep it short enough that the
+    scorecard still fits a page. These fallbacks are derived, not authored: they
+    should be replaced by a written `short` before the paper is final.
+    """
+    if (crit.short or "").strip():
+        return crit.short
+    text = (getattr(crit, "reasoning", "") or "").strip()
+    if not text:
+        return ""
+    first = text.split(". ")[0].rstrip(".")
+    if len(first) <= cap:
+        return first
+    return first[:cap].rsplit(" ", 1)[0] + "\\ldots"
+
+
 def load(claim):
     """Rows from the verified audit record, not the unverified CSV.
 
@@ -78,7 +99,7 @@ def load(claim):
     a = Audit.load(claim)
     return {c: {"criterion": a.criteria[c].name,
                 "status": a.criteria[c].status.value,
-                "evidence": tex(a.criteria[c].short),
+                "evidence": tex(_evidence_cell(a.criteria[c])),
                 "verified": a.criteria[c].verified} for c in ORDER}
 
 

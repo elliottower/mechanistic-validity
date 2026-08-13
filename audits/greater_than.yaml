@@ -194,7 +194,7 @@ criteria:
   C1:
     name: Falsifiability
     status: C
-    short: ''
+    short: Probability difference moves +81.7% to -36.6%, past indifference
     verified: true
     reasoning: 'The claim is stated so that it could have come out flat and did not. Probability difference
       carries a sign and a two-sided range, the prediction attached to each component is directional and
@@ -223,7 +223,7 @@ criteria:
   C2:
     name: Structural plausibility
     status: PC
-    short: ''
+    short: Flow located at three granularities; the derivation fails two causal tests
     verified: true
     reasoning: 'Information flow through the circuit is established at three granularities: heads attend
       to the YY position and put YY at the top of the whole vocabulary in unembedding space, MLPs 9 and
@@ -253,7 +253,7 @@ criteria:
   C3:
     name: Convergent validity
     status: PC
-    short: ''
+    short: Logit lens and path patching agree; single-method where they do not overlap
     verified: true
     reasoning: 'One cross-validation at origin is genuine and is run for a stated reason: the logit lens
       ignores the final LayerNorm, so Appendix E recomputes every logit-lens result as a direct effect
@@ -280,7 +280,7 @@ criteria:
   C4:
     name: Discriminant validity
     status: PC
-    short: ''
+    short: Three tasks recruit different components; every contrast is one kind
     verified: true
     reasoning: 'Separation from a neighbouring construct is tested at origin and found. Three tasks that
       a greater-than mechanism should cover recruit a different set of components entirely, which is the
@@ -306,7 +306,7 @@ criteria:
   C5:
     name: Nomological validity
     status: PC
-    short: ''
+    short: Placed between memorization and generalization, not derived from either
     verified: true
     reasoning: 'The result is placed inside a named theoretical dichotomy and the placement is the stated
       contribution: the circuit sits between memorization and generalization, and the paper claims to
@@ -332,7 +332,7 @@ criteria:
   M1:
     name: Reliability
     status: U
-    short: ''
+    short: Dispersion reported twice, both pre-circuit; no interval on any result
     verified: true
     reasoning: 'Dispersion is reported exactly twice and both times for the model''s behaviour before
       any circuit exists: 19.3% on probability difference and 7.2% on cutoff sharpness. Every quantity
@@ -357,7 +357,7 @@ criteria:
   M2:
     name: Baseline separation
     status: PC
-    short: ''
+    short: A size-matched comparison run and reported only in prose
     verified: true
     reasoning: 'A size- and location-matched comparison exists and it is the right comparison to make:
       circuits of comparable extent are scored, and performance is reported to track how much of the original
@@ -384,7 +384,7 @@ criteria:
   M3:
     name: Stability
     status: U
-    short: ''
+    short: Membership read off heatmaps; no threshold stated, none swept
     verified: true
     reasoning: 'Circuit membership is decided by reading path-patching heatmaps. The paper says a component
       joins when patching it changes performance "significantly", names the components that qualify, and
@@ -407,7 +407,7 @@ criteria:
   M4:
     name: Calibration
     status: PC
-    short: ''
+    short: Outcome metrics calibrated; the faithfulness quantity is not
     verified: true
     reasoning: 'Both outcome metrics are well calibrated. Each is bounded on [-1, 1], each carries a sign,
       zero means indifference between valid and invalid years, and each has a measured model value over
@@ -433,7 +433,7 @@ criteria:
   M5:
     name: Sensitivity
     status: U
-    short: ''
+    short: Two experiments, both on the real model; no planted mechanism
     verified: true
     reasoning: 'The validation set is exactly two experiments, the complement and its inverse, and both
       run on the real model where the true circuit is the object under dispute. A sensitivity test needs
@@ -455,7 +455,7 @@ criteria:
   M6:
     name: Invariance
     status: PC
-    short: ''
+    short: Per-condition variation visible; one tokenizer, one model, one frame
     verified: true
     reasoning: 'The design makes per-condition variation visible instead of averaging it away. Every behavioural
       result is a heatmap over start year crossed with predicted year on 10,000 examples spanning 120
@@ -482,7 +482,7 @@ criteria:
   M7:
     name: Selection correction
     status: U
-    short: ''
+    short: Every candidate screened and disclosed; no multiplicity control
     verified: true
     reasoning: 'The selection is disclosed completely and corrected nowhere. Every candidate is screened
       — 144 heads and 12 MLPs against the logits, then the sweep repeats through MLPs 11, 10, 9 and 8,
@@ -506,7 +506,7 @@ criteria:
   I1:
     name: Necessity
     status: C
-    short: ''
+    short: 'A sign reversal rather than degradation: +81.7% to -36.6%'
     verified: true
     reasoning: 'The necessity test is the strong form. Routing the 01-dataset through the circuit while
       the rest of the model receives real input drives probability difference to -36.6% against a +81.7%
@@ -526,7 +526,7 @@ criteria:
   I2:
     name: Sufficiency
     status: C
-    short: ''
+    short: Complement recovers 72.7% under conditions chosen to favour failure
     verified: true
     reasoning: 'The complement test is run under conditions that favour failure and it passes. Every path
       outside the circuit carries 01-input, which the authors state should push the model to poor performance,
@@ -550,7 +550,7 @@ criteria:
   I3:
     name: Minimality
     status: PC
-    short: ''
+    short: Most of MLP 10 ablates freely; one result runs the other way
     verified: true
     reasoning: 'Minimality is asserted in the definition of a circuit and probed by decomposition rather
       than by pruning. The evidence that exists is real: neuron-level patching shows most of MLP 10 can
@@ -578,7 +578,7 @@ criteria:
   I4:
     name: Specificity
     status: PC
-    short: ''
+    short: Fires on less-than prompts its label does not cover
     verified: true
     reasoning: 'Specificity is tested in the direction that can embarrass the claim, and it fails there.
       Two prompts requiring less-than recruit the same circuit and produce greater-than output, and a
@@ -606,7 +606,7 @@ criteria:
   I5:
     name: Rival mechanism exclusion
     status: I
-    short: ''
+    short: Two rivals tested and both left live, the lookup table included
     verified: true
     reasoning: 'Two rival accounts are on the table and neither is disposed of. Structured number representations
       are tested causally, twice, and fail both times: ablating the PCA dimensions changes little, and
@@ -636,7 +636,7 @@ criteria:
   I6:
     name: Double dissociation
     status: U
-    short: ''
+    short: The makings of one half; the converse is never run
     verified: true
     reasoning: 'A double dissociation needs two mechanisms and two behaviours, with each intervention
       moving one and sparing the other. The source has the makings of the first half and never runs the
@@ -660,7 +660,7 @@ criteria:
   I7:
     name: Confound control
     status: PC
-    short: ''
+    short: Tokenization confound designed out; frequency handled by restriction
     verified: true
     reasoning: 'One confound is controlled to the point of shaping the dataset. Byte-pair encoding makes
       frequent years single tokens, which would let the model score well for a reason unrelated to comparison,
@@ -686,7 +686,7 @@ criteria:
   I8:
     name: Confounding sensitivity
     status: U
-    short: ''
+    short: Unattempted; nothing bounds an unmeasured confounder
     verified: false
     reasoning: 'NOT SETTLED BY THE SOURCE. No quantity in the paper bounds how strong an unmeasured confounder
       would have to be to overturn a reported effect, and none can be read as such a bound.
@@ -703,7 +703,7 @@ criteria:
   I9:
     name: Epistatic interaction
     status: PC
-    short: ''
+    short: Non-additivity is the neuron-level finding; no interaction statistic
     verified: true
     reasoning: 'Non-additivity is the neuron-level finding rather than a side observation, and the argument
       for it is structural: a neuron''s activation scales its logit distribution without reshaping it,
@@ -730,7 +730,7 @@ criteria:
   I10:
     name: Rescue reversibility
     status: U
-    short: ''
+    short: Direction fixed by path patching; the restore is never framed
     verified: true
     reasoning: 'Every intervention in the source substitutes 01-input for real input along chosen paths,
       and behaviour is read off the result. The direction is fixed by the instrument rather than by choice,
@@ -757,7 +757,7 @@ criteria:
   I11:
     name: Onset coupling
     status: N/A
-    short: ''
+    short: No published checkpoints, so onset cannot be timed at all
     verified: true
     reasoning: 'The audited system is one released checkpoint of a model whose intermediate checkpoints
       were never published, so there is no training trajectory in which the circuit''s appearance could
@@ -787,7 +787,7 @@ criteria:
   I12:
     name: Offset coupling
     status: N/A
-    short: ''
+    short: One checkpoint observed once; no interval across which to lapse
     verified: true
     reasoning: 'Offset coupling asks whether a mechanism''s disappearance tracks the behaviour''s, which
       requires at least two points on a training trajectory. The source observes one checkpoint at one
@@ -807,7 +807,7 @@ criteria:
   E1:
     name: Intervention reach
     status: PC
-    short: ''
+    short: Three intervention families, but one counterfactual behind them all
     verified: true
     reasoning: 'Three intervention families appear, and they are not variants of each other. Path patching
       runs at four granularities — whole components, multi-edge paths, individual neurons, and queries,
@@ -843,7 +843,7 @@ criteria:
   E2:
     name: Prompt generalization
     status: PC
-    short: ''
+    short: Broad inside one frame, and the frame is held fixed by design
     verified: true
     reasoning: 'Coverage is broad inside one frame and the frame is held fixed by design. The origin runs
       10,000 examples over 120 nouns and 768 years, then three variant prompts that change the surface
@@ -871,7 +871,7 @@ criteria:
   E3:
     name: Cross-task generalization
     status: PC
-    short: ''
+    short: Transfers across the year frame at 67.8--98.8% and fails outside it
     verified: true
     reasoning: 'Section 5 is this criterion''s experiment and it is reported at full width. Three related
       tasks recruit similar circuits with recoveries from 67.8% to 98.8%, three tasks that should have
@@ -896,7 +896,7 @@ criteria:
   E4:
     name: Cross-model generalization
     status: D
-    short: ''
+    short: One model throughout, named as a limitation in the conclusion
     verified: true
     reasoning: 'The origin runs one model and says so. GPT-2 small is the object of study throughout,
       model size is named as a limitation in the conclusion, and studying larger models is listed as the
@@ -924,7 +924,7 @@ criteria:
   E5:
     name: Graded response
     status: PC
-    short: ''
+    short: Circuit extent is graded; intervention strength has no scale to sweep
     verified: true
     reasoning: 'One axis is graded and it is the wrong one for this criterion. Circuit extent varies smoothly
       — the logit lens of MLP 10 is shown for the top 3, 10, 100 and 200 neurons with the greater-than
@@ -948,7 +948,7 @@ criteria:
   E6:
     name: Novel prediction
     status: PC
-    short: ''
+    short: Prediction confirmed at 98.8% and 88.9%; one corollary falsified
     verified: true
     reasoning: 'The mechanism yields a prediction before the test that could have failed. If MLPs 9-11
       perform the comparison on a YY value delivered by attention heads, then any prompt supplying YY
@@ -975,7 +975,7 @@ criteria:
   V1:
     name: Level declaration
     status: PC
-    short: ''
+    short: The declaration is implementational; the title asks an algorithmic question
     verified: true
     reasoning: 'The unit of description is declared precisely: a minimal computational subgraph over components
       and the edges between them, with the edge-level emphasis marked as the difference from node-level
@@ -1002,7 +1002,7 @@ criteria:
   V2:
     name: Level-evidence match
     status: PC
-    short: ''
+    short: Matched on flow and topography, not on the claim the title advertises
     verified: true
     reasoning: 'Evidence matches claim wherever the claim is about topography or flow. Which components
       carry YY, which upweight years above it, and how much each contributes directly versus indirectly
@@ -1028,7 +1028,7 @@ criteria:
   V3:
     name: Alternative level
     status: PC
-    short: ''
+    short: The lookup-table reading is entertained and bounded, never excluded
     verified: true
     reasoning: 'The competing description is named, entertained seriously, and partly accepted. A lookup
       table over memorized year associations would produce the same circuit diagram, the authors say so,
@@ -1053,7 +1053,7 @@ criteria:
   V4:
     name: Unlicensed labeling
     status: C
-    short: ''
+    short: Every component label redescribes a measurement made first
     verified: true
     reasoning: 'Every component label redescribes a measurement. Heads "communicate YY" after the logit
       lens shows YY as the top-ranked token in their output; MLPs "upweight precisely those years greater
@@ -1082,7 +1082,7 @@ criteria:
   V5:
     name: Scope declaration
     status: C
-    short: ''
+    short: Scope declared before the evidence and again after it
     verified: true
     reasoning: 'Scope is declared before the evidence and again after it. Section 5 bounds the generalization
       test in advance, calling the analyses qualitative and restricting them to tasks that keep the year

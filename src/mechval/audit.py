@@ -380,9 +380,9 @@ class Audit(BaseModel):
         judgment = yaml.safe_load(audit_file(claim).read_text()) or {}
         extraction = yaml.safe_load(claim_file(claim).read_text()) or {}
         merged = {**extraction, **judgment}
-        merged.pop("evidence", None)
+        merged.pop("claims", None)
         crit = {cid: dict(c) for cid, c in (judgment.get("criteria") or {}).items()}
-        for cid, ev in (extraction.get("evidence") or {}).items():
+        for cid, ev in (extraction.get("claims") or {}).items():
             if cid not in crit:
                 raise ValueError(f"{claim}: claims/ carries evidence for {cid}, "
                                  f"which audits/ does not score")

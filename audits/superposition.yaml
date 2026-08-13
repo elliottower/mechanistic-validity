@@ -640,7 +640,7 @@ criteria:
   I6:
     name: Double dissociation
     status: U
-    short: ''
+    short: Status recorded without a supporting quote from the source
     verified: false
     reasoning: 'NOT YET VERIFIED. No quote from the source supports this status.
 
@@ -679,7 +679,7 @@ criteria:
   I8:
     name: Confounding sensitivity
     status: U
-    short: ''
+    short: Status recorded without a supporting quote from the source
     verified: false
     reasoning: 'NOT YET VERIFIED. No quote from the source supports this status.
 
@@ -718,7 +718,7 @@ criteria:
   I10:
     name: Rescue reversibility
     status: U
-    short: ''
+    short: Status recorded without a supporting quote from the source
     verified: false
     reasoning: 'NOT YET VERIFIED. No quote from the source supports this status.
 

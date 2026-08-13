@@ -225,7 +225,7 @@ criteria:
   C1:
     name: Falsifiability
     status: C
-    short: ''
+    short: Three conjunctive conditions, 80% pass; weight predictions stated first
     verified: true
     reasoning: 'The claim is committed to before it is measured, at two levels, and each commitment had
       a way of coming out wrong. Behaviorally, the three qualitative steps are turned into three conjunctive
@@ -256,7 +256,7 @@ criteria:
   C2:
     name: Structural plausibility
     status: C
-    short: ''
+    short: 'Read off the weights: 84.70% OV, 95.72% QK, before any ablation'
     verified: true
     reasoning: 'The mechanism is read off the weights before any ablation is run, and both halves of it
       are quantified over the entire vocabulary: 84.70% of tokens have their OV diagonal among the ten
@@ -284,7 +284,7 @@ criteria:
   C3:
     name: Convergent validity
     status: C
-    short: ''
+    short: 'Four instruments differing in kind agree: weights, coding, ablation, OOD'
     verified: true
     reasoning: 'Four instruments bear on the same claim and agree. Weight products give 84.70% and 95.72%
       with no intervention at all; hand-coding of dataset examples gives 80%; a structured ablation that
@@ -313,7 +313,7 @@ criteria:
   C4:
     name: Discriminant validity
     status: PC
-    short: ''
+    short: Three rivals separated; only the conjunction discriminates, not either half
     verified: true
     reasoning: 'Three separations are run and all three are against the rivals that matter. The same-matching
       baseline addresses the confound tied embeddings create, Duplicate Token Heads are shown to behave
@@ -347,7 +347,7 @@ criteria:
   C5:
     name: Nomological validity
     status: PC
-    short: ''
+    short: Unifies negative name movers with anti-induction; formation unexplained
     verified: true
     reasoning: 'The strongest nomological work available here is unification, and the paper does it: two
       independently named phenomena, negative name mover heads from the IOI literature and anti-induction
@@ -376,7 +376,7 @@ criteria:
   M1:
     name: Reliability
     status: PC
-    short: ''
+    short: Spread across data in 100 percentiles; no interval on any estimate
     verified: true
     reasoning: 'Every headline quantity is an average over OpenWebText reported as one number. The paper
       shows spread across data, binning completions into 100 percentiles of effect size, which is a real
@@ -404,7 +404,7 @@ criteria:
   M2:
     name: Baseline separation
     status: PC
-    short: ''
+    short: Mean ablation is the denominator; no null constructed for 76.9% itself
     verified: true
     reasoning: 'Two baselines carry the argument and both are the right shape. Mean ablation of the direct
       effect is the denominator of the effect-explained ratio, so every percentage in the paper is already
@@ -432,7 +432,7 @@ criteria:
   M3:
     name: Stability
     status: PC
-    short: ''
+    short: Perturbations run and disclosed where they fail the idealisation
     verified: true
     reasoning: 'Perturbations are run against the paper''s own result and reported when they hurt. Including
       the query and key biases leaves the QK distribution unchanged; the static 84.70% is rechecked dynamically
@@ -458,7 +458,7 @@ criteria:
   M4:
     name: Calibration
     status: PC
-    short: ''
+    short: KL's failure mode named; the effect is small and sign-unstable
     verified: true
     reasoning: 'The validation metric is well chosen and its failure mode is stated by the authors. KL
       divergence has a meaningful zero, is linear in the log-probabilities the ablation produces, and
@@ -486,7 +486,7 @@ criteria:
   M5:
     name: Sensitivity
     status: U
-    short: ''
+    short: Every control is a known-negative; no planted mechanism recovered
     verified: true
     reasoning: 'Every control in the paper is a known-negative. The same-matching baseline, the layer
       9-11 head sweep and mean ablation all establish what the measurement returns when copy suppression
@@ -508,7 +508,7 @@ criteria:
   M6:
     name: Invariance
     status: PC
-    short: ''
+    short: All of OpenWebText under three metrics; no domain or frequency split
     verified: true
     reasoning: 'The claim is evaluated across the whole of OpenWebText rather than a template set, binned
       into 100 percentiles of effect size, under three metrics, at two granularities and in three further
@@ -534,7 +534,7 @@ criteria:
   M7:
     name: Selection correction
     status: U
-    short: ''
+    short: Selection disclosed at every step and corrected at none
     verified: true
     reasoning: 'Selection runs through the paper and is disclosed at every step. L10H7 is chosen as the
       most negative head in GPT-2 Small; the 80% behavioral figure is computed on a sample from the top
@@ -561,7 +561,7 @@ criteria:
   I1:
     name: Necessity
     status: PC
-    short: ''
+    short: Direct path localised cleanly; the absolute effect is a thousandth of loss
     verified: true
     reasoning: 'Necessity is established for a path and not for the head. Decomposing the head''s effect
       into direct and indirect routes shows the direct path carries most of the loss change, which localises
@@ -587,7 +587,7 @@ criteria:
   I2:
     name: Sufficiency
     status: PC
-    short: ''
+    short: CSPA preserves 76.9%, but the figure spans 25--95% across metrics
     verified: true
     reasoning: 'CSPA is a well-built sufficiency test: delete every function of the head except the OV
       projection onto source-token unembeddings and the QK filter to top-predicted source tokens, and
@@ -614,7 +614,7 @@ criteria:
   I3:
     name: Minimality
     status: PC
-    short: ''
+    short: Each half mild alone and the conjunction costs; nothing left to prune
     verified: true
     reasoning: 'The object under study is a single attention head, so minimality can only be tested inside
       the explanation rather than over a component set, and that is what happens. Preserving the QK mechanism
@@ -641,7 +641,7 @@ criteria:
   I4:
     name: Specificity
     status: PC
-    short: ''
+    short: CSPA discriminates L10H7; its components clear 50% for many heads
     verified: true
     reasoning: 'Specificity is tested and comes out split, with both halves in the same appendix. CSPA
       applied to every layer 9-11 head recovers most for L10H7, which is the result the criterion asks
@@ -667,7 +667,7 @@ criteria:
   I5:
     name: Rival mechanism exclusion
     status: PC
-    short: ''
+    short: Two rivals addressed; the perpendicular queryside driver left unknown
     verified: true
     reasoning: 'Two rivals are named and addressed at origin. Tied embeddings make a same-matching QK
       circuit the obvious alternative explanation for the diagonal, and the paper runs the baseline that
@@ -693,7 +693,7 @@ criteria:
   I6:
     name: Double dissociation
     status: U
-    short: ''
+    short: Materials present in Table 2, never assembled into a dissociation
     verified: true
     reasoning: 'The source has the materials for a double dissociation and never assembles one. Two mechanisms
       are identified in the same setting, copy suppression in Negative Heads and a different mechanism
@@ -715,7 +715,7 @@ criteria:
   I7:
     name: Confound control
     status: PC
-    short: ''
+    short: Tied embeddings and LayerNorm handled; data confounds untouched
     verified: true
     reasoning: 'Two confounds are controlled by construction, and both are structural features of GPT-2
       Small that would otherwise manufacture the result. Tied embeddings are handled by using the effective
@@ -744,7 +744,7 @@ criteria:
   I8:
     name: Confounding sensitivity
     status: U
-    short: ''
+    short: Unattempted; nothing bounds an unmeasured confounder
     verified: false
     reasoning: 'NOT SETTLED BY THE SOURCE. Nothing in the paper bounds how strong an unmeasured confounder
       would have to be to overturn a reported effect, and no quantity in it can be read as such a bound.
@@ -761,7 +761,7 @@ criteria:
   I9:
     name: Epistatic interaction
     status: PC
-    short: ''
+    short: One interaction quantified, copy suppression on itself; no grid
     verified: true
     reasoning: 'One interaction is isolated and quantified rather than noted. Appendix C controls the
       path from L10H7 to L11H10 separately and finds the loss increase roughly twice as large when it
@@ -788,7 +788,7 @@ criteria:
   I10:
     name: Rescue reversibility
     status: U
-    short: ''
+    short: Clean activations already in hand; the restore is never run
     verified: true
     reasoning: 'Every intervention in the paper is subtractive or additive at the query, and none restores
       what was removed. CSPA deletes function and measures what survives, with the clean activations already
@@ -812,7 +812,7 @@ criteria:
   I11:
     name: Onset coupling
     status: PC
-    short: ''
+    short: No onset experiment; named three times as the one to run
     verified: true
     reasoning: 'The origin runs no onset experiment and names it three times as the experiment to run.
       Appendix E states the paper explains what the head does rather than why it forms, offers three theories
@@ -839,7 +839,7 @@ criteria:
   I12:
     name: Offset coupling
     status: U
-    short: ''
+    short: Pythia checkpoints already in use; no offset observed anywhere
     verified: true
     reasoning: 'Offset coupling asks whether a mechanism''s disappearance tracks the behaviour''s, which
       requires at least two points on a training trajectory. GPT-2 Small has no public checkpoints, but
@@ -859,7 +859,7 @@ criteria:
   E1:
     name: Intervention reach
     status: PC
-    short: ''
+    short: Four intervention forms, all activation edits on one head
     verified: true
     reasoning: 'Four intervention forms appear and the variation among them is real: mean ablation of
       direct and indirect paths, CSPA''s structured OV projection and QK filter, projection of the queryside
@@ -884,7 +884,7 @@ criteria:
   E2:
     name: Prompt generalization
     status: C
-    short: ''
+    short: Averaged over the pretraining distribution, not a template set
     verified: true
     reasoning: 'This is the claim''s distinguishing feature. The headline number is an average over OpenWebText,
       GPT-2''s own pretraining distribution, rather than over a template set built for the hypothesis,
@@ -909,7 +909,7 @@ criteria:
   E3:
     name: Cross-task generalization
     status: C
-    short: ''
+    short: IOI and random-token scores correlate across three model families
     verified: true
     reasoning: 'Transfer is measured across two distributions that share nothing. Copy-suppression scores
       from IOI and anti-induction scores from repeated sequences of uniformly random tokens correlate
@@ -935,7 +935,7 @@ criteria:
   E4:
     name: Cross-model generalization
     status: PC
-    short: ''
+    short: Phenomenon replicates in three systems; the mechanism does not
     verified: true
     reasoning: 'Three further systems are examined and each returns a partial result the paper states
       plainly. The QK experiment in GPT-2 Medium recovers two of the three most negative IOI heads; copy
@@ -959,7 +959,7 @@ criteria:
   E5:
     name: Graded response
     status: PC
-    short: ''
+    short: A genuine dose-response at the query; every other intervention binary
     verified: true
     reasoning: 'Appendix R is a genuine dose-response experiment. A scaled vector is added to the queryside
       residual stream before LayerNorm and attention to the IO token rises with the scale, including when
@@ -986,7 +986,7 @@ criteria:
   E6:
     name: Novel prediction
     status: C
-    short: ''
+    short: Anti-induction on random tokens predicted, then confirmed
     verified: true
     reasoning: 'The prediction has the right form and the right risk. If the negative behaviour on IOI
       is copy suppression rather than an IOI-specific mechanism, then the same heads should show anti-induction
@@ -1011,7 +1011,7 @@ criteria:
   V1:
     name: Level declaration
     status: C
-    short: ''
+    short: Three numbered steps mapped to matrices, with the remainder named
     verified: true
     reasoning: 'The level of the claim is declared and then held to. The mechanism is stated as three
       numbered steps in the introduction, each step is mapped to a specific matrix in Section 3, and the
@@ -1034,7 +1034,7 @@ criteria:
   V2:
     name: Level-evidence match
     status: PC
-    short: ''
+    short: Matched on mechanism and coverage; when and how much it fires is not
     verified: true
     reasoning: 'Evidence and claim are matched on two of three axes. The mechanism claim is carried by
       weight-level evidence, which is the right level for a claim about what a matrix does, and the coverage
@@ -1058,7 +1058,7 @@ criteria:
   V3:
     name: Alternative level
     status: PC
-    short: ''
+    short: Appendix K favours semantic copy suppression over the paper's own name
     verified: true
     reasoning: 'One alternative description is examined and partly accepted. Appendix K measures the cases
       where the source token is suppressed without being most suppressed, finds a semantically related
@@ -1085,7 +1085,7 @@ criteria:
   V4:
     name: Unlicensed labeling
     status: C
-    short: ''
+    short: Every label redescribes a measured object; no intentional vocabulary
     verified: true
     reasoning: 'Each label redescribes something measured. "Copy suppression" is introduced as three numbered
       steps, and each step becomes a measurable object: a logit-lens prediction, an attention pattern,
@@ -1124,7 +1124,7 @@ criteria:
   V5:
     name: Scope declaration
     status: C
-    short: ''
+    short: Scope declared where each claim is made, not collected at the end
     verified: true
     reasoning: 'Scope is declared where a reader meets each claim rather than collected in a closing paragraph.
       The central claim is stated as a lower bound on one head in one model, and the sentence immediately

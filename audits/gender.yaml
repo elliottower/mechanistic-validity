@@ -224,7 +224,7 @@ criteria:
   C1:
     name: Falsifiability
     status: C
-    short: ''
+    short: The answer could have been 100 heads and was 10; one negative case fires
     verified: true
     reasoning: 'The sparsity claim is put as a quantity that could have come out any way. The search runs
       over all 144 heads and reports how many are needed to reach the all-head effect; the answer could
@@ -250,7 +250,7 @@ criteria:
   C2:
     name: Structural plausibility
     status: PC
-    short: ''
+    short: Mediators taken from the architecture; no weight-level mechanism anywhere
     verified: true
     reasoning: 'The mediator inventory is taken from the architecture rather than from the phenomenon.
       Neurons, layers, heads and single attention weights are enumerated before any measurement, and each
@@ -277,7 +277,7 @@ criteria:
   C3:
     name: Convergent validity
     status: C
-    short: ''
+    short: Two mediator families, three datasets, four scales -- all one instrument
     verified: true
     reasoning: 'Convergence at origin is broad and shallow. Two mediator families run on three datasets
       give the same sparsity picture, and four outcome scales give it again, so the result is robust to
@@ -305,7 +305,7 @@ criteria:
   C4:
     name: Discriminant validity
     status: U
-    short: ''
+    short: No second construct is ever localised, so nothing can separate from it
     verified: true
     reasoning: 'Nothing in the source separates the bias mechanism from a mechanism for gender competence,
       because no second construct is ever localised. The outcome is a ratio over two pronouns and nothing
@@ -335,7 +335,7 @@ criteria:
   C5:
     name: Nomological validity
     status: C
-    short: ''
+    short: Pearl's estimands used under his definitions, with the conditions stated
     verified: true
     reasoning: 'The theory is imported rather than borrowed by analogy. TE, NDE and NIE are Pearl''s estimands,
       used under his definitions and cited to him, and the paper does the work an import requires. It
@@ -362,7 +362,7 @@ criteria:
   M1:
     name: Reliability
     status: PC
-    short: ''
+    short: Dispersion reported where it is incidental and absent where it is load-bearing
     verified: true
     reasoning: 'Estimates are averages over a stated population and dispersion is reported wherever the
       paper has a story about dispersion: standard deviations for the gender-neutral effects, spread across
@@ -388,7 +388,7 @@ criteria:
   M2:
     name: Baseline separation
     status: C
-    short: ''
+    short: An untrained model matched on everything but training, run at both levels
     verified: true
     reasoning: 'The negative control is matched on everything that could otherwise explain the result
       — same architecture, same parameter count, same datasets, same estimator — and differs only in having
@@ -414,7 +414,7 @@ criteria:
   M3:
     name: Stability
     status: PC
-    short: ''
+    short: Selection rule and outcome scale both varied; the target word is not
     verified: true
     reasoning: 'Two perturbations are run and both hold. The mediator-selection rule is varied between
       a greedy marginal-gain search and a top-k rank, and the saturating fraction of heads is stable across
@@ -445,7 +445,7 @@ criteria:
   M4:
     name: Calibration
     status: PC
-    short: ''
+    short: A fixed point at 1 and a sign convention; the effect scale has no referent
     verified: true
     reasoning: 'The bias measure has what a calibrated scale needs: a fixed point at 1 that means indifference,
       a sign convention on either side of it, and a worked example that carries real probabilities through
@@ -472,7 +472,7 @@ criteria:
   M5:
     name: Sensitivity
     status: PC
-    short: ''
+    short: Effects track published occupational statistics, but at the wrong level
     verified: true
     reasoning: 'The instrument is checked against a quantity known to be present outside the model. Profession-level
       total effects track published occupational gender statistics at 0.35 to 0.45, and the weaker Winograd
@@ -497,7 +497,7 @@ criteria:
   M6:
     name: Invariance
     status: C
-    short: ''
+    short: Six axes tested, and where the invariance stops is reported too
     verified: true
     reasoning: 'Invariance is tested along more axes than the criterion usually sees — five GPT-2 sizes,
       three datasets, two mediator families, four metrics, six model families — and the answer differs
@@ -522,7 +522,7 @@ criteria:
   M7:
     name: Selection correction
     status: U
-    short: ''
+    short: Pool, rule and shortcut all disclosed; nothing corrected for multiplicity
     verified: true
     reasoning: 'Selection is disclosed completely. The candidate pool, the search rule, the retained set
       size and the computational shortcut are all stated, and Appendix D goes further and names the optimisation
@@ -548,7 +548,7 @@ criteria:
   I1:
     name: Necessity
     status: N/A
-    short: ''
+    short: Neither estimand can be put in the form necessity requires
     verified: true
     reasoning: 'Necessity asks what the behaviour does when a component is gone. Neither estimand in this
       design can be put in that form. The NDE applies the treatment while pinning the mediator at the
@@ -580,7 +580,7 @@ criteria:
   I2:
     name: Sufficiency
     status: PC
-    short: ''
+    short: Ten heads of 144 reproduce the all-mediator effect; no capability measured
     verified: true
     reasoning: 'The NIE is an interchange intervention in the strict sense: the treated value of a mediator
       is written into an otherwise untreated run, so a mediator set that reproduces the all-mediator effect
@@ -604,7 +604,7 @@ criteria:
   I3:
     name: Minimality
     status: PC
-    short: ''
+    short: Greedy admission by marginal gain; no ablation of the selected ten
     verified: true
     reasoning: 'Minimality is approached from below. The greedy search admits heads one at a time by marginal
       contribution and stops where the curve saturates, so each of the ten earned its place at the moment
@@ -627,7 +627,7 @@ criteria:
   I4:
     name: Specificity
     status: U
-    short: ''
+    short: A two-element outcome set leaves off-target damage nowhere to register
     verified: true
     reasoning: 'Off-target effects have nowhere to register. The primary measure and all three alternates
       are computed over a two-element outcome set, so an intervention that wrecked the model''s syntax
@@ -655,7 +655,7 @@ criteria:
   I5:
     name: Rival mechanism exclusion
     status: PC
-    short: ''
+    short: The untrained control excludes architecture; the stimulus rival stands
     verified: true
     reasoning: 'The rival that would sink the causal reading — that the structure belongs to the architecture
       or to the stimuli rather than to what training put in the network — is excluded by a matched untrained
@@ -680,7 +680,7 @@ criteria:
   I6:
     name: Double dissociation
     status: U
-    short: ''
+    short: One behaviour by construction, so the second dissociation cannot be run
     verified: true
     reasoning: 'A double dissociation needs two mechanisms and two behaviours, with each intervention
       moving one and sparing the other. This design has one behaviour by construction: the paper states
@@ -702,7 +702,7 @@ criteria:
   I7:
     name: Confound control
     status: PC
-    short: ''
+    short: Definitional gender dropped by crowdsourced rating; frequency untouched
     verified: true
     reasoning: 'Two confounds are removed by construction and both are the right ones. Definitional gender
       is dropped from the total-effect calculation using crowdsourced definitionality ratings, so the
@@ -732,7 +732,7 @@ criteria:
   I8:
     name: Confounding sensitivity
     status: U
-    short: ''
+    short: Unattempted; nothing bounds an unmeasured confounder
     verified: false
     reasoning: 'NOT SETTLED BY THE SOURCE. Nothing in the paper bounds how strong an unmeasured confounder
       would have to be to overturn a reported effect, and no quantity in it can be read as such a bound.
@@ -751,7 +751,7 @@ criteria:
   I9:
     name: Epistatic interaction
     status: C
-    short: ''
+    short: Concurrent against summed intervention, run at both levels, and it splits
     verified: true
     reasoning: 'Non-additivity is measured rather than assumed, by a comparison designed for the purpose
       and run at both levels: concurrent intervention on all mediators against the sum of the individual
@@ -777,7 +777,7 @@ criteria:
   I10:
     name: Rescue reversibility
     status: U
-    short: ''
+    short: Counterfactual activations exist for every example; no recovery is read
     verified: true
     reasoning: 'No experiment in the paper is presented or analysed as a recovery test. Both estimands
       intervene on the input and on a mediator together, and the paper reads the result as the share of
@@ -803,7 +803,7 @@ criteria:
   I11:
     name: Onset coupling
     status: U
-    short: ''
+    short: Two states, before training and after; no sequence to locate an onset in
     verified: true
     reasoning: 'Onset coupling requires the mediators and the behaviour to be timed against each other
       while the model is being trained. The systems analysed are released checkpoints observed at one
@@ -825,7 +825,7 @@ criteria:
   I12:
     name: Offset coupling
     status: PC
-    short: ''
+    short: Behaviour and structure both absent untrained; nothing in between
     verified: true
     reasoning: 'The coupling is shown at one end of the training axis and nowhere along it. In the untrained
       model the behaviour is near zero and the sparse mediation structure is absent at both mediator levels,
@@ -850,7 +850,7 @@ criteria:
   E1:
     name: Intervention reach
     status: U
-    short: ''
+    short: One instrument throughout, so every agreement is the method with itself
     verified: true
     reasoning: 'One instrument, applied throughout. Every result in the paper comes from writing a mediator''s
       value from one forward pass into another. The treatment that produces those values varies across
@@ -875,7 +875,7 @@ criteria:
   E2:
     name: Prompt generalization
     status: C
-    short: ''
+    short: Three prompt sets built differently, with the differences reported
     verified: true
     reasoning: 'The claim is tested on three prompt sets that were not built the same way: a seventeen-template
       generator over 169 professions, and two Winograd-schema coreference sets whose bias lives in which
@@ -897,7 +897,7 @@ criteria:
   E3:
     name: Cross-task generalization
     status: U
-    short: ''
+    short: One two-candidate setup throughout; generality claimed, not shown
     verified: true
     reasoning: 'The generality claim is about the framework and is made as a claim rather than shown as
       a result. Every measurement in the paper runs on the same two-candidate gendered-continuation setup,
@@ -917,7 +917,7 @@ criteria:
   E4:
     name: Cross-model generalization
     status: PC
-    short: ''
+    short: Transfers within the autoregressive class and fails outside it
     verified: true
     reasoning: 'Cross-model testing is unusually broad and the result splits by architecture class. Inside
       GPT-2 the effect is present at every size. In the two other autoregressive families the sparsity
@@ -943,7 +943,7 @@ criteria:
   E5:
     name: Graded response
     status: PC
-    short: ''
+    short: Dose is the number of mediators, not the strength of the intervention
     verified: true
     reasoning: 'There is a dose-response curve and its dose is the number of mediators rather than the
       strength of the intervention. Both figures sweep the intervened set from one element upward and
@@ -966,7 +966,7 @@ criteria:
   E6:
     name: Novel prediction
     status: PC
-    short: ''
+    short: One prediction confirmed outside the model, one sharper one falsified
     verified: true
     reasoning: 'One prediction points outside the model and is confirmed: profession-level effects should
       track real occupational gender statistics, and they do at 0.35 to 0.45, with the weaker Winograd
@@ -991,7 +991,7 @@ criteria:
   V1:
     name: Level declaration
     status: C
-    short: ''
+    short: Structural-behavioral declared twice, and no claim sits outside it
     verified: true
     reasoning: 'The level is declared twice and in the places where it binds. The introduction names the
       analysis as structural-behavioral and says which half each claim comes from — components on the
@@ -1013,7 +1013,7 @@ criteria:
   V2:
     name: Level-evidence match
     status: C
-    short: ''
+    short: Every headline claim is a property of the measured effect distribution
     verified: true
     reasoning: 'The three headline claims are properties of the distribution of measured effects, and
       each is measured on that distribution directly: sparsity by how many mediators are needed to saturate,
@@ -1035,7 +1035,7 @@ criteria:
   V3:
     name: Alternative level
     status: PC
-    short: ''
+    short: The architecture rival is defeated; the decisive one is never raised
     verified: true
     reasoning: 'One alternative account is stated and defeated with an experiment: that the structure
       belongs to the architecture rather than to what training put in it. The alternative the audit''s
@@ -1060,7 +1060,7 @@ criteria:
   V4:
     name: Unlicensed labeling
     status: C
-    short: ''
+    short: Components carry no names at all, only an index and an estimand
     verified: true
     reasoning: 'Components get no names at all. A mediator is a neuron, a layer, a head or an attention
       weight, identified by index — head 5-10 — and what is reported about it is an estimand, NDE or NIE,
@@ -1091,7 +1091,7 @@ criteria:
   V5:
     name: Scope declaration
     status: C
-    short: ''
+    short: Declared where each restriction binds, not collected at the end
     verified: true
     reasoning: 'Scope is declared at each place where it binds rather than collected into a limitations
       paragraph at the end. The binary-gender restriction is stated where the outcome variable is defined,

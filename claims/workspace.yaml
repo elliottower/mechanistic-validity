@@ -4,7 +4,7 @@ description: 'A low-dimensional subspace of the residual stream, recovered as th
   of the final-layer residual with respect to layer $\ell$, is proposed as the set of contents a model
   can verbally report and reason over. Five properties are enumerated in advance from global workspace
   theory --- verbal report, directed modulation, internal reasoning, flexible generalization, capacity
-  limits --- and one is used to find the object rather than to score it afterwards. Systems: four closed-weight
+  limits --- and one is used to find the object rather than to score it afterwards. Evaluated on: four closed-weight
   Claude models with sizes undisclosed, plus base and model-organism checkpoints. Description mode: implementational-functional.'
 source:
   citation: gurnee2026verbalizable

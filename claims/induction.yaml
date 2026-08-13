@@ -4,7 +4,7 @@ description: 'A two-head composition: a previous-token head writes the identity 
   repeat into the residual stream, and an induction head reads it to predict what followed last time.
   Heads are identified by two behavioral scores on sequences of repeated uniform-random tokens, prefix
   matching and copying, and the mechanism is derived at the weight level for the two-layer attention-only
-  case. Systems: 34 decoder-only models from one to forty layers, with causal ablation confined to the
+  case. Evaluated on: 34 decoder-only models from one to forty layers, with causal ablation confined to the
   twelve small models, six attention-only and six with MLPs. Description mode: implementational-functional.'
 source:
   citation: olsson2022context

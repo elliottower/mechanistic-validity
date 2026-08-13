@@ -4,7 +4,7 @@ description: 'Eight attention heads in a 4-layer attention-only transformer comp
   to predict the next argument name in a Python docstring: fuzzy previous-token heads and a positional
   head set up an induction step, and argument movers carry the name from the definition line to the output
   position. Resample ablation under three corruption types establishes which heads matter, and resample-ablating
-  everything outside the eight leaves 42\% success against the full model''s 56\%. Systems: one released
+  everything outside the eight leaves 42\% success against the full model''s 56\%. Evaluated on: one released
   toy model, 50 prompts per experiment, on prompts built to disable the line-number and repeat-inhibition
   algorithms at a measured cost ($\sim$75\% to 56\%). Description mode: implementational-functional.'
 source:

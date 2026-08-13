@@ -214,7 +214,7 @@ criteria:
   C1:
     name: Falsifiability
     status: C
-    short: ''
+    short: Signed predictions run both ways on 34 relations, against a matched control
     verified: true
     reasoning: 'The hypothesis is stated as a signed prediction on a measured quantity and is run in both
       directions on 34 relations. Zeroing the identified activations should lower the correct-answer probability,
@@ -238,7 +238,7 @@ criteria:
   C2:
     name: Structural plausibility
     status: C
-    short: ''
+    short: 'Eq. (3) beside Eq. (2): the same key-value operation under another nonlinearity'
     verified: true
     reasoning: 'The account names a concrete component and shows the algebra that makes it a memory. Equation
       (3) is put beside Equation (2) and the two are read as the same query-key-value operation under
@@ -262,7 +262,7 @@ criteria:
   C3:
     name: Convergent validity
     status: PC
-    short: ''
+    short: One attributor against one contrast, agreeing on one coarse property
     verified: true
     reasoning: 'The origin runs one attribution family against one contrast attributor. Integrated gradients
       identifies the neurons; raw activation magnitude supplies the comparison; every downstream result
@@ -286,7 +286,7 @@ criteria:
   C4:
     name: Discriminant validity
     status: D
-    short: ''
+    short: The competitor is named, removed by a filter, and the same machinery moves it
     verified: true
     reasoning: 'The neighbouring construct is named in the source. §3.3 says the coarse set may hold neurons
       that express syntactic or lexical information, which is the competitor a knowledge construct has
@@ -316,7 +316,7 @@ criteria:
   C5:
     name: Nomological validity
     status: PC
-    short: ''
+    short: Two theories say where to look; neither is tested as a network
     verified: true
     reasoning: 'The construct sits inside two existing theories and the paper says which. Language models
       as knowledge bases supplies the reason a cloze probe counts as a knowledge test; FFN layers as key-value
@@ -340,7 +340,7 @@ criteria:
   M1:
     name: Reliability
     status: U
-    short: ''
+    short: Every quantity a mean reported once, with no interval or repeated run
     verified: true
     reasoning: 'Every quantity in the paper is a mean reported once. Suppression is 29.03%, amplification
       31.17%, neuron count 4.13, and none carries an interval, a resampling distribution or a repeated
@@ -363,7 +363,7 @@ criteria:
   M2:
     name: Baseline separation
     status: C
-    short: ''
+    short: Activation magnitude through the identical pipeline, succeeding 0.0% of the time
     verified: true
     reasoning: 'One negative control runs through the whole paper and is matched on the quantity that
       would otherwise explain any gap. Raw activation magnitude is put through the identical refining
@@ -391,7 +391,7 @@ criteria:
   M3:
     name: Stability
     status: U
-    short: ''
+    short: Three free settings stated and none of them perturbed
     verified: true
     reasoning: 'Three free settings determine the identified set: the attribution threshold at 0.2 of
       a per-prompt maximum, the Riemann step count at 20, and the refining threshold. The paper states
@@ -413,7 +413,7 @@ criteria:
   M4:
     name: Calibration
     status: PC
-    short: ''
+    short: Outcomes calibrated; the selection quantity is driven to a target range
     verified: true
     reasoning: 'The outcome quantities are calibrated and the selection quantity is not. A correct-probability
       change ratio carries a sign, a zero meaning no effect, and a control value measured on the same
@@ -438,7 +438,7 @@ criteria:
   M5:
     name: Sensitivity
     status: U
-    short: ''
+    short: One known-negative control and no case where the answer is known in advance
     verified: true
     reasoning: 'The paper carries one control and it is a known negative: an attributor that should not
       find the right neurons, and does not. A sensitivity test needs the opposite, a case where the answer
@@ -459,7 +459,7 @@ criteria:
   M6:
     name: Invariance
     status: PC
-    short: ''
+    short: Per-relation spread across 34 relations; the generalisation claim has no experiment
     verified: true
     reasoning: 'Invariance is checked on two axes and left open on the rest. Every intervention result
       is broken out per relation across 34 relations, so the spread is visible rather than averaged away,
@@ -483,7 +483,7 @@ criteria:
   M7:
     name: Selection correction
     status: U
-    short: ''
+    short: Selection at four places, disclosed at all four and corrected at none
     verified: true
     reasoning: 'Selection happens at four places and is disclosed at all four: a swept refining threshold,
       a 10% sharing filter before updating, four relations chosen from 34 for erasure, and 20 most-frequent
@@ -508,7 +508,7 @@ criteria:
   I1:
     name: Necessity
     status: PC
-    short: ''
+    short: 29.03% against the control's 1.47%, consistent across relations but a decrement
     verified: true
     reasoning: 'Zeroing the identified activations produces a large deficit that the matched control does
       not reproduce, 29.03% against 1.47%, and the deficit is consistent across all 34 relations rather
@@ -533,7 +533,7 @@ criteria:
   I2:
     name: Sufficiency
     status: PC
-    short: ''
+    short: Doubling gives +31.17% and rewriting succeeds 34.4%; neither reaches sufficiency
     verified: true
     reasoning: 'Two results push toward sufficiency and neither reaches it. Doubling the activations raises
       the correct probability by 31.17%, and rewriting the value slots makes the substituted entity the
@@ -557,7 +557,7 @@ criteria:
   I3:
     name: Minimality
     status: U
-    short: ''
+    short: Set size is an input, held near four neurons before any effect is measured
     verified: true
     reasoning: 'Set size in this paper is an input. The refining threshold is moved by 0.05 at a time
       until the average count enters [2, 5], so the identified set is held at about four neurons before
@@ -591,7 +591,7 @@ criteria:
   I4:
     name: Specificity
     status: I
-    short: ''
+    short: 'Holds at identification and erasure, fails on other knowledge: results point both ways'
     verified: true
     reasoning: 'The origin tests specificity three times and gets two answers. It holds at identification:
       fact pairs from different relations share 0.09 neurons against the control''s 1.92. It holds at
@@ -635,7 +635,7 @@ criteria:
   I5:
     name: Rival mechanism exclusion
     status: U
-    short: ''
+    short: The one alternative ruled out is about method; the FFN framing forecloses the rest
     verified: true
     reasoning: 'One alternative is ruled out and it is an alternative about method. The activation baseline
       stands for the possibility that the identified units are merely input-sensitive, and the intersection
@@ -660,7 +660,7 @@ criteria:
   I6:
     name: Double dissociation
     status: U
-    short: ''
+    short: One mechanism localised and one behaviour measured, so neither arm exists
     verified: true
     reasoning: 'A double dissociation needs two localised mechanisms and two behaviours, with each intervention
       moving one behaviour and sparing the other. The source localises one mechanism and measures one
@@ -682,7 +682,7 @@ criteria:
   I7:
     name: Confound control
     status: PC
-    short: ''
+    short: Wording controlled by requiring recurrence across nine templates; frequency is not
     verified: true
     reasoning: 'Two confounds are controlled and one of them is controlled well. Prompt wording cannot
       explain the identified set, because a neuron only survives refining if it recurs across roughly
@@ -707,7 +707,7 @@ criteria:
   I8:
     name: Confounding sensitivity
     status: U
-    short: ''
+    short: Unattempted; nothing bounds an unmeasured confounder
     verified: false
     reasoning: 'NOT SETTLED BY THE SOURCE. Nothing in the paper quantifies how strong an unmeasured confounder
       would have to be to overturn a reported effect, and no quantity in it can be read as such a bound.
@@ -723,7 +723,7 @@ criteria:
   I9:
     name: Epistatic interaction
     status: U
-    short: ''
+    short: Every manipulation hits the whole set at once, so no contribution separates
     verified: true
     reasoning: 'Every manipulation in the paper is applied to the whole identified set at once. Suppression
       zeroes all of them, amplification doubles all of them, and the surgery rewrites all four value slots,
@@ -743,7 +743,7 @@ criteria:
   I10:
     name: Rescue reversibility
     status: U
-    short: ''
+    short: The damage is analytic and invertible, and the restore is never run
     verified: true
     reasoning: 'The damage the paper inflicts is analytic and invertible. Erasure writes zero vectors
       into value slots whose original contents are known, and the update adds a closed-form shift built
@@ -766,7 +766,7 @@ criteria:
   I11:
     name: Onset coupling
     status: N/A
-    short: ''
+    short: One released checkpoint, so there is no sequence to locate an onset in
     verified: true
     reasoning: 'Onset coupling asks whether a mechanism appears when the behaviour it explains appears,
       which requires a sequence of states in which the behaviour is first absent and then present. The
@@ -790,7 +790,7 @@ criteria:
   I12:
     name: Offset coupling
     status: N/A
-    short: ''
+    short: One checkpoint supplies no interval over which either could go
     verified: true
     reasoning: 'Offset coupling asks whether a mechanism disappears when the behaviour disappears, and
       needs the same time axis as onset for the same reason. One checkpoint supplies no interval over
@@ -809,7 +809,7 @@ criteria:
   E1:
     name: Intervention reach
     status: PC
-    short: ''
+    short: Three forms agreeing in direction, all downstream of one attributor
     verified: true
     reasoning: 'Three intervention forms appear and they agree in direction: zeroing an activation, doubling
       it, and rewriting the value slot the activation weights. Two of the three act on activations and
@@ -833,7 +833,7 @@ criteria:
   E2:
     name: Prompt generalization
     status: C
-    short: ''
+    short: Survival across roughly nine templates is built into the identification
     verified: true
     reasoning: 'The identified set is required to survive paraphrase by construction, since refining keeps
       only neurons shared across the roughly nine templates a relation has, and the pool those templates
@@ -856,7 +856,7 @@ criteria:
   E3:
     name: Cross-task generalization
     status: U
-    short: ''
+    short: Single-word cloze throughout, named first among the authors' limitations
     verified: true
     reasoning: 'Every measurement in the paper is a single-word cloze completion, and the authors name
       the restriction first among their limitations. No second task is attempted, so nothing shows whether
@@ -877,7 +877,7 @@ criteria:
   E4:
     name: Cross-model generalization
     status: PC
-    short: ''
+    short: One model, with generalisation asserted and no experiment behind it
     verified: true
     reasoning: 'The origin runs on one model. It asserts that the method generalises and supplies no experiment,
       and its conclusion lists the multilingual case as future work, which concedes that the transfer
@@ -901,7 +901,7 @@ criteria:
   E5:
     name: Graded response
     status: PC
-    short: ''
+    short: Sign reverses between zero and double; nothing reported between them
     verified: true
     reasoning: 'The intervention takes two values, zero and double, and the response reverses sign between
       them, from -29.03% to +31.17%, which rules out a generic damage effect. Nothing between or beyond
@@ -924,7 +924,7 @@ criteria:
   E6:
     name: Novel prediction
     status: C
-    short: ''
+    short: Unseen text fires the neurons where it expresses the fact and not otherwise
     verified: true
     reasoning: 'The prediction is derived from the account before the test and could have failed. If these
       neurons carry a relational fact, then text the model never saw during identification should activate
@@ -949,7 +949,7 @@ criteria:
   V1:
     name: Level declaration
     status: PC
-    short: ''
+    short: The unit is declared exactly and the level is not; storage and expression run together
     verified: true
     reasoning: 'The unit of analysis is declared exactly -- an intermediate neuron of a named FFN layer
       -- and the level of the claim is not. Storage and expression run together in the same sentences:
@@ -971,7 +971,7 @@ criteria:
   V2:
     name: Level-evidence match
     status: D
-    short: ''
+    short: The title claims storage; the measurement is correlation with expression
     verified: true
     reasoning: 'The claim and the evidence sit at different levels and the paper says both in its own
       summary sentences. The title and the abstract claim storage, which is a claim about where a fact
@@ -999,7 +999,7 @@ criteria:
   V3:
     name: Alternative level
     status: I
-    short: ''
+    short: The method alternative is rejected; the storage-versus-expression reading is untouched
     verified: true
     reasoning: 'One alternative reading is stated and rejected. The activation baseline stands for the
       possibility that the identified units are the generally input-sensitive ones, and Table 2 pushes
@@ -1024,7 +1024,7 @@ criteria:
   V4:
     name: Unlicensed labeling
     status: PC
-    short: ''
+    short: The name arrives in the sentence that introduces the method, before the measurement
     verified: true
     reasoning: 'The name arrives before the measurement. §1 introduces the method and the label in one
       sentence -- the neurons the method identifies "are named knowledge neurons" -- so the term states
@@ -1071,7 +1071,7 @@ criteria:
   V5:
     name: Scope declaration
     status: PC
-    short: ''
+    short: Four limits declared; the one asserted past is generalisation beyond BERT
     verified: true
     reasoning: 'Scope is declared in the right place and with one gap. §7 lists three restrictions and
       one open question, and §4.5 and §5 both label the manipulations a proof of concept before any application

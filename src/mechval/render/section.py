@@ -33,13 +33,15 @@ def section(claim: str) -> str:
     return f"""\\clearpage
 \\section*{{{a.title}}}
 
-\\textbf{{Source.}} \\citet{{{a.source.citation}}}.
-
 \\textbf{{Description.}} {esc(a.description)}
 
+\\vspace{{4pt}}
+{criterion_table(claim, load(claim)).rstrip().replace(chr(92)+"clearpage" + chr(10), "", 1).replace(chr(92)+"vspace*{-1.5em}" + chr(10), "", 1)}
+
+\\clearpage
 \\begin{{table}}[H]
 \\centering
-\\small
+\\footnotesize
 \\caption{{Readings of the claim, from the version the authors state to the version the
 field cites.}}
 \\label{{tab:{claim}-readings}}
@@ -55,7 +57,7 @@ field cites.}}
 
 \\begin{{table}}[H]
 \\centering
-\\small
+\\footnotesize
 \\caption{{Verdict: \\textbf{{{a.verdict}}}. A dash means the tier is reached; a criterion at
 Inconclusive, Untested or Disconfirmed blocks promotion.}}
 \\label{{tab:{claim}-verdict}}
@@ -68,8 +70,6 @@ Inconclusive, Untested or Disconfirmed blocks promotion.}}
 \\bottomrule
 \\end{{tabular}}
 \\end{{table}}
-
-{criterion_table(claim, load(claim)).rstrip()}
 """
 
 

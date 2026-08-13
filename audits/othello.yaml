@@ -592,7 +592,7 @@ criteria:
   I8:
     name: Confounding sensitivity
     status: U
-    short: ''
+    short: No sensitivity analysis, and no quantity that could serve as a bound
     verified: false
     reasoning: 'NOT SETTLED BY THE SOURCE. The paper contains no sensitivity analysis for an unmeasured
       confounder, no bound on how strong such a confounder would have to be, and no discussion framed

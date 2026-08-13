@@ -4,7 +4,7 @@ description: 'A GPT variant trained from random initialization on Othello transc
   state in its activations. Nonlinear probes decode all 64 tiles where linear probes never dip below 20\%
   error, and 2,000 interventions move the top-$N$ predictions onto the counterfactual legal-move set (errors
   0.12 and 0.06 against null baselines of 2.68 and 2.59), half of them on boards unreachable by legal
-  play. Systems: one 8-layer architecture trained twice, on championship games and on uniformly sampled
+  play. Evaluated on: one 8-layer architecture trained twice, on championship games and on uniformly sampled
   legal moves, with both runs probed across all eight layers. Description mode: representational.'
 source:
   citation: li2023othello
