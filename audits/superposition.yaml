@@ -343,13 +343,24 @@ criteria:
       any experiment.
 
       '
-    notes:
+    notes: &id001
       legacy_evidence: 'Connected to three literatures with formal content rather than by analogy: compressed
         sensing, with an appendix deriving the connection between compressed-sensing lower bounds and
         the toy model; the Thomson problem and uniform polytopes for the geometry; and distributed / population
         codes in neuroscience. The linear-representation hypothesis is decomposed into two separable sub-hypotheses
         --- decomposability and linearity --- and the privileged-basis question is stated as a third,
         all before any experiment'
+  C6:
+    name: Complementation validity
+    status: U
+    reasoning: 'The individual features are the subdivisions and the toy setting makes the test unusually
+      cheap, since the ground-truth features are specified by construction. Nothing exploits that: the
+      geometry is characterised in aggregate, and no experiment perturbs two features together and reads
+      the result against each alone.'
+    short: Ground truth is available by construction and the test is not run
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: PC

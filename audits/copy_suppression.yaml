@@ -358,7 +358,7 @@ criteria:
       with tests it does not run. Unified and unexplained is PC.
 
       '
-    notes:
+    notes: &id001
       verification: 'The unification sentence and the iterative-inference sentence are verbatim, and Appendix
         E is explicitly framed as speculation with proposed tests, as the cell says. Figure 9 carries
         the cross-model correlation the cell cites, and the paper reports no correlation coefficient,
@@ -373,6 +373,18 @@ criteria:
         / logit-lens line, where the paper notes ``no connections have yet been made to Negative Heads''
         (\S5). Why such heads form is unexplained; Appendix E lists three ``speculative theories'' with
         tests proposed and not run
+  C6:
+    name: Complementation validity
+    status: U
+    reasoning: 'Two subdivisions are named and neither is tested for functional distinctness. The OV and
+      QK halves are ablated separately, which is a cis decomposition inside one head rather than a trans
+      comparison across two. Negative and Backup heads are shown to respond in opposite directions to
+      the same upstream ablation, which is suggestive and is not the test: nothing ablates the two together
+      and reads the result against each alone.'
+    short: OV and QK split within one head; the across-head trans test is absent
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: PC

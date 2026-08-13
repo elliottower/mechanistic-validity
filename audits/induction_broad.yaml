@@ -338,7 +338,7 @@ criteria:
       alternative and reported absent. Connected but mostly by analogy rather than by derivation. PC.
 
       '
-    notes:
+    notes: &id001
       verification: 'The thermodynamics sentence is verbatim as the cell quotes it. "We did not observe
         any evidence of mesa-optimizers" is verbatim. The Kaplan one-layer retrodiction is stronger than
         the cell''s "analogical" characterisation allows: it is a specific prior anomaly with a specific
@@ -350,6 +350,18 @@ criteria:
         no evidence for. The connections are analogical --- ``the relationship between scaling laws and
         mechanistic interpretability might be seen as analogous to the relationship between thermodynamics
         and the physics of individual particles'' --- rather than derivational
+  C6:
+    name: Complementation validity
+    status: U
+    reasoning: The subdivisions are the same two heads, and the broad claim adds a third division between
+      the copying mechanism and whatever carries the rest of in-context learning. Neither division is
+      put to a trans test. Argument 6's alternative -- that non-induction composition heads form at the
+      same time and do the same work -- is exactly the hypothesis a complementation design would address,
+      and no head population is constructed to address it.
+    short: The composition-head alternative is what a trans test would settle
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: U

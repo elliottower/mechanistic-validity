@@ -28,7 +28,7 @@ import yaml
 from mechval.paths import PROJECT_ROOT, audit_file, claim_file
 from pydantic import BaseModel, Field, ValidationInfo, field_validator, model_validator
 
-ORDER = (["C%d" % i for i in range(1, 6)] + ["M%d" % i for i in range(1, 8)]
+ORDER = (["C%d" % i for i in range(1, 7)] + ["M%d" % i for i in range(1, 8)]
          + ["I%d" % i for i in range(1, 13)] + ["E%d" % i for i in range(1, 7)]
          + ["V%d" % i for i in range(1, 6)])
 SHORT_MAX = 90          # the two-page layout breaks above this; see SUPPLEMENT_FORMAT_SPEC
@@ -353,7 +353,7 @@ class Audit(BaseModel):
 
     @field_validator("criteria")
     @classmethod
-    def _all_thirty_five(cls, v: dict[str, Criterion]) -> dict[str, Criterion]:
+    def _all_thirty_six(cls, v: dict[str, Criterion]) -> dict[str, Criterion]:
         missing = [c for c in ORDER if c not in v]
         unknown = [c for c in v if c not in ORDER]
         if missing:

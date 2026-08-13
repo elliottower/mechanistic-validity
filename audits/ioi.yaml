@@ -309,7 +309,7 @@ criteria:
       with no derivation replacing it, is PC.
 
       '
-    notes:
+    notes: &id001
       verification: 'The legacy evidence''s quoted phrase "in the context we study, Induction Heads perform
         a different function compared to what was described in their original discovery" is verbatim (§3.3),
         and the top-five ranking is verbatim (Appendix H). One correction: the cell says the heads serve
@@ -324,6 +324,18 @@ criteria:
         --- ``in the context we study, Induction Heads perform a different function compared to what was
         described in their original discovery,'''' serving as positional signals (\S3.3), a mechanism
         the paper does not explain'
+  C6:
+    name: Complementation validity
+    status: U
+    reasoning: Unattempted. The circuit is carved into seven named classes, and no test establishes that
+      the carving is functional. The class-level knockouts remove one class at a time, which leaves a
+      set of distinct complementation groups indistinguishable from a single group whose members share
+      one role. The trans comparison needs two ablation runs and a composition rule, and the cis control
+      is available in the same design.
+    short: Seven named classes, knocked out one at a time; no trans comparison
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: I

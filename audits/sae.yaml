@@ -284,7 +284,7 @@ criteria:
       direction — rewarding composed latents precisely because they are sparser.
 
       '
-    notes:
+    notes: &id001
       legacy_evidence: 'Fits superposition and the linear representation hypothesis, and the origin states
         the connection precisely. The theory does not underwrite the strong claim: nothing in superposition
         predicts a \emph{unique} dictionary, and Leask et al.\ show the training objective actively pushes
@@ -298,6 +298,18 @@ criteria:
         about sparsity being required for superposition is interrupted in the PDF by a footnote block,
         a page break and the Figure 1 caption, so the contiguous sparse-dictionary-learning sentence from
         the same passage is quoted instead.'
+  C6:
+    name: Complementation validity
+    status: U
+    reasoning: 'The dictionary''s features are the subdivisions, and whether they are functionally distinct
+      is the live question in this literature rather than a settled premise: feature splitting and absorption
+      both describe a labeled subdivision that turns out not to be atomic. The audited work does not run
+      the comparison, so the units are separated by the training objective rather than by any test of
+      their distinctness.'
+    short: Feature splitting is the open question; no test of atomicity is run
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: I

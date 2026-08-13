@@ -349,7 +349,7 @@ criteria:
       is PC.
 
       '
-    notes:
+    notes: &id001
       verification: 'The withdrawal sentence — "which we didn''t observe for successor heads" — is verbatim
         in §5 and the cell quotes it correctly. The connection to Hanna et al. is the source''s own ("similar
         to how we indirectly found the Greater-Than operation"), so the cell''s attribution is right.
@@ -362,6 +362,18 @@ criteria:
         Mikolov-style compositionality. The analogy to induction heads is drawn and then partly withdrawn
         on evidence: induction heads show a consistent training phase change, ``which we didn''t observe
         for successor heads (Appendix G)'''''
+  C6:
+    name: Complementation validity
+    status: U
+    reasoning: 'The paper''s own polysemanticity result is what this criterion asks about, from the other
+      side: succession, acronym and greater-than behaviour are carried by one head, so three labeled functions
+      are not separable by component. That is a finding about the head rather than a complementation test
+      of the successor construct, whose own subdivisions -- the eight ordinal task classes -- are scored
+      individually and never ablated against one another.'
+    short: Eight task classes scored individually and never ablated in pairs
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: PC

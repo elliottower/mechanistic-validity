@@ -1,7 +1,7 @@
 """A whole claim section, generated from its audit record.
 
 Everything the supplement renders for a claim now comes from data/audits/<claim>.yaml:
-the description, the readings table, the tier ladder and the 35-criterion audit. The
+the description, the readings table, the tier ladder and the 36-criterion audit. The
 readings and tier tables were hand-written LaTeX until now, which is how four of them
 shipped carrying an unfilled [derive] placeholder -- nothing generated them, so nothing
 checked them.

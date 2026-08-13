@@ -325,7 +325,7 @@ criteria:
       constrains where to look and never gets tested as a network. PC.
 
       '
-    notes:
+    notes: &id001
       verification: 'Both theoretical anchors the cell names are stated in the source and are verbatim.
         The contest the cell records -- Balogh (2026) placing the MLP in a routing role, Chen et al. (2024)
         giving attention a larger part -- is post-origin. The origin''s own hedge is worth recording:
@@ -337,6 +337,18 @@ criteria:
         et al.\ 2019). The theoretical link is now contested: Balogh (2026) place the MLP in a routing
         role with the fact originating in attention; Chen et al.\ (2024) find attention plays a larger
         role than the neuron account allows'
+  C6:
+    name: Complementation validity
+    status: U
+    reasoning: 'Relation-level neuron sets are the subdivisions and their separation is measured at identification,
+      where sets for different relations share 0.09 neurons against the control''s 1.92. Identification
+      overlap is not complementation: no experiment suppresses two relations'' neurons together and reads
+      the result against each alone, which is the comparison that would show the sets are functionally
+      as well as numerically distinct.'
+    short: Relation sets separate at identification; no joint suppression is run
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: U

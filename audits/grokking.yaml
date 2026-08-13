@@ -151,7 +151,7 @@ criteria:
       organise the result after the fact rather than generating it. PC.
 
       '
-    notes:
+    notes: &id001
       verification: 'Appendix B is an argument from the shape of the cosine waves, not a measurement,
         and the paper presents it that way.
 
@@ -161,6 +161,17 @@ criteria:
         argument of Appendix B explains \emph{why} several frequencies rather than one. No theory predicts
         the Fourier basis from task and architecture; Morwani et al.\ (2023) supply one afterwards, for
         a one-hidden-layer quadratic network under the $L_{2,3}$ norm, which does not cover this model
+  C6:
+    name: Complementation validity
+    status: U
+    reasoning: The five key frequencies are the labeled subdivisions, and they are treated as interchangeable
+      instances of one mechanism rather than as parts that might differ. Ablating frequencies individually
+      shows each contributes; no comparison ablates two together against each alone, so nothing establishes
+      whether the five are five mechanisms or five copies of one.
+    short: Five frequencies treated as interchangeable, never compared in pairs
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: PC

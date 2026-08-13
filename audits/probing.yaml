@@ -355,7 +355,7 @@ criteria:
       and does not close is PC.
 
       '
-    notes:
+    notes: &id001
       verification: 'All three formalisations and the Zhu & Rudzicz collapse are verbatim in the anchor.
         The cell''s characterisation of the disagreement is right and understated: Pimentel et al. (2020b)
         and Pimentel et al. (2020a) are on opposite sides of it in consecutive sentences of §4.2, the
@@ -369,6 +369,16 @@ criteria:
         --- Pimentel et al.\ argue for the most complex probe, Hewitt \& Liang for the most selective
         --- and Zhu \& Rudzicz find control tasks and control functions ``almost equivalent, both theoretically
         and empirically,'''' collapsing one proposed distinction'
+  C6:
+    name: Complementation validity
+    status: N/A
+    reasoning: The audited object is a method rather than a mechanism with named parts. A probing result
+      reports the decodability of a property from a representation, and nothing in that design divides
+      a construct into labeled pieces whose distinctness could be tested.
+    short: The audited object is a method, not a construct with named parts
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: U

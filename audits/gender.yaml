@@ -346,7 +346,7 @@ criteria:
       C.
 
       '
-    notes:
+    notes: &id001
       verification: 'Footnote 7, the Appendix E no-interaction passage and the §6 identification-assumption
         sentence are verbatim, so the cell''s account of the import is accurate throughout. One addition
         the cell omits: Appendix E does not only prove the implication, it fits the two sides of Eq. 11
@@ -359,6 +359,16 @@ criteria:
         assumptions discussed against Imai et al.\ and VanderWeele. Footnote 7 states which decomposition
         results transfer to a non-linear model and which need an added no-interaction condition, proved
         in Appendix E'
+  C6:
+    name: Complementation validity
+    status: N/A
+    reasoning: The design names no subdivisions to test. A mediator is a neuron, a layer, a head or an
+      attention weight identified by index, and what is reported about it is an estimand rather than a
+      role, so there is no labeled carving whose functional reality the criterion could ask about.
+    short: Mediators carry an index and an estimand, not a labeled role
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: PC

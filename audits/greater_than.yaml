@@ -317,7 +317,7 @@ criteria:
       derivation the circuit could have contradicted. PC.
 
       '
-    notes:
+    notes: &id001
       verification: 'The dichotomy sentence is verbatim in §1 and the cell quotes it accurately. The Liu
         et al. sentence is the paper''s only discussion of when a mechanism forms during training, and
         it is about someone else''s toy model, which is why it does not reach I11.
@@ -329,6 +329,17 @@ criteria:
         Connected to FFN key-value memories (Geva et al.\ 2021) for the neuron-level analysis and to structured
         number representations (Wallace et al.\ 2019). No formal theory of what a comparison circuit should
         look like'
+  C6:
+    name: Complementation validity
+    status: U
+    reasoning: The circuit is divided by role -- attention heads carry the start year, MLPs 8--11 raise
+      the logits above it -- and the division is never tested. Direct and indirect contributions are separated
+      per MLP, which quantifies each part's share without establishing that the two groups are functionally
+      different. No experiment ablates a head and an MLP together and compares that against each alone.
+    short: Heads and MLPs divided by role, with no joint ablation to test it
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: U

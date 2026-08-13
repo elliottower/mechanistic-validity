@@ -297,11 +297,22 @@ criteria:
       against theory but not derived from one is PC.
 
       '
-    notes:
+    notes: &id001
       legacy_evidence: Positioned against a named rival theory (surface statistics; Bender \& Koller 2020,
         Merrill et al.\ 2021) and within a line on emergent representations (Abdou et al.\ 2021; Toshniwal
         et al.\ 2021). No formal theory of what a world model \emph{is}; Vafa et al.\ (2024) supply one
         (DFA / Myhill--Nerode) after the fact
+  C6:
+    name: Complementation validity
+    status: U
+    reasoning: The 64 tiles are the subdivisions and every intervention addresses them one at a time.
+      Nothing intervenes on two tiles together and compares against each alone, so the board representation
+      is not shown to be carved into independently manipulable parts rather than one representation that
+      responds tile-wise.
+    short: Sixty-four tiles, intervened on one at a time throughout
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: C

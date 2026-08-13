@@ -338,7 +338,7 @@ criteria:
       in a theory that does not entail its central parameter is PC.
 
       '
-    notes:
+    notes: &id001
       verification: 'The cell''s §J quotation, "exists already in the base model, and is repurposed for
         refusal during safety fine-tuning", is verbatim. The three difference-in-means citations named
         in the cell (Belrose; Marks and Tegmark; Panickssery) all appear in §2.3 as the cell states.
@@ -349,6 +349,15 @@ criteria:
         hypothesis. \S J adds a developmental account --- the direction ``exists already in the base model,
         and is repurposed for refusal during safety fine-tuning.'''' No theory predicts \emph{one} dimension;
         one-dimensionality is an empirical finding without a nomological reason'
+  C6:
+    name: Complementation validity
+    status: N/A
+    reasoning: The claim is that one direction carries refusal, and one direction has no labeled subdivisions.
+      The criterion asks whether a carving is functional, and this claim makes no carving.
+    short: One direction, and a single direction has no subdivisions to carve
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: PC

@@ -50,7 +50,7 @@ def standing(st, n_rows, origin=False, audit_verdict=""):
     handful of criteria rather than all 35, so a tier cannot be read off it.
 
     The origin hypothesis is the exception. It is the one the paper itself advanced, and it
-    alone carries a full 35-criterion audit, which a subset of the same evidence cannot
+    alone carries a full 36-criterion audit, which a subset of the same evidence cannot
     overturn. Where that audit places the claim above Disconfirmed, the page reads
     Contradicted repeatedly rather than Excluded.
     """

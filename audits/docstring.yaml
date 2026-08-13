@@ -346,7 +346,7 @@ criteria:
       IOI motifs is stated as resemblance. Embedded in theory, with the theory bent to fit, is PC.
 
       '
-    notes:
+    notes: &id001
       verification: 'PARAPHRASE IN QUOTATION MARKS. The cell quotes head 1.4 as "attending to the token
         following a previous occurrence of the current token". The post reads "a head that attends to
         the token (B_doc) following a previous occurrence (param_2) of the current token (param_3)" ---
@@ -365,6 +365,17 @@ criteria:
       legacy_warning: The legacy_evidence for this cell contains a paraphrase presented as a quotation,
         or a claim fused from two separate remarks in the source. Verified 2026-08-07. Use the quotes
         block, not the legacy text.
+  C6:
+    name: Complementation validity
+    status: U
+    reasoning: Eight heads are sorted into three named levels, fuzzy previous-token heads, a positional
+      head and induction, and the sorting is read off attention patterns rather than tested. Every ablation
+      in the source removes one component or one level, so nothing distinguishes three complementation
+      groups from one group whose members happen to sit at different depths.
+    short: Three named levels, each ablated alone and never in combination
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: U

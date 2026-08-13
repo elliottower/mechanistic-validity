@@ -341,7 +341,7 @@ criteria:
       the minimum architectural requirements" and builds an architecture to test it. C.
 
       '
-    notes:
+    notes: &id001
       verification: 'The cell says "Footnote 15 states the derivation explicitly" — correct. Note that
         the framework being drawn on is the authors'' own prior paper, so this is nomological coherence
         within one research programme rather than agreement with an independently developed theory.
@@ -351,6 +351,18 @@ criteria:
         supplies the OV/QK decomposition and the composition algebra, from which the paper derives a falsifiable
         architectural prediction --- induction requires attention-head composition, hence at least two
         layers --- and then tests it. Footnote 15 states the derivation explicitly
+  C6:
+    name: Complementation validity
+    status: U
+    reasoning: 'The two-head composition is the subdivision: a previous-token head and an induction head,
+      each named for a different role. Their distinctness is argued from the weight-level derivation rather
+      than tested, and every ablation removes one head at a time. Nothing ablates both and reads the result
+      against each alone, which is what would separate two complementation groups from one group whose
+      members share a role.'
+    short: Two named roles, ablated one at a time and never together
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: U

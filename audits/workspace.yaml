@@ -309,7 +309,7 @@ criteria:
       a limitations section.
 
       '
-    notes:
+    notes: &id001
       legacy_evidence: 'The claim is stated inside a named external theory whose predictions are enumerated
         in advance and whose disanalogies are stated: no separable input processors, no recurrent broadcast,
         unclear competitive ignition. The theory''s status is flagged (``the global workspace model is
@@ -318,6 +318,16 @@ criteria:
       verification: 'Verified.
 
         '
+  C6:
+    name: Complementation validity
+    status: N/A
+    reasoning: The claim concerns one low-dimensional subspace and its contents, and the subspace is not
+      divided into labeled parts. Where a claim names no subdivisions, the complementation question does
+      not attach to it.
+    short: One subspace, undivided, so the question does not attach
+    verified: false
+    notes: *id001
+    quotes: []
   M1:
     name: Reliability
     status: PC

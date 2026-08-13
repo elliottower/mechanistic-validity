@@ -1,4 +1,4 @@
-"""The 35-criterion table for one claim, in the one format the supplement uses.
+"""The 36-criterion table for one claim, in the one format the supplement uses.
 
 There were two formats before this: the hand-written IOI and SAE tables, which carry
 validity-group divider rows and a totals line, and whatever got written by hand afterwards,
@@ -37,7 +37,7 @@ def tex(s: str) -> str:
     s = re.sub(r"(?<!\\)([%&#])", r"\\\1", s)
     return re.sub(r"[\u0370-\u03ff]", lambda m: GREEK.get(m.group(), m.group()), s)
 
-GROUPS = [("Construct Validity", ["C%d" % i for i in range(1, 6)]),
+GROUPS = [("Construct Validity", ["C%d" % i for i in range(1, 7)]),
           ("Measurement Validity", ["M%d" % i for i in range(1, 8)]),
           ("Internal Validity", ["I%d" % i for i in range(1, 13)]),
           ("External Validity", ["E%d" % i for i in range(1, 7)]),
@@ -121,7 +121,7 @@ def table(claim, rows):
 {{\\footnotesize
 \\renewcommand{{\\arraystretch}}{{1.0}}
 \\begin{{longtable}}{{@{{}}llll>{{\\raggedright\\arraybackslash}}p{{6.5cm}}@{{}}}}
-\\caption{{Full 35-criterion audit of {TITLE[claim]}. Status: \\textbf{{C}} = Confirmed,
+\\caption{{Full 36-criterion audit of {TITLE[claim]}. Status: \\textbf{{C}} = Confirmed,
 \\textbf{{PC}} = Partially confirmed, \\textbf{{U}} = Untested, \\textbf{{I}} = Inconclusive,
 \\textbf{{D}} = Disconfirmed, \\textbf{{N/A}} = Not applicable.}}\\\\
 \\toprule
@@ -140,7 +140,7 @@ def table(claim, rows):
 
 
 def write(claim: str) -> pathlib.Path:
-    """The 35-criterion table for one claim."""
+    """The 36-criterion table for one claim."""
     rows = load(claim)
     out = GENERATED / f"{claim}_criterion_table.tex"
     GENERATED.mkdir(parents=True, exist_ok=True)
