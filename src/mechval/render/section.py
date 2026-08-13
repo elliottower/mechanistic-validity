@@ -33,6 +33,8 @@ def section(claim: str) -> str:
     return f"""\\clearpage
 \\section*{{{a.title}}}
 
+\\textbf{{Source.}} \\citet{{{a.source.citation}}}.
+
 \\textbf{{Description.}} {esc(a.description)}
 
 \\vspace{{4pt}}

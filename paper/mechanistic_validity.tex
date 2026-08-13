@@ -318,7 +318,7 @@ The 36 criteria also formalize common failure modes observed in published MI res
 \small
 \begin{table}[H]
 \centering
-\caption{Twelve common failure modes in MI research, each mapped to the criteria that detect it.}
+\caption{Ten failure modes observed in published MI research, each mapped to the criteria that detect it.}
 \label{tab:failures}
 \renewcommand{\arraystretch}{1.15}
 \begin{tabular}{@{}l>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{4.0cm}@{}}
@@ -335,7 +335,6 @@ Untested discriminant validity & Separation from a neighboring construct is pres
 \midrule
 Off-target effects reported but not read & Off-target numbers are measured, printed, and left uninterpreted & I4 Specificity & Knowledge neurons: fact updating raises inter-relation perplexity 7.2 against 4.3 for random neurons \citep{dai2022knowledge} \\
 \midrule
-Circuit redefinition & Drop heads that hurt faithfulness, call it ``refined'' & C1 Falsifiability & Adjusting circuit membership to maximize the target metric \\
 \midrule
 Post-hoc role labeling & Name heads after observed behavior; the label cannot fail & C1 Falsifiability & ``Name mover'' assigned after seeing logit attribution \\
 \midrule
@@ -345,7 +344,6 @@ Interpretive inflation & Label implies intent or algorithm beyond what evidence 
 \midrule
 Scope creep & Claim reach beyond the systems tested, with no experiment behind it & V5 Scope decl.\newline E4 Cross-model & Knowledge neurons: ``not limited to BERT and can be easily generalized to other pretrained models,'' with no second model run \\
 \midrule
-Flexible scope & Narrow the claim after seeing results so it cannot fail & V5 Scope\newline declaration & Restricting scope post-hoc to the subset of prompts that work \\
 \midrule
 Ignoring alternatives & Circuit works, but so does a different set of heads & I5 Rival mech.\newline exclusion & \citet{chen2026circuits} exhibit two IOI subgraphs at 100\% accuracy sharing 4.1\% of their edges \\
 \bottomrule
