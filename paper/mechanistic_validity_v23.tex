@@ -43,8 +43,6 @@
       \email elliot@elliottower.ai}
 
 
-
-
 % claims are numbered subsubsections here, so each one appears in the table of
 % contents and is reachable by hyperlink
 \newcommand{\claimheading}[1]{\subsubsection{#1}}
@@ -456,28 +454,6 @@ An evidence family classifies a metric's output by the source of signal it draws
 
 Each family answers a different question about the mechanism and has characteristic strengths and blind spots. Weight-based metrics cannot be confounded by runtime compensation but cannot distinguish used capacity from unused capacity. Activation-based metrics can establish necessity and sufficiency directly but are vulnerable to backup circuits that compensate after ablation. Behavioral metrics test whether the circuit reproduces the model's outputs, but behavioral equivalence does not imply mechanistic equivalence---different circuits can produce the same behavior for different reasons. Training-based metrics reveal developmental trajectories but cannot establish that a mechanism is causally responsible for current behavior.
 
-The four families hold their shape across fields, and what each field can put in them differs (\Cref{tab:families-domains}). The empty cell is as informative as the full ones: epidemiology has no structural evidence in this sense, because there is no persistent organization to inspect apart from the system running, which is why the field leans on history and state and built its deepest machinery there. A field that can access only three families is capped on convergent validity (C3) by construction rather than by neglect.
-
-\begin{table}[H]
-\centering\small
-\caption{The same four evidence families across fields. Entries name what each field can measure in that family; a dash marks a family the field cannot access.}
-\label{tab:families-domains}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{2.4cm}@{}}
-\toprule
-& \textbf{Interpretability} & \textbf{Genetics} & \textbf{Neuroscience} & \textbf{Epidemiology} & \textbf{Medical microbiology} \\
-\midrule
-\textbf{Structure} & Weights & Genome, protein structure & Connectome, anatomy & --- & Pathogen sequence \\
-\midrule
-\textbf{State} & Activations & Expression levels & Firing rates, fMRI & Biomarkers & Copy number, load \\
-\midrule
-\textbf{Behavior} & Task performance & Phenotype & Behavioral task & Outcome, disease status & Clinical disease \\
-\midrule
-\textbf{History} & Training checkpoints & Development, lineage & Maturation, plasticity & Exposure history & Infection course, relapse \\
-\bottomrule
-\end{tabular}
-\end{table}
-
 Some methods straddle multiple families. Gradient-based attribution (EAP, integrated gradients) computes counterfactual signals through both weights and activations jointly---it is neither purely observational nor interventional. Causal scrubbing intervenes on activations but evaluates through behavioral output. Automated circuit discovery methods like ACDC compose interventional-activation and behavioral evidence across multiple rounds. The family classification assigns each method to its \emph{primary} source of signal; methods that draw on multiple families are noted as such, and their cross-family nature is itself informative for convergent validity assessments.
 
 Within each family, interventional evidence is epistemically stronger than observational evidence because it rules out confounds that observation alone cannot. When evaluating a claim, the analyst asks: how many cells are covered? Which families and modes are represented? And are there cells that \emph{should} support the claim but do not? Absence of expected evidence is informative---it may indicate a gap in the claim or a limitation of the proposed mechanism. Measurement calibrations---bootstrap stability, seed variance, baseline separation---cut across all eight cells and are described in \Cref{sec:calibrations}.
@@ -526,7 +502,6 @@ I8 & Confounding sensitivity & How strong must an unmeasured confounder be to ex
 I9 & Epistatic interaction & Do circuit components interact non-additively, and does the direction of interaction distinguish shared pathways from mutual compensation? \\
 I10 & Rescue reversibility & Does restoring a corrupted component recover behavior? \\
 I11 & Onset coupling & Does the mechanism appear when the capability appears? \\
-\midrule
 I12 & Offset coupling & Does the mechanism go when the capability is removed? \\
 \midrule
 E1 & Intervention reach & Has the result been reproduced under at least two intervention families, and do they agree? \\
@@ -551,8 +526,6 @@ Two of the internal-validity criteria address what necessity and sufficiency lea
 The internal-validity criteria are written in terms of interventions because interventions are the strongest evidence for necessity and sufficiency. Fields that cannot intervene establish I1 and I2 by other means: natural experiments, instrumental variables, comparison across cases. Those routes reach the same conclusion at the cost of assumptions the intervention did not need, so a claim should record which route it took.
 
 V5 records the scope a claim asserts. Whether the evidence reaches that scope is a separate question, addressed in the companion work on admissibility.
-
-
 
 
 \begingroup
@@ -749,8 +722,6 @@ The case studies converge on five concrete changes to MI research practice that 
 \item \emph{Declare description mode and scope.} State explicitly whether the claim is computational, algorithmic, or implementational, and what input distribution it is validated on. This costs zero experiments and prevents the most common interpretive inflation.
 \item \emph{Report non-uniqueness.} If alternative circuits achieve comparable faithfulness, report this as a finding rather than suppressing it. Non-uniqueness is scientific information; a single reported circuit is a selection from a space the reader cannot see.
 \end{enumerate}
-
-
 
 
 % ============================================================
@@ -1050,8 +1021,6 @@ A08 Onset--Offset Coupling & Whether a mechanism's measured strength tracks the 
 \bottomrule
 \end{tabular}
 \medskip
-
-
 
 \begin{minipage}{\linewidth}
 \noindent{\textbf{B. Structural}}\par
