@@ -36,13 +36,18 @@
 \usepackage{caption}
 \captionsetup[table]{skip=8pt}
 
-\title{Mechanistic Validity: A Validity Theory, Research Methodology, and Evidence Standard for Mechanistic Claims}
+\title{Mechanistic Validity: A Validity Theory, Research Methodology, and Evidence Standard for Mechanistic Claims
+\thanks{Version 23. Earlier versions were circulated privately; this is the first to carry the criterion audits in the same document.}}
 
 \author{\name Elliot Tower \\
       \email elliot@elliottower.ai}
 
 
 
+
+% claims are numbered subsubsections here, so each one appears in the table of
+% contents and is reachable by hyperlink
+\newcommand{\claimheading}[1]{\subsubsection{#1}}
 
 \begin{document}
 
@@ -86,7 +91,7 @@ The pipeline has two uses. When \emph{running experiments}, evidence builds upwa
 
 The same criteria apply to circuits, SAE features, probing classifiers, steering vectors, transcoders, and crosscoders---the questions ``is the construct well-defined?'' and ``is the evidence causal?'' do not depend on how the evidence was produced.
 
-Its unit of analysis is a single causal mechanistic claim---not a model, a method, or a benchmark score---and the evidence a claim owes is fixed by the description mode it declares. We describe lessons from validity failures across sciences (\Cref{sec:motivation}), the framework (\Cref{sec:framework}), the concrete methodology for generating evidence (\Cref{sec:methodology}), its theoretical foundations (\Cref{sec:foundations}), its application to sixteen published claims spanning circuits, features, steering vectors, and a subspace-level result (\Cref{sec:case-studies}), the framework applied to itself (\Cref{sec:self-validation}), and its implications for the field (\Cref{sec:discussion}).
+Its unit of analysis is a single causal mechanistic claim---not a model, a method, or a benchmark score---and the evidence a claim owes is fixed by the description mode it declares. We describe lessons from validity failures across sciences (\Cref{sec:motivation}), the framework (\Cref{sec:framework}), the concrete methodology for generating evidence (\Cref{sec:methodology}), its theoretical foundations (\Cref{sec:foundations}), its application to sixteen published claims spanning circuits, features, steering vectors, and a subspace-level result (\Cref{sec:case-studies}), and its implications for the field (\Cref{sec:discussion}).
 
 
 % ============================================================
@@ -895,44 +900,6 @@ To demonstrate reachability, consider what it would take for the Fourier mechani
 \paragraph{Untested discriminant validity.} Three claims in the set name a construct whose separation from a neighbor is presupposed and never measured. ``Gender bias circuit'' presupposes that bias separates from gender competence, and \citet{vig2020gender} localize only the first, excluding from their measurement the definitionally gendered items that would carry the test. ``Knowledge neuron'' presupposes that factual knowledge separates from other linguistic regularity, and \citet{niu2024knowledge} later show the same editing machinery moves both. ``SAE feature'' presupposes that a recovered direction is a unit of the model rather than of the dictionary, and \citet{heap2025sparse} show the instrument that established it cannot tell a trained transformer from a randomly initialized one. C4 is the criterion most often skipped and the one whose failure is least repairable by more of the same evidence: where the construct is not separable from its neighbor, the response is reformulation, not another experiment.
 
 % ============================================================
-\section{Validating the Framework Itself}
-\label{sec:self-validation}
-
-The audit in \Cref{sec:case-studies} scores published claims, but it invites an obvious objection: the criteria were designed by the same author who then applied them, so the verdicts could be retrofitted. \citet{meloux2026validating} state the general form of this problem sharply---``an explanation can be plausible (convincing to a human) without being faithful (an accurate account of the underlying mechanism), and users often prefer the former.'' A framework about validity has to survive being turned on itself, and plausibility to its own author is exactly the wrong evidence. We specify four checks. The first is the central one and is reported below; the remaining three are specified here and their status is stated explicitly.
-
-\subsection{The historical validation audit}
-\label{sec:historical-audit}
-
-The framework makes a falsifiable prediction: \emph{a claim caps at the tier corresponding to its weakest validity dimension}. The prediction is testable against claims whose outcomes are already settled. We score historical claims on the evidence available at the time they were made, predict the ceiling each should have reached, and compare against what subsequently happened.
-
-\paragraph{Matched controls.} Scoring failures alone would be post-hoc rationalization regardless of how well the framework fits. Every failed claim is therefore paired with a control: a claim from the same era, the same field, and the same evidence regime that \emph{held up}. The framework has discriminant power only if failures and controls differ in their weakest dimension. The strongest pairs share a dataset rather than merely a field---the height polygenic-adaptation signal against the height associations from the same consortium; ENCODE's 80\% biochemical-function figure against the conserved fraction reported in the same project; HDL against LDL as causal targets in the same epidemiological literature.
-
-\paragraph{Blinding.} These cases are well known and their outcomes are known to us, so a promise to disregard that is not credible. We therefore score \emph{evidence structure} rather than cases. For each claim we extract a structured record from period-appropriate sources with an explicit cutoff at the date of the original claim, stating which evidence families were present, at what quality, with what sample sizes and controls, and omitting anything that identifies the case. A second rater scores the five dimensions from these records alone, blind to case identity and to outcomes. Rubric and records are frozen at a public commit hash before any join to outcomes. Redaction is feasible precisely because the framework scores structure: ``a cross-sectional association in $n\approx4{,}000$ with no interventional follow-up and no independent replication'' is scoreable without knowing which claim it is.
-
-\paragraph{Hypotheses, frozen in advance.}
-\begin{enumerate}[nosep]
-\item \textbf{H1 (ceiling).} The predicted ceiling matches the tier the claim actually reached.
-\item \textbf{H2 (discriminant).} Failures and matched controls differ in their weakest dimension. This is the substantive test; H1 without H2 is description.
-\item \textbf{H3 (cross-field invariance).} Dimension-level verdicts behave the same way regardless of which field's evidence families were used to derive them (\Cref{sec:evidence-families}).
-\item \textbf{H4 (which dimension).} Construct and internal validity carry the discriminant signal; measurement and external validity do not. HDL had excellent measurement and external validity and failed regardless.
-\end{enumerate}
-
-\paragraph{Status and results.}
-\textcolor{red}{[RESULT: $n=20$ cases (10 failures, 10 matched controls) across mechanistic interpretability, genetic epidemiology, clinical prediction and neuroimaging. Exact-tier match rate with Clopper--Pearson CI; within-one-tier rate. H2: paired comparison of weakest-dimension score, failures vs.\ controls. H3: does the H2 effect hold within each field separately. H4: which dimension separates failures from controls. Report all four outcomes including nulls.]}
-
-\textcolor{red}{[STATUS: protocol specified and pre-registered; audit not yet run. Ten matched pairs detects only a large effect---interpret a null as underpowered rather than as refutation.]}
-
-\subsection{Remaining checks}
-
-\paragraph{A ground-truth calibration.} The Validated tier is reachable only against a claim whose mechanism is known independently of the audit. Modular addition supplies one: a small transformer trained to generalization implements modular arithmetic through a Fourier construction stated in closed form \citep{nanda2023progress}, and \citet{zhong2023clock} show the same task admits a second circular-embedding algorithm---``Pizza''---alongside the original ``Clock,'' distinguished by gradient symmetricity and distance irrelevance rather than by anything in the Fourier domain. That distinction is what makes the setting a calibration target rather than merely a ground truth, and the reason is a measurement failure the framework should catch. Fourier structure does not discriminate the two: on the same Pizza model, the Clock functional form still explains 75.4--75.6\% of logit variance against Pizza's 99.2\%, so an instrument that certifies a mechanism at mid-70s fraction-of-variance-explained will certify the wrong one \citep[Table~2]{zhong2023clock}. Running the full measurement (M1--M7) and interpretive (V1--V5) suites on a trained model should therefore both certify the true mechanism at Validated and deny that tier to a claim asserting the other, on the strength of the discriminating instruments rather than the shared one. A framework that awards Validated to both, or to neither, is miscalibrated---and a framework that awards it on Fourier evidence alone has reproduced the M4 failure it exists to detect. \citet{meloux2026validating} provide a benchmark of ten simulated systems with hand-built ground-truth abstraction maps that makes the metric-level version of this calibration cheap to run; the claim-level version---does \emph{tier assignment} track ground truth, as distinct from whether a metric score does---remains ours to establish. \textcolor{red}{[STATUS: not yet run.]}
-
-\paragraph{A pre-registered prospective audit.} Retrospective scoring cannot rule out retrofitting on its own. We therefore pre-register verdicts on newly published claims before their evidence is fully reviewed, freezing the predicted tier and its rationale at a public commit hash, and report how the prospective verdicts land. A verdict committed before the evidence is a severe test of the framework in exactly the sense the framework demands of the claims it audits---the same discipline, applied reflexively. \textcolor{red}{[STATUS: not yet run.]}
-
-\paragraph{Inter-rater reliability.} Because aggregating criterion-level results to a tier involves judgment, two evaluators could assign different tiers to the same claim. The framework mitigates this by making the structured validity profile, not the tier, the primary output: disagreement localizes to individual, independently falsifiable criterion judgments rather than a holistic impression. Agreement is reported at the criterion level, where it matters, rather than only at the tier, using intraclass correlation with 95\% confidence intervals and the \citet{koo2016guideline} interpretive bands, following the protocol \citet{vandenben2026building} use for pipeline-induced variance in autointerpretability scores.
-
-Two external results calibrate what to expect. \citet{joshi2026causality} annotate 186 claims across 50 papers for the gap between the evidence a method establishes and the claim its language asserts, and report inter-annotator agreement on their confidence rating at $\alpha = 0.11$---near chance. \citet{vandenben2026building} report intraclass correlations as low as $-0.049$ (95\% CI $[-0.094, -0.006]$) for autointerpretability scores under variation in which activating examples are sampled. Classifying scientific claims by evidential strength is a task on which trained annotators agree poorly, and any agreement statistic we report should be read against that floor rather than against an idealized one. \textcolor{red}{[RESULT: per-criterion ICC(2,1) with 95\% CIs, two independent raters, on a random subsample of the audited claims. Expect agreement on measurement criteria to exceed agreement on construct criteria; that gradient is itself a finding.]} \textcolor{red}{[STATUS: not yet run.]}
-
-% ============================================================
 \section{Discussion}
 \label{sec:discussion}
 
@@ -980,7 +947,7 @@ This work is a theoretical contribution. The case study verdicts are based on pu
 
 \paragraph{Tier thresholds are provisional.} The minimum evidence requirements for tier promotion (\Cref{tab:tier-promotion})---such as ``$\geq 3$ evidence families'' for Triangulated or ``$\geq 2$ ablation methods'' for Mechanistically Supported---are not derived from first principles. They are calibrated against the authors' judgment on the case studies and against established precedents in the source disciplines (clinical trials require multiple endpoints; genetics requires genome-wide replication). The synthesis methods in \Cref{sec:methodology}---Robust Rank Aggregation for cross-method convergence, Dawid-Skene consensus for reliability-weighted voting, and distributional stability via Wasserstein distance---partially alleviate this concern by replacing fixed count thresholds with principled statistical aggregation: a ``$\geq 3$ evidence families'' requirement becomes ``statistically significant convergence across independent methods'' when operationalized through RRA. Nonetheless, the mapping from continuous synthesis scores to discrete tier boundaries involves judgment, and a formal sensitivity analysis showing how verdicts change under threshold perturbation would strengthen the framework.
 
-\paragraph{Calibration of the framework itself.} A framework is an instrument, and instruments are judged by calibration rather than by refutation: GRADE, the USPSTF grading scheme and the multitrait--multimethod matrix issue no falsifiable predictions either, and no one has asked what would refute them. The commitment we make instead is the one stated in \Cref{sec:self-validation}. Modular addition supplies two rival algorithms known independently of any audit, and Fourier evidence does not discriminate them---on a Pizza model the Clock functional form still explains 75.4--75.6\% of logit variance \citep[Table~2]{zhong2023clock}. Running the measurement and interpretive suites there should certify the algorithm the model implements and deny that tier to the other, on the strength of the discriminating instruments rather than the shared one. A framework that certifies both, or neither, is miscalibrated. That test can be run today, which is what makes it a commitment rather than a disclaimer.
+\paragraph{Calibration of the framework itself.} A framework is an instrument, and instruments are judged by calibration rather than by refutation: GRADE, the USPSTF grading scheme and the multitrait--multimethod matrix issue no falsifiable predictions either, and no one has asked what would refute them. The commitment we make instead is to a ground-truth case. Modular addition supplies two rival algorithms known independently of any audit, and Fourier evidence does not discriminate them---on a Pizza model the Clock functional form still explains 75.4--75.6\% of logit variance \citep[Table~2]{zhong2023clock}. Running the measurement and interpretive suites there should certify the algorithm the model implements and deny that tier to the other, on the strength of the discriminating instruments rather than the shared one. A framework that certifies both, or neither, is miscalibrated. That test can be run today, which is what makes it a commitment rather than a disclaimer.
 
 \paragraph{Scope of ``method-agnostic.''}  The framework is applied almost entirely to attention-head-level circuit claims in GPT-2-scale models. Extending it to SAE features, steering vectors, or crosscoders may require adapting how specific criteria are operationalized---the necessity/sufficiency tests look different for a distributed feature than for a localized head. The criteria themselves (``is specificity tested?'', ``does it generalize?'') are method-agnostic; their concrete instantiation is not. We have gestured at this adaptation in the metrics inventory (\Cref{appendix:metrics}) but have not demonstrated a full end-to-end application to a non-circuit MI result.
 
@@ -1232,5 +1199,45 @@ F15 Multiple Comparisons & Whether scores are corrected for the number of compon
 \end{minipage}
 
 \endgroup
+
+
+\clearpage
+\subsection{Criterion audits}
+\label{appendix:audits}
+Each claim below carries its own scorecard against the 36 criteria, the readings the
+claim admits, and the tier ladder showing what blocks promotion.  The claims appear in
+the order they are introduced in \Cref{sec:case-studies}.
+
+\input{generated/induction_section}
+
+\input{generated/copy_suppression_section}
+
+\input{generated/greater_than_section}
+
+\input{generated/grokking_section}
+
+\input{generated/refusal_section}
+
+\input{generated/successor_heads_section}
+
+\input{generated/superposition_section}
+
+\input{generated/workspace_section}
+
+\input{generated/docstring_section}
+
+\input{generated/gender_section}
+
+\input{generated/ioi_section}
+
+\input{generated/othello_section}
+
+\input{generated/sae_section}
+
+\input{generated/probing_section}
+
+\input{generated/induction_broad_section}
+
+\input{generated/knowledge_neurons_section}
 
 \end{document}

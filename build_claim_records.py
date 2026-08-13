@@ -25,7 +25,7 @@ import yaml
 
 ROOT = pathlib.Path(__file__).resolve().parent
 BIB = ROOT / "paper" / "references.bib"
-TEX = ROOT / "paper" / "mechanistic_validity.tex"
+TEX = ROOT / "paper" / "mechanistic_validity_v23.tex"
 CLAIMS = ROOT / "sources"
 
 FIELD = re.compile(r"(\w+)\s*=\s*[{\"](.*?)[}\"]\s*,?\s*$", re.S)
