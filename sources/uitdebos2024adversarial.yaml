@@ -1,5 +1,5 @@
 citation: uitdebos2024adversarial
-depth: cited
+depth: quoted
 title: Adversarial Circuit Evaluation
 authors:
 - uit de Bos
@@ -8,3 +8,5 @@ year: '2024'
 venue: arXiv preprint
 url: https://arxiv.org/abs/2407.15166
 arxiv: '2407.15166'
+local: reference/uitdebos_2024_adversarial_circuit_evaluation.pdf
+sha256: 5ab4c703874e65ed72427221ea1d9c6c1452957a662a7642d73134d4b5f9975d

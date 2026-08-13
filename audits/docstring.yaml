@@ -897,7 +897,7 @@ criteria:
   E2:
     name: Prompt generalization
     status: D
-    short: The post never varies the prompt family; the status rests on later work
+    short: A subclass of in-distribution inputs makes the circuit diverge from the model
     verified: false
     reasoning: 'NOT SETTLED BY THE SOURCE. The status rests entirely on post-origin work. The post itself
       never varies the prompt distribution and re-measures the circuit, so nothing in it can confirm or
@@ -921,6 +921,15 @@ criteria:
         for the IOI and docstring tasks fail to behave similarly to the full model \emph{even on completely
         benign inputs from the original task}.'' The failures are in-distribution, so this is generalisation
         within the origin task, not beyond it
+    refs:
+    - citation: uitdebos2024adversarial
+      text: patch inputs that have file as one of their parameters disrupt the circuit
+      section: '3'
+      page: null
+      direction: lowers
+      local: reference/uitdebos_2024_adversarial_circuit_evaluation.pdf
+      sha256: 5ab4c703874e65ed72427221ea1d9c6c1452957a662a7642d73134d4b5f9975d
+      extract_cmd: pdftotext
   E3:
     name: Cross-task generalization
     status: U
