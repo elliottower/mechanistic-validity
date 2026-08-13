@@ -1,9 +1,10 @@
 citation: loevinger1957objective
-depth: uncited
+depth: quoted
 title: Objective Tests as Instruments of Psychological Theory
 authors:
 - Loevinger, Jane
-year: ''
-venue: Psychological Reports
-url: https://doi.org/10.2466/pr0.1957.3.3.635
+year: '1957'
+venue: Psychological Reports 3(3), Monograph Supplement 9
 doi: 10.2466/pr0.1957.3.3.635
+local: reference/loevinger_1957_objective_tests.pdf
+sha256: b23f6b0be4a24890995f68b37dfcfc256d446611f01ab8b05f28de87478763c4
