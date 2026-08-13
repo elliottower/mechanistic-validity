@@ -653,10 +653,30 @@ Three diagnostic labels sit outside the hierarchy, covering the three ways a cla
 \paragraph{Completeness is reported separately from tier.} A verdict states how well a claim is evidenced. It does not state how much of the mechanism the claim specifies, and the two vary independently. The two also trade against each other inside a single paper: every additional component a claim specifies is another component whose role must be evidenced, so mechanistic specificity is bought with evidential risk. We report both. For a fixed body of evidence the achievable combinations form a Pareto frontier---no claim on it can be made more specific without losing tier, or better supported without becoming vaguer---and a paper's contribution is partly which point on that frontier it chose. A claim's position on Craver's continuum is read from structural plausibility (C2) and level--evidence match (V2) rather than scored as a separate criterion. The IOI circuit and superposition both reach Mechanistically Supported and sit at opposite ends of it: one names four of seven head classes by role without a weight-level account, the other derives every component in closed form.
 
 % ============================================================
-\subsection{Severity: preregistration and corroboration}
+\subsection{Severity}
 \label{sec:severity}
 
-The top tiers require more than accumulated confirmations. A claim tested only on the evidence it was constructed to fit has been confirmed, not corroborated: it passed a test it could not have failed. Following the error-statistical tradition \citep{mayo2018statistical}, we require the criteria that lift a claim to Triangulated or Validated to be established by \emph{severe} tests---tests the claim could have failed but did not. Severity is earned two ways. Preregistration supplies it directly: a specificity or generalization test whose prediction was fixed in advance is more severe than one selected after seeing the result. Whether a test was preregistered is recorded alongside the criterion and does not change the status it receives, on the same footing as selection correction. Independent corroboration supplies it structurally: convergent evidence across evidence families with different failure modes (C3) is, by construction, evidence the claim was not optimized to produce. The tier ceiling is therefore a consequence of the existing structure rather than an added penalty---Triangulated already requires cross-family convergence, so a claim resting on a single family, however often re-tested, cannot exceed Mechanistically Supported. Preregistration is the cleaner route to severity, not a separate gate: the verdict label stays a single word, and whether a tier was earned by preregistration or by corroboration is stated in the claim's write-up.
+The top tiers require more than accumulated confirmations. A claim tested only on
+the evidence it was constructed to fit has been confirmed where it needed to be
+corroborated: it passed a test it could not have failed. Following the
+error-statistical tradition \citep{mayo2018statistical}, the criteria that lift a
+claim to Triangulated or Validated must be established by \emph{severe} tests,
+meaning tests the claim could have failed and did not.
+
+Severity enters this framework through the tier requirements themselves.
+Convergent evidence across families with different failure modes (C3) is, by
+construction, evidence a claim was not optimized to produce, and Triangulated
+already demands it. A claim resting on one family therefore stops at
+Mechanistically Supported however often it is re-tested, and that ceiling follows
+from what the tier asks for. No separate severity gate is added on top.
+
+Preregistration is recorded and never scored. A prediction fixed before the
+result is more severe than one selected after it, and the audit records which a
+test was. The status the criterion receives is the same either way. Scoring it
+would make identical evidence count differently according to whether a disclosure
+was made, and this framework grades evidence. Selection correction (M7) is
+recorded on the same footing and for the same reason: both describe how a result
+was obtained, and both belong in the record rather than in the tier.
 
 % ============================================================
 \section{Methodology}
@@ -975,7 +995,7 @@ The framework is open-source and method-agnostic. It applies the same criteria t
 
 \bibliographystyle{tmlr}
 
-\nocite{campbell1963experimental,loevinger1957objective}
+\nocite{campbell1963experimental}
 \bibliography{references}
 
 
