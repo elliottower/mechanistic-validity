@@ -667,12 +667,44 @@ The framework layers described in \Cref{sec:framework} define what counts as evi
 
 Metrics are concrete, runnable tests that produce measurements about a neural network---the layer of the hierarchy where empirical contact with the model actually happens. Everything above (evidence families, criteria, validity types, verdicts) depends on what metrics measure and how well they measure it. A metric alone cannot establish a claim; a claim requires evidence from multiple metrics, evaluated against the criteria appropriate to the validity type being asserted.
 
-Each metric takes a model, a task, and optionally an intervention as input, and produces a number as output. Metrics can be composed: one metric's output feeds into another. The framework organizes evidence into four evidence families; the current catalog defines 59 metrics across families A--F, drawing on interventionist, information-theoretic, structural, and generalization traditions of causation. The full inventory is in \Cref{appendix:metrics}.
+Each metric takes a model, a task, and optionally an intervention as input, and produces a number as output. Metrics can be composed: one metric's output feeds into another. The framework organizes evidence into four evidence families by \emph{source of signal}; the catalog below groups metrics by \emph{what they measure}, in six groups A--F, so a group may draw on more than one family. The current catalog defines 59 metrics across groups A--F, drawing on interventionist, information-theoretic, structural, and generalization traditions of causation. The full inventory is in \Cref{appendix:metrics}.
 
 \subsection{Calibrations}
 \label{sec:calibrations}
 
-Calibrations are meta-metrics: they take another metric's output as input and assess whether that output is stable (bootstrap stability), reproducible (seed variance), or distinguishable from baselines (baseline separation). A high score on a primary metric is not evidence if the corresponding calibration fails. The 15 calibration metrics correspond to criteria M1--M6 (reliability, baseline separation, stability, calibration, sensitivity, invariance). The full catalog is in \Cref{appendix:metrics}.
+Calibrations are meta-metrics: they take another metric's output as input and assess whether that output is stable (bootstrap stability), reproducible (seed variance), or distinguishable from baselines (baseline separation). A high score on a primary metric is not evidence if the corresponding calibration fails. The 15 calibration metrics correspond to the measurement criteria M1--M7, and \Cref{tab:f-to-m} gives the mapping. The full catalog is in \Cref{appendix:metrics}.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Which measurement criterion each calibration metric bears on.  The
+correspondence is many-to-one: reliability and stability each take several
+calibrations, and selection correction takes one.}
+\label{tab:f-to-m}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Criterion} & \textbf{Calibration metrics} \\
+\midrule
+M1 Reliability          & F01 Test--Retest, F02 Bootstrap Stability, F03 Seed Variance, \\
+                        & F11 Estimator Uncertainty \\
+\addlinespace[2pt]
+M2 Baseline separation  & F06 Baseline Separation, F07 Negative Controls \\
+\addlinespace[2pt]
+M3 Stability            & F04 Checkpoint Variance, F05 Prompt Variance, \\
+                        & F09 Intervention Robustness, F10 Hyperparam.\ Sensitivity \\
+\addlinespace[2pt]
+M4 Calibration          & F12 Calibration Curve, F13 Cross-Metric Convergence \\
+\addlinespace[2pt]
+M5 Sensitivity          & F08 Positive Controls \\
+\addlinespace[2pt]
+M6 Invariance           & F14 Measurement Invariance \\
+\addlinespace[2pt]
+M7 Selection correction & F15 Multiple Comparisons \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 \subsection{Recommended practice}
 \label{sec:design}
@@ -981,6 +1013,7 @@ This appendix provides the full metric inventory grouped by evidence family (\re
 \subsection{Metrics inventory}
 \label{appendix:metrics}
 The full inventory of metrics is listed below, grouped by what each metric measures: causal, structural, information-theoretic, behavioral, representational, and measurement. These groupings organize the catalog. The evidence families of \Cref{sec:evidence-families} classify by source of signal instead, so a metric group may draw on more than one family. \\
+Groups A--E are candidate metrics drawn from adjacent literatures: they are available to the framework and most are not exercised by the audits in this paper.  Group F is different in kind.  Those fifteen are the calibrations the audits actually run, they are the only group that maps onto the criteria (\Cref{tab:f-to-m}), and a claim's measurement verdict is decided by them.
 \\
 \begingroup
 \small
@@ -1002,21 +1035,21 @@ The full inventory of metrics is listed below, grouped by what each metric measu
 \toprule
 \textbf{Metric} & \textbf{Description} \\
 \midrule
-A02 Counterfactual DAS & Distributed Alignment Search and IIA for testing causal abstraction hypotheses \\
+A01 Counterfactual DAS & Distributed Alignment Search and IIA for testing causal abstraction hypotheses \\
 \midrule
-A03 Rubin CATE & Conditional average treatment effects across input subpopulations \\
+A02 Rubin CATE & Conditional average treatment effects across input subpopulations \\
 \midrule
-A06 Mediation & Natural direct and indirect effects decomposition for circuit paths \\
+A03 Mediation & Natural direct and indirect effects decomposition for circuit paths \\
 \midrule
-A09 MDL / SLT & Minimum description length and singular learning theory for circuit complexity \\
+A04 MDL / SLT & Minimum description length and singular learning theory for circuit complexity \\
 \midrule
-A11 Actual Cause & Halpern-Pearl actual causation on specific inputs, not just potential causes \\
+A05 Actual Cause & Halpern-Pearl actual causation on specific inputs, not just potential causes \\
 \midrule
-A12 Transportability & Formal conditions for circuit generalization across models and distributions \\
+A06 Transportability & Formal conditions for circuit generalization across models and distributions \\
 \midrule
-A13 Causal Discovery & NOTEARS / PC algorithms for learning DAGs over circuit components \\
+A07 Causal Discovery & NOTEARS / PC algorithms for learning DAGs over circuit components \\
 \midrule
-A14 Onset--Offset Coupling & Whether a mechanism's measured strength tracks the capability in both directions: rising as the capability is acquired during training, falling as it is removed by unlearning or fine-tuning, and returning if the capability returns. Adapted from guideline 3 of the molecular Koch's postulates \citep{fredricks1996sequence} \\
+A08 Onset--Offset Coupling & Whether a mechanism's measured strength tracks the capability in both directions: rising as the capability is acquired during training, falling as it is removed by unlearning or fine-tuning, and returning if the capability returns. Adapted from guideline 3 of the molecular Koch's postulates \citep{fredricks1996sequence} \\
 \bottomrule
 \end{tabular}
 \medskip
