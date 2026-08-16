@@ -140,7 +140,7 @@ views_evidence:
   designed_for:
   - H4
 - criterion: E2
-  evidence: Model and circuit behaviour diverge at a million prompt pairs
+  evidence: Model and circuit behavior diverge at a million prompt pairs
   cells:
     H1: I
     H2: I
@@ -261,14 +261,14 @@ criteria:
         descended from ablation". Two of the five are not: the OV copy score (§3.1) is a weight computation
         with no intervention, and attention-pattern inspection is observational. Three of the five share
         the mean-ablation primitive. The steelman of the `short` is that head *identification* always
-        starts from path patching and the other families only characterise heads already selected — true,
+        starts from path patching and the other families only characterize heads already selected — true,
         and a sharper statement than the one recorded. The post-origin agreement (ACDC, EAP, EAP-IG, SAE
         circuits, edge pruning) is not verifiable against this source.
 
         '
       legacy_evidence: 'Five families at origin: path patching, attention-pattern inspection, weight-level
         copy scores, out-of-distribution validation on repeated random tokens (Appendices H, I), and a
-        behavioural adversarial test (\S4.4). Later agreement is broad --- ACDC \citep{conmy2023towards},
+        behavioral adversarial test (\S4.4). Later agreement is broad --- ACDC \citep{conmy2023towards},
         EAP \citep{syed2023attribution}, EAP-IG \citep{hanna2024faith}, SAE circuits (O''Neill \& Bui
         2024), edge pruning (Bhaskar et al.\ 2024) all recover overlapping head sets. The cap is that
         agreement is method-conditional: seven independent groups report that varying the ablation or
@@ -280,7 +280,7 @@ criteria:
     verified: false
     reasoning: 'NOT SETTLED BY THE SOURCE. The paper never compares the IOI circuit against a circuit
       for a different task, in this or any model, so nothing in it bears on whether the construct separates
-      from a neighbouring one.
+      from a neighboring one.
 
       '
     notes:
@@ -409,11 +409,11 @@ criteria:
         0.46" reads, under the ordinary convention that higher faithfulness is better, as the naïve circuit
         being four times worse. That cell should state the direction (lower is better, it is a gap) or
         the reader will invert it. UNITS: logit difference between the IO and S tokens, averaged over
-        p_IOI, not a probability and not normalised. F(M) = 3.56 over 100,000 examples (§2). SOURCE ERROR:
+        p_IOI, not a probability and not normalized. F(M) = 3.56 over 100,000 examples (§2). SOURCE ERROR:
         §4.3 cites "(Figure 6a)" for the naïve circuit''s completeness results, but the Figure 6 caption
         assigns (a) to "our circuit" and (b) to "a naive circuit," and the panel headers read "Full circuit
         completeness tests" and "Naive circuit completeness tests." The §4.3 reference should be Figure
-        6b. Math notation in the quotes is normalised from the PDF''s typeset form (the pdftotext layout
+        6b. Math notation in the quotes is normalized from the PDF''s typeset form (the pdftotext layout
         extraction renders it as "|F (M ) − F (C)|").
 
         '
@@ -475,7 +475,7 @@ criteria:
         - F(C)| follows from the definition rather than from any statement; the paper never sets a threshold
         for what counts as faithful, which is the substance of the cell''s complaint. The Miller et al.
         inter-quartile figure and the Mueller et al. CPR/CMD replacement are post-origin. Math notation
-        is normalised from the PDF''s typeset form.
+        is normalized from the PDF''s typeset form.
 
         '
       legacy_evidence: 'Logit difference is well chosen --- it has a sign, a null value, and a stated
@@ -569,14 +569,14 @@ criteria:
       95% of the logit difference. The per-node necessity test is existentially quantified — "there exists
       a subset K" — so each minimality score is conditional on a co-ablated set selected to make that
       score large, and the paper states the resulting effects are small. Necessity is therefore established
-      for the circuit under a favourable conditioning set rather than for its components unconditionally,
+      for the circuit under a favorable conditioning set rather than for its components unconditionally,
       which is PC.
 
       '
     notes:
       verification: 'Both quantities in the legacy evidence check out verbatim: "only 5% drop in logit
         difference" (§3.4) and "at least 1% of the original logit difference" (§4.2). The legacy evidence''s
-        characterisation of the minimality sets as "chosen to maximise them" is an accurate reading of
+        characterization of the minimality sets as "chosen to maximise them" is an accurate reading of
         the existential quantifier in the §4.2 definition, though the paper does not use the word "maximise"
         for the choice of K; the greedy maximisation in Appendix M is applied to the completeness score,
         not to minimality. Appendix K (Figure 20) prints the K set, F(C \ (K ∪ {v})) and F(C \ K) for
@@ -607,7 +607,7 @@ criteria:
       verification: 'The 0.46 / 13% / 87% figures and the quoted phrase "or only 13% of F(M) = 3.56" are
         verbatim from §4. The ablation value is the mean over p_ABC, computed per-template (§2.1), which
         the cell does not state and which matters: the reference distribution is not the task distribution.
-        Math notation in the quotes is normalised from the PDF''s typeset form.
+        Math notation in the quotes is normalized from the PDF''s typeset form.
 
         '
       legacy_evidence: 'Mean-ablating everything outside the circuit leaves $|F(M)-F(C)| = 0.46$, ``or
@@ -625,7 +625,7 @@ criteria:
       on the paper''s own terms the criterion passes and the K sets are disclosed in Appendix K. The same
       source supplies the reason the pass is weak. Backup Name Mover Heads are defined as components that
       take over when others are removed, and the paper states their individual importance is the lowest
-      in the circuit and that swapping which eight are included does not change the circuit''s behaviour.
+      in the circuit and that swapping which eight are included does not change the circuit''s behavior.
       A criterion whose pass depends on a conditioning set, applied to components the authors say are
       interchangeable, does not establish that the circuit is minimal — I.
 
@@ -655,7 +655,7 @@ criteria:
       could register. What the source does supply is evidence pointing the other way: every head class
       it validates outside p_IOI is validated by showing the head performs its role on non-IOI input.
       Duplicate Token, Previous Token, Induction and Name Mover heads are all shown to be active on repeated
-      random sequences. Components shared with other behaviours, no measure that could detect an off-target
+      random sequences. Components shared with other behaviors, no measure that could detect an off-target
       effect: the recorded I does not overstate what the origin settles.
 
       '
@@ -672,17 +672,17 @@ criteria:
         find 78\% head overlap between the IOI and Colored Objects circuits in GPT-2 Medium and raise
         Colored Objects accuracy from 49.6\% to 93.7\% by forcing IOI-style inhibition; \citet{hanna2024faith}
         find cross-task faithfulness near zero in GPT-2 small and conclude ``overlap is not a good predictor
-        of cross-task faithfulness.'' Shared components, unshared behaviour
+        of cross-task faithfulness.'' Shared components, unshared behavior
   I5:
     name: Rival mechanism exclusion
     status: I
-    short: Greedy search finds knockout sets carrying 87\% of the behaviour
+    short: Greedy search finds knockout sets carrying 87\% of the behavior
     verified: true
     reasoning: 'Two rivals are present in the source and neither is ruled out. The naïve circuit is a
       strictly smaller specification that the paper reports as reaching comparable faithfulness, and the
       greedy completeness search finds knockout sets under which the model still performs the task while
       the circuit does not, recovering up to 87% of the original logit difference outside the published
-      circuit. The paper does not characterise what carries the behaviour in those cases, calling the
+      circuit. The paper does not characterize what carries the behavior in those cases, calling the
       sets not semantically interpretable and the incompleteness difficult to interpret. Rivals exhibited
       and left standing is I.
 
@@ -693,7 +693,7 @@ criteria:
         not produce a faithfulness score. It produces sets K to knock out, and 3.09 is an incompleteness
         score |F(C \ K) - F(M \ K)|, a different quantity from the faithfulness |F(M) - F(C)| that yields
         0.1 and 0.46. The finding is real and arguably stronger than the `short` claims — it says components
-        outside the published circuit can carry 87% of the behaviour — but it is not a rival circuit measured
+        outside the published circuit can carry 87% of the behavior — but it is not a rival circuit measured
         on faithfulness. The legacy evidence states this correctly; the `short` compresses it wrongly.
         Same error in audit_tables_full/ACH_IOI.tex line 46, "Greedy search finds head sets of comparable
         faithfulness." Status left unchanged. The correction runs the same direction as I, so the recorded
@@ -713,16 +713,16 @@ criteria:
     status: U
     short: Unattempted; no published test located
     verified: true
-    reasoning: 'A double dissociation needs two mechanisms and two behaviours, with each intervention
-      moving one and sparing the other. The source defines one circuit for one behaviour and validates
-      it against three criteria, none of which is comparative in that sense, and it never localises a
+    reasoning: 'A double dissociation needs two mechanisms and two behaviors, with each intervention
+      moving one and sparing the other. The source defines one circuit for one behavior and validates
+      it against three criteria, none of which is comparative in that sense, and it never localizes a
       second mechanism to trade against. The design is absent, not attempted and inconclusive. U.
 
       '
     notes:
       verification: 'Verified against a full read. The nearest thing in the source is the token/position
         decomposition in §3.2 and Appendix A, which dissociates two *signals* carried by one head class
-        rather than two mechanisms behind two behaviours, and so does not meet the criterion. Feucht et
+        rather than two mechanisms behind two behaviors, and so does not meet the criterion. Feucht et
         al. and Li & Subramani are post-origin.
 
         '
@@ -784,7 +784,7 @@ criteria:
     status: PC
     short: Backup Name Movers are a discovered non-additivity
     verified: true
-    reasoning: 'Non-additivity is the organising discovery of §3.4 rather than an incidental observation.
+    reasoning: 'Non-additivity is the organizing discovery of §3.4 rather than an incidental observation.
       The paper re-runs its entire path-patching sweep after knocking out a head class, finds that heads
       change role, and reports one head reversing the sign of its contribution. The finding is then built
       into the validation: the minimality criterion is defined as an effect conditional on a co-ablated
@@ -813,13 +813,13 @@ criteria:
     reasoning: 'Every intervention in the source runs in one direction. Corrupted activations are written
       into an otherwise clean forward pass and the damage is measured; the word "always" in the second
       quote fixes that direction for the whole paper. The complementary test — restore one component inside
-      an otherwise corrupted run and measure how much behaviour returns — is never performed, so no rescue
+      an otherwise corrupted run and measure how much behavior returns — is never performed, so no rescue
       result exists at origin.
 
       '
     notes:
       verification: '"We will always take xorig to be a sample from pIOI" is the decisive sentence and
-        is verbatim. The cell''s characterisation of the direction is correct. The Chhabra et al. corrupt-then-retrain
+        is verbatim. The cell''s characterization of the direction is correct. The Chhabra et al. corrupt-then-retrain
         result that lifts this to PC is post-origin and operates at the training level rather than the
         activation level, so it is a different kind of rescue from the one the criterion describes.
 
@@ -838,7 +838,7 @@ criteria:
       training is a hypothesis about why the compensation effect exists, offered without any training-time
       observable to test it against, which is exactly the position the N/A records: there is no training
       run to intervene on and no sequence of checkpoints in which a mechanism''s onset could be timed
-      against the behaviour''s.
+      against the behavior''s.
 
       '
     notes:
@@ -864,7 +864,7 @@ criteria:
       '
     notes:
       verification: 'Read in full. Both results behind the recorded PC — the Pythia-160m head that loses
-        name-mover behaviour and the OLMo-2 reuse decline — are post-origin and in other models. Nothing
+        name-mover behavior and the OLMo-2 reuse decline — are post-origin and in other models. Nothing
         here bears on them.
 
         '
@@ -925,12 +925,12 @@ criteria:
     reasoning: 'All circuit validation happens on p_IOI, a fifteen-template generator, and every reported
       number is an average over it; the source holds out no prompt set and reports no per-example distribution.
       The one occasion it steps outside that generator, the circuit''s account stops covering the model''s
-      behaviour and the paper says so, naming an S-Inhibition attention pattern its analysis does not
+      behavior and the paper says so, naming an S-Inhibition attention pattern its analysis does not
       reach. The origin therefore shows the account is bound to its prompt distribution.
 
       '
     notes:
-      verification: 'The §4.4 admission that behaviour outside p_IOI is "beyond the analysis presented
+      verification: 'The §4.4 admission that behavior outside p_IOI is "beyond the analysis presented
         in Section 3" is origin-side evidence for the recorded D that the cell does not cite; the cell
         rests entirely on uit de Bos & Garriga-Alonso, which is post-origin. Their KL figures cannot be
         checked here.
@@ -946,7 +946,7 @@ criteria:
     status: PC
     short: Repeated-random-token generalization at origin, one direction
     verified: true
-    reasoning: 'Generalisation is present at origin and runs one way: components identified on IOI are
+    reasoning: 'Generalization is present at origin and runs one way: components identified on IOI are
       shown to perform their assigned operation on repeated random sequences, which is a distribution
       with no names, no syntax and no indirect object. That establishes the components are not IOI-specific.
       It does not establish that the circuit as an assembled mechanism performs any other task, and no
@@ -1097,7 +1097,7 @@ criteria:
     status: I
     short: The na\"ive circuit is simpler and not clearly worse
     verified: true
-    reasoning: 'A strictly simpler description of the same behaviour is built at origin. It drops the
+    reasoning: 'A strictly simpler description of the same behavior is built at origin. It drops the
       Backup and Negative Name Movers and half the Duplicate Token and Induction heads, and it matches
       the published circuit on the criterion the paper leads with. Two of the three completeness samplers
       separate them; the third separates neither. The source therefore constructs its own simpler rival
@@ -1108,7 +1108,7 @@ criteria:
       verification: 'Same numbers as M2 and the same direction caveat applies: faithfulness is the gap
         |F(M) - F(C)|, so the naïve circuit''s 0.1 is the better score, not the worse one. The cell''s
         phrasing "is not clearly worse" is right and is more careful than the corresponding row in audit_tables_full/ACH_IOI.tex.
-        The Merullo et al. generalisation is post-origin.
+        The Merullo et al. generalization is post-origin.
 
         '
       legacy_evidence: 'A simpler description is tested at origin and is not clearly worse: the na\"ive
@@ -1154,7 +1154,7 @@ criteria:
     reasoning: 'Scope is declared in five places and in the two that matter most: the abstract concedes
       remaining gaps before any result is given, and the introduction states the circuit fails the hardest
       of the paper''s own tests. The exclusions are stated as design decisions rather than discovered
-      afterwards, and §5 frames the whole result as a model organism, which names the generalisation limit
+      afterwards, and §5 frames the whole result as a model organism, which names the generalization limit
       rather than leaving the reader to infer it. C.
 
       '

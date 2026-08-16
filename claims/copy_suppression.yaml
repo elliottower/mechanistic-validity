@@ -10,7 +10,7 @@ description: 'Negative Head L10H7 in GPT-2 Small suppresses tokens that earlier 
   scores across GPT, Pythia and SoLU models. Description mode: implementational-functional.'
 source:
   citation: mcdougall2023copy
-  title: ''
+  title: 'Copy Suppression: Comprehensively Understanding an Attention Head'
   url: https://arxiv.org/abs/2310.04625
   local: reference/mcdougall_2023_copy_suppression.pdf
   sha256: a0dc617f897adeb92bb476ab80c0c2722fb5ad58453cbc578c99e7dbd4dc62e3
@@ -98,7 +98,7 @@ claims:
       section: Appendix F
       page: null
       line: null
-    - exact: However, one limitation of our analysis of the QK circuit is that this idealised setup does
+    - exact: However, one limitation of our analysis of the QK circuit is that this idealized setup does
         not completely faithfully represent L10H7’s real functioning (Appendices M.2, M.3 and N).
       prefix: ''
       suffix: ''
@@ -126,8 +126,8 @@ claims:
       section: §2
       page: null
       line: null
-    - exact: 1. In Section 3.1, we analyse the OV circuit, and show that the head suppresses the prediction
-        of 84.70% of tokens which it attends to. 2. In Section 3.2, we analyse the QK circuit, and show
+    - exact: 1. In Section 3.1, we analyze the OV circuit, and show that the head suppresses the prediction
+        of 84.70% of tokens which it attends to. 2. In Section 3.2, we analyze the QK circuit, and show
         that the head attends to the token which the model is currently predicting across 95.72% of the
         model’s vocabulary.
       prefix: ''
@@ -382,7 +382,7 @@ claims:
       section: Appendix M.2
       page: null
       line: null
-    - exact: However, one limitation of our analysis of the QK circuit is that this idealised setup does
+    - exact: However, one limitation of our analysis of the QK circuit is that this idealized setup does
         not completely faithfully represent L10H7’s real functioning (Appendices M.2, M.3 and N).
       prefix: ''
       suffix: ''
@@ -770,7 +770,7 @@ claims:
   I6:
     quotes:
     - exact: We found that these backup heads on the right hand side use a qualitatively different mechanism
-        for self-repair than (copy suppressing) negative heads, which we summarise behaviorally in Table
+        for self-repair than (copy suppressing) negative heads, which we summarize behaviorally in Table
         2.
       prefix: ''
       suffix: ''
@@ -851,7 +851,7 @@ claims:
       page: null
       line: null
     - exact: We found that these backup heads on the right hand side use a qualitatively different mechanism
-        for self-repair than (copy suppressing) negative heads, which we summarise behaviorally in Table
+        for self-repair than (copy suppressing) negative heads, which we summarize behaviorally in Table
         2.
       prefix: ''
       suffix: ''
@@ -931,7 +931,7 @@ claims:
       page: null
       line: null
     - exact: 'Tests: Look at checkpointed models, and see if negative heads form concurrently with the
-        emergence of copying behaviour by other heads.'
+        emergence of copying behavior by other heads.'
       prefix: ''
       suffix: ''
       section: Appendix E
@@ -969,7 +969,7 @@ claims:
       page: null
       line: null
     - exact: 'Tests: Look at checkpointed models, and see if negative heads form concurrently with the
-        emergence of copying behaviour by other heads.'
+        emergence of copying behavior by other heads.'
       prefix: ''
       suffix: ''
       section: Appendix E
@@ -1090,9 +1090,9 @@ claims:
       section: Appendix A
       page: null
       line: null
-    - exact: We believe this holds a generalisable lesson for mechanistic interpretability - certain components
+    - exact: We believe this holds a generalizable lesson for mechanistic interpretability - certain components
         can appear to be using task-specific algorithms, but are actually implementing a more general
-        pattern of behaviour.
+        pattern of behavior.
       prefix: ''
       suffix: ''
       section: Appendix A
@@ -1254,8 +1254,8 @@ claims:
       section: §1
       page: null
       line: null
-    - exact: 1. In Section 3.1, we analyse the OV circuit, and show that the head suppresses the prediction
-        of 84.70% of tokens which it attends to. 2. In Section 3.2, we analyse the QK circuit, and show
+    - exact: 1. In Section 3.1, we analyze the OV circuit, and show that the head suppresses the prediction
+        of 84.70% of tokens which it attends to. 2. In Section 3.2, we analyze the QK circuit, and show
         that the head attends to the token which the model is currently predicting across 95.72% of the
         model’s vocabulary.
       prefix: ''
@@ -1279,7 +1279,7 @@ claims:
       section: §1
       page: null
       line: null
-    - exact: However, one limitation of our analysis of the QK circuit is that this idealised setup does
+    - exact: However, one limitation of our analysis of the QK circuit is that this idealized setup does
         not completely faithfully represent L10H7’s real functioning (Appendices M.2, M.3 and N).
       prefix: ''
       suffix: ''
@@ -1435,7 +1435,7 @@ claims:
       section: §1
       page: null
       line: null
-    - exact: However, one limitation of our analysis of the QK circuit is that this idealised setup does
+    - exact: However, one limitation of our analysis of the QK circuit is that this idealized setup does
         not completely faithfully represent L10H7’s real functioning (Appendices M.2, M.3 and N).
       prefix: ''
       suffix: ''

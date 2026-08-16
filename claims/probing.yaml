@@ -2,14 +2,13 @@ claim: probing
 title: Probing Classifiers as Mechanistic Evidence
 description: 'A classifier $g$ is trained on a model''s intermediate output $f_l(x)$ to predict a property
   $z$, and its accuracy is reported as evidence that the model has learned information relevant to $z$.
-  The audited object is the method rather than one experiment: the anchor is a review that runs none of
-  its own, so the evidence sits in the studies it formalises, and its Figure 1 separates the nine components
+  The audited object is the method rather than one experiment: the anchor is a review that runs no experiments of its own, so the evidence sits in the studies it formalizes, and its Figure 1 separates the nine components
   a probing result depends on from the ten controls the literature has added to them. Evaluated on: every architecture
-  family the method has been pointed at, from static word embeddings through recurrent and recursive networks
+  family the method has been applied to, from static word embeddings through recurrent and recursive networks
   to transformers, and outward to speech recognition and computer vision. Description mode: representational.'
 source:
   citation: belinkov2022probing
-  title: ''
+  title: 'Probing Classifiers: Promises, Shortcomings, and Advances'
   url: https://doi.org/10.1162/coli_a_00422
   local: reference/belinkov_2022_probing_classifiers.pdf
   sha256: 5d42161c48d0a4f885064c4f352c2b2e647f3ef179b98e170dea2638fc33f9d1

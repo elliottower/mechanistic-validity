@@ -1,10 +1,9 @@
 claim: superposition
 title: Superposition of Features in Toy Models
 description: 'A ReLU network trained to reconstruct sparse features stores more of them than it has dimensions,
-  giving each a non-orthogonal direction and absorbing the interference that creates, which the linear
-  model differing only in that activation function never does at any sparsity. Where the tradeoff falls
+  giving each feature a non-orthogonal direction and absorbing the interference those directions create; the linear model differing only in activation function shows no superposition at any sparsity. Where the tradeoff falls
   is mapped over an importance $\times$ sparsity grid against closed-form losses for each candidate weight
-  configuration, and the geometries the trained models settle into are uniform polytopes solving a generalised
+  configuration, and the geometries the trained models settle into are uniform polytopes solving a generalized
   Thomson problem. Evaluated on: toy autoencoders on synthetic features whose sparsity, importance and correlation
   are set by hand, across four architectures and sizes from $(2,1)$ to 400 features in 30 dimensions,
   plus an absolute-value model that computes through a compressed layer rather than storing. Description

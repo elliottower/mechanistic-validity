@@ -4,7 +4,7 @@ readings:
 - statement: Eight named heads compose to predict the next argument name in a Python docstring in this
     4-layer model
   verdict: Causally Suggestive
-  missing: Specificity on any non-docstring behaviour (I4), a leave-one-out over the eight heads (I3),
+  missing: Specificity on any non-docstring behavior (I4), a leave-one-out over the eight heads (I3),
     a matched random head set to show the 42\% belongs to these heads (M2), and dispersion on any reported
     number (M1)
   primary: true
@@ -22,13 +22,13 @@ readings:
 - statement: These heads, or the head types they instantiate, serve other tasks or recur in other models
   verdict: Insufficient
   missing: Cross-task reuse is never asked (E3), cross-model transfer is named as future work with no
-    model, head set or number reported (E4), and the circuit is never compared with one for a neighbouring
+    model, head set or number reported (E4), and the circuit is never compared with one for a neighboring
     task (C4)
   primary: false
 hypotheses:
 - id: H1
   view: Object
-  label: the eight named heads compose across three levels to produce the behaviour
+  label: the eight named heads compose across three levels to produce the behavior
 - id: H2
   view: Role
   label: the operation is docstring induction
@@ -40,7 +40,7 @@ hypotheses:
   label: head 1.4's recency preference comes from the positional embeddings rather than the causal mask
 - id: H5
   view: Object
-  label: no determinate eight-head set carries the behaviour
+  label: no determinate eight-head set carries the behavior
 - id: H6
   view: Instrumental
   label: the circuit is an artifact of resample ablation and of the search that selected it
@@ -120,7 +120,7 @@ views_evidence:
   - H3
 - criterion: I6
   evidence: The four-case design dissociates two candidate causes of one attention pattern; no second
-    behaviour of this model is measured, so the converse arm is missing
+    behavior of this model is measured, so the converse arm is missing
   cells:
     H1: '-'
     H2: '-'
@@ -202,7 +202,7 @@ tiers:
   missing: '---'
 - name: Mechanistically Supported
   requires: Sufficiency (I2); reach (E1); specificity (I4)
-  missing: '\textbf{I4} unattempted: no non-docstring behaviour is measured, in a model that also handles
+  missing: '\textbf{I4} unattempted: no non-docstring behavior is measured, in a model that also handles
     natural language; \textbf{I2} recovers 42\% against the full model''s 56\%'
 - name: Triangulated
   requires: Convergence (C3); replication (E2/E4); dissociation (I6)
@@ -252,10 +252,10 @@ criteria:
     reasoning: 'The mechanism is argued at the level of activations. Attention patterns establish where
       a head reads, patching establishes that what it reads matters, and the composition score is itself
       a patching quantity: it asks how much one head''s output changes when fed another''s corrupted output.
-      The diagram''s Q, K and V labels are stated as inferences from behaviour, which is the author''s
+      The diagram''s Q, K and V labels are stated as inferences from behavior, which is the author''s
       own description of the evidence class. Nothing is computed from the weights, so the structural story
       rests on a family of measurements that cannot separate a head that must compose from one that merely
-      covaries. Two structural puzzles are left standing and named. Plausible and behaviourally argued,
+      covaries. Two structural puzzles are left standing and named. Plausible and behaviorally argued,
       unverified at the parameter level, which is PC.
 
       '
@@ -275,7 +275,7 @@ criteria:
       legacy_evidence: 'The information path is argued through attention patterns and patching-based composition
         scores (``How much does \textbf{Top}''s output meaningfully change when we feed it the corrupted
         rather than clean output of \textbf{Bottom}?''''). No weight-level analysis: no QK or OV decomposition,
-        no eigenvalue analysis. The plausibility argument is behavioural. The authors flag an unresolved
+        no eigenvalue analysis. The plausibility argument is behavioral. The authors flag an unresolved
         structural puzzle --- why three levels of composition when two would suffice'
       legacy_warning: The legacy_evidence for this cell contains a paraphrase presented as a quotation,
         or a claim fused from two separate remarks in the source. Verified 2026-08-07. Use the quotes
@@ -310,13 +310,13 @@ criteria:
   C4:
     name: Discriminant validity
     status: U
-    short: The circuit is never compared with one for a neighbouring task
+    short: The circuit is never compared with one for a neighboring task
     verified: true
-    reasoning: 'No neighbouring construct is put up against this one. The circuit is never compared with
+    reasoning: 'No neighboring construct is put up against this one. The circuit is never compared with
       a circuit for another task in the same model, and the authors state why: leaving the docstring distribution
       is out of scope. What exists is one head tested off-distribution. Head 1.4 is run on six-token synthetic
       prompts and shown to be inactive for ordinary words, which bounds that head''s range but says nothing
-      about whether the circuit as a construct separates from a neighbour. A boundary drawn around one
+      about whether the circuit as a construct separates from a neighbor. A boundary drawn around one
       component is not a discriminant contrast. U.
 
       '
@@ -325,11 +325,11 @@ criteria:
         the Multi-Function Head 1.4 section, and Open questions & leads. The only off-docstring material
         is the |BOS|S0|A|B|C|S1| sweep, which varies the destination token for one head, and the |BOS|,|A|B|=|,|
         side note. Both are attention-pattern probes on one head, so the cell''s "the head set is never
-        compared against a neighbouring task''s head set" survives as written. The cell''s Conmy et al.
+        compared against a neighboring task''s head set" survives as written. The cell''s Conmy et al.
         and uit de Bos & Garriga-Alonso claims are post-origin and cannot be checked here.
 
         '
-      legacy_evidence: Unattempted. The head set is never compared against a neighbouring task's head
+      legacy_evidence: Unattempted. The head set is never compared against a neighboring task's head
         set on this model. Docstring appears as one of six tasks in \citet{conmy2023towards} and one of
         three in uit de Bos \& Garriga-Alonso (2024), but always as a separate benchmark, never as a discriminant
         contrast
@@ -385,7 +385,7 @@ criteria:
       patching plot and every attention figure, the figures are batch averages, and every number that
       carries an argument --- 42%, 56%, 72%, 48%, 58%, the logit differences of 1.1, 0.5, -0.12 and -0.20
       --- is a single value with no interval and no repetition. One released model is run once, so neither
-      sampling variability nor initialisation variability is bounded anywhere. U.
+      sampling variability nor initialization variability is bounded anywhere. U.
 
       '
     notes:
@@ -429,7 +429,7 @@ criteria:
     reasoning: 'Nothing perturbs the circuit and re-measures the same claim. Head membership is varied,
       but only upward and only as a search for more performance, so the 48% and 58% figures record what
       adding heads buys rather than whether the eight-head result survives a jolt; no head is swapped
-      for a neighbour and no leave-one-out is run. A second docstring style is mentioned and a second
+      for a neighbor and no leave-one-out is run. A second docstring style is mentioned and a second
       positional-swap variant is run, both reported as agreeing, but neither re-derives the circuit. Perturbations
       exist at the edges of the argument and none of them touches the conclusion. U.
 
@@ -446,7 +446,7 @@ criteria:
         together --- but only in the direction of adding heads.
 
         '
-      legacy_evidence: Unattempted. No perturbation of the circuit boundary, no swap of a head for a neighbour,
+      legacy_evidence: Unattempted. No perturbation of the circuit boundary, no swap of a head for a neighbor,
         no variation of the prompt template family
       correction: 'The legacy cell says there is ''no variation of the prompt template family''. The post
         varies it: ''We''ve also looked into Google-style docstrings and found similar performance, but
@@ -495,7 +495,7 @@ criteria:
       verification: 'Read looking for a control: Methods (Patching experiments), the head 0.2 paragraph,
         the Multi-Function Head 1.4 sweep, and Putting it all together. The synthetic |BOS|S0|A|B|C|S1|
         prompts come with stated expectations for a pure induction head and a pure previous-token head,
-        which is the closest the post gets to a reference behaviour, but they test what head 1.4 does
+        which is the closest the post gets to a reference behavior, but they test what head 1.4 does
         rather than whether the method can detect a known head. The cell''s "no known-positive control"
         holds; "no synthetic circuit is recovered" holds.
 
@@ -636,9 +636,9 @@ criteria:
   I4:
     name: Specificity
     status: U
-    short: Measured on one behaviour; head 1.4 alone is run off-distribution
+    short: Measured on one behavior; head 1.4 alone is run off-distribution
     verified: true
-    reasoning: 'The circuit''s effect is measured on one behaviour only. The model was trained on natural
+    reasoning: 'The circuit''s effect is measured on one behavior only. The model was trained on natural
       language and Python generally, so there is an obvious off-target test available --- ablate the eight
       heads and see what else falls over --- and it is not run; the authors state that leaving the docstring
       distribution is outside the scope of the post. What exists is one head shown to be inactive on ordinary
@@ -646,14 +646,14 @@ criteria:
 
       '
     notes:
-      verification: 'The cell''s "the circuit''s effect on any non-docstring behaviour is never measured"
+      verification: 'The cell''s "the circuit''s effect on any non-docstring behavior is never measured"
         is an absolute and it survives, narrowly. The Multi-Function Head 1.4 section does run non-docstring
         inputs, but it reports attention patterns rather than any performance metric, and it covers one
         head rather than the circuit. Read for this: Methods, Multi-Function Head 1.4, Putting it all
         together, Open questions & leads.
 
         '
-      legacy_evidence: Unattempted. The circuit's effect on any non-docstring behaviour is never measured,
+      legacy_evidence: Unattempted. The circuit's effect on any non-docstring behavior is never measured,
         although the model handles natural language and general Python
   I5:
     name: Rival mechanism exclusion
@@ -687,15 +687,15 @@ criteria:
     short: No second capability is shown intact while the docstring one fails
     verified: true
     reasoning: 'The converse half is missing. A double dissociation needs a second capability shown intact
-      while the docstring behaviour is broken, and no second behaviour of this model is ever measured.
+      while the docstring behavior is broken, and no second behavior of this model is ever measured.
       What the post does contain is a clean single dissociation of two candidate causes: swapping head
       0.4''s attention pattern inverts head 1.4''s attention while swapping the positional embeddings
       leaves it alone, with both arms run in the same four-case design. That separates two mechanisms
-      within one behaviour, which is a different and weaker thing. U.
+      within one behavior, which is a different and weaker thing. U.
 
       '
     notes:
-      verification: 'Read looking for a second behaviour: Results, Surprising discoveries, Putting it
+      verification: 'Read looking for a second behavior: Results, Surprising discoveries, Putting it
         all together, Open questions & leads. None reports a task other than docstring argument prediction.
         The cell''s "no second circuit in this model is shown intact under docstring-circuit ablation"
         holds. Recorded here because the 0.4-versus-positional-embedding contrast is close enough to be
@@ -709,7 +709,7 @@ criteria:
     status: PC
     short: Line counting and repetition are designed out rather than argued away
     verified: true
-    reasoning: 'The confound that would explain the behaviour away is designed out rather than argued
+    reasoning: 'The confound that would explain the behavior away is designed out rather than argued
       away. Line counting and repeat inhibition both predict the right answer on ordinary docstrings,
       so extra arguments are inserted until they predict the wrong one, and the corrupted prompts change
       only argument names while holding the docstring frame fixed, which keeps the patch from carrying
@@ -758,8 +758,8 @@ criteria:
     reasoning: 'Interaction is the subject rather than an afterthought. The composition score is defined
       as a two-head quantity --- how much one head''s output moves when fed another''s corrupted output
       --- and it is what establishes that head 1.2 reaches the argument movers. The strongest non-additivity
-      is head 1.4, whose function depends on where it sits: previous-token behaviour in the definition
-      subcircuit, induction behaviour in the docstring subcircuit, demonstrated rather than assumed. What
+      is head 1.4, whose function depends on where it sits: previous-token behavior in the definition
+      subcircuit, induction behavior in the docstring subcircuit, demonstrated rather than assumed. What
       is absent is systematic coverage. Pairs are examined where the authors suspected something, there
       is no ablation grid over head pairs, and the check that would test the composition structure as
       a whole is listed as future work. PC.
@@ -818,7 +818,7 @@ criteria:
     reasoning: 'There is no training trajectory in evidence. The audited system is one pre-trained model
       taken off the shelf from a public toy-model suite, observed at a single point, and the post says
       nothing about whether earlier states of that model exist or can be obtained. Onset coupling needs
-      at least two points in training to ask whether the mechanism appears when the behaviour does, and
+      at least two points in training to ask whether the mechanism appears when the behavior does, and
       the source supplies one. The experiment is absent, and the source does not establish whether it
       could have been run. U rather than N/A, because untestability is not shown either.
 
@@ -845,7 +845,7 @@ criteria:
     status: U
     short: Needs the training sequence that onset coupling also lacks
     verified: true
-    reasoning: 'Offset coupling asks whether the mechanism''s disappearance tracks the behaviour''s, which
+    reasoning: 'Offset coupling asks whether the mechanism''s disappearance tracks the behavior''s, which
       needs the same training trajectory I11 lacks. One pre-trained model is observed once and never varied
       over training states, so there is no interval in which either could be seen to lapse. U for the
       same reason as I11, including the same refusal to call it untestable.
@@ -868,7 +868,7 @@ criteria:
       are swapped between two positions, head 0.4''s attention pattern is overridden at those positions,
       head 0.5''s pattern is replaced by the identity, and head 1.2''s attention to BOS is swept continuously;
       each edits a different object --- an embedding, one head''s pattern, a whole attention matrix, a
-      scalar allocation --- and none is a relabelled resample. The reach stops short of the classes that
+      scalar allocation --- and none is a relabeled resample. The reach stops short of the classes that
       would test the result hardest. No weight is edited, no direction is steered, and zero and mean ablation
       are named as the alternatives not taken. Several primitives, all activation-level, is PC.
 
@@ -901,7 +901,7 @@ criteria:
     verified: false
     reasoning: 'NOT SETTLED BY THE SOURCE. The status rests entirely on post-origin work. The post itself
       never varies the prompt distribution and re-measures the circuit, so nothing in it can confirm or
-      disconfirm generalisation across prompts.
+      disconfirm generalization across prompts.
 
       '
     notes:
@@ -911,7 +911,7 @@ criteria:
         also looked into Google-style docstrings and found similar performance, but won''t discuss this
         further here" (The docstring task, figure caption). That is a bare remark with no number and no
         circuit evaluation, so it does not rebut the later result, but it is the only in-source statement
-        on prompt generalisation and it is positive. Left with no quotes because a quote pointing the
+        on prompt generalization and it is positive. Left with no quotes because a quote pointing the
         opposite way to the status would misrepresent the status as source-supported.
 
         '
@@ -919,7 +919,7 @@ criteria:
         clean/corrupted pairs and find model-vs-circuit KL with mean 3.91, median 3.66, max 12.07, worst
         points ``more than 5 standard deviations away from the mean,'' concluding that ``the circuits
         for the IOI and docstring tasks fail to behave similarly to the full model \emph{even on completely
-        benign inputs from the original task}.'' The failures are in-distribution, so this is generalisation
+        benign inputs from the original task}.'' The failures are in-distribution, so this is generalization
         within the origin task, not beyond it
     refs:
     - citation: uitdebos2024adversarial
@@ -938,7 +938,7 @@ criteria:
     reasoning: 'Whether these components do anything for another task is never asked. The circuit is evaluated
       only where it was found, and the authors say that leaving the docstring distribution is out of scope.
       One head is followed off the task --- head 1.4 switches roles on default-argument-shaped prompts
-      and goes inactive on ordinary words --- which shows that a component generalises in behaviour without
+      and goes inactive on ordinary words --- which shows that a component generalizes in behavior without
       showing that the circuit serves any other task. U.
 
       '
@@ -1035,7 +1035,7 @@ criteria:
     short: A circuit is defined as a subset of components before any result
     verified: true
     reasoning: 'The level is fixed before any result. The opening section defines a circuit as a subset
-      of components and weights that both accounts for behaviour and corresponds to a human-interpretable
+      of components and weights that both accounts for behavior and corresponds to a human-interpretable
       algorithm, which names the two levels the claim will operate at and commits to both. Everything
       after is stated in those terms: named heads, named token positions, named information moving between
       them. No sentence drifts into a level the definition did not license. C.
@@ -1049,7 +1049,7 @@ criteria:
         '
       legacy_evidence: 'Declared, with the definition given up front: ``a circuit in a neural network,
         is a small subset of model components and model weights that (a) accounts for a large fraction''''
-        of the behaviour. The claim is implementational-functional throughout, with named heads and named
+        of the behavior. The claim is implementational-functional throughout, with named heads and named
         information flows'
   V2:
     name: Level-evidence match
@@ -1083,9 +1083,9 @@ criteria:
     status: PC
     short: Line counting is raised as the simpler description, then accepted
     verified: true
-    reasoning: 'The simpler description of the same behaviour is raised and then accepted rather than
+    reasoning: 'The simpler description of the same behavior is raised and then accepted rather than
       dismissed. Counting lines would produce the observed predictions on ordinary docstrings, the authors
-      judge it to be co-implemented, and they characterise it as the less robust of the two after a brief
+      judge it to be co-implemented, and they characterize it as the less robust of the two after a brief
       look. Their response is to design it out of the prompts rather than to argue it away, which is the
       right move and leaves the accounting undone: the surviving 42% is never apportioned between induction
       and residual line counting. Alternative engaged, not resolved, is PC.
@@ -1100,7 +1100,7 @@ criteria:
 
         '
       legacy_evidence: 'The alternative is considered and partly \emph{accepted} rather than dismissed:
-        the line-number algorithm is a simpler description of the same behaviour, and the authors judge
+        the line-number algorithm is a simpler description of the same behavior, and the authors judge
         it co-implemented. What is missing is apportionment --- how much of the 42\% is induction and
         how much is residual line-number counting'
   V4:

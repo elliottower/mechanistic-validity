@@ -30,7 +30,7 @@ hypotheses:
   label: a board-state representation in the activations that the move predictions read
 - id: H2
   view: Object
-  label: the transcripts are memorised and surface statistics account for the behaviour
+  label: the transcripts are memorised and surface statistics account for the behavior
 - id: H3
   view: Object
   label: board information is diffuse and no determinate representation is read
@@ -46,7 +46,7 @@ hypotheses:
 views_evidence:
 - criterion: C4
   evidence: A quarter of the game tree is withheld and probe error stays at 0.02 percent, and probes on
-    a randomised network barely improve on the linear case
+    a randomized network barely improve on the linear case
   cells:
     H1: C
     H2: I
@@ -72,7 +72,7 @@ views_evidence:
   - H1
   - H6
 - criterion: M3
-  evidence: Optimiser, learning rate, step count, beta across ten values, start layer across all eight
+  evidence: Optimizer, learning rate, step count, beta across ten values, start layer across all eight
     and probe capacity are swept, and the probe target is never varied
   cells:
     H1: C
@@ -181,7 +181,7 @@ tiers:
     outcome metrics; \textbf{I4} off-target tile flips acknowledged and never counted'
 - name: Triangulated
   requires: Convergence (C3); replication (E2/E4); dissociation (I6)
-  missing: '\textbf{I6} unattempted, one representation and one behaviour; \textbf{C3}: probe and intervention
+  missing: '\textbf{I6} unattempted, one representation and one behavior; \textbf{C3}: probe and intervention
     are one instrument used twice; \textbf{E4} rests entirely on post-origin work'
 - name: Validated
   requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
@@ -268,20 +268,20 @@ criteria:
     verified: true
     reasoning: 'Two constructs the board representation might be confused with are excluded by measurement.
       Removing a quarter of the game tree leaves the error rate at 0.02%, which separates the representation
-      from memorised transcripts, and the randomised network fixes how much a probe recovers from an untrained
+      from memorised transcripts, and the randomized network fixes how much a probe recovers from an untrained
       network at the same capacity. The construct that is never separated is the weaker reading of the
       paper''s own claim: a decodable state summary that the next-move computation reads. Discrimination
-      against the rivals that were posed is PC when the nearest neighbour is unposed.
+      against the rivals that were posed is PC when the nearest neighbor is unposed.
 
       '
     notes:
-      verification: 'Legacy evidence''s figures verified: skewed-tree error 0.02%, and the randomised-network
+      verification: 'Legacy evidence''s figures verified: skewed-tree error 0.02%, and the randomized-network
         baseline is in Tables 1 and 2 with the probe geometry in Appendix A. Footnote 6 states the intended
         contrast explicitly.
 
         '
       legacy_evidence: Origin separates the representation from memorisation (\S2.3, quarter of the game
-        tree removed, error 0.02\%) and from a randomised network (Tables 1, 2, Appendix A). It does not
+        tree removed, error 0.02\%) and from a randomized network (Tables 1, 2, Appendix A). It does not
         separate ``world model'' from ``sufficient state summary.'' Vafa et al.\ (2024) build that instrument
         and the synthetic model passes at 0.98 / 0.99 / 1.00 --- the separation exists, but the origin
         did not perform it
@@ -348,21 +348,21 @@ criteria:
       '
     notes:
       verification: 'All four baselines in the legacy evidence verified: 93.29% untrained, 52.95% constant
-        guess, randomised-network probes in Tables 1 and 2, and null intervention 2.68 / 2.59 with F1
+        guess, randomized-network probes in Tables 1 and 2, and null intervention 2.68 / 2.59 with F1
         floors 0.87 / 0.88 (Figure 9) and KL floors 0.92 / 0.64 (Figure 10).
 
         '
-      legacy_evidence: Randomised-network probe baseline (Tables 1, 2); constant-guess baseline 52.95\%
+      legacy_evidence: Randomized-network probe baseline (Tables 1, 2); constant-guess baseline 52.95\%
         (\S3); null-intervention baseline 2.68 / 2.59 errors (Figure 3), replicated under F1 (Figure 9)
         and KL (Figure 10). Vafa et al.\ (2024) add an untrained-transformer floor (0.00 / 0.02 / 0.14)
         and a true-world-model ceiling
   M3:
     name: Stability
     status: PC
-    short: Optimiser, β and probe capacity swept; the probe target never varied
+    short: Optimizer, β and probe capacity swept; the probe target never varied
     verified: true
-    reasoning: 'Four knobs are moved and the conclusion survives all four: optimiser, learning rate and
-      step count for the intervention, the regularisation weight β across ten values, the start layer
+    reasoning: 'Four knobs are moved and the conclusion survives all four: optimizer, learning rate and
+      step count for the intervention, the regularization weight β across ten values, the start layer
       across the eight available, and probe capacity and layer for the probe. The perturbation never applied
       is the definition of the probe target itself, which is held at black/white/empty everywhere in the
       paper. PC is the right shape for a result robust to everything except the one choice that later
@@ -376,7 +376,7 @@ criteria:
         layers rather than indexing them, or one of the two is wrong; the paper never reconciles them.
 
         '
-      legacy_evidence: Appendix G sweeps intervention start layer $L_s$ and regularisation weight $\beta$
+      legacy_evidence: Appendix G sweeps intervention start layer $L_s$ and regularization weight $\beta$
         (Table 3, $\beta = 0.0 \ldots 0.9$, errors 0.19--0.77) and reports robustness ``to different configurations
         of optimizer, learning rate $\alpha$, and number of steps''; Appendix B sweeps probe capacity
         and layer. The one perturbation not run is the probe \emph{target} definition, and that is the
@@ -404,7 +404,7 @@ criteria:
     status: PC
     short: A known-negative control only; no planted representation is recovered
     verified: true
-    reasoning: 'The randomised network establishes what the probe reports when the representation is absent,
+    reasoning: 'The randomized network establishes what the probe reports when the representation is absent,
       and the paper reads the residual accuracy correctly as information surviving a random projection.
       That is a known-negative control. Nowhere does a system with a representation present by construction
       get probed, so the false-negative rate of the method is unmeasured: a probe that missed a board
@@ -417,7 +417,7 @@ criteria:
         and reaches PC only by importing a later paper''s known-positive row. Status left as recorded.
 
         '
-      legacy_evidence: The randomised network is a known-negative control, not a known-positive. No planted
+      legacy_evidence: The randomized network is a known-negative control, not a known-positive. No planted
         representation is recovered within the origin. The nearest known-positive is Vafa et al.'s true-world-model
         row, which their instrument scores at 1.00
   M6:
@@ -425,11 +425,11 @@ criteria:
     status: C
     short: All eight layers, both datasets, both benchmarks, three metrics
     verified: true
-    reasoning: 'The result is reported over every axis the design makes available rather than at one favourable
-      setting: eight layers, two training distributions, a randomised control network, game progression,
+    reasoning: 'The result is reported over every axis the design makes available rather than at one favorable
+      setting: eight layers, two training distributions, a randomized control network, game progression,
       probe capacity, natural and unnatural boards, and three outcome metrics. The layerwise profile is
       interpretable and matches what probing studies of natural language report, which is a further sign
-      the pattern is not an artefact of one slice. C.
+      the pattern is not an artifact of one slice. C.
 
       '
     notes:
@@ -525,7 +525,7 @@ criteria:
     status: PC
     short: Off-target flips raised, mitigation swept, effects never counted
     verified: true
-    reasoning: 'The authors raise the specificity problem themselves, build a regulariser for it, sweep
+    reasoning: 'The authors raise the specificity problem themselves, build a regularizer for it, sweep
       its weight across ten values and report that it does not clearly help. What is missing is the measurement:
       the outcome is a count of legal-move errors, so a run that flipped unintended tiles while still
       producing the right move set would score as a success. Off-target effects acknowledged and unquantified
@@ -541,7 +541,7 @@ criteria:
 
         '
       legacy_evidence: 'Appendix G raises off-target effects directly: ``will the intervention operation
-        flip tiles we do not intend? It is possible.'''' A regularisation term $\beta$ is introduced to
+        flip tiles we do not intend? It is possible.'''' A regularization term $\beta$ is introduced to
         suppress them, swept, and found not to ``clearly help.'''' Off-target flips are acknowledged and
         unquantified. Vafa et al.''s distinction precision (0.99, synthetic) is the closest specificity
         number and it is high'
@@ -552,7 +552,7 @@ criteria:
     verified: true
     reasoning: 'The rival the paper was written against is excluded by construction: with a quarter of
       the game tree removed from training the error rate is 0.02%, so memorised transcripts cannot account
-      for the behaviour, and the unnatural benchmark puts the causal test on boards no training sequence
+      for the behavior, and the unnatural benchmark puts the causal test on boards no training sequence
       could reach. The rival left standing is inside the paper''s own conclusion. The linearity verdict
       rests on probing black/white, and a different choice of probe target would have to be run to exclude
       the alternative that the representation is linear in another basis. PC.
@@ -572,11 +572,11 @@ criteria:
   I6:
     name: Double dissociation
     status: U
-    short: One representation, one behaviour; no converse leg is available
+    short: One representation, one behavior; no converse leg is available
     verified: true
-    reasoning: 'A double dissociation needs two representations and two behaviours, so that an edit to
+    reasoning: 'A double dissociation needs two representations and two behaviors, so that an edit to
       one moves its own outcome and leaves the other intact. This paper probes one target, the board state,
-      and scores one outcome, the legal-move set. No second representation is probed and no second behaviour
+      and scores one outcome, the legal-move set. No second representation is probed and no second behavior
       is measured, so the converse test has nothing to run on. U.
 
       '
@@ -590,7 +590,7 @@ criteria:
     verified: true
     reasoning: 'Three confounds are handled by design. Training-set overlap is removed by truncating the
       game tree and by the fact that the network never sees a board state as input. Distributional support
-      is removed by the unnatural benchmark. Probe capacity is held fixed against a randomised network
+      is removed by the unnatural benchmark. Probe capacity is held fixed against a randomized network
       so that decoding power is subtracted from decoded content. The confound left uncontrolled is the
       probe target, which fixes what counts as the board state before any measurement begins.
 
@@ -598,7 +598,7 @@ criteria:
     notes:
       legacy_evidence: Memorisation controlled (\S2.3); distribution controlled by the unnatural benchmark,
         ``by definition far from anything encountered in the training distribution'' (\S4.2); probe capacity
-        partly controlled by the randomised-network baseline. The probe-target confound is uncontrolled,
+        partly controlled by the randomized-network baseline. The probe-target confound is uncontrolled,
         and it is the one that later broke
   I8:
     name: Confounding sensitivity
@@ -643,7 +643,7 @@ criteria:
     reasoning: 'The network restores the edited tile by itself at the next layer, which is why the protocol
       has to re-intervene at every subsequent layer. Recovery from a perturbation is therefore demonstrated,
       and it is informative about how the representation is maintained. It was not designed as a test:
-      no experiment corrupts the representation and then restores it deliberately to check that behaviour
+      no experiment corrupts the representation and then restores it deliberately to check that behavior
       returns. PC.
 
       '
@@ -651,7 +651,7 @@ criteria:
       verification: 'The legacy evidence''s reading is exact. Appendix D also shows the correction stops
         when the intervention is repeated at later layers, which the legacy cell does not mention and
         which strengthens the case that the restoration is a real mechanism rather than a measurement
-        artefact.
+        artifact.
 
         '
       legacy_evidence: 'Appendix D reports unintended restoration rather than a designed test: after intervening
@@ -664,7 +664,7 @@ criteria:
     short: Training-step axis available and explicitly declined
     verified: true
     reasoning: 'Onset coupling asks whether the representation appears when the capability does. The authors
-      train the model from random initialisation, so checkpoints were theirs to produce, and Appendix
+      train the model from random initialization, so checkpoints were theirs to produce, and Appendix
       B says outright that it substitutes probe capacity for the training-epoch axis that the study it
       borrows its plot format from used. The ''when'' the paper answers is position within a game. Untested
       rather than untestable is U.
@@ -676,14 +676,14 @@ criteria:
         question instead.
 
         '
-      legacy_evidence: Unattempted rather than untestable. Othello-GPT is trained from random initialisation
+      legacy_evidence: Unattempted rather than untestable. Othello-GPT is trained from random initialization
         by the authors (\S2.2), so checkpoints are producible at will and probe accuracy could be tracked
         against legal-move accuracy across training. Appendix B tracks probe accuracy across game progression
         and layer, never across training steps
   I12:
     name: Offset coupling
     status: U
-    short: Two models differ in competence; the coupling is never analysed
+    short: Two models differ in competence; the coupling is never analyzed
     verified: true
     reasoning: 'The offset test would remove legal-move competence and check whether the board representation
       goes with it. The materials are present: the authors control training, and they already hold two
@@ -720,7 +720,7 @@ criteria:
         '
       legacy_evidence: 'One intervention method (gradient descent on the probe''s class score), reported
         under three agreeing outcome metrics. Genuine method-independence arrived later: Nanda, Lee \&
-        Wattenberg (2023) achieve behavioural control by simple vector arithmetic on linear directions'
+        Wattenberg (2023) achieve behavioral control by simple vector arithmetic on linear directions'
   E2:
     name: Prompt generalization
     status: C
@@ -729,7 +729,7 @@ criteria:
     reasoning: 'The causal result is measured on a thousand cases per subset rather than on selected examples,
       and the unnatural subset is off-distribution by construction, since those boards cannot arise from
       legal play. Probing runs on two training distributions that differ in kind, strategic human play
-      against uniformly sampled legal moves. Generalisation across inputs is demonstrated at scale and
+      against uniformly sampled legal moves. Generalization across inputs is demonstrated at scale and
       in the hardest available direction. C.
 
       '
@@ -782,7 +782,7 @@ criteria:
     reasoning: 'Two intervention-strength knobs are swept and the response is graded in the shape a mechanism
       predicts: too many layers reaches back into layers whose representations are unreliable, too few
       leaves the network no computation to propagate the edit, and the error rises on both sides. The
-      knob that is never swept is the size of the edit itself against a graded behavioural outcome, so
+      knob that is never swept is the size of the edit itself against a graded behavioral outcome, so
       the dose-response curve the criterion asks for is absent. PC.
 
       '
@@ -793,7 +793,7 @@ criteria:
         '
       legacy_evidence: Appendix G sweeps two intervention-strength knobs --- $\beta$ and the number of
         intervened layers via $L_s$ --- with degradation outside the optimum. No sweep of edit magnitude
-        against a graded behavioural outcome
+        against a graded behavioral outcome
   E6:
     name: Novel prediction
     status: C
@@ -875,7 +875,7 @@ criteria:
     notes:
       legacy_evidence: 'One alternative is addressed and refuted: memorisation of surface statistics (\S2.3).
         The alternative that the representation is a sufficient state summary with no further world-model
-        content is not addressed; Vafa et al.\ (2024) later formalise exactly that level'
+        content is not addressed; Vafa et al.\ (2024) later formalize exactly that level'
   V4:
     name: Unlicensed labeling
     status: PC
@@ -890,7 +890,7 @@ criteria:
       by it. §4 sets up the question as decodable versus causally decodable and §4.2 concludes at exactly
       that level, that the representations ''are causal to model predictions''. Nothing separates the
       two readings: the protocol edits one tile at a time, so no coherence across the board is tested;
-      the outcome is always the legal-move set, so the state is never shown to feed a second behaviour;
+      the outcome is always the legal-move set, so the state is never shown to feed a second behavior;
       and the rule composition that would distinguish a model of the process from a summary of the state
       is measured once, in Appendix E, found to fail on the OR across lines, and left for future research.
       Under the rule that a name is licensed only when it redescribes what was measured, ''world model''
@@ -901,7 +901,7 @@ criteria:
     notes:
       verification: 'Contradicts the legacy evidence on its second premise. ''Intentional vocabulary is
         avoided throughout'' is false: the model is described as having a ''perceived world state'' (Figure
-        2), as being ''more convinced'' of a tile''s colour (Appendix D), as having a ''goal'' an Othello
+        2), as being ''more convinced'' of a tile''s color (Appendix D), as having a ''goal'' an Othello
         player could guess (§5), and as able to ''forget'' (Appendix B). The usage is light and never
         load-bearing for a claim, so it does not move the verdict by itself, and the cell should not rest
         on the avoidance argument. The first premise is confirmed verbatim: the definition is in §1 at
@@ -936,4 +936,4 @@ criteria:
         '
       legacy_evidence: Declared in the title (``a Sequence Model Trained on a Synthetic Task''), in \S1.1
         (``a highly controlled context, where both the task and sequence being modeled are synthetic''),
-        and in \S7, where natural-language generalisation is listed as future work rather than claimed
+        and in \S7, where natural-language generalization is listed as future work rather than claimed

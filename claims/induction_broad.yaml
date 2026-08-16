@@ -2,16 +2,16 @@ claim: induction_broad
 title: 'Induction Heads: General In-Context Learning'
 description: 'The two-head composition that performs in-context copying is advanced as the mechanistic
   source of in-context learning in general, on the argument that copying a token which followed the same
-  context earlier is the literal case of in-context nearest-neighbour retrieval. In-context learning is
+  context earlier is the literal case of in-context nearest-neighbor retrieval. In-context learning is
   operationalized as the difference in loss between the 500th and the 50th token of the context, and the
   claim rests on induction-head formation, the jump in that quantity, a loss bump and a PCA pivot all
-  arriving together in a 2.5e9--5e9 token window. Evaluated on: the same 34 decoder-only models, with the co-occurrence
+  arriving together in a $2.5$--$5	imes10^{9}$-token window. Evaluated on: the same 34 decoder-only models, with the co-occurrence
   observed across all of them and ablation confined to the twelve small models at $d_{\mathrm{model}}
   = 768$, so no causal evidence touches the models the claim is about. Description mode: implementational-functional,
   carried to a claim about a computational-level capability by Argument 6''s continuity argument.'
 source:
   citation: olsson2022context
-  title: ''
+  title: 'In-context Learning and Induction Heads'
   url: https://arxiv.org/abs/2209.11895
   local: reference/olsson_2022_induction_heads.pdf
   sha256: 9fa4a667e559431efac5bf1d9463f3b0005633e0b78f3ebbacfb901e4ed36e50

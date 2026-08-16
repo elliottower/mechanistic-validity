@@ -5,7 +5,7 @@ readings:
   verdict: Disconfirmed
   missing: 'Nothing --- tested and failed: all three of the paper''s own summaries report a correlation
     between activation and expression while the title and abstract claim storage (V2), and the same editing
-    machinery moves non-factual linguistic patterns, so the construct never separates from its neighbour
+    machinery moves non-factual linguistic patterns, so the construct never separates from its neighbor
     (C4)'
   primary: true
 - statement: Manipulating these neurons changes how strongly the model expresses the fact
@@ -148,7 +148,7 @@ views_evidence:
   - H4
 - criterion: C4
   evidence: The same editing machinery moves non-factual linguistic patterns, so the construct never separates
-    from its neighbour
+    from its neighbor
   cells:
     H1: I
     H2: C
@@ -288,7 +288,7 @@ criteria:
     status: D
     short: The competitor is named, removed by a filter, and the same machinery moves it
     verified: true
-    reasoning: 'The neighbouring construct is named in the source. §3.3 says the coarse set may hold neurons
+    reasoning: 'The neighboring construct is named in the source. §3.3 says the coarse set may hold neurons
       that express syntactic or lexical information, which is the competitor a knowledge construct has
       to separate from. The paper then removes them by a sharing rule that rests on two stated hypotheses:
       that true positives recur across paraphrases of a fact and false positives do not. No measurement
@@ -306,7 +306,7 @@ criteria:
         is untested: the origin names the competing construct and never measures it.
 
         '
-      legacy_evidence: 'The construct is ``knowledge'''' and the measure does not separate it from neighbouring
+      legacy_evidence: 'The construct is ``knowledge'''' and the measure does not separate it from neighboring
         constructs. \S3.3 shows the authors saw the risk --- the refining strategy exists to filter neurons
         that ``express other information (e.g., syntactic or lexical information)'''' --- but addresses
         it by a prompt-sharing heuristic rather than a test. Niu et al.\ (2024) run the test: ``we can
@@ -462,7 +462,7 @@ criteria:
     notes:
       verification: 'Read in full. Every identification in the paper runs on facts BERT already knows,
         selected because it already knows them (§5.1 samples "ten facts learned by the pretrained model"),
-        so there is no case with a known location. The cell''s characterisation of the activation baseline
+        so there is no case with a known location. The cell''s characterization of the activation baseline
         as a known-negative control is correct and is quoted here.
 
         '
@@ -471,13 +471,13 @@ criteria:
   M6:
     name: Invariance
     status: PC
-    short: Per-relation spread across 34 relations; the generalisation claim has no experiment
+    short: Per-relation spread across 34 relations; the generalization claim has no experiment
     verified: true
     reasoning: 'Invariance is checked on two axes and left open on the rest. Every intervention result
       is broken out per relation across 34 relations, so the spread is visible rather than averaged away,
       and §4.6 repeats the activation contrast on web-crawled text the neurons were not identified from.
       Model, language, architecture and prompt length are held fixed throughout, and the one statement
-      the paper makes about generalising past BERT is an assertion with no experiment behind it. PC.
+      the paper makes about generalizing past BERT is an assertion with no experiment behind it. PC.
 
       '
     notes:
@@ -557,7 +557,7 @@ criteria:
       '
     notes:
       verification: 'The 31.17% and 34.4% figures the cell cites are verbatim (Figure 5, Table 6). The
-        cell''s "34.4% means the manipulation fails on two thirds of attempts" is supported by the neighbouring
+        cell''s "34.4% means the manipulation fails on two thirds of attempts" is supported by the neighboring
         change rate of 48.5%: the edit alters the prediction about half the time and installs the intended
         target about a third of the time, so a further 14 points change the answer to something else.
 
@@ -672,12 +672,12 @@ criteria:
   I6:
     name: Double dissociation
     status: U
-    short: One mechanism localised and one behaviour measured, so neither arm exists
+    short: One mechanism localized and one behavior measured, so neither arm exists
     verified: true
-    reasoning: 'A double dissociation needs two localised mechanisms and two behaviours, with each intervention
-      moving one behaviour and sparing the other. The source localises one mechanism and measures one
-      behaviour, the correct-answer probability on a cloze query, and never identifies a second set of
-      units for a second behaviour to trade against. U.
+    reasoning: 'A double dissociation needs two localized mechanisms and two behaviors, with each intervention
+      moving one behavior and sparing the other. The source localizes one mechanism and measures one
+      behavior, the correct-answer probability on a cloze query, and never identifies a second set of
+      units for a second behavior to trade against. U.
 
       '
     notes:
@@ -688,7 +688,7 @@ criteria:
         post-origin.
 
         '
-      legacy_evidence: 'Unattempted. No converse test: no non-factual mechanism is localised and shown
+      legacy_evidence: 'Unattempted. No converse test: no non-factual mechanism is localized and shown
         intact under knowledge-neuron ablation. Niu et al.\ (2024) later report the opposite of the desired
         dissociation --- the same machinery moves both'
   I7:
@@ -761,7 +761,7 @@ criteria:
       into value slots whose original contents are known, and the update adds a closed-form shift built
       from two word embeddings, so restoring the model is a matter of writing the saved rows back. The
       paper measures the model before and after the edit and never after a restore, so no result shows
-      the behaviour returning when the mechanism does. Unattempted rather than untestable. U.
+      the behavior returning when the mechanism does. Unattempted rather than untestable. U.
 
       '
     notes:
@@ -780,8 +780,8 @@ criteria:
     status: N/A
     short: One released checkpoint, so there is no sequence to locate an onset in
     verified: true
-    reasoning: 'Onset coupling asks whether a mechanism appears when the behaviour it explains appears,
-      which requires a sequence of states in which the behaviour is first absent and then present. The
+    reasoning: 'Onset coupling asks whether a mechanism appears when the behavior it explains appears,
+      which requires a sequence of states in which the behavior is first absent and then present. The
       audited system is one released checkpoint of BERT-base-cased. Every fact studied is chosen because
       the model already knows it, no weight is trained anywhere in the paper, and the absence of training
       is the paper''s own selling point for the editing results. There is no time axis on which an onset
@@ -804,16 +804,16 @@ criteria:
     status: N/A
     short: One checkpoint supplies no interval over which either could go
     verified: true
-    reasoning: 'Offset coupling asks whether a mechanism disappears when the behaviour disappears, and
+    reasoning: 'Offset coupling asks whether a mechanism disappears when the behavior disappears, and
       needs the same time axis as onset for the same reason. One checkpoint supplies no interval over
       which either could be observed to go.
 
       '
     notes:
       verification: 'Confirmed on the same grounds as I11, with one thing to keep separate. §5.2 does
-        remove a relation from the model by zeroing value slots, which produces an offset of the behaviour.
-        That is an intervention on the mechanism measured by the behaviour it destroys, which is the necessity
-        test recorded at I1; the criterion here asks about a behaviour that disappears on its own and
+        remove a relation from the model by zeroing value slots, which produces an offset of the behavior.
+        That is an intervention on the mechanism measured by the behavior it destroys, which is the necessity
+        test recorded at I1; the criterion here asks about a behavior that disappears on its own and
         whether the mechanism goes with it. Nothing in the source bears on that.
 
         '
@@ -851,7 +851,7 @@ criteria:
       only neurons shared across the roughly nine templates a relation has, and the pool those templates
       generate is 253,448 prompts over 27,738 facts. The neurons are then taken to text from a different
       generator entirely: web pages crawled for the same facts, which the paper says are unseen in PARA
-      R EL, with two control prompt types. Generalisation across prompt form is demonstrated rather than
+      R EL, with two control prompt types. Generalization across prompt form is demonstrated rather than
       assumed. C.
 
       '
@@ -889,9 +889,9 @@ criteria:
   E4:
     name: Cross-model generalization
     status: PC
-    short: One model, with generalisation asserted and no experiment behind it
+    short: One model, with generalization asserted and no experiment behind it
     verified: true
-    reasoning: 'The origin runs on one model. It asserts that the method generalises and supplies no experiment,
+    reasoning: 'The origin runs on one model. It asserts that the method generalizes and supplies no experiment,
       and its conclusion lists the multilingual case as future work, which concedes that the transfer
       is untried. The transfers that later happened are what the cell''s PC rests on, and what transferred
       is the attribution procedure rather than the reading placed on its output.
@@ -1031,7 +1031,7 @@ criteria:
       legacy_evidence: 'One alternative is addressed and rejected --- \S4.3 argues the activation baseline
         finds merely input-sensitive neurons, using the intersection statistics of Table 2. The alternative
         that the identified neurons are a routing or amplification stage is not addressed, and the subsequent
-        literature is split: \citet{meng2022locating} supports localisation, Balogh (2026) supports routing,
+        literature is split: \citet{meng2022locating} supports localization, Balogh (2026) supports routing,
         and both remain live'
   V4:
     name: Unlicensed labeling
@@ -1056,7 +1056,7 @@ criteria:
     notes:
       verification: 'THE CELL''S READING OF §3.3 IS CORRECT AND CAN BE SHARPENED. The refining strategy
         does exist to filter neurons that "express other information (e.g., syntactic or lexical information)",
-        which is an acknowledgement that the label needs protecting from a neighbour. Two things the cell
+        which is an acknowledgement that the label needs protecting from a neighbor. Two things the cell
         does not say. The competitor §3.3 names is narrower than the one the criterion asks about: syntactic
         or lexical content, not "a signal correlated with output probability", so the filter does not
         engage the alternative that matters. And the filter is two stated hypotheses about prompt sharing,
@@ -1066,7 +1066,7 @@ criteria:
         head entity, and Table 3''s least-activating prompts contain both entities. That distinguishes
         relation-bearing input from entity-bearing input while measuring activation, which is what the
         correlated-signal reading predicts too. ONE ADDITION THE CELL MISSES, which is the source''s own
-        strongest evidence against the licence. The label is applied to the units the control finds as
+        strongest evidence against the license. The label is applied to the units the control finds as
         well: §4.3 runs the activation baseline through "the same pipeline to obtain the refined knowledge
         neurons", and Table 2''s first row reports "Knowledge neurons 4.13 3.96" for the method and the
         baseline side by side. The paper elsewhere argues that the baseline''s units are merely input-sensitive,
@@ -1076,24 +1076,24 @@ criteria:
 
         '
       legacy_evidence: '``Knowledge neuron'''' projects a human epistemic category onto a unit whose measured
-        behaviour is activation correlated with output probability. \S3.3''s syntactic/lexical filter
+        behavior is activation correlated with output probability. \S3.3''s syntactic/lexical filter
         shows the authors knew the label needed protecting. It is never contrastively tested --- no experiment
         distinguishes ``stores knowledge'''' from ``carries a correlated signal.'''' Niu et al.\ (2024)
         run that contrast and conclude the patterns ``do not constitute `knowledge'''''''
   V5:
     name: Scope declaration
     status: PC
-    short: Four limits declared; the one asserted past is generalisation beyond BERT
+    short: Four limits declared; the one asserted past is generalization beyond BERT
     verified: true
     reasoning: 'Scope is declared in the right place and with one gap. §7 lists three restrictions and
       one open question, and §4.5 and §5 both label the manipulations a proof of concept before any application
       is suggested. The restriction the paper never declares is the one a reader would most want: it runs
-      on a single model, and instead of saying so it asserts the method generalises to other pretrained
+      on a single model, and instead of saying so it asserts the method generalizes to other pretrained
       models with nothing behind the assertion. Four limits declared, one asserted past, is PC.
 
       '
     notes:
-      verification: 'All four §7 limits the cell names are verbatim, as is the BERT generalisation claim
+      verification: 'All four §7 limits the cell names are verbatim, as is the BERT generalization claim
         it flags. One addition: the proof-of-concept hedge appears twice, at §4.5 for the activation manipulations
         and at §5 for the editing studies, so the paper''s own confidence in the case studies is lower
         than the cell allows.

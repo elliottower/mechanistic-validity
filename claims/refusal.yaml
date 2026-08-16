@@ -2,11 +2,11 @@ claim: refusal
 title: Refusal Mediated by a Single Direction
 description: 'A difference in means between activations on harmful and harmless instructions yields one
   residual-stream direction per model. Projecting that direction out of every matrix that writes to the
-  residual stream stops the model refusing harmful instructions, and adding it at its extraction layer
+  residual stream stops the model from refusing harmful instructions, and adding it at its extraction layer
   makes the model refuse harmless ones, down to a request for the benefits of yoga. The direction is chosen
-  as the minimiser of bypass\_score over every post-instruction position crossed with every layer subject
+  as the minimizer of bypass\_score over every post-instruction position crossed with every layer subject
   to three thresholds, and the result is reported for 13 open-weight chat models in 5 families over a
-  40x parameter range. Description mode: undeclared --- representational in the title, causal-behavioural
+  40x parameter range. Description mode: undeclared --- representational in the title, causal-behavioral
   in the evidence.'
 source:
   citation: arditi2024refusal

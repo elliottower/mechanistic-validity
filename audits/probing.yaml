@@ -15,7 +15,7 @@ readings:
 - statement: A good probe score shows that the model uses $z$ in producing its output
   verdict: Disconfirmed
   missing: 'Nothing --- tested and failed: a control dataset holds $z$ non-discriminative for the original
-    task and the probe recovers it anyway, so decodability does not localise to the task (I4)'
+    task and the probe recovers it anyway, so decodability does not localize to the task (I4)'
   primary: false
 - statement: Interventions on a probe-identified direction show which features the model uses
   verdict: Underdetermined
@@ -222,7 +222,7 @@ criteria:
     verified: true
     reasoning: 'The claim form yields a prediction that can come out either way, and it came out both
       ways in work the anchor reports side by side. Modify a representation along a probe-identified direction
-      and the original model''s behaviour should move: Giulianelli et al. find it does, on the examples
+      and the original model''s behavior should move: Giulianelli et al. find it does, on the examples
       the property is defined over, and Elazar et al. find that removing a well-decoded property need
       not cost the original task. The selectivity test is a second falsifiable prediction with a definite
       outcome — popular probes could have shown high selectivity and the nonlinear ones did not. A method
@@ -283,7 +283,7 @@ criteria:
       ranking may flip under selectivity. Two proposed controls do converge, and the anchor reports Zhu
       & Rudzicz showing control tasks and control functions almost equivalent theoretically and empirically.
       The genuinely independent instrument, parameter-free probing, is positioned on the complexity axis
-      rather than checked for agreement with parameterised probes. PC.
+      rather than checked for agreement with parameterized probes. PC.
 
       '
     notes:
@@ -310,9 +310,9 @@ criteria:
   C4:
     name: Discriminant validity
     status: D
-    short: 'Two neighbours the instrument must separate: probe memorisation, random features'
+    short: 'Two neighbors the instrument must separate: probe memorisation, random features'
     verified: true
-    reasoning: 'The construct is "the model represents z", and it has two neighbours that a good instrument
+    reasoning: 'The construct is "the model represents z", and it has two neighbors that a good instrument
       must separate it from: "the probe learned z from its own training data" and "any representation
       of this dimensionality carries z". Both separation tests were run and both came back negative. Control
       tasks show nonlinear probes reaching high accuracy at low selectivity, which the anchor reads as
@@ -322,7 +322,7 @@ criteria:
 
       '
     notes:
-      verification: 'THE D IS EARNED FROM THE ANCHOR, in its own voice, for both neighbouring constructs:
+      verification: 'THE D IS EARNED FROM THE ANCHOR, in its own voice, for both neighboring constructs:
         the memorisation reading of low selectivity and the random-feature result are Belinkov''s sentences,
         not quotations from the papers he reviews. CONTRADICTION WITH THE CELL, on sourcing rather than
         on the verdict. The cell''s specifics are imported: the phrase "not selective", the numbers 97.3,
@@ -333,10 +333,10 @@ criteria:
         to.
 
         '
-      legacy_evidence: 'The construct is ``the model represents $z$''''; both neighbouring constructs
+      legacy_evidence: 'The construct is ``the model represents $z$''''; both neighboring constructs
         have been tested and not separated. From the probe side: \citet{hewitt2019designing} show popular
         probes are ``not selective'''' --- MLP-1 reaches 97.3 on part-of-speech against 92.8 on a control
-        task with randomised per-word-type outputs, a selectivity of 4.5, so most of the accuracy is memorisation.
+        task with randomized per-word-type outputs, a selectivity of 4.5, so most of the accuracy is memorisation.
         From the representation side: even random features ``capture significant information that can
         be decoded by the probing classifier.'''' Tests capable of exposing the failure were run and it
         failed'
@@ -350,20 +350,20 @@ criteria:
       embedded in a theory rather than standing alone. The three do not resolve to one prescription. Pimentel
       et al. argue the estimate is best served by the most complex probe available; the same authors elsewhere
       ask for the accuracy–complexity trade-off and probes that are simple and accurate; Hewitt & Liang''s
-      selectivity favours the simple probe outright. One proposed distinction inside the network collapses,
+      selectivity favors the simple probe outright. One proposed distinction inside the network collapses,
       with control functions and control tasks shown almost equivalent. A network of relations that exists
       and does not close is PC.
 
       '
     notes: &id001
-      verification: 'All three formalisations and the Zhu & Rudzicz collapse are verbatim in the anchor.
-        The cell''s characterisation of the disagreement is right and understated: Pimentel et al. (2020b)
+      verification: 'All three formalizations and the Zhu & Rudzicz collapse are verbatim in the anchor.
+        The cell''s characterization of the disagreement is right and understated: Pimentel et al. (2020b)
         and Pimentel et al. (2020a) are on opposite sides of it in consecutive sentences of §4.2, the
         first arguing for the most complex probe and the second calling for probes "that are both simple
         and accurate".
 
         '
-      legacy_evidence: 'Three formalisations exist and connect probing to defined quantities: mutual information
+      legacy_evidence: 'Three formalizations exist and connect probing to defined quantities: mutual information
         $I(z;h)$, minimum description length $\mathrm{MDL}(g,f,D_O,D_P)$, and information gain under a
         control function $G(z,h,c) = I(z;h) - I(z;c(h))$. They do not agree on what should be maximised
         --- Pimentel et al.\ argue for the most complex probe, Hewitt \& Liang for the most selective
@@ -411,11 +411,11 @@ criteria:
   M2:
     name: Baseline separation
     status: C
-    short: The criterion the literature solved; three control families formalised
+    short: The criterion the literature solved; three control families formalized
     verified: true
     reasoning: 'This is the criterion the literature solved, and the anchor''s contribution is to catalogue
       the solutions as first-class components rather than as advice. Lower bounds come in three kinds
-      — majority, simpler-representation and randomised-model — and upper bounds in three more. On top
+      — majority, simpler-representation and randomized-model — and upper bounds in three more. On top
       of them sit three controls that hold a specific confound fixed: control tasks against probe memorisation,
       control functions against representation content, control datasets against task relevance. The decisive
       result is itself a baseline result, that random features already decode the property, which is what
@@ -452,7 +452,7 @@ criteria:
       the ordering of two representations survives a change of probe, which is the stability the method
       needs; under selectivity the same ordering may reverse. Since the two measures are computed on the
       same probes and the same representations, that is the same object receiving two rankings, and the
-      anchor does not say which to prefer. The stabilising instrument is itself scope-limited, applying
+      anchor does not say which to prefer. The stabilizing instrument is itself scope-limited, applying
       to word-level properties and not clearly extending to sentence-level ones. Tested, informative,
       undecided: I.
 
@@ -576,7 +576,7 @@ criteria:
     short: Three control families catalogued; the omission from the catalogue is the gap
     verified: true
     reasoning: 'The anchor catalogues controls exhaustively enough that an omission from the catalogue
-      is informative. Three control families are named and formalised as components, and the closing prescription
+      is informative. Three control families are named and formalized as components, and the closing prescription
       names bounds, controls, complexity measurement and intervention. No item in either list is a correction
       for the number of configurations searched, even though the framework invites such a search: the
       accuracy–complexity trade-off is explicitly to be reported "along a range of probes", which means
@@ -658,7 +658,7 @@ criteria:
         right: a read-out has no write path and the criterion is inapplicable, not unrun. But §4.3 of
         the anchor describes installation interventions inside the probing literature. Giulianelli et
         al. push representations along the probe''s gradient and report the predicted increase in original-model
-        performance on number-agreement examples, which is an installed property producing the behaviour
+        performance on number-agreement examples, which is an installed property producing the behavior
         it should. Tucker et al. do the same to build counterfactual representations. The audit''s I1
         draws its D from the removal half of that same subsection. Scoping removal interventions into
         the claim and installation interventions out of it is an asymmetry with no basis in the anchor,
@@ -678,7 +678,7 @@ criteria:
     verified: true
     reasoning: 'The unit of analysis is a whole intermediate output — a layer''s representation, or another
       component taken entire — and the framework offers no operation that removes part of it and asks
-      whether the rest still supports the property. Minimisation in the anchor is applied to the probe
+      whether the rest still supports the property. Minimization in the anchor is applied to the probe
       instead: the trade-off to report is accuracy against probe complexity, and the one method that does
       prune the model''s own weights is presented as a way to improve that trade-off rather than to identify
       a minimal sufficient component set. Nothing tests whether each part of the representation is load-bearing.
@@ -711,7 +711,7 @@ criteria:
       reason to encode the property for the task''s sake; if decodability tracked task-relevant use, the
       probe should come back empty. It does not. The property is decodable anyway, and the anchor draws
       the conclusion the criterion asks about, that this casts doubt on causal claims about the effect
-      of an encoded property on the original task. Decodability does not localise to the task. D.
+      of an encoded property on the original task. Decodability does not localize to the task. D.
 
       '
     notes:
@@ -730,7 +730,7 @@ criteria:
         report models encode properties ``considerably above chance-level even when distributed in the
         data as random noise,'' which they read as ``casting doubts on causal claims concerning the effect
         that property encoded in the representation may have on the original task.'' Decodability does
-        not localise to the task
+        not localize to the task
       legacy_warning: The legacy_evidence for this cell contains quotations that do not appear verbatim
         in the anchor, or attributions to the anchor of text belonging to work it cites. Verified on 2026-08-07.
         Use the quotes block, not the legacy text.
@@ -766,10 +766,10 @@ criteria:
   I6:
     name: Double dissociation
     status: U
-    short: Needs two properties and two behaviours; the framework supplies one of each
+    short: Needs two properties and two behaviors; the framework supplies one of each
     verified: true
-    reasoning: 'A double dissociation needs two properties and two behaviours, with removal of each property
-      costing one behaviour and sparing the other. The framework has one original task and one probed
+    reasoning: 'A double dissociation needs two properties and two behaviors, with removal of each property
+      costing one behavior and sparing the other. The framework has one original task and one probed
       property per experiment, and the anchor''s enumeration of concerns and its closing prescription
       both stop at single-property interventions. It also puts the intervention literature that operates
       without probing classifiers outside its scope, so no design of that kind is inherited from elsewhere.
@@ -779,11 +779,11 @@ criteria:
     notes:
       verification: 'Verified against a full read. The nearest thing in the anchor is Feder et al.''s
         adversarially removed z paired with a positively controlled zC, which is two properties and one
-        behaviour — a control for specificity of removal, not a crossed design over two behaviours. Nothing
+        behavior — a control for specificity of removal, not a crossed design over two behaviors. Nothing
         else comes close.
 
         '
-      legacy_evidence: Unattempted. No standard design shows that removing property $A$ breaks behaviour
+      legacy_evidence: Unattempted. No standard design shows that removing property $A$ breaks behavior
         $X$ while sparing $Y$, and removing $B$ does the converse
   I7:
     name: Confound control
@@ -826,8 +826,8 @@ criteria:
     short: The anchor answers confounding with designed controls, never with a bound
     verified: true
     reasoning: 'The criterion asks how strong an unmeasured confounder would have to be to overturn a
-      reported probing result. The anchor''s response to confounding is to control it by design — randomise
-      the labels, randomise the model, hold the property non-discriminative — and never to bound the effect
+      reported probing result. The anchor''s response to confounding is to control it by design — randomize
+      the labels, randomize the model, hold the property non-discriminative — and never to bound the effect
       of a confounder left uncontrolled. No quantity in the framework, and none in the prescription, can
       be read as such a bound. U.
 
@@ -880,7 +880,7 @@ criteria:
       trained out and the resulting deficit on the original task is measured; the framework''s single
       interventional component is the representation *after* an intervention, with no inverse defined
       and no second measurement after restoration. Nothing puts the removed subspace back to check that
-      the behaviour returns, so no rescue result exists in the anchor. U.
+      the behavior returns, so no rescue result exists in the anchor. U.
 
       '
     notes:
@@ -909,7 +909,7 @@ criteria:
       verification: 'One correction to the cell, which says no work the anchor cites tracks probing against
         acquisition. Zhang et al. (2021) is closer than that: it varies training data volume and reports
         how much is needed before a property is encoded, which is an onset measurement on the representation
-        side. It still does not couple onset to the corresponding behaviour, so the U stands. "Checkpoint"
+        side. It still does not couple onset to the corresponding behavior, so the U stands. "Checkpoint"
         does not occur in the anchor.
 
         '
@@ -924,7 +924,7 @@ criteria:
     reasoning: 'The converse timing test — remove a capability and check that the probe''s target becomes
       undecodable — needs the same thing onset coupling needs, a model observed in more than one state
       of competence, and the framework supplies a single trained f . The anchor''s interventions modify
-      representations rather than capabilities, and it names no study that degrades a behaviour and re-probes.
+      representations rather than capabilities, and it names no study that degrades a behavior and re-probes.
       U.
 
       '
@@ -1056,7 +1056,7 @@ criteria:
     status: N/A
     short: No intervention, so no strength to dial and no response to grade
     verified: true
-    reasoning: 'A graded response needs an intervention whose strength can be dialled and a behaviour
+    reasoning: 'A graded response needs an intervention whose strength can be dialled and a behavior
       that tracks it. Standard probing applies no intervention at all — it maps a representation to a
       property and reports a number — so there is no dose to vary and the criterion has nothing to attach
       to. The nearest graded quantity in the anchor is the accuracy–complexity trade-off reported along
@@ -1187,11 +1187,11 @@ criteria:
     notes:
       verification: 'All four alternatives and their attached measures are verbatim in the anchor, and
         the cell''s description of them is accurate. Note that the anchor does not merely list the alternatives,
-        it formalises them as components of the framework in Figure 1(b), which is stronger than the cell
+        it formalizes them as components of the framework in Figure 1(b), which is stronger than the cell
         claims.
 
         '
-      legacy_evidence: 'The alternatives are enumerated, formalised, and instrumented rather than merely
+      legacy_evidence: 'The alternatives are enumerated, formalized, and instrumented rather than merely
         acknowledged: the probe learned the task (control tasks, selectivity), the property is incidentally
         encoded (control datasets), extractability rather than presence is the well-posed quantity (MDL,
         information gain), and the property is present but causally inert (amnesic probing). Each has
@@ -1217,7 +1217,7 @@ criteria:
         effort to alleviate this limitation" — the isolation is of the effort at the time of writing,
         and "at present" is not in the sentence. The cell is otherwise supported, and understates its
         own case: footnotes 7 through 10 collect the field''s epistemic vocabulary verbatim from the papers
-        using it, which is direct evidence for unlicensed labelling that the cell does not cite.
+        using it, which is direct evidence for unlicensed labeling that the cell does not cite.
 
         '
       legacy_evidence: '``The model knows / encodes / represents $z$'''' projects an epistemic relation

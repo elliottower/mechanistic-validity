@@ -19,7 +19,7 @@ readings:
   verdict: Underdetermined
   missing: Either half of the instrument alone clears 50\% recovered KL for many layer 9--11 heads, so
     the conjunction rather than the mechanism does the separating (I4, C4); the queryside direction perpendicular
-    to the IO unembedding matters more than the parallel one and is left uncharacterised (I5)
+    to the IO unembedding matters more than the parallel one and is left uncharacterized (I5)
   primary: false
 - statement: Negative Heads do copy suppression across models
   verdict: Proposed
@@ -144,7 +144,7 @@ views_evidence:
     H6: C
   designed_for: []
 - criterion: M7
-  evidence: The 80\% behavioural figure and both faithfulness appendices are computed on the top 5\% of
+  evidence: The 80\% behavioral figure and both faithfulness appendices are computed on the top 5\% of
     completions ranked by the head's own effect, and nothing is recomputed off that slice
   cells:
     H1: '-'
@@ -219,7 +219,7 @@ tiers:
     that removes copy suppression, and the structured ablation is never applied to it
 - name: Validated
   requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
-  missing: \textbf{M5}, \textbf{M7} unattempted, and the behavioural and faithfulness figures are computed
+  missing: \textbf{M5}, \textbf{M7} unattempted, and the behavioral and faithfulness figures are computed
     on a top-5\% slice chosen by the head's own effect; \textbf{I8}, \textbf{I10}, \textbf{I12} unattempted
 criteria:
   C1:
@@ -245,7 +245,7 @@ criteria:
         same sentence and is recorded at M7.
 
         '
-      legacy_evidence: 'The three qualitative steps are operationalised as three conjunctive conditions
+      legacy_evidence: 'The three qualitative steps are operationalized as three conjunctive conditions
         checked per completion (their \S2.1), and 80\% of a sample from the top 5\% of completions meet
         all three --- a number that could have come out near zero. The weights predictions are sharper:
         the OV diagonal could have failed to be negative and the QK diagonal could have failed to be maximal,
@@ -262,24 +262,24 @@ criteria:
       are quantified over the entire vocabulary: 84.70% of tokens have their OV diagonal among the ten
       most negative entries in their column, 98.86% in the bottom 5%, and 95.72% of QK rows have the diagonal
       as the largest entry. Structural evidence of this kind is usually the missing piece; here it is
-      the core of the paper. It is also checked against behaviour rather than left as an idealisation,
+      the core of the paper. It is also checked against behavior rather than left as an idealization,
       holding at 78.24% on real source-destination pairs from OpenWebText. C.
 
       '
     notes:
       verification: 'All four percentages are verbatim and the cell reports them correctly, including
         the distinction between the static 84.70% and the dynamic 78.24%. One caveat the cell notes only
-        at M3: the paper states the QK idealisation "does not completely faithfully represent L10H7''s
+        at M3: the paper states the QK idealization "does not completely faithfully represent L10H7''s
         real functioning", and Appendix M.2 measures the gap at a median attention change of -0.09 against
         an average attention of 0.21. The structural account of the OV circuit survives that caveat; the
-        QK half is idealised and known by the authors to be so.
+        QK half is idealized and known by the authors to be so.
 
         '
       legacy_evidence: 'The mechanism is read off the weights before any ablation. OV circuit $W_U W_{OV}
         \mathrm{MLP}_0(W_E)$: 84.70\% of vocabulary tokens have their diagonal among the ten most negative
         entries in their column, 98.86\% in the bottom 5\% (\S3.1). QK circuit $W_U W_{QK} \mathrm{MLP}_0(W_E)$:
         95.72\% of rows have the diagonal as the largest entry (\S3.2). Both are checked against on-distribution
-        behaviour --- the OV result holds at 78.24\% on real (source, destination) pairs from OpenWebText
+        behavior --- the OV result holds at 78.24\% on real (source, destination) pairs from OpenWebText
         (Appendix F)'
   C3:
     name: Convergent validity
@@ -289,7 +289,7 @@ criteria:
     reasoning: 'Four instruments bear on the same claim and agree. Weight products give 84.70% and 95.72%
       with no intervention at all; hand-coding of dataset examples gives 80%; a structured ablation that
       deletes everything except the two weight mechanisms preserves 76.9% of the head''s effect; and out-of-distribution
-      behaviour on repeated random tokens ranks the same head first. These differ in kind rather than
+      behavior on repeated random tokens ranks the same head first. These differ in kind rather than
       in granularity — one is a property of the parameters, one is observational, one is causal, one is
       a different distribution — so their agreement is not arithmetic. C.
 
@@ -303,8 +303,8 @@ criteria:
         are post-origin.
 
         '
-      legacy_evidence: 'Four families at origin, agreeing: weights (\S3.1--3.2), behavioural coding of
-        dataset examples (\S2.1, 80\%), structured ablation (\S3.3, CSPA), and out-of-distribution behaviour
+      legacy_evidence: 'Four families at origin, agreeing: weights (\S3.1--3.2), behavioral coding of
+        dataset examples (\S2.1, 80\%), structured ablation (\S3.3, CSPA), and out-of-distribution behavior
         on repeated random tokens (Appendix A). Independent later convergence: Campregher et al.\ (2025),
         a reproducibility study reconciling three papers, finds attention heads promote factual output
         ``via general copy suppression rather than selective counterfactual suppression''''; Urdshals
@@ -326,7 +326,7 @@ criteria:
     notes:
       verification: 'TWO CONTRADICTIONS WITH THE CELL, both about Figure 19b. First, the cell reads "L10H7''s
         diagonal median rank is 21,904 of 50,257" — the figure is captioned "Studying the number of Top-1
-        tokens for L3H0, a Duplicate Token Head", with a "Count" colour scale, so 21904/50257 is a count
+        tokens for L3H0, a Duplicate Token Head", with a "Count" color scale, so 21904/50257 is a count
         of vocabulary tokens whose diagonal ranks first, not a median rank. Under the caption the number
         says L3H0 matches strongly in effective-embedding space, the opposite of what the cell uses it
         for; the discriminant point is the 289/50257 it reaches in the copy-suppression configuration
@@ -444,12 +444,12 @@ criteria:
   M3:
     name: Stability
     status: PC
-    short: Perturbations run and disclosed where they fail the idealisation
+    short: Perturbations run and disclosed where they fail the idealization
     verified: true
     reasoning: 'Perturbations are run against the paper''s own result and reported when they hurt. Including
       the query and key biases leaves the QK distribution unchanged; the static 84.70% is rechecked dynamically
       at 78.24%; the headline is recomputed under two loss metrics giving 82% and 45%. The two perturbations
-      that matter most come out against the idealisation: projecting the key input onto the effective
+      that matter most come out against the idealization: projecting the key input onto the effective
       embedding moves attention by a median of -0.09, and the better context-free approximation still
       moves it by -0.06. Stability tested, partly failed, and disclosed is PC.
 
@@ -464,7 +464,7 @@ criteria:
       legacy_evidence: Perturbations are run and reported against the paper. QK results with and without
         bias terms are ``identical \ldots except a tiny difference in the Rank 1-2 bar heights'' (Figure
         19a). The static OV result (84.70\%) is checked dynamically (78.24\%, Appendix F). Three metrics
-        are reported (Appendix J.2). Appendices M.2 and M.3 perturb the idealised key and query approximations
+        are reported (Appendix J.2). Appendices M.2 and M.3 perturb the idealized key and query approximations
         and find both unfaithful --- median attention change $-0.09$ under the effective-embedding keyside,
         improving to $-0.06$ with a context-free residual state
   M4:
@@ -525,7 +525,7 @@ criteria:
     reasoning: 'The claim is evaluated across the whole of OpenWebText rather than a template set, binned
       into 100 percentiles of effect size, under three metrics, at two granularities and in three further
       model settings. Conditions that would stress it are absent: no breakdown by document domain, sequence
-      length or token frequency band appears. Appendix K then shows the operationalisation is itself condition-dependent,
+      length or token frequency band appears. Appendix K then shows the operationalization is itself condition-dependent,
       since in 42.00% of large-attention pairs the source token is suppressed without being the most suppressed,
       and in 90% of those the winner is a semantically related token. Broad coverage with an unstable
       definition at the margin is PC.
@@ -533,14 +533,14 @@ criteria:
       '
     notes:
       verification: 'The 42.00% and 90% figures are verbatim and the cell reports them correctly. Note
-        these two numbers cut both ways: they are evidence of non-invariance of the strict operationalisation,
+        these two numbers cut both ways: they are evidence of non-invariance of the strict operationalization,
         and evidence for the semantic reading the paper adopts in Appendix K and records at V3.
 
         '
       legacy_evidence: 'Reported across the full OpenWebText distribution binned into 100 effect-size
         percentiles, under three metrics, at two granularities (weights-static and on-distribution), and
         across three further model settings in appendices. Not reported across document domains, sequence
-        lengths, or token frequency bands. Appendix K shows the operationalisation is itself condition-dependent:
+        lengths, or token frequency bands. Appendix K shows the operationalization is itself condition-dependent:
         in 42.00\% of large-attention pairs the source token is suppressed but not most-suppressed, and
         in 90\% of those the most-suppressed token is semantically related to the source'
   M7:
@@ -566,21 +566,21 @@ criteria:
 
         '
       legacy_evidence: Unattempted. L10H7 is selected as the most negative head in GPT-2 Small; the 80\%
-        behavioural figure is computed on a sample from the top 5\% of completions by L10H7's own effect,
+        behavioral figure is computed on a sample from the top 5\% of completions by L10H7's own effect,
         chosen because they ``accounted for half of the attention head's loss reducing effect''; the QK
         ablation retains the top 5\% of source tokens; Appendices M.2 and M.3 evaluate faithfulness on
         the top 5\% again. Each selection is stated; none is corrected for
   I1:
     name: Necessity
     status: PC
-    short: Direct path localised cleanly; the absolute effect is a thousandth of loss
+    short: Direct path localized cleanly; the absolute effect is a thousandth of loss
     verified: true
     reasoning: 'Necessity is established for a path and not for the head. Decomposing the head''s effect
-      into direct and indirect routes shows the direct path carries most of the loss change, which localises
+      into direct and indirect routes shows the direct path carries most of the loss change, which localizes
       the contribution cleanly and justifies studying that path alone. In absolute terms nothing depends
       on the head. Its whole direct effect is a thousandth of the model''s loss, the sign of its contribution
       is close to balanced across completions, and the same is true of most heads in its layers. A clean
-      localisation of a small and two-sided effect is PC.
+      localization of a small and two-sided effect is PC.
 
       '
     notes:
@@ -591,7 +591,7 @@ criteria:
         0.0008 as plotted in Figure 12.
 
         '
-      legacy_evidence: 'Path decomposition localises the head''s contribution cleanly --- ablating the
+      legacy_evidence: 'Path decomposition localizes the head''s contribution cleanly --- ablating the
         direct path raises loss by 0.0102, ablating indirect paths by 0.0016 (Figure 2) --- which is a
         necessity result for the \emph{path}, not for the head. In absolute terms the head is not necessary
         for anything: removing it costs about 0.3\% of the model''s loss, and Figure 16a shows the sign
@@ -732,16 +732,16 @@ criteria:
     reasoning: 'Two confounds are controlled by construction, and both are structural features of GPT-2
       Small that would otherwise manufacture the result. Tied embeddings are handled by using the effective
       embedding keyside and running the same-matching baseline; LayerNorm is handled by weight processing
-      that strips centering and rescaling, plus renormalisation of the query and key inputs to simulate
+      that strips centering and rescaling, plus renormalization of the query and key inputs to simulate
       its effect. Confounds in the data are untouched. Token frequency, position in document and text
       domain are never controlled, and Appendix N shows the third one bites: the intervention''s failure
-      cases concentrate on capitalised words far above their base rate. PC.
+      cases concentrate on capitalized words far above their base rate. PC.
 
       '
     notes:
       verification: 'The effective-embedding and LayerNorm treatments are verbatim and correctly located
-        in Appendices H, I and M.1. One qualification: the cell reads the Appendix N capitalisation result
-        as evidence that domain is uncontrolled. Capitalisation is a token-class property rather than
+        in Appendices H, I and M.1. One qualification: the cell reads the Appendix N capitalization result
+        as evidence that domain is uncontrolled. Capitalization is a token-class property rather than
         a domain, and the paper''s own reading is that the projection fails to detect cases the head does
         suppress, so the failure is in the approximation rather than in the head.
 
@@ -749,9 +749,9 @@ criteria:
       legacy_evidence: 'Two confounds controlled by construction, both structural to GPT-2 Small. Tied
         embeddings: the effective embedding $\mathrm{MLP}_0(W_E)$ is used keyside and the same-matching
         baseline is run (\S3.2, Appendix I). LayerNorm: weight processing removes centering and rescaling,
-        and query and key inputs are renormalised to $\sqrt{d_{\mathrm{model}}}$ to simulate it (Appendices
+        and query and key inputs are renormalized to $\sqrt{d_{\mathrm{model}}}$ to simulate it (Appendices
         H, M.1). Token frequency, position in document, and domain are uncontrolled --- and Appendix N
-        shows the third matters, since the failure cases concentrate on capitalised words at ``far above
+        shows the third matters, since the failure cases concentrate on capitalized words at ``far above
         the base rate'''''
   I8:
     name: Confounding sensitivity
@@ -765,7 +765,7 @@ criteria:
     notes:
       verification: 'Read in full. The causal claims rest on ablation rather than on adjustment, so the
         E-value framing has no natural home here. The nearest thing in the paper is the perpendicular
-        queryside component, an identified but uncharacterised influence that a sensitivity analysis would
+        queryside component, an identified but uncharacterized influence that a sensitivity analysis would
         be the natural way to price.
 
         '
@@ -829,7 +829,7 @@ criteria:
     reasoning: 'The origin runs no onset experiment and names it three times as the experiment to run.
       Appendix E states the paper explains what the head does rather than why it forms, offers three theories
       for its formation, and attaches a checkpointed-model test to each: watch the loss cases as the head
-      is forming, check whether negative heads appear concurrently with copying behaviour elsewhere, and
+      is forming, check whether negative heads appear concurrently with copying behavior elsewhere, and
       inspect attention patterns early in training. The appendix also draws the distinction the criterion
       rests on, between why a head forms and how it reduces loss once trained.
 
@@ -853,7 +853,7 @@ criteria:
     status: U
     short: Pythia checkpoints already in use; no offset observed anywhere
     verified: true
-    reasoning: 'Offset coupling asks whether a mechanism''s disappearance tracks the behaviour''s, which
+    reasoning: 'Offset coupling asks whether a mechanism''s disappearance tracks the behavior''s, which
       requires at least two points on a training trajectory. GPT-2 Small has no public checkpoints, but
       the paper already runs experiments in Pythia, which does, and Appendix E shows the authors know
       checkpointed analysis is the route. Nothing in the source observes any component losing its role
@@ -926,14 +926,14 @@ criteria:
     reasoning: 'Transfer is measured across two distributions that share nothing. Copy-suppression scores
       from IOI and anti-induction scores from repeated sequences of uniformly random tokens correlate
       across GPT, Pythia and SoLU models, and L10H7 ranks first on both, which is the result a task-specific
-      mechanism could not produce. The paper draws the right conclusion from it, that the negative behaviour
+      mechanism could not produce. The paper draws the right conclusion from it, that the negative behavior
       on IOI is not task-dependent. C.
 
       '
     notes:
       verification: 'The "not task-dependent" sentence is verbatim and the cell''s rendering matches apart
         from typographic emphasis. Two limits on the strength of the C that the cell does not record.
-        What transfers is the behavioural score, since CSPA and the 76.9% decomposition are never run
+        What transfers is the behavioral score, since CSPA and the 76.9% decomposition are never run
         on the second distribution; and the correlation is asserted from Figure 9 with no coefficient,
         no head count and no test. Saraipour & Zhang, Urdshals & Urdshals and Campregher et al. are post-origin.
 
@@ -1000,7 +1000,7 @@ criteria:
     status: C
     short: Anti-induction on random tokens predicted, then confirmed
     verified: true
-    reasoning: 'The prediction has the right form and the right risk. If the negative behaviour on IOI
+    reasoning: 'The prediction has the right form and the right risk. If the negative behavior on IOI
       is copy suppression rather than an IOI-specific mechanism, then the same heads should show anti-induction
       on repeated sequences of uniformly random tokens, a distribution with no semantic content and no
       relation to the task the heads were found on. The scores correlate across three model families and
@@ -1015,7 +1015,7 @@ criteria:
         the two scores. The C survives on that reading; "in the strict sense" does not.
 
         '
-      legacy_evidence: Appendix A is a novel prediction in the strict sense. If the negative behaviour
+      legacy_evidence: Appendix A is a novel prediction in the strict sense. If the negative behavior
         on IOI is copy suppression rather than an IOI-specific mechanism, the same heads should show anti-induction
         on repeated sequences of \emph{uniformly random tokens} --- a distribution with no semantic content
         and no relation to the task the heads were found on. The scores correlate across three model families
@@ -1052,7 +1052,7 @@ criteria:
       weight-level evidence, which is the right level for a claim about what a matrix does, and the coverage
       claim is carried by a distribution-level average, which is the right level for a claim about a training
       distribution. The unmatched axis is the one the authors name: when and how much copy suppression
-      fires. Both idealised approximations shift real attention substantially, and the queryside direction
+      fires. Both idealized approximations shift real attention substantially, and the queryside direction
       that matters most is perpendicular to the one the account uses. PC.
 
       '
@@ -1064,13 +1064,13 @@ criteria:
       legacy_evidence: 'The mechanism claim is matched by weight-level evidence and the coverage claim
         by distribution-level evidence. The gap is the ``when,'''' stated by the authors in \S1: ``we
         do not explain precisely when or how much copy suppression is activated in different contexts.''''
-        Appendices M.2 and M.3 quantify it --- the idealised query and key approximations both shift real
+        Appendices M.2 and M.3 quantify it --- the idealized query and key approximations both shift real
         attention substantially, and \S4.2 shows the perpendicular query component matters more than the
         parallel one'
   V3:
     name: Alternative level
     status: PC
-    short: Appendix K favours semantic copy suppression over the paper's own name
+    short: Appendix K favors semantic copy suppression over the paper's own name
     verified: true
     reasoning: 'One alternative description is examined and partly accepted. Appendix K measures the cases
       where the source token is suppressed without being most suppressed, finds a semantically related
@@ -1078,7 +1078,7 @@ criteria:
       copy suppression. A simpler alternative, a same-matching QK circuit exploiting tied embeddings,
       is addressed and rejected with a baseline. A third is raised and left open, since the paper states
       it does not know what the perpendicular queryside component represents. Alternatives entertained,
-      one of them favoured over the paper''s own name for the mechanism, is PC.
+      one of them favored over the paper''s own name for the mechanism, is PC.
 
       '
     notes:
@@ -1110,7 +1110,7 @@ criteria:
       '
     notes:
       verification: 'PRIORITY CHECK on all three labels, each traced to where it is introduced. "Copy
-        suppression" is defined by the three steps in §1 and each is operationalised in §2.1 and §3; "Negative
+        suppression" is defined by the three steps in §1 and each is operationalized in §2.1 and §3; "Negative
         Head" by §1''s definition, repeated in the glossary; "backup head" by footnote 2 in §1 and the
         glossary, both purely in terms of response to ablation. The cell is right that all three name
         operations. Three qualifications. The glossary marks the Negative Head definition "a qualitative
@@ -1131,7 +1131,7 @@ criteria:
         pattern plus a negative OV diagonal, ``Negative Head'''' is defined by measured logit effect,
         ``backup head'''' by response to ablation. No intentional vocabulary. The one interpretive claim
         --- that the mechanism ``improves overall model calibration'''' --- has its own analysis (Appendix
-        D), and the three candidate explanations for why the heads form are labelled ``speculative theories''''
+        D), and the three candidate explanations for why the heads form are labeled ``speculative theories''''
         with tests attached'
   V5:
     name: Scope declaration
@@ -1142,7 +1142,7 @@ criteria:
       The central claim is stated as a lower bound on one head in one model, and the sentence immediately
       after it names what the paper does not explain. The QK analysis carries its own limitation at the
       point of use, pointing to the three appendices that quantify the shortfall. The conclusion names
-      two limitations and concedes that generalisation to larger models is behavioural rather than mechanistic,
+      two limitations and concedes that generalization to larger models is behavioral rather than mechanistic,
       and Appendix E states the why-question is out of scope. Declared at every level and specific about
       what is missing is C.
 

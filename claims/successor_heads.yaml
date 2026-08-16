@@ -4,7 +4,7 @@ description: 'One attention head maps an ordinal token to its successor, and the
   of four weight matrices --- embedding, $\mathrm{MLP}_0$, the head''s OV circuit, unembedding --- evaluated
   directly, with no activation from any prompt entering it. Mod-10 features recovered from $\mathrm{MLP}_0$
   by sparse autoencoders, by a linear probe and by single-neuron ablation carry the index the head increments.
-  Evaluated on: GPT-2, Pythia and Llama-2 from 31M to 12B for behavioural recurrence, with the feature-level
+  Evaluated on: GPT-2, Pythia and Llama-2 from 31M to 12B for behavioral recurrence, with the feature-level
   case study on Pythia-1.4B L12H0 and two appendix replications. Description mode: implementational-functional.'
 source:
   citation: gould2023successor
@@ -354,21 +354,21 @@ claims:
       page: null
       line: null
     - exact: '1. Direct effect resampling ablation: 33% for successorship, 11% for acronym, 10% for greater-than,
-        and 11% for copying behaviour.'
+        and 11% for copying behavior.'
       prefix: ''
       suffix: ''
       section: Appendix K
       page: null
       line: null
     - exact: '4. Total effect mean ablation: 27% for successorship, 8.2% for acronym, 10% for greater-than,
-        and 8.4% for copying behaviour.'
+        and 8.4% for copying behavior.'
       prefix: ''
       suffix: ''
       section: Appendix K
       page: null
       line: null
     - exact: '5. Total effect resampling ablation: 30% for successorship, 6.5% for acronym, 11% for greater-than,
-        and 6.2% for copying behaviour.'
+        and 6.2% for copying behavior.'
       prefix: ''
       suffix: ''
       section: Appendix K
@@ -391,7 +391,7 @@ claims:
       section: Appendix D
       page: null
       line: null
-    - exact: While our experiments in Section 3 focus on the study of mod-10 features, one might hypothesise
+    - exact: While our experiments in Section 3 focus on the study of mod-10 features, one might hypothesize
         that there exist similar natural mod-k features for other k. To explore this hypothesis, we repeat
         the linear probing experiment detailed in Section 3.3 for a range of moduli m ∈ {2, ..., 25}.
       prefix: ''
@@ -517,14 +517,14 @@ claims:
       page: null
       line: null
     - exact: '1. Direct effect resampling ablation: 33% for successorship, 11% for acronym, 10% for greater-than,
-        and 11% for copying behaviour.'
+        and 11% for copying behavior.'
       prefix: ''
       suffix: ''
       section: Appendix K
       page: null
       line: null
     - exact: '4. Total effect mean ablation: 27% for successorship, 8.2% for acronym, 10% for greater-than,
-        and 8.4% for copying behaviour.'
+        and 8.4% for copying behavior.'
       prefix: ''
       suffix: ''
       section: Appendix K
@@ -775,14 +775,14 @@ claims:
       page: null
       line: null
     - exact: '1. Direct effect resampling ablation: 33% for successorship, 11% for acronym, 10% for greater-than,
-        and 11% for copying behaviour.'
+        and 11% for copying behavior.'
       prefix: ''
       suffix: ''
       section: Appendix K
       page: null
       line: null
     - exact: '4. Total effect mean ablation: 27% for successorship, 8.2% for acronym, 10% for greater-than,
-        and 8.4% for copying behaviour.'
+        and 8.4% for copying behavior.'
       prefix: ''
       suffix: ''
       section: Appendix K
@@ -947,21 +947,21 @@ claims:
   I9:
     quotes:
     - exact: '2. Indirect effect mean ablation: 6.5% for successorship, 2.8% for acronym, 12% for greater-than,
-        and 9.0% for copying behaviour.'
+        and 9.0% for copying behavior.'
       prefix: ''
       suffix: ''
       section: Appendix K
       page: null
       line: null
     - exact: '3. Indirect effect resampling ablation: 5.8% for successorship, 2.7% for acronym, 11% for
-        greater-than, and 8% for copying behaviour.'
+        greater-than, and 8% for copying behavior.'
       prefix: ''
       suffix: ''
       section: Appendix K
       page: null
       line: null
     - exact: '1. Direct effect resampling ablation: 33% for successorship, 11% for acronym, 10% for greater-than,
-        and 11% for copying behaviour.'
+        and 11% for copying behavior.'
       prefix: ''
       suffix: ''
       section: Appendix K
@@ -1536,7 +1536,7 @@ claims:
       section: §3.2
       page: null
       line: null
-    - exact: While our experiments in Section 3 focus on the study of mod-10 features, one might hypothesise
+    - exact: While our experiments in Section 3 focus on the study of mod-10 features, one might hypothesize
         that there exist similar natural mod-k features for other k. To explore this hypothesis, we repeat
         the linear probing experiment detailed in Section 3.3 for a range of moduli m ∈ {2, ..., 25}.
       prefix: ''

@@ -225,7 +225,7 @@ criteria:
       legacy_evidence: 'Two evidence types at origin --- automated interpretability scoring and activation
         patching --- plus a concurrent independent origin (Bricken et al.\ 2023). Later convergence is
         broad on the method and divergent on the claim: SAEBench, MIB, AxBench and its 2026 rebuttal reach
-        opposite conclusions about utility, and \citet{mueller2025mib} finds no causal-localisation advantage
+        opposite conclusions about utility, and \citet{mueller2025mib} finds no causal-localization advantage
         over neurons'
       verification: 'The two origin evidence types are confirmed. The concurrent-origin claim is not attested
         in Cunningham et al., which never cites Bricken et al. (2023) anywhere in its reference list;
@@ -241,7 +241,7 @@ criteria:
     verified: true
     reasoning: 'The origin defines its construct as a dictionary feature that approximates an unknown
       ground truth network feature, and its case studies score against a weaker operational stand-in:
-      whether a direction admits one human-readable explanation. The neighbouring constructs the construct
+      whether a direction admits one human-readable explanation. The neighboring constructs the construct
       must be separated from — an atomic unit, a complete unit, and a direction that is an artifact of
       the dictionary rather than a property of the model — are exactly the ones the follow-up tests. Atomicity
       fails: meta-SAE decomposition of a 49,152-latent GPT-2 dictionary recovers components that match
@@ -252,13 +252,13 @@ criteria:
 
       '
     notes:
-      legacy_evidence: 'The construct is ``a feature of the model,'''' and both neighbouring constructs
+      legacy_evidence: 'The construct is ``a feature of the model,'''' and both neighboring constructs
         have been tested and not separated. Not atomic: meta-SAE decomposition recovers general components
         matching smaller-SAE latents, with 73\% five-way identification against a 20\% floor, and the
         cause named as the sparsity penalty. Not complete: 657 of 1{,}536 latents in the larger of a stitched
         GPT-2 pair are novel relative to the smaller, and adding them ``reduces the MSE by almost 10\%.''''
         Not distinguishable from a dictionary artifact: the origin''s headline metric returns similar
-        values on randomly initialised transformers (Heap et al.\ 2025). Tests capable of exposing the
+        values on randomly initialized transformers (Heap et al.\ 2025). Tests capable of exposing the
         failure were run and the criterion failed'
       verification: 'Every number in the cell checks out with one qualification. The 20% chance floor
         is not stated anywhere in Leask et al.; it is an inference from "ask it to choose which of 5 SAE
@@ -315,7 +315,7 @@ criteria:
     status: I
     short: One training run per configuration; no repetition reported
     verified: true
-    reasoning: 'The training appendix specifies the optimiser, the data volume and the epoch count and
+    reasoning: 'The training appendix specifies the optimizer, the data volume and the epoch count and
       says nothing about seeds or repeated runs, and no figure caption in the paper reports variation
       across training runs. Figure 2''s error bars are confidence intervals over the 150 scored features
       from a single dictionary, which measures scoring spread rather than training reliability. Every
@@ -335,11 +335,11 @@ criteria:
         stable object --- unstable individual features concentrate in reproducible low-rank subspaces'
       verification: "The appendix inventory in the cell is exact and the absence of a seed study is confirmed\
         \ by reading all seven appendices. Two locator corrections. The 94% cross-seed figure is in Leask\
-        \ et al. Appendix A.7 (Stitching experiments), with the seed axes labelled in Figure 18a; Appendix\
+        \ et al. Appendix A.7 (Stitching experiments), with the seed axes labeled in Figure 18a; Appendix\
         \ A.6 is \"Open source SAE weights.\" And the 94% is a proportion of reconstruction latents at\
         \ a 0.7 cosine threshold, which is agreement in the sense the paper defines rather than a feature-identity\
         \ match. Paulo & Belrose (2025) and Gerasimov et al. (2026) appear in neither audited paper.\n\
-        \ The seed axes are labelled in Leask et al. Figure 18a, \"Proportion of reconstruction latents\
+        \ The seed axes are labeled in Leask et al. Figure 18a, \"Proportion of reconstruction latents\
         \ in GPT-2 SAEs with 3072 latents. X and Y labels are random training seeds\"; that caption is\
         \ set in two columns and does not extract contiguously, so the contiguous sentence from Appendix\
         \ A.7 is quoted instead."
@@ -364,7 +364,7 @@ criteria:
         default-basis controls separate cleanly, and the paper reports the sharper negative alongside:
         ``We do not find residual stream basis directions to be any more interpretable than random directions.''''
         The random-\emph{network} baseline was not run at origin and fails when run: auto-interpretability
-        scores on randomly initialised transformers are ``similar to those from trained models'''' (Heap
+        scores on randomly initialized transformers are ``similar to those from trained models'''' (Heap
         et al.\ 2025)'
       verification: 'The default-basis quote is verbatim and sits in Appendix C.2, in the paragraph about
         transformers storing information in the residual stream basis. One thing the cell''s phrasing
@@ -415,7 +415,7 @@ criteria:
       does not hide what the scale delivers — the unselected first-five sample in Table 1 includes a negative
       score of -0.11 and a top score of 0.57, and the sample is explicitly unselected. Calibration is
       partial in the direction that matters for the claim: nothing converts a score of 0.33 into a statement
-      about how much of a feature''s behaviour is explained, and no upper reference point is established
+      about how much of a feature''s behavior is explained, and no upper reference point is established
       for what a genuinely monosemantic direction should score.
 
       '
@@ -460,14 +460,14 @@ criteria:
       layer of Pythia-70M, five dictionary-width ratios spanning undercomplete to eight times overcomplete,
       six layers of a second and larger model, and two scoring regimes of which the harder one is run
       precisely because the easier one could be flattering. That is a wide invariance envelope for a 2023
-      result. It stops short of complete because the envelope is one architecture family, one tokeniser
+      result. It stops short of complete because the envelope is one architecture family, one tokenizer
       and one training corpus, and because the paper reports where invariance breaks rather than explaining
       it: the advantage is gone by layer 4.'
     notes:
       legacy_evidence: 'Reported across all layers of Pythia-70M, six layers of Pythia-410M, five expansion
         ratios, and two scoring regimes (top-and-random, random-only). Reported where invariance \emph{fails}:
         the advantage over ICA vanishes by layer 4. Leask et al.\ add a second model family. Not checked
-        across tokenisers, training corpora, or architectures beyond decoder-only transformers'
+        across tokenizers, training corpora, or architectures beyond decoder-only transformers'
       verification: 'Every count in the cell checks out: five expansion ratios (R ∈ {0.5, 1, 2, 4, 8},
         Table 2 caption), six Pythia-410M layers (3, 7, 11, 15, 19, 23, Figure 17), two scoring regimes
         (top-and-random, random-only). This creates a conflict with E2, which describes the causal evidence
@@ -503,7 +503,7 @@ criteria:
   I1:
     name: Necessity
     status: PC
-    short: One feature ablated for behaviour; a full previous-layer sweep reads out to features
+    short: One feature ablated for behavior; a full previous-layer sweep reads out to features
     verified: true
     reasoning: 'Removal is performed and the direction of the effect matches the feature''s reading: take
       away the apostrophe feature and the model stops predicting the possessive s. The report is qualitative.
@@ -517,11 +517,11 @@ criteria:
         scale is disclosed in the same caption --- ``there are 12k logits negatively effected, but we
         set a threshold of 0.1 for visual clarity.'''' No systematic necessity test over a feature set'
       verification: 'Contradiction with the cell''s summary. "One feature, one removal" holds for necessity
-        with respect to behaviour, which is tested once, on the apostrophe feature, against logits. It
+        with respect to behavior, which is tested once, on the apostrophe feature, against logits. It
         does not hold for ablation as such: §5.3 ablates every dictionary feature in the previous layer,
         one at a time, and ranks them by effect on a target feature, then applies the procedure recursively.
         That is a systematic ablation sweep whose outcome variable is another feature''s activation rather
-        than model behaviour.'
+        than model behavior.'
   I2:
     name: Sufficiency
     status: PC
@@ -575,7 +575,7 @@ criteria:
       feature''s interpretation. Nothing establishes that the other movements are noise: there is no comparison
       to ablating a random direction of the same norm, no report of which tokens they are, and the display
       threshold of 0.1 is chosen for clarity rather than derived from a null. Specificity was computable
-      from data the authors already had and is the one quantity the section does not analyse.'
+      from data the authors already had and is the one quantity the section does not analyze.'
     notes:
       legacy_evidence: 'Measured incidentally at origin and left unanalysed: the single-feature ablation
         moves 12{,}000 logits, disclosed and then hidden behind a display threshold. Later evidence splits.
@@ -709,7 +709,7 @@ criteria:
     verified: true
     reasoning: The audited models are the Pythia suite, which exists to support analysis across training.
       Nothing in either paper measures when a dictionary feature first appears during pretraining, or
-      whether its appearance coincides with the behaviour it is said to support. The single dictionary
+      whether its appearance coincides with the behavior it is said to support. The single dictionary
       per configuration is trained on a final checkpoint, so onset is not merely unreported but outside
       the design.
     notes:
@@ -730,7 +730,7 @@ criteria:
       to both papers.
     notes:
       legacy_evidence: Unattempted. The nearest existing result is at the extreme rather than along the
-        trajectory --- SAEs on randomly initialised transformers score comparably \citep{heap2025sparse}
+        trajectory --- SAEs on randomly initialized transformers score comparably \citep{heap2025sparse}
         --- and that bears on the scoring instrument rather than on the feature's coupling to a capability
       verification: Heap et al. (2025), the random-network comparison the cell treats as the nearest result,
         is cited in neither audited paper. Nothing in Cunningham or Leask varies a capability and tracks
@@ -749,7 +749,7 @@ criteria:
     notes:
       legacy_evidence: 'Two intervention forms at origin --- activation patching in the IOI experiment
         (\S4) and less-than-rank-one ablation in the case studies (\S5.2, \S5.3) --- both acting on feature
-        directions. \S5 is organised as input, output and intermediate analyses and contains no steering
+        directions. \S5 is organized as input, output and intermediate analyses and contains no steering
         condition; the abstract''s appeal to ``steerability'''' is an aspiration for future work rather
         than a reported experiment. Later reach is broad and contested: AxBench reports SAEs uncompetitive
         at steering, and J\o{}rgensen et al.\ (2026) rebut with the reply title ``Actually, Sparse Autoencoders
@@ -767,7 +767,7 @@ criteria:
       a direction that only cohered on its training distribution would score badly. The causal evidence
       does not generalize the same way. It is one task, one template family with a swapped indirect object,
       and 50 items, which is enough to establish the comparison against PCA and not enough to establish
-      that the features localise behaviour in general.'
+      that the features localize behavior in general.'
     notes:
       legacy_evidence: 'Cross-corpus by construction --- dictionaries trained on the Pile, interpretability
         scored on OpenWebText, with 50{,}000 fragments screened per feature. The causal evidence is narrow
@@ -840,14 +840,14 @@ criteria:
     short: The IOI experiment is a prediction in the weak sense
     verified: true
     reasoning: 'The prediction is real in the weak sense and the paper identifies why it counts: the dictionaries
-      were fit without reference to the task, then asked to localise a behaviour they never saw, against
+      were fit without reference to the task, then asked to localize a behavior they never saw, against
       a decomposition fit the same way. It stays weak because the prediction is comparative and directional
       with no stated threshold, is not registered anywhere, and the task was selected after the dictionaries
       existed for the stated reason that it is simple and previously studied.'
     notes:
       legacy_evidence: 'The IOI experiment is a genuine prediction in the weak sense and the paper says
         why: ``Recall that the training of our feature dictionaries does not emphasize any particular
-        task.'''' Task-agnostic dictionaries were predicted to localise a task they never saw, and they
+        task.'''' Task-agnostic dictionaries were predicted to localize a task they never saw, and they
         did, against PCA. Not pre-registered, and the outcome is reported as a curve rather than against
         a stated threshold'
       verification: The task-agnostic sentence is verbatim and sits immediately after the task description,
@@ -866,9 +866,9 @@ criteria:
     notes:
       legacy_evidence: 'The formal object is declared precisely --- an overcomplete dictionary with a
         sparsity penalty, and a named metric. The word ``feature'''' is not: it slides between a direction
-        in activation space and a human-recognisable concept, and no description mode is stated'
+        in activation space and a human-recognizable concept, and no description mode is stated'
       verification: 'One qualification to the cell. The origin is more careful than "it slides between
-        a direction in activation space and a human-recognisable concept" allows: §2 names ground truth
+        a direction in activation space and a human-recognizable concept" allows: §2 names ground truth
         network features and dictionary features as separate objects and writes the approximation between
         them. The slide is in the title, abstract and case-study prose, where the qualifier is dropped.'
   V2:
@@ -888,7 +888,7 @@ criteria:
         fewer of them than PCA components reaches a given KL on one task. The adopted claim is that these
         are the model''s features and the units of analysis --- representational and computational. Three
         results sever the link: the proxy does not distinguish trained from random networks, the units
-        change with width, and causal localisation is no better than neurons. Against the \emph{origin''s
+        change with width, and causal localization is no better than neurons. Against the \emph{origin''s
         own} hedged wording (``indicates that it is possible,'''' ``appear to correspond,'''' ``more monosemantic
         than comparable methods'''') this row would be PC'
       verification: 'All three hedges the cell quotes are verbatim and appear in the places it says. The
@@ -904,12 +904,12 @@ criteria:
     reasoning: 'The alternative level is raised by the origin itself, in the appendix, from its own negative
       result, and then not pursued: the sentence names the possibility that no decomposition is privileged
       and immediately says confirming it would take work not done here. Raising an alternative and declining
-      to test it is the partial case. The follow-up pursues it, formalises it as the question of canonical
+      to test it is the partial case. The follow-up pursues it, formalizes it as the question of canonical
       units, and recommends accepting the alternative rather than resolving it.'
     notes:
       legacy_evidence: 'The alternative is raised at origin and not pursued: ``there is not a single correct
         way to decompose activation spaces into a sparse basis, though to confirm this would require many
-        additional experiments.'''' Leask et al.\ pursue it and formalise it, and their recommendation
+        additional experiments.'''' Leask et al.\ pursue it and formalize it, and their recommendation
         is to accept it --- ``the choice of SAE size should be guided by the specific interpretability
         task at hand, accepting that no single SAE configuration provides a universal solution'''''
       verification: Both quotes are verbatim. The origin sentence is quoted here in full including the
@@ -920,7 +920,7 @@ criteria:
     short: '``Monosemantic'''' projects semantics; the origin hedges consistently'
     verified: true
     reasoning: '“Monosemantic” and “interpretable” project a semantic category onto a direction in activation
-      space, and the origin hedges the projection every time it makes it: an idealised feature is defined
+      space, and the origin hedges the projection every time it makes it: an idealized feature is defined
       rather than claimed, features appear to correspond, and the conclusion says more monosemantic than
       comparable methods rather than monosemantic. The showcase discloses its own counterexample in running
       text, with figure pointers, which is what a calibrated version of this vocabulary looks like. It
@@ -955,7 +955,7 @@ criteria:
     notes:
       legacy_evidence: Both papers declare limits and quantify them. Cunningham \S6.2 gives incomplete
         reconstruction with a number (Pile perplexity 25 $\to$ 40), the MLP training failure, the untried
-        attention sublayer, and the unconfirmed IOI generalisation, plus an appendix of failed methods.
+        attention sublayer, and the unconfirmed IOI generalization, plus an appendix of failed methods.
         Leask et al.\ state ``our work only studies two LLMs and does not include very large SAEs'' and
         ``We are uncertain whether canonical units of analysis exist''
       verification: 'All quotes verbatim. One locator correction to the cell: “We are uncertain whether

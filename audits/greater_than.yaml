@@ -236,7 +236,7 @@ criteria:
       '
     notes:
       verification: 'The 64.7% and 81.7% pair is verbatim in §4.1 and §2 and is a like-for-like comparison:
-        both are probability difference on the same behaviour, so the LEACE erasure costs 17 points. The
+        both are probability difference on the same behavior, so the LEACE erasure costs 17 points. The
         cell''s "No QK/OV analysis of any head" is verified against a full read rather than against a
         statement: the logit lens is applied to head *outputs* (§3.3), never to a weight product, and
         no attention head''s QK or OV matrix is examined anywhere in the paper or its nine appendices.
@@ -268,7 +268,7 @@ criteria:
     notes:
       verification: 'The legacy evidence renders the Appendix E result as "essentially identical … though
         they differ in magnitude"; the elided words are "to the logit lens results," and the full sentence
-        is quoted here. The cell''s characterisation of Appendix E as avoiding the LayerNorm nonlinearity
+        is quoted here. The cell''s characterization of Appendix E as avoiding the LayerNorm nonlinearity
         is the paper''s own stated motivation.
 
         '
@@ -282,7 +282,7 @@ criteria:
     status: PC
     short: Three tasks recruit different components; every contrast is one kind
     verified: true
-    reasoning: 'Separation from a neighbouring construct is tested at origin and found. Three tasks that
+    reasoning: 'Separation from a neighboring construct is tested at origin and found. Three tasks that
       a greater-than mechanism should cover recruit a different set of components entirely, which is the
       result a construct with no boundaries could not produce. The contrasts available are all of one
       kind. Every task the paper compares against changes the operation, the frame, or both, and the design
@@ -345,7 +345,7 @@ criteria:
     status: U
     short: Dispersion reported twice, both pre-circuit; no interval on any result
     verified: true
-    reasoning: 'Dispersion is reported exactly twice and both times for the model''s behaviour before
+    reasoning: 'Dispersion is reported exactly twice and both times for the model''s behavior before
       any circuit exists: 19.3% on probability difference and 7.2% on cutoff sharpness. Every quantity
       that carries the argument — 72.7%, 89.5%, -36.6%, the loss recoveries in §5 — is a single number
       with no interval, no resampling and no per-example spread, and the sweep that selects the circuit
@@ -354,14 +354,14 @@ criteria:
 
       '
     notes:
-      verification: 'Both standard deviations are verbatim and both are on the behavioural baseline, as
+      verification: 'Both standard deviations are verbatim and both are on the behavioral baseline, as
         the cell states. The 490-datapoint sweep and its stated reason are verbatim. Verified against
         a full read for the absence: no bootstrap, confidence interval, repeated run or variance estimate
         appears in the body or in Appendices A through I.
 
         '
       legacy_evidence: Unattempted. The strings \texttt{seed} and \texttt{standard deviation} occur zero
-        and zero times respectively in the body; two SDs are reported and both are on the \emph{behavioural}
+        and zero times respectively in the body; two SDs are reported and both are on the \emph{behavioral}
         baseline (19.3\% and 7.2\%), never on a circuit result. The main circuit-discovery sweep uses
         490 datapoints ``for computational reasons.'' GPT-2 small is one released checkpoint, so cross-run
         variance is unavailable in principle, but bootstrap over the 10,000-example dataset is not
@@ -400,7 +400,7 @@ criteria:
     reasoning: 'Circuit membership is decided by reading path-patching heatmaps. The paper says a component
       joins when patching it changes performance "significantly", names the components that qualify, and
       states no threshold, sweeps none, and reports no sensitivity of the resulting circuit to where the
-      line falls. No member is swapped for a neighbour and no boundary is perturbed, so the circuit''s
+      line falls. No member is swapped for a neighbor and no boundary is perturbed, so the circuit''s
       dependence on its own selection rule is unmeasured. U.
 
       '
@@ -411,7 +411,7 @@ criteria:
 
         '
       legacy_evidence: Unattempted. The circuit boundary is set by visual inspection of path-patching
-        heatmaps with no threshold stated or swept, and no head or MLP is swapped for a neighbour to test
+        heatmaps with no threshold stated or swept, and no head or MLP is swapped for a neighbor to test
         sensitivity. Anani et al.\ (2026) later certify circuit discovery under bounded dataset perturbation
         with greater-than as one of three benchmarks, reporting up to 56\% higher accuracy with 80\% fewer
         components --- the manual circuit carries components certification discards
@@ -468,7 +468,7 @@ criteria:
     status: PC
     short: Per-condition variation visible; one tokenizer, one model, one frame
     verified: true
-    reasoning: 'The design makes per-condition variation visible instead of averaging it away. Every behavioural
+    reasoning: 'The design makes per-condition variation visible instead of averaging it away. Every behavioral
       result is a heatmap over start year crossed with predicted year on 10,000 examples spanning 120
       nouns and 768 years, so a reader can see where the account holds. One non-invariance is documented
       and costed: attention to the YY position varies non-monotonically with YY, bottoms out at YY=01,
@@ -484,7 +484,7 @@ criteria:
         weakest; Appendix B reports this without drawing that consequence.
 
         '
-      legacy_evidence: Behaviour is measured across 120 nouns and 768 years on 10,000 examples, and every
+      legacy_evidence: Behavior is measured across 120 nouns and 768 years on 10,000 examples, and every
         result is presented as a heatmap over start year YY $\times$ predicted year, so per-condition
         variation is visible rather than averaged away. Appendix B, Figure 11 documents one such variation
         and its consequence --- attention to the YY position varies non-monotonically with YY, is low
@@ -537,12 +537,12 @@ criteria:
   I2:
     name: Sufficiency
     status: C
-    short: Complement recovers 72.7% under conditions chosen to favour failure
+    short: Complement recovers 72.7% under conditions chosen to favor failure
     verified: true
-    reasoning: 'The complement test is run under conditions that favour failure and it passes. Every path
+    reasoning: 'The complement test is run under conditions that favor failure and it passes. Every path
       outside the circuit carries 01-input, which the authors state should push the model to poor performance,
       and the circuit alone recovers 72.7% of a 81.7% baseline. The anti-degeneracy metric moves the same
-      way: cutoff sharpness rises to 8%, so the recovered behaviour still depends on YY rather than collapsing
+      way: cutoff sharpness rises to 8%, so the recovered behavior still depends on YY rather than collapsing
       onto a constant prediction. Appendix B repeats the test for the full input-to-logits circuit and
       reaches 71.5% and 10.5%. C.
 
@@ -596,7 +596,7 @@ criteria:
       third case on non-monotone random sequences does the same, so the circuit fires on inputs its label
       does not cover. The authors report this as a property of the mechanism rather than smoothing it
       away. The converse test is missing: no ablation of the circuit is followed by measurement of damage
-      to capabilities that should be untouched, so the false-positive rate is characterised and the false-negative
+      to capabilities that should be untouched, so the false-positive rate is characterized and the false-negative
       cost is not. PC.
 
       '
@@ -649,12 +649,12 @@ criteria:
     status: U
     short: The makings of one half; the converse is never run
     verified: true
-    reasoning: 'A double dissociation needs two mechanisms and two behaviours, with each intervention
+    reasoning: 'A double dissociation needs two mechanisms and two behaviors, with each intervention
       moving one and sparing the other. The source has the makings of the first half and never runs the
       second. Ablating the circuit destroys year-span prediction, and a different set of heads and MLPs
       is identified for the tasks the circuit does not serve, but that second set is located observationally
       and never intervened on. Nothing shows it intact under circuit ablation, and nothing removes it
-      while leaving greater-than behaviour. U.
+      while leaving greater-than behavior. U.
 
       '
     notes:
@@ -676,7 +676,7 @@ criteria:
     reasoning: 'One confound is controlled to the point of shaping the dataset. Byte-pair encoding makes
       frequent years single tokens, which would let the model score well for a reason unrelated to comparison,
       so single-token years are excluded and each century''s extremes are dropped so every example admits
-      both a correct and an incorrect answer. Lexical content is randomised over 120 nouns. The confound
+      both a correct and an incorrect answer. Lexical content is randomized over 120 nouns. The confound
       the authors themselves identify is left in: nouns carry duration priors that shape which years get
       probability, the effect is visible as the 15-to-20-year drop-off, and nothing separates it from
       the comparison the circuit is credited with. Per-year token frequency and century are handled by
@@ -690,7 +690,7 @@ criteria:
         '
       legacy_evidence: 'Tokenization is controlled carefully and explicitly --- single-token years excluded
         because ``1700'''' is one token in normal data, and each century''s extreme years excluded so
-        every example has both a correct and an incorrect answer (\S2). Noun is randomised over 120 items.
+        every example has both a correct and an incorrect answer (\S2). Noun is randomized over 120 items.
         Uncontrolled: per-year token frequency, century, and the duration prior the authors themselves
         identify as shaping the output --- ``15-20 years after YY, probabilities drop. The exact length
         of the year-span receiving higher probability likely reflects patterns in GPT-2''s training data'''''
@@ -744,9 +744,9 @@ criteria:
     short: Direction fixed by path patching; the restore is never framed
     verified: true
     reasoning: 'Every intervention in the source substitutes 01-input for real input along chosen paths,
-      and behaviour is read off the result. The direction is fixed by the instrument rather than by choice,
+      and behavior is read off the result. The direction is fixed by the instrument rather than by choice,
       since path patching is defined as replacing a node''s inputs with those from another dataset. Restoring
-      a component inside an otherwise damaged run and measuring how much behaviour returns is never framed
+      a component inside an otherwise damaged run and measuring how much behavior returns is never framed
       or reported as such. U.
 
       '
@@ -755,7 +755,7 @@ criteria:
         experiment is a substitution rather than a restoration". The complement experiment gives the large
         majority of the model 01-input and feeds real input only through the circuit''s paths, and recovers
         72.7% of an 81.7% baseline. Under the reading I10 is given elsewhere in this batch — restore a
-        component inside an otherwise corrupted run and measure how much behaviour returns — that design
+        component inside an otherwise corrupted run and measure how much behavior returns — that design
         qualifies, and the difference between substituting and restoring is a matter of which run is called
         the reference. What the origin genuinely lacks is a graded or per-component version: the restoration
         is all-or-nothing over the whole circuit and is never repeated for single members. The recorded
@@ -772,7 +772,7 @@ criteria:
     verified: true
     reasoning: 'The audited system is one released checkpoint of a model whose intermediate checkpoints
       were never published, so there is no training trajectory in which the circuit''s appearance could
-      be timed against the behaviour''s. The paper''s one engagement with mechanism onset is a citation:
+      be timed against the behavior''s. The paper''s one engagement with mechanism onset is a citation:
       Liu et al.''s toy model develops structured number representations at the point it starts generalizing,
       an observation the authors import as motivation and cannot run on GPT-2. The limitation the paper
       names is model size rather than checkpoint access, which is the same constraint from the other side.
@@ -800,7 +800,7 @@ criteria:
     status: N/A
     short: One checkpoint observed once; no interval across which to lapse
     verified: true
-    reasoning: 'Offset coupling asks whether a mechanism''s disappearance tracks the behaviour''s, which
+    reasoning: 'Offset coupling asks whether a mechanism''s disappearance tracks the behavior''s, which
       requires at least two points on a training trajectory. The source observes one checkpoint at one
       time and never varies it, so there is no interval across which either could be seen to lapse. N/A
       for the same structural reason as I11.
@@ -931,7 +931,7 @@ criteria:
         verified by causal ablation against a matched-random null over ten seeds --- to greater-than plus
         three other tasks across Pythia-1B, OLMo-1B and OLMoE-1B-7B, and reports that across the twelve
         task-model cells ``no two share the same primary causal screen at comparable effect size.''''
-        Same task, same behaviour, different causal structure per model'
+        Same task, same behavior, different causal structure per model'
   E5:
     name: Graded response
     status: PC
@@ -1002,7 +1002,7 @@ criteria:
         suffices to compute the task" — is verbatim and sits in §3, as the cell says. The cell''s reading
         of the title and abstract as algorithmic is an interpretation rather than a quotable statement;
         the abstract sentence quoted here is the clearest case, since "boost the probability of end years
-        greater than the start year" describes an effect on outputs while the section it summarises describes
+        greater than the start year" describes an effect on outputs while the section it summarizes describes
         a subgraph.
 
         '

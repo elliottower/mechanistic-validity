@@ -4,7 +4,7 @@ description: 'Causal mediation analysis treats a gender edit to the input as a t
   layer, head or attention weight as a mediator, splitting the effect on a two-pronoun probability ratio
   into a natural direct and a natural indirect effect. Three properties of the effect distribution are
   reported --- sparsity, with ten of 144 heads reproducing the effect of intervening on all of them; synergy
-  among neurons; and decomposition into direct and indirect parts --- against a randomly initialised GPT2-small
+  among neurons; and decomposition into direct and indirect parts --- against a randomly initialized GPT2-small
   carried through as a matched negative control. Evaluated on: five GPT-2 sizes on 17 templates over 169 professions
   plus WinoBias Type 1 and Winogender, with five further model families added in \S5.5. Description mode:
   implementational-topographic.'

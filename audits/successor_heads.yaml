@@ -10,21 +10,21 @@ readings:
   primary: true
 - statement: The head is specific to succession
   verdict: Disconfirmed
-  missing: 'Nothing --- tested and failed: on natural text acronym and greater-than behaviour take 23.8\%
+  missing: 'Nothing --- tested and failed: on natural text acronym and greater-than behavior take 23.8\%
     and 18.9\% of winning cases, and the paper reframes the head as interpretably polysemantic (I4)'
   primary: false
 - statement: The mod-10 mechanism recurs across architectures and sizes, as the abstract states
   verdict: Underdetermined
-  missing: Mechanistic recurrence is one case study plus two appendix replications against broad behavioural
+  missing: Mechanistic recurrence is one case study plus two appendix replications against broad behavioral
     recurrence (E4); Llama-7B fails the held-out Roman-numeral task where the Pythia models do not (E4,
     M6), and putting the head on synthesised Roman-numeral representations drops top-1 accuracy to 0.125
     (E3, E6)
   primary: false
-- statement: The emergence of successor heads during training explains when the incrementation behaviour
+- statement: The emergence of successor heads during training explains when the incrementation behavior
     appears
   verdict: Underdetermined
   missing: Successor scores are tracked across checkpoints in two model families and the heads are seen
-    to emerge, but nothing is plotted against a behaviour or a loss curve, and the phase change the induction-head
+    to emerge, but nothing is plotted against a behavior or a loss curve, and the phase change the induction-head
     comparison predicts is absent (I11); no checkpoint interval shows the mechanism lapsing (I12)
   primary: false
 hypotheses:
@@ -41,7 +41,7 @@ hypotheses:
 - id: H4
   view: Object
   label: there is no determinate head-level mechanism --- the work is elsewhere, or the name is an aggregate
-    of behaviours
+    of behaviors
 - id: H5
   view: Contrastive
   label: the mod-10 mechanism recurs across architectures and sizes rather than holding in the case-study
@@ -92,8 +92,8 @@ views_evidence:
   designed_for:
   - H1
 - criterion: I4
-  evidence: Classifying every natural-text prompt where the head matters gives acronym behaviour 23.8\%
-    and greater-than behaviour 18.9\% of winning cases, and the decomposition survives five ablation regimes
+  evidence: Classifying every natural-text prompt where the head matters gives acronym behavior 23.8\%
+    and greater-than behavior 18.9\% of winning cases, and the decomposition survives five ablation regimes
   cells:
     H1: '-'
     H2: I
@@ -120,7 +120,7 @@ views_evidence:
   - H1
   - H4
 - criterion: M6
-  evidence: The mod-10 features do not steer Days or Letters, stated in the main text and analysed in
+  evidence: The mod-10 features do not steer Days or Letters, stated in the main text and analyzed in
     an appendix
   cells:
     H1: I
@@ -193,8 +193,8 @@ views_evidence:
   - H1
   - H6
 - criterion: E4
-  evidence: Behavioural recurrence spans three families over roughly three orders of magnitude, while
-    the mechanism is one case study plus two appendix replications and Llama-7B does not generalise
+  evidence: Behavioral recurrence spans three families over roughly three orders of magnitude, while
+    the mechanism is one case study plus two appendix replications and Llama-7B does not generalize
   cells:
     H1: '-'
     H2: '-'
@@ -217,7 +217,7 @@ tiers:
     and greater-than at 18.9\% of winning cases'
 - name: Triangulated
   requires: Convergence (C3); replication (E2/E4); dissociation (I6)
-  missing: \textbf{I6} unattempted, and one head carrying three behaviours makes the converse arm harder
+  missing: \textbf{I6} unattempted, and one head carrying three behaviors makes the converse arm harder
     to construct; \textbf{E4} mechanistic recurrence is single-model
 - name: Validated
   requires: Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4)
@@ -233,7 +233,7 @@ criteria:
     reasoning: 'The claim is stated as a test before any model is scored. The token list is fixed, the
       comparison set is fixed to the head''s own task class, and the threshold is a stated proportion,
       so a model either has a head that clears it or does not. Models do not: Figure 2 plots the cutoff
-      with models below it, and one of them is analysed in an appendix as a model with no successor head.
+      with models below it, and one of them is analyzed in an appendix as a model with no successor head.
       A pre-committed threshold on a fixed dataset, with negative cases in the paper''s own results, is
       C.
 
@@ -262,7 +262,7 @@ criteria:
       product of four matrices — embedding, MLP0, one head''s OV, unembedding — and the successor test
       evaluates that product directly, with no activation from any prompt entering the definition. The
       same product then produces a structural finding nobody asked for: an asymmetry in the logit matrix
-      that the paper names, locates in behaviour, and reports as evidence its own feature-level account
+      that the paper names, locates in behavior, and reports as evidence its own feature-level account
       is incomplete rather than dropping. Structure derived and structure conceded is C.
 
       '
@@ -312,18 +312,18 @@ criteria:
   C4:
     name: Discriminant validity
     status: PC
-    short: Top head eight times the runner-up; no neighbouring construct attempted
+    short: Top head eight times the runner-up; no neighboring construct attempted
     verified: true
     reasoning: 'Separation from the null case is shown twice and quantified: one model has no head above
       the cutoff, and in the case-study model the top head''s score is eight times the runner-up. Separation
-      from a neighbouring construct is never attempted. The successor score is not computed alongside
+      from a neighboring construct is never attempted. The successor score is not computed alongside
       an induction, copying or duplicate-token score on the same heads, so nothing rules out a head that
       would score highly on both. The paper then shows the construct is not clean at the component level,
-      since the same head also produces acronym and greater-than behaviour. PC.
+      since the same head also produces acronym and greater-than behavior. PC.
 
       '
     notes:
-      verification: 'The eight-times figure and the natural-text behaviour breakdown are verbatim. Confirmed
+      verification: 'The eight-times figure and the natural-text behavior breakdown are verbatim. Confirmed
         by full read: the strings "induction score", "copying score" and "duplicate" do not appear as
         head metrics anywhere — induction heads are mentioned only in Related Work — so the cell''s "never
         compared" is accurate as an absence rather than an inference.
@@ -331,10 +331,10 @@ criteria:
         '
       legacy_evidence: 'Separation from the null case is shown twice: GPT-2 Large has no head passing
         the cutoff (Appendix I), and in Pythia-1.4B the top head''s successor score is eight times the
-        next. Separation from neighbouring constructs is not attempted --- the successor score is never
+        next. Separation from neighboring constructs is not attempted --- the successor score is never
         compared against induction, copying or duplicate-token scores on the same heads. \S4 then shows
         the construct is not clean at the component level, since the same head also performs acronym and
-        greater-than behaviour'
+        greater-than behavior'
   C5:
     name: Nomological validity
     status: PC
@@ -345,7 +345,7 @@ criteria:
       claims. Two further connections are made to specific prior mechanisms, Hanna et al.''s greater-than
       circuit and Mikolov-style compositionality. The induction-head analogy is the informative case,
       because the paper draws it and then withdraws part of it on evidence: the training signature that
-      characterises induction heads was looked for and not found. Theory imported, tested and partly returned
+      characterizes induction heads was looked for and not found. Theory imported, tested and partly returned
       is PC.
 
       '
@@ -366,7 +366,7 @@ criteria:
     name: Complementation validity
     status: U
     reasoning: 'The paper''s own polysemanticity result is what this criterion asks about, from the other
-      side: succession, acronym and greater-than behaviour are carried by one head, so three labeled functions
+      side: succession, acronym and greater-than behavior are carried by one head, so three labeled functions
       are not separable by component. That is a finding about the head rather than a complementation test
       of the successor construct, whose own subdivisions -- the eight ordinal task classes -- are scored
       individually and never ablated against one another.'
@@ -407,7 +407,7 @@ criteria:
     verified: true
     reasoning: 'Two negative baselines, one of them sharp. The Tuned Lens control cuts the head out of
       the path and asks what the embedding plus MLP0 can do alone; the answer is under one percent, and
-      what comes back instead are bigram continuations, which localises the work to the head rather than
+      what comes back instead are bigram continuations, which localizes the work to the head rather than
       to the representation it reads. Appendix I supplies the within-model contrast and a model with no
       successor head. A chance level is stated, but for the decoding experiments rather than for the successor
       score itself, whose null depends on the size of each task class. PC.
@@ -435,7 +435,7 @@ criteria:
     status: PC
     short: Three perturbations, one aimed at the paper's own premise
     verified: true
-    reasoning: 'Three perturbations are run and one of them attacks the paper''s own premise. The behavioural
+    reasoning: 'Three perturbations are run and one of them attacks the paper''s own premise. The behavioral
       decomposition is recomputed across effect types and ablation values, and successorship stays dominant
       wherever the direct effect is included. The vector-arithmetic scale is swept rather than tuned to
       a single value. Most informatively, Appendix P repeats the probing experiment for every modulus
@@ -454,7 +454,7 @@ criteria:
         1.25, ..., 3.0}; the paper states the endpoints and four explicit steps, never the count.
 
         '
-      legacy_evidence: 'Two dedicated sweeps. Appendix K recomputes the behavioural decomposition under
+      legacy_evidence: 'Two dedicated sweeps. Appendix K recomputes the behavioral decomposition under
         five ablation regimes (direct/indirect/total $\times$ mean/resample) and successorship stays dominant
         in all direct- and total-effect variants (38.2\%, 33\%, 27\%, 30\%), while the minor categories
         move sharply --- copying 1.7\% $\to$ 11\%. Appendix D sweeps the vector-arithmetic scaling $\lambda$
@@ -521,9 +521,9 @@ criteria:
     verified: true
     reasoning: 'The core result is reported along every axis that could plausibly break it: three model
       families across roughly three orders of magnitude, eight tasks with a per-task breakdown rather
-      than a pooled average, spaced and capitalised variants of every token, five ablation regimes, and
+      than a pooled average, spaced and capitalized variants of every token, five ablation regimes, and
       three feature-detection methods. Where invariance fails it is reported inside the same design rather
-      than excluded — the mod-10 features do not steer Days or Letters, stated in the main text and analysed
+      than excluded — the mod-10 features do not steer Days or Letters, stated in the main text and analyzed
       in an appendix. Breadth with the failures kept in is C.
 
       '
@@ -531,12 +531,12 @@ criteria:
       verification: 'The per-task breakdown, the tokenizer variants and both steering failures are verbatim,
         and the cell''s list of axes is accurate. One axis the cell does not mention that also varies
         and partly fails: Appendix B.2 recomputes the successor score on the held-out Roman-numeral task
-        across models and reports that Llama-7B does not generalise to it.
+        across models and reports that Llama-7B does not generalize to it.
 
         '
       legacy_evidence: 'The core result is reported across three model families, roughly three orders
         of magnitude of parameter count, eight succession tasks with per-task breakdown (Figure 2, right),
-        spaced and capitalised token variants, five ablation regimes, and three independent feature-detection
+        spaced and capitalized token variants, five ablation regimes, and three independent feature-detection
         methods. Two failures are reported inside the same design rather than excluded: the mod-10 features
         do not steer Days or Letters (Appendix E)'
   M7:
@@ -651,14 +651,14 @@ criteria:
     reasoning: 'Specificity is measured directly and at length. The head is run over natural text and
       every prompt where it matters is classified, so the question is not whether the head does anything
       else but how much else, and the decomposition survives five ablation regimes. The answer is that
-      the head is not specific to succession: acronym and greater-than behaviour together account for
+      the head is not specific to succession: acronym and greater-than behavior together account for
       a substantial share. The paper reports this honestly and reframes it as a contribution. Off-target
       function measured and found present is PC.
 
       '
     notes:
-      verification: 'The Pile sampling protocol, the behaviour categories and the polysemanticity claim
-        are verbatim, and the cell''s characterisation of the result as an honestly reported specificity
+      verification: 'The Pile sampling protocol, the behavior categories and the polysemanticity claim
+        are verbatim, and the cell''s characterization of the result as an honestly reported specificity
         failure is right. The percentages the cell quotes for winning cases — successorship 43.4%, acronym
         23.8%, greater-than 18.9%, other 14% — are read off the Figure 9 pie chart rather than stated
         in the text; the Appendix K percentages quoted here are the text-stated ones.
@@ -688,7 +688,7 @@ criteria:
       verification: 'Both excluded rivals and their experiments are verbatim. The unexcluded rival is
         the cell''s own inference rather than a statement in the paper, but it is licensed by two quoted
         facts: the OV circuit''s bias toward values above the successor, and the appearance of greater-than
-        behaviour as its own category in natural text.
+        behavior as its own category in natural text.
 
         '
       legacy_evidence: 'Two rivals excluded, each with its own experiment. That the mod-10 features are
@@ -704,7 +704,7 @@ criteria:
     verified: true
     reasoning: 'A double dissociation needs an intervention that removes succession while leaving some
       other mechanism intact, and a converse. Neither arm is run. The paper''s central finding about this
-      head points the other way: succession, acronym and greater-than behaviour are carried by the same
+      head points the other way: succession, acronym and greater-than behavior are carried by the same
       component, so there is no second mechanism sitting elsewhere to spare, and the converse arm would
       be harder to construct here than in a monosemantic case. U.
 
@@ -716,7 +716,7 @@ criteria:
         '
       legacy_evidence: 'Unattempted. No converse test: no non-succession mechanism is shown intact while
         succession is removed. \S4 establishes that one head carries succession, acronym and greater-than
-        behaviour together, which is the opposite of a dissociation and makes the converse arm harder
+        behavior together, which is the opposite of a dissociation and makes the converse arm harder
         rather than easier to construct'
   I7:
     name: Confound control
@@ -724,7 +724,7 @@ criteria:
     short: Tokenization handled by construction; letter collisions explained, not tested
     verified: true
     reasoning: 'Two confounds are controlled by construction. Tokenization is handled by carrying spaced
-      and capitalised variants of every token through the whole pipeline and by taking the MLP0 output
+      and capitalized variants of every token through the whole pipeline and by taking the MLP0 output
       rather than the raw embedding as the object of study, which removes the most obvious way a tokenizer
       artifact could masquerade as structure. Leakage is handled by holding out whole tasks for the probe
       and by reserving Roman numerals, which are absent from the succession dataset. Frequency, position
@@ -739,7 +739,7 @@ criteria:
         is supported by the sentence''s own "we can attribute".
 
         '
-      legacy_evidence: Tokenization is controlled by including spaced and capitalised variants throughout
+      legacy_evidence: Tokenization is controlled by including spaced and capitalized variants throughout
         and by using $\mathrm{MLP}_0(W_E)$ rather than $W_E$ as the effective embedding. Train/test leakage
         is controlled by held-out tasks for the probe and by Roman numerals, which were absent from the
         succession dataset. Token frequency, sequence position and prompt length are uncontrolled, and
@@ -810,13 +810,13 @@ criteria:
   I11:
     name: Onset coupling
     status: I
-    short: Emergence observed across checkpoints; coupling to behaviour is not
+    short: Emergence observed across checkpoints; coupling to behavior is not
     verified: true
     reasoning: 'The experiment is run and the sharp version of the result does not appear. Successor scores
       are tracked across training checkpoints in two model families and the heads are seen to emerge,
       so onset is observed. What is not observed is coupling: the induction-head signature the paper compares
       itself against is a phase change, and the paper states it did not see one. Nothing is plotted against
-      the score that would let an onset in the mechanism be timed against an onset in the behaviour. Emergence
+      the score that would let an onset in the mechanism be timed against an onset in the behavior. Emergence
       shown, coupling not established, is I.
 
       '
@@ -825,7 +825,7 @@ criteria:
         verbatim, and its locator is right: it is in §5, Related Work, with the pointer to Appendix G
         that the cell reports. Two things the cell does not say. Appendix G itself never mentions a phase
         change; it frames the checkpoint study as evidence that successor heads matter for training loss,
-        and Figure 18 plots successor scores alone, with no behavioural or loss curve alongside them.
+        and Figure 18 plots successor scores alone, with no behavioral or loss curve alongside them.
         That is the substance of why the criterion is I rather than PC. Appendix G says it studies "a
         Pythia model", while Figure 18 shows three Pythia sizes.
 
@@ -840,10 +840,10 @@ criteria:
     status: U
     short: The checkpoint data exists and is read in the forward direction only
     verified: true
-    reasoning: 'Offset coupling asks what happens when a mechanism goes away — whether the behaviour departs
+    reasoning: 'Offset coupling asks what happens when a mechanism goes away — whether the behavior departs
       with it. The checkpoint data that would answer it exists and is used, but only in the forward direction:
       the appendix reports emergence and nothing else, and no checkpoint interval is examined in which
-      a successor score falls. Neither of the two checkpointed models is analysed for loss of the mechanism.
+      a successor score falls. Neither of the two checkpointed models is analyzed for loss of the mechanism.
       U.
 
       '
@@ -887,7 +887,7 @@ criteria:
     reasoning: 'Two distributions of very different kinds are used and the harder one is genuinely hard.
       The succession dataset is a constructed token list, which makes the weight test clean and says nothing
       about text. The natural-language evaluation samples 128 long contexts at random from the model''s
-      own training distribution and scores every prefix, which is distributional generalisation in the
+      own training distribution and scores every prefix, which is distributional generalization in the
       strong sense. The supporting experiments are much narrower: two hand-written templates for the Tuned
       Lens control, 64 hand-collected prompts for the numbered-listing study. PC.
 
@@ -899,7 +899,7 @@ criteria:
         '
       legacy_evidence: 'Two distributions of very different kinds. The succession dataset is constructed
         from fixed token lists. The natural-language evaluation samples 128 length-512 contexts at random
-        from The Pile and scores every prefix, which is genuine distributional generalisation. The supporting
+        from The Pile and scores every prefix, which is genuine distributional generalization. The supporting
         experiments are narrower: the Tuned Lens control uses two hand-written templates, and the numbered-listing
         study is 64 hand-collected prompts'
   E3:
@@ -919,7 +919,7 @@ criteria:
       verification: 'The Roman-numeral held-out design, the 94/102 probe result and both steering failures
         are verbatim. The cell says the transfer is "exact top-1 apart from I, V and X", which repeats
         the paper''s own claim; the extraction of Table 2 shows at least one further miss outside that
-        set (the letter row''s XI column), though column alignment in a -layout extraction of a coloured
+        set (the letter row''s XI column), though column alignment in a -layout extraction of a colored
         table is not a safe basis for a stronger statement. A caveat the cell omits and Appendix M supplies:
         applying the successor head to the same synthesised Roman-numeral representations drops top-1
         accuracy to 0.125.
@@ -927,33 +927,33 @@ criteria:
         '
       legacy_evidence: 'Eight succession tasks at origin, plus out-of-distribution transfer to Roman numerals
         absent from the dataset (Table 2, exact top-1 apart from I, V and X, which collide with single
-        letters), plus a probe trained only on numerals generalising to 94 of 102 held-out non-numeric
+        letters), plus a probe trained only on numerals generalizing to 94 of 102 held-out non-numeric
         examples, plus informal transfer to non-ordinal tokens (``triangle'''' $\to$ 3, ``week'''' $\to$
         7). Two failures are reported rather than suppressed: no steering on Days or Letters (Appendix
         E)'
   E4:
     name: Cross-model generalization
     status: PC
-    short: Behaviour recurs across three families; the mechanism is single-model
+    short: Behavior recurs across three families; the mechanism is single-model
     verified: true
     reasoning: 'The paper''s headline is recurrence across models, and the two halves of it are supported
-      very differently. Behavioural recurrence is broad: successor scores are reported for three families
+      very differently. Behavioral recurrence is broad: successor scores are reported for three families
       over roughly three orders of magnitude. Mechanistic recurrence is not. The feature-level account
       is a case study in one model, replicated in two further models in an appendix, and everything downstream
       of it — the probes, the neurons, the vector arithmetic, the natural-text decomposition — is single-model.
-      Broad behaviour on narrow mechanism is PC.
+      Broad behavior on narrow mechanism is PC.
 
       '
     notes:
-      verification: 'The three-family behavioural result, the single-model case study and the two appendix
+      verification: 'The three-family behavioral result, the single-model case study and the two appendix
         replications are verbatim, so the cell''s split is accurate. One cross-model negative the cell
         does not mention: Appendix B.2 reports that on the held-out Roman-numeral task Llama-7B does not
-        generalise, while the Pythia models do. The Xu (2026) select-then-ablate test is post-origin and
+        generalize, while the Pythia models do. The Xu (2026) select-then-ablate test is post-origin and
         cannot be checked here.
 
         '
       legacy_evidence: 'The paper''s headline and the place the evidence is thinnest relative to the claim.
-        Behavioural recurrence is broad --- successor heads in GPT-2, Pythia and Llama-2 from 31M to 12B
+        Behavioral recurrence is broad --- successor heads in GPT-2, Pythia and Llama-2 from 31M to 12B
         (Figure 2). Mechanistic recurrence is not: the mod-10 SAE structure is replicated in two further
         models (Appendix A.3) and everything else is Pythia-1.4B. Xu (2026) later tests the universality
         claim directly, running successor sequences through select-then-ablate with a matched-random null
@@ -994,7 +994,7 @@ criteria:
       out of a Roman numeral to a domain projected out of an unrelated sequence should decode to the right
       token of that sequence. It does, with the failures confined to the numerals that collide with single
       letters. A second prediction runs the other way: an asymmetry read off the OV weights first, then
-      looked for in natural text and found there as its own behaviour category. C.
+      looked for in natural text and found there as its own behavior category. C.
 
       '
     notes:
@@ -1010,7 +1010,7 @@ criteria:
         stores an index independently of which ordinal sequence a token belongs to, then $\pi_D(1_s) +
         \pi_N(i_{\mathrm{Rom}})$ should decode to $i_s$ for a sequence the projections never saw. Table
         2 shows it does, with failures confined to I, V and X. The greater-than bias is a second prediction
-        of a different kind --- read off the OV weights first, then located in behaviour
+        of a different kind --- read off the OV weights first, then located in behavior
   V1:
     name: Level declaration
     status: C
@@ -1035,13 +1035,13 @@ criteria:
   V2:
     name: Level-evidence match
     status: PC
-    short: Weights tested on weights; the recurrence claim rests mostly on behaviour
+    short: Weights tested on weights; the recurrence claim rests mostly on behavior
     verified: true
     reasoning: 'Three claims sit at three levels and the evidence matches unevenly. The mechanism claim
       is about weights and is tested on weights, which is the cleanest match in the paper. The feature-level
       claim is supported by three methods and is stated by the authors to be incomplete, since the features
       fail to reproduce a property the weights have. The universality claim is the loosest: it is made
-      about mechanism and supported mostly by behaviour, with mechanistic recurrence checked in two extra
+      about mechanism and supported mostly by behavior, with mechanistic recurrence checked in two extra
       models. PC.
 
       '
@@ -1055,7 +1055,7 @@ criteria:
       legacy_evidence: 'The mechanism claim is matched by weight-level evidence. The feature-level claim
         is matched by three methods but is stated by the authors to be incomplete: ``The absence of a
         strong greater-than bias in our mod 10 features suggests this feature-level description is missing
-        some details.'''' The universality claim is matched by behavioural recurrence across models but
+        some details.'''' The universality claim is matched by behavioral recurrence across models but
         only weakly by mechanistic recurrence, which is checked in two extra models'
   V3:
     name: Alternative level
@@ -1065,7 +1065,7 @@ criteria:
     reasoning: 'Two alternatives are raised as questions and answered with experiments: that the features
       are an artifact of the decomposition technique, and that the computation happens before the head.
       A third is raised by the paper''s own polysemanticity result — that a head is the wrong unit and
-      "successor head" names an aggregate of behaviours rather than a mechanism — and it is not addressed
+      "successor head" names an aggregate of behaviors rather than a mechanism — and it is not addressed
       here. Two alternatives closed and the one the paper itself opens left open is PC.
 
       '
@@ -1104,10 +1104,10 @@ criteria:
         asks for and which most audited papers fail. Two qualifications. "Greater-than" is borrowed from
         Hanna et al. (2023), which §5 states, and the same phenomenon is called the "decrementation bias"
         in Appendix H''s heading — the label is not stable across the paper. And the cell''s absolute
-        — "No intentional vocabulary anywhere" — is too strong as written: §4 defines every behaviour
+        — "No intentional vocabulary anywhere" — is too strong as written: §4 defines every behavior
         category with "the successor head pushes for", §1 says "Language models use abstract numeric representations
         to encode the index", and §3.4 says "successor heads must use other numeric information to produce
-        the greater-than bias". None of these is epistemic or agentive, and each is operationalised on
+        the greater-than bias". None of these is epistemic or agentive, and each is operationalized on
         the spot, so the recorded C stands; the absolute does not.
 
         '

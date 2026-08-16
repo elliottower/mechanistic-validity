@@ -75,7 +75,7 @@ criteria:
       and the single-frequency fit to the attention-score lookup vector at 92.42–99.10% of variance are
       all properties of the parameters, which is what makes the mechanism a structural claim rather than
       a description of one forward pass. Two gaps keep it from being complete: Win never receives a weight-level
-      account, the neurons being characterised by fitting their activations instead, and the role given
+      account, the neurons being characterized by fitting their activations instead, and the role given
       to heads 1 and 3 is introduced as speculation. C for what is covered.
 
       '
@@ -121,14 +121,14 @@ criteria:
     reasoning: 'The construct is separated from memorisation by an instrument built for that purpose.
       Excluded loss rises while train loss stays flat, which is the signature the authors predicted for
       a model moving off a memorising solution onto a frequency-supported one, and a diffuse memorising
-      solution would have left it unmoved. Separation from a rival generalising algorithm is another matter:
+      solution would have left it unmoved. Separation from a rival generalizing algorithm is another matter:
       nothing in the paper distinguishes this composition of the key frequencies from a different one
       over the same frequencies, since every discriminating measurement reported is a Fourier-sparsity
       measurement that any such rival would also pass. PC.
 
       '
     notes:
-      verification: 'The rival-generalising-algorithm instruments (gradient symmetricity, distance irrelevance)
+      verification: 'The rival-generalizing-algorithm instruments (gradient symmetricity, distance irrelevance)
         are post-origin and are not in this source, so the cell rests on what the source does not separate
         rather than on a reported failure.
 
@@ -148,7 +148,7 @@ criteria:
       and Appendix B supplies a reason internal to the task for a feature of the mechanism that could
       otherwise look arbitrary: why several frequencies are needed rather than one. What is missing is
       a theory that predicts the Fourier basis from the task and the architecture in advance. The frames
-      organise the result after the fact rather than generating it. PC.
+      organize the result after the fact rather than generating it. PC.
 
       '
     notes: &id001
@@ -229,7 +229,7 @@ criteria:
     short: Seed, data fraction, depth and modulus swept; analysis choices are not
     verified: true
     reasoning: 'Training-side stability is swept harder than in any other audit in this set, because the
-      authors train the models: seed, data fraction, depth, prime modulus, weight-decay strength and regulariser
+      authors train the models: seed, data fraction, depth, prime modulus, weight-decay strength and regularizer
       type. Analysis-side stability is not swept at all. The threshold that decides which Fourier coefficients
       count as nontrivial is never given a value, the rank-10 truncation is fixed, and the 85% cutoff
       that selects 433 neurons is used once and never varied, so the reader cannot tell whether the mechanism
@@ -280,7 +280,7 @@ criteria:
     reasoning: 'One half of a sensitivity design is present. Ablating the 51 non-key frequencies is a
       known-negative control, and it behaves as a control should: the procedure reports no effect where
       none should exist. The other half is missing. No model with a planted circuit of known frequencies
-      is analysed and recovered, so nothing measures what this analysis would fail to find. The setting
+      is analyzed and recovered, so nothing measures what this analysis would fail to find. The setting
       makes such a control unusually cheap, since the authors specify and train the models. U.
 
       '
@@ -291,16 +291,16 @@ criteria:
 
         '
       legacy_evidence: Unattempted. Ablating non-key frequencies is a known-negative control; there is
-        no known-positive. No synthetic model with a planted Fourier circuit of known frequencies is analysed
+        no known-positive. No synthetic model with a planted Fourier circuit of known frequencies is analyzed
         and recovered, although the setting makes one cheap to construct
   M6:
     name: Invariance
     status: C
     short: Table 5 repeats the mechanism statistics for 27 models, five conditions
     verified: true
-    reasoning: 'The same statistics are recomputed on every generalising model the paper trains, across
-      data fraction, depth, prime modulus and regulariser, and reported in one table with the spread visible
-      rather than summarised. The one condition where the pattern breaks is named in the text rather than
+    reasoning: 'The same statistics are recomputed on every generalizing model the paper trains, across
+      data fraction, depth, prime modulus and regularizer, and reported in one table with the spread visible
+      rather than summarized. The one condition where the pattern breaks is named in the text rather than
       buried in the table. Invariance stated over the conditions actually varied, with the exception disclosed,
       is C.
 
@@ -309,7 +309,7 @@ criteria:
       verification: 'CONTRADICTION WITH THE CELL''S `short`, which said 24 models. Table 5 has 27 rows:
         6 data fractions, 5 two-layer, 5 at P = 53, 5 at P = 109, 3 dropout p = 0.2 and 3 dropout p =
         0.5. The count reaches 24 only if the three dropout p = 0.2 rows are dropped, and the source keeps
-        them, listing them as generalising at around 99.6% test accuracy. `short` corrected to 27.
+        them, listing them as generalizing at around 99.6% test accuracy. `short` corrected to 27.
 
         '
       legacy_evidence: Table 5 reports the mechanism statistics for 24 generalizing models across five
@@ -422,8 +422,8 @@ criteria:
     status: N/A
     short: One task; the model has no off-target behavior to spare
     verified: true
-    reasoning: 'Specificity asks whether an intervention that removes the target behaviour spares behaviours
-      it should not touch. This model has no other behaviour. It is trained from scratch on one task,
+    reasoning: 'Specificity asks whether an intervention that removes the target behavior spares behaviors
+      it should not touch. This model has no other behavior. It is trained from scratch on one task,
       its input is a fixed three-token form, and loss is read from one position, so after a key-frequency
       ablation there is no second capability whose survival could be measured. The inapplicability is
       structural rather than a matter of an experiment left unrun. The nearest available check, that ablating
@@ -433,12 +433,12 @@ criteria:
       '
     notes:
       verification: 'Checked for an off-target surface before recording N/A. The three additional tasks
-        of Appendix D.3 are separate models trained separately, not other behaviours of this one, so they
+        of Appendix D.3 are separate models trained separately, not other behaviors of this one, so they
         cannot serve as an off-target measure for an ablation of this model.
 
         '
       legacy_evidence: Untestable in this setting. The model is trained on one task and has no non-target
-        behaviour on which off-target effects of a key-frequency ablation could be measured. The nearest
+        behavior on which off-target effects of a key-frequency ablation could be measured. The nearest
         available check --- that ablating the other 51 frequencies does not harm performance --- is a
         property of the complement, not of the circuit
   I5:
@@ -450,7 +450,7 @@ criteria:
       in the Fourier domain, the excluded loss is built to detect exactly that, and its rise during circuit
       formation is the observed signature of the model leaving that solution. The paper then treats the
       field of rivals as exhausted, writing that the model has two possible solutions. No alternative
-      generalising algorithm over the same key frequencies is considered, and none of the reported measurements
+      generalizing algorithm over the same key frequencies is considered, and none of the reported measurements
       would separate one from the Fourier multiplication account. PC.
 
       '
@@ -472,7 +472,7 @@ criteria:
     verified: true
     reasoning: 'A double dissociation needs two mechanisms and two outcomes, with each intervention moving
       one and sparing the other. Only the first half exists here. Ablating non-key frequencies spares
-      the target behaviour, which is a single dissociation, and the component ablations of Appendix A.1
+      the target behavior, which is a single dissociation, and the component ablations of Appendix A.1
       report necessity rather than the survival of a second mechanism under key-frequency ablation. Nothing
       in the paper identifies a second mechanism in this network that could be shown intact. U.
 
@@ -491,22 +491,22 @@ criteria:
     status: PC
     short: Data fraction, modulus, depth, seed and weight decay all varied
     verified: true
-    reasoning: 'Training the models is what buys the controls. Data fraction, modulus, depth, seed, regulariser
+    reasoning: 'Training the models is what buys the controls. Data fraction, modulus, depth, seed, regularizer
       type and weight-decay strength are all varied rather than found, and the λ = 0 run is the sharpest
-      of them: with the regulariser removed the excluded loss stays flat, so the circuit does not form
+      of them: with the regularizer removed the excluded loss stays flat, so the circuit does not form
       and grokking does not occur. What remains uncontrolled is on the analysis side, where thresholds
       are fixed, and in the architecture, since every mainline conclusion rests on one width and one depth.
       PC.
 
       '
     notes:
-      verification: 'The ℓ1 result is a further control in the same direction: a regulariser that pushes
-        toward neuron-basis sparsity produces no grokking, which separates weight decay from regularisation
+      verification: 'The ℓ1 result is a further control in the same direction: a regularizer that pushes
+        toward neuron-basis sparsity produces no grokking, which separates weight decay from regularization
         in general.
 
         '
       legacy_evidence: 'The strongest controls in the audit set, because the authors train the model:
-        data fraction, modulus, depth, seed, regulariser type and weight-decay strength are all varied,
+        data fraction, modulus, depth, seed, regularizer type and weight-decay strength are all varied,
         and Appendix D.1 shows $\lambda = 0$ produces neither grokking nor circuit formation. Uncontrolled:
         analysis-side choices (M3), and the fact that all mainline conclusions rest on one architecture
         at one $d_{\mathrm{model}}$'
@@ -556,7 +556,7 @@ criteria:
     verified: true
     reasoning: 'Every intervention in the paper is a substitution performed on a clean model: replace
       a component with its approximation, or project activations onto or off a subspace. None of them
-      corrupts the model and then restores the mechanism to see the behaviour return. The clean values
+      corrupts the model and then restores the mechanism to see the behavior return. The clean values
       are in hand at every one of these loci, so the corrupt-then-restore direction costs one extra forward
       pass and is not run. Unattempted rather than untestable. U.
 
@@ -576,8 +576,8 @@ criteria:
     verified: true
     reasoning: 'This is the criterion the paper was written to satisfy. Both progress measures are computed
       at every checkpoint, they move during circuit formation while train and test loss stay flat, and
-      the behaviour appears only later during cleanup. The ordering is the claim, it is measured rather
-      than inferred, and it is reproduced on four further seeds. Mechanism measurable before behaviour,
+      the behavior appears only later during cleanup. The ordering is the claim, it is measured rather
+      than inferred, and it is reproduced on four further seeds. Mechanism measurable before behavior,
       on repeated runs, is C.
 
       '
@@ -600,14 +600,14 @@ criteria:
     verified: true
     reasoning: 'No run removes the capability from a trained model and asks whether the Fourier structure
       goes with it. The λ = 0 experiment is the nearest thing in the paper and it is a different design:
-      a training condition in which neither the circuit nor the generalisation ever appears, which is
+      a training condition in which neither the circuit nor the generalization ever appears, which is
       a co-absence across conditions rather than a coupled disappearance within a model. The authors train
       these models and could construct the within-model version. U on the criterion as defined.
 
       '
     notes:
       verification: 'The λ = 0 run is stronger evidence than the cell''s U suggests. Excluded loss stays
-        flat and grokking never occurs in the same run, so the circuit and the behaviour are jointly absent
+        flat and grokking never occurs in the same run, so the circuit and the behavior are jointly absent
         under an intervention on the training objective. Whether that counts as offset coupling depends
         on whether the criterion admits between-run co-absence; if it does, this cell is PC rather than
         U. Flagged rather than changed, since statuses are out of scope here.
@@ -648,7 +648,7 @@ criteria:
       pairs are used for training and every remaining pair is used for evaluation, and the Fourier analyses
       and ablations are computed over the full grid rather than over a sample of it. There is no further
       prompt distribution the mechanism could fail to cover, so the criterion is met by construction rather
-      than by a generalisation experiment. C.
+      than by a generalization experiment. C.
 
       '
     notes:
@@ -665,10 +665,10 @@ criteria:
     status: PC
     short: Three further tasks run, but only for whether grokking occurs
     verified: true
-    reasoning: 'Three further tasks are run and none of them is analysed mechanistically. What transfers
+    reasoning: 'Three further tasks are run and none of them is analyzed mechanistically. What transfers
       is the grokking phenomenon and its dependence on limited data, measured as loss curves; the Fourier
       multiplication account is never recomputed on 5-digit addition, repeated subsequences or the skip
-      trigram, and the architectures differ from the mainline model. Behaviour generalised, mechanism
+      trigram, and the architectures differ from the mainline model. Behavior generalized, mechanism
       not tested. PC.
 
       '
@@ -695,7 +695,7 @@ criteria:
       '
     notes:
       verification: 'd_model is 128 throughout; the source varies depth and modulus but never width, so
-        "we vary the depth and dimension of the model" is realised in the appendices as depth and prime,
+        "we vary the depth and dimension of the model" is realized in the appendices as depth and prime,
         with no second d_model reported.
 
         '
@@ -758,7 +758,7 @@ criteria:
     reasoning: 'The level is legible from usage and never declared. The abstract puts an algorithm-level
       claim and an implementation-level method in consecutive sentences, and §3.1 states the algorithm
       as a four-step procedure without saying whether the claim is about the function computed, the algorithm
-      used, or the weights that realise it. A reader can reconstruct the answer; the paper does not supply
+      used, or the weights that realize it. A reader can reconstruct the answer; the paper does not supply
       it. PC.
 
       '
@@ -798,7 +798,7 @@ criteria:
     short: Memorization addressed and refuted; the basis alternative is not
     verified: true
     reasoning: 'One alternative account is stated and refuted. Memorisation is a competing description
-      of the same behaviour, the excluded loss is built to detect it, and it is ruled out. The weaker
+      of the same behavior, the excluded loss is built to detect it, and it is ruled out. The weaker
       alternative is not addressed: that the model computes some periodic function of a + b over the key
       frequencies without the particular trigonometric decomposition claimed. The >90% MLP-level fits
       are the closest the paper comes to excluding it, and they are fits to the claimed form rather than
@@ -840,7 +840,7 @@ criteria:
         distinguishes them, which is an argument for PC. C is retained here on the ground that four of
         five labels are definitional and the fifth is a name for a stated four-step procedure rather than
         for an unmeasured capacity; the phase labels memorization, circuit formation and cleanup are likewise
-        tied to the measured behaviour of two named losses. The one place the source names something it
+        tied to the measured behavior of two named losses. The one place the source names something it
         did not measure is the amplification role of heads 1 and 3, which it marks "We speculate". Status
         left unchanged per instruction; if the criterion is read strictly, this cell is PC. NOTE: the
         `name` field is renamed here only. The other fifteen audits and the label maps in build/make_grand_matrix.py
@@ -857,7 +857,7 @@ criteria:
     status: C
     short: \S6 states the limits before any generalization is implied
     verified: true
-    reasoning: 'The limits are declared before any generalisation is implied, and they are the right limits:
+    reasoning: 'The limits are declared before any generalization is implied, and they are the right limits:
       one task, one circuit, small models, manual analysis, and progress measures that do not transfer
       off this task. A second limit gets its own paragraph, that the measures do not predict when the
       transition occurs. Scope stated in the authors'' own words, covering the claims the paper makes,

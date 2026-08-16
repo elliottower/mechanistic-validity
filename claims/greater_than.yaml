@@ -10,7 +10,7 @@ description: 'Iterative path patching over GPT-2 small recovers a circuit for pr
   mode: implementational, with the algorithmic question in the title left open.'
 source:
   citation: hanna2023greater
-  title: ''
+  title: 'How Does GPT-2 Compute Greater-Than?: Interpreting Mathematical Abilities in a Pre-Trained Language Model'
   url: https://arxiv.org/abs/2305.00586
   local: reference/hanna_2023_greater_than.pdf
   sha256: c23636a032c05443bd82984c6e8949d1b24f8b84ae4afa3a9ca634abbc7d15d1

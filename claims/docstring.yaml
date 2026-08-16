@@ -871,7 +871,7 @@ claims:
       section: Open questions & leads
       page: null
       line: 201
-    - exact: We selected this behaviour because a 4-layer attention-only toy model could do the task while
+    - exact: We selected this behavior because a 4-layer attention-only toy model could do the task while
         a 3-layer one could not.
       prefix: ''
       suffix: ''
