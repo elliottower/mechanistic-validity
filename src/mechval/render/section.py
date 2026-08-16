@@ -30,9 +30,10 @@ def section(claim: str) -> str:
         reads.append(f"{stmt}\n  & {r.verdict}\n  & {esc(r.missing)} \\\\")
     tiers = [f"{t.name} & {esc(t.requires)} & {esc(t.missing)} \\\\" for t in a.tiers]
     sep = "\n\\addlinespace[2pt]\n"
+    source_title = ("\\emph{" + esc(a.source.title) + "} ") if a.source.title else ""
     return f"""\\claimheading{{{a.title}}}
 
-\\textbf{{Source.}} \\citet{{{a.source.citation}}}.
+\\textbf{{Source.}} {source_title}\\citep{{{a.source.citation}}}.
 
 \\textbf{{Description.}} {esc(a.description)}
 
