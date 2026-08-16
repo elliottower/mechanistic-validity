@@ -1,0 +1,125 @@
+\claimheading{Superposition of Features in Toy Models}
+
+\textbf{Source.} \emph{Toy Models of Superposition} \citep{elhage2022superposition}.
+
+\textbf{Description.} A ReLU network trained to reconstruct sparse features stores more of them than it has dimensions: each feature gets a non-orthogonal direction, the nonlinearity absorbs the interference those directions create, and the linear model differing only in activation function shows no superposition at any sparsity. The tradeoff is mapped over an importance $\times$ sparsity grid against closed-form losses, and the geometries the trained models settle into are uniform polytopes solving a generalized Thomson problem. Evaluated on: toy autoencoders on synthetic features, across four architectures from $(2,1)$ to 400 features in 30 dimensions. Description mode: representational.
+
+\vspace{4pt}
+{\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{@{}llll>{\raggedright\arraybackslash}p{4.6cm}@{}}
+\caption{\textbf{Superposition.} Full 36-criterion audit. Status: \textbf{C} = Confirmed,
+\textbf{PC} = Partially confirmed, \textbf{U} = Untested, \textbf{I} = Inconclusive,
+\textbf{D} = Disconfirmed, \textbf{N/A} = Not applicable.}\\
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endhead
+\midrule
+\multicolumn{4}{@{}l}{\textit{Construct Validity}} \\
+C1  & Falsifiability            & C   & Point prediction against a linear control, plus a two-parameter phase diagram \\
+C2  & Structural plausibility   & C   & Mechanism derived in closed form, then matched against the trained weights \\
+C3  & Convergent validity       & C   & Theory and experiment agree, and three outside groups replicated before publication \\
+C4  & Discriminant validity     & PC  & Three-way discrimination against planted features; PCA separated as a limiting case \\
+C5  & Nomological validity      & C   & Formal links to compressed sensing, the Thomson problem and distributed codes \\
+C6  & Complementation validity  & U   & Ground truth is available by construction and the test is not run \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Measurement Validity}} \\
+M1  & Reliability               & PC  & Repetition run and reported; aggregation is selection by loss, with no dispersion \\
+M2  & Baseline separation       & C   & Linear control cannot superpose, runs at every sparsity, and separates completely \\
+M3  & Stability                 & PC  & Sparsity, importance, correlation and size all swept; activation function held fixed \\
+M4  & Calibration               & PC  & Two purpose-built measures with stated readings and no external calibration \\
+M5  & Sensitivity               & C   & Planted ground-truth features give a known positive at every point \\
+M6  & Invariance                & PC  & Holds across sizes and data structures; one activation function and one loss \\
+M7  & Selection correction      & U   & Best-of-1000 and worst-discarded selection documented, with no correction applied \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Internal Validity}} \\
+I1  & Necessity                 & C   & Output nonlinearity, sparsity and negative bias each shown to be required \\
+I2  & Sufficiency               & C   & Built from the hypothesized ingredients alone, and superposition appears \\
+I3  & Minimality                & PC  & Load-bearing parts named and the smallest case solved; data assumptions untested \\
+I4  & Specificity               & N/A & One task and one loss, and the paper says cross-superposition loss comparison fails \\
+I5  & Rival mechanism exclusion & PC  & PCA named and characterized as a limiting case; incidental polysemanticity untested \\
+I6  & Double dissociation       & U   & Status recorded without a supporting quote from the source \\
+I7  & Confound control          & PC  & Data confounds set by construction; optimization left as an uncontrolled one \\
+I8  & Confounding sensitivity   & U   & Status recorded without a supporting quote from the source \\
+I9  & Epistatic interaction     & C   & Feature interactions are the subject once uniformity is dropped, and each is measured \\
+I10 & Rescue reversibility      & U   & Status recorded without a supporting quote from the source \\
+I11 & Onset coupling            & PC  & Onset tracked across training; feature dimensionality jumps as the loss drops \\
+I12 & Offset coupling           & U   & Offset never run; the learning-dynamics section is limited by the authors' own account \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{External Validity}} \\
+E1  & Intervention reach        & PC  & Four intervention forms including two that remove superposition, cost reported \\
+E2  & Prompt generalization     & PC  & Input distribution swept along every axis the theory names, all synthetic \\
+E3  & Cross-task generalization & PC  & Two tasks, with computation carrying the weight; representativeness left open \\
+E4  & Cross-model generalization& PC  & Four architectures inside the toy family; real-model support is consistency only \\
+E5  & Graded response           & C   & Dose-response is the core object: sparsity swept, response monotone and located \\
+E6  & Novel prediction          & C   & Two predictions that could have failed: polytope geometry and adversarial fragility \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Interpretive Validity}} \\
+V1  & Level declaration         & C   & Levels separated before any experiment; the chosen definition flagged as circular \\
+V2  & Level-evidence match      & C   & Claims stay at the toy-model level, and every step up from it is marked \\
+V3  & Alternative level         & PC  & PCA examined as a limiting case; the optimization alternative raised and left open \\
+V4  & Unlicensed labeling       & C   & Metaphors are physical and cashed out; agentive verbs appear but stay scare-quoted \\
+V5  & Scope declaration         & C   & Scope declared in the title, in Key Results, in the Discussion and in Open Questions \\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{Total:} 15 Confirmed, 14 Partially confirmed, 6 Untested, 1 Not applicable} \\
+\multicolumn{4}{@{}l}{\textbf{Verdict: Mechanistically Supported}} \\
+\bottomrule
+\end{longtable}}
+
+\clearpage
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Superposition.} Readings of the claim, from the version the authors state to the version the
+field cites.}
+\label{tab:superposition-readings}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}l>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Reading} & \textbf{Verdict} & \textbf{Missing} \\
+\midrule
+\textbf{Primary.} A ReLU network on sparse features represents more features than it has dimensions, in geometries set by sparsity and importance
+  & Mechanistically Supported
+  & A converse arm, with some property shown intact while superposition is removed (I6); correction for the lowest-loss selection the reported geometries are drawn from (M7); an input distribution outside the synthetic family (E2) \\
+\addlinespace[2pt]
+The reported geometries are properties of the optimum rather than of the optimizer
+  & Underdetermined
+  & The $m=2$ case is reported as much harder for gradient descent and its solutions are selected by loss (I7, M7); an invited comment in the same article shows the global minimum can have a smaller basin of attraction than nearby local minima, and the paper leaves it open (V3) \\
+\addlinespace[2pt]
+The phase diagram is fixed by sparsity and importance alone
+  & Disconfirmed
+  & Nothing --- tested and failed: the paper holds the activation function fixed across every one of its own experiments, and a replication carried in the same article finds the phase diagrams look quite different under other activation functions (M3, M6) \\
+\addlinespace[2pt]
+Language models represent features in superposition
+  & Insufficient
+  & Every measurement is on a toy model, and the paper labels its real-model section validation by consistency with existing reports rather than measurement taken here (E4); no natural-data distribution appears anywhere, and Open Questions asks whether real importance and sparsity curves can be estimated at all (E2) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Superposition.} Verdict: \textbf{Mechanistically Supported}. A dash means the tier is reached; a criterion at
+Inconclusive, Untested or Disconfirmed blocks promotion.}
+\label{tab:superposition-verdict}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Tier} & \textbf{Requires} & \textbf{Missing} \\
+\midrule
+Proposed & C1--C2; one admissible measurement & --- \\
+\addlinespace[2pt]
+Causally Suggestive & Necessity (I1); baselines (M2) & --- \\
+\addlinespace[2pt]
+Mechanistically Supported & Sufficiency (I2); reach (E1); specificity (I4) & \textbf{I4} not applicable: one objective, and superposition is induced by changing the task, so losses at different amounts of it are measured on different tasks \\
+\addlinespace[2pt]
+Triangulated & Convergence (C3); replication (E2/E4); dissociation (I6) & \textbf{I6} unattempted; no second property is shown intact while superposition is removed, and no manipulation removes another property while leaving superposition in place \\
+\addlinespace[2pt]
+Validated & Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4) & \textbf{M7} unattempted, and the neuron-level figures are the best of a thousand fits while the phase diagram discards the worst of ten; \textbf{I8}, \textbf{I10}, \textbf{I12} unattempted \\
+\bottomrule
+\end{tabular}
+\end{table}

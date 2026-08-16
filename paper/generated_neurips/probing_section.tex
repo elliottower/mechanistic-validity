@@ -1,0 +1,125 @@
+\claimheading{Probing Classifiers as Mechanistic Evidence}
+
+\textbf{Source.} \emph{Probing Classifiers: Promises, Shortcomings, and Advances} \citep{belinkov2022probing}.
+
+\textbf{Description.} A classifier $g$ is trained on a model's intermediate output $f_l(x)$ to predict a property $z$, and its accuracy is reported as evidence that the model has learned information relevant to $z$. The audited object is the method rather than one experiment: the anchor is a review that runs no experiments of its own, so the evidence sits in the studies it formalizes. Evaluated on: every architecture family the method has been applied to, from static word embeddings to transformers. Description mode: representational.
+
+\vspace{4pt}
+{\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{@{}llll>{\raggedright\arraybackslash}p{4.6cm}@{}}
+\caption{\textbf{Probing classifiers.} Full 36-criterion audit. Status: \textbf{C} = Confirmed,
+\textbf{PC} = Partially confirmed, \textbf{U} = Untested, \textbf{I} = Inconclusive,
+\textbf{D} = Disconfirmed, \textbf{N/A} = Not applicable.}\\
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endhead
+\midrule
+\multicolumn{4}{@{}l}{\textit{Construct Validity}} \\
+C1  & Falsifiability            & C   & The prediction can fail and did, in work the anchor reports side by side \\
+C2  & Structural plausibility   & PC  & Every symbol a probing result depends on is named and typed \\
+C3  & Convergent validity       & PC  & Probe families agree under accuracy and reverse under other measures \\
+C4  & Discriminant validity     & D   & Two neighbors the instrument must separate: probe memorisation, random features \\
+C5  & Nomological validity      & PC  & Tied to mutual information, description length and information gain \\
+C6  & Complementation validity  & N/A & The audited object is a method, not a construct with named parts \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Measurement Validity}} \\
+M1  & Reliability               & U   & A review reports no variance; the anchor states what it requires of studies \\
+M2  & Baseline separation       & C   & The criterion the literature solved; three control families formalized \\
+M3  & Stability                 & I   & Ordering survives under accuracy and inverts under an alternative measure \\
+M4  & Calibration               & D   & The shortcomings section opens by denying the measurement has a scale \\
+M5  & Sensitivity               & PC  & Skylines and floors exist; no planted property is ever recovered \\
+M6  & Invariance                & PC  & Invariance is what probing measures, so the instrument is the question \\
+M7  & Selection correction      & U   & Three control families catalogued; the omission from the catalogue is the gap \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Internal Validity}} \\
+I1  & Necessity                 & I   & Standard probing performs no removal; removal studies disagree four ways \\
+I2  & Sufficiency               & N/A & Probing is a map out of the representation, with no path writing back in \\
+I3  & Minimality                & U   & The unit is a whole intermediate output; no operation removes part of one \\
+I4  & Specificity               & D   & A control dataset holds the property constant and probing fails on it \\
+I5  & Rival mechanism exclusion & PC  & Control tasks are solvable only by memorisation, and separate cleanly \\
+I6  & Double dissociation       & U   & Needs two properties and two behaviors; the framework supplies one of each \\
+I7  & Confound control          & PC  & Probe capacity, information in a random baseline and task difficulty \\
+I8  & Confounding sensitivity   & U   & The anchor answers confounding with designed controls, never with a bound \\
+I9  & Epistatic interaction     & U   & Non-additivity needs two manipulable components; the object is one output \\
+I10 & Rescue reversibility      & U   & Every catalogued intervention runs one way, projecting or training out \\
+I11 & Onset coupling            & U   & The original model is taken as given and trained once \\
+I12 & Offset coupling           & U   & The converse needs the training sequence onset coupling also lacks \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{External Validity}} \\
+E1  & Intervention reach        & I   & Probing has no intervention of its own; those applied to it disagree \\
+E2  & Prompt generalization     & PC  & One line of work reports the same property across several datasets \\
+E3  & Cross-task generalization & PC  & Transfers to any property with an annotated dataset, which is the appeal \\
+E4  & Cross-model generalization& C   & Portability is established without qualification, from static embeddings on \\
+E5  & Graded response           & N/A & No intervention, so no strength to dial and no response to grade \\
+E6  & Novel prediction          & PC  & Four design changes followed probing results and then worked \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Interpretive Validity}} \\
+V1  & Level declaration         & PC  & The formalism fixes which objects a probing result is about \\
+V2  & Level-evidence match      & D   & The evidence supports extractability; the claim made is representation \\
+V3  & Alternative level         & C   & Every rival reading of a good score is given a measure of its own \\
+V4  & Unlicensed labeling       & PC  & ``The model knows z'' projects an epistemic relation onto decodability \\
+V5  & Scope declaration         & C   & A scope declaration end to end, conceding limits before any content \\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{Total:} 5 Confirmed, 12 Partially confirmed, 3 Inconclusive, 9 Untested, 4 Disconfirmed, 3 Not applicable} \\
+\multicolumn{4}{@{}l}{\textbf{Verdict: Proposed}} \\
+\bottomrule
+\end{longtable}}
+
+\clearpage
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Probing classifiers.} Readings of the claim, from the version the authors state to the version the
+field cites.}
+\label{tab:probing-readings}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}l>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Reading} & \textbf{Verdict} & \textbf{Missing} \\
+\midrule
+\textbf{Primary.} A probing result licenses that property $z$ is extractable from the representation by a classifier of the stated capacity
+  & Proposed
+  & Necessity: the method performs no removal of its own, and where removal was performed the studies the anchor reports disagree four ways (I1, E1) \\
+\addlinespace[2pt]
+A good probe score shows that the model represents $z$
+  & Disconfirmed
+  & Nothing --- tested and failed: control tasks attribute most of a nonlinear probe's accuracy to the probe itself, and even random features decode the property (C4) \\
+\addlinespace[2pt]
+A good probe score shows that the model uses $z$ in producing its output
+  & Disconfirmed
+  & Nothing --- tested and failed: a control dataset holds $z$ non-discriminative for the original task and the probe recovers it anyway, so decodability does not localize to the task (I4) \\
+\addlinespace[2pt]
+Interventions on a probe-identified direction show which features the model uses
+  & Underdetermined
+  & A result that decides the four-way disagreement among the intervention studies of \S4.3 (I1, E1). This is the broad scope, under which \textbf{I2} and \textbf{E5} are unattempted; under probing as \S2 defines it, a read-out with no path writing back in, they are not applicable \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Probing classifiers.} Verdict: \textbf{Proposed}. A dash means the tier is reached; a criterion at
+Inconclusive, Untested or Disconfirmed blocks promotion.}
+\label{tab:probing-verdict}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Tier} & \textbf{Requires} & \textbf{Missing} \\
+\midrule
+Proposed & C1--C2; one admissible measurement & --- \\
+\addlinespace[2pt]
+Causally Suggestive & Necessity (I1); baselines (M2) & \textbf{I1} inconclusive: the anchor sets Giulianelli's positive conclusion against Elazar's negative one and prefers neither \\
+\addlinespace[2pt]
+Mechanistically Supported & Sufficiency (I2); reach (E1); specificity (I4) & \textbf{I4} Disconfirmed; \textbf{E1} inconclusive; \textbf{I2} not applicable: a read-out has no write path \\
+\addlinespace[2pt]
+Triangulated & Convergence (C3); replication (E2/E4); dissociation (I6) & \textbf{I6} unattempted: one property and one behavior per experiment; \textbf{C3}: probe families agree under accuracy and reverse under selectivity \\
+\addlinespace[2pt]
+Validated & Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4) & \textbf{M4}, \textbf{V2} Disconfirmed; \textbf{M3} inconclusive; \textbf{M1}, \textbf{M7} unattempted \\
+\bottomrule
+\end{tabular}
+\end{table}

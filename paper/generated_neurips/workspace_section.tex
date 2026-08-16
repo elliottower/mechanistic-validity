@@ -1,0 +1,125 @@
+\claimheading{Global Workspace / J-space}
+
+\textbf{Source.} \emph{Verbalizable Representations Form a Global Workspace} \citep{gurnee2026verbalizable}.
+
+\textbf{Description.} A low-dimensional subspace of the residual stream, recovered as the expected Jacobian $J_\ell$ of the final-layer residual with respect to layer $\ell$, is proposed as the set of contents a model can verbally report and reason over. Five properties are enumerated in advance from global workspace theory --- verbal report, directed modulation, internal reasoning, flexible generalization, capacity limits --- and one is used to find the object rather than to score it afterwards. Evaluated on: four closed-weight Claude models with sizes undisclosed, plus base and model-organism checkpoints. Description mode: implementational-functional.
+
+\vspace{4pt}
+{\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{@{}llll>{\raggedright\arraybackslash}p{4.6cm}@{}}
+\caption{\textbf{Global workspace / J-space.} Full 36-criterion audit. Status: \textbf{C} = Confirmed,
+\textbf{PC} = Partially confirmed, \textbf{U} = Untested, \textbf{I} = Inconclusive,
+\textbf{D} = Disconfirmed, \textbf{N/A} = Not applicable.}\\
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endhead
+\midrule
+\multicolumn{4}{@{}l}{\textit{Construct Validity}} \\
+C1  & Falsifiability            & C   & Five properties operationalized before any result is reported \\
+C2  & Structural plausibility   & C   & $J_\ell$ derived from the architecture, not posited \\
+C3  & Convergent validity       & PC  & Three cross-checks, but almost every intervention edits along J-lens \\
+C4  & Discriminant validity     & PC  & Separated from ``any direction encoding this concept'' by design \\
+C5  & Nomological validity      & C   & Stated inside a named theory with disanalogies enumerated \\
+C6  & Complementation validity  & N/A & One subspace, undivided, so the question does not attach \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Measurement Validity}} \\
+M1  & Reliability               & PC  & Wilson intervals and per-prompt dots throughout; no seed variance \\
+M2  & Baseline separation       & C   & The densest negative controls in the set: logit lens and tuned lens \\
+M3  & Stability                 & PC  & Method variants swept and robust; corpus size from 1 to 1000 \\
+M4  & Calibration               & PC  & Ablations normalized to unablated Sonnet with a smaller-model floor \\
+M5  & Sensitivity               & C   & A known-positive control is run and named as one \\
+M6  & Invariance                & PC  & Four models, base and organism checkpoints, two further lenses \\
+M7  & Selection correction      & U   & Unattempted, and one token set is chosen self-referentially \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Internal Validity}} \\
+I1  & Necessity                 & C   & Four necessity demonstrations, three with controls \\
+I2  & Sufficiency               & PC  & Swaps install counterfactual content at 54--70\% across three models \\
+I3  & Minimality                & PC  & Occupancy estimated from where marginal improvement flattens \\
+I4  & Specificity               & C   & Tested three ways; a fourteen-task battery maps where it is not needed \\
+I5  & Rival mechanism exclusion & PC  & The concept-vector rival is named twice and tested twice \\
+I6  & Double dissociation       & U   & Single dissociation run cleanly and repeatedly; no converse \\
+I7  & Confound control          & C   & Five designed controls, each aimed at its experiment's alternative \\
+I8  & Confounding sensitivity   & U   & Unattempted; specific alternatives answered, no unmeasured-confounder bound \\
+I9  & Epistatic interaction     & PC  & Token-level exclusion at 0.09 vs 0.29; two held concepts co-occupy at chance \\
+I10 & Rescue reversibility      & PC  & Clamp-to-clean restoration run twice as a mediation control \\
+I11 & Onset coupling            & PC  & Present and load-bearing in a base model before any RLHF \\
+I12 & Offset coupling           & PC  & Deception signal amplified by coding RL, then attenuated by safety training \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{External Validity}} \\
+E1  & Intervention reach        & PC  & Many intervention forms, nearly all editing along the same directions \\
+E2  & Prompt generalization     & C   & Five public benchmarks plus six prompt distributions \\
+E3  & Cross-task generalization & C   & A fourteen-task battery maps where the mechanism is required \\
+E4  & Cross-model generalization& PC  & Four closed-weight models, one lab, sizes undisclosed; partly replicated externally \\
+E5  & Graded response           & C   & Six dose-response designs, including injection strength against rank \\
+E6  & Novel prediction          & C   & Five properties enumerated from theory, one used to find the object \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Interpretive Validity}} \\
+V1  & Level declaration         & C   & Declared before evidence, and the level is named explicitly \\
+V2  & Level-evidence match      & PC  & Three levels in play and two matched; the third is asserted \\
+V3  & Alternative level         & PC  & Two alternatives addressed and refuted; the workspace framing is not \\
+V4  & Unlicensed labeling       & PC  & Disanalogies enumerated and consciousness not adjudicated; hedged \\
+V5  & Scope declaration         & C   & Eight limitations named in a dedicated section \\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{Total:} 14 Confirmed, 18 Partially confirmed, 3 Untested, 1 Not applicable} \\
+\multicolumn{4}{@{}l}{\textbf{Verdict: Mechanistically Supported}} \\
+\bottomrule
+\end{longtable}}
+
+\clearpage
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Global workspace / J-space.} Readings of the claim, from the version the authors state to the version the
+field cites.}
+\label{tab:workspace-readings}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}l>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Reading} & \textbf{Verdict} & \textbf{Missing} \\
+\midrule
+\textbf{Primary.} A low-dimensional Jacobian subspace mediates which contents the model reports and reasons over
+  & Mechanistically Supported
+  & A converse dissociation (I6), an unmeasured-confounder bound (I8), and correction for how the token sets were chosen (M7) \\
+\addlinespace[2pt]
+Any direction encoding the concept would serve equally
+  & Disconfirmed
+  & Nothing --- named twice and tested twice, and concept vectors do not reproduce the effect \\
+\addlinespace[2pt]
+The subspace is a global workspace in the sense the theory intends
+  & Underdetermined
+  & The architectural disanalogies are enumerated by the authors; no experiment separates a workspace from a bottleneck that behaves like one \\
+\addlinespace[2pt]
+The result holds beyond one model family
+  & Insufficient
+  & Four models, one laboratory, all closed-weight, effects scale-graded from 54\% to 70\% (E4) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Global workspace / J-space.} Verdict: \textbf{Mechanistically Supported}. A dash means the tier is reached; a criterion at
+Inconclusive, Untested or Disconfirmed blocks promotion.}
+\label{tab:workspace-verdict}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Tier} & \textbf{Requires} & \textbf{Missing} \\
+\midrule
+Proposed & C1--C2; one admissible measurement & --- \\
+\addlinespace[2pt]
+Causally Suggestive & Necessity (I1); baselines (M2) & --- \\
+\addlinespace[2pt]
+Mechanistically Supported & Sufficiency (I2); reach (E1); specificity (I4) & --- \\
+\addlinespace[2pt]
+Triangulated & Convergence (C3); replication (E2/E4); dissociation (I6) & \textbf{C3}: nearly every intervention edits along the same directions; \textbf{I6} single rather than double; \textbf{E4} one model family \\
+\addlinespace[2pt]
+Validated & Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4) & \textbf{M7} unattempted, and one token set is chosen self-referentially; \textbf{I8} unattempted \\
+\bottomrule
+\end{tabular}
+\end{table}

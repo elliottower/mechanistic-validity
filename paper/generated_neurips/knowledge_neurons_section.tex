@@ -1,0 +1,125 @@
+\claimheading{Knowledge Neurons}
+
+\textbf{Source.} \emph{Knowledge Neurons in Pretrained Transformers} \citep{dai2022knowledge}.
+
+\textbf{Description.} Integrated gradients over the intermediate activations of a feed-forward layer attribute a relational fact to about four neurons, read as the value slots of the key--value memory that layer implements. Zeroing those activations lowers the correct-answer probability by 29.03\% and doubling them raises it by 31.17\%, against $-1.47\%$ and $-1.27\%$ for a count-matched baseline. Evaluated on: BERT-base-cased at one released checkpoint, on 253,448 ParaRel cloze prompts covering 27,738 facts. Description mode: implementational-functional.
+
+\vspace{4pt}
+{\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{@{}llll>{\raggedright\arraybackslash}p{4.6cm}@{}}
+\caption{\textbf{Knowledge neurons.} Full 36-criterion audit. Status: \textbf{C} = Confirmed,
+\textbf{PC} = Partially confirmed, \textbf{U} = Untested, \textbf{I} = Inconclusive,
+\textbf{D} = Disconfirmed, \textbf{N/A} = Not applicable.}\\
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endhead
+\midrule
+\multicolumn{4}{@{}l}{\textit{Construct Validity}} \\
+C1  & Falsifiability            & C   & Signed predictions run both ways on 34 relations, against a matched control \\
+C2  & Structural plausibility   & C   & Eq. (3) beside Eq. (2): the same key-value operation under another nonlinearity \\
+C3  & Convergent validity       & PC  & One attributor against one contrast, agreeing on one coarse property \\
+C4  & Discriminant validity     & D   & The competitor is named, removed by a filter, and the same machinery moves it \\
+C5  & Nomological validity      & PC  & Two theories say where to look; neither is tested as a network \\
+C6  & Complementation validity  & U   & Relation sets separate at identification; no joint suppression is run \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Measurement Validity}} \\
+M1  & Reliability               & U   & Every quantity a mean reported once, with no interval or repeated run \\
+M2  & Baseline separation       & C   & Activation magnitude through the identical pipeline, succeeding 0.0\% of the time \\
+M3  & Stability                 & U   & Three free settings stated and none of them perturbed \\
+M4  & Calibration               & PC  & Outcomes calibrated; the selection quantity is driven to a target range \\
+M5  & Sensitivity               & U   & One known-negative control and no case where the answer is known in advance \\
+M6  & Invariance                & PC  & Per-relation spread across 34 relations; the generalization claim has no experiment \\
+M7  & Selection correction      & U   & Selection at four places, disclosed at all four and corrected at none \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Internal Validity}} \\
+I1  & Necessity                 & PC  & 29.03\% against the control's 1.47\%, consistent across relations but a decrement \\
+I2  & Sufficiency               & PC  & Doubling gives +31.17\% and rewriting succeeds 34.4\%; neither reaches sufficiency \\
+I3  & Minimality                & U   & Set size is an input, held near four neurons before any effect is measured \\
+I4  & Specificity               & I   & Holds at identification and erasure, fails on other knowledge: results point both ways \\
+I5  & Rival mechanism exclusion & U   & The one alternative ruled out is about method; the FFN framing forecloses the rest \\
+I6  & Double dissociation       & U   & One mechanism localized and one behavior measured, so neither arm exists \\
+I7  & Confound control          & PC  & Wording controlled by requiring recurrence across nine templates; frequency is not \\
+I8  & Confounding sensitivity   & U   & Unattempted; nothing bounds an unmeasured confounder \\
+I9  & Epistatic interaction     & U   & Every manipulation hits the whole set at once, so no contribution separates \\
+I10 & Rescue reversibility      & U   & The damage is analytic and invertible, and the restore is never run \\
+I11 & Onset coupling            & N/A & One released checkpoint, so there is no sequence to locate an onset in \\
+I12 & Offset coupling           & N/A & One checkpoint supplies no interval over which either could go \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{External Validity}} \\
+E1  & Intervention reach        & PC  & Three forms agreeing in direction, all downstream of one attributor \\
+E2  & Prompt generalization     & C   & Survival across roughly nine templates is built into the identification \\
+E3  & Cross-task generalization & U   & Single-word cloze throughout, named first among the authors' limitations \\
+E4  & Cross-model generalization& PC  & One model, with generalization asserted and no experiment behind it \\
+E5  & Graded response           & PC  & Sign reverses between zero and double; nothing reported between them \\
+E6  & Novel prediction          & C   & Unseen text fires the neurons where it expresses the fact and not otherwise \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Interpretive Validity}} \\
+V1  & Level declaration         & PC  & The unit is declared exactly and the level is not; storage and expression run together \\
+V2  & Level-evidence match      & D   & The title claims storage; the measurement is correlation with expression \\
+V3  & Alternative level         & I   & The method alternative is rejected; the storage-versus-expression reading is untouched \\
+V4  & Unlicensed labeling       & PC  & The name arrives in the sentence that introduces the method, before the measurement \\
+V5  & Scope declaration         & PC  & Four limits declared; the one asserted past is generalization beyond BERT \\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{Total:} 5 Confirmed, 13 Partially confirmed, 2 Inconclusive, 12 Untested, 2 Disconfirmed, 2 Not applicable} \\
+\multicolumn{4}{@{}l}{\textbf{Verdict: Disconfirmed}} \\
+\bottomrule
+\end{longtable}}
+
+\clearpage
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Knowledge neurons.} Readings of the claim, from the version the authors state to the version the
+field cites.}
+\label{tab:knowledge_neurons-readings}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}l>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Reading} & \textbf{Verdict} & \textbf{Missing} \\
+\midrule
+\textbf{Primary.} These roughly four feed-forward neurons store the relational fact
+  & Disconfirmed
+  & Nothing --- tested and failed: all three of the paper's own summaries report a correlation between activation and expression while the title and abstract claim storage (V2), and the same editing machinery moves non-factual linguistic patterns, so the construct never separates from its neighbor (C4) \\
+\addlinespace[2pt]
+Manipulating these neurons changes how strongly the model expresses the fact
+  & Causally Suggestive
+  & Specificity, tested and inconclusive (I4); sufficiency reaches a 34.4\% edit success rate on a fact the rest of the model still expresses (I2) \\
+\addlinespace[2pt]
+Editing these neurons edits that fact and leaves unrelated knowledge alone
+  & Disconfirmed
+  & Nothing --- tested and failed: Table 6 gives an inter-relation perplexity rise of 7.2 for the identified neurons against 4.3 for random ones, and \S5.1 reads the same table as little negative influence on other knowledge (I4) \\
+\addlinespace[2pt]
+The account holds beyond BERT-base-cased
+  & Insufficient
+  & One model, and the generalization is asserted with no experiment behind it (E4, V5); what has since transferred is the attribution procedure rather than the storage reading \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Knowledge neurons.} Verdict: \textbf{Disconfirmed}. A dash means the tier is reached; a criterion at
+Inconclusive, Untested or Disconfirmed blocks promotion.}
+\label{tab:knowledge_neurons-verdict}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Tier} & \textbf{Requires} & \textbf{Missing} \\
+\midrule
+Proposed & C1--C2; one admissible measurement & --- \\
+\addlinespace[2pt]
+Causally Suggestive & Necessity (I1); baselines (M2) & --- \\
+\addlinespace[2pt]
+Mechanistically Supported & Sufficiency (I2); reach (E1); specificity (I4) & \textbf{I4} inconclusive: erasure spares other relations, while updating damages them more than editing random neurons does \\
+\addlinespace[2pt]
+Triangulated & Convergence (C3); replication (E2/E4); dissociation (I6) & \textbf{I6} unattempted: no second mechanism is shown intact under knowledge-neuron ablation; \textbf{C3}: one attribution family against one contrast baseline \\
+\addlinespace[2pt]
+Validated & Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4) & \textbf{V2} Disconfirmed; \textbf{V3} inconclusive; \textbf{M1}, \textbf{M3}, \textbf{M5}, \textbf{M7} unattempted, and the neuron count is set by a target range rather than by the data \\
+\bottomrule
+\end{tabular}
+\end{table}

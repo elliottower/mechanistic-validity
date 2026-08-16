@@ -1,0 +1,125 @@
+\claimheading{Successor Heads: Ordinal Incrementation}
+
+\textbf{Source.} \emph{Successor Heads: Recurring, Interpretable Attention Heads In The Wild} \citep{gould2023successor}.
+
+\textbf{Description.} One attention head maps an ordinal token to its successor, and the mechanism is a product of four weight matrices --- embedding, $\mathrm{MLP}_0$, the head's OV circuit, unembedding --- evaluated directly, with no activation from any prompt entering it. Mod-10 features recovered from $\mathrm{MLP}_0$ by sparse autoencoders, by a linear probe and by single-neuron ablation carry the index the head increments. Evaluated on: GPT-2, Pythia and Llama-2 from 31M to 12B for behavioral recurrence, with the feature-level case study on Pythia-1.4B L12H0 and two appendix replications. Description mode: implementational-functional.
+
+\vspace{4pt}
+{\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{@{}llll>{\raggedright\arraybackslash}p{4.6cm}@{}}
+\caption{\textbf{Successor heads.} Full 36-criterion audit. Status: \textbf{C} = Confirmed,
+\textbf{PC} = Partially confirmed, \textbf{U} = Untested, \textbf{I} = Inconclusive,
+\textbf{D} = Disconfirmed, \textbf{N/A} = Not applicable.}\\
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endhead
+\midrule
+\multicolumn{4}{@{}l}{\textit{Construct Validity}} \\
+C1  & Falsifiability            & C   & A fixed token list and a committed threshold; some models have no head \\
+C2  & Structural plausibility   & C   & A product of four matrices tested directly, with no prompt entering it \\
+C3  & Convergent validity       & C   & A probe at 0.708 cosine and single neurons, sharing nothing with the SAE \\
+C4  & Discriminant validity     & PC  & Top head eight times the runner-up; no neighboring construct attempted \\
+C5  & Nomological validity      & PC  & Weak universality imported, tested, and partly returned \\
+C6  & Complementation validity  & U   & Eight task classes scored individually and never ablated in pairs \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Measurement Validity}} \\
+M1  & Reliability               & PC  & Modes over a hundred autoencoders; the central score has no interval \\
+M2  & Baseline separation       & PC  & Cutting the head leaves under one percent and returns bigrams instead \\
+M3  & Stability                 & PC  & Three perturbations, one aimed at the paper's own premise \\
+M4  & Calibration               & PC  & A proportion against a stated threshold; importance gives rank, not magnitude \\
+M5  & Sensitivity               & U   & Every control a known-negative; no planted circuit recovered \\
+M6  & Invariance                & C   & Three families over three orders of magnitude, failures kept in \\
+M7  & Selection correction      & U   & Selection at three levels, disclosed at each and corrected at none \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Internal Validity}} \\
+I1  & Necessity                 & PC  & Winning head on all 64 prompts, which ranks the head without measuring it \\
+I2  & Sufficiency               & C   & The OV circuit alone ranks the successor above every alternative \\
+I3  & Minimality                & PC  & Minimal by construction; the droppable component contributes under a percent \\
+I4  & Specificity               & PC  & Off-target function measured across five ablation regimes and found present \\
+I5  & Rival mechanism exclusion & PC  & Artifact and pre-head computation both excluded by built experiments \\
+I6  & Double dissociation       & U   & Neither arm run, and the polysemantic head makes the converse hard \\
+I7  & Confound control          & PC  & Tokenization handled by construction; letter collisions explained, not tested \\
+I8  & Confounding sensitivity   & U   & Unattempted; nothing bounds an unmeasured confounder \\
+I9  & Epistatic interaction     & PC  & Indirect effect bounded under both ablation values; no feature-level grid \\
+I10 & Rescue reversibility      & U   & Both ablations reversible and the clean run in hand; restore never run \\
+I11 & Onset coupling            & I   & Emergence observed across checkpoints; coupling to behavior is not \\
+I12 & Offset coupling           & U   & The checkpoint data exists and is read in the forward direction only \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{External Validity}} \\
+E1  & Intervention reach        & C   & Five intervention forms spanning removal and addition, and they agree \\
+E2  & Prompt generalization     & PC  & A constructed token list and 128 natural contexts, the harder one genuinely hard \\
+E3  & Cross-task generalization & C   & Eight tasks scored individually; Roman numerals decode though never trained \\
+E4  & Cross-model generalization& PC  & Behavior recurs across three families; the mechanism is single-model \\
+E5  & Graded response           & PC  & A two-sided dose criterion, and every other ablation all-or-nothing \\
+E6  & Novel prediction          & C   & Roman numerals fitted out of every training set and decoded anyway \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Interpretive Validity}} \\
+V1  & Level declaration         & C   & The level is fixed by the object: a product of four weight matrices \\
+V2  & Level-evidence match      & PC  & Weights tested on weights; the recurrence claim rests mostly on behavior \\
+V3  & Alternative level         & PC  & Two alternatives closed by experiment; the paper's own third left open \\
+V4  & Unlicensed labeling       & C   & Each label defined in the sentence that introduces its measurement \\
+V5  & Scope declaration         & PC  & Three limits declared beside the results they bound; one gap remains \\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{Total:} 10 Confirmed, 18 Partially confirmed, 1 Inconclusive, 7 Untested} \\
+\multicolumn{4}{@{}l}{\textbf{Verdict: Mechanistically Supported}} \\
+\bottomrule
+\end{longtable}}
+
+\clearpage
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Successor heads.} Readings of the claim, from the version the authors state to the version the
+field cites.}
+\label{tab:successor_heads-readings}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}l>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Reading} & \textbf{Verdict} & \textbf{Missing} \\
+\midrule
+\textbf{Primary.} A single head's effective OV circuit increments an ordinal token to its successor, and mod-10 features carry the index it acts on
+  & Mechanistically Supported
+  & Necessity measured rather than ranked (I1); a known-positive control (M5); correction for the head, feature and $\lambda$ selections (M7); and the feature account does not reproduce the greater-than bias the same weights show, which the authors state as incomplete (V2) \\
+\addlinespace[2pt]
+The head is specific to succession
+  & Disconfirmed
+  & Nothing --- tested and failed: on natural text acronym and greater-than behavior take 23.8\% and 18.9\% of winning cases, and the paper reframes the head as interpretably polysemantic (I4) \\
+\addlinespace[2pt]
+The mod-10 mechanism recurs across architectures and sizes, as the abstract states
+  & Underdetermined
+  & Mechanistic recurrence is one case study plus two appendix replications against broad behavioral recurrence (E4); Llama-7B fails the held-out Roman-numeral task where the Pythia models do not (E4, M6), and putting the head on synthesised Roman-numeral representations drops top-1 accuracy to 0.125 (E3, E6) \\
+\addlinespace[2pt]
+The emergence of successor heads during training explains when the incrementation behavior appears
+  & Underdetermined
+  & Successor scores are tracked across checkpoints in two model families and the heads are seen to emerge, but nothing is plotted against a behavior or a loss curve, and the phase change the induction-head comparison predicts is absent (I11); no checkpoint interval shows the mechanism lapsing (I12) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Successor heads.} Verdict: \textbf{Mechanistically Supported}. A dash means the tier is reached; a criterion at
+Inconclusive, Untested or Disconfirmed blocks promotion.}
+\label{tab:successor_heads-verdict}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Tier} & \textbf{Requires} & \textbf{Missing} \\
+\midrule
+Proposed & C1--C2; one admissible measurement & --- \\
+\addlinespace[2pt]
+Causally Suggestive & Necessity (I1); baselines (M2) & --- \\
+\addlinespace[2pt]
+Mechanistically Supported & Sufficiency (I2); reach (E1); specificity (I4) & \textbf{I4} tested and adverse: the head is not specific to succession, with acronym at 23.8\% and greater-than at 18.9\% of winning cases \\
+\addlinespace[2pt]
+Triangulated & Convergence (C3); replication (E2/E4); dissociation (I6) & \textbf{I6} unattempted, and one head carrying three behaviors makes the converse arm harder to construct; \textbf{E4} mechanistic recurrence is single-model \\
+\addlinespace[2pt]
+Validated & Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4) & \textbf{M5}, \textbf{M7} unattempted, and the case-study head, the mod-10 features and $\lambda$ are each reported at a selected maximum; \textbf{I8}, \textbf{I10}, \textbf{I12} unattempted; \textbf{I11} inconclusive \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,125 @@
+\claimheading{Fourier Multiplication in Modular Addition}
+
+\textbf{Source.} \emph{Progress Measures for Grokking} \citep{nanda2023progress}.
+
+\textbf{Description.} A one-layer transformer trained on $a+b \bmod 113$ maps each input to $\cos$ and $\sin$ at five key frequencies, multiplies those components so the products encode $a+b$, and reads the sum off at the same five frequencies. The frequencies are identified from the embedding's Fourier spectrum; the account is validated by ablating in Fourier space and by two progress measures, restricted and excluded loss, tracked across training. Restricted and excluded loss move before test accuracy does, which is what makes the account predictive rather than descriptive. Description mode: algorithmic.
+
+\vspace{4pt}
+{\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{@{}llll>{\raggedright\arraybackslash}p{4.6cm}@{}}
+\caption{\textbf{Fourier multiplication.} Full 36-criterion audit. Status: \textbf{C} = Confirmed,
+\textbf{PC} = Partially confirmed, \textbf{U} = Untested, \textbf{I} = Inconclusive,
+\textbf{D} = Disconfirmed, \textbf{N/A} = Not applicable.}\\
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endhead
+\midrule
+\multicolumn{4}{@{}l}{\textit{Construct Validity}} \\
+C1  & Falsifiability            & C   & Each key frequency makes a directional ablation prediction that could fail \\
+C2  & Structural plausibility   & C   & Weight-level throughout; $W_E$ sparse in the Fourier basis at 6 frequencies \\
+C3  & Convergent validity       & PC  & Three families at origin, but all descend from Fourier-space ablation \\
+C4  & Discriminant validity     & PC  & Excluded loss rises during circuit formation while train loss stays flat \\
+C5  & Nomological validity      & PC  & Placed inside progress measures and phase changes; links are analogical \\
+C6  & Complementation validity  & U   & Five frequencies treated as interchangeable, never compared in pairs \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Measurement Validity}} \\
+M1  & Reliability               & PC  & Five seeds at the mainline configuration, reported in full (Table 3) \\
+M2  & Baseline separation       & C   & All 56 frequencies ablated individually; the five separate by orders \\
+M3  & Stability                 & PC  & Seed, data fraction, depth and modulus swept; analysis choices are not \\
+M4  & Calibration               & PC  & Loss in natural units; the uniform reference is invoked but never computed \\
+M5  & Sensitivity               & U   & Unattempted; a known-negative control with no known-positive \\
+M6  & Invariance                & C   & Table 5 repeats the mechanism statistics for 27 models, five conditions \\
+M7  & Selection correction      & U   & Unattempted, and circular: frequencies chosen from the spectrum tested \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Internal Validity}} \\
+I1  & Necessity                 & C   & Key-frequency removal gives 6.5--11 in four seeds; nullspace gives 5.27 \\
+I2  & Sufficiency               & C   & Non-key Fourier ablation improves loss 70\%; polynomial substitution costs 3\% \\
+I3  & Minimality                & PC  & Every key frequency is load-bearing singly; 79 of 512 neurons miss the cutoff \\
+I4  & Specificity               & N/A & One task; the model has no off-target behavior to spare \\
+I5  & Rival mechanism exclusion & PC  & Memorization excluded; Clock and Pizza are not \\
+I6  & Double dissociation       & U   & Unattempted; no second mechanism shown intact under ablation \\
+I7  & Confound control          & PC  & Data fraction, modulus, depth, seed and weight decay all varied \\
+I8  & Confounding sensitivity   & U   & Unattempted; no sensitivity analysis for an unmeasured confounder \\
+I9  & Epistatic interaction     & PC  & Non-additivity demonstrated: single frequencies have sparse effects \\
+I10 & Rescue reversibility      & U   & Unattempted; every intervention substitutes rather than restores \\
+I11 & Onset coupling            & C   & Restricted and excluded loss move before test accuracy does \\
+I12 & Offset coupling           & U   & Unattempted; no test that behavior disappears as the circuit does \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{External Validity}} \\
+E1  & Intervention reach        & C   & Five intervention primitives at four loci, all agreeing \\
+E2  & Prompt generalization     & C   & The input space is enumerable and enumerated: all $113^2$ pairs \\
+E3  & Cross-task generalization & PC  & Three further tasks run, but only for whether grokking occurs \\
+E4  & Cross-model generalization& PC  & One- and two-layer transformers only at origin \\
+E5  & Graded response           & U   & Unattempted; ablation is binary per component, with no interpolation \\
+E6  & Novel prediction          & C   & The progress measures are derived, then shown to predict the curve \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Interpretive Validity}} \\
+V1  & Level declaration         & PC  & Level implied by usage rather than declared \\
+V2  & Level-evidence match      & PC  & Algorithm-level claim backed at the weight level for most of the model \\
+V3  & Alternative level         & PC  & Memorization addressed and refuted; the basis alternative is not \\
+V4  & Unlicensed labeling       & C   & Four labels restate measurements; the algorithm name outruns what separates it \\
+V5  & Scope declaration         & C   & \S6 states the limits before any generalization is implied \\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{Total:} 12 Confirmed, 15 Partially confirmed, 8 Untested, 1 Not applicable} \\
+\multicolumn{4}{@{}l}{\textbf{Verdict: Triangulated}} \\
+\bottomrule
+\end{longtable}}
+
+\clearpage
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Fourier multiplication.} Readings of the claim, from the version the authors state to the version the
+field cites.}
+\label{tab:grokking-readings}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}l>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Reading} & \textbf{Verdict} & \textbf{Missing} \\
+\midrule
+\textbf{Primary.} The network computes $a+b \bmod 113$ by multiplying Fourier components at five key frequencies
+  & Mechanistically Supported
+  & Selection correction over the frequency pool (M7) and a positive control (M5) \\
+\addlinespace[2pt]
+The five frequencies are the mechanism at neuron granularity
+  & Underdetermined
+  & The leave-one-out runs at frequency level; 79 of 512 neurons fail the polynomial fit the account predicts (I3) \\
+\addlinespace[2pt]
+The account fixes which algorithm the network runs
+  & Underdetermined
+  & \citet{zhong2023clock} give two algorithms on the same frequencies; the metrics separating them are unrun here (I5) \\
+\addlinespace[2pt]
+The progress measures explain grokking generally
+  & Insufficient
+  & Three further tasks are run but only for whether grokking occurs, never for the mechanism (E3) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Fourier multiplication.} Verdict: \textbf{Mechanistically Supported}. A dash means the tier is reached; a criterion at
+Inconclusive, Untested or Disconfirmed blocks promotion.}
+\label{tab:grokking-verdict}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Tier} & \textbf{Requires} & \textbf{Missing} \\
+\midrule
+Proposed & C1--C2; one admissible measurement & --- \\
+\addlinespace[2pt]
+Causally Suggestive & Necessity (I1); baselines (M2) & --- \\
+\addlinespace[2pt]
+Mechanistically Supported & Sufficiency (I2); reach (E1); specificity (I4) & \textbf{I4} not applicable: one task, no off-target behavior to spare \\
+\addlinespace[2pt]
+Triangulated & Convergence (C3); replication (E2/E4); dissociation (I6) & \textbf{I6} unattempted; no second mechanism shown intact under key-frequency ablation \\
+\addlinespace[2pt]
+Validated & Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4) & \textbf{M5}, \textbf{M7} unattempted, and the frequency selection is circular; \textbf{I8}, \textbf{I10}, \textbf{E5} unattempted \\
+\bottomrule
+\end{tabular}
+\end{table}

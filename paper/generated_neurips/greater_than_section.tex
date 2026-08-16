@@ -1,0 +1,125 @@
+\claimheading{Greater-Than Circuit in Year-Span Prediction}
+
+\textbf{Source.} \emph{How Does GPT-2 Compute Greater-Than?: Interpreting Mathematical Abilities in a Pre-Trained Language Model} \citep{hanna2023greater}.
+
+\textbf{Description.} Iterative path patching over GPT-2 small recovers a circuit for prompts that supply a two-digit start year and ask for an end year: attention heads carry the start year to the final position, and MLPs 8--11 raise the probability of every year above it. Feeding the circuit real input while the rest of the model receives 01-input recovers 72.7\% of an 81.7\% probability-difference baseline, and the inverse assignment drives the same quantity to $-36.6\%$. Description mode: implementational, with the algorithmic question in the title left open.
+
+\vspace{4pt}
+{\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{@{}llll>{\raggedright\arraybackslash}p{4.6cm}@{}}
+\caption{\textbf{Greater-than circuit.} Full 36-criterion audit. Status: \textbf{C} = Confirmed,
+\textbf{PC} = Partially confirmed, \textbf{U} = Untested, \textbf{I} = Inconclusive,
+\textbf{D} = Disconfirmed, \textbf{N/A} = Not applicable.}\\
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endhead
+\midrule
+\multicolumn{4}{@{}l}{\textit{Construct Validity}} \\
+C1  & Falsifiability            & C   & Probability difference moves +81.7\% to -36.6\%, past indifference \\
+C2  & Structural plausibility   & PC  & Flow located at three granularities; the derivation fails two causal tests \\
+C3  & Convergent validity       & PC  & Logit lens and path patching agree; single-method where they do not overlap \\
+C4  & Discriminant validity     & PC  & Three tasks recruit different components; every contrast is one kind \\
+C5  & Nomological validity      & PC  & Placed between memorization and generalization, not derived from either \\
+C6  & Complementation validity  & U   & Heads and MLPs divided by role, with no joint ablation to test it \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Measurement Validity}} \\
+M1  & Reliability               & U   & Dispersion reported twice, both pre-circuit; no interval on any result \\
+M2  & Baseline separation       & PC  & A size-matched comparison run and reported only in prose \\
+M3  & Stability                 & U   & Membership read off heatmaps; no threshold stated, none swept \\
+M4  & Calibration               & PC  & Outcome metrics calibrated; the faithfulness quantity is not \\
+M5  & Sensitivity               & U   & Two experiments, both on the real model; no planted mechanism \\
+M6  & Invariance                & PC  & Per-condition variation visible; one tokenizer, one model, one frame \\
+M7  & Selection correction      & U   & Every candidate screened and disclosed; no multiplicity control \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Internal Validity}} \\
+I1  & Necessity                 & C   & A sign reversal rather than degradation: +81.7\% to -36.6\% \\
+I2  & Sufficiency               & C   & Complement recovers 72.7\% under conditions chosen to favor failure \\
+I3  & Minimality                & PC  & Most of MLP 10 ablates freely; one result runs the other way \\
+I4  & Specificity               & PC  & Fires on less-than prompts its label does not cover \\
+I5  & Rival mechanism exclusion & I   & Two rivals tested and both left live, the lookup table included \\
+I6  & Double dissociation       & U   & The makings of one half; the converse is never run \\
+I7  & Confound control          & PC  & Tokenization confound designed out; frequency handled by restriction \\
+I8  & Confounding sensitivity   & U   & Unattempted; nothing bounds an unmeasured confounder \\
+I9  & Epistatic interaction     & PC  & Non-additivity is the neuron-level finding; no interaction statistic \\
+I10 & Rescue reversibility      & U   & Direction fixed by path patching; the restore is never framed \\
+I11 & Onset coupling            & N/A & No published checkpoints, so onset cannot be timed at all \\
+I12 & Offset coupling           & N/A & One checkpoint observed once; no interval across which to lapse \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{External Validity}} \\
+E1  & Intervention reach        & PC  & Three intervention families, but one counterfactual behind them all \\
+E2  & Prompt generalization     & PC  & Broad inside one frame, and the frame is held fixed by design \\
+E3  & Cross-task generalization & PC  & Transfers across the year frame at 67.8--98.8\% and fails outside it \\
+E4  & Cross-model generalization& D   & One model throughout, named as a limitation in the conclusion \\
+E5  & Graded response           & PC  & Circuit extent is graded; intervention strength has no scale to sweep \\
+E6  & Novel prediction          & PC  & Prediction confirmed at 98.8\% and 88.9\%; one corollary falsified \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Interpretive Validity}} \\
+V1  & Level declaration         & PC  & The declaration is implementational; the title asks an algorithmic question \\
+V2  & Level-evidence match      & PC  & Matched on flow and topography, not on the claim the title advertises \\
+V3  & Alternative level         & PC  & The lookup-table reading is entertained and bounded, never excluded \\
+V4  & Unlicensed labeling       & C   & Every component label redescribes a measurement made first \\
+V5  & Scope declaration         & C   & Scope declared before the evidence and again after it \\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{Total:} 5 Confirmed, 19 Partially confirmed, 1 Inconclusive, 8 Untested, 1 Disconfirmed, 2 Not applicable} \\
+\multicolumn{4}{@{}l}{\textbf{Verdict: Mechanistically Supported}} \\
+\bottomrule
+\end{longtable}}
+
+\clearpage
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Greater-than circuit.} Readings of the claim, from the version the authors state to the version the
+field cites.}
+\label{tab:greater_than-readings}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}l>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Reading} & \textbf{Verdict} & \textbf{Missing} \\
+\midrule
+\textbf{Primary.} A subgraph of attention heads and MLPs 8--11 performs greater-than on year-span prompts in GPT-2 small
+  & Mechanistically Supported
+  & A second instrument for circuit discovery (C3), a dissociation from the components serving the tasks the circuit fails (I6), and a second model (E4) \\
+\addlinespace[2pt]
+The circuit computes the comparison rather than retrieving memorized year associations
+  & Underdetermined
+  & The paper's own structured-number-representation account fails two causal tests and memorization is never tested (I5); no experiment separates a lookup table from a computation (V3) \\
+\addlinespace[2pt]
+The circuit implements greater-than as such, firing where the relation applies and not elsewhere
+  & Disconfirmed
+  & Nothing --- tested and failed: two prompts requiring less-than recruit the same circuit and the model answers greater, and a non-monotone sequence case does the same (I4, E3) \\
+\addlinespace[2pt]
+The same circuit is the mechanism for greater-than beyond GPT-2 small
+  & Disconfirmed
+  & Nothing --- tested and failed: the disconfirming evidence is post-origin and in three other model families (E4), and the origin itself runs GPT-2 small only and names the gap \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Greater-than circuit.} Verdict: \textbf{Mechanistically Supported}. A dash means the tier is reached; a criterion at
+Inconclusive, Untested or Disconfirmed blocks promotion.}
+\label{tab:greater_than-verdict}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Tier} & \textbf{Requires} & \textbf{Missing} \\
+\midrule
+Proposed & C1--C2; one admissible measurement & --- \\
+\addlinespace[2pt]
+Causally Suggestive & Necessity (I1); baselines (M2) & --- \\
+\addlinespace[2pt]
+Mechanistically Supported & Sufficiency (I2); reach (E1); specificity (I4) & --- \\
+\addlinespace[2pt]
+Triangulated & Convergence (C3); replication (E2/E4); dissociation (I6) & \textbf{C3}: every component enters the circuit through one patching method; \textbf{I6} unattempted, with the rival component set located but never intervened on; \textbf{E4} Disconfirmed \\
+\addlinespace[2pt]
+Validated & Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4) & \textbf{M1}, \textbf{M3}, \textbf{M5}, \textbf{M7} unattempted, and the metric that selects the components also scores the circuit they compose; \textbf{I8}, \textbf{I10} unattempted; \textbf{E4} Disconfirmed \\
+\bottomrule
+\end{tabular}
+\end{table}

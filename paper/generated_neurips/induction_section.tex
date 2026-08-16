@@ -1,0 +1,125 @@
+\claimheading{Induction Heads: In-Context Token Copying}
+
+\textbf{Source.} \emph{In-context Learning and Induction Heads} \citep{olsson2022context}.
+
+\textbf{Description.} A two-head composition: a previous-token head writes the identity of the token before a repeat into the residual stream, and an induction head reads it to predict what followed last time. Heads are identified by two behavioral scores on sequences of repeated uniform-random tokens, prefix matching and copying, and the mechanism is derived at the weight level for the two-layer attention-only case. Evaluated on: 34 decoder-only models from one to forty layers, with causal ablation confined to the twelve small models, six attention-only and six with MLPs. Description mode: implementational-functional.
+
+\vspace{4pt}
+{\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{@{}llll>{\raggedright\arraybackslash}p{4.6cm}@{}}
+\caption{\textbf{Induction heads: token copying.} Full 36-criterion audit. Status: \textbf{C} = Confirmed,
+\textbf{PC} = Partially confirmed, \textbf{U} = Untested, \textbf{I} = Inconclusive,
+\textbf{D} = Disconfirmed, \textbf{N/A} = Not applicable.}\\
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endhead
+\midrule
+\multicolumn{4}{@{}l}{\textit{Construct Validity}} \\
+C1  & Falsifiability            & C   & Two numerical evaluators with a stated failure mode; three predictions \\
+C2  & Structural plausibility   & C   & Weight-level: copying is the OV circuit's positive-eigenvalue property \\
+C3  & Convergent validity       & C   & Five families: eigenvalues, evaluators, ablation, scaling, training \\
+C4  & Discriminant validity     & PC  & Built to separate induction from repeated-token memorization \\
+C5  & Nomological validity      & C   & Derived from the mathematical framework rather than fitted to it \\
+C6  & Complementation validity  & U   & Two named roles, ablated one at a time and never together \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Measurement Validity}} \\
+M1  & Reliability               & U   & Unattempted; one training run per model, no interval on any score \\
+M2  & Baseline separation       & PC  & Every head ablated at every snapshot, so the effect has a reference \\
+M3  & Stability                 & PC  & Token indices perturbed and the score shown robust to the choice \\
+M4  & Calibration               & PC  & Evaluators calibrated against weight-level quantities in the appendix \\
+M5  & Sensitivity               & PC  & A known-positive exists: the two-layer model with a derived circuit \\
+M6  & Invariance                & C   & 34 models, four series, 1--40 layers, 13M--13B, 200 snapshots each \\
+M7  & Selection correction      & U   & Unattempted; heads are scored, then the high scorers are ablated \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Internal Validity}} \\
+I1  & Necessity                 & C   & Almost all in-context learning in small models comes from these heads \\
+I2  & Sufficiency               & PC  & No experiment reconstructs copying from induction heads alone \\
+I3  & Minimality                & U   & Unattempted; the authors name the obstacle in marginal effects \\
+I4  & Specificity               & PC  & Every head is ablated, so off-target effects are measured throughout \\
+I5  & Rival mechanism exclusion & PC  & Basic copying heads named and argued away rather than tested \\
+I6  & Double dissociation       & C   & Unattempted at origin; run later by Feucht et al.\ and it succeeds \\
+I7  & Confound control          & PC  & Three exogenous confounds checked, including scheduled hyperparameters \\
+I8  & Confounding sensitivity   & U   & Unattempted; no sensitivity analysis for an unmeasured confounder \\
+I9  & Epistatic interaction     & PC  & Composition is the mechanism; the two-head circuit is non-additive \\
+I10 & Rescue reversibility      & U   & Unattempted; pattern-preserving ablation already caches the clean run \\
+I11 & Onset coupling            & C   & Across 34 models, heads and the loss bump appear at the same point \\
+I12 & Offset coupling           & U   & One Pythia-160m head loses the behavior while the algorithm persists \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{External Validity}} \\
+E1  & Intervention reach        & PC  & One primitive at origin: pattern-preserving zero ablation of a head \\
+E2  & Prompt generalization     & C   & The defining stimulus is out of distribution by construction \\
+E3  & Cross-task generalization & PC  & The same heads perform literal translation, verified against definition \\
+E4  & Cross-model generalization& C   & 34 models across four series, plus two external replications \\
+E5  & Graded response           & PC  & Both evaluators are continuous; the ablation is not interpolated \\
+E6  & Novel prediction          & C   & Argument 2 predicts an architectural change will move the bump \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Interpretive Validity}} \\
+V1  & Level declaration         & C   & Declared early and explicitly, by behavior on the defining stimulus \\
+V2  & Level-evidence match      & C   & Close for the narrow claim; the abstract's narrow sentence is backed \\
+V3  & Alternative level         & PC  & One alternative addressed; the authors offer their own caveat \\
+V4  & Unlicensed labeling       & PC  & The label imports an epistemic category, and the import is declared \\
+V5  & Scope declaration         & C   & The most thoroughly scoped claim in this audit set \\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{Total:} 14 Confirmed, 15 Partially confirmed, 7 Untested} \\
+\multicolumn{4}{@{}l}{\textbf{Verdict: Triangulated}} \\
+\bottomrule
+\end{longtable}}
+
+\clearpage
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Induction heads: token copying.} Readings of the claim, from the version the authors state to the version the
+field cites.}
+\label{tab:induction-readings}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}l>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Reading} & \textbf{Verdict} & \textbf{Missing} \\
+\midrule
+\textbf{Primary.} Induction heads implement in-context copying of a token that followed the same context earlier
+  & Triangulated
+  & Reliability of the head evaluators (M1) and selection correction over the head pool (M7) \\
+\addlinespace[2pt]
+The mechanism is the source of in-context learning as measured by token-loss difference
+  & Mech.\ Supported
+  & Necessity above 345M survives a decorrelating control, but the metric is uncalibrated (M4) \\
+\addlinespace[2pt]
+The mechanism is the source of in-context learning generally
+  & Disconfirmed
+  & Nothing --- tested and failed; the bridge from the small-model result to the 13B claim is analogy (V2) \\
+\addlinespace[2pt]
+The two heads compose in the stated order, each performing the role its name asserts
+  & Underdetermined
+  & Weight-level derivation covers the two-layer case only; role semantics exceed it elsewhere (C2) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{Induction heads: token copying.} Verdict: \textbf{Triangulated}. A dash means the tier is reached; a criterion at
+Inconclusive, Untested or Disconfirmed blocks promotion.}
+\label{tab:induction-verdict}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Tier} & \textbf{Requires} & \textbf{Missing} \\
+\midrule
+Proposed & C1--C2; one admissible measurement & --- \\
+\addlinespace[2pt]
+Causally Suggestive & Necessity (I1); baselines (M2) & --- \\
+\addlinespace[2pt]
+Mechanistically Supported & Sufficiency (I2); reach (E1); specificity (I4) & --- \\
+\addlinespace[2pt]
+Triangulated & Convergence (C3); replication (E2/E4); dissociation (I6) & --- \\
+\addlinespace[2pt]
+Validated & Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4) & \textbf{M1} unattempted, one training run per model; \textbf{M7} unattempted; \textbf{I3}, \textbf{I8}, \textbf{I10} unattempted \\
+\bottomrule
+\end{tabular}
+\end{table}

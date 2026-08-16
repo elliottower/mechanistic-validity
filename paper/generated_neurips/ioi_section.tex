@@ -1,0 +1,125 @@
+\claimheading{IOI Circuit}
+
+\textbf{Source.} \emph{Interpretability in the Wild} \citep{wang2023interpretability}.
+
+\textbf{Description.} Path patching over GPT-2 small identifies 26 attention heads in 7 classes---Previous Token, Duplicate Token, Induction, S-Inhibition, Name Mover, Negative Name Mover, Backup Name Mover---for sentences of the form ``When Mary and John went to the store, John gave a drink to \underline{\hspace{0.9cm}}''. Name Mover roles are supported at the weight level (OV copy score $>$95\%), the rest at the activation level. Component-level redundancy (Backup Name Movers) is recorded under minimality (I3) rather than necessity: a circuit whose parts compensate for one another is still necessary as a circuit. Description mode: implementational-functional.
+
+\vspace{4pt}
+{\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{@{}llll>{\raggedright\arraybackslash}p{4.6cm}@{}}
+\caption{\textbf{IOI circuit.} Full 36-criterion audit. Status: \textbf{C} = Confirmed,
+\textbf{PC} = Partially confirmed, \textbf{U} = Untested, \textbf{I} = Inconclusive,
+\textbf{D} = Disconfirmed, \textbf{N/A} = Not applicable.}\\
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Criterion} & \textbf{Status} & \textbf{Evidence} \\
+\endhead
+\midrule
+\multicolumn{4}{@{}l}{\textit{Construct Validity}} \\
+C1  & Falsifiability            & C   & 26 heads named with roles; criteria stated as failable quantities \\
+C2  & Structural plausibility   & PC  & Weight-level for two of seven classes; three omissions the authors name \\
+C3  & Convergent validity       & PC  & Five evidence types, but only three share the mean-ablation primitive \\
+C4  & Discriminant validity     & I   & 78\% head overlap with Colored Objects; opposite result elsewhere \\
+C5  & Nomological validity      & PC  & Induction-head theory applied operationally; no formal derivation \\
+C6  & Complementation validity  & U   & Seven named classes, knocked out one at a time; no trans comparison \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Measurement Validity}} \\
+M1  & Reliability               & I   & SDs plotted for attention probabilities; none on faithfulness \\
+M2  & Baseline separation       & PC  & Na\"ive circuit scores 0.1 against the full circuit's 0.46 \\
+M3  & Stability                 & D   & Six method choices move the same quantity below 0\% to over 100\% \\
+M4  & Calibration               & PC  & Logit difference has sign, null and baseline; faithfulness does not \\
+M5  & Sensitivity               & U   & Unattempted; no planted circuit of known extent \\
+M6  & Invariance                & D   & Faithfulness differs across the origin's own templates \\
+M7  & Selection correction      & U   & N is unstated for the post-knockout sweep, the selection step itself \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Internal Validity}} \\
+I1  & Necessity                 & PC  & Name Mover knockout costs only 5\%; the paper says so itself \\
+I2  & Sufficiency               & PC  & Mean-ablating outside the circuit leaves 87\% of the logit difference \\
+I3  & Minimality                & I   & Every node clears 1\%; Backup heads make components individually replaceable \\
+I4  & Specificity               & I   & Verdict depends on whether head overlap or task effect is measured \\
+I5  & Rival mechanism exclusion & I   & Greedy search finds knockout sets carrying 87\% of the behavior \\
+I6  & Double dissociation       & U   & Unattempted; no published test located \\
+I7  & Confound control          & PC  & Sequence length controlled twice; name frequency is not \\
+I8  & Confounding sensitivity   & U   & Unattempted; no E-value or sensitivity analysis \\
+I9  & Epistatic interaction     & PC  & Backup Name Movers are a discovered non-additivity \\
+I10 & Rescue reversibility      & PC  & Direction reversed at origin; corrupt-then-restore run later \\
+I11 & Onset coupling            & N/A & Untestable in GPT-2 small, a released checkpoint with no training run \\
+I12 & Offset coupling           & PC  & A Pythia name-mover head loses the behavior late in training \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{External Validity}} \\
+E1  & Intervention reach        & I   & One ablation value at origin, three granularities; methods disagree \\
+E2  & Prompt generalization     & D   & At $10^6$ clean/corrupted pairs, model and circuit diverge \\
+E3  & Cross-task generalization & PC  & Repeated-random-token generalization at origin, one direction \\
+E4  & Cross-model generalization& PC  & GPT-2 medium preliminary; not all heads attend to IO and S \\
+E5  & Graded response           & PC  & Graded in circuit extent, never in intervention strength \\
+E6  & Novel prediction          & C   & Duplicated-name prediction, with a matched control \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Interpretive Validity}} \\
+V1  & Level declaration         & PC  & Circuits formally defined in \S2.1; description level not declared \\
+V2  & Level-evidence match      & PC  & Topography and information flow supported; role semantics exceed it \\
+V3  & Alternative level         & I   & The na\"ive circuit is simpler and not clearly worse \\
+V4  & Unlicensed labeling       & PC  & ``Hedge'' for the Negative Name Movers, marked by the authors as speculation \\
+V5  & Scope declaration         & C   & Limits declared in the abstract, \S1, \S3 and \S5 \\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{Total:} 3 Confirmed, 17 Partially confirmed, 7 Inconclusive, 5 Untested, 3 Disconfirmed, 1 Not applicable} \\
+\multicolumn{4}{@{}l}{\textbf{Verdict: Causally Suggestive}} \\
+\bottomrule
+\end{longtable}}
+
+\clearpage
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{IOI circuit.} Readings of the claim, from the version the authors state to the version the
+field cites.}
+\label{tab:ioi-readings}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}l>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Reading} & \textbf{Verdict} & \textbf{Missing} \\
+\midrule
+\textbf{Primary.} A circuit comprising these 26 heads performs IOI in GPT-2 small on the origin templates
+  & Causally Suggestive
+  & Independent evidence (C3), separation from other circuits (I6), and robustness to method and prompt (M3, M6) \\
+\addlinespace[2pt]
+These 26 heads are \emph{the} mechanism, to the exclusion of others
+  & Underdetermined
+  & A test that discriminates among rival head sets; na\"ive and greedy-search circuits reach comparable faithfulness (I5) \\
+\addlinespace[2pt]
+The mechanism generalizes across prompts and models
+  & Disconfirmed
+  & Nothing --- tested and failed: model and circuit diverge at $10^6$ prompt pairs (E2), and faithfulness varies across the origin's own templates (M6) \\
+\addlinespace[2pt]
+The seven classes compose in the stated order, each performing the role its name asserts
+  & Underdetermined
+  & Weight-level accounts for four of seven classes (C2); role semantics currently exceed the evidence (V2) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{\textbf{IOI circuit.} Verdict: \textbf{Causally Suggestive}. A dash means the tier is reached; a criterion at
+Inconclusive, Untested or Disconfirmed blocks promotion.}
+\label{tab:ioi-verdict}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+\textbf{Tier} & \textbf{Requires} & \textbf{Missing} \\
+\midrule
+Proposed & C1--C2; one admissible measurement & --- \\
+\addlinespace[2pt]
+Causally Suggestive & Necessity (I1); baselines (M2) & --- \\
+\addlinespace[2pt]
+Mechanistically Supported & Sufficiency (I2); reach (E1); specificity (I4) & \textbf{E1}, \textbf{I4} inconclusive \\
+\addlinespace[2pt]
+Triangulated & Convergence (C3); replication (E2/E4); dissociation (I6) & \textbf{C3}: the five families all descend from ablation; \textbf{E2} Disconfirmed; \textbf{I6} unattempted \\
+\addlinespace[2pt]
+Validated & Calibration (M1--M7); interpretive audit (V1--V5); reach (E2, E4) & \textbf{M3}, \textbf{M6}, \textbf{E2} Disconfirmed \\
+\bottomrule
+\end{tabular}
+\end{table}
